@@ -1082,7 +1082,8 @@ CONTENT_FOOTER_FORMATS = {
 # systems.  The following comment systems are supported by Nikola:
 #   disqus, facebook, intensedebate, isso, muut, commento, utterances
 # You can leave this option blank to disable comments.
-COMMENT_SYSTEM = "disqus"
+#COMMENT_SYSTEM = "disqus"
+COMMENT_SYSTEM = ""
 # And you also need to add your COMMENT_SYSTEM_ID which
 # depends on what comment system you use. The default is
 # "nikolademo" which is a test account for Disqus. More information
@@ -1230,10 +1231,41 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.c
 # <!-- End of social buttons -->
 # """
 
+SOCIAL_BUTTONS_CODE = """
+<div class="social-buttons">
+    <!-- Facebook Share Button -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u={url}" target="_blank">
+        <img src="path/to/facebook-icon.png" alt="Share on Facebook">
+    </a>
+
+    <!-- Twitter Tweet Button -->
+    <a href="https://twitter.com/intent/tweet?url={url}&text={title}" target="_blank">
+        <img src="path/to/twitter-icon.png" alt="Tweet">
+    </a>
+
+    <!-- LinkedIn Share Button -->
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={url}&title={title}" target="_blank">
+        <img src="path/to/linkedin-icon.png" alt="Share on LinkedIn">
+    </a>
+</div>
+"""
+
+# SOCIAL_BUTTONS_CODE = """
+# <!-- Go to www.addthis.com/dashboard to customize your tools -->
+# <script type="text/javascript" src="<YOUR ADDTHIS IDENTIFIER>"></script>
+# """
+
 # SOCIAL_BUTTONS_CODE = """
 # <!-- Go to www.addthis.com/dashboard to customize your tools -->
 # <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-628a7c4dbad50ca3"></script>
 # """
+
+# SOCIAL_BUTTONS_CODE = """<div id="shareNice" data-share-label="Share"
+#     data-color-scheme="black" data-icon-size="32" data-panel-bottom="plain"
+#     data-services="plus.google.com,facebook.com,email,twitter.com"
+#     style="position: absolute; left: 20px; top: 60px;"></div>"""
+
+
 # Show link to source for the posts?
 SHOW_SOURCELINK = False
 # Copy the source files for your pages?
@@ -1368,6 +1400,18 @@ SEARCH_FORM = """
 # in the default template (base.tmpl).
 # (translatable)
 # BODY_END = ""
+
+# BODY_END = """
+# <script src="/javascripts/jquery.socialshareprivacy.min.js"></script>
+# <script>
+# $(document).ready(function () {
+#     $('.share').socialSharePrivacy();
+# });
+# </script>
+# """
+
+# SOCIAL_BUTTONS_CODE = """<div class="share"></div>"""
+
 EXTRA_HEAD_DATA = '''
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">

@@ -169,7 +169,23 @@ bg-dark
 </div>
 
 
-        <script src="../../assets/js/all-nocdn.js"></script><script>
+        <script src="../../assets/js/all-nocdn.js"></script><div class="social-buttons">
+    <!-- Facebook Share Button -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u=%7Burl%7D" target="_blank">
+        <img src="path/to/facebook-icon.png" alt="Share on Facebook"></a>
+
+    <!-- Twitter Tweet Button -->
+    <a href="https://twitter.com/intent/tweet?url=%7Burl%7D&amp;text=%7Btitle%7D" target="_blank">
+        <img src="path/to/twitter-icon.png" alt="Tweet"></a>
+
+    <!-- LinkedIn Share Button -->
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%7Burl%7D&amp;title=%7Btitle%7D" target="_blank">
+        <img src="path/to/linkedin-icon.png" alt="Share on LinkedIn"></a>
+</div>
+
+
+    
+    <script>
     baguetteBox.run('div#content', {
         ignoreClass: 'islink',
         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
