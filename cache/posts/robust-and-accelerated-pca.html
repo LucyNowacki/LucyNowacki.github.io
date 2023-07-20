@@ -1,0 +1,48 @@
+<div id="cell-id=a7929460" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The problem of finding a low-rank matrix approximation $\hat{L}\in \mathbb{R}^{n\times s}$ to a (centered) matrix $X\in \mathbb{R}^{n\times s}$ (of potentially full rank) can be formulated as the optimiation problem</p>
+<p>$$\hat{L}=\underset{L\in \mathbb{R}^{n\times s}}{\arg  \min } \left\{\frac{1}{2} \| L-X\| _{\text{Fro}}^2+\alpha  \| L\| _*\right\} \,\,\,\,\,(1) $$</p>
+
+</div>
+</div>
+</div>
+<div id="cell-id=11e4dff9" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, $\| \cdot \| _*$ is so-called nuclear norm, which is the one-norm vector of singular values of $X$, which is simply the sum of singular values, i.e.</p>
+<p>$$\| L\| _*=\sum _{j=1}^{\min (n,s)} \sigma _j$$</p>
+<p>where $\left\{\sigma _j\right\}_{j=1}^{\min (n,s)}$ denotes the singular values of $L$, and $\alpha &gt; 0$ is the regularistion parameter ( to control the sparsity of singular values of $L$ ).
+Thus, if we want to minimise (1), the $\| \cdot \| _*$ produces sparse solution in terms of the singular values, namely the obtained matrix with many singular values cut to zeros, and hence the rank of $L$ is automatically lower than rank of $X$.
+Problem (1) will find a matrix $\hat{L}$ close to X, with lower rank, depending on the choice of $\alpha$. If $X$, however, is only low-rank up to some sparsely distributed but significant outliers, model (1) is of no good use for the approximation of this low-rank matrix. We therefore replace the squared Frobenius-norm in (1) with the matrix one-norm, i.e. $\| \cdot \| _1\text{:=}\sum _{j=1}^n \sum _{i=1}^s \left| \cdot _{\text{ij}}\right|$ , and obtain</p>
+<p>$$\hat{L}=\underset{L\in \mathbb{R}^{n\times s}}{\arg  \min }\left\{\alpha  \| L\| _*+\| L-X\| _1\right\}\,\,\,\,\,(2) $$</p>
+
+</div>
+</div>
+</div>
+<div id="cell-id=f5f20cae" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If we substitute $S=L-X$ in (2), we have</p>
+<p>$$\left(\hat{L},\hat{S}\right)=\,\,\, \underset{L\in \mathbb{R}^{n\times s},S\in \mathbb{R}^{n\times s}}{\arg  \min } \left\{\| S\| _1+\alpha \| L\|_*\,\,  \text{subject}\,\, \text{to}\,\, X=L+S\right\}\,\,\,\,(3)$$</p>
+<p>Not that $S$ refers to outliers, i.e. it  represents the difference between our original data matrix $X$ and and low rank matrix $L$.</p>
+
+</div>
+</div>
+</div>
+<div id="cell-id=55fad615" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div id="cell-id=4f352e62" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+
+

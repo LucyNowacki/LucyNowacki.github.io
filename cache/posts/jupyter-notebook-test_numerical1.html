@@ -1,0 +1,19 @@
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are ten classes in Cifar-10, so we deal with the maulti-class attack where every point gets assigned to input class, $C_{i}$ for $i=1,...,k=10$. Therefore, there are $k=10$ discriminant classes, $g_{i}(x)$. In case of correct classification, point $x$ is classified as $C_{i}$ if discriminat $g_{i}(x)\geq g_{j}(x),\,\,\forall i\neq j$ for any other region $j$ of nine remaining regions (in case of the CIFAR-10). Namely, our discriminant $g_{i}(x)$ is higher than the value of other discrimant applied on $x$ but mapped from any other region $j$, i.e., and $j's$ are on the left
+$$g_{1} - g_{i}\leq 0$$
+$$\vdots$$
+$$g_{k} - g_{i}\leq 0$$
+\
+Equivalently, we want the worst discriminator to be negative
+$$\displaystyle \max_{x_{j\neq i}}g_{j}(x)-g_{i}(x)\leq 0$$
+However, as a result of attack, our point, $x$, is shifted to class $C_{t}$ (targeted) or any other (untargeted), that is why we would like<br>
+$$\displaystyle \max_{x_{j\neq t}}g_{j}(x)-g_{t}(x)\leq 0$$
+where $g_{t}(x)$ is the discriminant function of the target space, and $g_{i}(x)$ are the dyscriminants functions of the all other classes. In the last eqn., we have to be sure that if we pass $x$ into  $g_{t}(x)$ then it would give us the max value in comparision to the $x$ value under discriminat in any other space.</p>
+
+</div>
+</div>
+</div>
+ 
+

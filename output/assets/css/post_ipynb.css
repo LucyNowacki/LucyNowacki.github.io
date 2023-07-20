@@ -1,0 +1,88 @@
+.prompt {
+    min-width: 0ex;
+    padding: 0em;
+    margin: 0;
+    font-family: monospace;
+    text-align: right;
+    line-height: 1.21429em;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    color: #fff;
+}
+
+@media (max-width: 1540px) {
+    .prompt {
+        text-align: left;
+        color: #fff;
+    }
+}
+
+div.prompt:empty {
+    padding-top: 10;
+    padding-bottom: 0;
+    color: #fff;
+}
+
+@media (max-width: 540px) {
+    div.unrecognized_cell>div.prompt {
+        display: none;
+        color: #fff;
+    }
+}
+
+div.input_prompt {
+    color: #303f9f;
+    border-top: 1px solid transparent;
+    color: #fff;
+}
+
+div.out_prompt_overlay {
+    height: 100%;
+    padding: 0 10em;
+    position: absolute;
+    border-radius: 2px;
+    color: #fff;
+}
+
+div.out_prompt_overlay:hover {
+    -webkit-box-shadow: inset 0 0 1px #000;
+    box-shadow: inset 0 0 1px #000;
+    background: #fff;
+    color: #fff;
+}
+
+div.output_prompt {
+    color: #fff;
+}
+
+@media (max-width: 100vw) {
+    div.text_cell>div.prompt {
+        display: none;
+        color: #fff;
+    }
+}
+
+div.input_prompt {
+    color: #fff;
+    border-top: 1px solid transparent;
+}
+
+div.prompt {
+    background-color: #fff;
+    margin: 0 0;
+    padding: 0 0;
+    width: 0;
+}
+
+div.prompt.input_prompt {
+    background-color: #fff;
+}
+
+div.prompt.output_prompt {
+    background-color: #fff;
+}
