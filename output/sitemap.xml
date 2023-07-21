@@ -11,7 +11,7 @@
  </url>
  <url>
   <loc>https://example.com/archive/archive.html</loc>
-  <lastmod>2023-07-20T18:06:00Z</lastmod>
+  <lastmod>2023-07-21T16:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/bio/</loc>
@@ -19,11 +19,23 @@
  </url>
  <url>
   <loc>https://example.com/blog/</loc>
-  <lastmod>2023-01-24T16:29:00Z</lastmod>
+  <lastmod>2023-07-21T16:08:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/adversarial-attacks-on-model-for-cifar-10/</loc>
   <lastmod>2022-06-03T18:14:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/dynamic-mode-decomposition-for-el-nino/</loc>
+  <lastmod>2023-07-21T15:47:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/exploring-the-bitcoin-cryptocurrency-market/</loc>
+  <lastmod>2023-07-21T16:09:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/index-1.html</loc>
+  <lastmod>2023-07-21T15:47:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/jupyter-notebook-test/</loc>
@@ -58,12 +70,8 @@
   <lastmod>2022-06-14T18:04:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/blog/why-russians-invaded-ukraine/</loc>
-  <lastmod>2022-06-03T18:14:00Z</lastmod>
- </url>
- <url>
   <loc>https://example.com/categories.html</loc>
-  <lastmod>2023-07-20T18:06:00Z</lastmod>
+  <lastmod>2023-07-20T18:28:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/</loc>
@@ -91,7 +99,7 @@
  </url>
  <url>
   <loc>https://example.com/files/</loc>
-  <lastmod>2023-01-10T22:07:00Z</lastmod>
+  <lastmod>2023-07-21T15:53:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/galleries/</loc>

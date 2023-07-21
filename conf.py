@@ -1247,7 +1247,9 @@ SOCIAL_BUTTONS_CODE = """
     <a href="https://www.linkedin.com/shareArticle?mini=true&url={url}&title={title}" target="_blank">
         <img src="path/to/linkedin-icon.png" alt="Share on LinkedIn">
     </a>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 </div>
+
 """
 
 # SOCIAL_BUTTONS_CODE = """
