@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1690130807.8715227
+_modified_time = 1690132625.7843084
 _enable_loop = True
 _template_filename = '/home/lucy/anaconda3/envs/lucy/lib/python3.10/site-packages/nikola/data/themes/bootstrap4/templates/tags.tmpl'
 _template_uri = 'tags.tmpl'
@@ -28,14 +28,14 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        range = context.get('range', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
         cat_hierarchy = context.get('cat_hierarchy', UNDEFINED)
-        hidden_tags = context.get('hidden_tags', UNDEFINED)
         title = context.get('title', UNDEFINED)
-        messages = context.get('messages', UNDEFINED)
         len = context.get('len', UNDEFINED)
+        messages = context.get('messages', UNDEFINED)
+        hidden_tags = context.get('hidden_tags', UNDEFINED)
+        range = context.get('range', UNDEFINED)
         items = context.get('items', UNDEFINED)
         cat_items = context.get('cat_items', UNDEFINED)
         __M_writer = context.writer()
@@ -53,14 +53,14 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        range = context.get('range', UNDEFINED)
         def content():
             return render_content(context)
         cat_hierarchy = context.get('cat_hierarchy', UNDEFINED)
-        hidden_tags = context.get('hidden_tags', UNDEFINED)
         title = context.get('title', UNDEFINED)
-        messages = context.get('messages', UNDEFINED)
         len = context.get('len', UNDEFINED)
+        messages = context.get('messages', UNDEFINED)
+        hidden_tags = context.get('hidden_tags', UNDEFINED)
+        range = context.get('range', UNDEFINED)
         items = context.get('items', UNDEFINED)
         cat_items = context.get('cat_items', UNDEFINED)
         __M_writer = context.writer()
