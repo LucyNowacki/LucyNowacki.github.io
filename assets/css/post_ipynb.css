@@ -86,3 +86,13 @@ div.prompt.input_prompt {
 div.prompt.output_prompt {
     background-color: #fff;
 }
+
+.socials {
+    text-align: center;
+}
+
+.socials img {
+    max-width: 40px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}

@@ -1247,3 +1247,13 @@ h6:hover .anchor-link {
   font-size: 100%;
   font-style: italic;
 }
+
+.socials {
+  text-align: center;
+}
+
+.socials img {
+  max-width: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
