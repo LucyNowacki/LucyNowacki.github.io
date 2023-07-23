@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1690129289.9667222
+_modified_time = 1690130808.5378492
 _enable_loop = True
 _template_filename = 'themes/themeBlog/templates/post_ipynb.tmpl'
 _template_uri = 'post_ipynb.tmpl'
@@ -42,24 +42,24 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        abs_link = context.get('abs_link', UNDEFINED)
-        comments = _mako_get_namespace(context, 'comments')
-        parent = context.get('parent', UNDEFINED)
-        helper = _mako_get_namespace(context, 'helper')
-        def content():
-            return render_content(context._locals(__M_locals))
-        messages = context.get('messages', UNDEFINED)
-        ui = _mako_get_namespace(context, 'ui')
         def sourcelink():
             return render_sourcelink(context._locals(__M_locals))
-        post = context.get('post', UNDEFINED)
         smartjoin = context.get('smartjoin', UNDEFINED)
+        def content():
+            return render_content(context._locals(__M_locals))
+        ui = _mako_get_namespace(context, 'ui')
+        site_has_comments = context.get('site_has_comments', UNDEFINED)
+        abs_link = context.get('abs_link', UNDEFINED)
+        parent = context.get('parent', UNDEFINED)
         math = _mako_get_namespace(context, 'math')
+        helper = _mako_get_namespace(context, 'helper')
+        pheader = _mako_get_namespace(context, 'pheader')
+        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        comments = _mako_get_namespace(context, 'comments')
+        post = context.get('post', UNDEFINED)
         def extra_head():
             return render_extra_head(context._locals(__M_locals))
-        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
-        site_has_comments = context.get('site_has_comments', UNDEFINED)
-        pheader = _mako_get_namespace(context, 'pheader')
+        messages = context.get('messages', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -91,12 +91,12 @@ def render_extra_head(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         parent = context.get('parent', UNDEFINED)
-        post = context.get('post', UNDEFINED)
+        smartjoin = context.get('smartjoin', UNDEFINED)
         math = _mako_get_namespace(context, 'math')
         helper = _mako_get_namespace(context, 'helper')
+        post = context.get('post', UNDEFINED)
         def extra_head():
             return render_extra_head(context)
-        smartjoin = context.get('smartjoin', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n    ')
         __M_writer(str(parent.extra_head()))
@@ -139,16 +139,16 @@ def render_extra_head(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        abs_link = context.get('abs_link', UNDEFINED)
-        comments = _mako_get_namespace(context, 'comments')
-        helper = _mako_get_namespace(context, 'helper')
         def content():
             return render_content(context)
-        messages = context.get('messages', UNDEFINED)
-        post = context.get('post', UNDEFINED)
-        math = _mako_get_namespace(context, 'math')
         site_has_comments = context.get('site_has_comments', UNDEFINED)
+        abs_link = context.get('abs_link', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
         pheader = _mako_get_namespace(context, 'pheader')
+        helper = _mako_get_namespace(context, 'helper')
+        comments = _mako_get_namespace(context, 'comments')
+        post = context.get('post', UNDEFINED)
+        messages = context.get('messages', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n<article class="post-')
         __M_writer(str(post.meta('type')))
@@ -156,9 +156,31 @@ def render_content(context,**pageargs):
         __M_writer(str(pheader.html_post_header()))
         __M_writer('\n    <div class="e-content entry-content" itemprop="articleBody text">\n    ')
         __M_writer(str(post.text()))
-        __M_writer('\n    </div>\n\n    <div class="socials">\n        <a href="https://www.linkedin.com/shareArticle?url=')
+        __M_writer('\n    </div>\n\n<div class="socials">\n    <a href="https://twitter.com/share?text=')
+        __M_writer(filters.html_escape(str(post.title())))
+        __M_writer('&url=')
         __M_writer(str(abs_link(post.permalink())))
-        __M_writer('&source=www.bentasker.co.uk"\n        target=_blank \n        rel="noopener nofollow"\n        >\n            <img class="linkedinimg" \n                loading="lazy"\n                src="/images/social-icons/linkedin-share-button-icon.png"\n                alt="Share this post on LinkedIN"\n                title="Share this post on LinkedIN"\n                >\n        </a>\n\n    </div>\n\n\n    <aside class="postpromonav">\n    <nav>\n    ')
+        __M_writer('&via=bentasker" target=_blank rel="noopener nofollow">\n        <img class="twitterimg" \n             loading="lazy" src="/images/social-icons/share-on-twitter-button-icon.png" alt="Share this post on Twitter" title="Share this post on Twitter">\n    </a>\n\n    <a href="https://www.reddit.com/submit?url=')
+        __M_writer(str(abs_link(post.permalink())))
+        __M_writer('&title=')
+        __M_writer(filters.html_escape(str(post.title())))
+        __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="redditimg" \n             loading="lazy" src="images/social-icons/reddit-share-button-icon.png" alt="Share this post on Reddit" title="Share this post on Reddit">\n    </a>\n\n    <a href="https://www.linkedin.com/shareArticle?url=')
+        __M_writer(str(abs_link(post.permalink())))
+        __M_writer('&source=www.bentasker.co.uk" target=_blank rel="noopener nofollow">\n        <img class="linkedinimg" \n             loading="lazy" src="/images/social-icons/linkedin-share-button-icon.png" alt="Share this post on LinkedIN" title="Share this post on LinkedIN">\n    </a>\n\n    <a href="https://api.whatsapp.com/send?text=')
+        __M_writer(str(abs_link(post.permalink())))
+        __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="whatsappimg"\n             loading="lazy" src="/es/social-icons/whatsapp-share-button-icon.png" alt="Share this post via Whatsapp" title="Share this post via Whatsapp">\n    </a>\n\n    <a href="https://t.me/share/url?url=')
+        __M_writer(str(abs_link(post.permalink())))
+        __M_writer('&text=')
+        __M_writer(filters.html_escape(str(post.title())))
+        __M_writer('"\n    target=_blank \n    rel="noopener nofollow"\n    >\n        <img class="telegramimg" \n            loading="lazy"\n            src="/images/social-icons/telegram-icon.png"\n            alt="Share this post via Telegram"\n            title="Share this post via Telegram"\n            >\n    </a>\n\n    <a href="https://connect.qq.com/widget/shareqq/index.html?url=')
+        __M_writer(str(abs_link(post.permalink())))
+        __M_writer('&title=')
+        __M_writer(filters.html_escape(str(post.title())))
+        __M_writer('"\n    target=_blank \n    rel="noopener nofollow"\n    >\n        <img class="qqimg" \n            loading="lazy"\n            src="/images/social-icons/qq.jpg"\n            alt="Share this post via QQ"\n            title="Share this post via QQ"\n            >\n    </a>\n\n    <a href="mailto:?subject=')
+        __M_writer(filters.html_escape(str(post.title())))
+        __M_writer('&body=')
+        __M_writer(str(abs_link(post.permalink())))
+        __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="emailimg"\n             loading="lazy" src="/images/social-icons/email.jpg" alt="Share this post via Email" title="Share this post via Email">\n    </a>\n\n</div>\n\n    <aside class="postpromonav">\n    <nav>\n    ')
         __M_writer(str(helper.html_tags(post)))
         __M_writer('\n    ')
         __M_writer(str(helper.html_pager(post)))
@@ -182,11 +204,11 @@ def render_content(context,**pageargs):
 def render_sourcelink(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
-        ui = _mako_get_namespace(context, 'ui')
         def sourcelink():
             return render_sourcelink(context)
         post = context.get('post', UNDEFINED)
+        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        ui = _mako_get_namespace(context, 'ui')
         __M_writer = context.writer()
         __M_writer('\n')
         if show_sourcelink:
@@ -200,6 +222,6 @@ def render_sourcelink(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "themes/themeBlog/templates/post_ipynb.tmpl", "uri": "post_ipynb.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "64": 2, "65": 3, "66": 4, "67": 5, "68": 6, "69": 7, "74": 29, "79": 69, "84": 75, "90": 9, "101": 9, "102": 10, "103": 10, "104": 11, "105": 12, "106": 12, "107": 12, "108": 14, "109": 14, "110": 14, "111": 15, "112": 16, "113": 16, "114": 16, "115": 16, "116": 16, "117": 18, "118": 19, "119": 19, "120": 19, "121": 19, "122": 19, "123": 21, "124": 22, "125": 24, "126": 24, "127": 24, "128": 25, "129": 25, "130": 26, "131": 26, "132": 27, "133": 27, "139": 31, "153": 31, "154": 32, "155": 32, "156": 33, "157": 33, "158": 35, "159": 35, "160": 39, "161": 39, "162": 56, "163": 56, "164": 57, "165": 57, "166": 60, "167": 61, "168": 62, "169": 62, "170": 63, "171": 63, "172": 66, "173": 66, "174": 66, "175": 68, "176": 68, "182": 71, "191": 71, "192": 72, "193": 73, "194": 73, "195": 73, "201": 195}}
+{"filename": "themes/themeBlog/templates/post_ipynb.tmpl", "uri": "post_ipynb.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "64": 2, "65": 3, "66": 4, "67": 5, "68": 6, "69": 7, "74": 29, "79": 105, "84": 111, "90": 9, "101": 9, "102": 10, "103": 10, "104": 11, "105": 12, "106": 12, "107": 12, "108": 14, "109": 14, "110": 14, "111": 15, "112": 16, "113": 16, "114": 16, "115": 16, "116": 16, "117": 18, "118": 19, "119": 19, "120": 19, "121": 19, "122": 19, "123": 21, "124": 22, "125": 24, "126": 24, "127": 24, "128": 25, "129": 25, "130": 26, "131": 26, "132": 27, "133": 27, "139": 31, "153": 31, "154": 32, "155": 32, "156": 33, "157": 33, "158": 35, "159": 35, "160": 39, "161": 39, "162": 39, "163": 39, "164": 44, "165": 44, "166": 44, "167": 44, "168": 49, "169": 49, "170": 54, "171": 54, "172": 59, "173": 59, "174": 59, "175": 59, "176": 71, "177": 71, "178": 71, "179": 71, "180": 83, "181": 83, "182": 83, "183": 83, "184": 92, "185": 92, "186": 93, "187": 93, "188": 96, "189": 97, "190": 98, "191": 98, "192": 99, "193": 99, "194": 102, "195": 102, "196": 102, "197": 104, "198": 104, "204": 107, "213": 107, "214": 108, "215": 109, "216": 109, "217": 109, "223": 217}}
 __M_END_METADATA
 """
