@@ -5,9 +5,9 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1690118977.644548
+_modified_time = 1690129290.112476
 _enable_loop = True
-_template_filename = '/home/lucy/anaconda3/envs/lucy/lib/python3.10/site-packages/nikola/data/themes/bootstrap4/templates/post.tmpl'
+_template_filename = 'themes/themeBlog/templates/post.tmpl'
 _template_uri = 'post.tmpl'
 _source_encoding = 'utf-8'
 _exports = ['extra_head', 'content', 'sourcelink']
@@ -42,23 +42,24 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        abs_link = context.get('abs_link', UNDEFINED)
         comments = _mako_get_namespace(context, 'comments')
-        def extra_head():
-            return render_extra_head(context._locals(__M_locals))
-        messages = context.get('messages', UNDEFINED)
-        def sourcelink():
-            return render_sourcelink(context._locals(__M_locals))
-        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        parent = context.get('parent', UNDEFINED)
+        helper = _mako_get_namespace(context, 'helper')
         def content():
             return render_content(context._locals(__M_locals))
-        post = context.get('post', UNDEFINED)
-        helper = _mako_get_namespace(context, 'helper')
-        pheader = _mako_get_namespace(context, 'pheader')
-        smartjoin = context.get('smartjoin', UNDEFINED)
+        messages = context.get('messages', UNDEFINED)
         ui = _mako_get_namespace(context, 'ui')
-        site_has_comments = context.get('site_has_comments', UNDEFINED)
-        parent = context.get('parent', UNDEFINED)
+        def sourcelink():
+            return render_sourcelink(context._locals(__M_locals))
+        post = context.get('post', UNDEFINED)
+        smartjoin = context.get('smartjoin', UNDEFINED)
         math = _mako_get_namespace(context, 'math')
+        def extra_head():
+            return render_extra_head(context._locals(__M_locals))
+        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        site_has_comments = context.get('site_has_comments', UNDEFINED)
+        pheader = _mako_get_namespace(context, 'pheader')
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -89,13 +90,13 @@ def render_body(context,**pageargs):
 def render_extra_head(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        parent = context.get('parent', UNDEFINED)
+        post = context.get('post', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
+        helper = _mako_get_namespace(context, 'helper')
         def extra_head():
             return render_extra_head(context)
-        post = context.get('post', UNDEFINED)
-        helper = _mako_get_namespace(context, 'helper')
         smartjoin = context.get('smartjoin', UNDEFINED)
-        parent = context.get('parent', UNDEFINED)
-        math = _mako_get_namespace(context, 'math')
         __M_writer = context.writer()
         __M_writer('\n    ')
         __M_writer(str(parent.extra_head()))
@@ -138,15 +139,16 @@ def render_extra_head(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        abs_link = context.get('abs_link', UNDEFINED)
         comments = _mako_get_namespace(context, 'comments')
-        messages = context.get('messages', UNDEFINED)
+        helper = _mako_get_namespace(context, 'helper')
         def content():
             return render_content(context)
+        messages = context.get('messages', UNDEFINED)
         post = context.get('post', UNDEFINED)
-        helper = _mako_get_namespace(context, 'helper')
-        pheader = _mako_get_namespace(context, 'pheader')
-        site_has_comments = context.get('site_has_comments', UNDEFINED)
         math = _mako_get_namespace(context, 'math')
+        site_has_comments = context.get('site_has_comments', UNDEFINED)
+        pheader = _mako_get_namespace(context, 'pheader')
         __M_writer = context.writer()
         __M_writer('\n<article class="post-')
         __M_writer(str(post.meta('type')))
@@ -154,7 +156,9 @@ def render_content(context,**pageargs):
         __M_writer(str(pheader.html_post_header()))
         __M_writer('\n    <div class="e-content entry-content" itemprop="articleBody text">\n    ')
         __M_writer(str(post.text()))
-        __M_writer('\n    </div>\n    <aside class="postpromonav">\n    <nav>\n    ')
+        __M_writer('\n    </div>\n\n    <div class="socials">\n        <a href="https://www.linkedin.com/shareArticle?url=')
+        __M_writer(str(abs_link(post.permalink())))
+        __M_writer('&source=www.bentasker.co.uk"\n        target=_blank \n        rel="noopener nofollow"\n        >\n            <img class="linkedinimg" \n                loading="lazy"\n                src="/images/social-icons/linkedin-share-button-icon.png"\n                alt="Share this post on LinkedIN"\n                title="Share this post on LinkedIN"\n                >\n        </a>\n\n    </div>\n\n\n    \n    <aside class="postpromonav">\n    <nav>\n    ')
         __M_writer(str(helper.html_tags(post)))
         __M_writer('\n    ')
         __M_writer(str(helper.html_pager(post)))
@@ -178,10 +182,10 @@ def render_content(context,**pageargs):
 def render_sourcelink(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        def sourcelink():
-            return render_sourcelink(context)
         show_sourcelink = context.get('show_sourcelink', UNDEFINED)
         ui = _mako_get_namespace(context, 'ui')
+        def sourcelink():
+            return render_sourcelink(context)
         post = context.get('post', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
@@ -196,6 +200,6 @@ def render_sourcelink(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "/home/lucy/anaconda3/envs/lucy/lib/python3.10/site-packages/nikola/data/themes/bootstrap4/templates/post.tmpl", "uri": "post.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "63": 2, "64": 3, "65": 4, "66": 5, "67": 6, "68": 7, "73": 28, "78": 51, "83": 57, "89": 9, "100": 9, "101": 10, "102": 10, "103": 11, "104": 12, "105": 12, "106": 12, "107": 14, "108": 14, "109": 14, "110": 15, "111": 16, "112": 16, "113": 16, "114": 16, "115": 16, "116": 18, "117": 19, "118": 19, "119": 19, "120": 19, "121": 19, "122": 21, "123": 22, "124": 24, "125": 24, "126": 24, "127": 25, "128": 25, "129": 26, "130": 26, "131": 27, "132": 27, "138": 30, "151": 30, "152": 31, "153": 31, "154": 32, "155": 32, "156": 34, "157": 34, "158": 38, "159": 38, "160": 39, "161": 39, "162": 42, "163": 43, "164": 44, "165": 44, "166": 45, "167": 45, "168": 48, "169": 48, "170": 48, "171": 50, "172": 50, "178": 53, "187": 53, "188": 54, "189": 55, "190": 55, "191": 55, "197": 191}}
+{"filename": "themes/themeBlog/templates/post.tmpl", "uri": "post.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "64": 2, "65": 3, "66": 4, "67": 5, "68": 6, "69": 7, "74": 28, "79": 69, "84": 75, "90": 9, "101": 9, "102": 10, "103": 10, "104": 11, "105": 12, "106": 12, "107": 12, "108": 14, "109": 14, "110": 14, "111": 15, "112": 16, "113": 16, "114": 16, "115": 16, "116": 16, "117": 18, "118": 19, "119": 19, "120": 19, "121": 19, "122": 19, "123": 21, "124": 22, "125": 24, "126": 24, "127": 24, "128": 25, "129": 25, "130": 26, "131": 26, "132": 27, "133": 27, "139": 30, "153": 30, "154": 31, "155": 31, "156": 32, "157": 32, "158": 34, "159": 34, "160": 38, "161": 38, "162": 56, "163": 56, "164": 57, "165": 57, "166": 60, "167": 61, "168": 62, "169": 62, "170": 63, "171": 63, "172": 66, "173": 66, "174": 66, "175": 68, "176": 68, "182": 71, "191": 71, "192": 72, "193": 73, "194": 73, "195": 73, "201": 195}}
 __M_END_METADATA
 """

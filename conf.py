@@ -196,24 +196,24 @@ THEME_COLOR = '#5670d4'
 # bootstrap4 supports: navbar_light (defaults to False)
 #                      navbar_custom_bg (defaults to '')
 
-# Config for bootblog4:
-THEME_CONFIG = {
-    DEFAULT_LANG: {
-        # Show the latest featured post in a large box, with the previewimage as its background.
-        'featured_large': False,
-        # Show the first (remaining) two featured posts in small boxes.
-        'featured_small': False,
-        # Show featured posts on mobile.
-        'featured_on_mobile': True,
-        # Show image in `featured_large` on mobile.
-        # `featured_small` displays them only on desktop.
-        'featured_large_image_on_mobile': True,
-        # Strip HTML from featured post text.
-        'featured_strip_html': False,
-        # Contents of the sidebar, If empty, the sidebar is not displayed.
-        'sidebar': ''
-    }
-}
+# # Config for bootblog4:
+# THEME_CONFIG = {
+#     DEFAULT_LANG: {
+#         # Show the latest featured post in a large box, with the previewimage as its background.
+#         'featured_large': False,
+#         # Show the first (remaining) two featured posts in small boxes.
+#         'featured_small': False,
+#         # Show featured posts on mobile.
+#         'featured_on_mobile': True,
+#         # Show image in `featured_large` on mobile.
+#         # `featured_small` displays them only on desktop.
+#         'featured_large_image_on_mobile': True,
+#         # Strip HTML from featured post text.
+#         'featured_strip_html': False,
+#         # Contents of the sidebar, If empty, the sidebar is not displayed.
+#         'sidebar': ''
+#     }
+# }
 # Config for bootstrap4:
 # THEME_CONFIG = {
 #     DEFAULT_LANG: {
@@ -1231,25 +1231,26 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.c
 # <!-- End of social buttons -->
 # """
 
-SOCIAL_BUTTONS_CODE = """
-<div class="social-buttons">
-    <!-- Facebook Share Button -->
-    <a href="https://www.facebook.com/sharer/sharer.php?u={url}" target="_blank">
-        <img src="path/to/facebook-icon.png" alt="Share on Facebook">
-    </a>
+# SOCIAL_BUTTONS_CODE = """
+# <div class="social-buttons">
+#     <!-- Facebook Share Button -->
+#     <a href="https://www.facebook.com/sharer/sharer.php?u=${post.permalink()}" target="_blank">
+#         <img src="https://lucynowacki.github.io/images/facebook-icon.png" alt="Share on Facebook">
+#     </a>
 
-    <!-- Twitter Tweet Button -->
-    <a href="https://twitter.com/intent/tweet?url={url}&text={title}" target="_blank">
-        <img src="path/to/twitter-icon.png" alt="Tweet">
-    </a>
+#     <!-- Twitter Tweet Button -->
+#     <a href="https://twitter.com/intent/tweet?url=${post.permalink()}&text=${post.title()}" target="_blank">
+#         <img src="https://lucynowacki.github.io/images/twitter-icon.png" alt="Tweet">
+#     </a>
 
-    <!-- LinkedIn Share Button -->
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url={url}&title={title}" target="_blank">
-        <img src="path/to/linkedin-icon.png" alt="Share on LinkedIn">
-    </a>
-</div>
+#     <!-- LinkedIn Share Button -->
+#     <a href="https://www.linkedin.com/shareArticle?url=${abs_link(post.permalink())}&source=www.bentasker.co.uk" target="_blank">
+#         <img src="https://lucynowacki.github.io/images/linkedin-icon.png" alt="Share on LinkedIn">
+#     </a>
+# </div>
+# """
 
-"""
+
 
 # SOCIAL_BUTTONS_CODE = """
 # <!-- Go to www.addthis.com/dashboard to customize your tools -->

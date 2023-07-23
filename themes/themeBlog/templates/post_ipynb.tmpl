@@ -34,6 +34,23 @@
     <div class="e-content entry-content" itemprop="articleBody text">
     ${post.text()}
     </div>
+
+    <div class="socials">
+        <a href="https://www.linkedin.com/shareArticle?url=${abs_link(post.permalink())}&source=www.bentasker.co.uk"
+        target=_blank 
+        rel="noopener nofollow"
+        >
+            <img class="linkedinimg" 
+                loading="lazy"
+                src="/images/social-icons/linkedin-share-button-icon.png"
+                alt="Share this post on LinkedIN"
+                title="Share this post on LinkedIN"
+                >
+        </a>
+
+    </div>
+
+
     <aside class="postpromonav">
     <nav>
     ${helper.html_tags(post)}
