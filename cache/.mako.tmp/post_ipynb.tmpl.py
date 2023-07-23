@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1690132625.9769769
+_modified_time = 1690133254.743862
 _enable_loop = True
 _template_filename = 'themes/themeBlog/templates/post_ipynb.tmpl'
 _template_uri = 'post_ipynb.tmpl'
@@ -42,24 +42,24 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        ui = _mako_get_namespace(context, 'ui')
+        site_has_comments = context.get('site_has_comments', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
-        def sourcelink():
-            return render_sourcelink(context._locals(__M_locals))
-        pheader = _mako_get_namespace(context, 'pheader')
-        smartjoin = context.get('smartjoin', UNDEFINED)
-        abs_link = context.get('abs_link', UNDEFINED)
-        helper = _mako_get_namespace(context, 'helper')
-        messages = context.get('messages', UNDEFINED)
+        post = context.get('post', UNDEFINED)
         comments = _mako_get_namespace(context, 'comments')
+        abs_link = context.get('abs_link', UNDEFINED)
+        parent = context.get('parent', UNDEFINED)
+        smartjoin = context.get('smartjoin', UNDEFINED)
         def extra_head():
             return render_extra_head(context._locals(__M_locals))
+        messages = context.get('messages', UNDEFINED)
         math = _mako_get_namespace(context, 'math')
-        parent = context.get('parent', UNDEFINED)
+        def sourcelink():
+            return render_sourcelink(context._locals(__M_locals))
         show_sourcelink = context.get('show_sourcelink', UNDEFINED)
-        site_has_comments = context.get('site_has_comments', UNDEFINED)
-        post = context.get('post', UNDEFINED)
-        ui = _mako_get_namespace(context, 'ui')
+        helper = _mako_get_namespace(context, 'helper')
+        pheader = _mako_get_namespace(context, 'pheader')
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -90,12 +90,12 @@ def render_body(context,**pageargs):
 def render_extra_head(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        post = context.get('post', UNDEFINED)
+        parent = context.get('parent', UNDEFINED)
+        smartjoin = context.get('smartjoin', UNDEFINED)
         def extra_head():
             return render_extra_head(context)
         math = _mako_get_namespace(context, 'math')
-        parent = context.get('parent', UNDEFINED)
-        post = context.get('post', UNDEFINED)
-        smartjoin = context.get('smartjoin', UNDEFINED)
         helper = _mako_get_namespace(context, 'helper')
         __M_writer = context.writer()
         __M_writer('\n    ')
@@ -139,16 +139,16 @@ def render_extra_head(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        helper = _mako_get_namespace(context, 'helper')
+        site_has_comments = context.get('site_has_comments', UNDEFINED)
         def content():
             return render_content(context)
-        pheader = _mako_get_namespace(context, 'pheader')
-        abs_link = context.get('abs_link', UNDEFINED)
-        helper = _mako_get_namespace(context, 'helper')
-        messages = context.get('messages', UNDEFINED)
-        comments = _mako_get_namespace(context, 'comments')
-        math = _mako_get_namespace(context, 'math')
-        site_has_comments = context.get('site_has_comments', UNDEFINED)
         post = context.get('post', UNDEFINED)
+        comments = _mako_get_namespace(context, 'comments')
+        abs_link = context.get('abs_link', UNDEFINED)
+        messages = context.get('messages', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
+        pheader = _mako_get_namespace(context, 'pheader')
         __M_writer = context.writer()
         __M_writer('\n<article class="post-')
         __M_writer(str(post.meta('type')))
@@ -164,13 +164,13 @@ def render_content(context,**pageargs):
         __M_writer(str(abs_link(post.permalink())))
         __M_writer('&title=')
         __M_writer(filters.html_escape(str(post.title())))
-        __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="redditimg" \n             loading="lazy" src="images/social-icons/reddit-share-button-icon.png" alt="Share this post on Reddit" title="Share this post on Reddit">\n    </a>\n\n    <a href="https://www.linkedin.com/shareArticle?mini=true&url=')
+        __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="redditimg" \n             loading="lazy" src="/images/social-icons/reddit-share-button-icon.png" alt="Share this post on Reddit" title="Share this post on Reddit">\n    </a>\n\n    <a href="https://www.linkedin.com/shareArticle?mini=true&url=')
         __M_writer(str(abs_link(post.permalink())))
         __M_writer('&title=')
         __M_writer(filters.html_escape(str(post.title())))
         __M_writer('&summary=This%20is%20a%20summary%20of%20my%20blog%20post.&source=LucyNowacki.github.io" target=_blank rel="noopener nofollow">\n        <img class="linkedinimg" \n            loading="lazy" src="/images/social-icons/linkedin-share-button-icon.png" alt="Share this post on LinkedIN" title="Share this post on LinkedIN">\n    </a>\n\n\n    <a href="https://api.whatsapp.com/send?text=')
         __M_writer(str(abs_link(post.permalink())))
-        __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="whatsappimg"\n             loading="lazy" src="/es/social-icons/whatsapp-share-button-icon.png" alt="Share this post via Whatsapp" title="Share this post via Whatsapp">\n    </a>\n\n    <a href="https://t.me/share/url?url=')
+        __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="whatsappimg"\n             loading="lazy" src="/images/social-icons/whatsapp-share-button-icon.png" alt="Share this post via Whatsapp" title="Share this post via Whatsapp">\n    </a>\n\n    <a href="https://t.me/share/url?url=')
         __M_writer(str(abs_link(post.permalink())))
         __M_writer('&text=')
         __M_writer(filters.html_escape(str(post.title())))
