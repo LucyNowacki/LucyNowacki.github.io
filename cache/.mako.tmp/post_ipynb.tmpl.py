@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1690133254.743862
+_modified_time = 1690137091.2077992
 _enable_loop = True
 _template_filename = 'themes/themeBlog/templates/post_ipynb.tmpl'
 _template_uri = 'post_ipynb.tmpl'
@@ -42,24 +42,24 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        ui = _mako_get_namespace(context, 'ui')
-        site_has_comments = context.get('site_has_comments', UNDEFINED)
-        def content():
-            return render_content(context._locals(__M_locals))
-        post = context.get('post', UNDEFINED)
-        comments = _mako_get_namespace(context, 'comments')
-        abs_link = context.get('abs_link', UNDEFINED)
-        parent = context.get('parent', UNDEFINED)
-        smartjoin = context.get('smartjoin', UNDEFINED)
-        def extra_head():
-            return render_extra_head(context._locals(__M_locals))
-        messages = context.get('messages', UNDEFINED)
-        math = _mako_get_namespace(context, 'math')
         def sourcelink():
             return render_sourcelink(context._locals(__M_locals))
         show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        site_has_comments = context.get('site_has_comments', UNDEFINED)
+        ui = _mako_get_namespace(context, 'ui')
         helper = _mako_get_namespace(context, 'helper')
+        def content():
+            return render_content(context._locals(__M_locals))
+        def extra_head():
+            return render_extra_head(context._locals(__M_locals))
+        smartjoin = context.get('smartjoin', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
+        post = context.get('post', UNDEFINED)
+        abs_link = context.get('abs_link', UNDEFINED)
+        messages = context.get('messages', UNDEFINED)
+        comments = _mako_get_namespace(context, 'comments')
         pheader = _mako_get_namespace(context, 'pheader')
+        parent = context.get('parent', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -90,13 +90,13 @@ def render_body(context,**pageargs):
 def render_extra_head(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        smartjoin = context.get('smartjoin', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
         post = context.get('post', UNDEFINED)
         parent = context.get('parent', UNDEFINED)
-        smartjoin = context.get('smartjoin', UNDEFINED)
+        helper = _mako_get_namespace(context, 'helper')
         def extra_head():
             return render_extra_head(context)
-        math = _mako_get_namespace(context, 'math')
-        helper = _mako_get_namespace(context, 'helper')
         __M_writer = context.writer()
         __M_writer('\n    ')
         __M_writer(str(parent.extra_head()))
@@ -139,15 +139,15 @@ def render_extra_head(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        helper = _mako_get_namespace(context, 'helper')
         site_has_comments = context.get('site_has_comments', UNDEFINED)
+        helper = _mako_get_namespace(context, 'helper')
         def content():
             return render_content(context)
-        post = context.get('post', UNDEFINED)
         comments = _mako_get_namespace(context, 'comments')
+        math = _mako_get_namespace(context, 'math')
+        post = context.get('post', UNDEFINED)
         abs_link = context.get('abs_link', UNDEFINED)
         messages = context.get('messages', UNDEFINED)
-        math = _mako_get_namespace(context, 'math')
         pheader = _mako_get_namespace(context, 'pheader')
         __M_writer = context.writer()
         __M_writer('\n<article class="post-')
@@ -164,11 +164,9 @@ def render_content(context,**pageargs):
         __M_writer(str(abs_link(post.permalink())))
         __M_writer('&title=')
         __M_writer(filters.html_escape(str(post.title())))
-        __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="redditimg" \n             loading="lazy" src="/images/social-icons/reddit-share-button-icon.png" alt="Share this post on Reddit" title="Share this post on Reddit">\n    </a>\n\n    <a href="https://www.linkedin.com/shareArticle?mini=true&url=')
+        __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="redditimg" \n             loading="lazy" src="/images/social-icons/reddit-share-button-icon.png" alt="Share this post on Reddit" title="Share this post on Reddit">\n    </a>\n\n    <a href="https://www.linkedin.com/shareArticle?url=')
         __M_writer(str(abs_link(post.permalink())))
-        __M_writer('&title=')
-        __M_writer(filters.html_escape(str(post.title())))
-        __M_writer('&summary=This%20is%20a%20summary%20of%20my%20blog%20post.&source=LucyNowacki.github.io" target=_blank rel="noopener nofollow">\n        <img class="linkedinimg" \n            loading="lazy" src="/images/social-icons/linkedin-share-button-icon.png" alt="Share this post on LinkedIN" title="Share this post on LinkedIN">\n    </a>\n\n\n    <a href="https://api.whatsapp.com/send?text=')
+        __M_writer('&source=www.bentasker.co.uk" target=_blank rel="noopener nofollow">\n        <img class="linkedinimg" \n             loading="lazy" src="/images/social-icons/linkedin-share-button-icon.png" alt="Share this post on LinkedIN" title="Share this post on LinkedIN">\n    </a>\n\n\n\n    <a href="https://api.whatsapp.com/send?text=')
         __M_writer(str(abs_link(post.permalink())))
         __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="whatsappimg"\n             loading="lazy" src="/images/social-icons/whatsapp-share-button-icon.png" alt="Share this post via Whatsapp" title="Share this post via Whatsapp">\n    </a>\n\n    <a href="https://t.me/share/url?url=')
         __M_writer(str(abs_link(post.permalink())))
@@ -206,11 +204,11 @@ def render_content(context,**pageargs):
 def render_sourcelink(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
         post = context.get('post', UNDEFINED)
+        ui = _mako_get_namespace(context, 'ui')
         def sourcelink():
             return render_sourcelink(context)
-        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
-        ui = _mako_get_namespace(context, 'ui')
         __M_writer = context.writer()
         __M_writer('\n')
         if show_sourcelink:
@@ -224,6 +222,6 @@ def render_sourcelink(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "themes/themeBlog/templates/post_ipynb.tmpl", "uri": "post_ipynb.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "64": 2, "65": 3, "66": 4, "67": 5, "68": 6, "69": 7, "74": 29, "79": 106, "84": 112, "90": 9, "101": 9, "102": 10, "103": 10, "104": 11, "105": 12, "106": 12, "107": 12, "108": 14, "109": 14, "110": 14, "111": 15, "112": 16, "113": 16, "114": 16, "115": 16, "116": 16, "117": 18, "118": 19, "119": 19, "120": 19, "121": 19, "122": 19, "123": 21, "124": 22, "125": 24, "126": 24, "127": 24, "128": 25, "129": 25, "130": 26, "131": 26, "132": 27, "133": 27, "139": 31, "153": 31, "154": 32, "155": 32, "156": 33, "157": 33, "158": 35, "159": 35, "160": 39, "161": 39, "162": 39, "163": 39, "164": 44, "165": 44, "166": 44, "167": 44, "168": 49, "169": 49, "170": 49, "171": 49, "172": 55, "173": 55, "174": 60, "175": 60, "176": 60, "177": 60, "178": 72, "179": 72, "180": 72, "181": 72, "182": 84, "183": 84, "184": 84, "185": 84, "186": 93, "187": 93, "188": 94, "189": 94, "190": 97, "191": 98, "192": 99, "193": 99, "194": 100, "195": 100, "196": 103, "197": 103, "198": 103, "199": 105, "200": 105, "206": 108, "215": 108, "216": 109, "217": 110, "218": 110, "219": 110, "225": 219}}
+{"filename": "themes/themeBlog/templates/post_ipynb.tmpl", "uri": "post_ipynb.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "64": 2, "65": 3, "66": 4, "67": 5, "68": 6, "69": 7, "74": 29, "79": 107, "84": 113, "90": 9, "101": 9, "102": 10, "103": 10, "104": 11, "105": 12, "106": 12, "107": 12, "108": 14, "109": 14, "110": 14, "111": 15, "112": 16, "113": 16, "114": 16, "115": 16, "116": 16, "117": 18, "118": 19, "119": 19, "120": 19, "121": 19, "122": 19, "123": 21, "124": 22, "125": 24, "126": 24, "127": 24, "128": 25, "129": 25, "130": 26, "131": 26, "132": 27, "133": 27, "139": 31, "153": 31, "154": 32, "155": 32, "156": 33, "157": 33, "158": 35, "159": 35, "160": 39, "161": 39, "162": 39, "163": 39, "164": 44, "165": 44, "166": 44, "167": 44, "168": 49, "169": 49, "170": 56, "171": 56, "172": 61, "173": 61, "174": 61, "175": 61, "176": 73, "177": 73, "178": 73, "179": 73, "180": 85, "181": 85, "182": 85, "183": 85, "184": 94, "185": 94, "186": 95, "187": 95, "188": 98, "189": 99, "190": 100, "191": 100, "192": 101, "193": 101, "194": 104, "195": 104, "196": 104, "197": 106, "198": 106, "204": 109, "213": 109, "214": 110, "215": 111, "216": 111, "217": 111, "223": 217}}
 __M_END_METADATA
 """
