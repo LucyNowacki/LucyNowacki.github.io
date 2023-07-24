@@ -1,6 +1,7 @@
 <div id="cell-id=1e7d4255" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/images/heat.gif" alt="Optional alt text" /></p>
 <h1 id="METHOD-of-LINES-(MOL)">METHOD of LINES (MOL)<a class="anchor-link" href="#METHOD-of-LINES-(MOL)">&#182;</a></h1><p>There are various numerical schemes to solve PDEs. The finite difference and finite element or Galerkin methods are very popular. However, a semi-analytical approach called Method of Lines (MOL) allows for decent approximation accuracies. In this post, I show how to apply MOL to price European (EU) option based on the Black-Scholes model. <br><br>
 Let's consider the function $V=V(t,x)$ and its derivative $\partial_{t} = L(V)$.
 Method of Lines (MOL) amounts to the discretisation of PDE in space. Thus we set up a grid of points ${x_{i}}$. Then for each ${x_{i}}$, the individual ODE is solved along a time. Therefore the PDE is expressed in the form of one variable, $t$, instead of $x$ and $t$ as it is in case of finite difference or finite element methods. Namely, the system of ODEs is coupled by linear or non-linear operator $\mathbb{L}$ nad solved. In case of linear PDE, $\mathbb{L}$ is simply a matrix. For the non-linear, there is a matrix as well but depending itself on $V$ like in the Burger's eqn. Linearity has enormous advantages as far as the numerical approach is concerned.</p>
