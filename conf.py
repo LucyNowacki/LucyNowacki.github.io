@@ -146,12 +146,13 @@ NAVIGATION_LINKS = {
         # ("/index.html", "Home"),
         ("/categories/machine-learning", "Machine Blog"),
         ("/categories/numerical", "Numerical Blog"),
-        ("/categories/transhumanism", "Transhuman"),
         ("/categories/nlp", "NLP & Transformers"),
+        ("/categories/transhumanism", "Transhuman"),
         ("/categories/fintech", "FinTech"),
+        ("/categories/proofs", "Proofs"),
         ("/categories/", "Tags"),
         ("/bio/index.html", "Me & Hobbies"),
-        ("/categories/proofs", "Proofs"),
+        
     ),
 }
 
