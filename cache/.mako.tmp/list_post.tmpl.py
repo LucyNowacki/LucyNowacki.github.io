@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1690214236.4818861
+_modified_time = 1690215315.9377944
 _enable_loop = True
 _template_filename = '/home/lucy/anaconda3/envs/lucy/lib/python3.10/site-packages/nikola/data/themes/base/templates/list_post.tmpl'
 _template_uri = 'list_post.tmpl'
@@ -37,16 +37,16 @@ def render_body(context,**pageargs):
         _mako_get_namespace(context, 'archive_nav')._populate(_import_ns, ['*'])
         _mako_get_namespace(context, 'feeds_translations')._populate(_import_ns, ['*'])
         date_format = _import_ns.get('date_format', context.get('date_format', UNDEFINED))
+        feeds_translations = _mako_get_namespace(context, 'feeds_translations')
+        title = _import_ns.get('title', context.get('title', UNDEFINED))
+        messages = _import_ns.get('messages', context.get('messages', UNDEFINED))
         def content():
             return render_content(context._locals(__M_locals))
-        feeds_translations = _mako_get_namespace(context, 'feeds_translations')
-        archive_nav = _mako_get_namespace(context, 'archive_nav')
-        messages = _import_ns.get('messages', context.get('messages', UNDEFINED))
-        posts = _import_ns.get('posts', context.get('posts', UNDEFINED))
-        title = _import_ns.get('title', context.get('title', UNDEFINED))
-        kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
         def extra_head():
             return render_extra_head(context._locals(__M_locals))
+        posts = _import_ns.get('posts', context.get('posts', UNDEFINED))
+        archive_nav = _mako_get_namespace(context, 'archive_nav')
+        kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -92,13 +92,13 @@ def render_content(context,**pageargs):
         _mako_get_namespace(context, 'archive_nav')._populate(_import_ns, ['*'])
         _mako_get_namespace(context, 'feeds_translations')._populate(_import_ns, ['*'])
         date_format = _import_ns.get('date_format', context.get('date_format', UNDEFINED))
+        feeds_translations = _mako_get_namespace(context, 'feeds_translations')
+        title = _import_ns.get('title', context.get('title', UNDEFINED))
+        messages = _import_ns.get('messages', context.get('messages', UNDEFINED))
         def content():
             return render_content(context)
-        feeds_translations = _mako_get_namespace(context, 'feeds_translations')
-        archive_nav = _mako_get_namespace(context, 'archive_nav')
-        messages = _import_ns.get('messages', context.get('messages', UNDEFINED))
         posts = _import_ns.get('posts', context.get('posts', UNDEFINED))
-        title = _import_ns.get('title', context.get('title', UNDEFINED))
+        archive_nav = _mako_get_namespace(context, 'archive_nav')
         kind = _import_ns.get('kind', context.get('kind', UNDEFINED))
         __M_writer = context.writer()
         __M_writer('\n<article class="listpage">\n    <header>\n        <h1>')

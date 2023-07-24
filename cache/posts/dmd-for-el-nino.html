@@ -1,0 +1,209 @@
+<div id="cell-id=4dd4e303" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="DMD-for-El-Ni%C3%B1o">DMD for El Ni&#241;o<a class="anchor-link" href="#DMD-for-El-Ni%C3%B1o">&#182;</a></h1><p><img src="/images/animation1.gif" alt="Optional alt text" /></p>
+<p><a href="#code"><sup>[If you want to omit theory and go directly to the code.]</sup></a></p>
+<p>Dynamic Mode Decomposition (DMD) is a robust technique that has been increasingly utilized in the realm of data-driven modelling. This method enables us to dissect complex systems and extract significant insights about their behaviour. The strength of DMD is its capacity to offer a low-dimensional portrayal of high-dimensional data, making it an indispensable instrument for comprehending the dynamics of systems that evolve over time.</p>
+<p>In this blog post, we will explore the complexities of DMD and its practical application in revealing patterns in global ocean temperature over time, specifically concerning the El Niño phenomenon. The El Niño event, marked by unusually warm ocean temperatures in the Equatorial Pacific, serves as an excellent example of a complex system that can be examined using DMD. By applying DMD to ocean temperature data, we can discern the patterns and frequencies that indicate the emergence of an El Niño event, providing crucial insights for climate science and weather forecasting.</p>
+<p>We will employ the DMD algorithm based on the exact DMD framework developed by Tu et al. This algorithm is particularly beneficial as it can accommodate irregularly sampled data and concatenated data from various experiments or numerical simulations. It also offers a precise mathematical definition of DMD, enabling rigorous theoretical results.</p>
+<p>The initial step in DMD involves collecting pairs of snapshots of a system's state as it evolves over time. These snapshots are subsequently organized into two data matrices, X and X'. The DMD algorithm aims to find the leading <a href="https://en.wikipedia.org/wiki/Spectral_theorem">spectral decomposition</a> of the best-fit linear operator A that connects these two snapshot matrices in time. This operator A is an approximation of the Koopman operator, $\mathcal{K}$, and can be found, e.g., through a regression between X and X'. The best-fit operator A then forms a linear dynamical system that optimally advances snapshot measurements forward in time. For time uniform sampling, it is written as
+$$x_{k+1} \approx Ax_{k}$$</p>
+<p>Mathematically, the best-fit operator A is defined as:</p>
+<p>$$
+A = \arg\min_{A} \|X' - AX\|_F = X'X^{\dagger}\,\,\,\, (*)
+$$</p>
+<p>where $\| \cdot \|_F$ represents the Frobenius norm and $\dagger$ denotes the pseudo-inverse. The DMD algorithm employs dimensionality reduction to compute A's dominant eigenvalues and eigenvectors without requiring any explicit computations using A directly.</p>
+<p>In the context of our study, the state of the system is the ocean temperature at various locations, and the snapshots are the temperature readings at different time points. By applying DMD to this data, we can identify the dominant modes of variation in the ocean temperature, which can aid us in understanding and predicting El Niño events.</p>
+<p>In the subsequent sections, we will delve deeper into the DMD algorithm and illustrate how it can be utilized to study global ocean temperature patterns. Stay tuned!</p>
+
+</div>
+</div>
+</div>
+<div id="cell-id=f496130f" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The connection between Dynamic Mode Decomposition (DMD) and the Koopman operator, denoted as $\mathcal{K}$, is a captivating study area.</p>
+<p>Consider a dynamical system governed by the equation:</p>
+<p>$$\dot{x} = f(x)$$</p>
+<p>where $x$ is the state of the system, and $f$ is a potentially nonlinear function that describes the evolution of the system.</p>
+<p>A scalar observable is a function $g: \mathbb{R}^n \rightarrow \mathbb{C}$, where $X$ is the system's state space. The Koopman operator $\mathcal{K}$ is defined such that it describes the evolution of this scalar observable function along the system's trajectories. Mathematically, this is represented as:</p>
+<p>$$\mathcal{K}g(x) = g \circ f(x)$$</p>
+<p>This implies that the Koopman operator $\mathcal{K}$ applied to the observable $g$ at a point $x$ in the state space is equal to the observable $g$ evaluated along the trajectory of the system starting at $x$.</p>
+<p>The infinite-dimensional aspect of the Koopman operator arises from the fact that it operates on the space of observable functions, which can be infinite-dimensional rather than on the system's state space.
+An observable is a function that maps the state of the system to a real number. It represents a quantity that can be measured or observed in the system. For example, observables could be quantities like position, velocity, or kinetic energy in a physical system like a pendulum. In a weather system, observables could be temperature, pressure, or humidity at a particular location. The key idea is that an observable is a function that gives us information about the state of the system.</p>
+<p>An autonomous dynamical system is a system whose behaviour is entirely determined by its current state and does not explicitly depend on time. This is in contrast to non-autonomous systems, where the system's behaviour can change over time even if the system's state remains the same.</p>
+<p>For example, consider a simple pendulum swinging back and forth. If we ignore air resistance and assume that the pendulum is in a vacuum, then this is an example of an autonomous dynamical system. The state of the system at any given time (i.e., the position and velocity of the pendulum) completely determines the system's future behaviour.</p>
+<p>On the other hand, if we consider a pendulum in an environment where the air density changes with time (for example, if the air is being pumped out of the room), then this would be a non-autonomous system. Even if the pendulum is in the same state (same position and velocity) at two different times, it could behave differently at those times due to the changing air density.</p>
+<p>As for the Koopman operator and DMD, we typically deal with autonomous systems because the Koopman operator is defined in terms of the evolution of observables along the trajectories of an autonomous system. However, there are extensions of these methods to non-autonomous systems as well.</p>
+<p>Regarding the El Niño phenomenon, if we assume that the climate system is ergodic (time-averaging property and mixing property), it means that by observing the system over a long period of time, we can gather enough information about all possible states of the system. This is a fundamental assumption in many areas of statistical physics and thermodynamics, and it is also crucial for applying methods like DMD and the Koopman operator. Albeit the assumption of ergodicity in climate systems is a simplification that enables mathematical analysis, real-world climate systems, especially under the influence of climate change, may not strictly adhere to this assumption. Anomalies and trends introduced by climate change can disrupt ergodicity, as they might shift the climate system into unprecedented states or affect regions differently. Despite these challenges, ergodicity and associated mathematical tools like DMD and the Koopman operator can still provide valuable insights. Still, they must be used in conjunction with empirical data and updated regularly to account for the impacts of climate change.</p>
+<p>We can use a more general dynamical system in a discrete form</p>
+<p>$$
+x_{k+1} = F(x_k)
+$$</p>
+<p>where $x_k \in \mathbb{R}^n$ is the state of the system at time $k$, and $F: \mathbb{R}^n \rightarrow \mathbb{R}^n$ is a (possibly non-linear) function that describes the evolution of the system.</p>
+<p>The Koopman operator $\mathcal{K}$ associated with this dynamical system is defined on the space of observable functions $g: \mathbb{R}^n \rightarrow \mathbb{C}$. For any such function $g$, the Koopman operator $\mathcal{K}$ acts on $g$ to produce a new function $\mathcal{K}g$ defined by:</p>
+<p>$$
+(\mathcal{K}g)(x) = g(F(x))
+$$</p>
+<p>In other words, the Koopman operator &quot;advances&quot; the function $g$ one step forward in time according to the dynamics of the system.</p>
+<p>Now, if there exists a function $g$ and a complex number $\lambda$ such that $\mathcal{K}g = \lambda g$, then $g$ is an eigenfunction of the Koopman operator, and $\lambda$ is the corresponding eigenvalue. This means that the function $g$ evolves in time simply by being scaled by the factor $\lambda$.</p>
+<p>In the Dynamic Mode Decomposition (DMD) context, the Koopman operator plays a central role. DMD is a method used to analyze the dynamics of high-dimensional systems, and it works by approximating the eigenfunctions and eigenvalues of the Koopman operator. The eigenfunctions (also known as modes) represent spatial patterns that evolve in a simple way over time (namely, they are scaled by a complex exponential), and the eigenvalues represent the frequencies and growth/decay rates of these patterns.</p>
+<p>Now it is necessary to explain what precisely the eigenfunction is. In mathematics, an eigenfunction of a given operator is a non-zero function that changes only by a scalar factor, which is called the eigenvalue of the function when the operator is applied to it. In other words, if you have an operator $A$ and a function $f$, then $f$ is an eigenfunction of $A$ if $A(f)=\lambda f$ for some scalar $\lambda$. Here, $\lambda$ is the eigenvalue.</p>
+<p>In the context of differential equations, operators are often differential operators. For example, in the heat equation, the operator is the second derivative with respect to space. So, if $f''(x)=\lambda f(x)$, then $f$ is an eigenfunction of the second derivative operator, with $\lambda$ as the eigenvalue.</p>
+<p>The sine and cosine functions are eigenfunctions of the second derivative operator because the second derivative of a sine or cosine function is a scaled version of the original function. Specifically, if $f(x)=\sin(kx)$ or $f(x)=\cos(kx)$, then $f''(x)=-k^2 f(x)$. So, the eigenvalue is $-k^2$.</p>
+<p>In the context of the Fourier transform, these sine and cosine functions form a basis because any function can be expressed as a sum of scaled and shifted sine and cosine functions. When we solve the heat equation (or other similar differential equations), we often use this property to express the solution as a sum of sine and cosine functions. This is known as the separation of variables or the method of eigenfunctions.</p>
+<p>Analogically, in Dynamic Mode Decomposition (DMD), we often deal with a high-dimensional dynamical system that evolves over time. The goal of DMD is to find a set of modes (eigenfunctions) that best represent the dynamics of the system.</p>
+<p>These modes are eigenfunctions of the so-called Koopman operator. The Koopman operator is an infinite-dimensional linear operator that evolves observable functions of the state of the system forward in time. If we have a function $g$ that is an eigenfunction of the Koopman operator $\mathcal{K}$, then it satisfies $\mathcal{K}g = \lambda g$ for some complex scalar $\lambda$. Here, $\lambda$ is the eigenvalue corresponding to the eigenfunction $g$.</p>
+<p>The DMD algorithm approximates the eigenfunctions and eigenvalues of the Koopman operator from data. The resulting DMD modes (eigenfunctions) represent spatial patterns in the state space that evolve in a simple way over time (namely, they are scaled by a complex exponential), and the DMD eigenvalues represent the frequencies and growth/decay rates of these patterns.</p>
+<p>In this way, DMD provides a way to break down the complex, high-dimensional dynamics of the system into a sum of simpler, lower-dimensional modes. This is analogous to how the Fourier transform breaks down a function into a sum of sine and cosine functions.</p>
+<p>If we have a function $g$ that is an eigenfunction of the Koopman operator $\mathcal{K}$, then it satisfies $\mathcal{K}g = \lambda g$ for some complex scalar $\lambda$. Here, $\lambda$ is the eigenvalue corresponding to the eigenfunction $g$.</p>
+<p>The DMD algorithm approximates the eigenfunctions and eigenvalues of the Koopman operator from data. The resulting DMD modes (eigenfunctions) represent spatial patterns in the state space that evolve in a simple way over time. Specifically, if $\phi$ is a DMD mode and $\lambda$ is the corresponding DMD eigenvalue, then the mode evolves in time according to the equation:</p>
+<p>$$
+\phi(t) = e^{\lambda t} \phi(0)
+$$</p>
+<p>Here, $\phi(0)$ is the initial state of the mode, $t$ is time, and $e^{\lambda t}$ is the complex exponential that describes the evolution of the mode. The real part of $\lambda$ determines the growth or decay rate of the mode, and the imaginary part of $\lambda$ determines the frequency of oscillation.</p>
+<p>In this way, DMD provides a way to break down the complex, high-dimensional dynamics of the system into a sum of simpler, lower-dimensional modes. This is somewhat analogous to how the Fourier transform breaks down a function into a sum of sine and cosine functions.</p>
+
+</div>
+</div>
+</div>
+<div id="cell-id=2ab5f24e" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In general, the eigenfunctions $\phi$ and eigenvalues $\lambda$ of the Koopman operator satisfy the eigenvalue equation:</p>
+<p>$$
+\frac{d}{dt}\phi (x) = \mathcal{K}\phi(x) = \lambda \phi(x)
+$$</p>
+<p>This states that in continuous time, a Koopman eigenfunction $\phi(x)$ evolves at a rate that is proportional to its current value, with the proportionality constant given by the eigenvalue $\lambda$. This is a standard form for an eigenfunction equation.</p>
+<p>Let's apply the chain rule to the time derivative of the Koopman eigenfunction $\phi(x)$. The chain rule in calculus is a formula to compute the derivative of a composition of two functions. In its simplest form, if you have two functions $y=f(u)$ and $u=g(x)$ that are composed to form a function $y=f(g(x))$, then the derivative of $y$ with respect to $x$ is given by:</p>
+<p>$$
+\frac{dy}{dx} = \frac{df}{du} \cdot \frac{du}{dx}
+$$</p>
+<p>This says that the derivative of $y$ with respect to $x$ is the derivative of $f$ with respect to $u$, times the derivative of $u$ with respect to $x$.</p>
+<p>Here, the function $f$ is $\phi(x)$, and the function $g$ is $x(t)$, where $x(t)$ is the state of the system at time $t$. We want to compute the derivative of $\phi$ with respect to time $t$, which is given by:</p>
+<p>$$
+\frac{d\phi}{dt} = \frac{d\phi}{dx} \cdot \frac{dx}{dt}
+$$</p>
+<p>Here, $\frac{d\phi}{dx}$ is the derivative of $\phi$ with respect to $x$, and $\frac{dx}{dt}$ is the derivative of $x$ with respect to $t$. In the context of multivariable calculus, $\frac{d\phi}{dx}$ is replaced by the gradient of $\phi(x)$, denoted $\nabla\phi(x)$, and the multiplication is replaced by the dot product, giving:</p>
+<p>$$
+\frac{d\phi}{dt} = \nabla\phi(x) \cdot \frac{dx}{dt}
+$$</p>
+<p>Finally, the time derivative of the state $x(t)$ is given by the function $f(x)$ that describes the evolution of the system. Substituting this into the equation gives:</p>
+<p>$$
+\frac{d\phi}{dt} = \nabla\phi(x) \cdot f(x) = \lambda \phi(x)
+$$</p>
+<p>This is the equation that results from applying the chain rule to the time derivative of the Koopman eigenfunction $\phi(x)$. It is a nonlinear partial differential equation (PDE) and can be utilized to approximate the eigenfunctions, say, analytically via the Laurent series or with data by regression.</p>
+<p>The key idea behind the Koopman operator theory is that even though the dynamics of a system may be nonlinear in the original state space, there exists a transformation (given by the Koopman eigenfunctions) that can linearize the dynamics. The transformation from the original state space to the space of Koopman eigenfunctions is nonlinear, which is why it can linearize the dynamics of a nonlinear system. In the coordinates given by the Koopman eigenfunctions, the dynamics of the system are represented by a set of decoupled linear ordinary differential equations, which are much easier to analyze and control than the original nonlinear dynamics.</p>
+<p>In the context of the Koopman operator, the &quot;coordinates given by the Koopman eigenfunctions&quot; refer to a new representation of the state of the system. If we have a dynamical system with state $x(t)$, and we have found some Koopman eigenfunctions $\phi_i(x)$, then we can represent the state of the system in the new coordinates as $\phi_i(x(t))$.</p>
+<p>In other words, instead of describing the system in terms of the original state variables $x(t)$, we describe it in terms of the values of the Koopman eigenfunctions at $x(t)$. Mathematically, if we have $n$ Koopman eigenfunctions $\phi_1(x), \phi_2(x), ..., \phi_n(x)$, then the state of the system in the new coordinates at time $t$ is given by the vector:</p>
+<p>$$
+\begin{bmatrix}
+\phi_1(x(t)) \\
+\phi_2(x(t)) \\
+\vdots \\
+\phi_n(x(t))
+\end{bmatrix}
+$$</p>
+<p>This new representation has the property that the dynamics of the system are linear, which can make analysis and control of the system much more manageable.</p>
+<p>The linearity of the Koopman operator is one of its most significant properties, making it a powerful tool for analyzing nonlinear dynamical systems <sup><a href="#1">1</a></sup>.</p>
+<p>Even though the underlying dynamical system might be nonlinear, the Koopman operator itself is linear because it acts on the space of observable functions, not directly on the system's state space. This is a crucial distinction. Nonlinear dynamical systems can be challenging to analyze due to their inherent complexity. However, by transforming the problem into the space of observable functions and applying the linear Koopman operator, we can leverage the powerful techniques of linear algebra to analyze the system.</p>
+<p>For instance, consider a nonlinear dynamical system described by the equation $\dot{x} = f(x)$, where $x$ is the state of the system, and $f$ is a nonlinear function. If we define an observable $g: X \rightarrow \mathbb{R}$, where $X$ is the state space of the system, we can apply the Koopman operator to this observable to study the evolution of the system in the observable space. This transformation allows us to analyze the system using linear techniques, despite the original system being nonlinear.</p>
+<p>The linearity of the Koopman operator can be seen from its definition. If we have two observables $g_1$ and $g_2$ and two scalars $a$ and $b$, the linearity of the Koopman operator $\mathcal{K}$ means that:</p>
+<p>$$\mathcal{K}(a g_1 + b g_2) = a \mathcal{K} g_1 + b \mathcal{K} g_2$$</p>
+<p>This property allows us to use superposition and decomposition techniques from linear algebra to analyze the behaviour of the system. For example, we can decompose the observable space into a basis of the Koopman operator's eigenfunctions and study each component's evolution independently. This is a significant advantage over direct analysis of the nonlinear system, where such decomposition may not be possible.</p>
+<p>However, the price we pay for this linearity is that the Koopman operator is infinite-dimensional because it acts on the space of all possible observable functions, which is infinite-dimensional. This means that, in practice, we can only compute a finite-dimensional approximation of the Koopman operator, such as the one provided by the DMD algorithm. Despite this limitation, the ability to use linear techniques to analyze nonlinear systems makes the Koopman operator a powerful tool in dynamical systems theory.</p>
+<p><em>Neverthless, &quot;Obtaining Koopman eigenfunctions from data or from analytic expressions is a central
+applied challenge in modern dynamical systems. Discovering these eigenfunctions enables
+globally linear representations of strongly nonlinear systems.&quot;</em></p>
+<p>In the study of dynamical systems, it's common to collect a range of measurements from a system. Sometimes, we might even capture a system's entire state with a high-dimensional spatial nature, such as a fluid flow that changes over time. These measurements can be organized into a vector, denoted as $g$, where each individual measurement can be expressed in terms of the eigenfunctions, $\phi_j(X)$, of the Koopman operator.</p>
+<p>These eigenfunctions form an orthonormal basis in the Hilbert space of square-integrable functions. Each eigenfunction, $\phi_j(X)$, corresponds to a specific direction in this infinite-dimensional space. This set of eigenfunctions, $\{\phi_j(X_0)\}_{j=0}^{\infty}$, serves as the basis in our context.</p>
+<p>The vector of observables, $g$, can be expressed as a linear combination of these basis vectors (the Koopman eigenfunctions):</p>
+<p>$$
+g(X) = \sum_{j=1}^{\infty} \phi_j(X) v_j
+$$</p>
+<p>Here, the $v_j$ are the Koopman modes, which serve as the coordinates in this representation. They provide the weights for each basis vector (eigenfunction) in the representation of $g(X)$. The coordinates are given by the Koopman modes $\{v_j\}_{j=0}^{\infty}$ and the eigenvalues $\{\lambda_j^k\}_{j=0}^{\infty}$. The Koopman modes $v_j$ are the coefficients in the expansion of the observable function $g(X)$ in the basis of the Koopman eigenfunctions. They provide the weights for each basis vector (eigenfunction) in the representation of $g(X)$. The eigenvalues $\lambda_j^k$ represent the temporal evolution of the system, indicating how each mode changes over time.</p>
+<p>In systems that conserve energy, such as those governed by Hamiltonian dynamics, the Koopman operator is unitary on the Hilbert space of square-integrable functions. This implies that the Koopman eigenfunctions are orthonormal for conservative systems, and it is feasible to compute the Koopman modes $v_j$ directly by projection:</p>
+<p>$$
+v_j = \begin{bmatrix} \langle \phi_j, g_1 \rangle \\ \langle \phi_j, g_2 \rangle \\ \vdots \\ \langle \phi_j, g_p \rangle \end{bmatrix}
+$$</p>
+<p>where $\langle \cdot, \cdot \rangle$ is the standard inner product of functions in Hilbert space. Hence, the expansion of the observable function can be viewed as a transformation of basis into the coordinates of the eigenfunctions.</p>
+<p>These Koopman modes have a physical interpretation in the case of direct spatial measurements of a system, $g(X) = X$, where the modes are coherent spatial modes that behave linearly with the same temporal dynamics (i.e., oscillations, possibly with linear growth or decay). These Koopman modes are also known as dynamic modes in Dynamic Mode Decomposition (DMD).</p>
+<p>Given the decomposition, it is possible to represent the dynamics of the measurements $g$ as follows:</p>
+<p>$$
+g(X_k) = \mathcal{K}^k g(X_0) = \sum_{j=0}^{\infty} \lambda_j^k \phi_j(X_0) v_j
+$$</p>
+<p>where $\mathcal{K}^k$ is the Koopman operator $\mathcal{K}$ applied $k$ times. This sequence of triples, $\{(\lambda_j, \phi_j, v_j)\}_{j=0}^{\infty}$, is known as the Koopman mode decomposition. Often, it is possible to approximate this expansion as a truncated sum of only a few dominant terms.</p>
+<p>The DMD eigenvalues approximate the Koopman eigenvalues $\lambda_j$, the DMD modes approximate the Koopman modes $v_j$, and the DMD mode amplitudes approximate the corresponding Koopman eigenfunctions evaluated at the initial condition $\phi_j(X_0)$.</p>
+<p>In fact, the Koopman mode decomposition is nearly identical to the DMD spectral expansion, with the DMD mode amplitudes $b_j$ replaced with the Koopman eigenfunctions $\phi_j(X_0)$ evaluated at the initial condition, and the DMD modes $\phi_j$ replaced with the Koopman modes $v_j$. It is important to note that the Koopman modes and eigenfunctions are distinct mathematical objects, requiring different approaches for approximation. Koopman eigenfunctions are often more challenging to compute than Koopman modes.</p>
+<p>The DMD algorithm closely resembles the Koopman operator if we choose direct linear measurements of the state so that $g(x) = x$ . The matrix $A$ in DMD is an approximate representation of the Koopman operator restricted to a finite-dimensional subspace of linear measurements <a href="#1"><sup>[1]</sup></a>. Thus, our aim is to find the eigenvectors $W$ and eigenvalues $\Lambda$ of $$A W = W \Lambda$$</p>
+<p>However, for a high-dimensional state vector $x \in \mathbb{R}^n$, the matrix $A$ has $n^2$ elements, and representing this operator, let alone computing its spectral decomposition, may be intractable <a href="#1"><sup>[1]</sup></a>. Therefore, we do not compute matrix $A$ directly.</p>
+<p>Instead, we compute pseudo_inverse $X^{\dagger}$ in $(*)$ through SVD $X \approx U \Sigma V^*$ and using the easiness of inverting $V^*$, i.e., we are able to get $X^{\dagger}$ of $X$ with the most dominant singular vectors.</p>
+<p>In more detail, matrix $X \in \mathbb{R}^{m \times n}$ is usually such that $m &lt;&lt; n$, and hence via SVD, we obtain smaller matrix $\tilde{A} \in \mathbb{R}^{m \times m}$. The intricacies of the DMD algorithm will be delivered in the further part of the text, albeit now we know why we need SVD.</p>
+<p>In more general setting, the norm structure of the space is used, but there may not be an inner product available we rely on Banach spaces.
+The Banach spaces is a complete normed vector space. This means that it is a space in which every Cauchy sequence (a sequence where the distance between successive terms can be made arbitrarily small) converges to a limit that is within the space. In that space the DMD algorithm is seen as a method for approximating the action of the Koopman operator on an $N$-dimensional subspace of the space of observables. This means that we are considering a subspace of the space of all possible observable functions that has a finite dimension $N$.</p>
+<p>The DMD algorithm does this approximation by sampling at $M$ points in the state space. This means that we are taking $M$ different states of the system and using the data from these states to approximate the action of the Koopman operator.</p>
+<p>If we denote the state space as $X$ and the space of observables as $Y$, the Koopman operator $K: Y \rightarrow Y$ is approximated by a matrix $A: \mathbb{R}^N \rightarrow \mathbb{R}^N$ obtained from the DMD algorithm. The $M$ points in the state space are represented as vectors $x_1, x_2, ..., x_M \in X$, and the corresponding observables are vectors $y_1, y_2, ..., y_M \in Y$. The DMD algorithm uses these vectorsThe Dynamic Mode Decomposition (DMD) algorithm and the Koopman operator are both tools used to analyze dynamical systems. The Koopman operator is a linear operator that acts on the space of observable functions of a dynamical system, while DMD is a data-driven method that approximates the leading eigenvalues and modes of the Koopman operator.</p>
+<p>In the context of Banach spaces, the DMD algorithm is seen as a method for approximating the action of the Koopman operator on an $N$-dimensional subspace of the space of observables. This means that we are considering a subspace of the space of all possible observable functions that has a finite dimension $N$.</p>
+<p>Mathematically, if we denote the state space as $X$ and the space of observables as $Y$, the Koopman operator $K: Y \rightarrow Y$ is approximated by a matrix $A: \mathbb{R}^N \rightarrow \mathbb{R}^N$ obtained from the DMD algorithm. The $M$ points in the state space are represented as vectors $x_1, x_2, ..., x_M \in X$, and the corresponding observables are vectors $y_1, y_2, ..., y_M \in Y$. The DMD algorithm uses these vectors to construct the matrix $A$ that approximates the action of the Koopman operator on the $N$-dimensional subspace <a href="#4"><sup>[4]</sup></a>.</p>
+<p>The convergence of the Dynamic Mode Decomposition (DMD) algorithm is an important aspect of its performance and reliability. In the context of Banach spaces and the approximation of the Koopman operator, the convergence of the DMD algorithm is established under the assumption that the underlying dynamical system is ergodic.</p>
+<p>An ergodic dynamical system is one where the states of the system, over a long period of time, explore the entire state space evenly. In other words, the system's future states are not dependent on its initial state, but rather, they are influenced by the characteristics of the entire state space. This is a fundamental assumption in many areas of statistical physics and dynamical systems theory. Namely, when the underlying dynamical system is ergodic, it ensures that the sampling of the state space by the DMD algorithm, which is used to approximate the Koopman operator, is representative of the entire state space. This is crucial for the DMD algorithm to provide a reliable approximation of the Koopman operator.</p>
+<p>Mathematically, if we denote the Koopman operator as $K: Y \rightarrow Y$, the DMD algorithm approximates this operator by a matrix $A: \mathbb{R}^N \rightarrow \mathbb{R}^N$. The convergence of the DMD algorithm means that as the number of sampled points $M$ in the state space increases, the approximation $A$ converges to the true Koopman operator $K$ in the $N$-dimensional subspace of observables
+<a href="#2"><sup>[2]</sup></a>.</p>
+<p>As we are familiarized a bit with the DMD idea and Koopman operator, we can get down to the practicalities.</p>
+<p>At first, you should install cupy that enables to use GPU. We will need also libraries Xarray to deal with geospatial data and netCDF4. For nice graddients plotting, I suggest to install jupyterthems as well.</p>
+
+</div>
+</div>
+</div>
+<div id="cell-id=c904be91" class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">cupy</span> <span class="k">as</span> <span class="nn">cp</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span><span class="p">,</span> <span class="n">LinearSegmentedColormap</span>
+<span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
+<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="s2">&quot;monokai&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;notebook&quot;</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">LinearSegmentedColormap</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;animation.embed_limit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">80</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">scipy.io</span>
+
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">netCDF4</span> <span class="k">as</span> <span class="nn">nc</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div id="cell-id=84e7fb0a" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next we have to download the color map.</p>
+
+</div>
+</div>
+</div>
+<div id="cell-id=e380314b" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+
+
