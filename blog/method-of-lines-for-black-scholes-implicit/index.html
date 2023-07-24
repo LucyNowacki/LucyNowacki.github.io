@@ -580,7 +580,7 @@ Transformation of BS eqn to the heat equation would decrease the error since, in
         <a href="#" id="fb-share-button">Share on Facebook</a>
 
         <!-- LinkedIn share button -->
-        <button onclick="shareOnLinkedIn()">Share on LinkedIn</button>
+        <a href="#" id="linkedin-share-button">Share on LinkedIn</a>
 
 </div>
 
@@ -616,7 +616,7 @@ delimiters: [
     }
 
     // JavaScript for LinkedIn share button
-    function shareOnLinkedIn() {
+    document.getElementById('linkedin-share-button').onclick = function() {
         var postUrl = encodeURIComponent(window.location.href);
         var linkedinShareUrl = 'https://www.linkedin.com/shareArticle?mini=true&url=' + postUrl;
         window.open(linkedinShareUrl, '_blank');
