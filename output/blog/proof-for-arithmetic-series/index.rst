@@ -1,7 +1,7 @@
 .. title: Proof for Arithmetic Series
 .. slug: proof-for-arithmetic-series
 .. date: 2022-05-24 14:52:36 UTC+01:00
-.. tags: teaching
+.. tags: proofs
 .. has_math: yes
 .. category: 
 .. link: 

@@ -147,10 +147,10 @@ NAVIGATION_LINKS = {
         ("/categories/machine-learning", "Machine Blog"),
         ("/categories/numerical", "Numerical Blog"),
         ("/categories/transhumanism", "Transhuman"),
-        ("/categories/war-and-politics", "War & Ukraine"),
+        ("/categories/NLP", "NLP & Transformers"),
         ("/categories/", "Tags"),
-        ("/bio/index.html", "Bio & CV"),
-        ("/categories/teaching", "Teaching"),
+        ("/bio/index.html", "Me & Hobbies"),
+        ("/categories/proofs", "Proofs"),
     ),
 }
 
@@ -277,6 +277,7 @@ PAGES = (
 )
 # And to avoid a conflict because blogs try to generate /index.html
 INDEX_PATH = "blog"
+
 # Below this point, everything is optional
 
 # Post's dates are considered in UTC by default, if you want to use
