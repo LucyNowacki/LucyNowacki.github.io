@@ -20,21 +20,45 @@
   gtag('js', new Date());
   gtag('config', 'GA_MEASUREMENT_ID);
 </script><meta name="google-site-verification" content="WF1l7hEMV49eJl7Kb2rVSOwXp2KINwX59Tig6ACvfSs">
-<meta name="author" content="Lucy Nowacki">
+<!-- Add Facebook SDK -->
+</head>
+<body>
+<div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v11.0" nonce="yourNonceValue"></script><script>
+    window.fbAsyncInit = function() {
+        FB.init({
+        appId      : '963063331636085', // Your Facebook App ID
+        xfbml      : true,
+        version    : 'v11.0'
+        });
+        FB.AppEvents.logPageView();
+    };
+
+    function sharePost() {
+        FB.ui({
+        method: 'share',
+        href: 'https://lucynowacki.github.io/blog/dynamic-mode-decomposition-for-el-nino/', // Your blog post URL
+        }, function(response){});
+    }
+    </script><meta name="author" content="Lucy Nowacki">
 <link rel="prev" href="../exploring-the-bitcoin-cryptocurrency-market/" title="Exploring the Bitcoin Cryptocurrency Market" type="text/html">
 <meta property="og:site_name" content="Nova Automata">
 <meta property="og:title" content="Dynamic Mode Decomposition for El Nino">
 <meta property="og:url" content="https://example.com/blog/dynamic-mode-decomposition-for-el-nino/">
-<meta property="og:description" content="Add this at the top of your Jupyter notebook¶Replace 'https://lucynowacki.github.io/images/animation1.gif' with the URL of the image you want to use for this post¶&quot;&quot;&quot;
-title: Your Post Title
-og_image: ">
+<meta property="og:description" content="DMD for El Niño¶
+    
+
+
+
+
+
+[If you want to omit theory and go directly to the code.]
+Dynamic Mode Decomposition (DMD) is a robust technique that has been increasingly utilized in the realm of data-dri">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2023-07-16T20:24:19+01:00">
 <meta property="article:tag" content="Machine Learning">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
 <link rel="stylesheet" href="../../assets/css/post_ipynb.css">
-</head>
-<body>
 <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
 
 <!-- Menubar -->
@@ -150,79 +174,18 @@ bg-dark
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div id="cell-id=56450dac" class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Add-this-at-the-top-of-your-Jupyter-notebook">Add this at the top of your Jupyter notebook<a class="anchor-link" href="#Add-this-at-the-top-of-your-Jupyter-notebook">¶</a>
-</h2>
-<h2 id="Replace-'https://lucynowacki.github.io/images/animation1.gif'-with-the-URL-of-the-image-you-want-to-use-for-this-post">Replace '<a href="https://lucynowacki.github.io/images/animation1.gif">https://lucynowacki.github.io/images/animation1.gif</a>' with the URL of the image you want to use for this post<a class="anchor-link" href="#Replace-'https://lucynowacki.github.io/images/animation1.gif'-with-the-URL-of-the-image-you-want-to-use-for-this-post">¶</a>
-</h2>
-<p>"""
-title: Your Post Title
-og_image: <a href="https://lucynowacki.github.io/images/animation1.gif">https://lucynowacki.github.io/images/animation1.gif</a>
-"""</p>
-
-</div>
-</div>
-</div>
-<div id="cell-id=93325f7b" class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="social-icon">
-  <?php // Broken up for readability on smaller screens
-   $t = urlencode($page->title);
-   $p = urlencode($_SERVER['REQUEST_URI']);
-   $d = "https://www.bentasker.co.uk";
-  ?&gt;
-   <a href="https://twitter.com/share?text=&lt;?php%20echo%20%24t;%20?&gt;&amp;url=&lt;?php%20echo%20%24d%20.%20%24p;%20?&gt;&amp;via=bentasker">
-     Tweet This
-   </a>
-</div>
-
-
-</div>
-</div>
-</div>
-<div id="cell-id=70c926de" class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">"social-icon"</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="err">?</span><span class="n">php</span>
-   <span class="o">//</span> <span class="n">Broken</span> <span class="n">up</span> <span class="k">for</span> <span class="n">readability</span> <span class="n">on</span> <span class="n">smaller</span> <span class="n">screens</span>
-   <span class="err">$</span><span class="n">t</span> <span class="o">=</span> <span class="n">urlencode</span><span class="p">(</span><span class="err">$</span><span class="n">page</span><span class="o">-&gt;</span><span class="n">title</span><span class="p">);</span>
-   <span class="err">$</span><span class="n">p</span> <span class="o">=</span> <span class="n">urlencode</span><span class="p">(</span><span class="err">$</span><span class="n">_SERVER</span><span class="p">[</span><span class="s1">'REQUEST_URI'</span><span class="p">]);</span>
-   <span class="err">$</span><span class="n">d</span> <span class="o">=</span> <span class="s2">"https://www.bentasker.co.uk"</span><span class="p">;</span>
-  <span class="o">?&gt;</span>
-   <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">"https://facebook.com/share?text=&lt;?php echo $t; ?&gt;&amp;url=&lt;?php echo $d . $p; ?&gt;&amp;via=bentasker"</span><span class="o">&gt;</span>
-     <span class="n">Tweet</span> <span class="n">This</span>
-   <span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div id="cell-id=02c45c85" class="cell border-box-sizing text_cell rendered">
+    <div id="cell-id=02c45c85" class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="DMD-for-El-Ni%C3%B1o">DMD for El Niño<a class="anchor-link" href="#DMD-for-El-Ni%C3%B1o">¶</a>
 </h2>
-<meta property="og:title" content="DMD for El Niño">
-<meta property="og:description" content="Dynamic Mode Decomposition (DMD) is a robust technique that has been increasingly utilized in the realm of data-driven modelling.">
-<meta property="og:image" content="https://lucynowacki.github.io/images/animation1.gif">
 <a href="https://www.facebook.com/sharer/sharer.php?u=https://lucynowacki.github.io/blog/dynamic-mode-decomposition-for-el-nino/index.html" target="_blank">
     <img src="https://lucynowacki.github.io/images/facebook-icon.png" alt="Facebook" style="height:42px;width:42px;border:0;"></a>
 
+<p><a href="https://www.linkedin.com/shareArticle?mini=https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Flucynowacki.github.io%2Fblog%2Fmethod-of-lines-for-black-scholes-implicit%2Findex.html&amp;title=Method%20of%20Lines%20for%20Black-Scholes%20Implicit&amp;summary=This%20is%20a%20summary%20of%20my%20blog%20post.&amp;source=LucyNowacki.github.io" target="_blank">
+<img src="https://lucynowacki.github.io/images/social-icons/facebook-app-icon.png" alt="LinkedIn" style="height:42px;width:42px;border:0;"></a></p>
 <p><a href="#code"><sup>[If you want to omit theory and go directly to the code.]</sup></a></p>
 <p>Dynamic Mode Decomposition (DMD) is a robust technique that has been increasingly utilized in the realm of data-driven modelling. This method enables us to dissect complex systems and extract significant insights about their behaviour. The strength of DMD is its capacity to offer a low-dimensional portrayal of high-dimensional data, making it an indispensable instrument for comprehending the dynamics of systems that evolve over time.</p>
 <p>In this blog post, we will explore the complexities of DMD and its practical application in revealing patterns in global ocean temperature over time, specifically concerning the El Niño phenomenon. The El Niño event, marked by unusually warm ocean temperatures in the Equatorial Pacific, serves as an excellent example of a complex system that can be examined using DMD. By applying DMD to ocean temperature data, we can discern the patterns and frequencies that indicate the emergence of an El Niño event, providing crucial insights for climate science and weather forecasting.</p>
@@ -10833,7 +10796,7 @@ In essence, this equation says that we want to express the system's initial stat
 </div>
 </div>
 </div>
-<div id="cell-id=f289f765" class="cell border-box-sizing text_cell rendered">
+<div id="cell-id=6f90e0bb" class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -20637,28 +20600,12 @@ AAAAAEABBO4AAAAAAFAAgTsAAAAAABRA4A4AAAAAAAX4f92kezCIQPT7AAAAAElFTkSuQmCC\
     </div>
 
 <div class="socials">
-    <a href="https://twitter.com/share?text=Dynamic%20Mode%20Decomposition%20for%20El%20Nino&amp;url=https://example.com/blog/dynamic-mode-decomposition-for-el-nino/&amp;via=bentasker" target="_blank" rel="noopener nofollow">
-        <img class="twitterimg" loading="lazy" src="../../images/social-icons/share-on-twitter-button-icon.png" alt="Share this post on Twitter" title="Share this post on Twitter"></a>
 
-    <a href="https://www.reddit.com/submit?url=https://example.com/blog/dynamic-mode-decomposition-for-el-nino/&amp;title=Dynamic%20Mode%20Decomposition%20for%20El%20Nino" target="_blank" rel="noopener nofollow">
-        <img class="redditimg" loading="lazy" src="../../images/social-icons/reddit-share-button-icon.png" alt="Share this post on Reddit" title="Share this post on Reddit"></a>
+        <!-- Facebook share button -->
+        <a href="#" id="fb-share-button">Share on Facebook</a>
 
-    <a href="https://www.linkedin.com/shareArticle?url=https://example.com/blog/dynamic-mode-decomposition-for-el-nino/&amp;source=www.bentasker.co.uk" target="_blank" rel="noopener nofollow">
-        <img class="linkedinimg" loading="lazy" src="../../images/social-icons/linkedin-share-button-icon.png" alt="Share this post on LinkedIN" title="Share this post on LinkedIN"></a>
-
-
-
-    <a href="https://api.whatsapp.com/send?text=https://example.com/blog/dynamic-mode-decomposition-for-el-nino/" target="_blank" rel="noopener nofollow">
-        <img class="whatsappimg" loading="lazy" src="../../images/social-icons/whatsapp-share-button-icon.png" alt="Share this post via Whatsapp" title="Share this post via Whatsapp"></a>
-
-    <a href="https://t.me/share/url?url=https://example.com/blog/dynamic-mode-decomposition-for-el-nino/&amp;text=Dynamic%20Mode%20Decomposition%20for%20El%20Nino" target="_blank" rel="noopener nofollow">
-        <img class="telegramimg" loading="lazy" src="../../images/social-icons/telegram-icon.png" alt="Share this post via Telegram" title="Share this post via Telegram"></a>
-
-    <a href="https://connect.qq.com/widget/shareqq/index.html?url=https://example.com/blog/dynamic-mode-decomposition-for-el-nino/&amp;title=Dynamic%20Mode%20Decomposition%20for%20El%20Nino" target="_blank" rel="noopener nofollow">
-        <img class="qqimg" loading="lazy" src="../../images/social-icons/qq.jpg" alt="Share this post via QQ" title="Share this post via QQ"></a>
-
-    <a href="mailto:?subject=Dynamic%20Mode%20Decomposition%20for%20El%20Nino&amp;body=https://example.com/blog/dynamic-mode-decomposition-for-el-nino/" target="_blank" rel="noopener nofollow">
-        <img class="emailimg" loading="lazy" src="../../images/social-icons/email.jpg" alt="Share this post via Email" title="Share this post via Email"></a>
+        <!-- LinkedIn share button -->
+        <a href="#" id="linkedin-share-button">Share on LinkedIn</a>
 
 </div>
 
@@ -20683,7 +20630,21 @@ delimiters: [
 
                     }
                 );
-            </script></article><!--End of body content--><footer id="footer"><div class="text-center">
+            </script><!-- JavaScript for Facebook share button --><script>
+    document.getElementById('fb-share-button').onclick = function() {
+        var postUrl = encodeURIComponent(window.location.href);
+        var facebookShareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + postUrl;
+        window.open(facebookShareUrl, '_blank');
+    }
+
+    // JavaScript for LinkedIn share button
+    document.getElementById('linkedin-share-button').onclick = function() {
+        var postUrl = encodeURIComponent(window.location.href);
+        var linkedinShareUrl = 'https://www.linkedin.com/shareArticle?mini=true&url=' + postUrl;
+        window.open(linkedinShareUrl, '_blank');
+    }
+
+    </script></article><!--End of body content--><footer id="footer"><div class="text-center">
     <p>
         <span class="fa-stack fa-2x">
         <a href="https://github.com/LucyNowacki">

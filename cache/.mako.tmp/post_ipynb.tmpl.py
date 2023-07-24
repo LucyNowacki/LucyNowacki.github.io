@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1690137091.2077992
+_modified_time = 1690157181.3645349
 _enable_loop = True
 _template_filename = 'themes/themeBlog/templates/post_ipynb.tmpl'
 _template_uri = 'post_ipynb.tmpl'
@@ -42,23 +42,22 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        def sourcelink():
-            return render_sourcelink(context._locals(__M_locals))
-        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
-        site_has_comments = context.get('site_has_comments', UNDEFINED)
-        ui = _mako_get_namespace(context, 'ui')
-        helper = _mako_get_namespace(context, 'helper')
-        def content():
-            return render_content(context._locals(__M_locals))
         def extra_head():
             return render_extra_head(context._locals(__M_locals))
-        smartjoin = context.get('smartjoin', UNDEFINED)
-        math = _mako_get_namespace(context, 'math')
-        post = context.get('post', UNDEFINED)
-        abs_link = context.get('abs_link', UNDEFINED)
+        def sourcelink():
+            return render_sourcelink(context._locals(__M_locals))
+        def content():
+            return render_content(context._locals(__M_locals))
         messages = context.get('messages', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
+        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        site_has_comments = context.get('site_has_comments', UNDEFINED)
+        post = context.get('post', UNDEFINED)
         comments = _mako_get_namespace(context, 'comments')
+        helper = _mako_get_namespace(context, 'helper')
+        ui = _mako_get_namespace(context, 'ui')
         pheader = _mako_get_namespace(context, 'pheader')
+        smartjoin = context.get('smartjoin', UNDEFINED)
         parent = context.get('parent', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
@@ -90,17 +89,17 @@ def render_body(context,**pageargs):
 def render_extra_head(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        smartjoin = context.get('smartjoin', UNDEFINED)
-        math = _mako_get_namespace(context, 'math')
-        post = context.get('post', UNDEFINED)
-        parent = context.get('parent', UNDEFINED)
-        helper = _mako_get_namespace(context, 'helper')
         def extra_head():
             return render_extra_head(context)
+        post = context.get('post', UNDEFINED)
+        helper = _mako_get_namespace(context, 'helper')
+        math = _mako_get_namespace(context, 'math')
+        smartjoin = context.get('smartjoin', UNDEFINED)
+        parent = context.get('parent', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n    ')
         __M_writer(str(parent.extra_head()))
-        __M_writer('\n')
+        __M_writer('\n\n    <!-- Add Facebook SDK -->\n    <div id="fb-root"></div>\n    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="yourNonceValue"></script>\n    <script>\n    window.fbAsyncInit = function() {\n        FB.init({\n        appId      : \'963063331636085\', // Your Facebook App ID\n        xfbml      : true,\n        version    : \'v11.0\'\n        });\n        FB.AppEvents.logPageView();\n    };\n\n    function sharePost() {\n        FB.ui({\n        method: \'share\',\n        href: \'https://lucynowacki.github.io/blog/dynamic-mode-decomposition-for-el-nino/\', // Your blog post URL\n        }, function(response){});\n    }\n    </script>\n\n\n')
         if post.meta('keywords'):
             __M_writer('    <meta name="keywords" content="')
             __M_writer(filters.html_escape(str(smartjoin(', ', post.meta('keywords')))))
@@ -139,15 +138,14 @@ def render_extra_head(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        site_has_comments = context.get('site_has_comments', UNDEFINED)
-        helper = _mako_get_namespace(context, 'helper')
         def content():
             return render_content(context)
-        comments = _mako_get_namespace(context, 'comments')
-        math = _mako_get_namespace(context, 'math')
-        post = context.get('post', UNDEFINED)
-        abs_link = context.get('abs_link', UNDEFINED)
         messages = context.get('messages', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
+        site_has_comments = context.get('site_has_comments', UNDEFINED)
+        post = context.get('post', UNDEFINED)
+        comments = _mako_get_namespace(context, 'comments')
+        helper = _mako_get_namespace(context, 'helper')
         pheader = _mako_get_namespace(context, 'pheader')
         __M_writer = context.writer()
         __M_writer('\n<article class="post-')
@@ -156,31 +154,7 @@ def render_content(context,**pageargs):
         __M_writer(str(pheader.html_post_header()))
         __M_writer('\n    <div class="e-content entry-content" itemprop="articleBody text">\n    ')
         __M_writer(str(post.text()))
-        __M_writer('\n    </div>\n\n<div class="socials">\n    <a href="https://twitter.com/share?text=')
-        __M_writer(filters.html_escape(str(post.title())))
-        __M_writer('&url=')
-        __M_writer(str(abs_link(post.permalink())))
-        __M_writer('&via=bentasker" target=_blank rel="noopener nofollow">\n        <img class="twitterimg" \n             loading="lazy" src="/images/social-icons/share-on-twitter-button-icon.png" alt="Share this post on Twitter" title="Share this post on Twitter">\n    </a>\n\n    <a href="https://www.reddit.com/submit?url=')
-        __M_writer(str(abs_link(post.permalink())))
-        __M_writer('&title=')
-        __M_writer(filters.html_escape(str(post.title())))
-        __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="redditimg" \n             loading="lazy" src="/images/social-icons/reddit-share-button-icon.png" alt="Share this post on Reddit" title="Share this post on Reddit">\n    </a>\n\n    <a href="https://www.linkedin.com/shareArticle?url=')
-        __M_writer(str(abs_link(post.permalink())))
-        __M_writer('&source=www.bentasker.co.uk" target=_blank rel="noopener nofollow">\n        <img class="linkedinimg" \n             loading="lazy" src="/images/social-icons/linkedin-share-button-icon.png" alt="Share this post on LinkedIN" title="Share this post on LinkedIN">\n    </a>\n\n\n\n    <a href="https://api.whatsapp.com/send?text=')
-        __M_writer(str(abs_link(post.permalink())))
-        __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="whatsappimg"\n             loading="lazy" src="/images/social-icons/whatsapp-share-button-icon.png" alt="Share this post via Whatsapp" title="Share this post via Whatsapp">\n    </a>\n\n    <a href="https://t.me/share/url?url=')
-        __M_writer(str(abs_link(post.permalink())))
-        __M_writer('&text=')
-        __M_writer(filters.html_escape(str(post.title())))
-        __M_writer('"\n    target=_blank \n    rel="noopener nofollow"\n    >\n        <img class="telegramimg" \n            loading="lazy"\n            src="/images/social-icons/telegram-icon.png"\n            alt="Share this post via Telegram"\n            title="Share this post via Telegram"\n            >\n    </a>\n\n    <a href="https://connect.qq.com/widget/shareqq/index.html?url=')
-        __M_writer(str(abs_link(post.permalink())))
-        __M_writer('&title=')
-        __M_writer(filters.html_escape(str(post.title())))
-        __M_writer('"\n    target=_blank \n    rel="noopener nofollow"\n    >\n        <img class="qqimg" \n            loading="lazy"\n            src="/images/social-icons/qq.jpg"\n            alt="Share this post via QQ"\n            title="Share this post via QQ"\n            >\n    </a>\n\n    <a href="mailto:?subject=')
-        __M_writer(filters.html_escape(str(post.title())))
-        __M_writer('&body=')
-        __M_writer(str(abs_link(post.permalink())))
-        __M_writer('" target=_blank rel="noopener nofollow">\n        <img class="emailimg"\n             loading="lazy" src="/images/social-icons/email.jpg" alt="Share this post via Email" title="Share this post via Email">\n    </a>\n\n</div>\n\n    <aside class="postpromonav">\n    <nav>\n    ')
+        __M_writer('\n    </div>\n\n<div class="socials">\n\n        <!-- Facebook share button -->\n        <a href="#" id="fb-share-button">Share on Facebook</a>\n\n        <!-- LinkedIn share button -->\n        <a href="#" id="linkedin-share-button">Share on LinkedIn</a>\n\n</div>\n\n    <aside class="postpromonav">\n    <nav>\n    ')
         __M_writer(str(helper.html_tags(post)))
         __M_writer('\n    ')
         __M_writer(str(helper.html_pager(post)))
@@ -193,7 +167,7 @@ def render_content(context,**pageargs):
             __M_writer('\n        </section>\n')
         __M_writer('    ')
         __M_writer(str(math.math_scripts_ifpost(post)))
-        __M_writer('\n</article>\n')
+        __M_writer("\n    \n    <!-- JavaScript for Facebook share button -->\n    <script>\n    document.getElementById('fb-share-button').onclick = function() {\n        var postUrl = encodeURIComponent(window.location.href);\n        var facebookShareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + postUrl;\n        window.open(facebookShareUrl, '_blank');\n    }\n\n    // JavaScript for LinkedIn share button\n    document.getElementById('linkedin-share-button').onclick = function() {\n        var postUrl = encodeURIComponent(window.location.href);\n        var linkedinShareUrl = 'https://www.linkedin.com/shareArticle?mini=true&url=' + postUrl;\n        window.open(linkedinShareUrl, '_blank');\n    }\n\n    </script>\n</article>\n")
         __M_writer(str(comments.comment_link_script()))
         __M_writer('\n')
         return ''
@@ -204,11 +178,11 @@ def render_content(context,**pageargs):
 def render_sourcelink(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
         post = context.get('post', UNDEFINED)
-        ui = _mako_get_namespace(context, 'ui')
         def sourcelink():
             return render_sourcelink(context)
+        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        ui = _mako_get_namespace(context, 'ui')
         __M_writer = context.writer()
         __M_writer('\n')
         if show_sourcelink:
@@ -222,6 +196,6 @@ def render_sourcelink(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "themes/themeBlog/templates/post_ipynb.tmpl", "uri": "post_ipynb.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "64": 2, "65": 3, "66": 4, "67": 5, "68": 6, "69": 7, "74": 29, "79": 107, "84": 113, "90": 9, "101": 9, "102": 10, "103": 10, "104": 11, "105": 12, "106": 12, "107": 12, "108": 14, "109": 14, "110": 14, "111": 15, "112": 16, "113": 16, "114": 16, "115": 16, "116": 16, "117": 18, "118": 19, "119": 19, "120": 19, "121": 19, "122": 19, "123": 21, "124": 22, "125": 24, "126": 24, "127": 24, "128": 25, "129": 25, "130": 26, "131": 26, "132": 27, "133": 27, "139": 31, "153": 31, "154": 32, "155": 32, "156": 33, "157": 33, "158": 35, "159": 35, "160": 39, "161": 39, "162": 39, "163": 39, "164": 44, "165": 44, "166": 44, "167": 44, "168": 49, "169": 49, "170": 56, "171": 56, "172": 61, "173": 61, "174": 61, "175": 61, "176": 73, "177": 73, "178": 73, "179": 73, "180": 85, "181": 85, "182": 85, "183": 85, "184": 94, "185": 94, "186": 95, "187": 95, "188": 98, "189": 99, "190": 100, "191": 100, "192": 101, "193": 101, "194": 104, "195": 104, "196": 104, "197": 106, "198": 106, "204": 109, "213": 109, "214": 110, "215": 111, "216": 111, "217": 111, "223": 217}}
+{"filename": "themes/themeBlog/templates/post_ipynb.tmpl", "uri": "post_ipynb.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "63": 2, "64": 3, "65": 4, "66": 5, "67": 6, "68": 7, "73": 52, "78": 103, "83": 109, "89": 9, "100": 9, "101": 10, "102": 10, "103": 34, "104": 35, "105": 35, "106": 35, "107": 37, "108": 37, "109": 37, "110": 38, "111": 39, "112": 39, "113": 39, "114": 39, "115": 39, "116": 41, "117": 42, "118": 42, "119": 42, "120": 42, "121": 42, "122": 44, "123": 45, "124": 47, "125": 47, "126": 47, "127": 48, "128": 48, "129": 49, "130": 49, "131": 50, "132": 50, "138": 54, "151": 54, "152": 55, "153": 55, "154": 56, "155": 56, "156": 58, "157": 58, "158": 73, "159": 73, "160": 74, "161": 74, "162": 77, "163": 78, "164": 79, "165": 79, "166": 80, "167": 80, "168": 83, "169": 83, "170": 83, "171": 102, "172": 102, "178": 105, "187": 105, "188": 106, "189": 107, "190": 107, "191": 107, "197": 191}}
 __M_END_METADATA
 """

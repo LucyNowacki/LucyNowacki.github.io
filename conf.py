@@ -1231,41 +1231,6 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.c
 # <!-- End of social buttons -->
 # """
 
-# SOCIAL_BUTTONS_CODE = """
-# <div class="social-buttons">
-#     <!-- Facebook Share Button -->
-#     <a href="https://www.facebook.com/sharer/sharer.php?u=${post.permalink()}" target="_blank">
-#         <img src="https://lucynowacki.github.io/images/facebook-icon.png" alt="Share on Facebook">
-#     </a>
-
-#     <!-- Twitter Tweet Button -->
-#     <a href="https://twitter.com/intent/tweet?url=${post.permalink()}&text=${post.title()}" target="_blank">
-#         <img src="https://lucynowacki.github.io/images/twitter-icon.png" alt="Tweet">
-#     </a>
-
-#     <!-- LinkedIn Share Button -->
-#     <a href="https://www.linkedin.com/shareArticle?url=${abs_link(post.permalink())}&source=www.bentasker.co.uk" target="_blank">
-#         <img src="https://lucynowacki.github.io/images/linkedin-icon.png" alt="Share on LinkedIn">
-#     </a>
-# </div>
-# """
-
-
-
-# SOCIAL_BUTTONS_CODE = """
-# <!-- Go to www.addthis.com/dashboard to customize your tools -->
-# <script type="text/javascript" src="<YOUR ADDTHIS IDENTIFIER>"></script>
-# """
-
-# SOCIAL_BUTTONS_CODE = """
-# <!-- Go to www.addthis.com/dashboard to customize your tools -->
-# <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-628a7c4dbad50ca3"></script>
-# """
-
-# SOCIAL_BUTTONS_CODE = """<div id="shareNice" data-share-label="Share"
-#     data-color-scheme="black" data-icon-size="32" data-panel-bottom="plain"
-#     data-services="plus.google.com,facebook.com,email,twitter.com"
-#     style="position: absolute; left: 20px; top: 60px;"></div>"""
 
 
 # Show link to source for the posts?

@@ -20,7 +20,27 @@
   gtag('js', new Date());
   gtag('config', 'GA_MEASUREMENT_ID);
 </script><meta name="google-site-verification" content="WF1l7hEMV49eJl7Kb2rVSOwXp2KINwX59Tig6ACvfSs">
-<meta name="author" content="Lucy Nowacki">
+<!-- Add Facebook SDK -->
+</head>
+<body>
+<div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v11.0" nonce="yourNonceValue"></script><script>
+    window.fbAsyncInit = function() {
+        FB.init({
+        appId      : '963063331636085', // Your Facebook App ID
+        xfbml      : true,
+        version    : 'v11.0'
+        });
+        FB.AppEvents.logPageView();
+    };
+
+    function sharePost() {
+        FB.ui({
+        method: 'share',
+        href: 'https://lucynowacki.github.io/blog/dynamic-mode-decomposition-for-el-nino/', // Your blog post URL
+        }, function(response){});
+    }
+    </script><meta name="author" content="Lucy Nowacki">
 <link rel="prev" href="../we-are-already-trans-today/" title="WE ARE ALREADY TRANS TODAY ..." type="text/html">
 <link rel="next" href="../robust-and-accelerated-pca/" title="Robust and Accelerated PCA" type="text/html">
 <meta property="og:site_name" content="Nova Automata">
@@ -32,8 +52,6 @@
 <meta property="article:tag" content="Machine Learning">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
 <link rel="stylesheet" href="../../assets/css/post_ipynb.css">
-</head>
-<body>
 <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
 
 <!-- Menubar -->
@@ -1143,28 +1161,12 @@ or in <a href="../../images/Residual_net_svg.svg">details</a></p>
     </div>
 
 <div class="socials">
-    <a href="https://twitter.com/share?text=Physics%20informed%20solution%20for%20Heat%20equation&amp;url=https://example.com/blog/physics-informed-solution-for-heat-equation/&amp;via=bentasker" target="_blank" rel="noopener nofollow">
-        <img class="twitterimg" loading="lazy" src="../../images/social-icons/share-on-twitter-button-icon.png" alt="Share this post on Twitter" title="Share this post on Twitter"></a>
 
-    <a href="https://www.reddit.com/submit?url=https://example.com/blog/physics-informed-solution-for-heat-equation/&amp;title=Physics%20informed%20solution%20for%20Heat%20equation" target="_blank" rel="noopener nofollow">
-        <img class="redditimg" loading="lazy" src="../../images/social-icons/reddit-share-button-icon.png" alt="Share this post on Reddit" title="Share this post on Reddit"></a>
+        <!-- Facebook share button -->
+        <a href="#" id="fb-share-button">Share on Facebook</a>
 
-    <a href="https://www.linkedin.com/shareArticle?url=https://example.com/blog/physics-informed-solution-for-heat-equation/&amp;source=www.bentasker.co.uk" target="_blank" rel="noopener nofollow">
-        <img class="linkedinimg" loading="lazy" src="../../images/social-icons/linkedin-share-button-icon.png" alt="Share this post on LinkedIN" title="Share this post on LinkedIN"></a>
-
-
-
-    <a href="https://api.whatsapp.com/send?text=https://example.com/blog/physics-informed-solution-for-heat-equation/" target="_blank" rel="noopener nofollow">
-        <img class="whatsappimg" loading="lazy" src="../../images/social-icons/whatsapp-share-button-icon.png" alt="Share this post via Whatsapp" title="Share this post via Whatsapp"></a>
-
-    <a href="https://t.me/share/url?url=https://example.com/blog/physics-informed-solution-for-heat-equation/&amp;text=Physics%20informed%20solution%20for%20Heat%20equation" target="_blank" rel="noopener nofollow">
-        <img class="telegramimg" loading="lazy" src="../../images/social-icons/telegram-icon.png" alt="Share this post via Telegram" title="Share this post via Telegram"></a>
-
-    <a href="https://connect.qq.com/widget/shareqq/index.html?url=https://example.com/blog/physics-informed-solution-for-heat-equation/&amp;title=Physics%20informed%20solution%20for%20Heat%20equation" target="_blank" rel="noopener nofollow">
-        <img class="qqimg" loading="lazy" src="../../images/social-icons/qq.jpg" alt="Share this post via QQ" title="Share this post via QQ"></a>
-
-    <a href="mailto:?subject=Physics%20informed%20solution%20for%20Heat%20equation&amp;body=https://example.com/blog/physics-informed-solution-for-heat-equation/" target="_blank" rel="noopener nofollow">
-        <img class="emailimg" loading="lazy" src="../../images/social-icons/email.jpg" alt="Share this post via Email" title="Share this post via Email"></a>
+        <!-- LinkedIn share button -->
+        <a href="#" id="linkedin-share-button">Share on LinkedIn</a>
 
 </div>
 
@@ -1192,7 +1194,21 @@ delimiters: [
 
                     }
                 );
-            </script></article><!--End of body content--><footer id="footer"><div class="text-center">
+            </script><!-- JavaScript for Facebook share button --><script>
+    document.getElementById('fb-share-button').onclick = function() {
+        var postUrl = encodeURIComponent(window.location.href);
+        var facebookShareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + postUrl;
+        window.open(facebookShareUrl, '_blank');
+    }
+
+    // JavaScript for LinkedIn share button
+    document.getElementById('linkedin-share-button').onclick = function() {
+        var postUrl = encodeURIComponent(window.location.href);
+        var linkedinShareUrl = 'https://www.linkedin.com/shareArticle?mini=true&url=' + postUrl;
+        window.open(linkedinShareUrl, '_blank');
+    }
+
+    </script></article><!--End of body content--><footer id="footer"><div class="text-center">
     <p>
         <span class="fa-stack fa-2x">
         <a href="https://github.com/LucyNowacki">

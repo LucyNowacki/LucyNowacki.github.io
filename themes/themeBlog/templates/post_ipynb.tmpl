@@ -8,6 +8,29 @@
 
 <%block name="extra_head">
     ${parent.extra_head()}
+
+    <!-- Add Facebook SDK -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="yourNonceValue"></script>
+    <script>
+    window.fbAsyncInit = function() {
+        FB.init({
+        appId      : '963063331636085', // Your Facebook App ID
+        xfbml      : true,
+        version    : 'v11.0'
+        });
+        FB.AppEvents.logPageView();
+    };
+
+    function sharePost() {
+        FB.ui({
+        method: 'share',
+        href: 'https://lucynowacki.github.io/blog/dynamic-mode-decomposition-for-el-nino/', // Your blog post URL
+        }, function(response){});
+    }
+    </script>
+
+
     % if post.meta('keywords'):
     <meta name="keywords" content="${smartjoin(', ', post.meta('keywords'))|h}">
     % endif
@@ -36,56 +59,12 @@
     </div>
 
 <div class="socials">
-    <a href="https://twitter.com/share?text=${post.title()|h}&url=${abs_link(post.permalink())}&via=bentasker" target=_blank rel="noopener nofollow">
-        <img class="twitterimg" 
-             loading="lazy" src="/images/social-icons/share-on-twitter-button-icon.png" alt="Share this post on Twitter" title="Share this post on Twitter">
-    </a>
 
-    <a href="https://www.reddit.com/submit?url=${abs_link(post.permalink())}&title=${post.title()|h}" target=_blank rel="noopener nofollow">
-        <img class="redditimg" 
-             loading="lazy" src="/images/social-icons/reddit-share-button-icon.png" alt="Share this post on Reddit" title="Share this post on Reddit">
-    </a>
+        <!-- Facebook share button -->
+        <a href="#" id="fb-share-button">Share on Facebook</a>
 
-    <a href="https://www.linkedin.com/shareArticle?url=${abs_link(post.permalink())}&source=www.bentasker.co.uk" target=_blank rel="noopener nofollow">
-        <img class="linkedinimg" 
-             loading="lazy" src="/images/social-icons/linkedin-share-button-icon.png" alt="Share this post on LinkedIN" title="Share this post on LinkedIN">
-    </a>
-
-
-
-    <a href="https://api.whatsapp.com/send?text=${abs_link(post.permalink())}" target=_blank rel="noopener nofollow">
-        <img class="whatsappimg"
-             loading="lazy" src="/images/social-icons/whatsapp-share-button-icon.png" alt="Share this post via Whatsapp" title="Share this post via Whatsapp">
-    </a>
-
-    <a href="https://t.me/share/url?url=${abs_link(post.permalink())}&text=${post.title()|h}"
-    target=_blank 
-    rel="noopener nofollow"
-    >
-        <img class="telegramimg" 
-            loading="lazy"
-            src="/images/social-icons/telegram-icon.png"
-            alt="Share this post via Telegram"
-            title="Share this post via Telegram"
-            >
-    </a>
-
-    <a href="https://connect.qq.com/widget/shareqq/index.html?url=${abs_link(post.permalink())}&title=${post.title()|h}"
-    target=_blank 
-    rel="noopener nofollow"
-    >
-        <img class="qqimg" 
-            loading="lazy"
-            src="/images/social-icons/qq.jpg"
-            alt="Share this post via QQ"
-            title="Share this post via QQ"
-            >
-    </a>
-
-    <a href="mailto:?subject=${post.title()|h}&body=${abs_link(post.permalink())}" target=_blank rel="noopener nofollow">
-        <img class="emailimg"
-             loading="lazy" src="/images/social-icons/email.jpg" alt="Share this post via Email" title="Share this post via Email">
-    </a>
+        <!-- LinkedIn share button -->
+        <a href="#" id="linkedin-share-button">Share on LinkedIn</a>
 
 </div>
 
@@ -102,6 +81,23 @@
         </section>
     % endif
     ${math.math_scripts_ifpost(post)}
+    
+    <!-- JavaScript for Facebook share button -->
+    <script>
+    document.getElementById('fb-share-button').onclick = function() {
+        var postUrl = encodeURIComponent(window.location.href);
+        var facebookShareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + postUrl;
+        window.open(facebookShareUrl, '_blank');
+    }
+
+    // JavaScript for LinkedIn share button
+    document.getElementById('linkedin-share-button').onclick = function() {
+        var postUrl = encodeURIComponent(window.location.href);
+        var linkedinShareUrl = 'https://www.linkedin.com/shareArticle?mini=true&url=' + postUrl;
+        window.open(linkedinShareUrl, '_blank');
+    }
+
+    </script>
 </article>
 ${comments.comment_link_script()}
 </%block>
