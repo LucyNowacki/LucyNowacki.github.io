@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1690193161.812822
+_modified_time = 1690195394.4018717
 _enable_loop = True
 _template_filename = 'themes/themeBlog/templates/post_ipynb.tmpl'
 _template_uri = 'post_ipynb.tmpl'
@@ -42,23 +42,23 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        def extra_head():
-            return render_extra_head(context._locals(__M_locals))
-        smartjoin = context.get('smartjoin', UNDEFINED)
-        helper = _mako_get_namespace(context, 'helper')
-        math = _mako_get_namespace(context, 'math')
-        messages = context.get('messages', UNDEFINED)
-        ui = _mako_get_namespace(context, 'ui')
-        def sourcelink():
-            return render_sourcelink(context._locals(__M_locals))
-        pheader = _mako_get_namespace(context, 'pheader')
-        comments = _mako_get_namespace(context, 'comments')
-        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
         site_has_comments = context.get('site_has_comments', UNDEFINED)
-        post = context.get('post', UNDEFINED)
-        parent = context.get('parent', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
+        parent = context.get('parent', UNDEFINED)
+        messages = context.get('messages', UNDEFINED)
+        def sourcelink():
+            return render_sourcelink(context._locals(__M_locals))
+        def extra_head():
+            return render_extra_head(context._locals(__M_locals))
+        pheader = _mako_get_namespace(context, 'pheader')
+        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        smartjoin = context.get('smartjoin', UNDEFINED)
+        post = context.get('post', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
+        comments = _mako_get_namespace(context, 'comments')
+        helper = _mako_get_namespace(context, 'helper')
+        ui = _mako_get_namespace(context, 'ui')
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -89,13 +89,13 @@ def render_body(context,**pageargs):
 def render_extra_head(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        smartjoin = context.get('smartjoin', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
+        parent = context.get('parent', UNDEFINED)
+        post = context.get('post', UNDEFINED)
         def extra_head():
             return render_extra_head(context)
-        smartjoin = context.get('smartjoin', UNDEFINED)
         helper = _mako_get_namespace(context, 'helper')
-        math = _mako_get_namespace(context, 'math')
-        post = context.get('post', UNDEFINED)
-        parent = context.get('parent', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n    ')
         __M_writer(str(parent.extra_head()))
@@ -138,15 +138,15 @@ def render_extra_head(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        messages = context.get('messages', UNDEFINED)
-        helper = _mako_get_namespace(context, 'helper')
-        math = _mako_get_namespace(context, 'math')
-        pheader = _mako_get_namespace(context, 'pheader')
-        comments = _mako_get_namespace(context, 'comments')
         site_has_comments = context.get('site_has_comments', UNDEFINED)
-        post = context.get('post', UNDEFINED)
         def content():
             return render_content(context)
+        messages = context.get('messages', UNDEFINED)
+        pheader = _mako_get_namespace(context, 'pheader')
+        post = context.get('post', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
+        comments = _mako_get_namespace(context, 'comments')
+        helper = _mako_get_namespace(context, 'helper')
         __M_writer = context.writer()
         __M_writer('\n<article class="post-')
         __M_writer(str(post.meta('type')))
@@ -154,7 +154,7 @@ def render_content(context,**pageargs):
         __M_writer(str(pheader.html_post_header()))
         __M_writer('\n    <div class="e-content entry-content" itemprop="articleBody text">\n    ')
         __M_writer(str(post.text()))
-        __M_writer('\n    </div>\n\n<div class="socials">\n\n        <!-- Facebook share button -->\n        <a href="#" id="fb-share-button">Share on Facebook</a>\n\n        <!-- LinkedIn share button -->\n        <a href="#" id="linkedin-share-button">Share on LinkedIn</a>\n\n</div>\n\n    <aside class="postpromonav">\n    <nav>\n    ')
+        __M_writer('\n    </div>\n\n<div class="socials">\n\n        <!-- Facebook share button -->\n        <a href="#" id="fb-share-button">Share on Facebook</a>\n\n        <!-- LinkedIn share button -->\n        <button onclick="shareOnLinkedIn()">Share on LinkedIn</button>\n\n</div>\n\n    <aside class="postpromonav">\n    <nav>\n    ')
         __M_writer(str(helper.html_tags(post)))
         __M_writer('\n    ')
         __M_writer(str(helper.html_pager(post)))
@@ -167,7 +167,7 @@ def render_content(context,**pageargs):
             __M_writer('\n        </section>\n')
         __M_writer('    ')
         __M_writer(str(math.math_scripts_ifpost(post)))
-        __M_writer('\n    \n    <!-- JavaScript for Facebook share button -->\n    <script>\n    document.getElementById(\'fb-share-button\').onclick = function() {\n        var postUrl = encodeURIComponent(window.location.href);\n        var facebookShareUrl = \'https://www.facebook.com/sharer/sharer.php?u=\' + postUrl;\n        window.open(facebookShareUrl, \'_blank\');\n    }\n\n    // JavaScript for LinkedIn share button\n    document.getElementById(\'linkedin-share-button\').onclick = function() {\n        var postUrl = encodeURIComponent(window.location.href);\n        var linkedinShareUrl = \'https://www.linkedin.com/shareArticle?mini=true&url=\' + postUrl;\n        window.open(linkedinShareUrl, \'_blank\');\n    }\n\n    </script>\n\n    <!-- Add the image -->\n    <img src="https://lucynowacki.github.io/images/')
+        __M_writer('\n    \n    <!-- JavaScript for Facebook share button -->\n    <script>\n    document.getElementById(\'fb-share-button\').onclick = function() {\n        var postUrl = encodeURIComponent(window.location.href);\n        var facebookShareUrl = \'https://www.facebook.com/sharer/sharer.php?u=\' + postUrl;\n        window.open(facebookShareUrl, \'_blank\');\n    }\n\n    // JavaScript for LinkedIn share button\n    function shareOnLinkedIn() {\n        var postUrl = encodeURIComponent(window.location.href);\n        var linkedinShareUrl = \'https://www.linkedin.com/shareArticle?mini=true&url=\' + postUrl;\n        window.open(linkedinShareUrl, \'_blank\');\n    }\n\n    </script>\n\n    <!-- Add the image -->\n    <img src="https://lucynowacki.github.io/images/')
         __M_writer(str(post.meta('image')))
         __M_writer('" alt="Description of image">\n</article>\n')
         __M_writer(str(comments.comment_link_script()))
@@ -180,11 +180,11 @@ def render_content(context,**pageargs):
 def render_sourcelink(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        post = context.get('post', UNDEFINED)
+        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
         def sourcelink():
             return render_sourcelink(context)
-        post = context.get('post', UNDEFINED)
         ui = _mako_get_namespace(context, 'ui')
-        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         if show_sourcelink:
