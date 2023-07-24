@@ -8,6 +8,11 @@
 
 <%block name="extra_head">
     ${parent.extra_head()}
+    <meta property='og:title' content='${post.title()}'/>
+    <meta property='og:image' content='https://lucynowacki.github.io/images/${post.meta('image')}'/>
+    <meta property='og:description' content='${post.description()}'/>
+    <meta property='og:url' content='${post.permalink(absolute=True)}'/>
+
 
     <!-- Add Facebook SDK -->
     <div id="fb-root"></div>

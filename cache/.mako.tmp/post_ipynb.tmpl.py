@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1690198542.5935616
+_modified_time = 1690201124.697203
 _enable_loop = True
 _template_filename = 'themes/themeBlog/templates/post_ipynb.tmpl'
 _template_uri = 'post_ipynb.tmpl'
@@ -42,23 +42,23 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        math = _mako_get_namespace(context, 'math')
-        post = context.get('post', UNDEFINED)
         site_has_comments = context.get('site_has_comments', UNDEFINED)
-        messages = context.get('messages', UNDEFINED)
-        def extra_head():
-            return render_extra_head(context._locals(__M_locals))
-        parent = context.get('parent', UNDEFINED)
-        ui = _mako_get_namespace(context, 'ui')
-        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
-        smartjoin = context.get('smartjoin', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
-        comments = _mako_get_namespace(context, 'comments')
-        pheader = _mako_get_namespace(context, 'pheader')
         helper = _mako_get_namespace(context, 'helper')
+        ui = _mako_get_namespace(context, 'ui')
+        def extra_head():
+            return render_extra_head(context._locals(__M_locals))
+        messages = context.get('messages', UNDEFINED)
         def sourcelink():
             return render_sourcelink(context._locals(__M_locals))
+        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        comments = _mako_get_namespace(context, 'comments')
+        pheader = _mako_get_namespace(context, 'pheader')
+        post = context.get('post', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
+        parent = context.get('parent', UNDEFINED)
+        smartjoin = context.get('smartjoin', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -89,17 +89,25 @@ def render_body(context,**pageargs):
 def render_extra_head(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        helper = _mako_get_namespace(context, 'helper')
+        post = context.get('post', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
         def extra_head():
             return render_extra_head(context)
-        smartjoin = context.get('smartjoin', UNDEFINED)
-        math = _mako_get_namespace(context, 'math')
-        post = context.get('post', UNDEFINED)
-        helper = _mako_get_namespace(context, 'helper')
         parent = context.get('parent', UNDEFINED)
+        smartjoin = context.get('smartjoin', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n    ')
         __M_writer(str(parent.extra_head()))
-        __M_writer('\n\n    <!-- Add Facebook SDK -->\n    <div id="fb-root"></div>\n    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="yourNonceValue"></script>\n    <script>\n    window.fbAsyncInit = function() {\n        FB.init({\n        appId      : \'963063331636085\', // Your Facebook App ID\n        xfbml      : true,\n        version    : \'v11.0\'\n        });\n        FB.AppEvents.logPageView();\n    };\n\n    function sharePost() {\n        FB.ui({\n        method: \'share\',\n        href: \'https://lucynowacki.github.io/blog/dynamic-mode-decomposition-for-el-nino/\', // Your blog post URL\n        }, function(response){});\n    }\n    </script>\n\n\n')
+        __M_writer("\n    <meta property='og:title' content='")
+        __M_writer(str(post.title()))
+        __M_writer("'/>\n    <meta property='og:image' content='https://lucynowacki.github.io/images/")
+        __M_writer(str(post.meta('image')))
+        __M_writer("'/>\n    <meta property='og:description' content='")
+        __M_writer(str(post.description()))
+        __M_writer("'/>\n    <meta property='og:url' content='")
+        __M_writer(str(post.permalink(absolute=True)))
+        __M_writer('\'/>\n\n\n    <!-- Add Facebook SDK -->\n    <div id="fb-root"></div>\n    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="yourNonceValue"></script>\n    <script>\n    window.fbAsyncInit = function() {\n        FB.init({\n        appId      : \'963063331636085\', // Your Facebook App ID\n        xfbml      : true,\n        version    : \'v11.0\'\n        });\n        FB.AppEvents.logPageView();\n    };\n\n    function sharePost() {\n        FB.ui({\n        method: \'share\',\n        href: \'https://lucynowacki.github.io/blog/dynamic-mode-decomposition-for-el-nino/\', // Your blog post URL\n        }, function(response){});\n    }\n    </script>\n\n\n')
         if post.meta('keywords'):
             __M_writer('    <meta name="keywords" content="')
             __M_writer(filters.html_escape(str(smartjoin(', ', post.meta('keywords')))))
@@ -139,14 +147,14 @@ def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         site_has_comments = context.get('site_has_comments', UNDEFINED)
-        post = context.get('post', UNDEFINED)
-        math = _mako_get_namespace(context, 'math')
-        messages = context.get('messages', UNDEFINED)
         def content():
             return render_content(context)
-        comments = _mako_get_namespace(context, 'comments')
-        pheader = _mako_get_namespace(context, 'pheader')
         helper = _mako_get_namespace(context, 'helper')
+        messages = context.get('messages', UNDEFINED)
+        comments = _mako_get_namespace(context, 'comments')
+        post = context.get('post', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
+        pheader = _mako_get_namespace(context, 'pheader')
         __M_writer = context.writer()
         __M_writer('\n<article class="post-')
         __M_writer(str(post.meta('type')))
@@ -182,9 +190,9 @@ def render_sourcelink(context,**pageargs):
     try:
         show_sourcelink = context.get('show_sourcelink', UNDEFINED)
         ui = _mako_get_namespace(context, 'ui')
+        post = context.get('post', UNDEFINED)
         def sourcelink():
             return render_sourcelink(context)
-        post = context.get('post', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         if show_sourcelink:
@@ -198,6 +206,6 @@ def render_sourcelink(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "themes/themeBlog/templates/post_ipynb.tmpl", "uri": "post_ipynb.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "63": 2, "64": 3, "65": 4, "66": 5, "67": 6, "68": 7, "73": 52, "78": 106, "83": 112, "89": 9, "100": 9, "101": 10, "102": 10, "103": 34, "104": 35, "105": 35, "106": 35, "107": 37, "108": 37, "109": 37, "110": 38, "111": 39, "112": 39, "113": 39, "114": 39, "115": 39, "116": 41, "117": 42, "118": 42, "119": 42, "120": 42, "121": 42, "122": 44, "123": 45, "124": 47, "125": 47, "126": 47, "127": 48, "128": 48, "129": 49, "130": 49, "131": 50, "132": 50, "138": 54, "151": 54, "152": 55, "153": 55, "154": 56, "155": 56, "156": 58, "157": 58, "158": 73, "159": 73, "160": 74, "161": 74, "162": 77, "163": 78, "164": 79, "165": 79, "166": 80, "167": 80, "168": 83, "169": 83, "170": 83, "171": 103, "172": 103, "173": 105, "174": 105, "180": 108, "189": 108, "190": 109, "191": 110, "192": 110, "193": 110, "199": 193}}
+{"filename": "themes/themeBlog/templates/post_ipynb.tmpl", "uri": "post_ipynb.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "63": 2, "64": 3, "65": 4, "66": 5, "67": 6, "68": 7, "73": 57, "78": 111, "83": 117, "89": 9, "100": 9, "101": 10, "102": 10, "103": 11, "104": 11, "105": 12, "106": 12, "107": 13, "108": 13, "109": 14, "110": 14, "111": 39, "112": 40, "113": 40, "114": 40, "115": 42, "116": 42, "117": 42, "118": 43, "119": 44, "120": 44, "121": 44, "122": 44, "123": 44, "124": 46, "125": 47, "126": 47, "127": 47, "128": 47, "129": 47, "130": 49, "131": 50, "132": 52, "133": 52, "134": 52, "135": 53, "136": 53, "137": 54, "138": 54, "139": 55, "140": 55, "146": 59, "159": 59, "160": 60, "161": 60, "162": 61, "163": 61, "164": 63, "165": 63, "166": 78, "167": 78, "168": 79, "169": 79, "170": 82, "171": 83, "172": 84, "173": 84, "174": 85, "175": 85, "176": 88, "177": 88, "178": 88, "179": 108, "180": 108, "181": 110, "182": 110, "188": 113, "197": 113, "198": 114, "199": 115, "200": 115, "201": 115, "207": 201}}
 __M_END_METADATA
 """
