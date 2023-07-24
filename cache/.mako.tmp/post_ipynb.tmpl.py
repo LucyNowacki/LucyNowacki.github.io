@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1690158333.1608348
+_modified_time = 1690161003.1343734
 _enable_loop = True
 _template_filename = 'themes/themeBlog/templates/post_ipynb.tmpl'
 _template_uri = 'post_ipynb.tmpl'
@@ -42,23 +42,23 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        def sourcelink():
-            return render_sourcelink(context._locals(__M_locals))
-        helper = _mako_get_namespace(context, 'helper')
         post = context.get('post', UNDEFINED)
-        ui = _mako_get_namespace(context, 'ui')
-        def extra_head():
-            return render_extra_head(context._locals(__M_locals))
-        smartjoin = context.get('smartjoin', UNDEFINED)
-        math = _mako_get_namespace(context, 'math')
         def content():
             return render_content(context._locals(__M_locals))
-        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
-        comments = _mako_get_namespace(context, 'comments')
-        site_has_comments = context.get('site_has_comments', UNDEFINED)
         pheader = _mako_get_namespace(context, 'pheader')
-        parent = context.get('parent', UNDEFINED)
+        def sourcelink():
+            return render_sourcelink(context._locals(__M_locals))
+        smartjoin = context.get('smartjoin', UNDEFINED)
+        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        ui = _mako_get_namespace(context, 'ui')
+        site_has_comments = context.get('site_has_comments', UNDEFINED)
+        def extra_head():
+            return render_extra_head(context._locals(__M_locals))
         messages = context.get('messages', UNDEFINED)
+        parent = context.get('parent', UNDEFINED)
+        comments = _mako_get_namespace(context, 'comments')
+        math = _mako_get_namespace(context, 'math')
+        helper = _mako_get_namespace(context, 'helper')
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -89,13 +89,13 @@ def render_body(context,**pageargs):
 def render_extra_head(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        smartjoin = context.get('smartjoin', UNDEFINED)
-        math = _mako_get_namespace(context, 'math')
-        helper = _mako_get_namespace(context, 'helper')
-        parent = context.get('parent', UNDEFINED)
         post = context.get('post', UNDEFINED)
         def extra_head():
             return render_extra_head(context)
+        parent = context.get('parent', UNDEFINED)
+        smartjoin = context.get('smartjoin', UNDEFINED)
+        math = _mako_get_namespace(context, 'math')
+        helper = _mako_get_namespace(context, 'helper')
         __M_writer = context.writer()
         __M_writer('\n    ')
         __M_writer(str(parent.extra_head()))
@@ -138,15 +138,15 @@ def render_extra_head(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        helper = _mako_get_namespace(context, 'helper')
         post = context.get('post', UNDEFINED)
-        math = _mako_get_namespace(context, 'math')
         def content():
             return render_content(context)
-        comments = _mako_get_namespace(context, 'comments')
-        site_has_comments = context.get('site_has_comments', UNDEFINED)
         pheader = _mako_get_namespace(context, 'pheader')
+        site_has_comments = context.get('site_has_comments', UNDEFINED)
         messages = context.get('messages', UNDEFINED)
+        comments = _mako_get_namespace(context, 'comments')
+        math = _mako_get_namespace(context, 'math')
+        helper = _mako_get_namespace(context, 'helper')
         __M_writer = context.writer()
         __M_writer('\n<article class="post-')
         __M_writer(str(post.meta('type')))
@@ -167,7 +167,9 @@ def render_content(context,**pageargs):
             __M_writer('\n        </section>\n')
         __M_writer('    ')
         __M_writer(str(math.math_scripts_ifpost(post)))
-        __M_writer("\n    \n    <!-- JavaScript for Facebook share button -->\n    <script>\n    document.getElementById('fb-share-button').onclick = function() {\n        var postUrl = encodeURIComponent(window.location.href);\n        var facebookShareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + postUrl;\n        window.open(facebookShareUrl, '_blank');\n    }\n\n    // JavaScript for LinkedIn share button\n    document.getElementById('linkedin-share-button').onclick = function() {\n        var postUrl = encodeURIComponent(window.location.href);\n        var linkedinShareUrl = 'https://www.linkedin.com/shareArticle?mini=true&url=' + postUrl;\n        window.open(linkedinShareUrl, '_blank');\n    }\n\n    </script>\n</article>\n")
+        __M_writer('\n    \n    <!-- JavaScript for Facebook share button -->\n    <script>\n    document.getElementById(\'fb-share-button\').onclick = function() {\n        var postUrl = encodeURIComponent(window.location.href);\n        var facebookShareUrl = \'https://www.facebook.com/sharer/sharer.php?u=\' + postUrl;\n        window.open(facebookShareUrl, \'_blank\');\n    }\n\n    // JavaScript for LinkedIn share button\n    document.getElementById(\'linkedin-share-button\').onclick = function() {\n        var postUrl = encodeURIComponent(window.location.href);\n        var linkedinShareUrl = \'https://www.linkedin.com/shareArticle?mini=true&url=\' + postUrl;\n        window.open(linkedinShareUrl, \'_blank\');\n    }\n\n    </script>\n\n    <!-- Add the image -->\n    <img src="https://lucynowacki.github.io/images/')
+        __M_writer(str(post.meta('image')))
+        __M_writer('" alt="Description of image">\n</article>\n')
         __M_writer(str(comments.comment_link_script()))
         __M_writer('\n')
         return ''
@@ -178,11 +180,11 @@ def render_content(context,**pageargs):
 def render_sourcelink(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        post = context.get('post', UNDEFINED)
         show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        ui = _mako_get_namespace(context, 'ui')
         def sourcelink():
             return render_sourcelink(context)
-        post = context.get('post', UNDEFINED)
-        ui = _mako_get_namespace(context, 'ui')
         __M_writer = context.writer()
         __M_writer('\n')
         if show_sourcelink:
@@ -196,6 +198,6 @@ def render_sourcelink(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "themes/themeBlog/templates/post_ipynb.tmpl", "uri": "post_ipynb.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "63": 2, "64": 3, "65": 4, "66": 5, "67": 6, "68": 7, "73": 52, "78": 103, "83": 109, "89": 9, "100": 9, "101": 10, "102": 10, "103": 34, "104": 35, "105": 35, "106": 35, "107": 37, "108": 37, "109": 37, "110": 38, "111": 39, "112": 39, "113": 39, "114": 39, "115": 39, "116": 41, "117": 42, "118": 42, "119": 42, "120": 42, "121": 42, "122": 44, "123": 45, "124": 47, "125": 47, "126": 47, "127": 48, "128": 48, "129": 49, "130": 49, "131": 50, "132": 50, "138": 54, "151": 54, "152": 55, "153": 55, "154": 56, "155": 56, "156": 58, "157": 58, "158": 73, "159": 73, "160": 74, "161": 74, "162": 77, "163": 78, "164": 79, "165": 79, "166": 80, "167": 80, "168": 83, "169": 83, "170": 83, "171": 102, "172": 102, "178": 105, "187": 105, "188": 106, "189": 107, "190": 107, "191": 107, "197": 191}}
+{"filename": "themes/themeBlog/templates/post_ipynb.tmpl", "uri": "post_ipynb.tmpl", "source_encoding": "utf-8", "line_map": {"23": 2, "26": 3, "29": 4, "32": 5, "35": 6, "41": 0, "63": 2, "64": 3, "65": 4, "66": 5, "67": 6, "68": 7, "73": 52, "78": 106, "83": 112, "89": 9, "100": 9, "101": 10, "102": 10, "103": 34, "104": 35, "105": 35, "106": 35, "107": 37, "108": 37, "109": 37, "110": 38, "111": 39, "112": 39, "113": 39, "114": 39, "115": 39, "116": 41, "117": 42, "118": 42, "119": 42, "120": 42, "121": 42, "122": 44, "123": 45, "124": 47, "125": 47, "126": 47, "127": 48, "128": 48, "129": 49, "130": 49, "131": 50, "132": 50, "138": 54, "151": 54, "152": 55, "153": 55, "154": 56, "155": 56, "156": 58, "157": 58, "158": 73, "159": 73, "160": 74, "161": 74, "162": 77, "163": 78, "164": 79, "165": 79, "166": 80, "167": 80, "168": 83, "169": 83, "170": 83, "171": 103, "172": 103, "173": 105, "174": 105, "180": 108, "189": 108, "190": 109, "191": 110, "192": 110, "193": 110, "199": 193}}
 __M_END_METADATA
 """
