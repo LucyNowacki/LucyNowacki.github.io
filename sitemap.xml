@@ -11,7 +11,7 @@
  </url>
  <url>
   <loc>https://example.com/archive/archive.html</loc>
-  <lastmod>2023-07-24T10:55:00Z</lastmod>
+  <lastmod>2023-07-24T11:17:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/bio/</loc>
@@ -19,11 +19,15 @@
  </url>
  <url>
   <loc>https://example.com/blog/</loc>
-  <lastmod>2023-07-24T09:42:00Z</lastmod>
+  <lastmod>2023-07-24T11:17:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/adversarial-attacks-on-model-for-cifar-10/</loc>
   <lastmod>2022-06-03T18:14:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/chuj/</loc>
+  <lastmod>2023-07-24T11:17:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/dynamic-mode-decomposition-for-el-nino/</loc>
@@ -32,6 +36,10 @@
  <url>
   <loc>https://example.com/blog/exploring-the-bitcoin-cryptocurrency-market/</loc>
   <lastmod>2023-07-21T16:09:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/index-1.html</loc>
+  <lastmod>2023-07-24T11:17:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/method-of-lines-for-black-scholes-explicit/</loc>
