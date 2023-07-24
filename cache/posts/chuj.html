@@ -1,0 +1,66 @@
+<div id="cell-id=041c5ba8" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Write your post here.</p>
+
+</div>
+</div>
+</div>
+<div id="cell-id=8c8a3ef5" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="SVD-and-Dimensionality-Reduction">SVD and Dimensionality Reduction<a class="anchor-link" href="#SVD-and-Dimensionality-Reduction">&#182;</a></h2><p>Given $X\in \mathbb{R}^{s\times n}$, consider the low rank approximation problem
+$$ \underset{R}{\min }\, \| X-R\| _{\text{Fro}}^2\,\,\,subject\,\,to\,\, rank(R)=k$$
+where $\| A\| _{\text{Fro}}\text{:=}\,\sum _{i=1}^s \sum _{j=1}^n a _{\text{ij}}^2$, the entrywise squared $\ell_2$ norm.</p>
+<p>To understand the PCA, it is good to delve into SVD matrix decomposition, the kernel of data compression, recommender systems, linear autoencoders and umpteen other machine-learning applications. SVD is the generalisation of Fourier transformation to more complex systems. In other words, SVD is a matrix factorisation that generalises the concept of eigendecopmpositions of square matrices. Namely, it can be shown that every real (and complex) matrix $X\in \mathbb{R^{s\times n}}$ can be factorised into three matrices $U\in \mathbb{R^{s\times s}}$, $\Sigma \in \mathbb{R^{s \times n}}$ and $V \in \mathbb{R^{n \times n}}$  through</p>
+<p>$$X = U \Sigma V^*\,\,\,\,(2.10)$$</p>
+<p>Here both $U$ and $V$ are unitary matrices of eigenvectors whose columns are called left and right singular vectors of $X$.
+For the real matrices $X = U \Sigma V^T=\sigma_1U_1V^T_1+\sigma_2 U_2 V^T_1 +...+\sigma_n U_n V^T_n$. The
+The matrix $\Sigma$ is a diagonal matrix of decreasing eigenvalues of the form:</p>
+<ul>
+<li><p>for $s&gt;n$
+$$\left(
+\begin{array}{cccc}
+ \sigma _1 &amp; 0 &amp; \ldots  &amp; 0 \\
+ 0 &amp; \sigma _2 &amp; \ldots  &amp; 0 \\
+ 0 &amp; 0 &amp; \ddots &amp; 0 \\
+ 0 &amp; 0 &amp; \ldots  &amp; \sigma _n \\
+ 0 &amp; 0 &amp; \ldots  &amp; 0 \\
+ \vdots  &amp; \vdots  &amp; \ddots &amp; 0 \\
+ 0 &amp; 0 &amp; \ldots  &amp; 0 \\
+\end{array}
+\right)$$</p>
+</li>
+<li><p>for $s&lt;n$</p>
+</li>
+</ul>
+<p>$$\left(
+\begin{array}{ccccccc}
+ \sigma _1 &amp; 0 &amp; \cdots  &amp; 0 &amp; 0 &amp; \cdots  &amp; 0 \\
+ 0 &amp; \sigma _2 &amp; \cdots  &amp; 0 &amp; 0 &amp; \cdots  &amp; 0 \\
+ 0 &amp; 0 &amp; \ddots &amp; 0 &amp; 0 &amp; \cdots  &amp; 0 \\
+ 0 &amp; 0 &amp; \ldots  &amp; \sigma _s &amp; 0 &amp; \ldots  &amp; 0 \\
+\end{array}
+\right)$$
+SVD means that every matrix can be expressed  by rotation -&gt; scaling -&gt; another rotation that is illustrated below
+<img src="/images/svd.png" alt="img info" />
+** Make Wiki dontation!!! **</p>
+<ul>
+<li>for $s=n$ there is a symmetric singular matrix.
+The entrie  $\{\sigma_j\}_{j=1}^{min (s,n)}$ are called singular values of $X$, and are all-nonnegative, i.e. ${\sigma_j \geq 0 \,\,\forall j\in\{1,...,min(s,n)\}}$.
+Notice that SVD of $X$ allows us to easily compute the Frobienius norm, $\| \Sigma \| _{\text{Fro}}^2=\sqrt{\sum _{i=1}^s \sum _{j=1}^n \left| x_{\text{ij}}\right| {}^2}$, of that matrix since the Frobenius norm is equivalent to the Euclidian (EU) norm of the vector of singular values, which we see from
+$$\| \Sigma \| _{\text{Fro}}^2=\langle X,X\rangle =\left\langle \text{U$\Sigma $V}^T,\text{U$\Sigma $V}^T\right\rangle =\left\langle \text{$\Sigma $V}^T,U^T \text{U$\Sigma $V}^T\right\rangle =\left\langle \Sigma ,\text{V$\Sigma $} V^T\right\rangle =\langle \Sigma ,\Sigma \rangle =\| \Sigma \| _{\text{Fro}}^2=\sum _{j=1}^{\min (S,n)} \sigma _j^2$$</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div id="cell-id=5dee1aa1" class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+
+

@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1690196207.2574244
+_modified_time = 1690197839.175246
 _enable_loop = True
 _template_filename = '/home/lucy/anaconda3/envs/lucy/lib/python3.10/site-packages/nikola/data/themes/bootstrap4/templates/tags.tmpl'
 _template_uri = 'tags.tmpl'
@@ -28,15 +28,15 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        cat_items = context.get('cat_items', UNDEFINED)
-        range = context.get('range', UNDEFINED)
-        cat_hierarchy = context.get('cat_hierarchy', UNDEFINED)
+        messages = context.get('messages', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
         hidden_tags = context.get('hidden_tags', UNDEFINED)
         items = context.get('items', UNDEFINED)
         title = context.get('title', UNDEFINED)
-        messages = context.get('messages', UNDEFINED)
+        cat_items = context.get('cat_items', UNDEFINED)
+        cat_hierarchy = context.get('cat_hierarchy', UNDEFINED)
+        range = context.get('range', UNDEFINED)
         len = context.get('len', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
@@ -53,15 +53,15 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        cat_items = context.get('cat_items', UNDEFINED)
-        range = context.get('range', UNDEFINED)
-        cat_hierarchy = context.get('cat_hierarchy', UNDEFINED)
+        messages = context.get('messages', UNDEFINED)
         def content():
             return render_content(context)
         hidden_tags = context.get('hidden_tags', UNDEFINED)
         items = context.get('items', UNDEFINED)
         title = context.get('title', UNDEFINED)
-        messages = context.get('messages', UNDEFINED)
+        cat_items = context.get('cat_items', UNDEFINED)
+        cat_hierarchy = context.get('cat_hierarchy', UNDEFINED)
+        range = context.get('range', UNDEFINED)
         len = context.get('len', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n<h1>')
