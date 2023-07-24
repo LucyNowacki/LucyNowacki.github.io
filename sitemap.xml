@@ -7,106 +7,130 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://example.com/</loc>
-  <lastmod>2023-07-24T00:25:00Z</lastmod>
+  <lastmod>2023-07-24T14:29:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/archive/archive.html</loc>
-  <lastmod>2023-07-24T11:35:00Z</lastmod>
+  <lastmod>2023-07-24T15:53:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/bio/</loc>
-  <lastmod>2022-06-03T18:14:00Z</lastmod>
+  <lastmod>2023-07-24T14:28:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/</loc>
-  <lastmod>2023-07-24T11:17:00Z</lastmod>
+  <lastmod>2023-07-24T15:53:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/adversarial-attacks-on-model-for-cifar-10/</loc>
-  <lastmod>2022-06-03T18:14:00Z</lastmod>
+  <lastmod>2023-07-24T14:29:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/chuj/</loc>
-  <lastmod>2023-07-24T11:17:00Z</lastmod>
+  <lastmod>2023-07-24T14:29:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/dynamic-mode-decomposition-for-el-nino/</loc>
-  <lastmod>2023-07-21T15:47:00Z</lastmod>
+  <lastmod>2023-07-24T14:29:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/exploring-the-bitcoin-cryptocurrency-market/</loc>
-  <lastmod>2023-07-21T16:09:00Z</lastmod>
+  <lastmod>2023-07-24T14:29:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/hhh/</loc>
+  <lastmod>2023-07-24T15:53:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/index-1.html</loc>
-  <lastmod>2023-07-24T11:17:00Z</lastmod>
+  <lastmod>2023-07-24T15:34:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/introduction-to-transformers/</loc>
+  <lastmod>2023-07-24T15:21:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/method-of-lines-for-black-scholes-explicit/</loc>
-  <lastmod>2022-06-12T23:32:00Z</lastmod>
+  <lastmod>2023-07-24T14:29:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/method-of-lines-for-black-scholes-implicit/</loc>
-  <lastmod>2022-06-13T23:32:00Z</lastmod>
+  <lastmod>2023-07-24T14:28:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/physics-informed-solution-for-heat-equation/</loc>
-  <lastmod>2022-10-08T21:29:00Z</lastmod>
+  <lastmod>2023-07-24T14:29:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/proof-for-arithmetic-series/</loc>
-  <lastmod>2022-06-03T18:14:00Z</lastmod>
+  <lastmod>2023-07-24T14:29:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/robust-and-accelerated-pca/</loc>
-  <lastmod>2023-01-14T20:54:00Z</lastmod>
+  <lastmod>2023-07-24T14:29:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/svd/</loc>
-  <lastmod>2023-01-24T16:47:00Z</lastmod>
+  <lastmod>2023-07-24T14:29:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/we-are-already-trans-today/</loc>
-  <lastmod>2022-06-14T18:04:00Z</lastmod>
+  <lastmod>2023-07-24T14:29:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog_index/</loc>
+  <lastmod>2023-07-24T14:51:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog_index/index-1.html</loc>
+  <lastmod>2023-07-24T15:21:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories.html</loc>
-  <lastmod>2023-07-23T21:40:00Z</lastmod>
+  <lastmod>2023-07-24T15:23:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/</loc>
-  <lastmod>2022-06-03T18:14:00Z</lastmod>
+  <lastmod>2023-07-24T15:34:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/machine-learning/</loc>
-  <lastmod>2022-06-03T18:14:00Z</lastmod>
+  <lastmod>2023-07-24T14:28:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/categories/nlp/</loc>
+  <lastmod>2023-07-24T15:21:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/numerical/</loc>
-  <lastmod>2022-06-03T18:14:00Z</lastmod>
+  <lastmod>2023-07-24T14:28:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/categories/proofs/</loc>
+  <lastmod>2023-07-24T15:34:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/teaching/</loc>
-  <lastmod>2022-06-03T18:14:00Z</lastmod>
+  <lastmod>2023-07-24T14:28:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/transhumanism/</loc>
-  <lastmod>2022-06-03T18:14:00Z</lastmod>
+  <lastmod>2023-07-24T14:28:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/war-and-politics/</loc>
-  <lastmod>2022-06-03T18:14:00Z</lastmod>
+  <lastmod>2023-07-24T14:28:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/files/</loc>
-  <lastmod>2023-07-21T15:53:00Z</lastmod>
+  <lastmod>2023-07-24T14:28:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/galleries/</loc>
-  <lastmod>2022-06-03T18:14:00Z</lastmod>
+  <lastmod>2023-07-24T14:28:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/listings/</loc>
-  <lastmod>2022-06-03T18:14:00Z</lastmod>
+  <lastmod>2023-07-24T14:28:00Z</lastmod>
  </url>
 </urlset>

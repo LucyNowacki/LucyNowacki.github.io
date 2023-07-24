@@ -1,4 +1,4 @@
-Sitemap: https://lucynowacki.github.io/sitemapindex.xml
+Sitemap: https://example.com/sitemapindex.xml
 
 User-Agent: *
-Host: lucynowacki.github.io
+Host: example.com
