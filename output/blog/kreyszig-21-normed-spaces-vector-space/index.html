@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kreyszig 2.1, Normed Spaces - Vector Space | Nova Automata</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https://example.com/blog/kreyszig-21-normed-spaces-vector-space/">
+<link rel="icon" href="../../files/blogFavicon.ico" sizes="128x128">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YWLRJ2M88S"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID);
+</script><meta name="google-site-verification" content="WF1l7hEMV49eJl7Kb2rVSOwXp2KINwX59Tig6ACvfSs">
+<meta name="author" content="Lucy Nowacki">
+<link rel="prev" href="../kreyszig-14-metric-spaces-convergence-cauchy-sequence-completness/" title="Kreyszig 1.4, Metric Spaces - Convergence, Cauchy Sequence, Completness" type="text/html">
+<meta property="og:site_name" content="Nova Automata">
+<meta property="og:title" content="Kreyszig 2.1, Normed Spaces - Vector Space">
+<meta property="og:url" content="https://example.com/blog/kreyszig-21-normed-spaces-vector-space/">
+<meta property="og:description" content="Problem 1. Show that the set of real numbers, with the usual addition and multiplication, constitutes a one-dimensional real vector space, and the set of all complex numbers constitutes a one-dimensio">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-10-11T15:24:36+01:00">
+<meta property="article:tag" content="proofs">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark
+bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="../../">
+
+            <span id="blog-title">Nova Automata</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a href="../../categories/machine-learning" class="nav-link">Machine Blog</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/numerical" class="nav-link">Numerical Blog</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/nlp" class="nav-link">NLP &amp; Transformers</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/transhumanism" class="nav-link">Transhuman</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/fintech" class="nav-link">FinTech</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/proofs" class="nav-link">Proofs</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/" class="nav-link">Tags</a>
+                </li>
+<li class="nav-item">
+<a href="../../bio/index.html" class="nav-link">Me &amp; Hobbies</a>
+
+                
+            </li>
+</ul>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" google custom search>
+<form method="get" action="https://www.qwant.com/" class="navbar-form navbar-right" role="search">
+  <style>
+    .btn {
+        cursor: pointer;
+        display: inline-block;
+        padding: 10px 30px;
+        /* text color in the button */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+    }
+    
+    .btn:hover {
+        opacity: 0.9;
+        color: red;
+    }
+    /* Buttons for other colors */
+    
+    .btn-primary,
+    .bg-primary {
+        color: #fff;
+    }
+    
+    .btn-secondary,
+    .bg-secondary {
+        background: #88258b;
+        color: #fff;
+    }
+    
+    .btn-outline {
+        background: transparent;
+        border: 1px solid #fff;
+    }
+  </style>
+<div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder=" Qwant Search"><button type="submit" class="btn btn-secondary">
+            <i class="fa fa-search"></i>
+        </button>
+        <input type="hidden" name="sitesearch" value="https://example.com/">
+</div>    
+</form>
+<!-- End of custom search -->
+
+
+            <ul class="navbar-nav navbar-right"></ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Kreyszig 2.1, Normed Spaces - Vector Space</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Lucy Nowacki
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2023-10-11T15:24:36+01:00" itemprop="datePublished" title="2023-10-11 15:24">2023-10-11 15:24</time></a>
+            </p>
+            
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <p><strong>Problem 1. Show that the set of real numbers, with the usual addition and multiplication, constitutes a one-dimensional real vector space, and the set of all complex numbers constitutes a one-dimensional complex vector space.</strong></p>
+<p><strong>Proof for Real Numbers as a One-Dimensional Real Vector Space</strong></p>
+<ol class="arabic">
+<li>
+<p><strong>Additive Identity</strong>: There exists a number <span class="math">\(0\)</span> such that for every real number <span class="math">\(x\)</span>, <span class="math">\(x + 0 = x\)</span>.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+5 + 0 = 5
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Additive Inverse</strong>: For every real number <span class="math">\(x\)</span>, there exists a number <span class="math">\(-x\)</span> such that <span class="math">\(x + (-x) = 0\)</span>.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+5 + (-5) = 0
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Closure under Addition</strong>: For every pair of real numbers <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, their sum <span class="math">\(x + y\)</span> is also a real number.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+5 + 3 = 8
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Closure under Scalar Multiplication</strong>: For every real number <span class="math">\(x\)</span> and every scalar <span class="math">\(a\)</span>, the product <span class="math">\(ax\)</span> is also a real number.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+3 \times 5 = 15
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Distributivity of Scalar Multiplication with respect to Vector Addition</strong>: For every real number <span class="math">\(x\)</span> and <span class="math">\(y\)</span> and every scalar <span class="math">\(a\)</span>, <span class="math">\(a(x + y) = ax + ay\)</span>.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+3(5 + 2) = 3 \times 5 + 3 \times 2
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Distributivity of Scalar Multiplication with respect to Scalar Addition</strong>: For every real number <span class="math">\(x\)</span> and scalars <span class="math">\(a\)</span> and <span class="math">\(b\)</span>, <span class="math">\((a + b)x = ax + bx\)</span>.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+(3 + 2) \times 5 = 3 \times 5 + 2 \times 5
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Associativity of Scalar Multiplication</strong>: For every real number <span class="math">\(x\)</span> and scalars <span class="math">\(a\)</span> and <span class="math">\(b\)</span>, <span class="math">\(a(bx) = (ab)x\)</span>.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+3(2 \times 5) = (3 \times 2) \times 5
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Multiplicative Identity of Scalar Multiplication</strong>: There exists a scalar <span class="math">\(1\)</span> such that for every real number <span class="math">\(x\)</span>, <span class="math">\(1 \times x = x\)</span>.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+1 \times 5 = 5
+\end{equation*}
+</div>
+</li>
+</ol>
+<blockquote>
+<p><span class="math">\(\blacksquare\)</span></p>
+</blockquote>
+<p><strong>Proof for Complex Numbers as a One-Dimensional Complex Vector Space</strong></p>
+<ol class="arabic">
+<li>
+<p><strong>Additive Identity</strong>: There exists a complex number <span class="math">\(0\)</span> such that for every complex number <span class="math">\(z\)</span>, <span class="math">\(z + 0 = z\)</span>.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+(3 + 2i) + 0 = 3 + 2i
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Additive Inverse</strong>: For every complex number <span class="math">\(z\)</span>, there exists a complex number <span class="math">\(-z\)</span> such that <span class="math">\(z + (-z) = 0\)</span>.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+(3 + 2i) + (-3 - 2i) = 0
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Closure under Addition</strong>: For every pair of complex numbers <span class="math">\(z_1\)</span> and <span class="math">\(z_2\)</span>, their sum <span class="math">\(z_1 + z_2\)</span> is also a complex number.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+(3 + 2i) + (1 + 4i) = 4 + 6i
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Closure under Scalar Multiplication</strong>: For every complex number <span class="math">\(z\)</span> and every scalar <span class="math">\(c\)</span> in the complex numbers, the product <span class="math">\(cz\)</span> is also a complex number.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+(2 + i) \times (3 + 2i) = 6 + 7i
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Distributivity of Scalar Multiplication with respect to Vector Addition</strong>: For every complex number <span class="math">\(z_1\)</span> and <span class="math">\(z_2\)</span> and every scalar <span class="math">\(c\)</span> in the complex numbers, <span class="math">\(c(z_1 + z_2) = cz_1 + cz_2\)</span>.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+(2 + i)((3 + 2i) + (1 + 4i)) = (2 + i)(3 + 2i) + (2 + i)(1 + 4i)
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Distributivity of Scalar Multiplication with respect to Scalar Addition</strong>: For every complex number <span class="math">\(z\)</span> and scalars <span class="math">\(c_1\)</span> and <span class="math">\(c_2\)</span> in the complex numbers, <span class="math">\((c_1 + c_2)z = c_1z + c_2z\)</span>.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+(2 + i + 1)(3 + 2i) = (2 + i)(3 + 2i) + 3 + 2i
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Associativity of Scalar Multiplication</strong>: For every complex number <span class="math">\(z\)</span> and scalars <span class="math">\(c_1\)</span> and <span class="math">\(c_2\)</span> in the complex numbers, <span class="math">\(c_1(c_2z) = (c_1c_2)z\)</span>.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+(2 + i)(i(3 + 2i)) = (2 + i \times i)(3 + 2i)
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Multiplicative Identity of Scalar Multiplication</strong>: There exists a scalar <span class="math">\(1\)</span> in the complex numbers such that for every complex number <span class="math">\(z\)</span>, <span class="math">\(1 \times z = z\)</span>.</p>
+<p><strong>Example</strong>:</p>
+<div class="math">
+\begin{equation*}
+1 \times (3 + 2i) = 3 + 2i
+\end{equation*}
+</div>
+</li>
+</ol>
+<blockquote>
+<p><span class="math">\(\blacksquare\)</span></p>
+</blockquote>
+<hr class="docutils">
+<p><strong>Problem 2. Proof for Properties of the Zero Vector</strong></p>
+<p>Given that <span class="math">\(\theta\)</span> is the zero vector in a vector space.</p>
+<ol class="arabic">
+<li>
+<p><strong>Proof</strong> for <span class="math">\(0 \cdot \mathbf{x} = \theta\)</span>:</p>
+<p>Using the distributive property of scalar multiplication over vector addition, we have:</p>
+<div class="math">
+\begin{equation*}
+0 \cdot \mathbf{x} = (0 + 0) \cdot \mathbf{x} = 0 \cdot \mathbf{x} + 0 \cdot \mathbf{x}
+\end{equation*}
+</div>
+<p>Subtracting <span class="math">\(0 \cdot \mathbf{x}\)</span> from both sides:</p>
+<div class="math">
+\begin{equation*}
+0 \cdot \mathbf{x} - 0 \cdot \mathbf{x} = \theta
+\end{equation*}
+</div>
+<p>Thus, <span class="math">\(0 \cdot \mathbf{x} = \theta\)</span>.</p>
+<blockquote>
+<p><span class="math">\(\blacksquare\)</span></p>
+</blockquote>
+</li>
+<li>
+<p><strong>Proof</strong> for <span class="math">\(\alpha \cdot \theta = \theta\)</span>:</p>
+<p>For any scalar <span class="math">\(\alpha\)</span>:</p>
+<div class="math">
+\begin{equation*}
+\alpha \cdot \theta = \alpha \cdot (0 \cdot \mathbf{x}) = (\alpha \cdot 0) \cdot \mathbf{x} = 0 \cdot \mathbf{x} = \theta
+\end{equation*}
+</div>
+<p>Therefore, <span class="math">\(\alpha \cdot \theta = \theta\)</span>.</p>
+<blockquote>
+<p><span class="math">\(\blacksquare\)</span></p>
+</blockquote>
+</li>
+</ol>
+<p><strong>Proof for the Property</strong> <span class="math">\((-1) \cdot \mathbf{x} = -\mathbf{x}\)</span></p>
+<p>Given a vector <span class="math">\(\cdot\)</span> in a vector space.</p>
+<p>To prove: <span class="math">\((-1) \cdot \mathbf{x} = -\mathbf{x}\)</span></p>
+<p><strong>Proof</strong>:</p>
+<p>Using the distributive property of scalar multiplication over scalar addition, we have:</p>
+<div class="math">
+\begin{equation*}
+\mathbf{x} + (-1) \cdot \mathbf{x} = (1 + (-1)) \cdot \mathbf{x} = 0 \cdot \mathbf{x}
+\end{equation*}
+</div>
+<p>From a previous proof, we know that:</p>
+<div class="math">
+\begin{equation*}
+0 \cdot \mathbf{x} = \theta
+\end{equation*}
+</div>
+<p>Where <span class="math">\(\theta\)</span> is the zero vector.</p>
+<p>Therefore:</p>
+<div class="math">
+\begin{equation*}
+\mathbf{x} + (-1) \cdot \mathbf{x} = \theta
+\end{equation*}
+</div>
+<p>This implies that <span class="math">\((-1) \cdot \mathbf{x}\)</span> is the additive inverse of <span class="math">\(\mathbf{x}\)</span>, which is denoted as <span class="math">\(-\mathbf{x}\)</span>.</p>
+<p>Hence, <span class="math">\((-1) \cdot \mathbf{x} = -\mathbf{x}\)</span>.</p>
+<blockquote>
+<p><span class="math">\(\blacksquare\)</span></p>
+</blockquote>
+<hr class="docutils">
+<p><strong>Problem 3. Span of the Set M</strong> in <span class="math">\(\mathbb{R}^3\)</span></p>
+<p>The span of a set of vectors is the set of all linear combinations of those vectors. In other words, it's the set of all vectors that can be obtained by taking weighted sums of the vectors in the set.</p>
+<p>Given the set <span class="math">\(M = \{ (1,1,1), (0,0,2) \}\)</span> in <span class="math">\(\mathbb{R}^3\)</span>, any vector in the span of <span class="math">\(M\)</span> can be written as:</p>
+<div class="math">
+\begin{equation*}
+\alpha (1,1,1) + \beta (0,0,2) = (\alpha, \alpha, \alpha + 2\beta)
+\end{equation*}
+</div>
+<p>From the above expression, we can see that:</p>
+<ol class="arabic simple">
+<li><p>The first and second components of any vector in the span are always equal.</p></li>
+<li><p>The third component can be any real number since <span class="math">\(\alpha\)</span> and <span class="math">\(\beta\)</span> can be any real numbers.</p></li>
+</ol>
+<p>Thus, the span of <span class="math">\(M\)</span> in <span class="math">\(\mathbb{R}^3\)</span> is the set of all vectors of the form <span class="math">\((a, a, b)\)</span> where <span class="math">\(a\)</span> and <span class="math">\(b\)</span> are real numbers. This is a plane in <span class="math">\(\mathbb{R}^3\)</span> that passes through the origin and is defined by the equation <span class="math">\(x = y\)</span>.</p>
+<p>Visualization</p>
+<img alt="3D Visualization of the plane x=y" class="align-center" src="https://www6b3.wolframalpha.com/Calculate/MSP/MSP534170df867fd63c0f0000027ch9e42i92b0004?MSPStoreType=image/png&amp;s=20"><p>This plane passes through the origin and spans infinitely in all directions within the plane. The vectors <span class="math">\((1,1,1)\)</span> and <span class="math">\((0,0,2)\)</span> from the set <span class="math">\(M\)</span> lie on this plane, and their linear combinations fill out the entire plane.</p>
+<blockquote>
+<p><span class="math">\(\blacksquare\)</span></p>
+</blockquote>
+<hr class="docutils">
+<p><strong>Problem 4. Determination of Subspaces in</strong> <span class="math">\(\mathbb{R}^3\)</span></p>
+<p>To determine whether a subset of <span class="math">\(\mathbb{R}^3\)</span> constitutes a subspace, it must satisfy the following three properties:</p>
+<ol class="arabic simple">
+<li><p>The zero vector of <span class="math">\(\mathbb{R}^3\)</span> is in the subset.</p></li>
+<li><p>The subset is closed under vector addition.</p></li>
+<li><p>The subset is closed under scalar multiplication.</p></li>
+</ol>
+<p>Given the subsets:</p>
+<ol class="loweralpha simple">
+<li><p>All <span class="math">\(x\)</span> with <span class="math">\(\xi_1 = \xi_2\)</span>, and <span class="math">\(\xi_2 = 0\)</span></p></li>
+</ol>
+<p><strong>Evaluation</strong>:</p>
+<p>This means <span class="math">\(x\)</span> is of the form <span class="math">\((0, 0, \xi_3)\)</span>.</p>
+<ol class="arabic simple">
+<li><p>The zero vector <span class="math">\((0, 0, 0)\)</span> is in this subset.</p></li>
+<li><p>Sum of any two vectors in this subset will also be in this subset.</p></li>
+<li><p>Scalar multiplication of any vector in this subset will also be in this subset.</p></li>
+</ol>
+<p>Thus, (a) is a subspace of <span class="math">\(\mathbb{R}^3\)</span>.</p>
+<ol class="loweralpha simple" start="2">
+<li><p>All <span class="math">\(x\)</span> with <span class="math">\(\xi_1 = \xi_2 + 1\)</span></p></li>
+</ol>
+<p><strong>Evaluation</strong>:</p>
+<ol class="arabic simple">
+<li><p>This subset doesn't contain the zero vector.</p></li>
+<li><p>It's not closed under scalar multiplication since multiplying by a negative scalar will result in a vector outside this subset.</p></li>
+</ol>
+<p>Thus, (b) is not a subspace of <span class="math">\(\mathbb{R}^3\)</span>.</p>
+<ol class="loweralpha simple" start="3">
+<li><p>All <span class="math">\(x\)</span> with positive <span class="math">\(\xi_1, \xi_2, \xi_3\)</span></p></li>
+</ol>
+<p><strong>Evaluation</strong>:</p>
+<ol class="arabic simple">
+<li><p>This subset doesn't contain the zero vector.</p></li>
+<li><p>It's not closed under scalar multiplication since multiplying by a negative scalar will result in a vector outside this subset.</p></li>
+</ol>
+<p>Thus, (c) is not a subspace of <span class="math">\(\mathbb{R}^3\)</span>.</p>
+<ol class="loweralpha simple" start="4">
+<li><p>All <span class="math">\(x\)</span> with <span class="math">\(\xi_1 - \xi_2 + \xi_3 = \text{const}\)</span></p></li>
+</ol>
+<p><strong>Evaluation</strong>:</p>
+<p>If the constant is zero, then this subset could be a subspace. But if the constant is any other value, then the subset won't contain the zero vector, so it won't be a subspace.</p>
+<p><strong>Conclusion</strong>:</p>
+<ul class="simple">
+<li><ol class="loweralpha simple">
+<li><p>is a subspace of <span class="math">\(\mathbb{R}^3\)</span>.</p></li>
+</ol></li>
+<li><ol class="loweralpha simple" start="2">
+<li><p>is not a subspace of <span class="math">\(\mathbb{R}^3\)</span>.</p></li>
+</ol></li>
+<li><ol class="loweralpha simple" start="3">
+<li><p>is not a subspace of <span class="math">\(\mathbb{R}^3\)</span>.</p></li>
+</ol></li>
+<li><ol class="loweralpha simple" start="4">
+<li><p>could be a subspace if the constant is zero; otherwise, it's not.</p></li>
+</ol></li>
+</ul>
+<p><span class="math">\(\blacksquare\)</span></p>
+<hr class="docutils">
+<p><strong>Problem 5.</strong> The space <span class="math">\(C[a,b]\)</span> consists of all continuous functions defined on the closed interval <span class="math">\([a, b]\)</span>. That is, <span class="math">\(C[a,b]\)</span> is the set of functions <span class="math">\(f: [a, b] \to \mathbb{R}\)</span> such that <span class="math">\(f\)</span> is continuous on <span class="math">\([a, b]\)</span>.</p>
+<p><strong>Proof of Linear Independence</strong></p>
+<p>To show that the set <span class="math">\(\{ x_1, ..., x_n \}\)</span>, where <span class="math">\(x_j(x) = t^j\)</span> for <span class="math">\(j = 1, ..., n\)</span>, is linearly independent in <span class="math">\(C[a,b]\)</span>, we need to show that the only scalars <span class="math">\(c_1, ..., c_n\)</span> that satisfy the equation</p>
+<div class="math">
+\begin{equation*}
+c_1 x_1(t) + c_2 x_2(t) + ... + c_n x_n(t) = 0
+\end{equation*}
+</div>
+<p>for all <span class="math">\(t\)</span> in <span class="math">\([a, b]\)</span> are <span class="math">\(c_1 = c_2 = ... = c_n = 0\)</span>.</p>
+<p>Given the functions <span class="math">\(x_j(t) = t^j\)</span>, the above equation becomes:</p>
+<div class="math">
+\begin{equation*}
+c_1 t + c_2 t^2 + ... + c_n t^n = 0
+\end{equation*}
+</div>
+<p>This is a polynomial of degree <span class="math">\(n\)</span>. If this polynomial is identically zero on the interval <span class="math">\([a, b]\)</span>, then all its coefficients must be zero. This is because a non-zero polynomial of degree <span class="math">\(n\)</span> can have at most <span class="math">\(n\)</span> roots, but if the polynomial is zero for all <span class="math">\(t\)</span> in a continuous interval, it must be the zero polynomial.</p>
+<p>Therefore, <span class="math">\(c_1 = c_2 = ... = c_n = 0\)</span>, which proves that the set <span class="math">\(\{ x_1, ..., x_n \}\)</span> is linearly independent in <span class="math">\(C[a,b]\)</span>.</p>
+<blockquote>
+<p><span class="math">\(\blacksquare\)</span></p>
+</blockquote>
+<p><strong>Clarification on Polynomials and Their Roots</strong></p>
+<p>A polynomial of degree <span class="math">\(n\)</span> is an expression of the form:</p>
+<div class="math">
+\begin{equation*}
+p(t) = c_0 + c_1 t + c_2 t^2 + \dots + c_n t^n
+\end{equation*}
+</div>
+<p>where <span class="math">\(c_0, c_1, \dots, c_n\)</span> are coefficients and <span class="math">\(n\)</span> is a non-negative integer.</p>
+<p>The Fundamental Theorem of Algebra states that a non-zero polynomial of degree <span class="math">\(n\)</span> has exactly <span class="math">\(n\)</span> roots, counting multiplicities. This means that the polynomial can be zero at most <span class="math">\(n\)</span> times.</p>
+<p>However, if we have a polynomial that is zero for every value of <span class="math">\(t\)</span> in a continuous interval (like <span class="math">\([a, b]\)</span>), then it's not just zero at isolated points—it's zero everywhere in that interval. This behavior is inconsistent with a polynomial that has non-zero coefficients because such a polynomial would not be zero at more than <span class="math">\(n\)</span> points.</p>
+<p>Therefore, the only way a polynomial can be zero for all <span class="math">\(t\)</span> in a continuous interval is if it's the zero polynomial, which means all its coefficients <span class="math">\(c_0, c_1, \dots, c_n\)</span> are zero.</p>
+<p>In simpler terms: If you have a polynomial that's zero everywhere in an interval, then it's actually the zero polynomial, and all its coefficients are zero.</p>
+<p><strong>The crux of the proof is:</strong></p>
+<p>If a polynomial is zero for every value of t within a continuous interval (like [a,b]), then it cannot merely be the result of the polynomial having roots within that interval. Instead, the polynomial must be the zero polynomial, meaning all its coefficients are zero.</p>
+<p>In essence, a non-zero polynomial can only be zero at a finite number of points determined by its degree. If it's zero everywhere in a continuous interval, it contradicts this property, so it must be the zero polynomial.</p>
+<hr class="docutils">
+<p><strong>Problem 6.</strong> Show that in an <span class="math">\(n\)</span>-dimensional vector space <span class="math">\(X\)</span>, the representation of any vector <span class="math">\(x\)</span> as a linear combination of a given basis vectors <span class="math">\(e_1, \dots, e_n\)</span> is unique.</p>
+<p><strong>Proof</strong>:</p>
+<p>Assume, for the sake of contradiction, that there are two different representations of the vector <span class="math">\(x\)</span> in terms of the basis vectors.</p>
+<p>Let these representations be:</p>
+<div class="math">
+\begin{equation*}
+x = a_1 e_1 + a_2 e_2 + \dots + a_n e_n
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+x = b_1 e_1 + b_2 e_2 + \dots + b_n e_n
+\end{equation*}
+</div>
+<p>where <span class="math">\(a_i\)</span> and <span class="math">\(b_i\)</span> are scalars, and at least one <span class="math">\(a_i\)</span> is not equal to <span class="math">\(b_i\)</span>.</p>
+<p>Subtracting the second equation from the first, we get:</p>
+<div class="math">
+\begin{equation*}
+0 = (a_1 - b_1) e_1 + (a_2 - b_2) e_2 + \dots + (a_n - b_n) e_n
+\end{equation*}
+</div>
+<p>Now, since <span class="math">\(\{ e_1, e_2, \dots, e_n \}\)</span> is a basis for <span class="math">\(X\)</span>, these vectors are linearly independent. This means that the only way the above equation can hold is if each coefficient <span class="math">\((a_i - b_i)\)</span> is zero.</p>
+<p>Thus, <span class="math">\(a_i - b_i = 0\)</span> for all <span class="math">\(i\)</span>, which implies <span class="math">\(a_i = b_i\)</span> for all <span class="math">\(i\)</span>.</p>
+<p>This contradicts our assumption that the two representations were different. Therefore, our original assumption was false, and the representation of any vector <span class="math">\(x\)</span> as a linear combination of the basis vectors is unique.</p>
+<blockquote>
+<p><span class="math">\(\blacksquare\)</span></p>
+</blockquote>
+<p><strong>Truth Table for the Proof's Logic</strong></p>
+<img alt="https://www.wolframcloud.com/obj/845f9add-0989-4031-9cc4-aaec65b61ba3" src="https://www.wolframcloud.com/obj/845f9add-0989-4031-9cc4-aaec65b61ba3"><p>The logical structure of the proof can be summarized as:</p>
+<ol class="arabic simple">
+<li><p><strong>Assumption</strong>: There are two different representations of <span class="math">\(x\)</span>.</p></li>
+<li><p><strong>Implication</strong>: Subtracting the two representations results in a non-zero polynomial.</p></li>
+<li><p><strong>Contradiction</strong>: A non-zero polynomial cannot be zero everywhere in a continuous interval.</p></li>
+<li><p><strong>Conclusion</strong>: The assumption is false; the representation is unique.</p></li>
+</ol>
+<aside class="admonition note"><p class="admonition-title">Note</p>
+<p>This truth table is a simplification and doesn't capture the full depth of the proof. The proof's logic is more nuanced than what can be represented in a binary truth table.</p>
+</aside><hr class="docutils">
+<p><strong>Problem 7:</strong> Basis and Dimension of Complex Vector Space <span class="math">\(X\)</span></p>
+<p><strong>Problem Statement</strong>:</p>
+<p>Let <span class="math">\(\{e_1,...,e_n\}\)</span> be a basis for a complex vector space <span class="math">\(X\)</span>. Find the basis for <span class="math">\(X\)</span> regarded as a real vector space. What is the dimension of <span class="math">\(X\)</span> in either case?</p>
+<p><strong>Solution</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Basis for :math:`X` as a Complex Vector Space</strong>:</p></li>
+</ol>
+<p>Given that <span class="math">\(\{e_1, \dots, e_n\}\)</span> is a basis for the complex vector space <span class="math">\(X\)</span>, any vector <span class="math">\(v\)</span> in <span class="math">\(X\)</span> can be expressed as:</p>
+<div class="math">
+\begin{equation*}
+v = a_1 e_1 + a_2 e_2 + \dots + a_n e_n
+\end{equation*}
+</div>
+<p>where <span class="math">\(a_i\)</span> are complex numbers.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Basis for :math:`X` as a Real Vector Space</strong>:</p></li>
+</ol>
+<p>When we regard <span class="math">\(X\)</span> as a real vector space, the basis for <span class="math">\(X\)</span> is:</p>
+<div class="math">
+\begin{equation*}
+\{e_1, i e_1, e_2, i e_2, \dots, e_n, i e_n\}
+\end{equation*}
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Dimension of :math:`X` in Either Case</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>As a complex vector space, the dimension of <span class="math">\(X\)</span> is <span class="math">\(n\)</span>.</p></li>
+<li><p>As a real vector space, the dimension of <span class="math">\(X\)</span> is <span class="math">\(2n\)</span>.</p></li>
+</ul>
+<p><span class="math">\(\blacksquare\)</span></p>
+<hr class="docutils">
+<p><strong>Problem 8.</strong> If <span class="math">\(M\)</span> is a linearly dependent set in a complex vector space <span class="math">\(X\)</span>, is <span class="math">\(M\)</span> linearly dependent in <span class="math">\(X\)</span>, regarded as a real vector space?</p>
+<p><strong>Solution</strong></p>
+<p>If <span class="math">\(M\)</span> is linearly dependent in a complex vector space <span class="math">\(X\)</span>, then there exist complex scalars, not all zero, such that:</p>
+<div class="math">
+\begin{equation*}
+c_1 v_1 + c_2 v_2 + \dots + c_n v_n = 0
+\end{equation*}
+</div>
+<p>where <span class="math">\(v_1, v_2, \dots, v_n\)</span> are vectors in <span class="math">\(M\)</span> and at least one of the <span class="math">\(c_i\)</span> is non-zero.</p>
+<p>Now, when we regard <span class="math">\(X\)</span> as a real vector space, each complex scalar <span class="math">\(c_i\)</span> can be expressed as:</p>
+<div class="math">
+\begin{equation*}
+c_i = a_i + b_i i
+\end{equation*}
+</div>
+<p>where <span class="math">\(a_i\)</span> and <span class="math">\(b_i\)</span> are real numbers.</p>
+<p>Substituting this into our linear combination, we get:</p>
+<div class="math">
+\begin{equation*}
+(a_1 + b_1 i) v_1 + (a_2 + b_2 i) v_2 + \dots + (a_n + b_n i) v_n = 0
+\end{equation*}
+</div>
+<p>This can be rearranged as:</p>
+<div class="math">
+\begin{equation*}
+a_1 v_1 + a_2 v_2 + \dots + a_n v_n + i(b_1 v_1 + b_2 v_2 + \dots + b_n v_n) = 0
+\end{equation*}
+</div>
+<p>For the above equation to hold true, both the real part and the imaginary part of the equation must be zero:</p>
+<div class="math">
+\begin{equation*}
+a_1 v_1 + a_2 v_2 + \dots + a_n v_n = 0
+b_1 v_1 + b_2 v_2 + \dots + b_n v_n = 0
+\end{equation*}
+</div>
+<p>Given that at least one of the <span class="math">\(c_i\)</span> is non-zero, it implies that at least one of the <span class="math">\(a_i\)</span> or <span class="math">\(b_i\)</span> is non-zero. Therefore, the set <span class="math">\(M\)</span> is also linearly dependent when <span class="math">\(X\)</span> is regarded as a real vector space.</p>
+<p><strong>Conclusion</strong></p>
+<p>Yes, if <span class="math">\(M\)</span> is linearly dependent in a complex vector space <span class="math">\(X\)</span>, then <span class="math">\(M\)</span> is also linearly dependent in <span class="math">\(X\)</span> when regarded as a real vector space.</p>
+<p><span class="math">\(\blacksquare\)</span></p>
+    </div>
+
+
+
+    
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/proofs/" rel="tag">proofs</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../kreyszig-14-metric-spaces-convergence-cauchy-sequence-completness/" rel="prev" title="Kreyszig 1.4, Metric Spaces - Convergence, Cauchy Sequence, Completness">Previous post</a>
+            </li>
+        </ul></nav></aside><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script><script>
+                renderMathInElement(document.body,
+                    {
+                        
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                    }
+                );
+            </script></article><!--End of body content--><footer id="footer"><div class="text-center">
+    <p>
+        <span class="fa-stack fa-2x">
+        <a href="https://github.com/LucyNowacki">
+            <i class="fa fa-github-square fa-stack-2x"></i>
+        </a>
+        </span>
+        <span class="fa-stack fa-2x">
+        <a href="https://www.linkedin.com/in/lucy-nowacki-02360713b">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-linkedin fa-inverse fa-stack-1x"></i>
+        </a>
+        </span>
+        <span class="fa-stack fa-2x">
+        <a href="mailto:quantlucy@gmail.com">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-envelope fa-inverse fa-stack-1x"></i>
+        </a>
+        </span>
+    </p>
+    <p>
+        
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+<img alt="Creative Commons License BY-NC-SA" style="border-width:0; margin-bottom:12px;" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a> Contents © 2023  <a href="mailto:quantlucy@gmail.com">Lucy Nowacki</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>
+    </p>
+</div>
+
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
+    </script>
+</body>
+</html>

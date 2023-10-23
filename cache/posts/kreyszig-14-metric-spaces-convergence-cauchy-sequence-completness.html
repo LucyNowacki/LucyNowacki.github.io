@@ -1,0 +1,285 @@
+<p><strong>Problem 1. Convergence of Subsequences in a Metric Space</strong></p>
+<p><strong>Given</strong>: A sequence <span class="math">\((x_n)\)</span> in a metric space <span class="math">\(X\)</span> is convergent and has limit <span class="math">\(x\)</span>.</p>
+<p><strong>To Prove</strong>: Every subsequence <span class="math">\((x_{n_k})\)</span> of <span class="math">\((x_n)\)</span> is convergent and has the same limit <span class="math">\(x\)</span>.</p>
+<p><strong>Proof</strong>:</p>
+<p>Let <span class="math">\((x_{n_k})\)</span> be an arbitrary subsequence of <span class="math">\((x_n)\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Given that <span class="math">\((x_n)\)</span> is convergent with limit <span class="math">\(x\)</span>:
+This means that for every <span class="math">\(\epsilon &gt; 0\)</span>, there exists an <span class="math">\(N\)</span> such that for all <span class="math">\(n \geq N\)</span>, the distance between <span class="math">\(x_n\)</span> and <span class="math">\(x\)</span> is less than <span class="math">\(\epsilon\)</span>. Mathematically, this is:
+<span class="math">\(d(x_n, x) &lt; \epsilon \quad \text{for all} \quad n \geq N\)</span></p></li>
+<li><p>Consider the subsequence <span class="math">\((x_{n_k})\)</span>:
+Since <span class="math">\(n_k\)</span> represents the indices of the subsequence and <span class="math">\(n_k\)</span> is increasing (because it's a subsequence), for every <span class="math">\(k \geq K\)</span> (for some <span class="math">\(K\)</span>), we have <span class="math">\(n_k \geq N\)</span>.</p></li>
+<li><p>Using the convergence of <span class="math">\((x_n)\)</span>:
+For the same <span class="math">\(\epsilon &gt; 0\)</span> as before, for all <span class="math">\(k \geq K\)</span>, we have:
+<span class="math">\(d(x_{n_k}, x) &lt; \epsilon\)</span>
+This is because <span class="math">\(n_k \geq N\)</span> for all <span class="math">\(k \geq K\)</span>, and we know from the convergence of <span class="math">\((x_n)\)</span> that the distance between any term beyond <span class="math">\(N\)</span> and the limit <span class="math">\(x\)</span> is less than <span class="math">\(\epsilon\)</span>.</p></li>
+<li><p><strong>Conclusion</strong>:
+The above expression shows that the subsequence <span class="math">\((x_{n_k})\)</span> also converges to the same limit <span class="math">\(x\)</span>.</p></li>
+</ol>
+<p>Hence, every subsequence <span class="math">\((x_{n_k})\)</span> of <span class="math">\((x_n)\)</span> is convergent and has the same limit <span class="math">\(x\)</span>.</p>
+<p>This completes the proof.</p>
+<p><strong>Crux of the Proof for Convergence of Subsequences</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Definition of Convergence</strong>:
+A sequence <span class="math">\((x_n)\)</span> in a metric space converges to a limit <span class="math">\(x\)</span> if, for every <span class="math">\(\epsilon &gt; 0\)</span>, there exists an <span class="math">\(N\)</span> such that for all <span class="math">\(n \geq N\)</span>, the distance between <span class="math">\(x_n\)</span> and <span class="math">\(x\)</span> is less than <span class="math">\(\epsilon\)</span>.</p></li>
+<li><p><strong>Nature of Subsequences</strong>:
+A subsequence <span class="math">\((x_{n_k})\)</span> retains the order of the original sequence <span class="math">\((x_n)\)</span>. This means that if <span class="math">\(n_k\)</span> is the index of a term in the subsequence, then for every <span class="math">\(k' &gt; k\)</span>, <span class="math">\(n_{k'} &gt; n_k\)</span>.</p></li>
+</ol>
+<p>Given these two points:</p>
+<ol class="arabic simple" start="3">
+<li><p>If <span class="math">\((x_n)\)</span> converges to <span class="math">\(x\)</span>, then beyond a certain index <span class="math">\(N\)</span>, all terms of <span class="math">\((x_n)\)</span> are close to <span class="math">\(x\)</span>.</p></li>
+<li><p>Since a subsequence <span class="math">\((x_{n_k})\)</span> retains the order of <span class="math">\((x_n)\)</span>, beyond some index <span class="math">\(K\)</span>, all terms of <span class="math">\((x_{n_k})\)</span> will also be terms of <span class="math">\((x_n)\)</span> that are close to <span class="math">\(x\)</span>.</p></li>
+</ol>
+<p>Thus, the subsequence <span class="math">\((x_{n_k})\)</span> will also be close to <span class="math">\(x\)</span> beyond this index <span class="math">\(K\)</span>, meaning it converges to the same limit <span class="math">\(x\)</span>.</p>
+<p>In essence, the convergence of the original sequence ensures that its terms get arbitrarily close to the limit, and the nature of subsequences ensures that their terms, being a subset of the original sequence's terms, will also get arbitrarily close to the same limit.</p>
+<p><strong>A Practical Example</strong></p>
+<p>Consider the sequence <span class="math">\((x_n)\)</span> defined by <span class="math">\(x_n = \frac{1}{n}\)</span> for all natural numbers <span class="math">\(n\)</span>. This sequence represents the reciprocals of natural numbers and is defined in the metric space of real numbers with the usual metric (absolute value of the difference).</p>
+<p><strong>Observation</strong>:
+As <span class="math">\(n\)</span> grows larger, <span class="math">\(x_n\)</span> gets closer and closer to 0. Hence, the sequence <span class="math">\((x_n)\)</span> converges to 0 in the real numbers.</p>
+<p><strong>Subsequence</strong>:
+Let's consider a subsequence <span class="math">\((x_{n_k})\)</span> where <span class="math">\(n_k = 2^k\)</span>. This subsequence consists of the terms of <span class="math">\((x_n)\)</span> at the positions which are powers of 2. So, the subsequence is:
+<span class="math">\(x_{n_1} = \frac{1}{2}\)</span>, <span class="math">\(x_{n_2} = \frac{1}{4}\)</span>, <span class="math">\(x_{n_3} = \frac{1}{8}\)</span>, and so on.</p>
+<p><strong>Observation for the Subsequence</strong>:
+Just like the original sequence, as <span class="math">\(k\)</span> grows larger, <span class="math">\(x_{n_k}\)</span> gets closer and closer to 0. Hence, the subsequence <span class="math">\((x_{n_k})\)</span> also converges to 0 in the real numbers.</p>
+<p><strong>Conclusion</strong>:
+Both the sequence <span class="math">\((x_n)\)</span> and its subsequence <span class="math">\((x_{n_k})\)</span> converge to the same limit, 0, in the metric space of real numbers. This is consistent with our earlier proof that if a sequence in a metric space converges to a limit, then every subsequence of it also converges to the same limit.</p>
+<hr class="docutils" />
+<p><strong>Problem 2. Convergence of Cauchy Sequences with Convergent Subsequences</strong></p>
+<p><strong>Given</strong>:
+- A sequence <span class="math">\((x_n)\)</span> is Cauchy.
+- There exists a convergent subsequence <span class="math">\((x_{n_k})\)</span> such that <span class="math">\(x_{n_k} \rightarrow x\)</span>.</p>
+<p><strong>To Prove</strong>:
+- <span class="math">\((x_n)\)</span> is convergent and its limit is <span class="math">\(x\)</span>.</p>
+<p><strong>Proof</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Cauchy Sequence</strong>: By definition, for every <span class="math">\(\epsilon &gt; 0\)</span>, there exists an <span class="math">\(N_1\)</span> such that for all <span class="math">\(m, n \geq N_1\)</span>, we have
+<span class="math">\(d(x_m, x_n) &lt; \frac{\epsilon}{2}\)</span>.</p></li>
+<li><p><strong>Convergent Subsequence</strong>: Since <span class="math">\((x_{n_k}) \rightarrow x\)</span>, for the same <span class="math">\(\epsilon &gt; 0\)</span>, there exists a <span class="math">\(K\)</span> such that for all <span class="math">\(k \geq K\)</span>, we have
+<span class="math">\(d(x_{n_k}, x) &lt; \frac{\epsilon}{2}\)</span>.</p></li>
+<li><p><strong>Combining the Two</strong>: Let's choose <span class="math">\(N = \max(N_1, n_K)\)</span> where <span class="math">\(n_K\)</span> is the <span class="math">\(K\)</span>-th term of the sequence <span class="math">\((n_k)\)</span>. Then, for all <span class="math">\(n \geq N\)</span>, we have
+<span class="math">\(d(x_n, x) \leq d(x_n, x_{n_K}) + d(x_{n_K}, x)\)</span>
+<span class="math">\(&lt; \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon\)</span>.</p></li>
+</ol>
+<p>Therefore, <span class="math">\((x_n)\)</span> converges to <span class="math">\(x\)</span>.</p>
+<p>If a sequence is &quot;tightening up&quot; (Cauchy) and a part of it (subsequence) is getting close to a specific value (converging to x), then the entire sequence must also be getting close to that value (converging to x).</p>
+<p><strong>Practical Example</strong>:</p>
+<p>Consider the sequence <span class="math">\((x_n)\)</span> defined as follows:
+<span class="math">\(x_n = (-1)^n + \frac{1}{n}\)</span>.</p>
+<ol class="arabic simple">
+<li><p><strong>Cauchy Sequence</strong>: <span class="math">\((x_n)\)</span> is not a Cauchy sequence as it oscillates between positive and negative values without settling down as <span class="math">\(n\)</span> increases.</p></li>
+</ol>
+<p>2. <strong>Convergent Subsequence</strong>: However, we can find a convergent subsequence. Consider <span class="math">\(x_{n_k}\)</span> where <span class="math">\(n_k = 2k\)</span>. This subsequence is:
+<span class="math">\(x_{n_1} = \frac{3}{2}\)</span>, <span class="math">\(x_{n_2} = \frac{5}{4}\)</span>, <span class="math">\(x_{n_3} = \frac{7}{6}\)</span>, and so on, which converges to 1.</p>
+<p>According to the proof, if <span class="math">\((x_n)\)</span> was Cauchy, it would converge to the same limit as its subsequence, which is 1. However, since <span class="math">\((x_n)\)</span> is not Cauchy, we cannot conclude that <span class="math">\((x_n)\)</span> converges to 1, which aligns with our observation of the sequence.</p>
+<p>Note: This example demonstrates that the condition of being Cauchy is crucial for the sequence to converge to the same limit as its convergent subsequence.</p>
+<hr class="docutils" />
+<p><strong>Problem 3. Convergence and Neighborhoods in Metric Spaces</strong></p>
+<p><strong>Given</strong>:</p>
+<ul class="simple">
+<li><p>A sequence <span class="math">\((x_n)\)</span> in a metric space.</p></li>
+<li><p>A point <span class="math">\(x\)</span> in the same metric space.</p></li>
+</ul>
+<p><strong>To Prove</strong>:
+<span class="math">\(x_n \rightarrow x\)</span> if and only if for every neighborhood <span class="math">\(B\)</span> of <span class="math">\(x\)</span>, there exists an integer <span class="math">\(n_0\)</span> such that <span class="math">\(x_n \in B\)</span> for all <span class="math">\(n &gt; n_0\)</span>.</p>
+<p><strong>Proof</strong>:</p>
+<p><strong>(⇒) Forward Direction</strong>:
+Assume <span class="math">\(x_n \rightarrow x\)</span>.</p>
+<p>By the definition of convergence, for every <span class="math">\(\epsilon &gt; 0\)</span>, there exists an <span class="math">\(N\)</span> such that for all <span class="math">\(n \geq N\)</span>, the distance between <span class="math">\(x_n\)</span> and <span class="math">\(x\)</span> is less than <span class="math">\(\epsilon\)</span>. This means that <span class="math">\(x_n\)</span> lies in the <span class="math">\(\epsilon\)</span>-neighborhood of <span class="math">\(x\)</span> for all <span class="math">\(n \geq N\)</span>.</p>
+<p>Given any neighborhood <span class="math">\(B\)</span> of <span class="math">\(x\)</span>, there exists some <span class="math">\(\epsilon &gt; 0\)</span> such that the <span class="math">\(\epsilon\)</span>-neighborhood of <span class="math">\(x\)</span> is contained in <span class="math">\(B\)</span>. By the convergence of <span class="math">\(x_n\)</span>, there exists an <span class="math">\(n_0\)</span> such that <span class="math">\(x_n\)</span> lies in this <span class="math">\(\epsilon\)</span>-neighborhood (and hence in <span class="math">\(B\)</span>) for all <span class="math">\(n &gt; n_0\)</span>.</p>
+<p><strong>(⇐) Reverse Direction</strong>:
+Assume that for every neighborhood <span class="math">\(B\)</span> of <span class="math">\(x\)</span>, there exists an integer <span class="math">\(n_0\)</span> such that <span class="math">\(x_n \in B\)</span> for all <span class="math">\(n &gt; n_0\)</span>.</p>
+<p>Given any <span class="math">\(\epsilon &gt; 0\)</span>, consider the <span class="math">\(\epsilon\)</span>-neighborhood of <span class="math">\(x\)</span>. By assumption, there exists an <span class="math">\(n_0\)</span> such that <span class="math">\(x_n\)</span> lies in this <span class="math">\(\epsilon\)</span>-neighborhood for all <span class="math">\(n &gt; n_0\)</span>. This means that the distance between <span class="math">\(x_n\)</span> and <span class="math">\(x\)</span> is less than <span class="math">\(\epsilon\)</span> for all <span class="math">\(n &gt; n_0\)</span>.</p>
+<p>Therefore, <span class="math">\(x_n \rightarrow x\)</span>.</p>
+<p><strong>Conclusion</strong>:
+The sequence <span class="math">\(x_n\)</span> converges to <span class="math">\(x\)</span> if and only if for every neighborhood <span class="math">\(B\)</span> of <span class="math">\(x\)</span>, there exists an integer <span class="math">\(n_0\)</span> such that <span class="math">\(x_n \in B\)</span> for all <span class="math">\(n &gt; n_0\)</span>.</p>
+<p>This completes the proof.</p>
+<hr class="docutils" />
+<p><strong>Problem 4. Boundedness of Cauchy Sequences</strong></p>
+<p><strong>Given</strong>:
+- A sequence <span class="math">\((x_n)\)</span> is Cauchy.</p>
+<p><strong>To Prove</strong>:
+- The sequence <span class="math">\((x_n)\)</span> is bounded.</p>
+<p><strong>Proof</strong>:</p>
+<ol class="arabic">
+<li><p><strong>Definition of Cauchy Sequence</strong>: By definition, a sequence is Cauchy if, for any given <span class="math">\(\epsilon &gt; 0\)</span> (let's choose <span class="math">\(\epsilon = 1\)</span> for simplicity), there exists an <span class="math">\(N\)</span> such that for all <span class="math">\(m, n \geq N\)</span>, we have
+<span class="math">\(|x_m - x_n| &lt; 1\)</span>.</p></li>
+<li><p><strong>Boundedness of Terms Beyond</strong> <span class="math">\(N\)</span>: For any <span class="math">\(n \geq N\)</span>, using the triangle inequality, we get:</p>
+<p><span class="math">\(|x_n| = |x_n - x_N + x_N|\)</span>
+<span class="math">\(\leq |x_n - x_N| + |x_N|\)</span>
+<span class="math">\(&lt; 1 + |x_N|\)</span></p>
+<p>Let's denote <span class="math">\(M = 1 + |x_N|\)</span>.
+So, for all <span class="math">\(n \geq N\)</span>, <span class="math">\(|x_n| &lt; M\)</span>.</p>
+</li>
+<li><p><strong>Boundedness of Terms Before</strong> <span class="math">\(N\)</span>: For terms <span class="math">\(x_1, x_2, ... x_{N-1}\)</span>, they are finitely many, so they have a maximum absolute value, say <span class="math">\(M'\)</span>.</p></li>
+<li><p><strong>Combining the Two</strong>: The sequence <span class="math">\((x_n)\)</span> is bounded by <span class="math">\(\max(M, M')\)</span> for all <span class="math">\(n\)</span>.</p></li>
+</ol>
+<p><strong>Conclusion</strong>:
+Every Cauchy sequence is bounded.</p>
+<p>This completes the proof.</p>
+<p><strong>Crux of the Proof for Boundedness of Cauchy Sequences</strong></p>
+<p>The core idea behind proving that a Cauchy sequence is bounded revolves around leveraging the defining property of Cauchy sequences: as the sequence progresses, its terms get arbitrarily close to each other.</p>
+<ol class="arabic simple">
+<li><p><strong>Cauchy's Property</strong>:
+A Cauchy sequence ensures that, after a certain point (denoted by <span class="math">\(N\)</span>), the distance between any two terms is less than any given positive value. For the sake of the proof, we chose this value as <span class="math">\(\epsilon = 1\)</span>.</p></li>
+<li><p><strong>Boundedness Beyond a Point</strong> (Using <span class="math">\(M\)</span>):
+Given the Cauchy property, we deduced that all terms of the sequence beyond the point <span class="math">\(N\)</span> are not just close to each other but are also close to a specific term, <span class="math">\(x_N\)</span>. This means that the sequence's terms, after <span class="math">\(N\)</span>, are bounded by a value <span class="math">\(M\)</span>, which is a little more than the absolute value of <span class="math">\(x_N\)</span>.</p></li>
+<li><p><strong>Boundedness Before the Point</strong> (Using <span class="math">\(M'\)</span>):
+The terms before <span class="math">\(N\)</span> are finitely many. Any finite set of numbers is always bounded because there will be a maximum and minimum value among them. We denote the maximum absolute value of these terms as <span class="math">\(M'\)</span>.</p></li>
+<li><p><strong>Why Two Different</strong> <span class="math">\(M\)</span> and <span class="math">\(M'\)</span>?:
+The reason for using two different bounds, <span class="math">\(M\)</span> and <span class="math">\(M'\)</span>, is to separately handle the boundedness of two segments of the sequence:</p>
+<ul class="simple">
+<li><p><span class="math">\(M\)</span> handles the terms after the point <span class="math">\(N\)</span>, ensuring they don't stray too far from <span class="math">\(x_N\)</span>.</p></li>
+<li><p><span class="math">\(M'\)</span> handles the initial terms, up to <span class="math">\(N\)</span>, by simply using the maximum absolute value among them.</p></li>
+</ul>
+</li>
+</ol>
+<p>By combining these two bounds, we ensure that the entire sequence is bounded by the larger of <span class="math">\(M\)</span> and <span class="math">\(M'\)</span>.</p>
+<p>In essence, the proof uses the &quot;tightening&quot; behavior of Cauchy sequences to ensure that the sequence remains within a certain &quot;boundary&quot; and doesn't diverge to infinity, thus proving it's bounded.</p>
+<hr class="docutils" />
+<p><strong>Problem 6. Convergence of Distance Sequence of Cauchy Sequences</strong></p>
+<p><strong>Given</strong>:
+Two sequences <span class="math">\((x_n)\)</span> and <span class="math">\((y_n)\)</span> in a metric space <span class="math">\((X,d)\)</span> are Cauchy.</p>
+<p><strong>To Prove</strong>:
+The sequence <span class="math">\((a_n)\)</span>, where <span class="math">\(a_n = d(x_n, y_n)\)</span>, converges.</p>
+<p><strong>Proof</strong>:</p>
+<ol class="arabic">
+<li><p><strong>Cauchy Property of</strong> <span class="math">\((x_n)\)</span> and <span class="math">\((y_n)\)</span>:
+Since both <span class="math">\((x_n)\)</span> and <span class="math">\((y_n)\)</span> are Cauchy, for any given <span class="math">\(\epsilon &gt; 0\)</span>, there exist integers <span class="math">\(N_1\)</span> and <span class="math">\(N_2\)</span> such that for all <span class="math">\(m,n \geq N_1\)</span> and <span class="math">\(p,q \geq N_2\)</span>, we have:</p>
+<p><span class="math">\(d(x_m, x_n) &lt; \frac{\epsilon}{2}\)</span>
+<span class="math">\(d(y_p, y_q) &lt; \frac{\epsilon}{2}\)</span></p>
+</li>
+<li><p><strong>Using the Triangle Inequality</strong>:
+Consider the difference <span class="math">\(|a_m - a_n|\)</span>, where <span class="math">\(a_m = d(x_m, y_m)\)</span> and <span class="math">\(a_n = d(x_n, y_n)\)</span>. Using the triangle inequality, we get:</p>
+<p><span class="math">\(|a_m - a_n| = |d(x_m, y_m) - d(x_n, y_n)|\)</span>
+<span class="math">\(\leq d(x_m, x_n) + d(y_m, y_n)\)</span></p>
+<p>Now, using the properties of the metric and the Cauchy nature of the sequences, we can further bound this as:</p>
+<p><span class="math">\(\leq d(x_m, x_n) + d(y_m, y_n) &lt; \epsilon\)</span>
+for all <span class="math">\(m,n\)</span> greater than <span class="math">\(N = \max(N_1, N_2)\)</span>.</p>
+</li>
+<li><p><strong>Convergence of</strong> <span class="math">\((a_n)\)</span>:
+The above inequality shows that the sequence <span class="math">\((a_n)\)</span> is Cauchy. In metric spaces where every Cauchy sequence converges (like in real numbers), <span class="math">\((a_n)\)</span> will converge.</p></li>
+</ol>
+<p><strong>Illustrative Example</strong>:</p>
+<p>Consider the metric space <span class="math">\((X,d)\)</span> where <span class="math">\(X\)</span> is the set of real numbers and <span class="math">\(d\)</span> is the usual metric (absolute difference). Let:</p>
+<p><span class="math">\(x_n = \frac{1}{n}\)</span>
+<span class="math">\(y_n = \frac{1}{n+1}\)</span></p>
+<p>Both <span class="math">\((x_n)\)</span> and <span class="math">\((y_n)\)</span> are Cauchy sequences in this metric space. Now, consider:</p>
+<p><span class="math">\(a_n = d(x_n, y_n) = \left| \frac{1}{n} - \frac{1}{n+1} \right| = \frac{1}{n(n+1)}\)</span></p>
+<p>The sequence <span class="math">\((a_n)\)</span> represents the distances between the terms of <span class="math">\((x_n)\)</span> and <span class="math">\((y_n)\)</span>. As <span class="math">\(n\)</span> goes to infinity, <span class="math">\(a_n\)</span> goes to 0, showing that <span class="math">\((a_n)\)</span> converges to 0.</p>
+<p>This completes the proof and illustrative example.</p>
+<hr class="docutils" />
+<p><strong>Problem 8. Equivalence of Cauchy Sequences in Two Metrics</strong></p>
+<p><strong>Given</strong>:
+Two metrics <span class="math">\(d_1\)</span> and <span class="math">\(d_2\)</span> on the same set <span class="math">\(X\)</span>. There exist positive numbers <span class="math">\(a\)</span> and <span class="math">\(b\)</span> such that for all <span class="math">\(x, y \in X\)</span>:</p>
+<div class="math">
+\begin{equation*}
+a d_1(x,y) \leq d_2(x,y) \leq b d_1(x,y)
+\end{equation*}
+</div>
+<p><strong>To Prove</strong>:
+The Cauchy sequences in <span class="math">\((X,d_1)\)</span> and <span class="math">\((X,d_2)\)</span> are the same.</p>
+<p><strong>Proof</strong>:</p>
+<ol class="arabic">
+<li><p><strong>Assume a Cauchy Sequence in :math:`(X,d_1)`</strong>:</p>
+<p>Let <span class="math">\((x_n)\)</span> be a Cauchy sequence in <span class="math">\((X,d_1)\)</span>.</p>
+<p>This means that for any given <span class="math">\(\epsilon &gt; 0\)</span>, there exists an integer <span class="math">\(N\)</span> such that for all <span class="math">\(m, n \geq N\)</span>:</p>
+<div class="math">
+\begin{equation*}
+d_1(x_m, x_n) &lt; \epsilon
+\end{equation*}
+</div>
+</li>
+<li><p><strong>Using the Given Inequality</strong>:
+Using the given inequality, we can deduce:</p>
+<div class="math">
+\begin{equation*}
+d_2(x_m, x_n) \leq b d_1(x_m, x_n) &lt; b\epsilon
+\end{equation*}
+</div>
+<p>This shows that <span class="math">\((x_n)\)</span> is also a Cauchy sequence in <span class="math">\((X,d_2)\)</span>.</p>
+</li>
+<li><p><strong>Conversely, Assume a Cauchy Sequence</strong> in <span class="math">\((X,d_2)\)</span>:</p>
+<p>Similarly, if <span class="math">\((x_n)\)</span> is a Cauchy sequence in <span class="math">\((X,d_2)\)</span>,
+then for any given <span class="math">\(\epsilon &gt; 0\)</span>, there exists an integer <span class="math">\(N\)</span> such that for all <span class="math">\(m, n \geq N\)</span>:</p>
+<div class="math">
+\begin{equation*}
+d_2(x_m, x_n) &lt; \epsilon
+\end{equation*}
+</div>
+<p>Using the given inequality again, we get:</p>
+<div class="math">
+\begin{equation*}
+d_1(x_m, x_n) \leq \frac{1}{a} d_2(x_m, x_n) &lt; \frac{\epsilon}{a}
+\end{equation*}
+</div>
+<p>This shows that <span class="math">\((x_n)\)</span> is also a Cauchy sequence in <span class="math">\((X,d_1)\)</span>.</p>
+</li>
+</ol>
+<p><strong>Conclusion</strong>:
+The Cauchy sequences in <span class="math">\((X,d_1)\)</span> and <span class="math">\((X,d_2)\)</span> are the same.</p>
+<p>This completes the proof.</p>
+<p><strong>Crux of the Proof for Equivalence of Cauchy Sequences in Two Metrics</strong></p>
+<p>The essence of the proof lies in the given relationship between the two metrics <span class="math">\(d_1\)</span> and <span class="math">\(d_2\)</span>. The inequalities provided ensure that the &quot;distance&quot; between any two points in <span class="math">\(X\)</span> as measured by <span class="math">\(d_1\)</span> and <span class="math">\(d_2\)</span> are directly proportional. This proportionality ensures that if the terms of a sequence get arbitrarily close to each other in one metric, they must also get arbitrarily close in the other metric.</p>
+<p><strong>Crux of the Proof</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Proportional Distances</strong>:
+The given inequalities <span class="math">\(a d_1(x,y) \leq d_2(x,y) \leq b d_1(x,y)\)</span> ensure that distances in <span class="math">\(d_2\)</span> are always bounded by proportional distances in <span class="math">\(d_1\)</span>.</p></li>
+<li><p><strong>Cauchy</strong> in <span class="math">\(d_1\)</span> Implies Cauchy in <span class="math">\(d_2\)</span>:
+If a sequence is Cauchy in <span class="math">\((X, d_1)\)</span>, then the terms of the sequence are getting closer in the <span class="math">\(d_1\)</span> metric. Due to the proportional relationship, they must also be getting closer in the <span class="math">\(d_2\)</span> metric.</p></li>
+<li><p><strong>Cauchy</strong> in <span class="math">\(d_2\)</span> Implies Cauchy in <span class="math">\(d_1\)</span>:
+Similarly, if a sequence is Cauchy in <span class="math">\((X, d_2)\)</span>, the proportional relationship ensures that the sequence is also Cauchy in <span class="math">\((X, d_1)\)</span>.</p></li>
+</ol>
+<p>By establishing these two implications, we conclude that the set of Cauchy sequences in both metrics is the same.</p>
+<hr class="docutils" />
+<p><strong>Problem 10. Completeness of Complex Numbers Using Completeness of Real Numbers</strong></p>
+<p><strong>Given</strong>:</p>
+<ul class="simple">
+<li><p>The real numbers <span class="math">\(\mathbb{R}\)</span> are complete, which means every Cauchy sequence of real numbers converges to a limit in <span class="math">\(\mathbb{R}\)</span>.</p></li>
+</ul>
+<p><strong>To Prove</strong>:</p>
+<ul class="simple">
+<li><p>The complex numbers <span class="math">\(\mathbb{C}\)</span> are complete.</p></li>
+</ul>
+<p><strong>Proof</strong>:</p>
+<ol class="arabic">
+<li><p><strong>Representation of Complex Numbers</strong>:
+Every complex number can be represented as:</p>
+<div class="math">
+\begin{equation*}
+z = x + yi
+\end{equation*}
+</div>
+<p>where <span class="math">\(x\)</span> and <span class="math">\(y\)</span> are real numbers and <span class="math">\(i\)</span> is the imaginary unit.</p>
+</li>
+<li><p><strong>Assume a Cauchy Sequence</strong> in <span class="math">\(\mathbb{C}\)</span>:
+Let <span class="math">\((z_n)\)</span> be a Cauchy sequence in <span class="math">\(\mathbb{C}\)</span>. This means that for any given <span class="math">\(\epsilon &gt; 0\)</span>, there exists an integer <span class="math">\(N\)</span> such that for all <span class="math">\(m, n \geq N\)</span>:</p>
+<div class="math">
+\begin{equation*}
+|z_m - z_n| &lt; \epsilon
+\end{equation*}
+</div>
+</li>
+<li><p><strong>Real and Imaginary Parts are Cauchy</strong>:
+The sequences of real parts <span class="math">\((x_n)\)</span> and imaginary parts <span class="math">\((y_n)\)</span> of <span class="math">\((z_n)\)</span> are also Cauchy in <span class="math">\(\mathbb{R}\)</span>. This is because:</p>
+<div class="math">
+\begin{equation*}
+|x_m - x_n| \leq |z_m - z_n|
+|y_m - y_n| \leq |z_m - z_n|
+\end{equation*}
+</div>
+</li>
+<li><p><strong>Convergence of Real and Imaginary Parts</strong>:
+Since <span class="math">\(\mathbb{R}\)</span> is complete, the Cauchy sequences <span class="math">\((x_n)\)</span> and <span class="math">\((y_n)\)</span> converge to limits in <span class="math">\(\mathbb{R}\)</span>.</p></li>
+<li><p><strong>Convergence of the Complex Sequence</strong>:
+The sequence <span class="math">\((z_n)\)</span> converges to:</p>
+<div class="math">
+\begin{equation*}
+z = x + yi
+\end{equation*}
+</div>
+<p>in <span class="math">\(\mathbb{C}\)</span>.</p>
+</li>
+</ol>
+<p><strong>Conclusion</strong>:
+Every Cauchy sequence in <span class="math">\(\mathbb{C}\)</span> converges to a limit in <span class="math">\(\mathbb{C}\)</span>. Hence, <span class="math">\(\mathbb{C}\)</span> is complete.</p>
+<p>This completes the proof.</p>
