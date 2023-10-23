@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kreyszig 1.2, Metric Spaces | Nova Automata</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https://example.com/blog/kreyszig-12-metric-spaces/">
+<link rel="icon" href="../../files/blogFavicon.ico" sizes="128x128">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YWLRJ2M88S"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID);
+</script><meta name="google-site-verification" content="WF1l7hEMV49eJl7Kb2rVSOwXp2KINwX59Tig6ACvfSs">
+<meta name="author" content="Lucy Nowacki">
+<link rel="prev" href="../pinns-in-forward-inverse-problems/" title="PINNs in Forward &amp; Inverse Problems" type="text/html">
+<link rel="next" href="../kreyszig-14-metric-spaces-convergence-cauchy-sequence-completness/" title="Kreyszig 1.4, Metric Spaces - Convergence, Cauchy Sequence, Completness" type="text/html">
+<meta property="og:site_name" content="Nova Automata">
+<meta property="og:title" content="Kreyszig 1.2, Metric Spaces">
+<meta property="og:url" content="https://example.com/blog/kreyszig-12-metric-spaces/">
+<meta property="og:description" content="Problem 1. Show that in the metric \(d(x,y) = \sum_{j=1}^{\infty} \frac{1}{2^j} \frac{|x_j - y_j|}{1 + |x_j - y_j|}\) we can obtain another metric by replacing \(\frac{1}{2^j}\) by \(\mu_j &gt; 0\) such ">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-10-07T00:03:11+01:00">
+<meta property="article:tag" content="proofs">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark
+bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="../../">
+
+            <span id="blog-title">Nova Automata</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a href="../../categories/machine-learning" class="nav-link">Machine Blog</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/numerical" class="nav-link">Numerical Blog</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/nlp" class="nav-link">NLP &amp; Transformers</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/transhumanism" class="nav-link">Transhuman</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/fintech" class="nav-link">FinTech</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/proofs" class="nav-link">Proofs</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/" class="nav-link">Tags</a>
+                </li>
+<li class="nav-item">
+<a href="../../bio/index.html" class="nav-link">Me &amp; Hobbies</a>
+
+                
+            </li>
+</ul>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" google custom search>
+<form method="get" action="https://www.qwant.com/" class="navbar-form navbar-right" role="search">
+  <style>
+    .btn {
+        cursor: pointer;
+        display: inline-block;
+        padding: 10px 30px;
+        /* text color in the button */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+    }
+    
+    .btn:hover {
+        opacity: 0.9;
+        color: red;
+    }
+    /* Buttons for other colors */
+    
+    .btn-primary,
+    .bg-primary {
+        color: #fff;
+    }
+    
+    .btn-secondary,
+    .bg-secondary {
+        background: #88258b;
+        color: #fff;
+    }
+    
+    .btn-outline {
+        background: transparent;
+        border: 1px solid #fff;
+    }
+  </style>
+<div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder=" Qwant Search"><button type="submit" class="btn btn-secondary">
+            <i class="fa fa-search"></i>
+        </button>
+        <input type="hidden" name="sitesearch" value="https://example.com/">
+</div>    
+</form>
+<!-- End of custom search -->
+
+
+            <ul class="navbar-nav navbar-right"></ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Kreyszig 1.2, Metric Spaces</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Lucy Nowacki
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2023-10-07T00:03:11+01:00" itemprop="datePublished" title="2023-10-07 00:03">2023-10-07 00:03</time></a>
+            </p>
+            
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <p><strong>Problem 1. Show that in the metric</strong> <span class="math">\(d(x,y) = \sum_{j=1}^{\infty} \frac{1}{2^j} \frac{|x_j - y_j|}{1 + |x_j - y_j|}\)</span> <strong>we can obtain another metric by replacing</strong> <span class="math">\(\frac{1}{2^j}\)</span> <strong>by</strong> <span class="math">\(\mu_j &gt; 0\)</span> <strong>such that</strong> <span class="math">\(\sum \mu_j\)</span> <strong>converges.</strong></p>
+<p><strong>Proof:</strong></p>
+<p>Given the metric:
+<span class="math">\(d(x,y) = \sum_{j=1}^{\infty} \frac{1}{2^j} \frac{|x_j - y_j|}{1 + |x_j - y_j|}\)</span></p>
+<p>We want to replace <span class="math">\(\frac{1}{2^j}\)</span> with <span class="math">\(\mu_j &gt; 0\)</span> such that <span class="math">\(\sum \mu_j\)</span> converges. Let's denote the new metric as <span class="math">\(d'(x,y)\)</span>.</p>
+<p><span class="math">\(d'(x,y) = \sum_{j=1}^{\infty} \mu_j \frac{|x_j - y_j|}{1 + |x_j - y_j|}\)</span></p>
+<p>To show that <span class="math">\(d'\)</span> is a metric, it must satisfy the metric axioms:</p>
+<ol class="arabic">
+<li>
+<p><strong>Non-negativity:</strong> <span class="math">\(d'(x,y) \geq 0\)</span> for all <span class="math">\(x, y\)</span> and <span class="math">\(d'(x,y) = 0\)</span> if and only if <span class="math">\(x = y\)</span>.</p>
+<p><em>Proof:</em>
+Each term in the series is non-negative due to the absolute value and the fact that <span class="math">\(\mu_j &gt; 0\)</span>. The sum is zero if and only if each term is zero, which implies <span class="math">\(x_j = y_j\)</span> for all <span class="math">\(j\)</span>, or <span class="math">\(x = y\)</span>.</p>
+</li>
+<li>
+<p><strong>Symmetry:</strong> <span class="math">\(d'(x,y) = d'(y,x)\)</span> for all <span class="math">\(x, y\)</span>.</p>
+<p><em>Proof:</em>
+This is evident from the absolute value in the definition of the metric.</p>
+</li>
+<li>
+<p><strong>Triangle Inequality:</strong> <span class="math">\(d'(x,z) \leq d'(x,y) + d'(y,z)\)</span> for all <span class="math">\(x, y, z\)</span>.</p>
+<p><em>Proof:</em>
+For each term in the series, the triangle inequality for the absolute value gives:
+<span class="math">\(\frac{|x_j - z_j|}{1 + |x_j - z_j|} \leq \frac{|x_j - y_j| + |y_j - z_j|}{1 + |x_j - y_j| + |y_j - z_j|}\)</span>
+Multiplying both sides by <span class="math">\(\mu_j\)</span> and summing over all <span class="math">\(j\)</span> gives the desired result.</p>
+</li>
+</ol>
+<p>Given that the series <span class="math">\(\sum \mu_j\)</span> converges, the series defining <span class="math">\(d'\)</span> will also converge for any <span class="math">\(x\)</span> and <span class="math">\(y\)</span> (by the comparison test, since each term of the metric series is bounded by <span class="math">\(\mu_j\)</span>).</p>
+<p>Thus, <span class="math">\(d'\)</span> defined with <span class="math">\(\mu_j\)</span> is a valid metric on the space as long as <span class="math">\(\sum \mu_j\)</span> converges.</p>
+<hr class="docutils">
+<p><strong>Problem 2: Show that the geometric mean of two positive numbers does not exceed the arithmetic mean using the given inequality.</strong></p>
+<p><strong>Given:</strong></p>
+<p><span class="math">\(\alpha \beta \leq \int_0^{\alpha} t^{p-1} dt + \int_0^{\beta} u^{q-1} du = \frac{\alpha^p}{p} + \frac{\beta^q}{q}\)</span></p>
+<p>where <span class="math">\(\alpha\)</span> and <span class="math">\(\beta\)</span> are positive numbers, and <span class="math">\(p\)</span> and <span class="math">\(q\)</span> are conjugate exponents such that <span class="math">\(\frac{1}{p} + \frac{1}{q} = 1\)</span>.</p>
+<p><strong>Proof:</strong></p>
+<p>To show that the geometric mean of two positive numbers does not exceed the arithmetic mean, consider two positive numbers <span class="math">\(a\)</span> and <span class="math">\(b\)</span>. The geometric mean is <span class="math">\(\sqrt{ab}\)</span> and the arithmetic mean is <span class="math">\(\frac{a+b}{2}\)</span>.</p>
+<p>Let's set <span class="math">\(\alpha = a\)</span> and <span class="math">\(\beta = b\)</span>, and choose <span class="math">\(p = 2\)</span> and <span class="math">\(q = 2\)</span> (since they are conjugate exponents).</p>
+<p>Using the given inequality:
+<span class="math">\(ab \leq \frac{a^2}{2} + \frac{b^2}{2}\)</span></p>
+<p>Rearranging:
+<span class="math">\(2ab \leq a^2 + b^2\)</span></p>
+<p>Taking the square root of both sides:
+<span class="math">\(\sqrt{2ab} \leq \sqrt{a^2 + b^2}\)</span></p>
+<p>Dividing both sides by 2:
+<span class="math">\(\sqrt{ab} \leq \frac{a+b}{2}\)</span></p>
+<p>This shows that the geometric mean of <span class="math">\(a\)</span> and <span class="math">\(b\)</span> is less than or equal to their arithmetic mean.</p>
+<p>Thus, the geometric mean of two positive numbers does not exceed the arithmetic mean.</p>
+<hr class="docutils">
+<p><strong>Problem 3: Show that the Cauchy-Schwarz inequality implies the given inequality for sequences.</strong></p>
+<p><strong>Given:</strong></p>
+<p><span class="math">\(\left| \sum_{j=1}^{\infty} \xi_j \eta_j \right| \leq \sqrt{ \sum_{k=1}^{\infty} |\xi_k|^2 } \sqrt{ \sum_{m=1}^{\infty} |\eta_m|^2 }\)</span></p>
+<p><strong>To Prove:</strong></p>
+<p><span class="math">\((\left| \xi_1 \right| + \dots + \left| \xi_n \right|)^2 \leq n (\left| \xi_1 \right|^2 + \dots + \left| \xi_n \right|^2)\)</span></p>
+<p><strong>Proof:</strong></p>
+<p>Let's consider two sequences:</p>
+<ol class="arabic simple">
+<li><p><span class="math">\(a_j = |\xi_j|\)</span> for <span class="math">\(j = 1, 2, ..., n\)</span></p></li>
+<li><p><span class="math">\(b_j = 1\)</span> for all <span class="math">\(j\)</span></p></li>
+</ol>
+<p>Using the Cauchy-Schwarz inequality, we have:</p>
+<p><span class="math">\(\left( \sum_{j=1}^{n} a_j b_j \right)^2 \leq \left( \sum_{j=1}^{n} a_j^2 \right) \left( \sum_{j=1}^{n} b_j^2 \right)\)</span></p>
+<p>Substituting in our choices for <span class="math">\(a_j\)</span> and <span class="math">\(b_j\)</span>, we get:</p>
+<p><span class="math">\(\left( \sum_{j=1}^{n} |\xi_j| \right)^2 \leq \left( \sum_{j=1}^{n} |\xi_j|^2 \right) \left( \sum_{j=1}^{n} 1^2 \right)\)</span></p>
+<p>Since <span class="math">\(\sum_{j=1}^{n} 1^2 = n\)</span>, our inequality becomes:</p>
+<p><span class="math">\(\left( \sum_{j=1}^{n} |\xi_j| \right)^2 \leq n \left( \sum_{j=1}^{n} |\xi_j|^2 \right)\)</span></p>
+<p>This completes the proof.</p>
+<hr class="docutils">
+<p><strong>Problem 4: Find a sequence that converges to 0 but is not in any :math:`l^p` space, where :math:`1 leq p &lt; +infty`.</strong></p>
+<p><strong>Given:</strong></p>
+<p>Consider the sequence <span class="math">\((x_n)\)</span> defined as:</p>
+<div class="math">
+\begin{equation*}
+x_n =
+\begin{cases}
+\frac{1}{k} &amp; \text{if } n = 2^k \text{ for some } k \in \mathbb{N} \\
+0 &amp; \text{otherwise}
+\end{cases}
+\end{equation*}
+</div>
+<p>This means that the sequence <span class="math">\((x_n)\)</span> will have the values:</p>
+<div class="math">
+\begin{equation*}
+x_1 = 0, x_2 = 1, x_3 = 0, x_4 = \frac{1}{2}, x_5 = x_6 = x_7 = 0, x_8 = \frac{1}{3}, \dots
+\end{equation*}
+</div>
+<p><strong>Proof:</strong></p>
+<p>1. <strong>Convergence to 0:</strong>
+Clearly, <span class="math">\((x_n)\)</span> converges to 0 as <span class="math">\(n\)</span> approaches infinity because the sequence is 0 at all but countably many points, and where it is not 0, it is a sequence of numbers <span class="math">\(\frac{1}{k}\)</span> which tends to 0 as <span class="math">\(k\)</span> increases.</p>
+<p>2. <strong>Not in any</strong> <span class="math">\(l^p\)</span> <strong>space:</strong>
+To see why <span class="math">\((x_n)\)</span> is not in any <span class="math">\(l^p\)</span> space, consider the <span class="math">\(p\)</span>-norm of <span class="math">\((x_n)\)</span>:</p>
+<div class="math">
+\begin{equation*}
+||x_n||_p = \left( \sum_{n=1}^{\infty} |x_n|^p \right)^{\frac{1}{p}}
+\end{equation*}
+</div>
+<p>For <span class="math">\(n = 2^k\)</span>, <span class="math">\(x_n = \frac{1}{k}\)</span>. So, the <span class="math">\(p\)</span>-norm becomes:</p>
+<div class="math">
+\begin{equation*}
+||x_n||_p = \left( \sum_{k=1}^{\infty} \left( \frac{1}{k} \right)^p \right)^{\frac{1}{p}}
+\end{equation*}
+</div>
+<p>Given that the series <span class="math">\(\sum_{k=1}^{\infty} \left( \frac{1}{k} \right)^p\)</span> is divergent for <span class="math">\(p \leq 1\)</span>, it implies that the sequence <span class="math">\((x_n)\)</span> is not in any <span class="math">\(l^p\)</span> space for <span class="math">\(p \leq 1\)</span>.</p>
+<hr class="docutils">
+<p><strong>Problem 5: Find a sequence</strong> <span class="math">\(x\)</span> <strong>which is in</strong> <span class="math">\(l^p\)</span> <strong>for some</strong> <span class="math">\(p &gt; 1\)</span> <strong>but</strong> <span class="math">\(x\)</span> <strong>is not in</strong> <span class="math">\(l^1\)</span> <strong>.</strong></p>
+<p><strong>Solution:</strong></p>
+<p>Consider the sequence <span class="math">\(x_n\)</span> defined by:</p>
+<div class="math">
+\begin{equation*}
+x_n = \frac{1}{n^{\alpha}}
+\end{equation*}
+</div>
+<p>where <span class="math">\(0 &lt; \alpha &lt; 1\)</span>.</p>
+<p><strong>1.</strong> <span class="math">\(x\)</span> is in <span class="math">\(l^p\)</span> for <span class="math">\(p &gt; 1\)</span>:</p>
+<p>For the sequence to be in <span class="math">\(l^p\)</span>, the series <span class="math">\(\sum_{n=1}^{\infty} |x_n|^p\)</span> must converge. In this case:</p>
+<div class="math">
+\begin{equation*}
+\sum_{n=1}^{\infty} \left( \frac{1}{n^{\alpha}} \right)^p = \sum_{n=1}^{\infty} \frac{1}{n^{p\alpha}}
+\end{equation*}
+</div>
+<p>Given that <span class="math">\(p &gt; 1\)</span> and <span class="math">\(0 &lt; \alpha &lt; 1\)</span>, the exponent <span class="math">\(p\alpha\)</span> will be strictly between 1 and <span class="math">\(p\)</span>. Since the series <span class="math">\(\sum_{n=1}^{\infty} \frac{1}{n^s}\)</span> converges for <span class="math">\(s &gt; 1\)</span>, our series will converge for any <span class="math">\(p &gt; 1\)</span>.</p>
+<p><strong>Proof: Convergence of the series</strong> <span class="math">\(\sum_{n=1}^{\infty} \frac{1}{n^s}\)</span> <strong>for</strong> <span class="math">\(s &gt; 1\)</span></p>
+<p><strong>Integral Test:</strong></p>
+<p>To determine the convergence of the series <span class="math">\(\sum_{n=1}^{\infty} \frac{1}{n^s}\)</span>, we can compare it to the improper integral:</p>
+<div class="math">
+\begin{equation*}
+\int_{1}^{\infty} \frac{1}{x^s} \, dx
+\end{equation*}
+</div>
+<ol class="arabic simple">
+<li><p><strong>Evaluate the integral:</strong></p></li>
+</ol>
+<div class="math">
+\begin{equation*}
+\int_{1}^{\infty} \frac{1}{x^s} \, dx = \lim_{{b \to \infty}} \int_{1}^{b} x^{-s} \, dx
+\end{equation*}
+</div>
+<p>Using the power rule for integration:</p>
+<div class="math">
+\begin{equation*}
+\lim_{{b \to \infty}} \left[ \frac{x^{-s+1}}{-s+1} \right]_1^b = \lim_{{b \to \infty}} \left[ \frac{1}{(1-s)b^{s-1}} - \frac{1}{1-s} \right]
+\end{equation*}
+</div>
+<p>For <span class="math">\(s &gt; 1\)</span>, the term <span class="math">\(\frac{1}{(1-s)b^{s-1}}\)</span> approaches 0 as <span class="math">\(b\)</span> approaches infinity. Thus, the integral converges to:</p>
+<div class="math">
+\begin{equation*}
+\frac{1}{s-1}
+\end{equation*}
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Comparison with the series:</strong></p></li>
+</ol>
+<p>Since the improper integral converges, the series <span class="math">\(\sum_{n=1}^{\infty} \frac{1}{n^s}\)</span> also converges by the integral test.</p>
+<p>In conclusion, the series <span class="math">\(\sum_{n=1}^{\infty} \frac{1}{n^s}\)</span> converges for all <span class="math">\(s &gt; 1\)</span>.</p>
+<p><strong>2.</strong> <span class="math">\(x\)</span> is not in <span class="math">\(l^1\)</span>:</p>
+<p>For the sequence to be in <span class="math">\(l^1\)</span>, the series <span class="math">\(\sum_{n=1}^{\infty} |x_n|\)</span> must converge. In this case:</p>
+<div class="math">
+\begin{equation*}
+\sum_{n=1}^{\infty} \frac{1}{n^{\alpha}}
+\end{equation*}
+</div>
+<p>Given that <span class="math">\(0 &lt; \alpha &lt; 1\)</span>, this is a p-series with <span class="math">\(p = \alpha\)</span>, and it is known that such a series diverges when <span class="math">\(p \leq 1\)</span>. Thus, the sequence <span class="math">\(x_n\)</span> is not in <span class="math">\(l^1\)</span>.</p>
+<p><strong>Proof: Divergence of the series</strong> <span class="math">\(\sum_{n=1}^{\infty} \frac{1}{n^p}\)</span> <strong>for</strong> <span class="math">\(p \leq 1\)</span></p>
+<p><strong>Integral Test:</strong></p>
+<p>To determine the convergence of the series <span class="math">\(\sum_{n=1}^{\infty} \frac{1}{n^p}\)</span>, we can compare it to the improper integral:</p>
+<div class="math">
+\begin{equation*}
+\int_{1}^{\infty} \frac{1}{x^p} \, dx
+\end{equation*}
+</div>
+<ol class="arabic simple">
+<li><p><strong>Evaluate the integral:</strong></p></li>
+</ol>
+<div class="math">
+\begin{equation*}
+\int_{1}^{\infty} \frac{1}{x^p} \, dx = \lim_{{b \to \infty}} \int_{1}^{b} x^{-p} \, dx
+\end{equation*}
+</div>
+<p>Using the power rule for integration:</p>
+<div class="math">
+\begin{equation*}
+\lim_{{b \to \infty}} \left[ \frac{x^{-p+1}}{-p+1} \right]_1^b = \lim_{{b \to \infty}} \left[ \frac{1}{(1-p)b^{p-1}} - \frac{1}{1-p} \right]
+\end{equation*}
+</div>
+<p>For <span class="math">\(p \leq 1\)</span>, the term <span class="math">\(\frac{1}{(1-p)b^{p-1}}\)</span> does not approach 0 as <span class="math">\(b\)</span> approaches infinity. Instead, it either remains constant (for (p = 1)) or grows without bound (for (p &lt; 1)). Thus, the integral diverges.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Comparison with the series:</strong></p></li>
+</ol>
+<p>Since the improper integral diverges, the series <span class="math">\(\sum_{n=1}^{\infty} \frac{1}{n^p}\)</span> also diverges by the integral test.</p>
+<p>In conclusion, the series <span class="math">\(\sum_{n=1}^{\infty} \frac{1}{n^p}\)</span> diverges for all <span class="math">\(p \leq 1\)</span>.</p>
+<p>Therefore, the sequence <span class="math">\(x_n = \frac{1}{n^{\alpha}}\)</span> where <span class="math">\(0 &lt; \alpha &lt; 1\)</span> is in <span class="math">\(l^p\)</span> for any <span class="math">\(p &gt; 1\)</span> but is not in <span class="math">\(l^1\)</span>.</p>
+<hr class="docutils">
+<p><strong>Problem 6:</strong>
+Show that if <span class="math">\(A \subset B\)</span> in a metric space <span class="math">\((X,d)\)</span>, then <span class="math">\(\delta(A) \leq \delta(B)\)</span>.</p>
+<p><strong>Given:</strong>
+The diameter <span class="math">\(\delta(A)\)</span> of a nonempty set <span class="math">\(A\)</span> in a metric space <span class="math">\((X,d)\)</span> is defined as:</p>
+<div class="math">
+\begin{equation*}
+\delta(A) = \sup_{x, y \in A} d(x, y)
+\end{equation*}
+</div>
+<p>A set <span class="math">\(A\)</span> is said to be bounded if <span class="math">\(\delta(A) &lt; \infty\)</span>.</p>
+<p><strong>Intuition:</strong>
+Consider two nested sets <span class="math">\(A\)</span> and <span class="math">\(B\)</span> in a metric space. The inner set represents <span class="math">\(A\)</span> and the outer set represents <span class="math">\(B\)</span>.</p>
+<img alt="https://www.wolframcloud.com/obj/8284851e-93d0-4a74-90e1-459e0333670c" src="https://www.wolframcloud.com/obj/8284851e-93d0-4a74-90e1-459e0333670c"><p>The maximum distance between any two points in <span class="math">\(A\)</span> will always be less than or equal to the maximum distance between any two points in <span class="math">\(B\)</span>. This is because every point in <span class="math">\(A\)</span> is also in <span class="math">\(B\)</span>, and the supremum of distances in <span class="math">\(B\)</span> must account for all distances in <span class="math">\(A\)</span> as well as additional distances between points exclusive to <span class="math">\(B\)</span> or between points in <span class="math">\(A\)</span> and points exclusive to <span class="math">\(B\)</span>.</p>
+<p><strong>Proof:</strong>
+1. Let's consider any two points <span class="math">\(x, y\)</span> in <span class="math">\(A\)</span>. Since <span class="math">\(A \subset B\)</span>, both <span class="math">\(x\)</span> and <span class="math">\(y\)</span> are also in <span class="math">\(B\)</span>. Therefore, the distance <span class="math">\(d(x, y)\)</span> is also a distance between two points in <span class="math">\(B\)</span>.
+2. Given the definition of <span class="math">\(\delta\)</span> as the supremum of distances between any two points in a set, the maximum distance between any two points in <span class="math">\(A\)</span> will always be less than or equal to the maximum distance between any two points in <span class="math">\(B\)</span>. This is because the set of all distances in <span class="math">\(A\)</span> is a subset of the set of all distances in <span class="math">\(B\)</span>.
+3. Therefore, <span class="math">\(\delta(A) \leq \delta(B)\)</span>.</p>
+<hr class="docutils">
+<p><strong>Problem 7:</strong>
+Given the definition of the diameter <span class="math">\(\delta(A)\)</span> of a nonempty set <span class="math">\(A\)</span> in a metric space <span class="math">\((X,d)\)</span>, show that:</p>
+<div class="math">
+\begin{equation*}
+\delta(A) = \sup_{x, y \in A} d(x, y)
+\end{equation*}
+</div>
+<p>Show that <span class="math">\(\delta(A) = 0\)</span> if and only if <span class="math">\(A\)</span> consists of a single point.</p>
+<p><strong>Proof:</strong></p>
+<p><strong>(=&gt;) Direction:</strong>
+Assume <span class="math">\(\delta(A) = 0\)</span>. This means that the supremum of the distances between all pairs of points in <span class="math">\(A\)</span> is 0. For any two distinct points <span class="math">\(x\)</span> and <span class="math">\(y\)</span> in <span class="math">\(A\)</span>, the distance <span class="math">\(d(x, y)\)</span> must be 0. However, in a metric space, the distance between two distinct points is always greater than 0. Therefore, the only way for the supremum of the distances to be 0 is if there are no pairs of distinct points in <span class="math">\(A\)</span>. This implies that <span class="math">\(A\)</span> consists of a single point.</p>
+<p><strong>(&lt;=) Direction:</strong>
+Assume <span class="math">\(A\)</span> consists of a single point, say <span class="math">\(a\)</span>. Then, for any <span class="math">\(x, y \in A\)</span>, <span class="math">\(x = y = a\)</span>. The distance <span class="math">\(d(x, y) = d(a, a) = 0\)</span>. Since this is the only possible distance between points in <span class="math">\(A\)</span>, the supremum of these distances is also 0. Therefore, <span class="math">\(\delta(A) = 0\)</span>.</p>
+<p>Combining both directions, we conclude that <span class="math">\(\delta(A) = 0\)</span> if and only if <span class="math">\(A\)</span> consists of a single point.</p>
+<hr class="docutils">
+<p><strong>Problem 8:</strong>
+Given two nonempty subsets <span class="math">\(A\)</span> and <span class="math">\(B\)</span> of a metric space <span class="math">\((X,d)\)</span>, the distance <span class="math">\(D(A,B)\)</span> between <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is defined as:</p>
+<div class="math">
+\begin{equation*}
+D(A,B) = \inf_{a \in A, b \in B} d(a, b)
+\end{equation*}
+</div>
+<p>Show that <span class="math">\(D\)</span> does not define a metric on the power set of <span class="math">\(X\)</span>.</p>
+<p><strong>Proof:</strong>
+To show that <span class="math">\(D\)</span> does not define a metric on the power set of <span class="math">\(X\)</span>, we need to show that at least one of the metric properties is violated by <span class="math">\(D\)</span>. The metric properties are:</p>
+<ol class="arabic simple">
+<li><p><strong>Non-negativity:</strong> For all sets <span class="math">\(A, B\)</span> in the power set of <span class="math">\(X\)</span>, <span class="math">\(D(A,B) \geq 0\)</span>.</p></li>
+<li><p><strong>Identity of indiscernibles:</strong> <span class="math">\(D(A,B) = 0\)</span> if and only if <span class="math">\(A = B\)</span>.</p></li>
+<li><p><strong>Symmetry:</strong> For all sets <span class="math">\(A, B\)</span> in the power set of <span class="math">\(X\)</span>, <span class="math">\(D(A,B) = D(B,A)\)</span>.</p></li>
+<li><p><strong>Triangle inequality:</strong> For all sets <span class="math">\(A, B, C\)</span> in the power set of <span class="math">\(X\)</span>, <span class="math">\(D(A,C) \leq D(A,B) + D(B,C)\)</span>.</p></li>
+</ol>
+<p>We will focus on the second property, the identity of indiscernibles.</p>
+<p>Consider two distinct sets <span class="math">\(A\)</span> and <span class="math">\(B\)</span> such that <span class="math">\(A\)</span> is a subset of <span class="math">\(B\)</span> and <span class="math">\(B\)</span> contains one additional point <span class="math">\(b\)</span> not in <span class="math">\(A\)</span>. Now, for any point <span class="math">\(a\)</span> in <span class="math">\(A\)</span>, the distance <span class="math">\(d(a, b)\)</span> is some positive value. However, since <span class="math">\(A\)</span> is a subset of <span class="math">\(B\)</span>, the distance between any point in <span class="math">\(A\)</span> and itself in <span class="math">\(B\)</span> is 0. This means that the infimum of the distances between points in <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is 0, even though <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are distinct sets. This violates the identity of indiscernibles property, as <span class="math">\(D(A,B) = 0\)</span> even when <span class="math">\(A \neq B\)</span>.</p>
+<p>Therefore, <span class="math">\(D\)</span> does not define a metric on the power set of <span class="math">\(X\)</span>.</p>
+<p><strong>Problem 8:</strong>
+Given two nonempty subsets <span class="math">\(A\)</span> and <span class="math">\(B\)</span> of a metric space <span class="math">\((X,d)\)</span>, the distance <span class="math">\(D(A,B)\)</span> between <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is defined as:</p>
+<div class="math">
+\begin{equation*}
+D(A,B) = \inf_{a \in A, b \in B} d(a, b)
+\end{equation*}
+</div>
+<p>Show that <span class="math">\(D\)</span> does not define a metric on the power set of <span class="math">\(X\)</span>.</p>
+<p><strong>Visualization:</strong></p>
+<img alt="https://www.wolframcloud.com/obj/b078151a-22ad-4290-b859-657a3777ff26" src="https://www.wolframcloud.com/obj/b078151a-22ad-4290-b859-657a3777ff26"><p>In the above visualization:</p>
+<ul class="simple">
+<li><p>The inner circle represents the set <span class="math">\(A\)</span>.</p></li>
+<li><p>The outer circle represents the set <span class="math">\(B\)</span>.</p></li>
+<li><p>The point labeled "a" is a point in <span class="math">\(A\)</span>.</p></li>
+<li><p>The point labeled "b" is a point in <span class="math">\(B\)</span> but not in <span class="math">\(A\)</span>.</p></li>
+</ul>
+<p><strong>Proof with Visualization:</strong></p>
+<p>Consider two distinct sets <span class="math">\(A\)</span> and <span class="math">\(B\)</span> in a metric space such that <span class="math">\(A\)</span> is a proper subset of <span class="math">\(B\)</span>. As visualized, <span class="math">\(A\)</span> is represented by the inner circle, and <span class="math">\(B\)</span> is represented by the outer circle. The point <span class="math">\(a\)</span> is in both <span class="math">\(A\)</span> and <span class="math">\(B\)</span>, while the point <span class="math">\(b\)</span> is only in <span class="math">\(B\)</span>.</p>
+<p>Now, the distance <span class="math">\(d(a, b)\)</span> between any point <span class="math">\(a\)</span> in <span class="math">\(A\)</span> and the point <span class="math">\(b\)</span> in <span class="math">\(B\)</span> is some positive value. However, since <span class="math">\(A\)</span> is a subset of <span class="math">\(B\)</span>, the distance between any point in <span class="math">\(A\)</span> and itself in <span class="math">\(B\)</span> is 0. This means that the infimum of the distances between points in <span class="math">\(A\)</span> and <span class="math">\(B\)</span> is 0, even though <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are distinct sets. This violates the identity of indiscernibles property, as <span class="math">\(D(A,B) = 0\)</span> even when <span class="math">\(A \neq B\)</span>.</p>
+<p>Therefore, <span class="math">\(D\)</span> does not define a metric on the power set of <span class="math">\(X\)</span>.</p>
+<hr class="docutils">
+<p><strong>Problem 9:</strong>
+Given the definition of the distance <span class="math">\(D(A,B)\)</span> between two nonempty subsets <span class="math">\(A\)</span> and <span class="math">\(B\)</span> of a metric space <span class="math">\((X,d)\)</span>, show that:</p>
+<div class="math">
+\begin{equation*}
+D(A,B) = \inf_{a \in A, b \in B} d(a, b)
+\end{equation*}
+</div>
+<p>Show that if <span class="math">\(A \cap B \neq \emptyset\)</span>, then <span class="math">\(D(A,B) = 0\)</span>. What about the converse?</p>
+<p><strong>Proof with Visualization:</strong></p>
+<img alt="https://www.wolframcloud.com/obj/15f2f93c-50a2-4687-b6cb-0b8b26a2a6f2" src="https://www.wolframcloud.com/obj/15f2f93c-50a2-4687-b6cb-0b8b26a2a6f2"><p>In the above visualization:</p>
+<ul class="simple">
+<li><p>The circle on the left represents the set <span class="math">\(A\)</span>.</p></li>
+<li><p>The circle on the right represents the set <span class="math">\(B\)</span>.</p></li>
+<li><p>The point labeled "x" is a point that belongs to both <span class="math">\(A\)</span> and <span class="math">\(B\)</span>, i.e., <span class="math">\(x \in A \cap B\)</span>.</p></li>
+</ul>
+<ol class="arabic">
+<li>
+<p><strong>If</strong> <span class="math">\(A \cap B \neq \emptyset\)</span> <strong>then</strong> <span class="math">\(D(A,B) = 0\)</span> <strong>:</strong></p>
+<p>If <span class="math">\(A \cap B \neq \emptyset\)</span>, then there exists at least one point <span class="math">\(x\)</span> such that <span class="math">\(x \in A\)</span> and <span class="math">\(x \in B\)</span>. For this point, <span class="math">\(d(x, x) = 0\)</span>. Since <span class="math">\(D(A,B)\)</span> is the infimum of the distances between all pairs of points where one is from <span class="math">\(A\)</span> and the other is from <span class="math">\(B\)</span>, and since 0 is a possible distance (because of the point <span class="math">\(x\)</span>), the infimum is 0. Therefore, <span class="math">\(D(A,B) = 0\)</span>.</p>
+</li>
+<li>
+<p><strong>Converse: If</strong> <span class="math">\(D(A,B) = 0\)</span> <strong>, then</strong> <span class="math">\(A \cap B \neq \emptyset\)</span> <strong>:</strong></p>
+<p>This statement is true. If <span class="math">\(D(A,B) = 0\)</span>, it means that the infimum of the distances between all pairs of points where one is from <span class="math">\(A\)</span> and the other is from <span class="math">\(B\)</span> is 0. This implies that there exists a pair of points <span class="math">\(a \in A\)</span> and <span class="math">\(b \in B\)</span> such that <span class="math">\(d(a, b) = 0\)</span>. In a metric space, the distance between two points is 0 if and only if the two points are the same. Therefore, <span class="math">\(a = b\)</span>, which means there exists a point that belongs to both <span class="math">\(A\)</span> and <span class="math">\(B\)</span>, i.e., <span class="math">\(A \cap B \neq \emptyset\)</span>.</p>
+</li>
+</ol>
+<hr class="docutils">
+<p><strong>Problem 10:</strong>
+Given the definition of the distance <span class="math">\(D(x,B)\)</span> from a point <span class="math">\(x\)</span> to a non-empty subset <span class="math">\(B\)</span> of a metric space <span class="math">\((X,d)\)</span>, show that:</p>
+<div class="math">
+\begin{equation*}
+D(x,B) = \inf_{b \in B} d(x, b)
+\end{equation*}
+</div>
+<p>Show that for any <span class="math">\(x, y \in X\)</span>:</p>
+<div class="math">
+\begin{equation*}
+|D(x,B) - D(y,B)| \leq d(x,y)
+\end{equation*}
+</div>
+<p><strong>Proof:</strong></p>
+<p>For any <span class="math">\(b \in B\)</span>:</p>
+<ol class="arabic simple">
+<li><p><span class="math">\(d(x, b) \leq d(x, y) + d(y, b)\)</span> (by the triangle inequality)</p></li>
+</ol>
+<p>Rearranging, we get:</p>
+<ol class="arabic simple" start="2">
+<li><p><span class="math">\(d(x, b) - d(y, b) \leq d(x, y)\)</span></p></li>
+</ol>
+<p>Now, taking the infimum over all <span class="math">\(b \in B\)</span> on both sides:</p>
+<ol class="arabic simple" start="3">
+<li><p><span class="math">\(D(x,B) - D(y,B) \leq d(x,y)\)</span></p></li>
+</ol>
+<p>Similarly, by interchanging <span class="math">\(x\)</span> and <span class="math">\(y\)</span>:</p>
+<ol class="arabic simple" start="4">
+<li><p><span class="math">\(d(y, b) \leq d(y, x) + d(x, b)\)</span> (by the triangle inequality)</p></li>
+</ol>
+<p>Rearranging, we get:</p>
+<ol class="arabic simple" start="5">
+<li><p><span class="math">\(d(y, b) - d(x, b) \leq d(y, x)\)</span></p></li>
+</ol>
+<p>Taking the infimum over all <span class="math">\(b \in B\)</span> on both sides:</p>
+<ol class="arabic simple" start="6">
+<li><p><span class="math">\(D(y,B) - D(x,B) \leq d(y,x)\)</span></p></li>
+</ol>
+<p>From (3) and (6), we get:</p>
+<div class="math">
+\begin{equation*}
+|D(x,B) - D(y,B)| \leq d(x,y)
+\end{equation*}
+</div>
+<p><strong>Visualization Explanation:</strong></p>
+<img alt="https://www.wolframcloud.com/obj/2f65e7f6-4afe-448d-93ed-5cf2d939da51" src="https://www.wolframcloud.com/obj/2f65e7f6-4afe-448d-93ed-5cf2d939da51"><p>In the above visualization:</p>
+<ul class="simple">
+<li><p>The circle represents the set <span class="math">\(B\)</span>.</p></li>
+<li><p>The points labeled "x" and "y" are two arbitrary points in <span class="math">\(X\)</span>.</p></li>
+<li><p>The point labeled "b" is an arbitrary point in <span class="math">\(B\)</span>.</p></li>
+<li><p>The solid line between "x" and "y" represents the distance <span class="math">\(d(x,y)\)</span>.</p></li>
+<li><p>The dashed lines from "x" and "y" to "b" represent the distances <span class="math">\(d(x,b)\)</span> and <span class="math">\(d(y,b)\)</span> respectively.</p></li>
+</ul>
+<p>From the triangle inequality, the direct distance between "x" and "y" (i.e., <span class="math">\(d(x,y)\)</span>) is always less than or equal to the sum of their distances to any point "b" in <span class="math">\(B\)</span>. This is visually evident as the direct path (solid line) between "x" and "y" is shorter than the path that goes through "b" (dashed lines).</p>
+<p>This visualization supports the proof that for any two points <span class="math">\(x\)</span> and <span class="math">\(y\)</span> in <span class="math">\(X\)</span>, the difference in their distances to set <span class="math">\(B\)</span> is bounded by their direct distance, i.e., <span class="math">\(|D(x,B) - D(y,B)| \leq d(x,y)\)</span>.</p>
+<hr class="docutils">
+<p><strong>Problem 12:</strong></p>
+<p>Given the definition of a bounded set from Problem 6, where the diameter <span class="math">\(\delta(A)\)</span> of a nonempty set <span class="math">\(A\)</span> in a metric space <span class="math">\((X, d)\)</span> is defined by:</p>
+<div class="math">
+\begin{equation*}
+\delta(A) = \sup_{x,y \in A} d(x, y)
+\end{equation*}
+</div>
+<p>A set is said to be bounded if <span class="math">\(\delta(A) &lt; \infty\)</span>.</p>
+<p>Show that the union of two bounded sets <span class="math">\(A\)</span> and <span class="math">\(B\)</span> in a metric space is a bounded set.</p>
+<img alt="Visualization of the union of two bounded sets" src="https://www.wolframcloud.com/obj/55851edd-7940-4ce1-b5b4-c96a59787567"><p><strong>Proof:</strong></p>
+<p>Let's assume that both <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are bounded sets. This means:</p>
+<div class="math">
+\begin{equation*}
+\delta(A) = \sup_{x,y \in A} d(x, y) &lt; \infty
+\delta(B) = \sup_{x,y \in B} d(x, y) &lt; \infty
+\end{equation*}
+</div>
+<p>Now, consider any two points <span class="math">\(p\)</span> and <span class="math">\(q\)</span> in <span class="math">\(A \cup B\)</span>. There are three possible scenarios:</p>
+<ol class="arabic simple">
+<li><p>Both <span class="math">\(p\)</span> and <span class="math">\(q\)</span> are in <span class="math">\(A\)</span>.</p></li>
+<li><p>Both <span class="math">\(p\)</span> and <span class="math">\(q\)</span> are in <span class="math">\(B\)</span>.</p></li>
+<li><p><span class="math">\(p\)</span> is in <span class="math">\(A\)</span> and <span class="math">\(q\)</span> is in <span class="math">\(B\)</span> or vice versa.</p></li>
+</ol>
+<p>For the first scenario, <span class="math">\(d(p, q) \leq \delta(A)\)</span> since <span class="math">\(A\)</span> is bounded.</p>
+<p>For the second scenario, <span class="math">\(d(p, q) \leq \delta(B)\)</span> since <span class="math">\(B\)</span> is bounded.</p>
+<p>For the third scenario, let's use the triangle inequality:</p>
+<div class="math">
+\begin{equation*}
+d(p, q) \leq d(p, r) + d(r, q)
+\end{equation*}
+</div>
+<p>Where <span class="math">\(r\)</span> is any point in <span class="math">\(A\)</span> (or <span class="math">\(B\)</span>). Since both <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are bounded, we can say:</p>
+<div class="math">
+\begin{equation*}
+d(p, q) \leq \delta(A) + \delta(B)
+\end{equation*}
+</div>
+<p>Combining all three scenarios, the supremum of the distances between any two points in <span class="math">\(A \cup B\)</span> is:</p>
+<div class="math">
+\begin{equation*}
+\delta(A \cup B) \leq \max(\delta(A), \delta(B), \delta(A) + \delta(B))
+\end{equation*}
+</div>
+<p>Since both <span class="math">\(\delta(A)\)</span> and <span class="math">\(\delta(B)\)</span> are finite, their sum is also finite. Thus, <span class="math">\(\delta(A \cup B) &lt; \infty\)</span>, which means <span class="math">\(A \cup B\)</span> is bounded.</p>
+<p>This completes the proof.</p>
+<hr class="docutils">
+<p><strong>Problem 11:</strong></p>
+<p>Given a metric space <span class="math">\((X,d)\)</span>, another metric on <span class="math">\(X\)</span> is defined by:</p>
+<div class="math">
+\begin{equation*}
+\tilde{d}(x,y) = \frac{d(x,y)}{1+d(x,y)}
+\end{equation*}
+</div>
+<p>Show that <span class="math">\(\tilde{d}\)</span> is a metric and that <span class="math">\(X\)</span> is bounded in this metric.</p>
+<p><strong>Proof:</strong></p>
+<p><strong>Part 1: Show that (tilde{d}(x,y)) is a metric:</strong></p>
+<ol class="arabic">
+<li>
+<p><strong>Non-negativity:</strong> For any <span class="math">\(x, y \in X\)</span>,</p>
+<div class="math">
+\begin{equation*}
+\tilde{d}(x,y) = \frac{d(x,y)}{1+d(x,y)} \geq 0
+\end{equation*}
+</div>
+<p>since <span class="math">\(d(x,y) \geq 0\)</span> by the definition of a metric.</p>
+</li>
+<li>
+<p><strong>Identity of indiscernibles:</strong> For any <span class="math">\(x \in X\)</span>,</p>
+<div class="math">
+\begin{equation*}
+\tilde{d}(x,x) = \frac{d(x,x)}{1+d(x,x)} = 0
+\end{equation*}
+</div>
+<p>since <span class="math">\(d(x,x) = 0\)</span>.</p>
+</li>
+<li>
+<p><strong>Symmetry:</strong> For any <span class="math">\(x, y \in X\)</span>,</p>
+<div class="math">
+\begin{equation*}
+\tilde{d}(x,y) = \frac{d(x,y)}{1+d(x,y)} = \frac{d(y,x)}{1+d(y,x)} = \tilde{d}(y,x)
+\end{equation*}
+</div>
+<p>because <span class="math">\(d(x,y) = d(y,x)\)</span>.</p>
+</li>
+<li>
+<p><strong>Triangle Inequality:</strong> For any <span class="math">\(x, y, z \in X\)</span>,</p>
+<div class="math">
+\begin{equation*}
+\tilde{d}(x,z) + \tilde{d}(z,y) = \frac{d(x,z)}{1+d(x,z)} + \frac{d(z,y)}{1+d(z,y)}
+\end{equation*}
+</div>
+<p>Using the properties of fractions and the triangle inequality for <span class="math">\(d\)</span>, we can show that:</p>
+<div class="math">
+\begin{equation*}
+\tilde{d}(x,z) + \tilde{d}(z,y) \geq \tilde{d}(x,y)
+\end{equation*}
+</div>
+</li>
+</ol>
+<p><strong>Part 2: Show that (X) is bounded in the metric (tilde{d}(x,y)):</strong></p>
+<p>Given the nature of the fraction, as <span class="math">\(d(x,y)\)</span> increases, the value of <span class="math">\(\tilde{d}(x,y)\)</span> also increases, but at a diminishing rate due to the increasing denominator. As <span class="math">\(d(x,y)\)</span> approaches infinity, <span class="math">\(\tilde{d}(x,y)\)</span> approaches but never exceeds 1. This means that for all pairs <span class="math">\(x, y \in X\)</span>, the value of <span class="math">\(\tilde{d}(x,y)\)</span> is always between 0 and 1, inclusive. Therefore, the supremum of <span class="math">\(\tilde{d}(x,y)\)</span> over all <span class="math">\(x, y \in X\)</span> is 1, which means that <span class="math">\(X\)</span> is bounded in the metric <span class="math">\(\tilde{d}(x,y)\)</span> with diameter at most 1.</p>
+<p><strong>Explanation for the supremum statement:</strong></p>
+<p>The function <span class="math">\(\tilde{d}(x,y) = \frac{d(x,y)}{1+d(x,y)}\)</span> is a fraction where the numerator is the original distance between <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, and the denominator is 1 plus that distance. The smallest value of <span class="math">\(d(x,y)\)</span> is 0 (when <span class="math">\(x=y\)</span>), and in this case, <span class="math">\(\tilde{d}(x,y) = 0\)</span>. As <span class="math">\(d(x,y)\)</span> increases, the value of <span class="math">\(\tilde{d}(x,y)\)</span> also increases, but at a diminishing rate due to the increasing denominator. As <span class="math">\(d(x,y)\)</span> approaches infinity, <span class="math">\(\tilde{d}(x,y)\)</span> approaches but never exceeds 1. This means that the largest possible value of <span class="math">\(\tilde{d}(x,y)\)</span> over all <span class="math">\(x, y \in X\)</span> is 1.</p>
+<p>This completes the proof.</p>
+<p>Let's delve deeper into the statement "the supremum of <span class="math">\(\tilde{d}(x,y)\)</span> over all <span class="math">\(x,y \in X\)</span> is at most 1."</p>
+<p><strong>Explanation:</strong></p>
+<p>The function <span class="math">\(\tilde{d}(x,y) = \frac{d(x,y)}{1+d(x,y)}\)</span> is a fraction where the numerator is the original distance between <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, and the denominator is 1 plus that distance.</p>
+<ul class="simple">
+<li><p>The smallest value of <span class="math">\(d(x,y)\)</span> is 0 (when <span class="math">\(x=y\)</span>), and in this case, <span class="math">\(\tilde{d}(x,y) = 0\)</span>.</p></li>
+<li><p>As <span class="math">\(d(x,y)\)</span> increases, the value of <span class="math">\(\tilde{d}(x,y)\)</span> also increases. However, because of the denominator <span class="math">\(1+d(x,y)\)</span>, the rate of increase of <span class="math">\(\tilde{d}(x,y)\)</span> is slower than the rate of increase of <span class="math">\(d(x,y)\)</span>.</p></li>
+<li><p>As <span class="math">\(d(x,y)\)</span> approaches infinity, the fraction <span class="math">\(\frac{d(x,y)}{1+d(x,y)}\)</span> approaches 1. This means that no matter how large <span class="math">\(d(x,y)\)</span> becomes, <span class="math">\(\tilde{d}(x,y)\)</span> will never exceed 1.</p></li>
+</ul>
+<p>Thus, the largest possible value of <span class="math">\(\tilde{d}(x,y)\)</span> over all <span class="math">\(x,y \in X\)</span> is 1, making the supremum of <span class="math">\(\tilde{d}(x,y)\)</span> equal to 1.</p>
+    </div>
+
+
+
+    
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/proofs/" rel="tag">proofs</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../pinns-in-forward-inverse-problems/" rel="prev" title="PINNs in Forward &amp; Inverse Problems">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../kreyszig-14-metric-spaces-convergence-cauchy-sequence-completness/" rel="next" title="Kreyszig 1.4, Metric Spaces - Convergence, Cauchy Sequence, Completness">Next post</a>
+            </li>
+        </ul></nav></aside><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script><script>
+                renderMathInElement(document.body,
+                    {
+                        
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                    }
+                );
+            </script></article><!--End of body content--><footer id="footer"><div class="text-center">
+    <p>
+        <span class="fa-stack fa-2x">
+        <a href="https://github.com/LucyNowacki">
+            <i class="fa fa-github-square fa-stack-2x"></i>
+        </a>
+        </span>
+        <span class="fa-stack fa-2x">
+        <a href="https://www.linkedin.com/in/lucy-nowacki-02360713b">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-linkedin fa-inverse fa-stack-1x"></i>
+        </a>
+        </span>
+        <span class="fa-stack fa-2x">
+        <a href="mailto:quantlucy@gmail.com">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-envelope fa-inverse fa-stack-1x"></i>
+        </a>
+        </span>
+    </p>
+    <p>
+        
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+<img alt="Creative Commons License BY-NC-SA" style="border-width:0; margin-bottom:12px;" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a> Contents © 2023  <a href="mailto:quantlucy@gmail.com">Lucy Nowacki</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>
+    </p>
+</div>
+
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
+    </script>
+</body>
+</html>

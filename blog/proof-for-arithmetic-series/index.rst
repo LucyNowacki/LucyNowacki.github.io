@@ -34,3 +34,8 @@ Where the red term is the last term, therefore we have
 :math:`S_n=\frac{n}{2}\left( a+\color{red}last\,term\right)\,\,\,\,\,\,\,\square`
 
 
+.. math::
+
+   \int \frac{dx}{1+ax}=\frac{1}{a}\ln(1+ax)+C
+
+

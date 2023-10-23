@@ -11,7 +11,7 @@
  </url>
  <url>
   <loc>https://example.com/archive/archive.html</loc>
-  <lastmod>2023-07-26T10:00:00Z</lastmod>
+  <lastmod>2023-10-23T22:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/bio/</loc>
@@ -19,7 +19,7 @@
  </url>
  <url>
   <loc>https://example.com/blog/</loc>
-  <lastmod>2023-07-24T18:52:00Z</lastmod>
+  <lastmod>2023-10-23T22:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/adversarial-attacks-on-model-for-cifar-10/</loc>
@@ -28,10 +28,6 @@
  <url>
   <loc>https://example.com/blog/dmd-for-el-nino/</loc>
   <lastmod>2023-07-24T16:15:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/blog/dynamic-mode-decomposition-for-el-nino/</loc>
-  <lastmod>2023-07-24T17:34:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/exploring-the-bitcoin-cryptocurrency-market/</loc>
@@ -43,7 +39,23 @@
  </url>
  <url>
   <loc>https://example.com/blog/index-1.html</loc>
-  <lastmod>2023-07-24T16:48:00Z</lastmod>
+  <lastmod>2023-10-23T22:41:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/kreyszig-11-metric-spaces/</loc>
+  <lastmod>2023-10-05T15:02:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/kreyszig-12-metric-spaces/</loc>
+  <lastmod>2023-10-06T23:46:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/kreyszig-14-metric-spaces-convergence-cauchy-sequence-completness/</loc>
+  <lastmod>2023-10-11T09:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/kreyszig-21-normed-spaces-vector-space/</loc>
+  <lastmod>2023-10-11T15:19:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/method-of-lines-for-black-scholes-explicit/</loc>
@@ -56,6 +68,10 @@
  <url>
   <loc>https://example.com/blog/physics-informed-solution-for-heat-equation/</loc>
   <lastmod>2023-07-24T14:29:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/pinns-in-forward-inverse-problems/</loc>
+  <lastmod>2023-10-05T16:19:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/proof-for-arithmetic-series/</loc>
@@ -79,7 +95,7 @@
  </url>
  <url>
   <loc>https://example.com/categories/</loc>
-  <lastmod>2023-07-24T15:34:00Z</lastmod>
+  <lastmod>2023-10-05T15:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/machine-learning/</loc>
@@ -92,6 +108,10 @@
  <url>
   <loc>https://example.com/categories/numerical/</loc>
   <lastmod>2023-07-24T14:28:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/categories/proofs-mathjax/</loc>
+  <lastmod>2023-10-05T15:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/proofs/</loc>
