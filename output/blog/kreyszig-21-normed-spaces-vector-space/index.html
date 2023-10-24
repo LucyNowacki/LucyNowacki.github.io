@@ -597,7 +597,519 @@ b_1 v_1 + b_2 v_2 + \dots + b_n v_n = 0
 <p><strong>Conclusion</strong></p>
 <p>Yes, if <span class="math">\(M\)</span> is linearly dependent in a complex vector space <span class="math">\(X\)</span>, then <span class="math">\(M\)</span> is also linearly dependent in <span class="math">\(X\)</span> when regarded as a real vector space.</p>
 <p><span class="math">\(\blacksquare\)</span></p>
-    </div>
+<hr class="docutils">
+<p><strong>Problem 9 Statement</strong></p>
+<p>On a fixed interval <span class="math">\([a, b] \subset \mathbb{R}\)</span>, consider the set <span class="math">\(X\)</span> consisting of all polynomials with real coefficients and of degree not exceeding a given <span class="math">\(n\)</span>, and the polynomial <span class="math">\(x = 0\)</span> (for which a degree is not defined in a usual discussion of degree). Show that <span class="math">\(X\)</span> with usual addition and usual multiplication by real numbers is a real vector space of dimension <span class="math">\(n+1\)</span>.</p>
+<p><strong>/ Solution</strong></p>
+<p><strong>Vector Space Axioms Verification</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Closure under Addition</strong>:
+For any two polynomials <span class="math">\(p(t), q(t) \in X\)</span>, their sum <span class="math">\(p(t) + q(t)\)</span> is also a polynomial with real coefficients, and its degree is not exceeding <span class="math">\(n\)</span>. Therefore, <span class="math">\(p(t) + q(t) \in X\)</span>.</p></li>
+<li><p><strong>Closure under Scalar Multiplication</strong>:
+For any polynomial <span class="math">\(p(t) \in X\)</span> and any real number <span class="math">\(c\)</span>, the product <span class="math">\(c \cdot p(t)\)</span> is also a polynomial with real coefficients, and its degree is not exceeding <span class="math">\(n\)</span>. Therefore, <span class="math">\(c \cdot p(t) \in X\)</span>.</p></li>
+<li><p><strong>Associativity of Addition</strong>:
+For any <span class="math">\(p(t), q(t), r(t) \in X\)</span>, <span class="math">\((p(t) + q(t)) + r(t) = p(t) + (q(t) + r(t))\)</span>.</p></li>
+<li><p><strong>Commutativity of Addition</strong>:
+For any <span class="math">\(p(t), q(t) \in X\)</span>, <span class="math">\(p(t) + q(t) = q(t) + p(t)\)</span>.</p></li>
+<li><p><strong>Identity Element of Addition</strong>:
+The zero polynomial <span class="math">\(0\)</span> acts as the additive identity in <span class="math">\(X\)</span>, since for any <span class="math">\(p(t) \in X\)</span>, <span class="math">\(p(t) + 0 = p(t)\)</span>.</p></li>
+<li><p><strong>Inverse Elements of Addition</strong>:
+For every <span class="math">\(p(t) \in X\)</span>, its additive inverse is <span class="math">\(-p(t)\)</span>, which is also in <span class="math">\(X\)</span>. Thus, <span class="math">\(p(t) + (-p(t)) = 0\)</span>.</p></li>
+<li><p><strong>Compatibility of Scalar Multiplication with Field Multiplication</strong>:
+For any real numbers <span class="math">\(a, b\)</span> and any <span class="math">\(p(t) \in X\)</span>, <span class="math">\(a \cdot (b \cdot p(t)) = (a \cdot b) \cdot p(t)\)</span>.</p></li>
+<li><p><strong>Identity Element of Scalar Multiplication</strong>:
+For any <span class="math">\(p(t) \in X\)</span>, <span class="math">\(1 \cdot p(t) = p(t)\)</span>, where 1 is the multiplicative identity in <span class="math">\(\mathbb{R}\)</span>.</p></li>
+<li><p><strong>Distributivity of Scalar Multiplication with respect to Vector Addition</strong>:
+For any real number <span class="math">\(a\)</span> and any <span class="math">\(p(t), q(t) \in X\)</span>, <span class="math">\(a \cdot (p(t) + q(t)) = a \cdot p(t) + a \cdot q(t)\)</span>.</p></li>
+<li><p><strong>Distributivity of Scalar Multiplication with respect to Scalar Addition</strong>:
+For any real numbers <span class="math">\(a, b\)</span> and any <span class="math">\(p(t) \in X\)</span>, <span class="math">\((a + b) \cdot p(t) = a \cdot p(t) + b \cdot p(t)\)</span>.</p></li>
+</ol>
+<p><strong>Basis and Dimension</strong>:</p>
+<p>A basis for <span class="math">\(X\)</span> can be the set of monomials <span class="math">\(\{e_0, e_1, \ldots, e_n\}\)</span>, where <span class="math">\(e_j(t) = t^j\)</span> for <span class="math">\(t \in [a, b]\)</span> and <span class="math">\(0 \leq j \leq n\)</span>. This set is linearly independent and spans <span class="math">\(X\)</span>, as any polynomial of degree not exceeding <span class="math">\(n\)</span> can be written as a linear combination of these monomials.</p>
+<p>The dimension of <span class="math">\(X\)</span> is the number of vectors in its basis, which is <span class="math">\(n+1\)</span>.</p>
+<p><strong>Conclusion</strong>:</p>
+<p><span class="math">\(X\)</span> is a real vector space of dimension <span class="math">\(n+1\)</span> on the interval <span class="math">\([a, b]\)</span>, with a basis <span class="math">\(\{e_0, e_1, \ldots, e_n\}\)</span>.</p>
+<p><strong>Problem 9 (Real Polynomial Example) Statement</strong></p>
+<p>On a fixed interval <span class="math">\([a, b] \subset \mathbb{R}\)</span>, consider two specific real polynomials <span class="math">\(p(t) = 2t^2 + 3t + 1\)</span> and <span class="math">\(q(t) = t^2 - 2t + 4\)</span>. Show that the set <span class="math">\(X\)</span> of all real polynomials of degree not exceeding a given <span class="math">\(n\)</span> with the usual addition and scalar multiplication is a real vector space.</p>
+<p><strong>Solution</strong></p>
+<p><strong>Vector Space Axioms Verification</strong>:</p>
+<ol class="arabic">
+<li>
+<p><strong>Closure under Addition</strong>:</p>
+<div class="math">
+\begin{equation*}
+p(t) + q(t) = (2t^2 + 3t + 1) + (t^2 - 2t + 4) = 3t^2 + t + 5
+\end{equation*}
+</div>
+<p>The result is a polynomial of degree 2, which is not exceeding <span class="math">\(n\)</span> if <span class="math">\(n \geq 2\)</span>.</p>
+</li>
+<li>
+<p><strong>Closure under Scalar Multiplication</strong>:
+Let's take a real number <span class="math">\(c = 3\)</span>.</p>
+<div class="math">
+\begin{equation*}
+c \cdot p(t) = 3 \cdot (2t^2 + 3t + 1) = 6t^2 + 9t + 3
+\end{equation*}
+</div>
+<p>The result is a polynomial of degree 2, which is not exceeding <span class="math">\(n\)</span> if <span class="math">\(n \geq 2\)</span>.</p>
+</li>
+<li>
+<p><strong>Associativity of Addition</strong>:
+Let's take another polynomial <span class="math">\(r(t) = 4t - 1\)</span>.</p>
+<div class="math">
+\begin{equation*}
+(p(t) + q(t)) + r(t) = (3t^2 + t + 5) + (4t - 1) = 3t^2 + 5t + 4
+p(t) + (q(t) + r(t)) = (2t^2 + 3t + 1) + (5t^2 - 2t + 3) = 3t^2 + 5t + 4
+\end{equation*}
+</div>
+<p>Both results are equal.</p>
+</li>
+<li>
+<p><strong>Commutativity of Addition</strong>:</p>
+<div class="math">
+\begin{equation*}
+p(t) + q(t) = 3t^2 + t + 5
+q(t) + p(t) = 3t^2 + t + 5
+\end{equation*}
+</div>
+<p>Both results are equal.</p>
+</li>
+<li>
+<p><strong>Identity Element of Addition</strong>:
+The zero polynomial is <span class="math">\(0\)</span>.</p>
+<div class="math">
+\begin{equation*}
+p(t) + 0 = 2t^2 + 3t + 1
+0 + p(t) = 2t^2 + 3t + 1
+\end{equation*}
+</div>
+<p>Both results are equal to <span class="math">\(p(t)\)</span>.</p>
+</li>
+<li>
+<p><strong>Inverse Elements of Addition</strong>:
+The additive inverse of <span class="math">\(p(t)\)</span> is <span class="math">\(-p(t) = -2t^2 - 3t - 1\)</span>.</p>
+<div class="math">
+\begin{equation*}
+p(t) + (-p(t)) = 2t^2 + 3t + 1 + (-2t^2 - 3t - 1) = 0
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Compatibility of Scalar Multiplication with Field Multiplication</strong>:
+For real numbers <span class="math">\(a = 2\)</span> and <span class="math">\(b = 3\)</span>,</p>
+<div class="math">
+\begin{equation*}
+a \cdot (b \cdot p(t)) = 2 \cdot (3 \cdot (2t^2 + 3t + 1)) = 12t^2 + 18t + 6
+(a \cdot b) \cdot p(t) = (2 \cdot 3) \cdot (2t^2 + 3t + 1) = 12t^2 + 18t + 6
+\end{equation*}
+</div>
+<p>Both results are equal.</p>
+</li>
+<li>
+<p><strong>Identity Element of Scalar Multiplication</strong>:</p>
+<div class="math">
+\begin{equation*}
+1 \cdot p(t) = 1 \cdot (2t^2 + 3t + 1) = 2t^2 + 3t + 1
+\end{equation*}
+</div>
+<p>The result is equal to <span class="math">\(p(t)\)</span>.</p>
+</li>
+<li>
+<p><strong>Distributivity of Scalar Multiplication with respect to Vector Addition</strong>:
+For any real number <span class="math">\(a\)</span>,</p>
+<div class="math">
+\begin{equation*}
+a \cdot (p(t) + q(t)) = 3 \cdot (3t^2 + t + 5) = 9t^2 + 3t + 15
+a \cdot p(t) + a \cdot q(t) = 3 \cdot (2t^2 + 3t + 1) + 3 \cdot (t^2 - 2t + 4) = 9t^2 + 3t + 15
+\end{equation*}
+</div>
+<p>Both results are equal.</p>
+</li>
+<li>
+<p><strong>Distributivity of Scalar Multiplication with respect to Scalar Addition</strong>:
+For any real numbers <span class="math">\(a, b\)</span>,</p>
+<div class="math">
+\begin{equation*}
+(a + b) \cdot p(t) = (3 + 2) \cdot (2t^2 + 3t + 1) = 10t^2 + 15t + 5
+a \cdot p(t) + b \cdot p(t) = 3 \cdot (2t^2 + 3t + 1) + 2 \cdot (2t^2 + 3t + 1) = 10t^2 + 15t + 5
+\end{equation*}
+</div>
+<p>Both results are equal.</p>
+</li>
+</ol>
+<p><strong>Basis and Dimension</strong>:</p>
+<p>A basis for <span class="math">\(X\)</span> can be the set of monomials <span class="math">\(\{1, t, t^2, \ldots, t^n\}\)</span>. In our specific example, a basis for polynomials of degree not exceeding 2 is <span class="math">\(\{1, t, t^2\}\)</span>.</p>
+<p>The dimension of <span class="math">\(X\)</span> is the number of vectors in its basis, which is <span class="math">\(n+1\)</span>. In our specific example, the dimension is 3.</p>
+<p><strong>Conclusion</strong>:</p>
+<p>The set <span class="math">\(X\)</span> of all real polynomials of degree not exceeding <span class="math">\(n\)</span> on the interval <span class="math">\([a, b]\)</span> is a real vector space of dimension <span class="math">\(n+1\)</span>, with the usual addition and scalar multiplication.</p>
+<p><strong>Problem Statement</strong></p>
+<p>Show that we can obtain a complex metric space <span class="math">\(\tilde{X}\)</span> in a similar fashion if we let the coefficients be complex. Also, determine if <span class="math">\(X\)</span> is a subspace of <span class="math">\(\tilde{X}\)</span>.</p>
+<p><strong>Solution</strong></p>
+<p><strong>Part 1:</strong> Constructing <span class="math">\(\tilde{X}\)</span></p>
+<ol class="arabic">
+<li>
+<p><strong>Set Definition</strong>:
+Let <span class="math">\(\tilde{X}\)</span> be the set of all polynomials with complex coefficients of degree not exceeding <span class="math">\(n\)</span>, along with the zero polynomial. A general element of <span class="math">\(\tilde{X}\)</span> can be represented as:</p>
+<div class="math">
+\begin{equation*}
+p(t) = c_0 + c_1t + c_2t^2 + \ldots + c_nt^n
+\end{equation*}
+</div>
+<p>where <span class="math">\(c_0, c_1, \ldots, c_n\)</span> are complex numbers.</p>
+</li>
+<li>
+<p><strong>Vector Space Operations</strong>:</p>
+<ul class="simple">
+<li><p><strong>Addition</strong>: For any two polynomials <span class="math">\(p(t), q(t) \in \tilde{X}\)</span>, their sum <span class="math">\(p(t) + q(t)\)</span> is also a polynomial in <span class="math">\(\tilde{X}\)</span> with complex coefficients.</p></li>
+<li><p><strong>Scalar Multiplication</strong>: For any complex number <span class="math">\(\alpha\)</span> and any polynomial <span class="math">\(p(t) \in \tilde{X}\)</span>, the product <span class="math">\(\alpha p(t)\)</span> is also a polynomial in <span class="math">\(\tilde{X}\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Verification of Vector Space Axioms</strong>:
+Similar to the real case, one can verify that <span class="math">\(\tilde{X}\)</span> satisfies all the vector space axioms under these operations.</p></li>
+</ol>
+<p><strong>Part 2:</strong> Is <span class="math">\(X\)</span> a Subspace of <span class="math">\(\tilde{X}\)</span>?</p>
+<ol class="arabic">
+<li>
+<p><strong>Subspace Criteria</strong>:
+A subset <span class="math">\(Y\)</span> of a vector space <span class="math">\(Z\)</span> is a subspace of <span class="math">\(Z\)</span> if:</p>
+<ul class="simple">
+<li><p>The zero vector of <span class="math">\(Z\)</span> is in <span class="math">\(Y\)</span>.</p></li>
+<li><p>For every <span class="math">\(u, v \in Y\)</span>, the sum <span class="math">\(u + v\)</span> is in <span class="math">\(Y\)</span>.</p></li>
+<li><p>For every <span class="math">\(u \in Y\)</span> and scalar <span class="math">\(c\)</span>, the product <span class="math">\(cu\)</span> is in <span class="math">\(Y\)</span>.</p></li>
+</ul>
+</li>
+<li>
+<p><strong>Application to</strong> <span class="math">\(X\)</span> and <span class="math">\(\tilde{X}\)</span>:</p>
+<ul class="simple">
+<li><p>The zero polynomial is in both <span class="math">\(X\)</span> and <span class="math">\(\tilde{X}\)</span>.</p></li>
+<li><p>The sum of any two polynomials in <span class="math">\(X\)</span> (with real coefficients) is a polynomial with real coefficients, which is in <span class="math">\(X\)</span>.</p></li>
+<li><p>The product of any polynomial in <span class="math">\(X\)</span> by any real number is a polynomial with real coefficients, which is in <span class="math">\(X\)</span>.</p></li>
+</ul>
+</li>
+<li>
+<p><strong>Failure under Complex Scalar Multiplication</strong>:</p>
+<p>However, if we consider scalar multiplication by complex numbers (as is allowed in <span class="math">\(\tilde{X}\)</span>), <span class="math">\(X\)</span> is not closed under this operation. For example, if <span class="math">\(p(t) \in X\)</span> and <span class="math">\(i\)</span> is the imaginary unit, <span class="math">\(i \cdot p(t)\)</span> will be a polynomial with complex coefficients, which is not in <span class="math">\(X\)</span> but is in <span class="math">\(\tilde{X}\)</span>.</p>
+</li>
+<li><p><strong>Conclusion</strong>:
+While <span class="math">\(X\)</span> satisfies the criteria for being a subspace under real scalar multiplication, it does not satisfy the criteria under complex scalar multiplication. Therefore, <span class="math">\(X\)</span> is not a subspace of <span class="math">\(\tilde{X}\)</span> when <span class="math">\(\tilde{X}\)</span> is considered as a complex vector space.</p></li>
+</ol>
+<hr class="docutils">
+<p><strong>Problem 10.</strong></p>
+<p>If <span class="math">\(Y\)</span> and <span class="math">\(Z\)</span> are subspaces of a vector space <span class="math">\(X\)</span>, show that <span class="math">\(Y \cap Z\)</span> is a subspace of <span class="math">\(X\)</span>, but <span class="math">\(Y \cup Z\)</span> need not be one. Provide three examples to illustrate the concepts.</p>
+<p><strong>Solution</strong></p>
+<p><strong>Part 1:</strong> <span class="math">\(Y \cap Z\)</span> is a Subspace</p>
+<p>To show that <span class="math">\(Y \cap Z\)</span> is a subspace of <span class="math">\(X\)</span>, we need to verify the subspace criteria:</p>
+<ol class="arabic simple">
+<li><p><strong>Non-emptiness</strong>: Since <span class="math">\(Y\)</span> and <span class="math">\(Z\)</span> are subspaces, they both contain the zero vector. Therefore, <span class="math">\(Y \cap Z\)</span> is non-empty as it at least contains the zero vector.</p></li>
+<li><p><strong>Closed under addition</strong>: Let <span class="math">\(u\)</span> and <span class="math">\(v\)</span> be any vectors in <span class="math">\(Y \cap Z\)</span>. Since <span class="math">\(u\)</span> and <span class="math">\(v\)</span> are in both <span class="math">\(Y\)</span> and <span class="math">\(Z\)</span>, and since <span class="math">\(Y\)</span> and <span class="math">\(Z\)</span> are subspaces (and thus closed under addition), <span class="math">\(u + v\)</span> must be in both <span class="math">\(Y\)</span> and <span class="math">\(Z\)</span>. Therefore, <span class="math">\(u + v\)</span> is in <span class="math">\(Y \cap Z\)</span>.</p></li>
+<li><p><strong>Closed under scalar multiplication</strong>: Let <span class="math">\(u\)</span> be any vector in <span class="math">\(Y \cap Z\)</span> and let <span class="math">\(c\)</span> be any scalar. Since <span class="math">\(u\)</span> is in both <span class="math">\(Y\)</span> and <span class="math">\(Z\)</span>, and since <span class="math">\(Y\)</span> and <span class="math">\(Z\)</span> are subspaces (and thus closed under scalar multiplication), <span class="math">\(c \cdot u\)</span> must be in both <span class="math">\(Y\)</span> and <span class="math">\(Z\)</span>. Therefore, <span class="math">\(c \cdot u\)</span> is in <span class="math">\(Y \cap Z\)</span>.</p></li>
+</ol>
+<p><strong>Part 2:</strong> <span class="math">\(Y \cup Z\)</span> Need Not Be a Subspace</p>
+<p>To show that <span class="math">\(Y \cup Z\)</span> need not be a subspace, consider the following examples:</p>
+<ol class="arabic simple">
+<li><p><strong>Example 1</strong>: Let <span class="math">\(X = \mathbb{R}^2\)</span>, <span class="math">\(Y = \{(x, 0) \mid x \in \mathbb{R}\}\)</span> (the x-axis), and <span class="math">\(Z = \{(0, y) \mid y \in \mathbb{R}\}\)</span> (the y-axis). <span class="math">\(Y\)</span> and <span class="math">\(Z\)</span> are both subspaces of <span class="math">\(X\)</span>, but <span class="math">\(Y \cup Z\)</span> is not because it is not closed under addition. For example, <span class="math">\((1, 0) \in Y\)</span> and <span class="math">\((0, 1) \in Z\)</span>, but <span class="math">\((1, 0) + (0, 1) = (1, 1) \notin Y \cup Z\)</span>.</p></li>
+<li><p><strong>Example 2</strong>: Let <span class="math">\(X = \mathbb{R}^3\)</span>, <span class="math">\(Y = \{(x, 0, 0) \mid x \in \mathbb{R}\}\)</span>, and <span class="math">\(Z = \{(0, y, 0) \mid y \in \mathbb{R}\}\)</span>. <span class="math">\(Y\)</span> and <span class="math">\(Z\)</span> are both subspaces of <span class="math">\(X\)</span>, but <span class="math">\(Y \cup Z\)</span> is not a subspace because it is not closed under scalar multiplication. For example, <span class="math">\((1, 0, 0) \in Y\)</span>, but <span class="math">\(2 \cdot (1, 0, 0) = (2, 0, 0) \notin Y \cup Z\)</span>.</p></li>
+<li><p><strong>Example 3</strong>: Let <span class="math">\(X = \mathbb{R}\)</span>, <span class="math">\(Y = \{2\}\)</span>, and <span class="math">\(Z = \{3\}\)</span>. <span class="math">\(Y\)</span> and <span class="math">\(Z\)</span> are both subspaces of <span class="math">\(X\)</span>, but <span class="math">\(Y \cup Z = \{2, 3\}\)</span> is not a subspace because it is not closed under addition or scalar multiplication.</p></li>
+</ol>
+<p><strong>Conclusion</strong></p>
+<p>While the intersection of two subspaces is always a subspace, the union of two subspaces is generally not a subspace unless one of the subspaces is contained within the other. The provided examples illustrate scenarios where the union of two subspaces fails to satisfy the subspace criteria.</p>
+<hr class="docutils">
+<p>Problem 11 Statement</p>
+<p>If <span class="math">\(M \neq \emptyset\)</span> is any subset of a vector space <span class="math">\(X\)</span>, show that <span class="math">\(\text{span}(M)\)</span> is a subspace of <span class="math">\(X\)</span>.</p>
+<section id="solution"><h2>Solution</h2>
+<p>To prove that <span class="math">\(\text{span}(M)\)</span> is a subspace of <span class="math">\(X\)</span>, we need to verify the following properties:</p>
+<ol class="arabic">
+<li>
+<p><strong>Non-emptiness</strong>:
+Since <span class="math">\(M \neq \emptyset\)</span>, there is at least one vector in <span class="math">\(M\)</span>. The zero vector of <span class="math">\(X\)</span> can be represented as a linear combination of vectors in <span class="math">\(M\)</span> with all coefficients being zero. Hence, the zero vector is in <span class="math">\(\text{span}(M)\)</span>, ensuring that <span class="math">\(\text{span}(M)\)</span> is non-empty.</p>
+<div class="math">
+\begin{equation*}
+\text{Let } \mathbf{v} \in M, \text{ then } 0 \cdot \mathbf{v} = \mathbf{0} \in \text{span}(M)
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Closure under Addition</strong>:
+Let <span class="math">\(\mathbf{u}\)</span> and <span class="math">\(\mathbf{v}\)</span> be any two vectors in <span class="math">\(\text{span}(M)\)</span>. This means that <span class="math">\(\mathbf{u}\)</span> and <span class="math">\(\mathbf{v}\)</span> can be expressed as linear combinations of vectors from <span class="math">\(M\)</span>. The sum <span class="math">\(\mathbf{u} + \mathbf{v}\)</span> is also a linear combination of vectors from <span class="math">\(M\)</span> and is therefore in <span class="math">\(\text{span}(M)\)</span>.</p>
+<div class="math">
+\begin{equation*}
+\text{Let } \mathbf{u} = \sum_{i=1}^{n} a_i \mathbf{m}_i \text{ and } \mathbf{v} = \sum_{i=1}^{n} b_i \mathbf{m}_i, \text{ where } \mathbf{m}_i \in M
+\text{Then, } \mathbf{u} + \mathbf{v} = \sum_{i=1}^{n} (a_i + b_i) \mathbf{m}_i \in \text{span}(M)
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Closure under Scalar Multiplication</strong>:
+Let <span class="math">\(\mathbf{u}\)</span> be a vector in <span class="math">\(\text{span}(M)\)</span> and <span class="math">\(c\)</span> be any scalar. The product <span class="math">\(c\mathbf{u}\)</span> is also a linear combination of vectors from <span class="math">\(M\)</span> and is therefore in <span class="math">\(\text{span}(M)\)</span>.</p>
+<div class="math">
+\begin{equation*}
+\text{Let } \mathbf{u} = \sum_{i=1}^{n} a_i \mathbf{m}_i, \text{ where } \mathbf{m}_i \in M
+\text{Then, } c\mathbf{u} = c\sum_{i=1}^{n} a_i \mathbf{m}_i = \sum_{i=1}^{n} (ca_i) \mathbf{m}_i \in \text{span}(M)
+\end{equation*}
+</div>
+</li>
+</ol>
+<p>By verifying these properties, we have shown that <span class="math">\(\text{span}(M)\)</span> is a subspace of <span class="math">\(X\)</span>.</p>
+<hr class="docutils">
+<p><strong>Problem 12. Two-rowed squred matrices and thier space</strong></p>
+<blockquote>
+<p>To show that the set of all real <span class="math">\(2 \times 2\)</span> matrices forms a vector space <span class="math">\(X\)</span>, we need to verify that the set satisfies the eight vector space axioms under matrix addition and scalar multiplication.</p>
+<p>Let's denote the set of all real <span class="math">\(2 \times 2\)</span> matrices as <span class="math">\(X\)</span>, and let <span class="math">\(A\)</span>, <span class="math">\(B\)</span>, and <span class="math">\(C\)</span> be arbitrary matrices in <span class="math">\(X\)</span>, and let <span class="math">\(k\)</span> and <span class="math">\(l\)</span> be arbitrary real numbers. The matrices can be represented as follows:</p>
+<div class="math">
+\begin{equation*}
+A = \begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{bmatrix}, \quad B = \begin{bmatrix} b_{11} &amp; b_{12} \\ b_{21} &amp; b_{22} \end{bmatrix}, \quad C = \begin{bmatrix} c_{11} &amp; c_{12} \\ c_{21} &amp; c_{22} \end{bmatrix}
+\end{equation*}
+</div>
+<p>Now, let's verify the vector space axioms:</p>
+<ol class="arabic">
+<li>
+<p><strong>Closure under Addition</strong>: For any <span class="math">\(A, B \in X\)</span>, <span class="math">\(A + B\)</span> is also in <span class="math">\(X\)</span>.</p>
+<div class="math">
+\begin{equation*}
+A + B = \begin{bmatrix} a_{11} + b_{11} &amp; a_{12} + b_{12} \\ a_{21} + b_{21} &amp; a_{22} + b_{22} \end{bmatrix}
+\end{equation*}
+</div>
+<p>Since the sum of real numbers is a real number, each element of <span class="math">\(A + B\)</span> is real, and <span class="math">\(A + B \in X\)</span>.</p>
+</li>
+<li>
+<p><strong>Associativity of Addition</strong>: For any <span class="math">\(A, B, C \in X\)</span>, <span class="math">\((A + B) + C = A + (B + C)\)</span>.</p>
+<div class="math">
+\begin{equation*}
+(A + B) + C = \begin{bmatrix} a_{11} + b_{11} + c_{11} &amp; a_{12} + b_{12} + c_{12} \\ a_{21} + b_{21} + c_{21} &amp; a_{22} + b_{22} + c_{22} \end{bmatrix}
+A + (B + C) = \begin{bmatrix} a_{11} + (b_{11} + c_{11}) &amp; a_{12} + (b_{12} + c_{12}) \\ a_{21} + (b_{21} + c_{21}) &amp; a_{22} + (b_{22} + c_{22}) \end{bmatrix}
+\end{equation*}
+</div>
+<p>By the associativity of real number addition, these two results are equal.</p>
+</li>
+<li>
+<p><strong>Commutativity of Addition</strong>: For any <span class="math">\(A, B \in X\)</span>, <span class="math">\(A + B = B + A\)</span>.</p>
+<div class="math">
+\begin{equation*}
+A + B = \begin{bmatrix} a_{11} + b_{11} &amp; a_{12} + b_{12} \\ a_{21} + b_{21} &amp; a_{22} + b_{22} \end{bmatrix}
+B + A = \begin{bmatrix} b_{11} + a_{11} &amp; b_{12} + a_{12} \\ b_{21} + a_{21} &amp; b_{22} + a_{22} \end{bmatrix}
+\end{equation*}
+</div>
+<p>By the commutativity of real number addition, these two results are equal.</p>
+</li>
+<li>
+<p><strong>Existence of Additive Identity</strong>: There exists a matrix <span class="math">\(O \in X\)</span> such that for any <span class="math">\(A \in X\)</span>, <span class="math">\(A + O = A\)</span>.</p>
+<div class="math">
+\begin{equation*}
+O = \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
+A + O = \begin{bmatrix} a_{11} + 0 &amp; a_{12} + 0 \\ a_{21} + 0 &amp; a_{22} + 0 \end{bmatrix} = A
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Existence of Additive Inverse</strong>: For any <span class="math">\(A \in X\)</span>, there exists a matrix <span class="math">\(-A \in X\)</span> such that <span class="math">\(A + (-A) = O\)</span>.</p>
+<div class="math">
+\begin{equation*}
+-A = \begin{bmatrix} -a_{11} &amp; -a_{12} \\ -a_{21} &amp; -a_{22} \end{bmatrix}
+A + (-A) = \begin{bmatrix} a_{11} + (-a_{11}) &amp; a_{12} + (-a_{12}) \\ a_{21} + (-a_{21}) &amp; a_{22} + (-a_{22}) \end{bmatrix} = O
+\end{equation*}
+</div>
+</li>
+<li>
+<p><strong>Closure under Scalar Multiplication</strong>: For any <span class="math">\(A \in X\)</span> and any real number <span class="math">\(k\)</span>, <span class="math">\(kA\)</span> is also in <span class="math">\(X\)</span>.</p>
+<div class="math">
+\begin{equation*}
+kA = k \begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{bmatrix} = \begin{bmatrix} ka_{11} &amp; ka_{12} \\ ka_{21} &amp; ka_{22} \end{bmatrix}
+\end{equation*}
+</div>
+<p>Since the product of a real number and a real number is a real number, each element of <span class="math">\(kA\)</span> is real, and <span class="math">\(kA \in X\)</span>.</p>
+</li>
+<li>
+<p><strong>Associativity of Scalar Multiplication</strong>: For any <span class="math">\(A \in X\)</span> and any real numbers <span class="math">\(k\)</span> and <span class="math">\(l\)</span>, <span class="math">\(k(lA) = (kl)A\)</span>.</p>
+<div class="math">
+\begin{equation*}
+k(lA) = k \left( l \begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{bmatrix} \right) = k \begin{bmatrix} la_{11} &amp; la_{12} \\ la_{21} &amp; la_{22} \end{bmatrix} = \begin{bmatrix} kla_{11} &amp; kla_{12} \\ kla_{21} &amp; kla_{22} \end{bmatrix}
+(kl)A = (kl) \begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{bmatrix} = \begin{bmatrix} kla_{11} &amp; kla_{12} \\ kla_{21} &amp; kla_{22} \end{bmatrix}
+\end{equation*}
+</div>
+<p>These two results are equal.</p>
+</li>
+<li>
+<p><strong>Distributivity of Scalar Multiplication with respect to Scalar Addition</strong>: For any <span class="math">\(A \in X\)</span> and any real numbers <span class="math">\(k\)</span> and <span class="math">\(l\)</span>, <span class="math">\((k + l)A = kA + lA\)</span>.</p>
+<div class="math">
+\begin{equation*}
+(k + l)A = (k + l) \begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{bmatrix} = \begin{bmatrix} (k + l)a_{11} &amp; (k + l)a_{12} \\ (k + l)a_{21} &amp; (k + l)a_{22} \end{bmatrix}
+kA + lA = k \begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{bmatrix} + l \begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{bmatrix} = \begin{bmatrix} ka_{11} + la_{11} &amp; ka_{12} + la_{12} \\ ka_{21} + la_{21} &amp; ka_{22} + la_{22} \end{bmatrix}
+\end{equation*}
+</div>
+<p>By the distributivity of real number multiplication over addition, these two results are equal.</p>
+</li>
+<li>
+<p><strong>Distributivity of Scalar Multiplication with respect to Vector Addition</strong>: For any <span class="math">\(A, B \in X\)</span> and any real number <span class="math">\(k\)</span>, <span class="math">\(k(A + B) = kA + kB\)</span>.</p>
+<div class="math">
+\begin{equation*}
+k(A + B) = k \left( \begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{bmatrix} + \begin{bmatrix} b_{11} &amp; b_{12} \\ b_{21} &amp; b_{22} \end{bmatrix} \right) = k \begin{bmatrix} a_{11} + b_{11} &amp; a_{12} + b_{12} \\ a_{21} + b_{21} &amp; a_{22} + b_{22} \end{bmatrix} = \begin{bmatrix} k(a_{11} + b_{11}) &amp; k(a_{12} + b_{12}) \\ k(a_{21} + b_{21}) &amp; k(a_{22} + b_{22}) \end{bmatrix}
+kA + kB = k \begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{bmatrix} + k \begin{bmatrix} b_{11} &amp; b_{12} \\ b_{21} &amp; b_{22} \end{bmatrix} = \begin{bmatrix} ka_{11} &amp; ka_{12} \\ ka_{21} &amp; ka_{22} \end{bmatrix} + \begin{bmatrix} kb_{11} &amp; kb_{12} \\ kb_{21} &amp; kb_{22} \end{bmatrix} = \begin{bmatrix} ka_{11} + kb_{11} &amp; ka_{12} + kb_{12} \\ ka_{21} + kb_{21} &amp; ka_{22} + kb_{22} \end{bmatrix}
+\end{equation*}
+</div>
+<p>By the distributivity of real number multiplication over addition, these two results are equal.</p>
+</li>
+</ol>
+<p>Since all eight vector space axioms are satisfied, the set of all real <span class="math">\(2 \times 2\)</span> matrices forms a vector space <span class="math">\(X\)</span>.</p>
+</blockquote>
+<p><strong>Zero vector</strong></p>
+<div class="math">
+\begin{equation*}
+\text{The zero vector in } X \text{ is the } 2 \times 2 \text{ zero matrix } \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}.
+\end{equation*}
+</div>
+<p><strong>Determine dim X</strong></p>
+<div class="math">
+\begin{equation*}
+\text{To determine the dimension of the vector space } X \text{ of all real } 2 \times 2 \text{ matrices, we need to find a basis for } X \text{ and then count the number of vectors in that basis.}
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+\text{A } 2 \times 2 \text{ matrix can be represented as:}
+\begin{bmatrix}
+a &amp; b \\
+c &amp; d
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+\text{where } a, b, c, \text{ and } d \text{ are real numbers.}
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+\text{A basis for this vector space is a set of linearly independent matrices that span the entire space. For the space of all } 2 \times 2 \text{ matrices, a common basis is:}
+\left\{ \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}, \begin{bmatrix} 0 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}, \begin{bmatrix} 0 &amp; 0 \\ 1 &amp; 0 \end{bmatrix}, \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} \right\}
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+\text{These matrices are linearly independent and any } 2 \times 2 \text{ matrix can be expressed as a linear combination of these four matrices. Therefore, they form a basis for } X.
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+\text{The dimension of } X, \text{ denoted as } \dim(X), \text{ is the number of vectors in a basis for } X. \text{ Since we have found a basis for } X \text{ that contains four matrices, we can conclude that:}
+\dim(X) = 4
+\end{equation*}
+</div>
+<p><strong>Find a basis for X</strong></p>
+<p>To find a basis for the vector space <span class="math">\(X\)</span> of all real <span class="math">\(2 \times 2\)</span> matrices, we need to identify a set of linearly independent matrices that span the entire space.</p>
+<p>A <span class="math">\(2 \times 2\)</span> matrix can be represented as:</p>
+<div class="math">
+\begin{equation*}
+\begin{bmatrix}
+a &amp; b \\
+c &amp; d
+\end{bmatrix}
+\end{equation*}
+</div>
+<p>where <span class="math">\(a, b, c,\)</span> and <span class="math">\(d\)</span> are real numbers.</p>
+<p>A common basis for this vector space is the set of matrices:</p>
+<ol class="arabic simple">
+<li><p><span class="math">\(\begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span></p></li>
+<li><p><span class="math">\(\begin{bmatrix} 0 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}\)</span></p></li>
+<li><p><span class="math">\(\begin{bmatrix} 0 &amp; 0 \\ 1 &amp; 0 \end{bmatrix}\)</span></p></li>
+<li><p><span class="math">\(\begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}\)</span></p></li>
+</ol>
+<p>These matrices are linearly independent because no matrix can be written as a linear combination of the others. Additionally, any <span class="math">\(2 \times 2\)</span> matrix can be expressed as a linear combination of these four matrices. For example, for any real numbers <span class="math">\(a, b, c,\)</span> and <span class="math">\(d\)</span>:</p>
+<div class="math">
+\begin{equation*}
+\begin{bmatrix}
+a &amp; b \\
+c &amp; d
+\end{bmatrix}
+= a \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
++ b \begin{bmatrix} 0 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}
++ c \begin{bmatrix} 0 &amp; 0 \\ 1 &amp; 0 \end{bmatrix}
++ d \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}
+\end{equation*}
+</div>
+<p>Therefore, the set <span class="math">\(\left\{ \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}, \begin{bmatrix} 0 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}, \begin{bmatrix} 0 &amp; 0 \\ 1 &amp; 0 \end{bmatrix}, \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} \right\}\)</span> forms a basis for <span class="math">\(X\)</span>.</p>
+<p><strong>Examples of subspaces of X</strong></p>
+<ol class="arabic">
+<li>
+<p><strong>The Zero Subspace</strong>:
+The set containing only the zero matrix is a subspace of <span class="math">\(X\)</span>.</p>
+<div class="math">
+\begin{equation*}
+\left\{ \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 0 \end{bmatrix} \right\}
+\end{equation*}
+</div>
+<p>This subspace satisfies all the required properties of a vector space.</p>
+</li>
+<li>
+<p><strong>The Subspace of Diagonal Matrices</strong>:
+The set of all <span class="math">\(2 \times 2\)</span> diagonal matrices is a subspace of <span class="math">\(X\)</span>.</p>
+<div class="math">
+\begin{equation*}
+\left\{ \begin{bmatrix} a &amp; 0 \\ 0 &amp; b \end{bmatrix} \mid a, b \in \mathbb{R} \right\}
+\end{equation*}
+</div>
+<p>This set is closed under addition and scalar multiplication, and it contains the zero vector.</p>
+</li>
+<li>
+<p><strong>The Subspace of Upper Triangular Matrices</strong>:
+The set of all <span class="math">\(2 \times 2\)</span> upper triangular matrices is a subspace of <span class="math">\(X\)</span>.</p>
+<div class="math">
+\begin{equation*}
+\left\{ \begin{bmatrix} a &amp; b \\ 0 &amp; c \end{bmatrix} \mid a, b, c \in \mathbb{R} \right\}
+\end{equation*}
+</div>
+<p>This set is also closed under addition and scalar multiplication, and it includes the zero vector.</p>
+</li>
+</ol>
+<p><strong>Do the symmetric matrices x in X form a subspace?</strong></p>
+<p>Yes, the set of symmetric matrices in <span class="math">\(X\)</span> forms a subspace. A symmetric matrix is defined as a square matrix that is equal to its transpose. For a <span class="math">\(2 \times 2\)</span> matrix <span class="math">\(A\)</span>, this means that:</p>
+<div class="math">
+\begin{equation*}
+A = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}
+\end{equation*}
+</div>
+<p>is symmetric if <span class="math">\(b = c\)</span>. So a symmetric matrix in <span class="math">\(X\)</span> has the form:</p>
+<div class="math">
+\begin{equation*}
+\begin{bmatrix} a &amp; b \\ b &amp; d \end{bmatrix}
+\end{equation*}
+</div>
+<p>Now, let's check the three main properties to confirm that this set is indeed a subspace:</p>
+<ol class="arabic simple">
+<li><p><strong>Closed under addition</strong>: If you take two symmetric matrices <span class="math">\(A\)</span> and <span class="math">\(B\)</span> in <span class="math">\(X\)</span>, their sum <span class="math">\(A + B\)</span> will also be a symmetric matrix in <span class="math">\(X\)</span>.</p></li>
+<li><p><strong>Closed under scalar multiplication</strong>: If you take any scalar <span class="math">\(k\)</span> and a symmetric matrix <span class="math">\(A\)</span> in <span class="math">\(X\)</span>, the product <span class="math">\(kA\)</span> will also be a symmetric matrix in <span class="math">\(X\)</span>.</p></li>
+<li><p><strong>Contains the zero vector</strong>: The zero matrix is a symmetric matrix, and it is in <span class="math">\(X\)</span>.</p></li>
+</ol>
+<p>Since these three properties are satisfied, the set of symmetric matrices in <span class="math">\(X\)</span> forms a subspace of <span class="math">\(X\)</span>.</p>
+<p><strong>Do the singular matrices x in X form a subspace?</strong></p>
+<p>To determine if the set of singular matrices in <span class="math">\(X\)</span> (the space of all <span class="math">\(2 \times 2\)</span> real matrices) forms a subspace, we need to check the three main properties of a subspace:</p>
+<ol class="arabic simple">
+<li><p><strong>Closed under addition</strong>: If <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are singular matrices in <span class="math">\(X\)</span>, then <span class="math">\(A + B\)</span> should also be a singular matrix in <span class="math">\(X\)</span>.</p></li>
+<li><p><strong>Closed under scalar multiplication</strong>: If <span class="math">\(A\)</span> is a singular matrix in <span class="math">\(X\)</span> and <span class="math">\(c\)</span> is any scalar, then <span class="math">\(cA\)</span> should also be a singular matrix in <span class="math">\(X\)</span>.</p></li>
+<li><p><strong>Contains the zero vector</strong>: The set should contain the zero matrix, which is a singular matrix.</p></li>
+</ol>
+<p>However, the set of singular matrices does not satisfy these properties. Here’s why:</p>
+<ol class="arabic">
+<li>
+<p><strong>Closed under addition</strong>: This property is not always satisfied. For example, consider the singular matrices:</p>
+<div class="math">
+\begin{equation*}
+A = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}, \quad B = \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}
+\end{equation*}
+</div>
+<p>Their sum is:</p>
+<div class="math">
+\begin{equation*}
+A + B = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}
+\end{equation*}
+</div>
+<p>The matrix <span class="math">\(A + B\)</span> is the identity matrix, which is not singular. So, the set of singular matrices is not closed under addition.</p>
+</li>
+<li><p><strong>Closed under scalar multiplication</strong>: This property is satisfied because multiplying a singular matrix by any scalar will result in another singular matrix or the zero matrix.</p></li>
+<li><p><strong>Contains the zero vector</strong>: The set of singular matrices does contain the zero matrix.</p></li>
+</ol>
+<p>Since the set of singular matrices in <span class="math">\(X\)</span> is not closed under addition, it does not form a subspace of <span class="math">\(X\)</span>.</p>
+</section>
+</div>
 
 
 

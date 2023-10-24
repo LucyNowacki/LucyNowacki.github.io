@@ -182,7 +182,7 @@ bg-dark
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="ooo" src="../../images/gif_contour_heat.gif"></p>
+<p><img alt="ooo" src="../../images/gif_heat.gif"></p>
 <p>In this post, we demonstrate the forward and inverse PINNs problem for the heat equation</p>
 <p>$$U_t=0.1\,U_{xx}$$</p>
 <p>with Dirichlet boundary conditions, homogeneous $U(0,t)=0$ and non-homogeneous $U(1,t)=\cos(2t)$, together with the initial condition $U(x,0)=\sqrt{x}$. Non-homogeneous solutions can cause difficulties, i.e., it is often not straightforward to obtain stable convergence, and the model overfits easily. The problem can be overcome by applying a bespoke NN architecture and/or <a href="https://arxiv.org/pdf/2006.10739.pdf">Fourier Features</a>. The analytical solution was obtained through Mathematica in the form of a 30-term expansion of the solution and is plotted below. For the residual term, we have a grid of 200x100, totaling 20000 points from which we will sample points, namely collocation points inside the domain, $\Omega$.</p>
