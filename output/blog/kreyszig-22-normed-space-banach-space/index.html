@@ -22,6 +22,7 @@
 </script><meta name="google-site-verification" content="WF1l7hEMV49eJl7Kb2rVSOwXp2KINwX59Tig6ACvfSs">
 <meta name="author" content="Lucy Nowacki">
 <link rel="prev" href="../kreyszig-21-normed-spaces-vector-space/" title="Kreyszig 2.1, Normed Spaces - Vector Space" type="text/html">
+<link rel="next" href="../kreyszig-23-further-properties-of-normed-spaces/" title="Kreyszig 2.3, Further Properties of Normed Spaces" type="text/html">
 <meta property="og:site_name" content="Nova Automata">
 <meta property="og:title" content="Kreyszig-2.2-Normed Space, Banach Space">
 <meta property="og:url" content="https://example.com/blog/kreyszig-22-normed-space-banach-space/">
@@ -762,6 +763,76 @@ z = \alpha x + (1 - \alpha) y
 <li><p>For values of <span class="math">\(\alpha\)</span> between 0 and 1, <span class="math">\(z\)</span> lies within the line segment connecting <span class="math">\(x\)</span> and <span class="math">\(y\)</span>.</p></li>
 </ul>
 <p>A set is convex if, for every pair of points within the set, the entire line segment that connects them also lies within the set. The point <span class="math">\(z\)</span> symbolizes a general point on the line segment between <span class="math">\(x\)</span> and <span class="math">\(y\)</span>. Demonstrating that for all values of <span class="math">\(\alpha\)</span> in the closed interval [0, 1], <span class="math">\(z\)</span> remains within the set proves the set's convexity. This is the essence of why the expression <span class="math">\(z = \alpha x + (1 - \alpha) y\)</span> is used: it is a generic representation of any point on the line segment, and verifying that all such points are contained within the set for all <span class="math">\(\alpha\)</span> in [0, 1] affirms the convexity of the set.</p>
+<hr class="docutils">
+<p><strong>Problem Statement 15.</strong> Show that a subset <span class="math">\(M\)</span> in a normed space <span class="math">\(X\)</span> is bounded if and only if there is a positive number <span class="math">\(c\)</span> such that <span class="math">\(\|x\| \leq c\)</span> for every <span class="math">\(x \in M\)</span>. The diameter <span class="math">\(\delta(A)\)</span> of a nonempty set <span class="math">\(A\)</span> in a metric space <span class="math">\((X, d)\)</span> is defined to be <span class="math">\(\delta(A) = \sup \{d(x, y) : x, y \in A\}\)</span>. A set <span class="math">\(A\)</span> is said to be bounded if <span class="math">\(\delta(A) &lt; \infty\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p>If <span class="math">\(M\)</span> is bounded, then there exists a <span class="math">\(c\)</span> such that <span class="math">\(\|x\| \leq c\)</span> for every <span class="math">\(x \in M\)</span>:</p>
+<dl class="simple">
+<dt>Step 1: Assume <span class="math">\(M\)</span> is bounded.</dt>
+<dd>
+<p>By definition of boundedness in the context of a normed space, this means that the diameter <span class="math">\(\delta(M)\)</span>, which is the supremum of the distances between all pairs of points in <span class="math">\(M\)</span>, is less than infinity. In mathematical terms, <span class="math">\(\delta(M) = \sup \{\|x - y\| : x, y \in M\} = b &lt; \infty\)</span>.</p>
+</dd>
+<dt>Step 2: Choose any <span class="math">\(x \in M\)</span> and also take a fixed element <span class="math">\(x_0 \in M\)</span>.</dt>
+<dd>
+<p>We need a reference point in <span class="math">\(M\)</span> to compare all other points to. The choice of <span class="math">\(x_0\)</span> is arbitrary but will be used to help establish a universal bound for the norm of any element in <span class="math">\(M\)</span>.</p>
+</dd>
+<dt>Step 3: Define <span class="math">\(c = b + \|x_0\|\)</span>, which is a positive number.</dt>
+<dd>
+<p>Here <span class="math">\(b\)</span> is the diameter <span class="math">\(\delta(M)\)</span> we defined earlier, which captures the maximum distance between any two points in <span class="math">\(M\)</span>. We are defining a new constant <span class="math">\(c\)</span> that not only accounts for this maximum distance but also adds the norm of our reference point <span class="math">\(x_0\)</span> to ensure that <span class="math">\(c\)</span> will be an upper bound for the norm of any point in <span class="math">\(M\)</span>.</p>
+</dd>
+</dl>
+<p><strong>Step 4:</strong> For any <span class="math">\(x \in M\)</span>, estimate <span class="math">\(\|x\|\)</span> using the triangle inequality:</p>
+<blockquote>
+<div class="math">
+\begin{equation*}
+\|x\| = \|x - x_0 + x_0\| \leq \|x - x_0\| + \|x_0\| \leq b + \|x_0\| = c.
+\end{equation*}
+</div>
+<p>The last step uses the fact that <span class="math">\(\delta(M) = b\)</span> is the supremum of all such norms <span class="math">\(\|x - x_0\|\)</span>, and therefore <span class="math">\(\|x - x_0\|\)</span> cannot exceed <span class="math">\(b\)</span>.</p>
+</blockquote>
+<dl class="simple">
+<dt>Step 5: This shows that for every <span class="math">\(x \in M\)</span>, <span class="math">\(\|x\| \leq c\)</span>.</dt>
+<dd>
+<p>The definition of <span class="math">\(c\)</span> was constructed to be a bound for the norms of all points in <span class="math">\(M\)</span> relative to the fixed point <span class="math">\(x_0\)</span> and the diameter of <span class="math">\(M\)</span>.</p>
+</dd>
+</dl>
+<p><strong>Conversely</strong> , if there exists a <span class="math">\(c\)</span> such that <span class="math">\(\|x\| \leq c\)</span> for every <span class="math">\(x \in M\)</span>, then <span class="math">\(M\)</span> is bounded:</p>
+<dl class="simple">
+<dt>Step 1: Assume that for every <span class="math">\(x \in M\)</span>, <span class="math">\(\|x\| \leq c\)</span> for some positive number <span class="math">\(c\)</span>.</dt>
+<dd>
+<p>This is the hypothesis that there is a uniform bound on the norms of all elements in the set <span class="math">\(M\)</span>.</p>
+</dd>
+</dl>
+<p><strong>Step 2:</strong> For any <span class="math">\(x, y \in M\)</span>, using the triangle inequality we have:</p>
+<blockquote>
+<div class="math">
+\begin{equation*}
+\|x - y\| \leq \|x\| + \|y\|.
+\end{equation*}
+</div>
+<p>This is the triangle inequality applied to the points <span class="math">\(x\)</span> and <span class="math">\(y\)</span> in <span class="math">\(M\)</span>.</p>
+</blockquote>
+<p><strong>Step 3:</strong> Since <span class="math">\(\|x\| \leq c\)</span> and <span class="math">\(\|y\| \leq c\)</span>, it follows that:</p>
+<blockquote>
+<div class="math">
+\begin{equation*}
+\|x - y\| \leq c + c = 2c.
+\end{equation*}
+</div>
+<p>This step uses the bound for the norms of <span class="math">\(x\)</span> and <span class="math">\(y\)</span> to establish a bound for the distance between them.</p>
+</blockquote>
+<dl class="simple">
+<dt>
+<strong>Step 4:</strong> This inequality holds for all <span class="math">\(x, y \in M\)</span>, so <span class="math">\(\delta(M)\)</span>, the supremum of all such distances, is at most <span class="math">\(2c\)</span>.</dt>
+<dd>
+<p>Here we use the definition of <span class="math">\(\delta(M)\)</span> again, which is the supremum of all distances between points in <span class="math">\(M\)</span>. Since we've shown that every such distance is bounded by <span class="math">\(2c\)</span>, it follows that <span class="math">\(\delta(M) \leq 2c\)</span>.</p>
+</dd>
+<dt>Step 5: Therefore, <span class="math">\(\delta(M) \leq 2c &lt; \infty\)</span>, which means <span class="math">\(M\)</span> is bounded.</dt>
+<dd>
+<p>Since <span class="math">\(2c\)</span> is a finite number, the supremum of the set of distances (the diameter) is also finite, confirming that <span class="math">\(M\)</span> is bounded by definition.</p>
+</dd>
+</dl>
+<p>In both directions of the proof, the definition of <span class="math">\(\delta(M)\)</span> as the supremum of distances <span class="math">\(\|x - y\|\)</span> for <span class="math">\(x, y \in M\)</span> is crucial for establishing the boundedness of <span class="math">\(M\)</span>.</p>
     </div>
 
 
@@ -773,6 +844,9 @@ z = \alpha x + (1 - \alpha) y
 <ul class="pager hidden-print">
 <li class="previous">
                 <a href="../kreyszig-21-normed-spaces-vector-space/" rel="prev" title="Kreyszig 2.1, Normed Spaces - Vector Space">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../kreyszig-23-further-properties-of-normed-spaces/" rel="next" title="Kreyszig 2.3, Further Properties of Normed Spaces">Next post</a>
             </li>
         </ul></nav></aside><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script><script>
                 renderMathInElement(document.body,

@@ -1,0 +1,321 @@
+<p><strong>Problem 1.</strong> Show that <span class="math">\(c \subset l^{\infty}\)</span> is a vector subspace of <span class="math">\(l^{\infty}\)</span> and so is <span class="math">\(C_0\)</span>, the
+space of all sequences of scalars converging to zero.</p>
+<p><strong>Solution:</strong></p>
+<p>The space <span class="math">\(l^{\infty}\)</span> is defined as the set of all bounded sequences of real (or complex) numbers.
+A sequence <span class="math">\((a_n)\)</span> is in <span class="math">\(l^{\infty}\)</span> if there exists a real number <span class="math">\(M\)</span> such that for every
+term <span class="math">\(a_n\)</span> in the sequence, <span class="math">\(|a_n| \leq M\)</span>.</p>
+<p>The space <span class="math">\(c\)</span> denotes the set of all convergent sequences. A sequence <span class="math">\((a_n)\)</span> is in <span class="math">\(c\)</span> if it
+converges to some limit <span class="math">\(L\)</span> in the real (or complex) numbers.</p>
+<p>The space <span class="math">\(C_0\)</span>, or <span class="math">\(c_0\)</span> as it is often denoted, is the set of all sequences that converge to zero.</p>
+<p>To show that <span class="math">\(c\)</span> and <span class="math">\(C_0\)</span> are subspaces of <span class="math">\(l^{\infty}\)</span>, we must verify the following properties
+for each:</p>
+<ol class="arabic simple">
+<li><p>Non-emptiness: The subspace must contain the zero vector.</p></li>
+<li><p>Closed under vector addition: If two vectors <span class="math">\(x\)</span> and <span class="math">\(y\)</span> are in the subspace, then their sum
+<span class="math">\(x + y\)</span> must also be in the subspace.</p></li>
+<li><p>Closed under scalar multiplication: If a vector <span class="math">\(x\)</span> is in the subspace and <span class="math">\(\alpha\)</span> is any scalar,
+then the product <span class="math">\(\alpha x\)</span> must also be in the subspace.</p></li>
+</ol>
+<p>For <span class="math">\(c\)</span> (all convergent sequences):</p>
+<ol class="arabic simple">
+<li><p>Non-emptiness: The zero sequence is in <span class="math">\(c\)</span> since it converges to zero, and it is clearly bounded.</p></li>
+<li><p>Closed under vector addition: If <span class="math">\(x, y \in c\)</span>, both converge to some limits <span class="math">\(L_x\)</span> and <span class="math">\(L_y\)</span>,
+and their sum <span class="math">\(x + y\)</span> converges to <span class="math">\(L_x + L_y\)</span>. Also, the sum of two bounded sequences is bounded.</p></li>
+<li><p>Closed under scalar multiplication: For any <span class="math">\(x \in c\)</span> and scalar <span class="math">\(\alpha\)</span>, the sequence
+<span class="math">\(\alpha x\)</span> converges to <span class="math">\(\alpha L_x\)</span> and is bounded if <span class="math">\(x\)</span> is bounded.</p></li>
+</ol>
+<p>For <span class="math">\(C_0\)</span> (sequences converging to zero):</p>
+<ol class="arabic simple">
+<li><p>Non-emptiness: <span class="math">\(C_0\)</span> contains the zero sequence.</p></li>
+<li><p>Closed under vector addition: The sum of two sequences in <span class="math">\(C_0\)</span> also converges to zero.</p></li>
+<li><p>Closed under scalar multiplication: A scalar multiple of a sequence in <span class="math">\(C_0\)</span> also converges to zero and
+is bounded.</p></li>
+</ol>
+<p>Since both <span class="math">\(c\)</span> and <span class="math">\(C_0\)</span> satisfy these properties, they are both subspaces of <span class="math">\(l^{\infty}\)</span>.</p>
+<hr class="docutils" />
+<p><strong>Problem 2.</strong> Show that <span class="math">\(c_0\)</span> in Problem 1 is a closed subspace of <span class="math">\(l^{\infty}\)</span>, so that <span class="math">\(c_0\)</span> is complete by:
+(a) Theorem (Complete subspace): A subspace <span class="math">\(M\)</span> of a complete metric space <span class="math">\(X\)</span> is itself complete if and only if the set <span class="math">\(M\)</span> is closed in <span class="math">\(X\)</span>.
+(b) Completeness of <span class="math">\(l^{\infty}\)</span>: The space <span class="math">\(l^{\infty}\)</span>, is complete.</p>
+<p><strong>Solution:</strong></p>
+<p>To show that <span class="math">\(c_0\)</span> from Problem 1 is a closed subspace of <span class="math">\(l^{\infty}\)</span>, we will use the theorem provided and the fact that <span class="math">\(l^{\infty}\)</span> is complete.</p>
+<p><strong>Step 1:</strong> Use the Theorem (Complete Subspace)</p>
+<p>The theorem states that a subspace <span class="math">\(M\)</span> of a complete metric space <span class="math">\(X\)</span> is complete if and only if <span class="math">\(M\)</span> is closed in <span class="math">\(X\)</span>. Therefore, we must demonstrate that <span class="math">\(c_0\)</span> is closed in <span class="math">\(l^{\infty}\)</span>.</p>
+<p><strong>Step 2:</strong> Show that <span class="math">\(c_0\)</span> is closed in <span class="math">\(l^{\infty}\)</span></p>
+<p>A subset of a metric space is closed if it contains all of its limit points. To prove that <span class="math">\(c_0\)</span> is closed, we need to show that if a sequence of elements in <span class="math">\(c_0\)</span> converges to some limit within <span class="math">\(l^{\infty}\)</span>, then this limit is also in <span class="math">\(c_0\)</span>.</p>
+<p>Suppose <span class="math">\((x_n)\)</span> is a sequence of sequences in <span class="math">\(c_0\)</span> that converges to some sequence <span class="math">\(x\)</span> in <span class="math">\(l^{\infty}\)</span>. We need to show that <span class="math">\(x\)</span> is also in <span class="math">\(c_0\)</span>. This means that <span class="math">\(x\)</span> must converge to zero.</p>
+<p>Since <span class="math">\((x_n)\)</span> converges to <span class="math">\(x\)</span> in <span class="math">\(l^{\infty}\)</span>, for every <span class="math">\(\epsilon &gt; 0\)</span>, there exists an <span class="math">\(N\)</span> such that for all <span class="math">\(n \geq N\)</span>, the sequences <span class="math">\(x_n\)</span> are within <span class="math">\(\epsilon\)</span> of <span class="math">\(x\)</span> in the supremum norm, i.e.,</p>
+<div class="math">
+\begin{equation*}
+\sup_{k \in \mathbb{N}} |(x_n)_k - x_k| &lt; \epsilon.
+\end{equation*}
+</div>
+<p>Each <span class="math">\(x_n\)</span> is in <span class="math">\(c_0\)</span>, meaning that for each <span class="math">\(x_n\)</span> and for every <span class="math">\(\epsilon &gt; 0\)</span>, there exists an <span class="math">\(M\)</span> (which can depend on <span class="math">\(n\)</span>) such that for all <span class="math">\(k \geq M\)</span>, <span class="math">\(|(x_n)_k| &lt; \epsilon\)</span>.</p>
+<p>As <span class="math">\(n \rightarrow \infty\)</span>, <span class="math">\(x_n\)</span> converges to <span class="math">\(x\)</span> and since each <span class="math">\(x_n\)</span> gets arbitrarily close to zero for large enough indices, <span class="math">\(x\)</span> must also get arbitrarily close to zero for large enough indices. This means that <span class="math">\(x\)</span> converges to zero and thus <span class="math">\(x \in c_0\)</span>.</p>
+<p><strong>Step 3:</strong> Apply the Completeness of <span class="math">\(l^{\infty}\)</span></p>
+<p>Since <span class="math">\(l^{\infty}\)</span> is a complete metric space and <span class="math">\(c_0\)</span> is closed in <span class="math">\(l^{\infty}\)</span>, by the theorem, <span class="math">\(c_0\)</span> is also complete.</p>
+<p>By showing that <span class="math">\(c_0\)</span> is a closed subset of the complete space <span class="math">\(l^{\infty}\)</span>, we have shown that <span class="math">\(c_0\)</span> is a complete subspace of <span class="math">\(l^{\infty}\)</span>.</p>
+<hr class="docutils" />
+<p><strong>Problem 3.</strong> Problem Statement: In <span class="math">\(l^{\infty}\)</span>, let <span class="math">\(Y\)</span> be the subset of all sequences with only finitely many nonzero terms.
+Show that <span class="math">\(Y\)</span> is a subspace of <span class="math">\(l^{\infty}\)</span> but not a closed subspace.</p>
+<p><strong>Solution:</strong></p>
+<p>To demonstrate that <span class="math">\(Y\)</span> is a subspace of <span class="math">\(l^{\infty}\)</span>, we must verify that <span class="math">\(Y\)</span> satisfies
+the three properties of a vector subspace:</p>
+<ol class="arabic simple">
+<li><p>Non-emptiness: <span class="math">\(Y\)</span> contains the zero vector.</p></li>
+<li><p>Closed under vector addition: If two vectors <span class="math">\(x\)</span> and <span class="math">\(y\)</span> are in <span class="math">\(Y\)</span>, then their sum
+<span class="math">\(x + y\)</span> must also be in <span class="math">\(Y\)</span>.</p></li>
+<li><p>Closed under scalar multiplication: If a vector <span class="math">\(x\)</span> is in <span class="math">\(Y\)</span> and <span class="math">\(\alpha\)</span> is any scalar,
+then the product <span class="math">\(\alpha x\)</span> must also be in <span class="math">\(Y\)</span>.</p></li>
+</ol>
+<p>Let's examine each property:</p>
+<ol class="arabic simple">
+<li><p><strong>Non-emptiness</strong>: The zero sequence, where every term is zero, is a sequence with finitely many nonzero
+terms (specifically, none), so <span class="math">\(Y\)</span> contains the zero vector.</p></li>
+<li><p><strong>Closed under vector addition</strong>: If <span class="math">\(x\)</span> and <span class="math">\(y\)</span> are in <span class="math">\(Y\)</span>, they each have only finitely
+many nonzero terms. The sum <span class="math">\(x + y\)</span> will also have only finitely many nonzero terms because the nonzero
+terms can only occur at the indices where <span class="math">\(x\)</span> or <span class="math">\(y\)</span> (or both) have nonzero terms. Therefore,
+<span class="math">\(x + y\)</span> is also in <span class="math">\(Y\)</span>.</p></li>
+<li><p><strong>Closed under scalar multiplication</strong>: If <span class="math">\(x\)</span> is in <span class="math">\(Y\)</span> and <span class="math">\(\alpha\)</span> is any scalar,
+multiplying <span class="math">\(x\)</span> by <span class="math">\(\alpha\)</span> will not introduce any new nonzero terms beyond those already present
+in <span class="math">\(x\)</span>. Therefore, <span class="math">\(\alpha x\)</span> will also have only finitely many nonzero terms and is in <span class="math">\(Y\)</span>.</p></li>
+</ol>
+<p>Since <span class="math">\(Y\)</span> satisfies all three properties, it is a subspace of <span class="math">\(l^{\infty}\)</span>.</p>
+<p>To show that <span class="math">\(Y\)</span> is not a closed subspace, we need to find a sequence of elements in <span class="math">\(Y\)</span> that
+converges to a limit not in <span class="math">\(Y\)</span>. This limit will be a sequence with infinitely many nonzero terms,
+demonstrating that <span class="math">\(Y\)</span> does not contain all its limit points, and hence it is not closed.</p>
+<p>Consider the sequence of sequences <span class="math">\((y^{(n)})\)</span> defined by:</p>
+<div class="math">
+\begin{equation*}
+y^{(n)} = (1, \frac{1}{2}, \frac{1}{3}, \ldots, \frac{1}{n}, 0, 0, 0, \ldots)
+\end{equation*}
+</div>
+<p>Each <span class="math">\(y^{(n)}\)</span> is in <span class="math">\(Y\)</span> because it has only <span class="math">\(n\)</span> nonzero terms. Now, consider the sequence
+<span class="math">\(y\)</span> defined by:</p>
+<div class="math">
+\begin{equation*}
+y = (1, \frac{1}{2}, \frac{1}{3}, \ldots)
+\end{equation*}
+</div>
+<p>The sequence <span class="math">\(y\)</span> is not in <span class="math">\(Y\)</span> because it has infinitely many nonzero terms. However,
+<span class="math">\((y^{(n)})\)</span> converges to <span class="math">\(y\)</span> in the <span class="math">\(l^{\infty}\)</span> norm because for every <span class="math">\(\epsilon &gt; 0\)</span>,
+there exists an <span class="math">\(N\)</span> such that for all <span class="math">\(n \geq N\)</span>, the tail of the sequence <span class="math">\(y\)</span> (from <span class="math">\(n\)</span>
+onward) is bounded above by <span class="math">\(\epsilon\)</span>.</p>
+<p>Therefore, the limit of the convergent sequence <span class="math">\((y^{(n)})\)</span> is not in <span class="math">\(Y\)</span>, showing that <span class="math">\(Y\)</span> is
+not closed in <span class="math">\(l^{\infty}\)</span>.</p>
+<hr class="docutils" />
+<p><strong>Problem 4.</strong> In a normed space <span class="math">\(X\)</span>, show that vector addition and multiplication by scalars are continuous operations
+with respect to the norm; that is, the mappings defined by <span class="math">\((x, y) \mapsto x+y\)</span> and <span class="math">\((\alpha, x) \mapsto \alpha x\)</span> are continuous.</p>
+<p><strong>Solution:</strong></p>
+<p><strong>Continuity of Vector Addition</strong></p>
+<p>Let <span class="math">\((x_n)\)</span> and <span class="math">\((y_n)\)</span> be sequences in <span class="math">\(X\)</span> such that <span class="math">\(x_n \to x\)</span> and <span class="math">\(y_n \to y\)</span> as <span class="math">\(n \to \infty\)</span>. We need to show that <span class="math">\(x_n + y_n \to x + y\)</span>. By the definition of convergence in a normed space, for every <span class="math">\(\epsilon &gt; 0\)</span>, there exist <span class="math">\(N_1, N_2 \in \mathbb{N}\)</span> such that for all <span class="math">\(n \geq N_1\)</span>, <span class="math">\(\|x_n - x\| &lt; \frac{\epsilon}{2}\)</span> and for all <span class="math">\(n \geq N_2\)</span>, <span class="math">\(\|y_n - y\| &lt; \frac{\epsilon}{2}\)</span>.</p>
+<p>Let <span class="math">\(N = \max\{N_1, N_2\}\)</span>. Then for all <span class="math">\(n \geq N\)</span>, we have:</p>
+<div class="math">
+\begin{equation*}
+\| (x_n + y_n) - (x + y) \| = \| (x_n - x) + (y_n - y) \| \leq \|x_n - x\| + \|y_n - y\| &lt; \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{equation*}
+</div>
+<p>The inequality follows from the triangle inequality of the norm. Since <span class="math">\(\epsilon\)</span> was arbitrary, this shows that <span class="math">\(x_n + y_n \to x + y\)</span>, and thus vector addition is continuous.</p>
+<p><strong>Continuity of Scalar Multiplication</strong></p>
+<p>Let <span class="math">\((\alpha_n)\)</span> be a sequence of scalars converging to <span class="math">\(\alpha\)</span>, and let <span class="math">\((x_n)\)</span> be a sequence in <span class="math">\(X\)</span> such that <span class="math">\(x_n \to x\)</span>. We need to show that <span class="math">\(\alpha_n x_n \to \alpha x\)</span>. For every <span class="math">\(\epsilon &gt; 0\)</span>, there exist <span class="math">\(N_1, N_2 \in \mathbb{N}\)</span> such that for all <span class="math">\(n \geq N_1\)</span>, <span class="math">\(|\alpha_n - \alpha| &lt; \frac{\epsilon}{2(\|x\|+1)}\)</span> and for all <span class="math">\(n \geq N_2\)</span>, <span class="math">\(\|x_n - x\| &lt; \frac{\epsilon}{2(\|\alpha\|+1)}\)</span>.</p>
+<p>Let <span class="math">\(N = \max\{N_1, N_2\}\)</span>. Then for all <span class="math">\(n \geq N\)</span>, we have:</p>
+<div class="math">
+\begin{equation*}
+\| \alpha_n x_n - \alpha x \| = \| \alpha_n x_n - \alpha_n x + \alpha_n x - \alpha x \| \leq \| \alpha_n (x_n - x) \| + \| (\alpha_n - \alpha) x \|
+\end{equation*}
+</div>
+<p>Using the properties of the norm and the convergence of <span class="math">\(\alpha_n\)</span> and <span class="math">\(x_n\)</span>, we further obtain:</p>
+<div class="math">
+\begin{equation*}
+\| \alpha_n x_n - \alpha x \| \leq |\alpha_n| \| x_n - x \| + |\alpha_n - \alpha| \| x \| &lt; (\|\alpha\|+1) \frac{\epsilon}{2(\|\alpha\|+1)} + \frac{\epsilon}{2} = \epsilon
+\end{equation*}
+</div>
+<p>Since <span class="math">\(\epsilon\)</span> was arbitrary, this shows that <span class="math">\(\alpha_n x_n \to \alpha x\)</span>, and thus scalar multiplication is continuous.</p>
+<p>Hence, in a normed space <span class="math">\(X\)</span>, both vector addition and scalar multiplication are continuous with respect to the norm.</p>
+<hr class="docutils" />
+<p><strong>Problem 5.</strong> Show that <span class="math">\(x_n \to x\)</span> and <span class="math">\(y_n \to y\)</span> implies <span class="math">\(x_n + y_n \to x + y\)</span>. Show that
+<span class="math">\(\alpha_n \to \alpha\)</span> and <span class="math">\(x_n \to x\)</span> implies <span class="math">\(\alpha_n x_n \to \alpha x\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p><strong>Continuity of Vector Addition</strong></p>
+<p>Given <span class="math">\(x_n \to x\)</span> and <span class="math">\(y_n \to y\)</span>, we need to demonstrate that <span class="math">\(x_n + y_n \to x + y\)</span>.</p>
+<p>By the definition of convergence, for every <span class="math">\(\epsilon &gt; 0\)</span>, there exists an <span class="math">\(N_1\)</span> such that for all <span class="math">\(n \geq N_1\)</span>, <span class="math">\(\|x_n - x\| &lt; \frac{\epsilon}{2}\)</span>. Similarly, there exists an <span class="math">\(N_2\)</span> such that for all <span class="math">\(n \geq N_2\)</span>, <span class="math">\(\|y_n - y\| &lt; \frac{\epsilon}{2}\)</span>.</p>
+<p>Let <span class="math">\(N = \max(N_1, N_2)\)</span>. Then for all <span class="math">\(n \geq N\)</span>:</p>
+<div class="math">
+\begin{equation*}
+\| (x_n + y_n) - (x + y) \| = \| (x_n - x) + (y_n - y) \| \leq \|x_n - x\| + \|y_n - y\| &lt; \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+\end{equation*}
+</div>
+<p>This proves that <span class="math">\(x_n + y_n \to x + y\)</span>, confirming the continuity of vector addition.</p>
+<p><strong>Continuity of Scalar Multiplication</strong></p>
+<p>Given <span class="math">\(\alpha_n \to \alpha\)</span> and <span class="math">\(x_n \to x\)</span>, we need to show that <span class="math">\(\alpha_n x_n \to \alpha x\)</span>.</p>
+<p>For every <span class="math">\(\epsilon &gt; 0\)</span>, there exists an <span class="math">\(N_1\)</span> such that for all <span class="math">\(n \geq N_1\)</span>, <span class="math">\(|\alpha_n - \alpha| &lt; \frac{\epsilon}{2(\|x\| + 1)}\)</span> (assuming <span class="math">\(x \neq 0\)</span>, otherwise the result is trivial). Also, there exists an <span class="math">\(N_2\)</span> such that for all <span class="math">\(n \geq N_2\)</span>, <span class="math">\(\|x_n - x\| &lt; \frac{\epsilon}{2(|\alpha| + 1)}\)</span>.</p>
+<p>Let <span class="math">\(N = \max(N_1, N_2)\)</span>. Then for all <span class="math">\(n \geq N\)</span>:</p>
+<div class="math">
+\begin{equation*}
+\| \alpha_n x_n - \alpha x \| = \| \alpha_n x_n - \alpha_n x + \alpha_n x - \alpha x \| \leq |\alpha_n| \| x_n - x \| + |\alpha_n - \alpha| \| x \|.
+\end{equation*}
+</div>
+<p>Using the convergence criteria and the norm properties, we get:</p>
+<div class="math">
+\begin{equation*}
+|\alpha_n| \| x_n - x \| &lt; (|\alpha| + 1) \frac{\epsilon}{2(|\alpha| + 1)} = \frac{\epsilon}{2},
+\end{equation*}
+</div>
+<p>and</p>
+<div class="math">
+\begin{equation*}
+|\alpha_n - \alpha| \| x \| &lt; \frac{\epsilon}{2(\|x\| + 1)} \|x\| \leq \frac{\epsilon}{2}.
+\end{equation*}
+</div>
+<p>Summing these inequalities gives:</p>
+<div class="math">
+\begin{equation*}
+\| \alpha_n x_n - \alpha x \| &lt; \epsilon.
+\end{equation*}
+</div>
+<p>This confirms that <span class="math">\(\alpha_n x_n \to \alpha x\)</span>, establishing the continuity of scalar multiplication.</p>
+<hr class="docutils" />
+<p><strong>Problem 6.</strong> Show that the closure <span class="math">\(\bar{Y}\)</span> of a subspace <span class="math">\(Y\)</span> of a normed space <span class="math">\(X\)</span> is again
+a vector subspace.</p>
+<p><strong>Solution:</strong></p>
+<p>To show that the closure <span class="math">\(\overline{Y}\)</span> of a subspace <span class="math">\(Y\)</span> is a vector subspace, we need to verify that it satisfies the properties of a vector subspace:</p>
+<p><strong>Non-emptiness:</strong>
+The closure <span class="math">\(\overline{Y}\)</span> must contain the zero vector. Since <span class="math">\(Y\)</span> is a subspace, it contains the zero vector <span class="math">\(0\)</span>. The closure of a set contains all the limit points of that set, and since <span class="math">\(0\)</span> is in <span class="math">\(Y\)</span> and is its own limit, <span class="math">\(0\)</span> is also in <span class="math">\(\overline{Y}\)</span>.</p>
+<p><strong>Closed under vector addition:</strong>
+If <span class="math">\(x\)</span> and <span class="math">\(y\)</span> are in <span class="math">\(\overline{Y}\)</span>, then <span class="math">\(x + y\)</span> must also be in <span class="math">\(\overline{Y}\)</span>. Let <span class="math">\(x\)</span> and <span class="math">\(y\)</span> be in <span class="math">\(\overline{Y}\)</span>. By the definition of closure, for every <span class="math">\(\epsilon &gt; 0\)</span>, there exist points <span class="math">\(x' \in Y\)</span> and <span class="math">\(y' \in Y\)</span> such that <span class="math">\(\|x - x'\| &lt; \frac{\epsilon}{2}\)</span> and <span class="math">\(\|y - y'\| &lt; \frac{\epsilon}{2}\)</span>. Since <span class="math">\(Y\)</span> is a subspace and therefore closed under addition, <span class="math">\(x' + y'\)</span> is in <span class="math">\(Y\)</span>.</p>
+<p>Consider <span class="math">\(x + y\)</span> and <span class="math">\(x' + y'\)</span>. We have:</p>
+<div class="math">
+\begin{equation*}
+\| (x + y) - (x' + y') \| = \| (x - x') + (y - y') \| \leq \|x - x'\| + \|y - y'\| &lt; \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+\end{equation*}
+</div>
+<p>This inequality shows that for every point <span class="math">\(x + y\)</span> in <span class="math">\(\overline{Y}\)</span>, we can find a point <span class="math">\(x' + y'\)</span> in <span class="math">\(Y\)</span> such that <span class="math">\(x + y\)</span> is as close as we wish to <span class="math">\(x' + y'\)</span>, which means <span class="math">\(x + y\)</span> is a limit point of <span class="math">\(Y\)</span> and hence in <span class="math">\(\overline{Y}\)</span>.</p>
+<p><strong>Closed under scalar multiplication:</strong>
+If <span class="math">\(x\)</span> is in <span class="math">\(\overline{Y}\)</span> and <span class="math">\(\alpha\)</span> is a scalar, then <span class="math">\(\alpha x\)</span> must also be in <span class="math">\(\overline{Y}\)</span>. Let <span class="math">\(x\)</span> be in <span class="math">\(\overline{Y}\)</span> and let <span class="math">\(\alpha\)</span> be any scalar. By the definition of closure, for every <span class="math">\(\epsilon &gt; 0\)</span>, there exists a point <span class="math">\(x' \in Y\)</span> such that <span class="math">\(\|x - x'\| &lt; \frac{\epsilon}{|\alpha|}\)</span> if <span class="math">\(\alpha \neq 0\)</span> (if <span class="math">\(\alpha = 0\)</span>, the result is trivial since <span class="math">\(0 \cdot x = 0\)</span> is in <span class="math">\(Y\)</span> and hence in <span class="math">\(\overline{Y}\)</span>).</p>
+<p>Since <span class="math">\(Y\)</span> is a subspace, it is closed under scalar multiplication, so <span class="math">\(\alpha x'\)</span> is in <span class="math">\(Y\)</span>. Consider <span class="math">\(\alpha x\)</span> and <span class="math">\(\alpha x'\)</span>. We have:</p>
+<div class="math">
+\begin{equation*}
+\| \alpha x - \alpha x' \| = |\alpha| \| x - x' \| &lt; |\alpha| \cdot \frac{\epsilon}{|\alpha|} = \epsilon.
+\end{equation*}
+</div>
+<p>This inequality shows that for every point <span class="math">\(\alpha x\)</span> in <span class="math">\(\overline{Y}\)</span>, we can find a point <span class="math">\(\alpha x'\)</span> in <span class="math">\(Y\)</span> such that <span class="math">\(\alpha x\)</span> is as close as we wish to <span class="math">\(\alpha x'\)</span>, which means <span class="math">\(\alpha x\)</span> is a limit point of <span class="math">\(Y\)</span> and hence in <span class="math">\(\overline{Y}\)</span>.</p>
+<p>Therefore, the closure <span class="math">\(\overline{Y}\)</span> of a subspace <span class="math">\(Y\)</span> of a normed space <span class="math">\(X\)</span> satisfies all the properties of a vector subspace and is thus itself a vector subspace of <span class="math">\(X\)</span>.</p>
+<hr class="docutils" />
+<p><strong>Problem 7.</strong> Show that convergence of <span class="math">\(\|\mathbf{y}_1\| + \|\mathbf{y}_2\| + \|\mathbf{y}_3\| + \ldots\)</span> may not imply convergence of <span class="math">\(\mathbf{y}_1 + \mathbf{y}_2 + \mathbf{y}_3 + \ldots\)</span>. Hint: Consider <span class="math">\(\mathbf{y}\)</span> in Prob. 3 and <span class="math">\((\mathbf{y}_n)\)</span>, where <span class="math">\(\mathbf{y}_n = (\eta_j^{(n)})\)</span>, <span class="math">\(\eta_n^{(n)} = 1/n^2\)</span>, <span class="math">\(\eta_j^{(n)} = 0\)</span> for all <span class="math">\(j \neq n\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p>To demonstrate the statement, we'll consider a sequence in the space <span class="math">\(l^\infty\)</span> of all bounded sequences of scalars, which is the space mentioned in Problem 3.</p>
+<p>We'll construct a specific example using the hint provided, which involves sequences with only one non-zero term whose magnitude is <span class="math">\(\frac{1}{n^2}\)</span>. This example will show that the series of norms converges (absolute convergence), but the series of vectors does not converge in the <span class="math">\(l^\infty\)</span> space.</p>
+<p><strong>Construction:</strong></p>
+<p>Let <span class="math">\(y_n\)</span> be a sequence in <span class="math">\(l^\infty\)</span> defined by <span class="math">\(y_n = (\eta_j^{(n)})\)</span> where:</p>
+<div class="math">
+\begin{equation*}
+\eta_j^{(n)} = \begin{cases}
+\frac{1}{n^2} &amp; \text{if } j = n \\
+0 &amp; \text{if } j \neq n
+\end{cases}
+\end{equation*}
+</div>
+<p>This sequence <span class="math">\(y_n\)</span> has only the <span class="math">\(n\)</span>-th term non-zero and equal to <span class="math">\(\frac{1}{n^2}\)</span>, and all other terms are zero.</p>
+<p><strong>Absolute convergence of norms:</strong></p>
+<p>Consider the series of norms <span class="math">\(\sum_{n=1}^\infty \|y_n\|\)</span>. Since <span class="math">\(\|y_n\| = \frac{1}{n^2}\)</span> for each <span class="math">\(n\)</span>, the series is:</p>
+<div class="math">
+\begin{equation*}
+\sum_{n=1}^\infty \|y_n\| = \sum_{n=1}^\infty \frac{1}{n^2}
+\end{equation*}
+</div>
+<p>The series <span class="math">\(\sum_{n=1}^\infty \frac{1}{n^2}\)</span> is known to converge (it's a p-series with <span class="math">\(p = 2\)</span>, which converges for <span class="math">\(p &gt; 1\)</span>).</p>
+<p><strong>Lack of convergence of the vector series:</strong></p>
+<p>Now consider the series of vectors <span class="math">\(\sum_{n=1}^\infty y_n\)</span>. The <span class="math">\(n\)</span>-th partial sum of this series is:</p>
+<div class="math">
+\begin{equation*}
+S_n = \sum_{k=1}^n y_k = (1, \frac{1}{4}, \frac{1}{9}, \ldots, \frac{1}{n^2}, 0, 0, \ldots)
+\end{equation*}
+</div>
+<p>Each partial sum <span class="math">\(S_n\)</span> is a sequence in <span class="math">\(l^\infty\)</span> where the first <span class="math">\(n\)</span> terms are the reciprocals of the squares of the natural numbers, and the rest are zeros.</p>
+<p>The limit of the partial sums <span class="math">\(S_n\)</span> as <span class="math">\(n \to \infty\)</span>, if it exists, would be the sequence:</p>
+<div class="math">
+\begin{equation*}
+S = (1, \frac{1}{4}, \frac{1}{9}, \ldots, \frac{1}{n^2}, \ldots)
+\end{equation*}
+</div>
+<p>The sequence <span class="math">\(S\)</span> represents the harmonic series of squares, which does not converge in the <span class="math">\(l^\infty\)</span> space, because it's not a bounded sequence. Each term in the sequence <span class="math">\(S\)</span> is a positive number, and there are infinitely many terms, so the sequence does not converge to a point in <span class="math">\(l^\infty\)</span> (which requires boundedness).</p>
+<p><strong>Conclusion:</strong></p>
+<p>We have shown that while the series of norms <span class="math">\(\sum_{n=1}^\infty \|y_n\|\)</span> converges, the series of vectors <span class="math">\(\sum_{n=1}^\infty y_n\)</span> does not converge in the <span class="math">\(l^\infty\)</span> space. This example illustrates that absolute convergence of the norms does not imply convergence of the series of vectors in the <span class="math">\(l^\infty\)</span> space.</p>
+<hr class="docutils" />
+<p><strong>Problem 8.</strong> Problem Statement: In a normed space <span class="math">\(X\)</span>, if absolute convergence of any series always implies convergence of that series, show that <span class="math">\(X\)</span> is complete.</p>
+<p><strong>Proof:</strong></p>
+<ol class="arabic">
+<li><p><strong>Absolute Convergence Implies Convergence:</strong>
+By hypothesis, if a series <span class="math">\(\sum_{n=1}^\infty x_n\)</span> in <span class="math">\(X\)</span> is absolutely convergent, meaning that <span class="math">\(\sum_{n=1}^\infty \|x_n\|\)</span> converges, then the series <span class="math">\(\sum_{n=1}^\infty x_n\)</span> itself converges in <span class="math">\(X\)</span>.</p></li>
+<li><p><strong>Cauchy Criterion for Series:</strong>
+A series <span class="math">\(\sum_{n=1}^\infty x_n\)</span> converges if and only if the sequence of partial sums <span class="math">\(S_m = \sum_{n=1}^m x_n\)</span> is a Cauchy sequence.</p></li>
+<li><p><strong>Absolute Convergence and Cauchy Sequences:</strong>
+Suppose <span class="math">\(\sum_{n=1}^\infty x_n\)</span> is absolutely convergent. Then for every <span class="math">\(\varepsilon &gt; 0\)</span>, there exists <span class="math">\(N \in \mathbb{N}\)</span> such that for all <span class="math">\(m &gt; n \geq N\)</span>, we have <span class="math">\(\sum_{k=n}^m \|x_k\| &lt; \varepsilon\)</span> because the series of norms is convergent and hence satisfies the Cauchy criterion.</p></li>
+<li><p><strong>Implication for Partial Sums:</strong>
+The property above implies that the sequence of partial sums <span class="math">\((S_m)\)</span> is Cauchy. To see this, note that for <span class="math">\(m &gt; n \geq N\)</span>,</p>
+<div class="math">
+\begin{equation*}
+\|S_m - S_n\| = \left\|\sum_{k=n+1}^m x_k\right\| \leq \sum_{k=n+1}^m \|x_k\| &lt; \varepsilon.
+\end{equation*}
+</div>
+<p>This inequality holds because the norm is subadditive (it satisfies the triangle inequality).</p>
+</li>
+<li><p><strong>Completeness of X:</strong>
+If <span class="math">\((S_m)\)</span> is a Cauchy sequence in <span class="math">\(X\)</span> and <span class="math">\(X\)</span> is a space where absolute convergence implies convergence, then <span class="math">\((S_m)\)</span> must converge in <span class="math">\(X\)</span> because it is absolutely convergent.</p></li>
+<li><p><strong>Conclusion:</strong>
+Since every Cauchy sequence in <span class="math">\(X\)</span> converges in <span class="math">\(X\)</span>, <span class="math">\(X\)</span> is complete. Hence, <span class="math">\(X\)</span> is a Banach space.</p></li>
+</ol>
+<p>The key point here is the equivalence of the Cauchy criterion for series convergence and the completeness of the space. The hypothesis that absolute convergence implies convergence ensures that Cauchy sequences of partial sums always converge, which is precisely the definition of a complete space.
+<strong>Solution:</strong></p>
+<p>The key point here is the equivalence of the Cauchy criterion for series convergence and the completeness of the space. The hypothesis that absolute convergence implies convergence ensures that Cauchy sequences of partial sums always converge, which is precisely the definition of a complete space.</p>
+<p><strong>Completeness of</strong> <span class="math">\(X\)</span>:</p>
+<p>To say that <span class="math">\(X\)</span> is complete means that every Cauchy sequence in <span class="math">\(X\)</span> converges to a limit within <span class="math">\(X\)</span>. Now, let's consider any Cauchy sequence <span class="math">\((x_n)\)</span> in <span class="math">\(X\)</span>. By the property of normed spaces, we can form a series <span class="math">\(\sum_{n=1}^\infty (x_{n+1} - x_n)\)</span>. This series is absolutely convergent if the series of norms <span class="math">\(\sum_{n=1}^\infty \|x_{n+1} - x_n\|\)</span> converges.</p>
+<p>Since <span class="math">\((x_n)\)</span> is a Cauchy sequence, for every <span class="math">\(\varepsilon &gt; 0\)</span>, there exists an <span class="math">\(N\)</span> such that for all <span class="math">\(m &gt; n \geq N\)</span>, the distance between <span class="math">\(x_n\)</span> and <span class="math">\(x_m\)</span> is less than <span class="math">\(\varepsilon\)</span>. Formally, <span class="math">\(\|x_m - x_n\| &lt; \varepsilon\)</span>.</p>
+<p>The property of being a Cauchy sequence suggests that the series of differences <span class="math">\((x_{n+1} - x_n)\)</span> has terms that become arbitrarily small as <span class="math">\(n\)</span> increases. In other words, the series <span class="math">\(\sum_{n=N}^\infty \|x_{n+1} - x_n\|\)</span> has terms that decrease and approach zero, implying that the series of norms is convergent.</p>
+<p>Given that absolute convergence of a series in <span class="math">\(X\)</span> implies its convergence, we can conclude that the series <span class="math">\(\sum_{n=1}^\infty (x_{n+1} - x_n)\)</span> converges in <span class="math">\(X\)</span>. The convergence of this series means that the sequence of partial sums, which corresponds to the sequence <span class="math">\((x_n)\)</span> up to an initial segment, converges to a limit in <span class="math">\(X\)</span>.</p>
+<p>Therefore, the original Cauchy sequence <span class="math">\((x_n)\)</span> must also converge in <span class="math">\(X\)</span>, because its behavior at infinity is captured by the series formed by its successive differences. Since every Cauchy sequence in <span class="math">\(X\)</span> has a limit in <span class="math">\(X\)</span>, we conclude that <span class="math">\(X\)</span> is complete.</p>
+<p>In summary, the condition that absolute convergence implies convergence in <span class="math">\(X\)</span> allows us to transform the Cauchy criterion for sequences into a condition on series. Since this condition guarantees convergence for all absolutely convergent series—and hence for all Cauchy sequences—it follows that <span class="math">\(X\)</span> is a complete normed space, or a Banach space.</p>
+<p><strong>Solution:</strong></p>
+<p>This proof leverages the fundamental property of normed spaces: a space is complete if every Cauchy sequence converges within the space. The given condition, that absolute convergence implies convergence, is used to show that Cauchy sequences, constructed from series of vectors in the space, converge. This implies that the space must be complete, as all such Cauchy sequences have a limit in the space, satisfying the definition of a Banach space.</p>
+<hr class="docutils" />
+<p><strong>Problem 9.</strong> Show that in a Banach space, an absolutely convergent series is convergent.</p>
+<p>Detailed Proof:</p>
+<p>Let <span class="math">\((X, \|\cdot\|)\)</span> be a Banach space. Suppose we have a series <span class="math">\(\sum_{n=1}^\infty x_n\)</span> in <span class="math">\(X\)</span> that is absolutely convergent. By definition, this means that the series <span class="math">\(\sum_{n=1}^\infty \|x_n\|\)</span> converges in the real numbers.</p>
+<ol class="arabic">
+<li><p><strong>Definition of Absolute Convergence:</strong>
+The series <span class="math">\(\sum_{n=1}^\infty \|x_n\|\)</span> is said to be absolutely convergent if the sum of the norms, which are real numbers, is a convergent series in <span class="math">\(\mathbb{R}\)</span>, i.e., there exists a real number <span class="math">\(L\)</span> such that for every <span class="math">\(\epsilon &gt; 0\)</span>, there is an integer <span class="math">\(N\)</span> such that for all <span class="math">\(n \geq N\)</span>, it holds that</p>
+<div class="math">
+\begin{equation*}
+\left|\sum_{k=N+1}^n \|x_k\| - L\right| &lt; \epsilon.
+\end{equation*}
+</div>
+</li>
+<li><p><strong>Partial Sums as a Sequence:</strong>
+Define the <span class="math">\(n\)</span>-th partial sum <span class="math">\(S_n\)</span> of the series <span class="math">\(\sum_{n=1}^\infty x_n\)</span> by <span class="math">\(S_n = \sum_{k=1}^n x_k\)</span>. The sequence <span class="math">\((S_n)\)</span> is a sequence of elements in <span class="math">\(X\)</span>.</p></li>
+<li><p><strong>Partial Sums Are Cauchy:</strong>
+To show that <span class="math">\((S_n)\)</span> is a Cauchy sequence, consider any <span class="math">\(\epsilon &gt; 0\)</span>. Since the series of norms converges, there exists an integer <span class="math">\(N\)</span> such that for all <span class="math">\(m, n \geq N\)</span> with <span class="math">\(m &lt; n\)</span>, we have</p>
+<div class="math">
+\begin{equation*}
+\sum_{k=m+1}^n \|x_k\| &lt; \epsilon.
+\end{equation*}
+</div>
+<p>Now, consider the difference between the <span class="math">\(n\)</span>-th and <span class="math">\(m\)</span>-th partial sums:</p>
+<div class="math">
+\begin{equation*}
+\|S_n - S_m\| = \left\|\sum_{k=m+1}^n x_k\right\| \leq \sum_{k=m+1}^n \|x_k\|,
+\end{equation*}
+</div>
+<p>where we used the triangle inequality for norms. Given our choice of <span class="math">\(N\)</span>, for <span class="math">\(m, n \geq N\)</span>, this implies</p>
+<div class="math">
+\begin{equation*}
+\|S_n - S_m\| &lt; \epsilon.
+\end{equation*}
+</div>
+<p>This is the Cauchy criterion for sequences in a normed space: for any <span class="math">\(\epsilon &gt; 0\)</span>, there exists an <span class="math">\(N\)</span> such that for all <span class="math">\(m, n \geq N\)</span>, the norm of the difference between the <span class="math">\(n\)</span>-th and <span class="math">\(m\)</span>-th terms of the sequence is less than <span class="math">\(\epsilon\)</span>.</p>
+</li>
+<li><p><strong>Convergence of Cauchy Sequences in Banach Spaces:</strong>
+A Banach space is, by definition, a complete normed vector space. Completeness means that every Cauchy sequence in the space converges to a limit within the space. Since we have established that <span class="math">\((S_n)\)</span> is a Cauchy sequence, it must converge to some limit <span class="math">\(S\)</span> in <span class="math">\(X\)</span>.</p></li>
+<li><p><strong>Conclusion:</strong>
+The limit <span class="math">\(S\)</span> to which the sequence <span class="math">\((S_n)\)</span> converges is the sum of the series <span class="math">\(\sum_{n=1}^\infty x_n\)</span>. Therefore, the series converges in <span class="math">\(X\)</span>, and we have demonstrated that an absolutely convergent series in a Banach space is indeed convergent.</p></li>
+</ol>
+<p><strong>Solution:</strong></p>
+<p>This detailed proof walks through the concepts of absolute convergence, the properties of Cauchy sequences, and the completeness of Banach spaces to conclusively show that an absolutely convergent series in a Banach space must converge. This result is a cornerstone of functional analysis and underscores the robustness of Banach spaces for analytical purposes.</p>
