@@ -626,4 +626,59 @@ The point :math:`z = \alpha x + (1 - \alpha) y` is crucial in the definition of 
 
 A set is convex if, for every pair of points within the set, the entire line segment that connects them also lies within the set. The point :math:`z` symbolizes a general point on the line segment between :math:`x` and :math:`y`. Demonstrating that for all values of :math:`\alpha` in the closed interval [0, 1], :math:`z` remains within the set proves the set's convexity. This is the essence of why the expression :math:`z = \alpha x + (1 - \alpha) y` is used: it is a generic representation of any point on the line segment, and verifying that all such points are contained within the set for all :math:`\alpha` in [0, 1] affirms the convexity of the set.
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**Problem Statement 15.** Show that a subset :math:`M` in a normed space :math:`X` is bounded if and only if there is a positive number :math:`c` such that :math:`\|x\| \leq c` for every :math:`x \in M`. The diameter :math:`\delta(A)` of a nonempty set :math:`A` in a metric space :math:`(X, d)` is defined to be :math:`\delta(A) = \sup \{d(x, y) : x, y \in A\}`. A set :math:`A` is said to be bounded if :math:`\delta(A) < \infty`.
+
+**Solution:**
+
+If :math:`M` is bounded, then there exists a :math:`c` such that :math:`\|x\| \leq c` for every :math:`x \in M`:
+
+Step 1: Assume :math:`M` is bounded.
+  By definition of boundedness in the context of a normed space, this means that the diameter :math:`\delta(M)`, which is the supremum of the distances between all pairs of points in :math:`M`, is less than infinity. In mathematical terms, :math:`\delta(M) = \sup \{\|x - y\| : x, y \in M\} = b < \infty`.
+
+Step 2: Choose any :math:`x \in M` and also take a fixed element :math:`x_0 \in M`.
+  We need a reference point in :math:`M` to compare all other points to. The choice of :math:`x_0` is arbitrary but will be used to help establish a universal bound for the norm of any element in :math:`M`.
+
+Step 3: Define :math:`c = b + \|x_0\|`, which is a positive number.
+  Here :math:`b` is the diameter :math:`\delta(M)` we defined earlier, which captures the maximum distance between any two points in :math:`M`. We are defining a new constant :math:`c` that not only accounts for this maximum distance but also adds the norm of our reference point :math:`x_0` to ensure that :math:`c` will be an upper bound for the norm of any point in :math:`M`.
+
+**Step 4:** For any :math:`x \in M`, estimate :math:`\|x\|` using the triangle inequality:
+  
+  .. math::
+     \|x\| = \|x - x_0 + x_0\| \leq \|x - x_0\| + \|x_0\| \leq b + \|x_0\| = c.
+
+  The last step uses the fact that :math:`\delta(M) = b` is the supremum of all such norms :math:`\|x - x_0\|`, and therefore :math:`\|x - x_0\|` cannot exceed :math:`b`.
+
+Step 5: This shows that for every :math:`x \in M`, :math:`\|x\| \leq c`.
+  The definition of :math:`c` was constructed to be a bound for the norms of all points in :math:`M` relative to the fixed point :math:`x_0` and the diameter of :math:`M`.
+
+**Conversely** , if there exists a :math:`c` such that :math:`\|x\| \leq c` for every :math:`x \in M`, then :math:`M` is bounded:
+
+Step 1: Assume that for every :math:`x \in M`, :math:`\|x\| \leq c` for some positive number :math:`c`.
+  This is the hypothesis that there is a uniform bound on the norms of all elements in the set :math:`M`.
+
+**Step 2:** For any :math:`x, y \in M`, using the triangle inequality we have:
+  
+  .. math::
+     \|x - y\| \leq \|x\| + \|y\|.
+
+  This is the triangle inequality applied to the points :math:`x` and :math:`y` in :math:`M`.
+
+**Step 3:** Since :math:`\|x\| \leq c` and :math:`\|y\| \leq c`, it follows that:
+  
+  .. math::
+     \|x - y\| \leq c + c = 2c.
+
+  This step uses the bound for the norms of :math:`x` and :math:`y` to establish a bound for the distance between them.
+
+**Step 4:** This inequality holds for all :math:`x, y \in M`, so :math:`\delta(M)`, the supremum of all such distances, is at most :math:`2c`.
+  Here we use the definition of :math:`\delta(M)` again, which is the supremum of all distances between points in :math:`M`. Since we've shown that every such distance is bounded by :math:`2c`, it follows that :math:`\delta(M) \leq 2c`.
+
+Step 5: Therefore, :math:`\delta(M) \leq 2c < \infty`, which means :math:`M` is bounded.
+  Since :math:`2c` is a finite number, the supremum of the set of distances (the diameter) is also finite, confirming that :math:`M` is bounded by definition.
+
+In both directions of the proof, the definition of :math:`\delta(M)` as the supremum of distances :math:`\|x - y\|` for :math:`x, y \in M` is crucial for establishing the boundedness of :math:`M`.
+
+
 
