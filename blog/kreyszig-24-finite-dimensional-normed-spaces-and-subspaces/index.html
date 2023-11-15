@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kreyszig 2.4 Finite Dimensional Normed Spaces and Subspaces | Nova Automata</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https://example.com/blog/kreyszig-24-finite-dimensional-normed-spaces-and-subspaces/">
+<link rel="icon" href="../../files/blogFavicon.ico" sizes="128x128">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YWLRJ2M88S"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID);
+</script><meta name="google-site-verification" content="WF1l7hEMV49eJl7Kb2rVSOwXp2KINwX59Tig6ACvfSs">
+<meta name="author" content="Lucy Nowacki">
+<link rel="prev" href="../kreyszig-23-further-properties-of-normed-spaces/" title="Kreyszig 2.3, Further Properties of Normed Spaces" type="text/html">
+<meta property="og:site_name" content="Nova Automata">
+<meta property="og:title" content="Kreyszig 2.4 Finite Dimensional Normed Spaces and Subspaces">
+<meta property="og:url" content="https://example.com/blog/kreyszig-24-finite-dimensional-normed-spaces-and-subspaces/">
+<meta property="og:description" content="Problem 1. Give examples of subspaces of \(\ell^\infty\) and \(\ell^2\) which are not closed.
+Solution:
+In topology and functional analysis, a subspace of a topological space is considered closed if i">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-11-15T19:46:21Z">
+<meta property="article:tag" content="proofs">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark
+bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="../../">
+
+            <span id="blog-title">Nova Automata</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a href="../../categories/machine-learning" class="nav-link">Machine Blog</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/numerical" class="nav-link">Numerical Blog</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/nlp" class="nav-link">NLP &amp; Transformers</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/transhumanism" class="nav-link">Transhuman</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/fintech" class="nav-link">FinTech</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/proofs" class="nav-link">Proofs</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/" class="nav-link">Tags</a>
+                </li>
+<li class="nav-item">
+<a href="../../bio/index.html" class="nav-link">Me &amp; Hobbies</a>
+
+                
+            </li>
+</ul>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" google custom search>
+<form method="get" action="https://www.qwant.com/" class="navbar-form navbar-right" role="search">
+  <style>
+    .btn {
+        cursor: pointer;
+        display: inline-block;
+        padding: 10px 30px;
+        /* text color in the button */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+    }
+    
+    .btn:hover {
+        opacity: 0.9;
+        color: red;
+    }
+    /* Buttons for other colors */
+    
+    .btn-primary,
+    .bg-primary {
+        color: #fff;
+    }
+    
+    .btn-secondary,
+    .bg-secondary {
+        background: #88258b;
+        color: #fff;
+    }
+    
+    .btn-outline {
+        background: transparent;
+        border: 1px solid #fff;
+    }
+  </style>
+<div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder=" Qwant Search"><button type="submit" class="btn btn-secondary">
+            <i class="fa fa-search"></i>
+        </button>
+        <input type="hidden" name="sitesearch" value="https://example.com/">
+</div>    
+</form>
+<!-- End of custom search -->
+
+
+            <ul class="navbar-nav navbar-right"></ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Kreyszig 2.4 Finite Dimensional Normed Spaces and Subspaces</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Lucy Nowacki
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2023-11-15T19:46:21Z" itemprop="datePublished" title="2023-11-15 19:46">2023-11-15 19:46</time></a>
+            </p>
+            
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <p><strong>Problem 1.</strong> Give examples of subspaces of <span class="math">\(\ell^\infty\)</span> and <span class="math">\(\ell^2\)</span> which are not closed.</p>
+<p><strong>Solution:</strong></p>
+<p>In topology and functional analysis, a subspace of a topological space is considered <strong>closed</strong> if it contains all its limit points. For a subspace to be not closed, there must exist sequences (or nets) within the subspace that converge to a point outside the subspace.</p>
+<p>For <span class="math">\(\ell^\infty\)</span> (Bounded Sequences):</p>
+<p><strong>Example of a Non-Closed Subspace</strong>:</p>
+<ul class="simple">
+<li><p>Consider the subspace of <span class="math">\(\ell^\infty\)</span> consisting of sequences that converge to 0.</p></li>
+<li><p><strong>Example Sequence</strong>: Define <span class="math">\(x_n = (0, 0, \ldots, 0, \frac{1}{n}, 0, \ldots)\)</span>, where each <span class="math">\(x_n\)</span> has <span class="math">\(\frac{1}{n}\)</span> at the <span class="math">\(n\)</span>-th position and 0 everywhere else.</p></li>
+<li><p><strong>Proof of Non-Closure</strong>:
+- As <span class="math">\(n\)</span> increases, each <span class="math">\(x_n\)</span> converges to the zero sequence (all terms are zero), which is in the subspace.
+- The term-wise limit of <span class="math">\((x_n)\)</span> as <span class="math">\(n \to \infty\)</span> is the harmonic sequence <span class="math">\(y = (1, \frac{1}{2}, \frac{1}{3}, \ldots)\)</span>.
+- Although each <span class="math">\(x_n\)</span> converges to 0, the limit sequence <span class="math">\(y\)</span> does not converge to 0.
+- Since <span class="math">\(y\)</span> is not in the subspace (it doesn't converge to 0) but is a limit of sequences in the subspace, this demonstrates that the subspace is not closed.</p></li>
+</ul>
+<p>For <span class="math">\(\ell^2\)</span> (Square-Summable Sequences):</p>
+<p><strong>Example of a Non-Closed Subspace</strong>:</p>
+<ul class="simple">
+<li><p>Consider the subspace of <span class="math">\(\ell^2\)</span> consisting of sequences that converge to 0.</p></li>
+<li><p><strong>Example Sequence</strong>: Let <span class="math">\(x_n = (1, \frac{1}{2}, \ldots, \frac{1}{n}, 0, 0, \ldots)\)</span>, where the first <span class="math">\(n\)</span> terms are the first <span class="math">\(n\)</span> terms of the harmonic sequence, and the rest are 0.</p></li>
+<li><p><strong>Proof of Non-Closure</strong>:
+- Each <span class="math">\(x_n\)</span> is square-summable and converges to 0, making them elements of the subspace.
+- The term-wise limit of <span class="math">\((x_n)\)</span> as <span class="math">\(n \to \infty\)</span> is <span class="math">\(y = (1, \frac{1}{2}, \frac{1}{3}, \ldots)\)</span>.
+- While each <span class="math">\(x_n\)</span> is square-summable, the limit sequence <span class="math">\(y\)</span> is not square-summable. The sum of the squares of the terms of <span class="math">\(y\)</span>, <span class="math">\(\sum \frac{1}{n^2}\)</span>, diverges.
+- Since <span class="math">\(y\)</span> is not in <span class="math">\(\ell^2\)</span> (not square-summable) but is the limit of sequences in the subspace, this demonstrates that the subspace is not closed.</p></li>
+</ul>
+<p>These examples illustrate that not all subspaces in <span class="math">\(\ell^\infty\)</span> and <span class="math">\(\ell^2\)</span> are closed. A subspace is not closed if it does not contain the limits of all convergent sequences within it. In <span class="math">\(\ell^\infty\)</span>, the subspace of sequences converging to 0 fails to include the harmonic sequence, which is a limit point. Similarly, in <span class="math">\(\ell^2\)</span>, the subspace of sequences converging to 0 does not include the harmonic sequence, which is not square-summable. This absence of limit points in the respective subspaces proves they are not closed.</p>
+<p>These examples illustrate the principle of closed subspaces and demonstrate how sequences within these subspaces and their corresponding limit points can indicate whether a subspace is closed.</p>
+<p><strong>Problem:</strong></p>
+<p>Consider the space <span class="math">\(\ell^\infty\)</span> which consists of all bounded sequences of real numbers, and the space <span class="math">\(\ell^2\)</span> which consists of all square-summable sequences. We are tasked with demonstrating that certain subspaces of these spaces are not closed.</p>
+<p><strong>Solution:</strong></p>
+<p>The distinction between the sequences <span class="math">\(\left( \frac{1}{n} \right)\)</span> and <span class="math">\(\left( \frac{1}{n^2} \right)\)</span> in the context of closed subspaces is significant.</p>
+<p>The sequence <span class="math">\(\left( \frac{1}{n} \right)\)</span> has terms that approach 0 as <span class="math">\(n\)</span> grows, but it does not actually converge to 0. The terms get infinitesimally small but never reach a limit as a sequence. This sequence does not meet the criterion for sequences in a subspace <span class="math">\(S \subset \ell^\infty\)</span> that we consider, which is the set of all sequences that converge to 0.</p>
+<p>On the other hand, the sequence <span class="math">\(\left( \frac{1}{n^2} \right)\)</span> does converge to 0. For every <span class="math">\(\epsilon &gt; 0\)</span>, there is an <span class="math">\(N\)</span> such that for all <span class="math">\(n &gt; N\)</span>, <span class="math">\(\left| \frac{1}{n^2} \right| &lt; \epsilon\)</span>. This means the sequence <span class="math">\(\left( \frac{1}{n^2} \right)\)</span> meets the criterion for inclusion in <span class="math">\(S\)</span>.</p>
+<p>When we consider the limit of a sequence of sequences from <span class="math">\(S\)</span>, if the limit sequence is not in <span class="math">\(S\)</span>, it shows that <span class="math">\(S\)</span> is not closed. For the sequence <span class="math">\(\left( \frac{1}{n} \right)\)</span>, we can demonstrate this by considering a sequence of sequences <span class="math">\((x_n)\)</span> where each <span class="math">\(x_n\)</span> consists of the first <span class="math">\(n\)</span> terms of <span class="math">\(\left( \frac{1}{n} \right)\)</span> followed by zeros. The term-wise limit of this sequence of sequences as <span class="math">\(n\)</span> approaches infinity is the sequence <span class="math">\(\left( \frac{1}{n} \right)\)</span>, which is bounded and therefore an element of <span class="math">\(\ell^\infty\)</span> but not in <span class="math">\(S\)</span> since it does not converge to 0, hence showing that <span class="math">\(S\)</span> is not closed in <span class="math">\(\ell^\infty\)</span>.</p>
+<p>In contrast, any sequence of sequences from <span class="math">\(S\)</span> where each sequence converges to 0 will have a limit that also converges to 0. This is due to the more rapid convergence of the terms <span class="math">\(\left( \frac{1}{n^2} \right)\)</span> compared to <span class="math">\(\left( \frac{1}{n} \right)\)</span>. Thus, the sequence <span class="math">\(\left( \frac{1}{n^2} \right)\)</span> is not suitable for constructing a counterexample of a non-closed subspace in <span class="math">\(\ell^\infty\)</span>, because its limit behavior is consistent with sequences in <span class="math">\(S\)</span>.</p>
+<p><strong>Proofs of convergence</strong></p>
+<div class="math">
+\begin{equation*}
+\varepsilon \text{-Proof that } \frac{1}{n} \text{ Does Not Converge to 0:}
+\end{equation*}
+</div>
+<p>Suppose for contradiction that <span class="math">\(\frac{1}{n}\)</span> converges to 0. Then, for any <span class="math">\(\varepsilon &gt; 0\)</span>, there should exist an <span class="math">\(N \in \mathbb{N}\)</span> such that for all <span class="math">\(n &gt; N\)</span>, <span class="math">\(\left| \frac{1}{n} - 0 \right| &lt; \varepsilon\)</span>.</p>
+<p>Let's choose <span class="math">\(\varepsilon = \frac{1}{2}\)</span>. According to our assumption, there should exist an <span class="math">\(N\)</span> such that for all <span class="math">\(n &gt; N\)</span>, <span class="math">\(\left| \frac{1}{n} \right| &lt; \frac{1}{2}\)</span>.</p>
+<p>However, no matter how large <span class="math">\(N\)</span> is chosen, there will always be an <span class="math">\(n = N + 1\)</span> such that <span class="math">\(\frac{1}{n} = \frac{1}{N + 1}\)</span>, which is not less than <span class="math">\(\frac{1}{2}\)</span> for sufficiently large <span class="math">\(N\)</span>. This contradicts the assumption that <span class="math">\(\frac{1}{n}\)</span> converges to 0.</p>
+<div class="math">
+\begin{equation*}
+\varepsilon \text{-Proof that } \frac{1}{n^2} \text{ Converges to 0:}
+\end{equation*}
+</div>
+<p>To prove that <span class="math">\(\frac{1}{n^2}\)</span> converges to 0, we must show that for any <span class="math">\(\varepsilon &gt; 0\)</span>, there exists an <span class="math">\(N \in \mathbb{N}\)</span> such that for all <span class="math">\(n &gt; N\)</span>, <span class="math">\(\left| \frac{1}{n^2} - 0 \right| &lt; \varepsilon\)</span>.</p>
+<p>Let <span class="math">\(\varepsilon &gt; 0\)</span> be given. We want to find an <span class="math">\(N\)</span> such that if <span class="math">\(n &gt; N\)</span>, then <span class="math">\(\frac{1}{n^2} &lt; \varepsilon\)</span>.</p>
+<p>Since <span class="math">\(\frac{1}{n^2}\)</span> is decreasing as <span class="math">\(n\)</span> increases, we can solve the inequality <span class="math">\(\frac{1}{n^2} &lt; \varepsilon\)</span> for <span class="math">\(n\)</span>. We get <span class="math">\(n^2 &gt; \frac{1}{\varepsilon}\)</span>, and thus <span class="math">\(n &gt; \sqrt{\frac{1}{\varepsilon}}\)</span>.</p>
+<p>Therefore, if we choose <span class="math">\(N\)</span> to be any integer greater than <span class="math">\(\sqrt{\frac{1}{\varepsilon}}\)</span>, then for all <span class="math">\(n &gt; N\)</span>, <span class="math">\(\left| \frac{1}{n^2} \right| &lt; \varepsilon\)</span>. This proves that <span class="math">\(\frac{1}{n^2}\)</span> converges to 0.</p>
+<p><strong>Problem Statement:</strong></p>
+<p>Discuss examples and counterexamples for non-closed and closed subspaces in the spaces <span class="math">\(\ell^\infty\)</span> and <span class="math">\(\ell^2\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p><strong>Example for</strong> <span class="math">\(\ell^\infty\)</span> (Non-closed Subspace):</p>
+<ul class="simple">
+<li><p><strong>Subspace Definition</strong>: Consider the subspace <span class="math">\(S \subset \ell^\infty\)</span> consisting of sequences that converge to 0.</p></li>
+<li><p><strong>Example Sequence</strong>: <span class="math">\(x_n = (0, 0, \ldots, 0, \underbrace{\frac{1}{n}}_{n\text{-th position}}, 0, 0, \ldots)\)</span>. As <span class="math">\(n \to \infty\)</span>, each <span class="math">\(x_n\)</span> converges to the zero sequence, which is in <span class="math">\(S\)</span>.</p></li>
+<li><p><strong>Limit Sequence</strong>: The term-wise limit of <span class="math">\((x_n)\)</span> as <span class="math">\(n \to \infty\)</span> is <span class="math">\(y = (1, \frac{1}{2}, \frac{1}{3}, \ldots)\)</span>, the harmonic sequence.</p></li>
+<li><p><strong>Proof</strong>: Since <span class="math">\(y\)</span> does not converge to 0, <span class="math">\(y \notin S\)</span>. But <span class="math">\(y\)</span> is the limit of sequences in <span class="math">\(S\)</span>. Therefore, <span class="math">\(S\)</span> does not contain all its limit points, showing it is not closed.</p></li>
+</ul>
+<p><strong>Counterexample for</strong> <span class="math">\(\ell^\infty\)</span> (Closed Subspace):</p>
+<ul class="simple">
+<li><p><strong>Subspace Definition</strong>: Consider the subspace <span class="math">\(T \subset \ell^\infty\)</span> consisting of all sequences that are eventually constant (i.e., from some point onward, all terms are the same).</p></li>
+<li><p><strong>Example Sequence</strong>: <span class="math">\(x_n = (a, a, \ldots, a, \underbrace{b}_{n\text{-th position}}, b, b, \ldots)\)</span>, where <span class="math">\(a, b\)</span> are constants.</p></li>
+<li><p><strong>Limit Sequence</strong>: The limit of <span class="math">\((x_n)\)</span> as <span class="math">\(n \to \infty\)</span> is a constant sequence <span class="math">\((a, a, a, \ldots)\)</span>.</p></li>
+<li><p><strong>Proof</strong>: Since the limit sequence is constant, it is in <span class="math">\(T\)</span>. Thus, <span class="math">\(T\)</span> contains all its limit points and is closed.</p></li>
+</ul>
+<p><strong>Example for</strong> <span class="math">\(\ell^2\)</span> (Non-closed Subspace):</p>
+<ul class="simple">
+<li><p><strong>Subspace Definition</strong>: Consider the subspace <span class="math">\(U \subset \ell^2\)</span> consisting of sequences converging to 0.</p></li>
+<li><p><strong>Example Sequence</strong>: <span class="math">\(x_n = (1, \frac{1}{2}, \ldots, \frac{1}{n}, 0, 0, \ldots)\)</span>. Each <span class="math">\(x_n\)</span> is in <span class="math">\(U\)</span> since it converges to 0 and is square-summable.</p></li>
+<li><p><strong>Limit Sequence</strong>: The term-wise limit of <span class="math">\((x_n)\)</span> as <span class="math">\(n \to \infty\)</span> is the sequence <span class="math">\(y = (1, \frac{1}{2}, \frac{1}{3}, \ldots)\)</span>, which is not square-summable.</p></li>
+<li><p><strong>Proof</strong>: The sequence <span class="math">\(y\)</span> is the harmonic sequence, which is not in <span class="math">\(U\)</span> as it is not square-summable. However, it is the limit of sequences in <span class="math">\(U\)</span>. Hence, <span class="math">\(U\)</span> does not contain all its limit points, showing it is not closed.</p></li>
+</ul>
+<p><strong>Counterexample for</strong> <span class="math">\(\ell^2\)</span> (Closed Subspace):</p>
+<ul class="simple">
+<li><p><strong>Subspace Definition</strong>: Consider the subspace <span class="math">\(V \subset \ell^2\)</span> consisting of all sequences that are eventually zero.</p></li>
+<li><p><strong>Example Sequence</strong>: <span class="math">\(x_n = (a_1, a_2, \ldots, a_k, 0, 0, \ldots)\)</span> with only a finite number of non-zero terms.</p></li>
+<li><p><strong>Limit Sequence</strong>: Any sequence of sequences in <span class="math">\(V\)</span> will have a limit sequence that is also eventually zero.</p></li>
+<li><p><strong>Proof</strong>: Since the limit sequence will be eventually zero, it is in <span class="math">\(V\)</span>. Thus, <span class="math">\(V\)</span> contains all its limit points and is closed.</p></li>
+</ul>
+<p><strong>The essence of the original problem is to understand and provide examples of non-closed subspaces within the mathematical spaces</strong> <span class="math">\(\ell^\infty\)</span> and <span class="math">\(\ell^2\)</span>.</p>
+<ul class="simple">
+<li><p><strong>In the Context of</strong> <span class="math">\(\ell^\infty\)</span>:
+This space consists of all bounded sequences of real numbers. The goal was to identify a subspace of <span class="math">\(\ell^\infty\)</span> that is not closed. A subspace is closed if it contains all its limit points, meaning every sequence within the subspace that converges has its limit also within the subspace. A non-closed subspace would be one where you can find a sequence (or sequences) within the subspace that converges to a limit not included in the subspace.</p></li>
+<li><p><strong>In the Context of</strong> <span class="math">\(\ell^2\)</span>:
+This space is made up of all square-summable sequences of real numbers. Similar to <span class="math">\(\ell^\infty\)</span>, the task was to find a subspace of <span class="math">\(\ell^2\)</span> that does not contain all its limit points, thus making it a non-closed subspace.</p></li>
+</ul>
+<p>In both cases, the challenge lies in identifying specific sequences and showing through examples (and counterexamples) how their behavior within these spaces illustrates the concept of closed versus non-closed subspaces. This understanding is fundamental in functional analysis and topology, as it provides insight into the behavior of sequences in different mathematical spaces and the properties of these spaces.</p>
+<p>Applying the concepts of closed and non-closed subspaces to real-life scenarios can help in understanding these abstract mathematical ideas in a more tangible way. Let's use some analogies:</p>
+<p><strong>Closed Subspaces - A "Complete" Library</strong></p>
+<ul class="simple">
+<li><p><strong>Analogy</strong>: Think of a closed subspace as a library that contains every possible book (limit points) on a specific topic. For instance, a library dedicated to "World History" contains every book ever written on the subject, including those that are the culmination of earlier works (analogous to limit points of sequences).</p></li>
+<li><p><strong>Real-Life Example</strong>: When a researcher looks for information on a particular historical event, they will find all relevant books in this library, including those that have evolved from earlier research. The library is "closed" in the sense that it leaves no gaps in this field of knowledge.</p></li>
+</ul>
+<p><strong>Non-Closed Subspaces - An Incomplete Music Playlist</strong></p>
+<ul class="simple">
+<li><p><strong>Analogy</strong>: A non-closed subspace is like a music playlist meant to include every song from a specific genre but misses some key tracks. Imagine a playlist intended to contain every jazz song ever composed, but it lacks some essential pieces that are considered evolutions or variations of earlier jazz songs.</p></li>
+<li><p><strong>Real-Life Example</strong>: A jazz enthusiast looking for a comprehensive collection of jazz music in this playlist will find it lacking. Some songs that should be there, being logical continuations or variations of existing songs (like limits of sequences), are missing. This playlist is "non-closed" as it doesn't encapsulate the complete range of jazz music.</p></li>
+</ul>
+<p><strong>For</strong> <span class="math">\(\ell^\infty\)</span> - Temperature Readings</p>
+<ul class="simple">
+<li><p><strong>Analogy</strong>: Consider a weather monitoring system that tracks temperature but is set to record only up to a certain threshold. This system is analogous to a non-closed subspace in <span class="math">\(\ell^\infty\)</span> if it fails to record extreme temperature spikes that surpass its set limit, even though such spikes are the logical continuations (limits) of the recorded data.</p></li>
+<li><p><strong>Real-Life Example</strong>: A meteorological station records temperatures but stops logging data beyond a certain point. During an unusual thermal event, where temperatures exceed this threshold, the system fails to record these critical data points, thus not "closing" the full spectrum of temperature variations.</p></li>
+</ul>
+<p><strong>For</strong> <span class="math">\(\ell^2\)</span> - Ecological Studies</p>
+<ul class="simple">
+<li><p><strong>Analogy</strong>: Imagine an ecological study tracking the population of a specific species over time. If the study is discontinued prematurely, it's like a non-closed subspace in <span class="math">\(\ell^2\)</span>, failing to include the "limit" of the population trend.</p></li>
+<li><p><strong>Real-Life Example</strong>: Biologists observe a species' population but stop their study after a certain period. The final phase of the study, which could have shown a critical trend (like a limit of a sequence), is missing. This incomplete study doesn't encapsulate the full picture of the population dynamics.</p></li>
+</ul>
+<p>These analogies help to illustrate the concepts of closed and non-closed subspaces in a more concrete and relatable manner.</p>
+    </div>
+
+
+
+    
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/proofs/" rel="tag">proofs</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../kreyszig-23-further-properties-of-normed-spaces/" rel="prev" title="Kreyszig 2.3, Further Properties of Normed Spaces">Previous post</a>
+            </li>
+        </ul></nav></aside><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script><script>
+                renderMathInElement(document.body,
+                    {
+                        
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                    }
+                );
+            </script></article><!--End of body content--><footer id="footer"><div class="text-center">
+    <p>
+        <span class="fa-stack fa-2x">
+        <a href="https://github.com/LucyNowacki">
+            <i class="fa fa-github-square fa-stack-2x"></i>
+        </a>
+        </span>
+        <span class="fa-stack fa-2x">
+        <a href="https://www.linkedin.com/in/lucy-nowacki-02360713b">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-linkedin fa-inverse fa-stack-1x"></i>
+        </a>
+        </span>
+        <span class="fa-stack fa-2x">
+        <a href="mailto:quantlucy@gmail.com">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-envelope fa-inverse fa-stack-1x"></i>
+        </a>
+        </span>
+    </p>
+    <p>
+        
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+<img alt="Creative Commons License BY-NC-SA" style="border-width:0; margin-bottom:12px;" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a> Contents © 2023  <a href="mailto:quantlucy@gmail.com">Lucy Nowacki</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>
+    </p>
+</div>
+
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
+    </script>
+</body>
+</html>
