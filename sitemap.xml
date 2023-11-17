@@ -11,7 +11,7 @@
  </url>
  <url>
   <loc>https://example.com/archive/archive.html</loc>
-  <lastmod>2023-11-15T23:22:00Z</lastmod>
+  <lastmod>2023-11-17T21:25:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/bio/</loc>
@@ -19,7 +19,7 @@
  </url>
  <url>
   <loc>https://example.com/blog/</loc>
-  <lastmod>2023-11-15T19:47:00Z</lastmod>
+  <lastmod>2023-11-17T21:26:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/adversarial-attacks-on-model-for-cifar-10/</loc>
@@ -39,7 +39,7 @@
  </url>
  <url>
   <loc>https://example.com/blog/index-1.html</loc>
-  <lastmod>2023-11-15T19:47:00Z</lastmod>
+  <lastmod>2023-11-17T21:26:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/kreyszig-11-metric-spaces/</loc>
@@ -68,6 +68,10 @@
  <url>
   <loc>https://example.com/blog/kreyszig-24-finite-dimensional-normed-spaces-and-subspaces/</loc>
   <lastmod>2023-11-15T19:47:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/blog/kreyszig-25-compactness-and-finite-dimension/</loc>
+  <lastmod>2023-11-17T21:26:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/blog/method-of-lines-for-black-scholes-explicit/</loc>
