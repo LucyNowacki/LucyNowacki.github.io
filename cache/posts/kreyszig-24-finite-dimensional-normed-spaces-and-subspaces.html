@@ -112,3 +112,382 @@ This space is made up of all square-summable sequences of real numbers. Similar 
 <li><p><strong>Real-Life Example</strong>: Biologists observe a species' population but stop their study after a certain period. The final phase of the study, which could have shown a critical trend (like a limit of a sequence), is missing. This incomplete study doesn't encapsulate the full picture of the population dynamics.</p></li>
 </ul>
 <p>These analogies help to illustrate the concepts of closed and non-closed subspaces in a more concrete and relatable manner.</p>
+<hr class="docutils" />
+<p><strong>Problem 2.</strong> Determine the largest possible value of <span class="math">\(c\)</span> in the inequality</p>
+<div class="math">
+\begin{equation*}
+\|\alpha_1 x_1 + \ldots + \alpha_n x_n\| \geq c(|\alpha_1| + \ldots + |\alpha_n|)
+\end{equation*}
+</div>
+<p>from Lemma 2.4-1, for the cases where the space <span class="math">\(X\)</span> is <span class="math">\(\mathbb{R}^2\)</span> with vectors <span class="math">\(x_1 = (1,0), x_2 = (0,1)\)</span> and when <span class="math">\(X\)</span> is <span class="math">\(\mathbb{R}^3\)</span> with vectors <span class="math">\(x_1 = (1,0,0), x_2 = (0,1,0), x_3 = (0,0,1)\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p>To determine the largest possible value of <span class="math">\(c\)</span> in <span class="math">\(\mathbb{R}^2\)</span> and <span class="math">\(\mathbb{R}^3\)</span>, we utilize the lemma on linear combinations which asserts that for any set of linearly independent vectors in a normed space <span class="math">\(X\)</span>, there exists a <span class="math">\(c &gt; 0\)</span> such that for any choice of scalars <span class="math">\(\alpha_1, \ldots, \alpha_n\)</span>, the inequality</p>
+<div class="math">
+\begin{equation*}
+\|\alpha_1 x_1 + \ldots + \alpha_n x_n\| \geq c(|\alpha_1| + \ldots + |\alpha_n|)
+\end{equation*}
+</div>
+<p>holds true.</p>
+<p><strong>For</strong> <span class="math">\(\mathbb{R}^2\)</span>:</p>
+<p>Given vectors <span class="math">\(x_1 = (1,0)\)</span> and <span class="math">\(x_2 = (0,1)\)</span>, we seek the largest <span class="math">\(c\)</span> such that for any scalars <span class="math">\(\alpha_1\)</span> and <span class="math">\(\alpha_2\)</span>:</p>
+<div class="math">
+\begin{equation*}
+\|(1,0)\alpha_1 + (0,1)\alpha_2\| \geq c(|\alpha_1| + |\alpha_2|)
+\end{equation*}
+</div>
+<p>The left-hand side simplifies to <span class="math">\(\|(\alpha_1, \alpha_2)\|\)</span>, which is the Euclidean norm in <span class="math">\(\mathbb{R}^2\)</span> and is equal to <span class="math">\(\sqrt{\alpha_1^2 + \alpha_2^2}\)</span>. The inequality thus becomes:</p>
+<div class="math">
+\begin{equation*}
+\sqrt{\alpha_1^2 + \alpha_2^2} \geq c(|\alpha_1| + |\alpha_2|)
+\end{equation*}
+</div>
+<p>To find the largest <span class="math">\(c\)</span>, we need to maximize the quotient:</p>
+<div class="math">
+\begin{equation*}
+\frac{\sqrt{\alpha_1^2 + \alpha_2^2}}{|\alpha_1| + |\alpha_2|}
+\end{equation*}
+</div>
+<p>which reaches its maximum when <span class="math">\(\alpha_1 = \alpha_2\)</span>, yielding <span class="math">\(c = \frac{1}{\sqrt{2}}\)</span>.</p>
+<p><strong>For</strong> <span class="math">\(\mathbb{R}^3\)</span>:</p>
+<p>Given vectors <span class="math">\(x_1 = (1,0,0)\)</span>, <span class="math">\(x_2 = (0,1,0)\)</span>, and <span class="math">\(x_3 = (0,0,1)\)</span>, we aim to find the largest <span class="math">\(c\)</span> such that for any scalars <span class="math">\(\alpha_1, \alpha_2, \alpha_3\)</span>:</p>
+<div class="math">
+\begin{equation*}
+\|(1,0,0)\alpha_1 + (0,1,0)\alpha_2 + (0,0,1)\alpha_3\| \geq c(|\alpha_1| + |\alpha_2| + |\alpha_3|)
+\end{equation*}
+</div>
+<p>The left-hand side simplifies to <span class="math">\(\|(\alpha_1, \alpha_2, \alpha_3)\|\)</span>, which is <span class="math">\(\sqrt{\alpha_1^2 + \alpha_2^2 + \alpha_3^2}\)</span>. The inequality becomes:</p>
+<div class="math">
+\begin{equation*}
+\sqrt{\alpha_1^2 + \alpha_2^2 + \alpha_3^2} \geq c(|\alpha_1| + |\alpha_2| + |\alpha_3|)
+\end{equation*}
+</div>
+<p>Similarly, to maximize the quotient:</p>
+<div class="math">
+\begin{equation*}
+\frac{\sqrt{\alpha_1^2 + \alpha_2^2 + \alpha_3^2}}{|\alpha_1| + |\alpha_2| + |\alpha_3|}
+\end{equation*}
+</div>
+<p>the maximum is achieved when <span class="math">\(\alpha_1 = \alpha_2 = \alpha_3\)</span>, resulting in <span class="math">\(c = \frac{1}{\sqrt{3}}\)</span>.</p>
+<p>Hence, in <span class="math">\(\mathbb{R}^2\)</span>, the largest possible <span class="math">\(c\)</span> is <span class="math">\(\frac{1}{\sqrt{2}}\)</span>, and in <span class="math">\(\mathbb{R}^3\)</span>, the largest possible <span class="math">\(c\)</span> is <span class="math">\(\frac{1}{\sqrt{3}}\)</span>.</p>
+<hr class="docutils" />
+<p><strong>Problem 3.</strong> Show that in Definition 2.4-4 the axioms of an equivalence relation hold. The definition states that a norm <span class="math">\(\|\cdot\|\)</span> on a vector space <span class="math">\(X\)</span> is said to be equivalent to a norm <span class="math">\(\|\cdot\|_0\)</span> on <span class="math">\(X\)</span> if there are positive numbers <span class="math">\(a\)</span> and <span class="math">\(b\)</span> such that for all <span class="math">\(x \in X\)</span> we have <span class="math">\(a\|x\|_0 \leq \|x\| \leq b\|x\|_0\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p>To show that the definition of equivalent norms satisfies the axioms of an equivalence relation, we must verify reflexivity, symmetry, and transitivity.</p>
+<p><strong>Reflexivity</strong>:</p>
+<p>For reflexivity, we consider any norm <span class="math">\(\|\cdot\|\)</span> on a vector space <span class="math">\(X\)</span>. A norm is reflexive if it is equivalent to itself. Given the definition of equivalent norms, for all <span class="math">\(x \in X\)</span>, the condition</p>
+<div class="math">
+\begin{equation*}
+a\|x\|_0 \leq \|x\| \leq b\|x\|_0
+\end{equation*}
+</div>
+<p>must hold for some positive constants <span class="math">\(a\)</span> and <span class="math">\(b\)</span>. When <span class="math">\(\|\cdot\|_0\)</span> is the same as <span class="math">\(\|\cdot\|\)</span>, we can choose <span class="math">\(a = b = 1\)</span>, thus for all <span class="math">\(x \in X\)</span>, we have</p>
+<div class="math">
+\begin{equation*}
+\|x\| \leq \|x\| \leq \|x\|,
+\end{equation*}
+</div>
+<p>which is trivially true, thus establishing reflexivity.</p>
+<p><strong>Symmetry</strong>:</p>
+<p>For symmetry, assume that <span class="math">\(\|\cdot\|\)</span> is equivalent to <span class="math">\(\|\cdot\|_0\)</span>. This implies the existence of positive constants <span class="math">\(a\)</span> and <span class="math">\(b\)</span> such that</p>
+<div class="math">
+\begin{equation*}
+a\|x\|_0 \leq \|x\| \leq b\|x\|_0, \quad \forall x \in X.
+\end{equation*}
+</div>
+<p>To demonstrate symmetry, we must show that <span class="math">\(\|\cdot\|_0\)</span> is also equivalent to <span class="math">\(\|\cdot\|\)</span>. From the given inequality, we can derive that</p>
+<div class="math">
+\begin{equation*}
+\frac{1}{b}\|x\| \leq \|x\|_0 \leq \frac{1}{a}\|x\|,
+\end{equation*}
+</div>
+<p>establishing symmetry by showing that the constants <span class="math">\(1/b\)</span> and <span class="math">\(1/a\)</span> serve to demonstrate the equivalence in the reverse order.</p>
+<p><strong>Transitivity</strong>:</p>
+<p>For transitivity, assume <span class="math">\(\|\cdot\|\)</span> is equivalent to <span class="math">\(\|\cdot\|_0\)</span> and <span class="math">\(\|\cdot\|_0\)</span> is equivalent to <span class="math">\(\|\cdot\|_1\)</span> with respective positive constants <span class="math">\(a, b\)</span> for the first pair and <span class="math">\(c, d\)</span> for the second pair, satisfying</p>
+<div class="math">
+\begin{equation*}
+a\|x\|_0 \leq \|x\| \leq b\|x\|_0
+\end{equation*}
+</div>
+<p>and</p>
+<div class="math">
+\begin{equation*}
+c\|x\|_1 \leq \|x\|_0 \leq d\|x\|_1,
+\end{equation*}
+</div>
+<p>for all <span class="math">\(x \in X\)</span>. To establish transitivity, we demonstrate that <span class="math">\(\|\cdot\|\)</span> is equivalent to <span class="math">\(\|\cdot\|_1\)</span>. By combining the inequalities and recognizing that multiplication of inequalities is valid, we obtain</p>
+<div class="math">
+\begin{equation*}
+ac\|x\|_1 \leq \|x\| \leq bd\|x\|_1,
+\end{equation*}
+</div>
+<p>confirming that <span class="math">\(\|\cdot\|\)</span> is equivalent to <span class="math">\(\|\cdot\|_1\)</span> and thus showing transitivity.</p>
+<p>These demonstrations confirm that the axioms of an equivalence relation are satisfied by the definition of equivalent norms.</p>
+<hr class="docutils" />
+<p><strong>Problem 4</strong> Show that equivalent norms on a vector space <span class="math">\(X\)</span> induce the same topology for <span class="math">\(X\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p>Suppose <span class="math">\(\|\cdot\|\)</span> and <span class="math">\(\|\cdot\|_0\)</span> are equivalent norms on a vector space <span class="math">\(X\)</span>. By definition, there exists positive constants <span class="math">\(a, b &gt; 0\)</span> such that for all <span class="math">\(x \in X\)</span>, the following inequalities hold:</p>
+<div class="math">
+\begin{equation*}
+a\|x\|_0 \leq \|x\| \leq b\|x\|_0.
+\end{equation*}
+</div>
+<p>We aim to show that the identity map <span class="math">\(I: (X, \|\cdot\|) \rightarrow (X, \|\cdot\|_0)\)</span> induces the same topology, which requires proving that <span class="math">\(I\)</span> is continuous. To this end, consider a point <span class="math">\(x_0 \in X\)</span> and an arbitrary <span class="math">\(\epsilon &gt; 0\)</span>. We choose <span class="math">\(\delta = \frac{\epsilon}{a}\)</span> and for all <span class="math">\(x\)</span> satisfying <span class="math">\(\|x - x_0\| &lt; \delta\)</span>, we have:</p>
+<div class="math">
+\begin{equation*}
+\|x - x_0\|_0 \leq \frac{1}{a}\|x - x_0\| &lt; \frac{a\delta}{a} = \epsilon.
+\end{equation*}
+</div>
+<p>This inequality shows that every ball in <span class="math">\((X, \|\cdot\|_0)\)</span> centered at <span class="math">\(x_0\)</span> with radius <span class="math">\(\epsilon\)</span> contains the image under <span class="math">\(I\)</span> of a ball in <span class="math">\((X, \|\cdot\|)\)</span> centered at the same point with radius <span class="math">\(\delta\)</span>. Hence, <span class="math">\(I\)</span> is continuous.</p>
+<p>Similarly, to prove that the inverse identity map <span class="math">\(\bar{I}: (X, \|\cdot\|_0) \rightarrow (X, \|\cdot\|)\)</span> is continuous, we take a point <span class="math">\(x_0 \in X\)</span> and an arbitrary <span class="math">\(\epsilon &gt; 0\)</span>. Setting <span class="math">\(\delta = \frac{\epsilon}{b}\)</span> ensures that for all <span class="math">\(x\)</span> satisfying <span class="math">\(\|x - x_0\|_0 &lt; \delta\)</span>, the following holds:</p>
+<div class="math">
+\begin{equation*}
+\|x - x_0\| \leq b\|x - x_0\|_0 &lt; b\delta = \epsilon.
+\end{equation*}
+</div>
+<p>Thus, every ball in <span class="math">\((X, \|\cdot\|)\)</span> centered at <span class="math">\(x_0\)</span> with radius <span class="math">\(\epsilon\)</span> contains the image under <span class="math">\(\bar{I}\)</span> of a ball in <span class="math">\((X, \|\cdot\|_0)\)</span> centered at the same point with radius <span class="math">\(\delta\)</span>, confirming the continuity of the inverse map.</p>
+<p>Having established the continuity of both <span class="math">\(I\)</span> and <span class="math">\(\bar{I}\)</span>, we conclude that they are homeomorphisms, showing that the topologies induced by <span class="math">\(\|\cdot\|\)</span> and <span class="math">\(\|\cdot\|_0\)</span> are indeed the same.</p>
+<p><strong>Remark</strong>:</p>
+<p>The converse is also true, that is, if two norms <span class="math">\(\|\cdot\|\)</span> and <span class="math">\(\|\cdot\|_0\)</span> on <span class="math">\(X\)</span> induce the same topology, they are equivalent norms on <span class="math">\(X\)</span>.</p>
+<hr class="docutils" />
+<p><strong>Problem 5.</strong> If <span class="math">\(\|\cdot\|\)</span> and <span class="math">\(\|\cdot\|_0\)</span> are equivalent norms on <span class="math">\(X\)</span>, show that the Cauchy sequences in <span class="math">\((X, \|\cdot\|)\)</span> and <span class="math">\((X, \|\cdot\|_0)\)</span> are the same.</p>
+<p><strong>Solution:</strong></p>
+<p>To prove this, we use the definition of equivalent norms that provides constants <span class="math">\(a, b &gt; 0\)</span> such that for all <span class="math">\(x \in X\)</span>:</p>
+<div class="math">
+\begin{equation*}
+a\|x\|_0 \leq \|x\| \leq b\|x\|_0.
+\end{equation*}
+</div>
+<p>A sequence <span class="math">\((x_n)\)</span> in <span class="math">\(X\)</span> is Cauchy with respect to a norm if for every <span class="math">\(\epsilon &gt; 0\)</span>, there exists an <span class="math">\(N \in \mathbb{N}\)</span> such that for all <span class="math">\(m, n &gt; N\)</span>, it holds that <span class="math">\(\|x_m - x_n\| &lt; \epsilon\)</span>.</p>
+<p><strong>Cauchy in</strong> <span class="math">\((X, \|\cdot\|)\)</span> implies Cauchy in <span class="math">\((X, \|\cdot\|_0)\)</span>:</p>
+<p>Assume <span class="math">\((x_n)\)</span> is Cauchy in <span class="math">\((X, \|\cdot\|)\)</span>. For every <span class="math">\(\epsilon &gt; 0\)</span>, choose <span class="math">\(\delta = a\epsilon\)</span>. There exists <span class="math">\(N\)</span> such that for all <span class="math">\(m, n &gt; N\)</span>, we have:</p>
+<div class="math">
+\begin{equation*}
+\|x_m - x_n\| &lt; \delta.
+\end{equation*}
+</div>
+<p>Applying the inequality given by the equivalence of norms, we obtain:</p>
+<div class="math">
+\begin{equation*}
+\|x_m - x_n\|_0 \leq \frac{1}{a}\|x_m - x_n\| &lt; \frac{\delta}{a} = \epsilon.
+\end{equation*}
+</div>
+<p>Hence, <span class="math">\((x_n)\)</span> is also Cauchy in <span class="math">\((X, \|\cdot\|_0)\)</span>.</p>
+<p><strong>Cauchy in</strong> <span class="math">\((X, \|\cdot\|_0)\)</span> implies Cauchy in <span class="math">\((X, \|\cdot\|)\)</span>:</p>
+<p>Conversely, if <span class="math">\((x_n)\)</span> is Cauchy in <span class="math">\((X, \|\cdot\|_0)\)</span>, for every <span class="math">\(\epsilon &gt; 0\)</span>, choose <span class="math">\(\delta = \frac{\epsilon}{b}\)</span>. There exists <span class="math">\(N\)</span> such that for all <span class="math">\(m, n &gt; N\)</span>, it holds that:</p>
+<div class="math">
+\begin{equation*}
+\|x_m - x_n\|_0 &lt; \delta.
+\end{equation*}
+</div>
+<p>From the equivalent norm inequality, we get:</p>
+<div class="math">
+\begin{equation*}
+\|x_m - x_n\| \leq b\|x_m - x_n\|_0 &lt; b\delta = \epsilon.
+\end{equation*}
+</div>
+<p>Therefore, <span class="math">\((x_n)\)</span> is a Cauchy sequence in <span class="math">\((X, \|\cdot\|)\)</span> as well.</p>
+<p>Since we have shown that Cauchy sequences in one normed space are Cauchy in the other and vice versa, we conclude that the Cauchy sequences in both <span class="math">\((X, \|\cdot\|)\)</span> and <span class="math">\((X, \|\cdot\|_0)\)</span> are the same. This conclusion follows from the ability to find a <span class="math">\(\delta\)</span> for every <span class="math">\(\epsilon\)</span> (and vice versa) satisfying the conditions for a Cauchy sequence in both normed spaces.</p>
+<hr class="docutils" />
+<p><strong>Problem 6.</strong> Theorem 2.4-5 implies that <span class="math">\(\|\cdot\|_2\)</span> and <span class="math">\(\|\cdot\|_\infty\)</span> in Problem 8, Section 2.2, are equivalent. Give a direct proof of this fact.</p>
+<p>Solution:</p>
+<p>By Theorem 2.4-5, on a finite-dimensional vector space <span class="math">\(X\)</span>, any norm <span class="math">\(\|\cdot\|\)</span> is equivalent to any other norm <span class="math">\(\|\cdot\|_0\)</span>. To prove the equivalence of the <span class="math">\(\ell_2\)</span> and <span class="math">\(\ell_\infty\)</span> norms, we need to establish two inequalities that hold for all vectors in <span class="math">\(\mathbb{R}^n\)</span>.</p>
+<p>To provide a direct proof that the <span class="math">\(\ell_2\)</span> norm (Euclidean norm) and the <span class="math">\(\ell_\infty\)</span> norm (maximum norm) are equivalent on a finite-dimensional vector space <span class="math">\(X\)</span>, we will leverage the theorem from the second image which states that on a finite-dimensional vector space, any norm is equivalent to any other norm.</p>
+<p>The <span class="math">\(\ell_2\)</span> norm of a vector <span class="math">\(x \in \mathbb{R}^n\)</span> is defined as:</p>
+<div class="math">
+\begin{equation*}
+\|x\|_2 = \sqrt{x_1^2 + x_2^2 + \ldots + x_n^2},
+\end{equation*}
+</div>
+<p>and the <span class="math">\(\ell_\infty\)</span> norm is defined as:</p>
+<div class="math">
+\begin{equation*}
+\|x\|_\infty = \max_{1 \leq i \leq n} |x_i|.
+\end{equation*}
+</div>
+<p><strong>Proof</strong>:</p>
+<p><em>Showing :math:`|x|_2 leq c |x|_infty` for some :math:`c &gt; 0`</em>:</p>
+<p>By definition, for any <span class="math">\(x \in \mathbb{R}^n\)</span>, each component <span class="math">\(x_i\)</span> satisfies <span class="math">\(|x_i| \leq \|x\|_\infty\)</span>. Thus,</p>
+<div class="math">
+\begin{equation*}
+\|x\|_2^2 = x_1^2 + x_2^2 + \ldots + x_n^2 \leq n\|x\|_\infty^2,
+\end{equation*}
+</div>
+<p>since there are <span class="math">\(n\)</span> terms and each <span class="math">\(x_i^2 \leq \|x\|_\infty^2\)</span>. Taking square roots, we have:</p>
+<div class="math">
+\begin{equation*}
+\|x\|_2 \leq \sqrt{n}\|x\|_\infty.
+\end{equation*}
+</div>
+<p>Hence, we can choose <span class="math">\(c = \sqrt{n}\)</span>, showing the first inequality.</p>
+<p><em>Showing :math:`|x|_infty leq d |x|_2` for some :math:`d &gt; 0`</em>:</p>
+<p>Consider the vector <span class="math">\(x \in \mathbb{R}^n\)</span> with the largest component in absolute value being <span class="math">\(\|x\|_\infty\)</span>. Then, by the definition of the Euclidean norm:</p>
+<div class="math">
+\begin{equation*}
+\|x\|_\infty^2 \leq x_1^2 + x_2^2 + \ldots + x_n^2 = \|x\|_2^2.
+\end{equation*}
+</div>
+<p>Since the square root is a monotonic function, taking square roots gives:</p>
+<div class="math">
+\begin{equation*}
+\|x\|_\infty \leq \|x\|_2.
+\end{equation*}
+</div>
+<p>Here, we can choose <span class="math">\(d = 1\)</span>, showing the second inequality.</p>
+<p>Since we have established both inequalities <span class="math">\(\|x\|_2 \leq \sqrt{n}\|x\|_\infty\)</span> and <span class="math">\(\|x\|_\infty \leq \|x\|_2\)</span>, by the definition of equivalent norms, the <span class="math">\(\ell_2\)</span> and <span class="math">\(\ell_\infty\)</span> norms are equivalent on <span class="math">\(\mathbb{R}^n\)</span>.</p>
+<p>This direct proof aligns with the statement of the theorem that in a finite-dimensional vector space, all norms are equivalent.</p>
+<p><strong>Theorem 2.4-5 (Equivalent norms):</strong></p>
+<p>On a finite-dimensional vector space <span class="math">\(X\)</span>, any norm <span class="math">\(\|\cdot\|\)</span> is equivalent to any other norm <span class="math">\(\|\cdot\|_0\)</span>. This theorem is fundamental in the study of finite-dimensional vector spaces because it ensures that all norms define the same topology and consequently, the same notions of convergence, continuity, and compactness.</p>
+<hr class="docutils" />
+<p><strong>Problem 7.</strong> Let <span class="math">\(\|\cdot\|_2\)</span> be as in Prob. 8, Sec. 2.2, and let <span class="math">\(\|\cdot\|\)</span> be any norm on that vector space, call it <span class="math">\(X\)</span>. Show directly (without using 2.4-5) that there is a <span class="math">\(b &gt; 0\)</span> such that <span class="math">\(\|x\| \leq b \|x\|_2\)</span> for all <span class="math">\(x\)</span>.</p>
+<p><strong>Solution:</strong></p>
+<p>We are given that <span class="math">\(\|\cdot\|_2\)</span> is the Euclidean norm defined on <span class="math">\(\mathbb{R}^n\)</span>. For any vector <span class="math">\(x\)</span> in <span class="math">\(\mathbb{R}^n\)</span>, the <span class="math">\(\ell_2\)</span> norm is calculated as:</p>
+<div class="math">
+\begin{equation*}
+\|x\|_2 = \sqrt{x_1^2 + x_2^2 + \ldots + x_n^2}.
+\end{equation*}
+</div>
+<p>Let <span class="math">\(\{e_1, e_2, \ldots, e_n\}\)</span> be the standard basis for <span class="math">\(\mathbb{R}^n\)</span>. The norm <span class="math">\(\|\cdot\|\)</span> being a norm on <span class="math">\(X\)</span> implies that it satisfies the property of absolute scalability, which states that for any scalar <span class="math">\(\alpha\)</span> and any vector <span class="math">\(x\)</span> in <span class="math">\(X\)</span>, the following holds:</p>
+<div class="math">
+\begin{equation*}
+\|\alpha x\| = |\alpha| \|x\|.
+\end{equation*}
+</div>
+<p>For any vector <span class="math">\(x = (x_1, x_2, \ldots, x_n)\)</span> in <span class="math">\(X\)</span>, we express <span class="math">\(x\)</span> as a linear combination of the standard basis vectors:</p>
+<div class="math">
+\begin{equation*}
+x = x_1 e_1 + x_2 e_2 + \ldots + x_n e_n.
+\end{equation*}
+</div>
+<p>Applying the properties of a norm, specifically the triangle inequality and absolute scalability, we have:</p>
+<div class="math">
+\begin{equation*}
+\|x\| = \|x_1 e_1 + x_2 e_2 + \ldots + x_n e_n\| \leq |x_1| \|e_1\| + |x_2| \|e_2\| + \ldots + |x_n| \|e_n\|.
+\end{equation*}
+</div>
+<p>Define <span class="math">\(b_i = \|e_i\|\)</span> for each <span class="math">\(i\)</span>. Set <span class="math">\(b = \max\{b_1, b_2, \ldots, b_n\}\)</span>, which allows us to rewrite the inequality as:</p>
+<div class="math">
+\begin{equation*}
+\|x\| \leq b (|x_1| + |x_2| + \ldots + |x_n|).
+\end{equation*}
+</div>
+<p>Using the Cauchy-Schwarz inequality, we observe that the sum of the absolute values of the components of <span class="math">\(x\)</span> is less than or equal to the square root of the sum of the squares of these components. This gives us:</p>
+<div class="math">
+\begin{equation*}
+|x_1| + |x_2| + \ldots + |x_n| \leq \sqrt{n(x_1^2 + x_2^2 + \ldots + x_n^2)} = \sqrt{n}\|x\|_2.
+\end{equation*}
+</div>
+<p>Combining the two inequalities, we obtain:</p>
+<div class="math">
+\begin{equation*}
+\|x\| \leq b\sqrt{n}\|x\|_2.
+\end{equation*}
+</div>
+<p>Thus, we have established that there exists a constant <span class="math">\(b' = b\sqrt{n}\)</span> which satisfies the condition <span class="math">\(\|x\| \leq b' \|x\|_2\)</span> for all <span class="math">\(x \in X\)</span>. The constant <span class="math">\(b'\)</span> depends on the norm <span class="math">\(\|\cdot\|\)</span> and the dimension of the space <span class="math">\(X\)</span>, which concludes the direct proof.</p>
+<hr class="docutils" />
+<p><strong>Problem 8.</strong> Show that the norms <span class="math">\(\|\cdot\|_1\)</span> and <span class="math">\(\|\cdot\|_2\)</span> in Prob. 8, Sec. 2.2, satisfy</p>
+<div class="math">
+\begin{equation*}
+\frac{1}{\sqrt{n}} \|x\|_1 \leq \|x\|_2 \leq \|x\|_1.
+\end{equation*}
+</div>
+<p>Solution:</p>
+<p>To establish this relationship between the <span class="math">\(\ell_1\)</span> and <span class="math">\(\ell_2\)</span> norms, we will utilize the definitions and properties of each norm. For a vector <span class="math">\(x \in \mathbb{R}^n\)</span>, the norms are defined by:</p>
+<div class="math">
+\begin{equation*}
+\|x\|_1 = |x_1| + |x_2| + \ldots + |x_n|,
+\end{equation*}
+</div>
+<p>and</p>
+<div class="math">
+\begin{equation*}
+\|x\|_2 = \sqrt{x_1^2 + x_2^2 + \ldots + x_n^2}.
+\end{equation*}
+</div>
+<p><strong>Proof</strong>:</p>
+<p><em>The inequality</em> <span class="math">\(\|x\|_2 \leq \|x\|_1\)</span>:</p>
+<p>The square root of a sum of squares is always less than or equal to the sum of the absolute values, hence we have:</p>
+<div class="math">
+\begin{equation*}
+\|x\|_2 = \sqrt{x_1^2 + x_2^2 + \ldots + x_n^2} \leq |x_1| + |x_2| + \ldots + |x_n| = \|x\|_1.
+\end{equation*}
+</div>
+<p>This follows since for all <span class="math">\(i\)</span>, <span class="math">\(\sqrt{x_i^2} = |x_i|\)</span>.</p>
+<p><em>The inequality</em> <span class="math">\(\frac{1}{\sqrt{n}} \|x\|_1 \leq \|x\|_2\)</span>:</p>
+<p>By employing the Cauchy-Schwarz inequality, which asserts that for any sequences <span class="math">\(a_i\)</span> and <span class="math">\(b_i\)</span>:</p>
+<div class="math">
+\begin{equation*}
+\left(\sum_{i=1}^n a_i b_i\right)^2 \leq \left(\sum_{i=1}^n a_i^2\right)\left(\sum_{i=1}^n b_i^2\right).
+\end{equation*}
+</div>
+<p>Letting <span class="math">\(a_i = 1\)</span> and <span class="math">\(b_i = |x_i|\)</span>, it yields:</p>
+<div class="math">
+\begin{equation*}
+\left(\sum_{i=1}^n |x_i|\right)^2 \leq n \left(\sum_{i=1}^n |x_i|^2\right),
+\end{equation*}
+</div>
+<p>which simplifies to:</p>
+<div class="math">
+\begin{equation*}
+\|x\|_1^2 \leq n \|x\|_2^2.
+\end{equation*}
+</div>
+<p>Taking square roots on both sides, we get:</p>
+<div class="math">
+\begin{equation*}
+\|x\|_1 \leq \sqrt{n} \|x\|_2,
+\end{equation*}
+</div>
+<p>and rearranging gives us:</p>
+<div class="math">
+\begin{equation*}
+\frac{1}{\sqrt{n}} \|x\|_1 \leq \|x\|_2.
+\end{equation*}
+</div>
+<p>By combining the established inequalities, we have proven the required relationship:</p>
+<div class="math">
+\begin{equation*}
+\frac{1}{\sqrt{n}} \|x\|_1 \leq \|x\|_2 \leq \|x\|_1.
+\end{equation*}
+</div>
+<p>This completes the direct proof of the norm inequalities as presented in the problem statement.</p>
+<hr class="docutils" />
+<p><strong>Problem 9.</strong> If two norms <span class="math">\(\|\cdot\|\)</span> and <span class="math">\(\|\cdot\|_0\)</span> on a vector space <span class="math">\(X\)</span> are equivalent, show that (i) <span class="math">\(\|x_n - x\| \rightarrow 0\)</span> implies (ii) <span class="math">\(\|x_n - x\|_0 \rightarrow 0\)</span> (and vice versa, of course).</p>
+<p><strong>Solution:</strong></p>
+<p>By the definition of equivalent norms, there exist positive constants <span class="math">\(c, C\)</span> such that for all <span class="math">\(x \in X\)</span>, we have:</p>
+<div class="math">
+\begin{equation*}
+c\|x\|_0 \leq \|x\| \leq C\|x\|_0.
+\end{equation*}
+</div>
+<p><strong>Proof</strong>:</p>
+<ol class="lowerroman simple">
+<li><p>Assume <span class="math">\(\|x_n - x\| \rightarrow 0\)</span>, meaning that for every <span class="math">\(\epsilon &gt; 0\)</span>, there exists an <span class="math">\(N\)</span> such that for all <span class="math">\(n &gt; N\)</span>, <span class="math">\(\|x_n - x\| &lt; \epsilon\)</span>. Utilizing the lower bound of the equivalent norms, we have:</p></li>
+</ol>
+<div class="math">
+\begin{equation*}
+\|x_n - x\|_0 \leq \frac{1}{c}\|x_n - x\|.
+\end{equation*}
+</div>
+<p>Since <span class="math">\(\|x_n - x\| &lt; \epsilon\)</span>, it follows that:</p>
+<div class="math">
+\begin{equation*}
+\|x_n - x\|_0 &lt; \frac{\epsilon}{c}.
+\end{equation*}
+</div>
+<p>Therefore, <span class="math">\(\|x_n - x\|_0 \rightarrow 0\)</span> as <span class="math">\(n \rightarrow \infty\)</span>.</p>
+<ol class="lowerroman simple" start="2">
+<li><p>Conversely, assume <span class="math">\(\|x_n - x\|_0 \rightarrow 0\)</span>. For every <span class="math">\(\epsilon' &gt; 0\)</span>, there exists an <span class="math">\(N'\)</span> such that for all <span class="math">\(n &gt; N'\)</span>, <span class="math">\(\|x_n - x\|_0 &lt; \epsilon'\)</span>. Applying the upper bound of the equivalent norms, we obtain:</p></li>
+</ol>
+<div class="math">
+\begin{equation*}
+\|x_n - x\| \leq C\|x_n - x\|_0.
+\end{equation*}
+</div>
+<p>By setting <span class="math">\(\epsilon' = \frac{\epsilon}{C}\)</span>, we find:</p>
+<div class="math">
+\begin{equation*}
+\|x_n - x\| &lt; C \frac{\epsilon}{C} = \epsilon,
+\end{equation*}
+</div>
+<p>which indicates that <span class="math">\(\|x_n - x\| \rightarrow 0\)</span> as <span class="math">\(n \rightarrow \infty\)</span>.</p>
+<p>Hence, we have shown that convergence in one norm implies convergence in the other, validating that (i) <span class="math">\(\|x_n - x\| \rightarrow 0\)</span> if and only if (ii) <span class="math">\(\|x_n - x\|_0 \rightarrow 0\)</span>, under the assumption that the norms <span class="math">\(\|\cdot\|\)</span> and <span class="math">\(\|\cdot\|_0\)</span> are equivalent.</p>
