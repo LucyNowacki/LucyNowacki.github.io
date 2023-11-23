@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kreyszig 2.6 Linear Operators | Nova Automata</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https://example.com/blog/kreyszig-26-linear-operators/">
+<link rel="icon" href="../../files/blogFavicon.ico" sizes="128x128">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YWLRJ2M88S"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID);
+</script><meta name="google-site-verification" content="WF1l7hEMV49eJl7Kb2rVSOwXp2KINwX59Tig6ACvfSs">
+<meta name="author" content="Lucy Nowacki">
+<link rel="prev" href="../kreyszig-25-compactness-and-finite-dimension/" title="Kreyszig 2.5 Compactness and Finite Dimension" type="text/html">
+<meta property="og:site_name" content="Nova Automata">
+<meta property="og:title" content="Kreyszig 2.6 Linear Operators">
+<meta property="og:url" content="https://example.com/blog/kreyszig-26-linear-operators/">
+<meta property="og:description" content="Problem 1. Show that the operators in sections 2.6-2, 2.6-3, and 2.6-4 are linear.
+Solution:
+To show that the operators in sections 2.6-2, 2.6-3, and 2.6-4 are linear, we need to verify that each oper">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-11-21T19:22:26Z">
+<meta property="article:tag" content="proofs">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark
+bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="../../">
+
+            <span id="blog-title">Nova Automata</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a href="../../categories/machine-learning" class="nav-link">Machine Blog</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/numerical" class="nav-link">Numerical Blog</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/nlp" class="nav-link">NLP &amp; Transformers</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/transhumanism" class="nav-link">Transhuman</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/fintech" class="nav-link">FinTech</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/proofs" class="nav-link">Proofs</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/" class="nav-link">Tags</a>
+                </li>
+<li class="nav-item">
+<a href="../../bio/index.html" class="nav-link">Me &amp; Hobbies</a>
+
+                
+            </li>
+</ul>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" google custom search>
+<form method="get" action="https://www.qwant.com/" class="navbar-form navbar-right" role="search">
+  <style>
+    .btn {
+        cursor: pointer;
+        display: inline-block;
+        padding: 10px 30px;
+        /* text color in the button */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+    }
+    
+    .btn:hover {
+        opacity: 0.9;
+        color: red;
+    }
+    /* Buttons for other colors */
+    
+    .btn-primary,
+    .bg-primary {
+        color: #fff;
+    }
+    
+    .btn-secondary,
+    .bg-secondary {
+        background: #88258b;
+        color: #fff;
+    }
+    
+    .btn-outline {
+        background: transparent;
+        border: 1px solid #fff;
+    }
+  </style>
+<div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder=" Qwant Search"><button type="submit" class="btn btn-secondary">
+            <i class="fa fa-search"></i>
+        </button>
+        <input type="hidden" name="sitesearch" value="https://example.com/">
+</div>    
+</form>
+<!-- End of custom search -->
+
+
+            <ul class="navbar-nav navbar-right"></ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Kreyszig 2.6 Linear Operators</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Lucy Nowacki
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2023-11-21T19:22:26Z" itemprop="datePublished" title="2023-11-21 19:22">2023-11-21 19:22</time></a>
+            </p>
+            
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <p><strong>Problem 1.</strong> Show that the operators in sections 2.6-2, 2.6-3, and 2.6-4 are linear.</p>
+<p><strong>Solution:</strong></p>
+<p>To show that the operators in sections 2.6-2, 2.6-3, and 2.6-4 are linear, we need to verify that each operator satisfies the two linearity conditions for all vectors <span class="math">\(x, y\)</span> in the domain and all scalars <span class="math">\(a, b\)</span> in the field over which the vector space is defined:</p>
+<ol class="arabic simple">
+<li><p><span class="math">\(T(x + y) = T(x) + T(y)\)</span> (additivity)</p></li>
+<li><p><span class="math">\(T(ax) = aT(x)\)</span> (homogeneity)</p></li>
+</ol>
+<p>Let's consider each operator in turn:</p>
+<p><strong>2.6-2 Identity Operator</strong> <span class="math">\(I_x\)</span>:
+The identity operator <span class="math">\(I_x\)</span> on a vector space <span class="math">\(X\)</span> is defined by <span class="math">\(I_x(x) = x\)</span> for all <span class="math">\(x \in X\)</span>.</p>
+<ul class="simple">
+<li><p>For additivity, consider two vectors <span class="math">\(x, y \in X\)</span>. We need to show that <span class="math">\(I_x(x + y) = I_x(x) + I_x(y)\)</span>. Indeed, <span class="math">\(I_x(x + y) = x + y = I_x(x) + I_x(y)\)</span>.</p></li>
+<li><p>For homogeneity, consider a scalar <span class="math">\(a\)</span> and a vector <span class="math">\(x \in X\)</span>. We need to show that <span class="math">\(I_x(ax) = aI_x(x)\)</span>. Indeed, <span class="math">\(I_x(ax) = ax = aI_x(x)\)</span>.</p></li>
+</ul>
+<p><strong>2.6-3 Zero Operator</strong> <span class="math">\(0_x\)</span>:
+The zero operator <span class="math">\(0_x\)</span> on a vector space <span class="math">\(X\)</span> to another vector space <span class="math">\(Y\)</span> is defined by <span class="math">\(0_x(x) = 0\)</span> for all <span class="math">\(x \in X\)</span>, where <span class="math">\(0\)</span> is the zero vector in <span class="math">\(Y\)</span>.</p>
+<ul class="simple">
+<li><p>For additivity, consider two vectors <span class="math">\(x, y \in X\)</span>. We have <span class="math">\(0_x(x + y) = 0 = 0 + 0 = 0_x(x) + 0_x(y)\)</span>.</p></li>
+<li><p>For homogeneity, for any scalar <span class="math">\(a\)</span> and vector <span class="math">\(x in X\)</span>, <span class="math">\(0_x(ax) = 0 = a \cdot 0 = a0_x(x)\)</span>.</p></li>
+</ul>
+<p><strong>2.6-4 Differentiation Operator</strong> <span class="math">\(D\)</span>:
+Let <span class="math">\(X\)</span> be the vector space of all polynomials on <span class="math">\([a, b]\)</span>. The differentiation operator <span class="math">\(D\)</span> is defined by <span class="math">\(D(T(x)) = T'(x)\)</span>, where <span class="math">\(T'\)</span> denotes differentiation with respect to <span class="math">\(x\)</span>.</p>
+<ul class="simple">
+<li><p>For additivity, let <span class="math">\(x(t)\)</span> and <span class="math">\(y(t)\)</span> be polynomials in <span class="math">\(X\)</span>. Then <span class="math">\(D(x(t) + y(t)) = (x + y)'(t) = x'(t) + y'((t) = D(x(t)) + D(y(t))\)</span>.</p></li>
+<li><p>For homogeneity, let <span class="math">\(a\)</span> be a scalar and <span class="math">\(x(t)\)</span> be a polynomial in <span class="math">\(X\)</span>. Then <span class="math">\(D(a \cdot x(t)) = (a \cdot x)'(t) = a \cdot x'(t) = a \cdot D(x(t))\)</span>.</p></li>
+</ul>
+<p>In all cases, the operators satisfy the linearity conditions, hence they are indeed linear operators.</p>
+<p><span class="math">\(\blacksquare\)</span></p>
+<hr class="docutils">
+<p><strong>Problem 2.</strong> Show that the operators <span class="math">\(T_1, T_2, T_3\)</span>, and <span class="math">\(T_4\)</span> from <span class="math">\(\mathbb{R}^2\)</span> into <span class="math">\(\mathbb{R}^2\)</span> defined by</p>
+<ul class="simple">
+<li><p><span class="math">\(T_1(\xi_1, \xi_2) = (\xi_1, 0)\)</span></p></li>
+<li><p><span class="math">\(T_2(\xi_1, \xi_2) = (0, \xi_2)\)</span></p></li>
+<li><p><span class="math">\(T_3(\xi_1, \xi_2) = (\xi_2, \xi_1)\)</span></p></li>
+<li><p><span class="math">\(T_4(\xi_1, \xi_2) = (\gamma\xi_1, \gamma\xi_2)\)</span></p></li>
+</ul>
+<p>respectively, are linear, and interpret these operators geometrically.</p>
+<p><strong>Solution:</strong>
+To demonstrate the linearity of operators <span class="math">\(T_1, T_2, T_3\)</span>, and <span class="math">\(T_4\)</span>, we must verify that each operator satisfies the following properties for all vectors <span class="math">\(\xi, \eta \in \mathbb{R}^2\)</span> and all scalars <span class="math">\(a \in \mathbb{R}\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Additivity: <span class="math">\(T(\xi + \eta) = T(\xi) + T(\eta)\)</span></p></li>
+<li><p>Homogeneity: <span class="math">\(T(a\xi) = aT(\xi)\)</span></p></li>
+</ol>
+<p>For <span class="math">\(T_1\)</span>:</p>
+<ul class="simple">
+<li><p>Additivity: <span class="math">\(T_1((\xi_1 + \eta_1, \xi_2 + \eta_2)) = (\xi_1 + \eta_1, 0) = (\xi_1, 0) + (\eta_1, 0) = T_1(\xi_1, \xi_2) + T_1(\eta_1, \eta_2)\)</span></p></li>
+<li><p>Homogeneity: <span class="math">\(T_1(a(\xi_1, \xi_2)) = (a\xi_1, 0) = a(\xi_1, 0) = aT_1(\xi_1, \xi_2)\)</span></p></li>
+</ul>
+<p>For <span class="math">\(T_2\)</span>, additivity and homogeneity can be shown similarly, with <span class="math">\(T_2\)</span> projecting any vector onto the y-axis.</p>
+<p>For <span class="math">\(T_3\)</span>:</p>
+<ul class="simple">
+<li><p>Additivity: <span class="math">\(T_3((\xi_1 + \eta_1, \xi_2 + \eta_2)) = (\xi_2 + \eta_2, \xi_1 + \eta_1) = (\xi_2, \xi_1) + (\eta_2, \eta_1) = T_3(\xi_1, \xi_2) + T_3(\eta_1, \eta_2)\)</span></p></li>
+<li><p>Homogeneity: <span class="math">\(T_3(a(\xi_1, \xi_2)) = (a\xi_2, a\xi_1) = a(\xi_2, \xi_1) = aT_3(\xi_1, \xi_2)\)</span></p></li>
+</ul>
+<p>For <span class="math">\(T_4\)</span>:</p>
+<ul class="simple">
+<li><p>Additivity: <span class="math">\(T_4((\xi_1 + \eta_1, \xi_2 + \eta_2)) = (\gamma(\xi_1 + \eta_1), \gamma(\xi_2 + \eta_2)) = (\gamma\xi_1, \gamma\xi_2) + (\gamma\eta_1, \gamma\eta_2) = T_4(\xi_1, \xi_2) + T_4(\eta_1, \eta_2)\)</span></p></li>
+<li><p>Homogeneity: <span class="math">\(T_4(a(\xi_1, \xi_2)) = (a\gamma\xi_1, a\gamma\xi_2) = a(\gamma\xi_1, \gamma\xi_2) = aT_4(\xi_1, \xi_2)\)</span></p></li>
+</ul>
+<p>Geometric Interpretation:</p>
+<ul class="simple">
+<li><p><span class="math">\(T_1\)</span> and <span class="math">\(T_2\)</span> are projection operators onto the x-axis and y-axis respectively.</p></li>
+<li><p><span class="math">\(T_3\)</span> is a reflection operator across the line <span class="math">\(\xi_1 = \xi_2\)</span>.</p></li>
+</ul>
+<p><span class="math">\(\blacksquare\)</span></p>
+<hr class="docutils">
+<p><strong>Problem 3.</strong> What are the domain, range, and null space of <span class="math">\(T_1, T_2, T_3\)</span> in Problem 2?</p>
+<p><strong>Solution:</strong></p>
+<p>To determine the domain, range, and null space of the linear operators <span class="math">\(T_1, T_2,\)</span> and <span class="math">\(T_3\)</span>, we consider their definitions from Problem 2.</p>
+<p>For Operator <span class="math">\(T_1\)</span>: <span class="math">\(T_1(\xi_1, \xi_2) = (\xi_1, 0)\)</span></p>
+<ul class="simple">
+<li><p><strong>Domain</strong>: The domain of <span class="math">\(T_1\)</span> is the entire <span class="math">\(\mathbb{R}^2\)</span>.</p></li>
+<li><p><strong>Range</strong>: The range of <span class="math">\(T_1\)</span> is the x-axis, given by <span class="math">\(\{(\xi_1, 0) \mid \xi_1 \in \mathbb{R}\}\)</span>.</p></li>
+<li><p><strong>Null Space</strong>: The null space of <span class="math">\(T_1\)</span> is the set of all vectors that map to the zero vector under <span class="math">\(T_1\)</span>, which is <span class="math">\(\{(0, \xi_2) \mid \xi_2 \in \mathbb{R}\}\)</span>.</p></li>
+</ul>
+<p>For Operator <span class="math">\(T_2\)</span>: <span class="math">\(T_2(\xi_1, \xi_2) = (0, \xi_2)\)</span></p>
+<ul class="simple">
+<li><p><strong>Domain</strong>: The domain of <span class="math">\(T_2\)</span> is the entire <span class="math">\(\mathbb{R}^2\)</span>.</p></li>
+<li><p><strong>Range</strong>: The range of <span class="math">\(T_2\)</span> is the y-axis, described by <span class="math">\(\{(0, \xi_2) \mid \xi_2 \in \mathbb{R}\}\)</span>.</p></li>
+<li><p><strong>Null Space</strong>: The null space of <span class="math">\(T_2\)</span> includes all vectors that <span class="math">\(T_2\)</span> maps to the zero vector, which is <span class="math">\(\{(\xi_1, 0) \mid \xi_1 \in \mathbb{R}\}\)</span>.</p></li>
+</ul>
+<p>For Operator <span class="math">\(T_3\)</span>: <span class="math">\(T_3(\xi_1, \xi_2) = (\xi_2, \xi_1)\)</span></p>
+<ul class="simple">
+<li><p><strong>Domain</strong>: The domain of <span class="math">\(T_3\)</span> is the entire <span class="math">\(\mathbb{R}^2\)</span>.</p></li>
+<li><p><strong>Range</strong>: The range of <span class="math">\(T_3\)</span> is also <span class="math">\(\mathbb{R}^2\)</span> since any vector in <span class="math">\(\mathbb{R}^2\)</span> can be obtained by applying <span class="math">\(T_3\)</span> to some vector in <span class="math">\(\mathbb{R}^2\)</span>.</p></li>
+<li><p><strong>Null Space</strong>: The null space of <span class="math">\(T_3\)</span> is the set of vectors that are mapped to the zero vector, which is only the zero vector itself <span class="math">\(\{(0, 0)\}\)</span>.</p></li>
+</ul>
+<p>These operators' geometric interpretations relate to their ranges and null spaces, with <span class="math">\(T_1\)</span> and <span class="math">\(T_2\)</span> acting as projection operators onto the x-axis and y-axis, respectively, and <span class="math">\(T_3\)</span> mapping vectors onto the line <span class="math">\(\xi_1 = \xi_2\)</span>.</p>
+<p><span class="math">\(\blacksquare\)</span></p>
+<hr class="docutils">
+<p><strong>Problem 4.</strong> What is the null space of <span class="math">\(T_4\)</span> in Problem 2? Of <span class="math">\(T_1\)</span> and <span class="math">\(T_2\)</span> in 2.6-7? Of <span class="math">\(T\)</span> in 2.6-4?</p>
+<p><strong>Solution:</strong></p>
+<p>Given the definitions of the operators <span class="math">\(T_4\)</span>, <span class="math">\(T_1\)</span>, and <span class="math">\(T_2\)</span> from the provided images, we can find their null spaces.</p>
+<p>For <strong>Operator</strong> <span class="math">\(T_4\)</span> from 2.6-4 (Differentiation):</p>
+<ul class="simple">
+<li><p><strong>Definition</strong>: <span class="math">\(T_4\)</span> is defined on the vector space <span class="math">\(X\)</span> of all polynomials on <span class="math">\([a, b]\)</span> by <span class="math">\(T_4(x(t)) = x'(t)\)</span>, where the prime denotes differentiation with respect to <span class="math">\(t\)</span>.</p></li>
+<li><p><strong>Null Space</strong>: The null space of the differentiation operator consists of all polynomials <span class="math">\(x(t)\)</span> such that <span class="math">\(x'(t) = 0\)</span>. Thus, the null space of <span class="math">\(T_4\)</span> is the set of all constant polynomials on <span class="math">\([a, b]\)</span>.</p></li>
+</ul>
+<p>For <strong>Operator</strong> <span class="math">\(T_1\)</span> from 2.6-7 (Cross product with a fixed vector):</p>
+<ul class="simple">
+<li><p><strong>Definition</strong>: <span class="math">\(T_1\)</span> is defined on <span class="math">\(\mathbb{R}^3\)</span> by <span class="math">\(T_1(\vec{x}) = \vec{x} \times \vec{a}\)</span>, where <span class="math">\(\vec{a}\)</span> is a fixed vector in <span class="math">\(\mathbb{R}^3\)</span>.</p></li>
+<li><p><strong>Null Space</strong>: The null space of <span class="math">\(T_1\)</span> includes all vectors <span class="math">\(\vec{x}\)</span> such that <span class="math">\(\vec{x} \times \vec{a} = \vec{0}\)</span>, which are the scalar multiples of <span class="math">\(\vec{a}\)</span> including the zero vector.</p></li>
+</ul>
+<p>For <strong>Operator</strong> <span class="math">\(T_2\)</span> from 2.6-7 (Dot product with a fixed vector):</p>
+<ul class="simple">
+<li><p><strong>Definition</strong>: <span class="math">\(T_2\)</span> is defined on <span class="math">\(\mathbb{R}^3\)</span> by <span class="math">\(T_2(\vec{x}) = \vec{x} \cdot \vec{a}\)</span>, where <span class="math">\(\vec{a} = (a_i)\)</span> is a fixed vector in <span class="math">\(\mathbb{R}^3\)</span>.</p></li>
+<li><p><strong>Null Space</strong>: The null space of <span class="math">\(T_2\)</span> consists of all vectors <span class="math">\(\vec{x}\)</span> that are orthogonal to <span class="math">\(\vec{a}\)</span>, which is the orthogonal complement of the vector <span class="math">\(\vec{a}\)</span> in <span class="math">\(\mathbb{R}^3\)</span>.</p></li>
+</ul>
+<p>The null spaces reflect the specific transformations these operators perform on their respective vector spaces.</p>
+<p><span class="math">\(\blacksquare\)</span></p>
+<hr class="docutils">
+<p><strong>Problem 7.</strong> Determine if the operators <span class="math">\(T_1\)</span> and <span class="math">\(T_3\)</span> from Problem 2 commute.</p>
+<p><strong>Given:</strong></p>
+<ul class="simple">
+<li><p><span class="math">\(T_1(\xi_1, \xi_2) = (\xi_1, 0)\)</span></p></li>
+<li><p><span class="math">\(T_3(\xi_1, \xi_2) = (\xi_2, \xi_1)\)</span></p></li>
+</ul>
+<p><strong>Solution:</strong></p>
+<p>To check for commutativity, we calculate <span class="math">\((T_1T_3)(\xi_1, \xi_2)\)</span> and <span class="math">\((T_3T_1)(\xi_1, \xi_2)\)</span>.</p>
+<p><strong>Applying</strong> <span class="math">\(T_1\)</span> followed by <span class="math">\(T_3\)</span>:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Apply <span class="math">\(T_1\)</span> to <span class="math">\((\xi_1, \xi_2)\)</span>:</dt>
+<dd>
+<p><span class="math">\(T_1(\xi_1, \xi_2) = (\xi_1, 0)\)</span></p>
+</dd>
+</dl></li>
+<li><dl class="simple">
+<dt>Then apply <span class="math">\(T_3\)</span> to the result:</dt>
+<dd>
+<p><span class="math">\(T_3(\xi_1, 0) = (0, \xi_1)\)</span></p>
+</dd>
+</dl></li>
+</ol>
+<p><strong>Applying</strong> <span class="math">\(T_3\)</span> followed by <span class="math">\(T_1\)</span>:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Apply <span class="math">\(T_3\)</span> to <span class="math">\((\xi_1, \xi_2)\)</span>:</dt>
+<dd>
+<p><span class="math">\(T_3(\xi_1, \xi_2) = (\xi_2, \xi_1)\)</span></p>
+</dd>
+</dl></li>
+<li><dl class="simple">
+<dt>Then apply <span class="math">\(T_1\)</span> to the result:</dt>
+<dd>
+<p><span class="math">\(T_1(\xi_2, \xi_1) = (\xi_2, 0)\)</span></p>
+</dd>
+</dl></li>
+</ol>
+<p><strong>Comparing Results:</strong></p>
+<ul class="simple">
+<li><p><span class="math">\(T_1T_3\)</span> yields <span class="math">\((0, \xi_1)\)</span>.</p></li>
+<li><p><span class="math">\(T_3T_1\)</span> yields <span class="math">\((\xi_2, 0)\)</span>.</p></li>
+</ul>
+<p>Since <span class="math">\((0, \xi_1) \neq (\xi_2, 0)\)</span> for arbitrary <span class="math">\(\xi_1, \xi_2\)</span>, we conclude that <span class="math">\(T_1\)</span> and <span class="math">\(T_3\)</span> do <strong>not</strong> commute.</p>
+<dl class="simple">
+<dt><strong>Conclusion:</strong></dt>
+<dd>
+<p>The operators <span class="math">\(T_1\)</span> and <span class="math">\(T_3\)</span> do not satisfy the commutativity property <span class="math">\(T_1T_3 = T_3T_1\)</span> for all vectors in <span class="math">\(\mathbb{R}^2\)</span>. Therefore, they are non-commutative.</p>
+</dd>
+</dl>
+<p><span class="math">\(\blacksquare\)</span></p>
+<hr class="docutils">
+<p><strong>Problem 8.</strong> Represent the operators <span class="math">\(T_1, T_2, T_3\)</span>, and <span class="math">\(T_4\)</span> from Problem 2 using <span class="math">\(2 \times 2\)</span> matrices.</p>
+<p><strong>Given Operators:</strong></p>
+<ul class="simple">
+<li><p><span class="math">\(T_1(\xi_1, \xi_2) = (\xi_1, 0)\)</span></p></li>
+<li><p><span class="math">\(T_2(\xi_1, \xi_2) = (0, \xi_2)\)</span></p></li>
+<li><p><span class="math">\(T_3(\xi_1, \xi_2) = (\xi_2, \xi_1)\)</span></p></li>
+<li><p><span class="math">\(T_4(\xi_1, \xi_2) = (\gamma\xi_1, \gamma\xi_2)\)</span></p></li>
+</ul>
+<p><strong>Matrix Representations:</strong></p>
+<blockquote>
+<ul>
+<li>
+<p><strong>For</strong> <span class="math">\(T_1\)</span>:</p>
+<p>The matrix representation is:
+<span class="math">\(T_1 = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span></p>
+</li>
+<li>
+<p><strong>For</strong> <span class="math">\(T_2\)</span>:</p>
+<p>The matrix representation is:
+<span class="math">\(T_2 = \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}\)</span></p>
+</li>
+<li>
+<p><strong>For</strong> <span class="math">\(T_3\)</span>:</p>
+<p>The matrix representation is:
+<span class="math">\(T_3 = \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix}\)</span></p>
+</li>
+<li>
+<p><strong>For</strong> <span class="math">\(T_4\)</span>:</p>
+<p>The matrix representation is:
+<span class="math">\(T_4 = \begin{bmatrix} \gamma &amp; 0 \\ 0 &amp; \gamma \end{bmatrix}\)</span></p>
+</li>
+</ul>
+</blockquote>
+<dl class="simple">
+<dt><strong>Conclusion:</strong></dt>
+<dd>
+<p>Each operator from Problem 2 can be expressed as a <span class="math">\(2 \times 2\)</span> matrix. These matrices transform vectors in <span class="math">\(\mathbb{R}^2\)</span> by linearly scaling and/or permuting their components as specified by the operators.</p>
+</dd>
+</dl>
+<p><span class="math">\(\blacksquare\)</span></p>
+<hr class="docutils">
+<p><strong>Problem 9.</strong> Elaborate the condition in 2.6-10(a) regarding the existence of an inverse operator, <span class="math">\(T^{-1}\)</span>, in the context of the null space of <span class="math">\(T\)</span>.</p>
+<p><strong>Theorem Interpretation:</strong>
+The theorem from section 2.6-10(a) can be restated in the context of the null space of <span class="math">\(T\)</span> as follows:</p>
+<ul class="simple">
+<li><p>The inverse operator <span class="math">\(T^{-1}\)</span> from <span class="math">\(\mathcal{R}(T)\)</span> to <span class="math">\(\mathcal{D}(T)\)</span> exists if and only if the only solution to <span class="math">\(Tx = 0\)</span> is the trivial solution <span class="math">\(x = 0\)</span>. This is equivalent to saying that the null space of <span class="math">\(T\)</span>, denoted <span class="math">\(N(T)\)</span> or <span class="math">\(\text{ker}(T)\)</span>, consists solely of the zero vector.</p></li>
+</ul>
+<p><strong>Definitions:</strong></p>
+<ul class="simple">
+<li><p><strong>Linear Operator</strong>: A mapping <span class="math">\(T: \mathcal{D}(T) \rightarrow Y\)</span> between vector spaces <span class="math">\(X\)</span> and <span class="math">\(Y\)</span>, adhering to additivity (<span class="math">\(T(x + z) = T(x) + T(z)\)</span>) and homogeneity (<span class="math">\(T(\alpha x) = \alpha T(x)\)</span>), for all <span class="math">\(x, z \in \mathcal{D}(T)\)</span> and scalars <span class="math">\(\alpha\)</span>.</p></li>
+<li><p><strong>Inverse Operator</strong>: <span class="math">\(T^{-1}: \mathcal{R}(T) \rightarrow \mathcal{D}(T)\)</span> is the reverse mapping such that <span class="math">\(T^{-1}(Tx) = x\)</span> for all <span class="math">\(x \in \mathcal{D}(T)\)</span> and <span class="math">\(T(T^{-1}y) = y\)</span> for all <span class="math">\(y \in \mathcal{R}(T)\)</span>.</p></li>
+<li><p><strong>Null Space</strong>: Denoted by <span class="math">\(N(T)\)</span> or <span class="math">\(\text{ker}(T)\)</span>, it is the set of vectors <span class="math">\(x \in \mathcal{D}(T)\)</span> where <span class="math">\(T(x) = 0\)</span>.</p></li>
+</ul>
+<p><strong>In-Depth Analysis of Theorem 2.6-10(a):</strong></p>
+<p>This theorem posits that <span class="math">\(T^{-1}\)</span> can only exist if <span class="math">\(Tx = 0\)</span> strictly leads to <span class="math">\(x = 0\)</span>. Essentially, <span class="math">\(N(T)\)</span> must be trivial—comprised solely of the zero vector. If <span class="math">\(N(T)\)</span> included any non-zero vectors, <span class="math">\(T\)</span> could not be injective, as it would map distinct vectors to the same point (the zero vector in <span class="math">\(Y\)</span>), contravening the bijective requirement for an inverse function.</p>
+<p><strong>Formulating the Condition for Inverse Existence:</strong></p>
+<p>The existence condition for <span class="math">\(T^{-1}\)</span> relative to the null space of <span class="math">\(T\)</span> is that <span class="math">\(N(T) = \{0\}\)</span>. This reflects the injectivity of <span class="math">\(T\)</span>.</p>
+<p><strong>Examples:</strong></p>
+<ul class="simple">
+<li><p><strong>For an Injective Operator</strong>: A matrix representation of <span class="math">\(T\)</span> as <span class="math">\(A\)</span> with no linearly dependent rows or columns ensures <span class="math">\(N(T) = \{0\}\)</span>, affirming the existence of <span class="math">\(T^{-1}\)</span>.</p></li>
+<li><p><strong>For a Non-Injective Operator</strong>: Should <span class="math">\(T\)</span> be depicted by a matrix <span class="math">\(A\)</span> containing a zero row, <span class="math">\(N(T)\)</span> would be non-trivial, housing non-zero vectors, thus negating the presence of <span class="math">\(T^{-1}\)</span>.</p></li>
+</ul>
+<dl class="simple">
+<dt><strong>Conclusion:</strong></dt>
+<dd>
+<p>The theorem outlined in 2.6-10(a) underscores a pivotal tenet in linear algebra: the invertibility of a linear operator is inherently dependent on the exclusivity of the zero vector in its null space. An operator <span class="math">\(T\)</span> is invertible if and only if <span class="math">\(N(T)\)</span> is trivial, serving as a vital criterion for <span class="math">\(T\)</span>'s injectivity.</p>
+</dd>
+</dl>
+<p><span class="math">\(\blacksquare\)</span></p>
+<hr class="docutils">
+<p><strong>Problem 10.</strong> Determine the existence of the inverse operator <span class="math">\(T^{-1}\)</span> for the differentiation operator <span class="math">\(T\)</span> as defined in section 2.6-4.</p>
+<dl class="simple">
+<dt><strong>Operator Definition:</strong></dt>
+<dd>
+<p>The operator <span class="math">\(T\)</span> defined in section 2.6-4 is the differentiation operator acting on the vector space <span class="math">\(X\)</span> of all polynomials on the interval <span class="math">\([a, b]\)</span>. The action of <span class="math">\(T\)</span> is defined by <span class="math">\(T(x(t)) = x'(t)\)</span>, where <span class="math">\(x'(t)\)</span> denotes the derivative of <span class="math">\(x(t)\)</span> with respect to <span class="math">\(t\)</span>.</p>
+</dd>
+<dt><strong>Inverse Operator Existence Criteria:</strong></dt>
+<dd>
+<p>An operator <span class="math">\(T\)</span> has an inverse <span class="math">\(T^{-1}\)</span> if and only if <span class="math">\(T\)</span> is bijective, which means it is both injective (one-to-one) and surjective (onto).</p>
+</dd>
+<dt><strong>Injectivity Analysis:</strong></dt>
+<dd>
+<p><span class="math">\(T\)</span> is injective if <span class="math">\(T(x) = T(y)\)</span> implies <span class="math">\(x = y\)</span>. For the differentiation operator, if <span class="math">\(x'(t) = y'(t)\)</span> for two polynomials <span class="math">\(x(t)\)</span> and <span class="math">\(y(t)\)</span>, then <span class="math">\(x(t)\)</span> and <span class="math">\(y(t)\)</span> differ by at most a constant. Hence, for <span class="math">\(T\)</span> to be injective, we must restrict our attention to a subspace of <span class="math">\(X\)</span> where the constant of integration is fixed, for example by setting <span class="math">\(x(a) = 0\)</span> for all <span class="math">\(x \in X\)</span>.</p>
+</dd>
+<dt><strong>Surjectivity Analysis:</strong></dt>
+<dd>
+<p><span class="math">\(T\)</span> is surjective if for every function <span class="math">\(y(t)\)</span> in the codomain, there exists an <span class="math">\(x(t)\)</span> in the domain such that <span class="math">\(T(x) = y\)</span>. The differentiation operator is surjective onto the space of all differentiable functions on <span class="math">\([a, b]\)</span> that can be expressed as the derivative of a polynomial, which is again the space of all polynomials on <span class="math">\([a, b]\)</span>.</p>
+</dd>
+<dt>
+<strong>Existence of</strong> <span class="math">\(T^{-1}\)</span>:</dt>
+<dd>
+<p>For the differentiation operator <span class="math">\(T\)</span>, an inverse would correspond to the integration operator. However, since integration includes a constant of integration, <span class="math">\(T\)</span> is not surjective onto <span class="math">\(X\)</span>, and therefore, its inverse <span class="math">\(T^{-1}\)</span> does not exist as a map back into <span class="math">\(X\)</span>.</p>
+</dd>
+<dt><strong>Conclusion:</strong></dt>
+<dd>
+<p>The inverse <span class="math">\(T^{-1}\)</span> of the differentiation operator <span class="math">\(T\)</span> as defined in 2.6-4 does not exist within the space of all polynomials on <span class="math">\([a, b]\)</span> because <span class="math">\(T\)</span> is not surjective onto <span class="math">\(X\)</span>. The differentiation operator, without additional constraints, does not have a unique inverse that maps back to the original polynomial space due to the constant of integration involved in the antiderivative.</p>
+</dd>
+</dl>
+<p><span class="math">\(\blacksquare\)</span></p>
+<dl>
+<dt><strong>Counterexample Illustration:</strong></dt>
+<dd>
+<p>Consider the differentiation operator <span class="math">\(T\)</span> on the space <span class="math">\(X\)</span> of polynomials over an interval <span class="math">\([a, b]\)</span>. We are given a function <span class="math">\(y(t) = e^t\)</span> which is not a polynomial. Our goal is to find a polynomial <span class="math">\(x(t)\)</span> such that <span class="math">\(x'(t) = y(t)\)</span>.</p>
+</dd>
+<dt>
+<strong>Attempt to Find</strong> <span class="math">\(x(t)\)</span>:</dt>
+<dd>
+<p>The inverse operation to differentiation is integration. Thus, we integrate <span class="math">\(y(t)\)</span> to find <span class="math">\(x(t)\)</span>:</p>
+<div class="math">
+\begin{equation*}
+x(t) = \int y(t) dt = \int e^t dt = e^t + C
+\end{equation*}
+</div>
+<p>where <span class="math">\(C\)</span> represents the constant of integration.</p>
+</dd>
+<dt><strong>Analysis:</strong></dt>
+<dd>
+<p>The result of the integration, <span class="math">\(x(t) = e^t + C\)</span>, is not a polynomial. Hence, it does not reside in the space <span class="math">\(X\)</span> of polynomials on <span class="math">\([a, b]\)</span>. This shows that <span class="math">\(y(t)\)</span>, a non-polynomial function, does not have an antiderivative that is a polynomial in <span class="math">\(X\)</span>.</p>
+</dd>
+<dt><strong>Conclusion:</strong></dt>
+<dd>
+<p>Since the integration maps <span class="math">\(y(t) = e^t\)</span> to a function outside the space of polynomials, it demonstrates that the differentiation operator <span class="math">\(T\)</span> is not surjective over the space <span class="math">\(X\)</span>. Consequently, <span class="math">\(T\)</span> does not have an inverse <span class="math">\(T^{-1}\)</span> that maps back to <span class="math">\(X\)</span>. The function <span class="math">\(y(t) = e^t\)</span> serves as a counterexample, indicating that there are functions in the codomain of <span class="math">\(T\)</span> for which no polynomial in <span class="math">\(X\)</span> is a pre-image, thereby confirming the non-existence of an inverse operator <span class="math">\(T^{-1}\)</span> that returns to the original polynomial space <span class="math">\(X\)</span>.</p>
+</dd>
+</dl>
+<hr class="docutils">
+<p><strong>Problem 11.</strong> Verify the linearity of the operator <span class="math">\(T: X \rightarrow X\)</span> defined by <span class="math">\(T(x) = bx\)</span> for a fixed <span class="math">\(2 \times 2\)</span> complex matrix <span class="math">\(b\)</span>, and determine the condition for the existence of the inverse operator <span class="math">\(T^{-1}\)</span>.</p>
+<p><strong>Proof of Linearity:</strong>
+To demonstrate that <span class="math">\(T\)</span> is linear, it must satisfy additivity and homogeneity.</p>
+<ul class="simple">
+<li><p><strong>Additivity</strong>:</p></li>
+</ul>
+<p>For any <span class="math">\(2 \times 2\)</span> matrices <span class="math">\(x\)</span> and <span class="math">\(y\)</span> in <span class="math">\(X\)</span>:</p>
+<div class="math">
+\begin{equation*}
+T(x + y) = b(x + y) = bx + by = T(x) + T(y)
+\end{equation*}
+</div>
+<ul class="simple">
+<li><p><strong>Homogeneity</strong>:</p></li>
+</ul>
+<p>For any complex scalar <span class="math">\(\alpha\)</span> and matrix <span class="math">\(x\)</span> in <span class="math">\(X\)</span>:</p>
+<div class="math">
+\begin{equation*}
+T(\alpha x) = b(\alpha x) = \alpha bx = \alpha T(x)
+\end{equation*}
+</div>
+<p>Since <span class="math">\(T\)</span> satisfies both properties, we conclude that <span class="math">\(T\)</span> is indeed a linear operator.</p>
+<p><strong>Condition for the Existence of</strong> <span class="math">\(T^{-1}\)</span>:
+The inverse operator <span class="math">\(T^{-1}\)</span> exists if and only if <span class="math">\(T\)</span> is bijective, which entails being both injective and surjective.</p>
+<ul class="simple">
+<li><p><strong>Injectivity</strong>:</p></li>
+</ul>
+<p><span class="math">\(T\)</span> is injective if <span class="math">\(T(x) = T(y)\)</span> implies <span class="math">\(x = y\)</span>. For <span class="math">\(T\)</span>, this condition holds if the matrix <span class="math">\(b\)</span> is invertible, i.e., <span class="math">\(\text{det}(b) \neq 0\)</span>.</p>
+<ul class="simple">
+<li><p><strong>Surjectivity</strong>:</p></li>
+</ul>
+<p><span class="math">\(T\)</span> is surjective if for every <span class="math">\(z\)</span> in <span class="math">\(X\)</span>, there exists an <span class="math">\(x\)</span> such that <span class="math">\(T(x) = z\)</span>. This is true if <span class="math">\(b\)</span> is invertible, allowing us to solve <span class="math">\(x = b^{-1}z\)</span> for any <span class="math">\(z\)</span>.</p>
+<p>Therefore, the inverse operator <span class="math">\(T^{-1}\)</span> exists if and only if the matrix <span class="math">\(b\)</span> is invertible, characterized by a non-zero determinant, <span class="math">\(\text{det}(b) \neq 0\)</span>.</p>
+<p><span class="math">\(\blacksquare\)</span></p>
+<hr class="docutils">
+<p><strong>Problem 12.</strong> Assess the surjectivity of the operator <span class="math">\(T: X \rightarrow X\)</span>, defined by <span class="math">\(T(x) = bx\)</span> for a fixed matrix <span class="math">\(b\)</span> in <span class="math">\(X\)</span>, where <span class="math">\(X\)</span> is the vector space of all <span class="math">\(2 \times 2\)</span> complex matrices, and <span class="math">\(bx\)</span> denotes the standard product of matrices.</p>
+<dl class="simple">
+<dt><strong>Surjectivity Definition:</strong></dt>
+<dd>
+<p>An operator <span class="math">\(T\)</span> is said to be surjective if for every matrix <span class="math">\(z\)</span> in <span class="math">\(X\)</span>, there is a matrix <span class="math">\(x\)</span> in <span class="math">\(X\)</span> such that <span class="math">\(T(x) = z\)</span>. Formally, this means that the equation <span class="math">\(bx = z\)</span> has a solution for every matrix <span class="math">\(z\)</span> in <span class="math">\(X\)</span>.</p>
+</dd>
+<dt><strong>Condition for Surjectivity:</strong></dt>
+<dd>
+<p>The operator <span class="math">\(T\)</span> defined by matrix multiplication is surjective if and only if the matrix <span class="math">\(b\)</span> is invertible. This is equivalent to the requirement that <span class="math">\(\text{det}(b) \neq 0\)</span>. If <span class="math">\(b\)</span> is invertible, then for every matrix <span class="math">\(z\)</span> in <span class="math">\(X\)</span>, there exists a unique matrix <span class="math">\(x = b^{-1}z\)</span> that solves the equation <span class="math">\(bx = z\)</span>, indicating that <span class="math">\(T\)</span> maps onto the entire space <span class="math">\(X\)</span>.</p>
+</dd>
+<dt><strong>Conclusion:</strong></dt>
+<dd>
+<p>Surjectivity of the operator <span class="math">\(T\)</span> hinges on the invertibility of the matrix <span class="math">\(b\)</span>. If <span class="math">\(b\)</span> is not invertible (i.e., <span class="math">\(\text{det}(b) = 0\)</span>), not all matrices <span class="math">\(z\)</span> in <span class="math">\(X\)</span> will have a pre-image under <span class="math">\(T\)</span>, and thus <span class="math">\(T\)</span> will not be surjective. Conversely, if <span class="math">\(b\)</span> is invertible, <span class="math">\(T\)</span> is surjective, ensuring that the inverse operator <span class="math">\(T^{-1}\)</span> exists and operates as <span class="math">\(T^{-1}(z) = b^{-1}z\)</span> for all <span class="math">\(z\)</span> in <span class="math">\(X\)</span>.</p>
+</dd>
+</dl>
+<p><span class="math">\(\blacksquare\)</span></p>
+<hr class="docutils">
+<p><strong>Problem 13</strong> Prove that if <span class="math">\(\{x_1, \ldots, x_n\}\)</span> is a linearly independent set in <span class="math">\(\mathcal{D}(T)\)</span>, and <span class="math">\(T: \mathcal{D}(T) \rightarrow Y\)</span> is a linear operator with an inverse, then the set <span class="math">\(\{Tx_1, \ldots, Tx_n\}\)</span> is also linearly independent.</p>
+<dl>
+<dt><strong>Proof:</strong></dt>
+<dd>
+<p>Assume for contradiction that <span class="math">\(\{Tx_1, \ldots, Tx_n\}\)</span> is not linearly independent. Then there exist scalars <span class="math">\(c_1, \ldots, c_n\)</span>, not all zero, such that:</p>
+<div class="math">
+\begin{equation*}
+c_1 Tx_1 + \ldots + c_n Tx_n = 0.
+\end{equation*}
+</div>
+<p>Applying the inverse operator <span class="math">\(T^{-1}\)</span> to both sides, and using the linearity of <span class="math">\(T^{-1}\)</span>, we obtain:</p>
+<div class="math">
+\begin{equation*}
+c_1 T^{-1}(Tx_1) + \ldots + c_n T^{-1}(Tx_n) = T^{-1}(0).
+\end{equation*}
+</div>
+<p>Since <span class="math">\(T^{-1}T\)</span> is the identity operator on <span class="math">\(\mathcal{D}(T)\)</span>, we have <span class="math">\(T^{-1}(Tx_i) = x_i\)</span> for all <span class="math">\(i\)</span>. Knowing that the identity operator maps <span class="math">\(0\)</span> to <span class="math">\(0\)</span>, the equation simplifies to:</p>
+<div class="math">
+\begin{equation*}
+c_1 x_1 + \ldots + c_n x_n = 0.
+\end{equation*}
+</div>
+<p>This implies that <span class="math">\(c_1, \ldots, c_n\)</span> must all be zero because <span class="math">\(\{x_1, \ldots, x_n\}\)</span> is linearly independent, contradicting our assumption.</p>
+</dd>
+<dt><strong>Conclusion:</strong></dt>
+<dd>
+<p>Therefore, the set <span class="math">\(\{Tx_1, \ldots, Tx_n\}\)</span> must be linearly independent, under the condition that <span class="math">\(T\)</span> is invertible. This holds true due to the fundamental properties of linear transformations and their inverses in vector space theory.</p>
+</dd>
+</dl>
+<p><span class="math">\(\blacksquare\)</span></p>
+<hr class="docutils">
+<p><strong>Problem 14.</strong> Prove that for a linear operator <span class="math">\(T: X \rightarrow Y\)</span> with <span class="math">\(\text{dim} X = \text{dim} Y = n\)</span>, the range of <span class="math">\(T\)</span>, <span class="math">\(\mathcal{R}(T)\)</span>, is equal to <span class="math">\(Y\)</span> if and only if the inverse operator <span class="math">\(T^{-1}\)</span> exists.</p>
+<p><strong>Proof:</strong></p>
+<p><strong>Forward Direction</strong> (<span class="math">\(\mathcal{R}(T) = Y\)</span> implies <span class="math">\(T^{-1}\)</span> exists):</p>
+<p>If <span class="math">\(\mathcal{R}(T) = Y\)</span>, then <span class="math">\(T\)</span> is surjective, meaning for every <span class="math">\(y \in Y\)</span>, there exists at least one <span class="math">\(x \in X\)</span> such that <span class="math">\(T(x) = y\)</span>. Since <span class="math">\(\text{dim} X = \text{dim} Y\)</span>, <span class="math">\(T\)</span> is a surjective linear map between two finite-dimensional vector spaces of equal dimension, which implies <span class="math">\(T\)</span> is also injective. This is a consequence of the Rank-Nullity Theorem, which in this case implies that <span class="math">\(\text{nullity}(T) = 0\)</span> because <span class="math">\(\text{rank}(T) = \text{dim} Y = n\)</span> and <span class="math">\(\text{rank}(T) + \text{nullity}(T) = \text{dim} X\)</span>.</p>
+<p>Being both injective and surjective, <span class="math">\(T\)</span> is bijective, and therefore an inverse <span class="math">\(T^{-1}\)</span> exists by definition.</p>
+<p><strong>Reverse Direction</strong> (<span class="math">\(T^{-1}\)</span> exists implies <span class="math">\(\mathcal{R}(T) = Y\)</span>):</p>
+<p>If <span class="math">\(T^{-1}\)</span> exists, then by definition, <span class="math">\(T\)</span> is bijective, meaning it is both injective and surjective. The surjectivity of <span class="math">\(T\)</span> immediately gives us <span class="math">\(\mathcal{R}(T) = Y\)</span>, because for every <span class="math">\(y \in Y\)</span>, the existence of <span class="math">\(T^{-1}\)</span> guarantees an <span class="math">\(x \in X\)</span> such that <span class="math">\(T(x) = y\)</span>.</p>
+<p><strong>Conclusion:</strong></p>
+<p>The range of <span class="math">\(T\)</span>, <span class="math">\(\mathcal{R}(T)\)</span>, is equal to <span class="math">\(Y\)</span> if and only if <span class="math">\(T\)</span> is bijective, and since <span class="math">\(T\)</span> is linear, this bijectivity is equivalent to the existence of an inverse <span class="math">\(T^{-1}\)</span>. This holds true for finite-dimensional vector spaces <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> of equal dimension <span class="math">\(n\)</span>.</p>
+<p><span class="math">\(\blacksquare\)</span></p>
+<dl class="simple">
+<dt><strong>Detailed Explanation of the Rank-Nullity Theorem in Context:</strong></dt>
+<dd>
+<p>The Rank-Nullity Theorem is pivotal in understanding the relationship between the dimensions of a linear operator's range, null space, and domain. For a linear operator <span class="math">\(T: X \rightarrow Y\)</span> with <span class="math">\(\text{dim} X = \text{dim} Y = n\)</span>, the theorem is expressed as:</p>
+</dd>
+</dl>
+<div class="math">
+\begin{equation*}
+\text{rank}(T) + \text{nullity}(T) = \text{dim} X
+\end{equation*}
+</div>
+<p>Here, <span class="math">\(\text{rank}(T)\)</span> represents the dimension of the range of <span class="math">\(T\)</span> (<span class="math">\(\mathcal{R}(T)\)</span>), and <span class="math">\(\text{nullity}(T)\)</span> signifies the dimension of the null space of <span class="math">\(T\)</span> (<span class="math">\(N(T)\)</span>).</p>
+<p><strong>Application to the Given Problem:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>If</strong> <span class="math">\(\mathcal{R}(T) = Y\)</span>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>The rank of <span class="math">\(T\)</span> is the dimension of <span class="math">\(Y\)</span>, hence <span class="math">\(\text{rank}(T) = \text{dim} Y = n\)</span>.</p></li>
+<li><p>Applying the Rank-Nullity Theorem, and knowing <span class="math">\(\text{dim} X = n\)</span>, we deduce that <span class="math">\(\text{nullity}(T) = 0\)</span>, which implies that <span class="math">\(T\)</span> is injective.</p></li>
+<li><p>A linear operator that is injective and surjective is bijective, indicating the existence of an inverse <span class="math">\(T^{-1}\)</span>.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li>
+<p><strong>If</strong> <span class="math">\(T^{-1}\)</span> Exists:</p>
+<ul class="simple">
+<li><p>The existence of <span class="math">\(T^{-1}\)</span> implies <span class="math">\(T\)</span> is bijective. Consequently, <span class="math">\(T\)</span> is injective, leading to <span class="math">\(\text{nullity}(T) = 0\)</span>.</p></li>
+<li><p>Since <span class="math">\(T\)</span> is also surjective, <span class="math">\(\text{rank}(T) = \text{dim} Y = n\)</span>.</p></li>
+<li><p>The Rank-Nullity Theorem then confirms that <span class="math">\(\text{rank}(T) + \text{nullity}(T) = n\)</span>, which equals <span class="math">\(\text{dim} X\)</span>, thus confirming that <span class="math">\(\mathcal{R}(T) = Y\)</span>.</p></li>
+</ul>
+</li>
+</ol>
+<dl class="simple">
+<dt><strong>Conclusion:</strong></dt>
+<dd>
+<p>The Rank-Nullity Theorem in this scenario confirms that the linear operator <span class="math">\(T\)</span> is invertible if and only if it is surjective. When the domain and codomain are finite-dimensional vector spaces of equal dimension, surjectivity implies injectivity, which is integral to establishing the existence of an inverse operator <span class="math">\(T^{-1}\)</span>.</p>
+</dd>
+</dl>
+<hr class="docutils">
+<p><strong>Problem 15.</strong> We are tasked with proving that the range <span class="math">\(\mathcal{R}(T)\)</span> of a linear operator <span class="math">\(T\)</span> defined on the vector space <span class="math">\(X\)</span> of all real-valued functions with derivatives of all orders is the entirety of <span class="math">\(X\)</span>. However, we must also demonstrate that the inverse <span class="math">\(T^{-1}\)</span> does not exist. This is to be contrasted with Problem 14.</p>
+<dl class="simple">
+<dt>
+<strong>Showing that</strong> <span class="math">\(\mathcal{R}(T)\)</span> is all of <span class="math">\(X\)</span>:</dt>
+<dd>
+<p>Any function <span class="math">\(y(t)\)</span> in <span class="math">\(X\)</span> can be expressed as the derivative of another function in <span class="math">\(X\)</span>, as the space includes functions with derivatives of all orders. We can take an antiderivative of <span class="math">\(y(t)\)</span> to find a function <span class="math">\(x(t)\)</span> in <span class="math">\(X\)</span> whose derivative is <span class="math">\(y(t)\)</span>, that is, <span class="math">\(x'(t) = y(t)\)</span>. Since the space of functions is closed under integration, this antiderivative <span class="math">\(x(t)\)</span> is also in <span class="math">\(X\)</span>. This demonstrates that for every <span class="math">\(y(t)\)</span> in <span class="math">\(X\)</span>, there exists an <span class="math">\(x(t)\)</span> in <span class="math">\(X\)</span> such that <span class="math">\(T(x(t)) = y(t)\)</span>, confirming that <span class="math">\(\mathcal{R}(T)\)</span> is all of <span class="math">\(X\)</span>.</p>
+</dd>
+<dt>
+<strong>Showing that</strong> <span class="math">\(T^{-1}\)</span> does not exist:</dt>
+<dd>
+<p>An inverse operator <span class="math">\(T^{-1}\)</span> would map a function <span class="math">\(y(t)\)</span> to a function <span class="math">\(x(t)\)</span> such that <span class="math">\(T(x(t)) = y(t)\)</span>. However, the process of taking an antiderivative is not unique due to the constant of integration. Hence, <span class="math">\(T\)</span> is not injective, as multiple functions in <span class="math">\(X\)</span> can map to the same function under <span class="math">\(T\)</span>. Since injectivity is a necessary condition for the existence of an inverse, <span class="math">\(T^{-1}\)</span> does not exist.</p>
+</dd>
+<dt><strong>Comparison with Problem 14 and Comments:</strong></dt>
+<dd>
+<p>Problem 14 involves a finite-dimensional vector space, where surjectivity implies invertibility. In contrast, Problem 15 deals with an infinite-dimensional vector space of smooth functions, where surjectivity is not sufficient for invertibility. The non-uniqueness of the antiderivatives prevents <span class="math">\(T\)</span> from being injective, unlike in finite dimensions, where surjectivity implies injectivity due to the Rank-Nullity Theorem.</p>
+</dd>
+<dt><strong>Conclusion:</strong></dt>
+<dd>
+<p>Despite <span class="math">\(\mathcal{R}(T)\)</span> covering all of <span class="math">\(X\)</span>, the non-uniqueness of the antiderivative, due to the constant of integration, prevents <span class="math">\(T\)</span> from being injective, thus precluding the existence of <span class="math">\(T^{-1}\)</span>. This example underscores a significant distinction between linear operators in finite-dimensional spaces and those in infinite-dimensional spaces.</p>
+</dd>
+</dl>
+</div>
+
+
+
+    
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/proofs/" rel="tag">proofs</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../kreyszig-25-compactness-and-finite-dimension/" rel="prev" title="Kreyszig 2.5 Compactness and Finite Dimension">Previous post</a>
+            </li>
+        </ul></nav></aside><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script><script>
+                renderMathInElement(document.body,
+                    {
+                        
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                    }
+                );
+            </script></article><!--End of body content--><footer id="footer"><div class="text-center">
+    <p>
+        <span class="fa-stack fa-2x">
+        <a href="https://github.com/LucyNowacki">
+            <i class="fa fa-github-square fa-stack-2x"></i>
+        </a>
+        </span>
+        <span class="fa-stack fa-2x">
+        <a href="https://www.linkedin.com/in/lucy-nowacki-02360713b">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-linkedin fa-inverse fa-stack-1x"></i>
+        </a>
+        </span>
+        <span class="fa-stack fa-2x">
+        <a href="mailto:quantlucy@gmail.com">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-envelope fa-inverse fa-stack-1x"></i>
+        </a>
+        </span>
+    </p>
+    <p>
+        
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+<img alt="Creative Commons License BY-NC-SA" style="border-width:0; margin-bottom:12px;" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a> Contents © 2023  <a href="mailto:quantlucy@gmail.com">Lucy Nowacki</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>
+    </p>
+</div>
+
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
+    </script>
+</body>
+</html>
