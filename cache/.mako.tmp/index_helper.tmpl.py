@@ -5,7 +5,7 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1705933070.0194983
+_modified_time = 1706101479.9640124
 _enable_loop = True
 _template_filename = '/home/lucy/anaconda3/envs/lucy/lib/python3.10/site-packages/nikola/data/themes/bootstrap4/templates/index_helper.tmpl'
 _template_uri = 'index_helper.tmpl'
@@ -28,8 +28,8 @@ def render_html_pager(context):
     __M_caller = context.caller_stack._push_frame()
     try:
         nextlink = context.get('nextlink', UNDEFINED)
-        prevlink = context.get('prevlink', UNDEFINED)
         messages = context.get('messages', UNDEFINED)
+        prevlink = context.get('prevlink', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         if prevlink or nextlink:
