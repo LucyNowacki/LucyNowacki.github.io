@@ -41,7 +41,7 @@
 'render_taxonomies', (60928, 56)
 'copy_assets:output/assets/js/baguetteBox.min.js', (61440, 435)
 'render_taxonomies:output/categories.html', (61952, 1742)
-'sitemap:output/sitemap.xml', (756224, 7579)
+'sitemap:output/sitemap.xml', (756224, 7580)
 'sitemap:output/sitemapindex.xml', (68096, 255)
 'render_sources:output/blog/we-are-already-trans-today/index.rst', (68608, 278)
 'render_pages:output/blog/adversarial-attacks-on-model-for-cifar-10/index.html', (69120, 4489)
