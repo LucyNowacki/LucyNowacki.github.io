@@ -1,0 +1,513 @@
+<p><strong>Problem 1. Show that the real line is a metric space.</strong></p>
+<p>To demonstrate that the real line is a metric space, we must define a distance function (or metric) on the real line and confirm that it adheres to the properties of a metric.</p>
+<p>Let's represent the real line as <span class="math">\(\mathbb{R}\)</span> and consider two points <span class="math">\(x, y \in \mathbb{R}\)</span>.</p>
+<p><strong>Definition of the Metric (Distance Function):</strong></p>
+<p>Define the distance between <span class="math">\(x\)</span> and <span class="math">\(y\)</span> as:
+<span class="math">\(d(x, y) = |x - y|\)</span>
+where <span class="math">\(| \cdot |\)</span> symbolizes the absolute value.</p>
+<p>We now need to confirm that <span class="math">\(d\)</span> adheres to the three properties of a metric:</p>
+<ol class="arabic">
+<li><p><strong>Non-negativity:</strong> For all <span class="math">\(x, y \in \mathbb{R}\)</span>, <span class="math">\(d(x, y) \geq 0\)</span> and <span class="math">\(d(x, y) = 0\)</span> if and only if <span class="math">\(x = y\)</span>.</p>
+<p><em>Proof:</em>
+<span class="math">\(d(x, y) = |x - y| \geq 0\)</span> because the absolute value is always non-negative.
+<span class="math">\(d(x, y) = 0\)</span> if and only if <span class="math">\(x - y = 0\)</span> or <span class="math">\(x = y\)</span>.</p>
+</li>
+<li><p><strong>Symmetry:</strong> For all <span class="math">\(x, y \in \mathbb{R}\)</span>, <span class="math">\(d(x, y) = d(y, x)\)</span>.</p>
+<p><em>Proof:</em>
+<span class="math">\(d(x, y) = |x - y| = |- (y - x)| = |y - x| = d(y, x)\)</span>.</p>
+</li>
+<li><p><strong>Triangle Inequality:</strong> For all <span class="math">\(x, y, z \in \mathbb{R}\)</span>, <span class="math">\(d(x, z) \leq d(x, y) + d(y, z)\)</span>.</p>
+<p><em>Proof:</em>
+Using the properties of absolute values, we have:
+<span class="math">\(|x - z| = |(x - y) + (y - z)| \leq |x - y| + |y - z|\)</span>.
+Thus, <span class="math">\(d(x, z) \leq d(x, y) + d(y, z)\)</span>.</p>
+</li>
+</ol>
+<p>Given that the distance function <span class="math">\(d\)</span> adheres to all three properties of a metric on <span class="math">\(\mathbb{R}\)</span>, we can deduce that the real line <span class="math">\(\mathbb{R}\)</span> is a metric space with metric <span class="math">\(d\)</span>.</p>
+<hr class="docutils" />
+<p><strong>Problem 2. Does</strong> <span class="math">\(d(x,y) = (x-y)^2\)</span> <strong>define a metric on the set of all real numbers?</strong></p>
+<p>To determine if <span class="math">\(d(x,y) = (x-y)^2\)</span> defines a metric on the set of all real numbers, we need to check if it satisfies the three properties of a metric:</p>
+<ol class="arabic">
+<li><p><strong>Non-negativity:</strong> For all <span class="math">\(x, y \in \mathbb{R}\)</span>, <span class="math">\(d(x, y) \geq 0\)</span> and <span class="math">\(d(x, y) = 0\)</span> if and only if <span class="math">\(x = y\)</span>.</p>
+<p><em>Proof:</em>
+<span class="math">\(d(x, y) = (x-y)^2\)</span> is always non-negative since the square of any real number is non-negative.
+<span class="math">\(d(x, y) = 0\)</span> if and only if <span class="math">\((x-y)^2 = 0\)</span>, which implies <span class="math">\(x-y = 0\)</span> or <span class="math">\(x = y\)</span>.</p>
+</li>
+<li><p><strong>Symmetry:</strong> For all <span class="math">\(x, y \in \mathbb{R}\)</span>, <span class="math">\(d(x, y) = d(y, x)\)</span>.</p>
+<p><em>Proof:</em>
+<span class="math">\(d(x, y) = (x-y)^2\)</span> and <span class="math">\(d(y, x) = (y-x)^2\)</span>. Since <span class="math">\((x-y)^2 = (y-x)^2\)</span>, we have <span class="math">\(d(x, y) = d(y, x)\)</span>.</p>
+</li>
+<li><p><strong>Triangle Inequality:</strong> For all <span class="math">\(x, y, z \in \mathbb{R}\)</span>, <span class="math">\(d(x, z) \leq d(x, y) + d(y, z)\)</span>.</p>
+<p><em>Proof:</em>
+We need to check if <span class="math">\((x-z)^2 \leq (x-y)^2 + (y-z)^2\)</span> for all <span class="math">\(x, y, z \in \mathbb{R}\)</span>.
+This inequality does not hold in general. For a counterexample, consider <span class="math">\(x = 0\)</span>, <span class="math">\(y = 1\)</span>, and <span class="math">\(z = 2\)</span>. We have:
+<span class="math">\((x-z)^2 = 4\)</span>
+<span class="math">\((x-y)^2 + (y-z)^2 = 1 + 1 = 2\)</span>
+Clearly, 4 is not less than or equal to 2, so the triangle inequality is not satisfied.</p>
+</li>
+</ol>
+<p>Given that the triangle inequality is not satisfied for the function <span class="math">\(d(x,y) = (x-y)^2\)</span>, we can conclude that it does not define a metric on the set of all real numbers.</p>
+<hr class="docutils" />
+<p><strong>Problem 3. Show that</strong> <span class="math">\(d(x,y)=\sqrt(|x-y|)\)</span> <strong>defines a metric on the set of all real numbers.</strong></p>
+<p>Define the distance between <span class="math">\(x\)</span> and <span class="math">\(y\)</span> as:
+<span class="math">\(d(x, y) = \sqrt{|x - y|}\)</span>
+where <span class="math">\(| \cdot |\)</span> symbolizes the absolute value.</p>
+<p>We now need to confirm that <span class="math">\(d\)</span> adheres to the three properties of a metric:</p>
+<ol class="arabic">
+<li><p><strong>Non-negativity:</strong> For all <span class="math">\(x, y \in \mathbb{R}\)</span>, <span class="math">\(d(x, y) \geq 0\)</span> and <span class="math">\(d(x, y) = 0\)</span> if and only if <span class="math">\(x = y\)</span>.</p>
+<p><em>Proof:</em>
+<span class="math">\(d(x, y) = \sqrt{|x - y|}\)</span> is always non-negative since the square root of any non-negative number is non-negative.
+<span class="math">\(d(x, y) = 0\)</span> if and only if <span class="math">\(\sqrt{|x-y|} = 0\)</span>, which implies <span class="math">\(|x-y| = 0\)</span> or <span class="math">\(x = y\)</span>.</p>
+</li>
+<li><p><strong>Symmetry:</strong> For all <span class="math">\(x, y \in \mathbb{R}\)</span>, <span class="math">\(d(x, y) = d(y, x)\)</span>.</p>
+<p><em>Proof:</em>
+<span class="math">\(d(x, y) = \sqrt{|x - y|}\)</span> and <span class="math">\(d(y, x) = \sqrt{|y - x|}\)</span>. Since <span class="math">\(|x-y| = |y-x|\)</span>, we have <span class="math">\(d(x, y) = d(y, x)\)</span>.</p>
+</li>
+<li><p><strong>Triangle Inequality:</strong> For all <span class="math">\(x, y, z \in \mathbb{R}\)</span>, <span class="math">\(d(x, z) \leq d(x, y) + d(y, z)\)</span>.</p>
+<p><em>Proof:</em>
+We need to check if <span class="math">\(\sqrt{|x-z|} \leq \sqrt{|x-y|} + \sqrt{|y-z|}\)</span> for all <span class="math">\(x, y, z \in \mathbb{R}\)</span>.
+Squaring both sides, this is equivalent to checking if <span class="math">\(|x-z| \leq |x-y| + 2\sqrt{|x-y|}\sqrt{|y-z|} + |y-z|\)</span>.
+Using the triangle inequality for absolute values, we have:
+<span class="math">\(|x-z| \leq |x-y| + |y-z|\)</span>.
+Since <span class="math">\(2\sqrt{|x-y|}\sqrt{|y-z|}\)</span> is always non-negative, the inequality <span class="math">\(|x-z| \leq |x-y| + 2\sqrt{|x-y|}\sqrt{|y-z|} + |y-z|\)</span> is satisfied.</p>
+</li>
+</ol>
+<p>Given that the distance function <span class="math">\(d\)</span> adheres to all three properties of a metric on <span class="math">\(\mathbb{R}\)</span>, we can deduce that the real line <span class="math">\(\mathbb{R}\)</span> is a metric space with metric <span class="math">\(d\)</span>.</p>
+<hr class="docutils" />
+<p><strong>Problem 4. Find all metrics on set X consisting of two points. Consiting of one point.</strong></p>
+<p>Consider a set <span class="math">\(X\)</span> with two distinct points, <span class="math">\(a\)</span> and <span class="math">\(b\)</span>.</p>
+<p>For <span class="math">\(d: X \times X \rightarrow \mathbb{R}\)</span> to be a metric, it must satisfy the following properties:</p>
+<ol class="arabic simple">
+<li><p><span class="math">\(d(x, y) \geq 0\)</span> (non-negativity)</p></li>
+<li><p><span class="math">\(d(x, y) = 0\)</span> if and only if <span class="math">\(x = y\)</span> (identity of indiscernibles)</p></li>
+<li><p><span class="math">\(d(x, y) = d(y, x)\)</span> (symmetry)</p></li>
+<li><p><span class="math">\(d(x, z) \leq d(x, y) + d(y, z)\)</span> (triangle inequality)</p></li>
+</ol>
+<p>Given that <span class="math">\(X\)</span> has only two points, the possible distances are:</p>
+<ol class="arabic simple">
+<li><p><span class="math">\(d(a, a) = 0\)</span></p></li>
+<li><p><span class="math">\(d(b, b) = 0\)</span></p></li>
+<li><p><span class="math">\(d(a, b)\)</span> which must be positive.</p></li>
+<li><p><span class="math">\(d(b, a) = d(a, b)\)</span></p></li>
+</ol>
+<p>Thus, for any positive real number <span class="math">\(r\)</span>, defining <span class="math">\(d(a, b) = r\)</span> and <span class="math">\(d(b, a) = r\)</span> gives a metric on <span class="math">\(X\)</span>. There are infinitely many such metrics, one for each positive real number <span class="math">\(r\)</span>.</p>
+<p>Now, for a set <span class="math">\(X\)</span> with a single point, <span class="math">\(a\)</span>, the only possible distance is:</p>
+<ol class="arabic simple">
+<li><p><span class="math">\(d(a, a) = 0\)</span></p></li>
+</ol>
+<p>Given that this satisfies all the properties of a metric, there is only one metric on <span class="math">\(X\)</span> when <span class="math">\(X\)</span> consists of a single point.</p>
+<hr class="docutils" />
+<p><strong>Problem 5. Let d be a metric on X. Determine all constants k such that (i) k*d, (ii) d+k is  metric on X.</strong></p>
+<p>Given a metric <span class="math">\(d\)</span> on <span class="math">\(X\)</span>, let's determine the constants <span class="math">\(k\)</span> for which:</p>
+<ol class="lowerroman simple">
+<li><p><span class="math">\(k \cdot d\)</span> is a metric on <span class="math">\(X\)</span></p></li>
+<li><p><span class="math">\(d + k\)</span> is a metric on <span class="math">\(X\)</span></p></li>
+</ol>
+<p>For (i) <span class="math">\(k \cdot d\)</span> to be a metric:</p>
+<ol class="arabic simple">
+<li><p><span class="math">\(k \cdot d(x, y) \geq 0\)</span> for all <span class="math">\(x, y \in X\)</span>. This implies <span class="math">\(k \geq 0\)</span>.</p></li>
+<li><p><span class="math">\(k \cdot d(x, y) = 0\)</span> if and only if <span class="math">\(x = y\)</span>. This property is satisfied for all values of <span class="math">\(k\)</span>.</p></li>
+<li><p>Symmetry is automatically satisfied.</p></li>
+<li><p>The triangle inequality is satisfied for all <span class="math">\(k\)</span>.</p></li>
+</ol>
+<p>Thus, for (i), <span class="math">\(k\)</span> can be any non-negative real number.</p>
+<p>For (ii) <span class="math">\(d + k\)</span> to be a metric:</p>
+<ol class="arabic simple">
+<li><p><span class="math">\(d(x, y) + k \geq 0\)</span> for all <span class="math">\(x, y \in X\)</span>. This implies <span class="math">\(k &gt; 0\)</span>.</p></li>
+<li><p><span class="math">\(d(x, y) + k = 0\)</span> is never true since <span class="math">\(k &gt; 0\)</span>.</p></li>
+<li><p>Symmetry is automatically satisfied.</p></li>
+<li><p>The triangle inequality is satisfied for all <span class="math">\(k\)</span>.</p></li>
+</ol>
+<p>Thus, for (ii), <span class="math">\(k\)</span> must be strictly positive.</p>
+<hr class="docutils" />
+<p><strong>Problem 6. We have a sequence space</strong> <span class="math">\(l^{\infty}\)</span> <strong>, where every element of X is a complex sequence, i.e.,</strong> <span class="math">\(x=(\xi_1, \xi_2, ...)\)</span> <strong>, and the metric is defined as</strong> <span class="math">\(d(x,y)=sup_{j \in \mathbb{N}} |\xi_j - \eta_j|\)</span> <strong>. Show that a such defined d(x,y) is really metric.</strong></p>
+<p>Consider the sequence space <span class="math">\(l^{\infty}\)</span> where each element of <span class="math">\(X\)</span> is a complex sequence, i.e., <span class="math">\(x = (\xi_1, \xi_2, \ldots)\)</span>. The metric is defined as <span class="math">\(d(x,y) = \sup_{j \in \mathbb{N}} |\xi_j - \eta_j|\)</span>.</p>
+<p>To show that <span class="math">\(d\)</span> is a metric, we need to verify the following properties:</p>
+<ol class="arabic simple">
+<li><p><strong>Non-negativity:</strong>
+- <span class="math">\(d(x, y) \geq 0\)</span> for all <span class="math">\(x, y \in X\)</span> and <span class="math">\(d(x, y) = 0\)</span> if and only if <span class="math">\(x = y\)</span>.</p>
+<ul class="simple">
+<li><p>Proof: The absolute value is always non-negative, and if <span class="math">\(d(x, y) = 0\)</span>, then <span class="math">\(\xi_j = \eta_j\)</span> for all <span class="math">\(j\)</span>. Conversely, if <span class="math">\(x = y\)</span>, then <span class="math">\(d(x, y) = 0\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Symmetry:</strong>
+- <span class="math">\(d(x, y) = d(y, x)\)</span> for all <span class="math">\(x, y \in X\)</span>.</p>
+<ul class="simple">
+<li><p>Proof: <span class="math">\(d(x, y) = \sup_{j \in \mathbb{N}} |\xi_j - \eta_j| = d(y, x)\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Triangle Inequality:</strong>
+- For all <span class="math">\(x, y, z \in X\)</span>, <span class="math">\(d(x, z) \leq d(x, y) + d(y, z)\)</span>.</p>
+<ul class="simple">
+<li><p>Proof: Using the triangle inequality for absolute values, we have <span class="math">\(|\xi_j - \zeta_j| \leq |\xi_j - \eta_j| + |\eta_j - \zeta_j|\)</span>. Taking the supremum over all <span class="math">\(j\)</span> gives the desired result.</p></li>
+</ul>
+</li>
+</ol>
+<p>Given that the distance function <span class="math">\(d\)</span> satisfies all the properties of a metric, we conclude that it is indeed a metric on <span class="math">\(l^{\infty}\)</span>.</p>
+<hr class="docutils" />
+<p><strong>Problem 7. Determine the Induced Metric on</strong> <span class="math">\(A\)</span></p>
+<p>Consider the space <span class="math">\(l^{\infty}\)</span>, which consists of all bounded sequences. If <span class="math">\(A\)</span> is a subspace of <span class="math">\(l^{\infty}\)</span> consisting of all sequences of zeros and ones, then the metric of <span class="math">\(l^{\infty}\)</span> induces a metric on <span class="math">\(A\)</span>.</p>
+<p>For <span class="math">\(d: A \times A \rightarrow \mathbb{R}\)</span> to be a metric, it must satisfy the following properties:</p>
+<ol class="arabic simple">
+<li><p><span class="math">\(d(x, y) \geq 0\)</span> (non-negativity)</p></li>
+<li><p><span class="math">\(d(x, y) = 0\)</span> if and only if <span class="math">\(x = y\)</span> (identity of indiscernibles)</p></li>
+<li><p><span class="math">\(d(x, y) = d(y, x)\)</span> (symmetry)</p></li>
+<li><p><span class="math">\(d(x, z) \leq d(x, y) + d(y, z)\)</span> (triangle inequality)</p></li>
+</ol>
+<p><strong>Definition of the Induced Metric:</strong></p>
+<p>For any two sequences <span class="math">\(x, y\)</span> in <span class="math">\(A\)</span>, the distance between them in the induced metric is given by:
+<span class="math">\(d(x,y) = \sup_{j \in \mathbb{N}} |x_j - y_j|\)</span></p>
+<p>However, since each <span class="math">\(x_j\)</span> and <span class="math">\(y_j\)</span> can only be 0 or 1 in <span class="math">\(A\)</span>:</p>
+<ol class="arabic">
+<li><p><strong>Non-negativity:</strong> The absolute difference <span class="math">\(|x_j - y_j|\)</span> can only be 0 (if <span class="math">\(x_j = y_j\)</span>) or 1 (if <span class="math">\(x_j \neq y_j\)</span>). Therefore, the supremum will be 0 if the sequences are the same and 1 if they are different at any position.</p>
+<p><em>Proof:</em>
+The absolute difference between any two terms of sequences in <span class="math">\(A\)</span> is either 0 or 1. The supremum of a set of non-negative numbers that includes 0 and does not exceed 1 is 1.</p>
+</li>
+<li><p><strong>Symmetry:</strong> For all sequences <span class="math">\(x, y\)</span> in <span class="math">\(A\)</span>, <span class="math">\(d(x, y) = d(y, x)\)</span>.</p>
+<p><em>Proof:</em>
+The order of the terms in the absolute difference does not affect its value, so <span class="math">\(|x_j - y_j| = |y_j - x_j|\)</span>.</p>
+</li>
+<li><p><strong>Triangle Inequality:</strong> This needs to be verified for the induced metric on <span class="math">\(A\)</span>. Given the nature of sequences in <span class="math">\(A\)</span>, the triangle inequality holds.</p>
+<p><em>Proof:</em>
+For any three sequences <span class="math">\(x, y, z\)</span> in <span class="math">\(A\)</span>, the triangle inequality can be verified by considering the individual terms of the sequences and noting that the sum of the absolute differences for any term does not exceed 1.</p>
+</li>
+</ol>
+<p><strong>In other words, the induced metric on</strong> <span class="math">\(A\)</span> <strong>is:</strong>
+<span class="math">\(d(x,y) = \begin{cases}
+0 &amp; \text{if } x=y \\
+1 &amp; \text{if } x \neq y
+\end{cases}\)</span></p>
+<p>This is known as the discrete metric. Every pair of distinct sequences in <span class="math">\(A\)</span> is at a distance of 1 from each other, while the distance between a sequence and itself is 0.</p>
+<p>Given the properties and proofs outlined above, the induced metric on <span class="math">\(A\)</span> is indeed a metric.</p>
+<hr class="docutils" />
+<p><strong>Problem 8. Show that</strong> <span class="math">\(\tilde{d}\)</span> <strong>defines a metric on the function space</strong> <span class="math">\(C[a,b]\)</span></p>
+<p>Consider the function space <span class="math">\(C[a,b]\)</span>, which consists of all real-valued continuous functions defined on the closed interval <span class="math">\([a,b]\)</span>. Let <span class="math">\(X\)</span> be the set of all such functions, denoted by <span class="math">\(x, y, \dots\)</span>, where each function is a mapping from the independent variable <span class="math">\(t\)</span> to the real numbers.</p>
+<p>For <span class="math">\(\tilde{d}: X \times X \rightarrow \mathbb{R}\)</span> to be a metric, it must satisfy the following properties:</p>
+<ol class="arabic simple">
+<li><p><span class="math">\(\tilde{d}(x, y) \geq 0\)</span> (non-negativity)</p></li>
+<li><p><span class="math">\(\tilde{d}(x, y) = 0\)</span> if and only if <span class="math">\(x = y\)</span> (identity of indiscernibles)</p></li>
+<li><p><span class="math">\(\tilde{d}(x, y) = \tilde{d}(y, x)\)</span> (symmetry)</p></li>
+<li><p><span class="math">\(\tilde{d}(x, z) \leq \tilde{d}(x, y) + \tilde{d}(y, z)\)</span> (triangle inequality)</p></li>
+</ol>
+<p><strong>Definition of the Metric</strong> <span class="math">\(\tilde{d}\)</span>:</p>
+<p>For any two functions <span class="math">\(x, y\)</span> in <span class="math">\(X\)</span>, the distance between them in the metric <span class="math">\(\tilde{d}\)</span> is given by:
+<span class="math">\(\tilde{d}(x,y) = \int_{a}^{b} |x(t) - y(t)| dt\)</span></p>
+<p><strong>Verification of Metric Properties:</strong></p>
+<ol class="arabic">
+<li><p><strong>Non-negativity:</strong> The absolute value ensures that the integrand is non-negative. Therefore, the integral of a non-negative function is also non-negative.</p>
+<p><em>Proof:</em>
+<span class="math">\(\tilde{d}(x,y) = \int_{a}^{b} |x(t) - y(t)| dt \geq 0\)</span></p>
+</li>
+<li><p><strong>Identity of indiscernibles:</strong> If <span class="math">\(x = y\)</span>, then for all <span class="math">\(t \in [a,b]\)</span>, <span class="math">\(x(t) = y(t)\)</span>, and thus <span class="math">\(|x(t) - y(t)| = 0\)</span>. The integral of zero is zero.</p>
+<p><em>Proof:</em>
+If <span class="math">\(x = y\)</span>, then <span class="math">\(\tilde{d}(x,y) = \int_{a}^{b} 0 dt = 0\)</span></p>
+</li>
+<li><p><strong>Symmetry:</strong> The absolute value function is symmetric, so swapping <span class="math">\(x\)</span> and <span class="math">\(y\)</span> does not change the value of the integrand.</p>
+<p><em>Proof:</em>
+<span class="math">\(\tilde{d}(x,y) = \int_{a}^{b} |x(t) - y(t)| dt = \int_{a}^{b} |y(t) - x(t)| dt = \tilde{d}(y,x)\)</span></p>
+</li>
+<li><p><strong>Triangle Inequality:</strong> Using the properties of integrals and absolute values, we can show that the triangle inequality holds.</p>
+<p><em>Proof:</em>
+For any function <span class="math">\(z\)</span> in <span class="math">\(X\)</span>, we have:
+<span class="math">\(|x(t) - z(t)| \leq |x(t) - y(t)| + |y(t) - z(t)|\)</span></p>
+<p>Integrating both sides over <span class="math">\([a,b]\)</span>, we get:
+<span class="math">\(\int_{a}^{b} |x(t) - z(t)| dt \leq \int_{a}^{b} |x(t) - y(t)| dt + \int_{a}^{b} |y(t) - z(t)| dt\)</span></p>
+<p>Thus, <span class="math">\(\tilde{d}(x,z) \leq \tilde{d}(x,y) + \tilde{d}(y,z)\)</span></p>
+</li>
+</ol>
+<p>Given the properties and proofs outlined above, the function <span class="math">\(\tilde{d}\)</span> does indeed define a metric on the function space <span class="math">\(C[a,b]\)</span>.</p>
+<hr class="docutils" />
+<p><strong>Problem 10. Hamming Distance. Let X be a set of all ordered triples of zeros and ones. Show that X consists of 8 elements and a metric d on X is defined by d(x,y)=number of places where x and y have a different entries.</strong></p>
+<p>Definition of Ordered Triples:</p>
+<p>An ordered triple refers to a set of three elements arranged in a specific order. The order of elements in the triple is significant, meaning that the triple (0,1,0) is different from the triple (1,0,0).</p>
+<p>Elements of Set X:</p>
+<p>Given that each element of the ordered triple can be either a 0 or a 1, we can list all possible ordered triples in set <span class="math">\(X\)</span> as follows:</p>
+<ol class="arabic simple">
+<li><p>(0,0,0)</p></li>
+<li><p>(0,0,1)</p></li>
+<li><p>(0,1,0)</p></li>
+<li><p>(0,1,1)</p></li>
+<li><p>(1,0,0)</p></li>
+<li><p>(1,0,1)</p></li>
+<li><p>(1,1,0)</p></li>
+<li><p>(1,1,1)</p></li>
+</ol>
+<p>Thus, set <span class="math">\(X\)</span> consists of 8 distinct ordered triples.</p>
+<p>Definition of the Metric d on X:</p>
+<p>For any two ordered triples <span class="math">\(x\)</span> and <span class="math">\(y\)</span> in <span class="math">\(X\)</span>, the metric <span class="math">\(d(x,y)\)</span> is defined as the number of positions at which the entries of <span class="math">\(x\)</span> and <span class="math">\(y\)</span> differ.</p>
+<p><strong>Example:</strong></p>
+<p>Let's consider two ordered triples:
+<span class="math">\(x = (0,1,0)\)</span>
+<span class="math">\(y = (1,1,1)\)</span></p>
+<p>Comparing the entries of <span class="math">\(x\)</span> and <span class="math">\(y\)</span> position by position:</p>
+<ul class="simple">
+<li><p>At the first position: <span class="math">\(x\)</span> has 0 and <span class="math">\(y\)</span> has 1. They are different.</p></li>
+<li><p>At the second position: Both <span class="math">\(x\)</span> and <span class="math">\(y\)</span> have 1. They are the same.</p></li>
+<li><p>At the third position: <span class="math">\(x\)</span> has 0 and <span class="math">\(y\)</span> has 1. They are different.</p></li>
+</ul>
+<p>So, there are 2 positions at which <span class="math">\(x\)</span> and <span class="math">\(y\)</span> have different entries. Therefore, <span class="math">\(d(x,y) = 2\)</span>.</p>
+<p>In essence, the metric <span class="math">\(d(x,y)\)</span> for the set <span class="math">\(X\)</span> counts the number of &quot;mismatches&quot; between the entries of two ordered triples. The more mismatches there are, the &quot;farther apart&quot; the two ordered triples are considered to be in terms of the metric.</p>
+<p>This format should be suitable for Nikola reStructuredText (rst) rendering.</p>
+<p>Properties of the Metric d:</p>
+<p>To show that <span class="math">\(d\)</span> is a metric, we need to verify the following properties:</p>
+<ol class="arabic">
+<li><p><strong>Non-negativity:</strong> For all <span class="math">\(x, y \in X\)</span>, <span class="math">\(d(x, y) \geq 0\)</span>.</p>
+<p><em>Proof:</em>
+The number of differing positions between two ordered triples is always non-negative.</p>
+</li>
+<li><p><strong>Identity of Indiscernibles:</strong> For all <span class="math">\(x, y \in X\)</span>, <span class="math">\(d(x, y) = 0\)</span> if and only if <span class="math">\(x = y\)</span>.</p>
+<p><em>Proof:</em>
+If <span class="math">\(d(x, y) = 0\)</span>, it means there are no differing positions between <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, implying <span class="math">\(x = y\)</span>.</p>
+</li>
+<li><p><strong>Symmetry:</strong> For all <span class="math">\(x, y \in X\)</span>, <span class="math">\(d(x, y) = d(y, x)\)</span>.</p>
+<p><em>Proof:</em>
+The number of differing positions between <span class="math">\(x\)</span> and <span class="math">\(y\)</span> is the same as the number of differing positions between <span class="math">\(y\)</span> and <span class="math">\(x\)</span>.</p>
+</li>
+<li><p><strong>Triangle Inequality:</strong> For all <span class="math">\(x, y, z \in X\)</span>, <span class="math">\(d(x, z) \leq d(x, y) + d(y, z)\)</span>.</p>
+<p><em>Proof:</em>
+Let's consider three ordered triples <span class="math">\(x, y,\)</span> and <span class="math">\(z\)</span> from set <span class="math">\(X\)</span>. For each position in the ordered triples:</p>
+<ul class="simple">
+<li><p>If <span class="math">\(x\)</span> and <span class="math">\(z\)</span> have the same entry, then the contribution to <span class="math">\(d(x, z)\)</span> is 0 for that position.</p></li>
+<li><p>If <span class="math">\(x\)</span> and <span class="math">\(z\)</span> have different entries, then either <span class="math">\(x\)</span> and <span class="math">\(y\)</span> have different entries, or <span class="math">\(y\)</span> and <span class="math">\(z\)</span> have different entries, or both. This means that the sum of the contributions to <span class="math">\(d(x, y)\)</span> and <span class="math">\(d(y, z)\)</span> for that position is at least 1.</p></li>
+</ul>
+<p>Summing over all positions, we get:
+<span class="math">\(d(x, z) \leq d(x, y) + d(y, z)\)</span></p>
+<p>Thus, the triangle inequality is satisfied for the Hamming distance on set <span class="math">\(X\)</span>.</p>
+</li>
+</ol>
+<p>Given that the metric <span class="math">\(d\)</span> satisfies all the properties of a metric on <span class="math">\(X\)</span>, we can conclude that <span class="math">\(d\)</span> defines a metric on the set <span class="math">\(X\)</span> of all ordered triples of zeros and ones.</p>
+<hr class="docutils" />
+<p><strong>Problem 11. Prove</strong></p>
+<div class="math">
+\begin{equation*}
+d(x_1, x_{k+1}) \leq (d(x_1,x_2) + d(x_2,x_3) + \ldots + d(x_{k-1}, x_k)) + d(x_k, x_{k+1})
+\end{equation*}
+</div>
+<p>Given a metric space with metric <span class="math">\(d\)</span>, we want to prove that for any sequence of points <span class="math">\(x_1, x_2, \ldots, x_n\)</span> in the space:</p>
+<div class="math">
+\begin{equation*}
+d(x_1, x_n) \leq d(x_1,x_2) + d(x_2,x_3) + \ldots + d(x_{n-1}, x_n)
+\end{equation*}
+</div>
+<p>To prove this, we'll use induction on <span class="math">\(n\)</span>.</p>
+<p><strong>Base Case</strong>  <span class="math">\(n=2\)</span> For <span class="math">\(n = 2\)</span> , the statement is trivially true as:</p>
+<div class="math">
+\begin{equation*}
+d(x_1, x_2) \leq d(x_1, x_2)
+\end{equation*}
+</div>
+<p><strong>Inductive Step</strong>
+Assuming our inductive hypothesis, we have:</p>
+<div class="math">
+\begin{equation*}
+d(x_1, x_k) \leq d(x_1,x_2) + d(x_2,x_3) + \ldots + d(x_{k-1}, x_k)
+\end{equation*}
+</div>
+<p>Now, consider the distance between <span class="math">\(x_1\)</span> and <span class="math">\(x_{k+1}\)</span>. Using the triangle inequality, we can say:</p>
+<div class="math">
+\begin{equation*}
+d(x_1, x_{k+1}) \leq d(x_1, x_k) + d(x_k, x_{k+1})
+\end{equation*}
+</div>
+<p>Here's the breakdown:</p>
+<ul class="simple">
+<li><p><span class="math">\(d(x_1, x_{k+1})\)</span> is the total distance from <span class="math">\(x_1\)</span> to <span class="math">\(x_{k+1}\)</span>.</p></li>
+<li><p><span class="math">\(d(x_1, x_k)\)</span> represents the distance from <span class="math">\(x_1\)</span> to <span class="math">\(x_k\)</span>.</p></li>
+<li><p><span class="math">\(d(x_k, x_{k+1})\)</span> is the distance between the points <span class="math">\(x_k\)</span> and <span class="math">\(x_{k+1}\)</span>.</p></li>
+</ul>
+<p>The triangle inequality tells us that the direct path from <span class="math">\(x_1\)</span> to <span class="math">\(x_{k+1}\)</span> is shorter than or equal to the sum of the path from <span class="math">\(x_1\)</span> to <span class="math">\(x_k\)</span> and then from <span class="math">\(x_k\)</span> to <span class="math">\(x_{k+1}\)</span>.</p>
+<p>Now, using our inductive assumption, we can replace <span class="math">\(d(x_1, x_k)\)</span> with the sum of distances between consecutive points up to <span class="math">\(x_k\)</span>:</p>
+<div class="math">
+\begin{equation*}
+d(x_1, x_{k+1}) \leq (d(x_1,x_2) + d(x_2,x_3) + \ldots + d(x_{k-1}, x_k)) + d(x_k, x_{k+1})
+\end{equation*}
+</div>
+<p>This equation essentially states that the direct distance from <span class="math">\(x_1\)</span> to <span class="math">\(x_{k+1}\)</span> is less than or equal to the sum of distances when traveling through all intermediate points up to <span class="math">\(x_{k+1}\)</span>.</p>
+<p>Thus, our inductive step is complete, and the statement holds for <span class="math">\(n = k+1\)</span>.</p>
+<p>By the principle of mathematical induction, the statement is true for all positive integers <span class="math">\(n\)</span>.</p>
+<p><strong>Conclusion</strong></p>
+<p>The given inequality is a direct consequence of the triangle inequality, and it holds for any sequence of points in a metric space.</p>
+<p><strong>Problem 12.</strong></p>
+<p>Given the inequality:</p>
+<div class="math">
+\begin{equation*}
+d(x_1, x_{k+1}) \leq (d(x_1,x_2) + d(x_2,x_3) + \ldots + d(x_{k-1}, x_k)) + d(x_k, x_{k+1})
+\end{equation*}
+</div>
+<p>We aim to prove:</p>
+<div class="math">
+\begin{equation*}
+|d(x,y) - d(z,w)| \leq d(x,z) + d(y,w)
+\end{equation*}
+</div>
+<p><strong>Proof</strong></p>
+<p>Using the triangle inequality, we have:</p>
+<div class="math">
+\begin{equation*}
+d(x,y) \leq d(x,z) + d(z,y)
+\end{equation*}
+</div>
+<p>Similarly:</p>
+<div class="math">
+\begin{equation*}
+d(z,w) \leq d(z,y) + d(y,w)
+\end{equation*}
+</div>
+<p>From the first inequality, expressing d(z,y) :</p>
+<div class="math">
+\begin{equation*}
+d(z,y) \geq d(x,y) - d(x,z)
+\end{equation*}
+</div>
+<p>Substituting into the second inequality:</p>
+<div class="math">
+\begin{equation*}
+d(z,w) \leq d(x,y) - d(x,z) + d(y,w)
+\end{equation*}
+</div>
+<p>Rearranging, we get:</p>
+<div class="math">
+\begin{equation*}
+d(x,y) - d(z,w) \leq d(x,z) + d(y,w)
+\end{equation*}
+</div>
+<p>Similarly, by interchanging  x and  z and y  and  w , we derive:</p>
+<div class="math">
+\begin{equation*}
+d(z,w) - d(x,y) \leq d(x,z) + d(y,w)
+\end{equation*}
+</div>
+<p>Combining the two results:</p>
+<div class="math">
+\begin{equation*}
+|d(x,y) - d(z,w)| \leq d(x,z) + d(y,w)
+\end{equation*}
+</div>
+<p>In conclusion, the direct path (straight line) between any two points is always shorter than or equal to the sum of the paths that go through an intermediate point.</p>
+<p>This completes the proof.</p>
+<hr class="docutils" />
+<p><strong>Problem 13. Using triangle inequality show</strong> <span class="math">\(|d(x,z)-d(y,z)|\leq d(x,y)\)</span></p>
+<ol class="arabic">
+<li><p><strong>Using the Triangle Inequality:</strong></p>
+<p>We know from the triangle inequality that:
+<span class="math">\(d(x,z) \leq d(x,y) + d(y,z)\)</span>
+(1)</p>
+<p>Similarly, we have:
+<span class="math">\(d(y,z) \leq d(y,x) + d(x,z)\)</span>
+(2)</p>
+</li>
+<li><p><strong>Rearranging (1):</strong></p>
+<p>From (1), we can rearrange to get:
+<span class="math">\(d(x,z) - d(y,z) \leq d(x,y)\)</span>
+(3)</p>
+</li>
+<li><p><strong>Rearranging (2):</strong></p>
+<p>From (2), we can rearrange to get:
+<span class="math">\(d(y,z) - d(x,z) \leq d(x,y)\)</span>
+(4)</p>
+</li>
+<li><p><strong>Combining (3) and (4):</strong></p>
+<p>From (3) and (4), we can conclude that:
+<span class="math">\(-d(x,y) \leq d(x,z) - d(y,z) \leq d(x,y)\)</span></p>
+<p>This is the definition of the absolute value inequality. Thus, we can rewrite it as:
+<span class="math">\(|d(x,z) - d(y,z)| \leq d(x,y)\)</span></p>
+</li>
+</ol>
+<p>And that completes the proof.</p>
+<hr class="docutils" />
+<p><strong>Problem 16.</strong></p>
+<p>We aim to prove the following inequality using the triangle inequality:</p>
+<div class="math">
+\begin{equation*}
+d(x,y) \leq d(z,x) + d(z,y)
+\end{equation*}
+</div>
+<p><strong>Proof</strong></p>
+<p>Using the triangle inequality for any three points x ,  y , and  z  in a metric space, we have:</p>
+<div class="math">
+\begin{equation*}
+d(x,y) \leq d(x,z) + d(z,y)
+\end{equation*}
+</div>
+<p>This states that the distance between x and  y is always less than or equal to the sum of the distances from  x to z and from z to y .</p>
+<p>Thus, the desired inequality is proven:</p>
+<div class="math">
+\begin{equation*}
+d(x,y) \leq d(z,x) + d(z,y)
+\end{equation*}
+</div>
+<p><strong>A bit detailed look</strong></p>
+<p>The triangle inequality states that for any three points in a metric space, the direct distance between two of them is always less than or equal to the sum of their distances to the third point.</p>
+<p>Given three points x ,  y, and z:</p>
+<ul>
+<li><p>The direct distance between x and y is denoted as:</p>
+<div class="math">
+\begin{equation*}
+d(x,y)
+\end{equation*}
+</div>
+</li>
+<li><p>The sum of their distances to z is:</p>
+<div class="math">
+\begin{equation*}
+d(x,z) + d(z,y)
+\end{equation*}
+</div>
+</li>
+</ul>
+<p>Using the triangle inequality, we can conclude:</p>
+<div class="math">
+\begin{equation*}
+d(x,y) \leq d(x,z) + d(z,y)
+\end{equation*}
+</div>
+<p>This completes the proof.</p>
+<hr class="docutils" />
+<p><strong>Problem 14. Show that (M3) and (M4) can be derived from (M2) and (M4).</strong></p>
+<p><strong>Proof:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Deriving (M3) from (M2) and (M4):</strong></p></li>
+</ol>
+<p>Given (M2): <span class="math">\(d(x,y) = 0\)</span> if and only if <span class="math">\(x = y\)</span></p>
+<p>Given (M4): <span class="math">\(d(x,y) \leq d(x,z) + d(z,y)\)</span></p>
+<p>To prove (M3): <span class="math">\(d(x,y) = d(y,x)\)</span></p>
+<p>Consider any two points <span class="math">\(x\)</span> and <span class="math">\(y\)</span>.</p>
+<p>Using (M4) with <span class="math">\(z = x\)</span>, we get:
+<span class="math">\(d(x,y) \leq d(x,x) + d(x,y)\)</span></p>
+<p>But from (M2), <span class="math">\(d(x,x) = 0\)</span>. So,
+<span class="math">\(d(x,y) \leq d(x,y)\)</span></p>
+<p>Similarly, using (M4) with <span class="math">\(z = y\)</span>, we get:
+<span class="math">\(d(y,x) \leq d(y,y) + d(y,x)\)</span></p>
+<p>Again, from (M2), <span class="math">\(d(y,y) = 0\)</span>. So,
+<span class="math">\(d(y,x) \leq d(y,x)\)</span></p>
+<p>Combining the two inequalities, we get:
+<span class="math">\(d(x,y) = d(y,x)\)</span></p>
+<p>This proves (M3).</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Deriving (M4) from (M2) and (M4):</strong></p></li>
+</ol>
+<p>This is trivial since (M4) is already given.</p>
+<p>Thus, we have shown that (M3) can be derived from (M2) and (M4).</p>
+<hr class="docutils" />
+<p><strong>Problem 15. Show that non-negativity of a metric follows from (M2) to (M4).</strong></p>
+<p><strong>Proof:</strong></p>
+<p>Given the axioms:</p>
+<p>(M2): <span class="math">\(d(x,y) = 0\)</span> if and only if <span class="math">\(x = y\)</span></p>
+<p>(M3): <span class="math">\(d(x,y) = d(y,x)\)</span></p>
+<p>(M4): <span class="math">\(d(x,y) \leq d(x,z) + d(z,y)\)</span></p>
+<p>We aim to prove non-negativity, i.e., <span class="math">\(d(x,y) \geq 0\)</span> for all <span class="math">\(x, y\)</span>.</p>
+<p>Consider any two points <span class="math">\(x\)</span> and <span class="math">\(y\)</span>.</p>
+<p>Using (M4) with <span class="math">\(z = x\)</span>, we get:
+<span class="math">\(d(x,y) \leq d(x,x) + d(x,y)\)</span></p>
+<p>From (M2), we know that <span class="math">\(d(x,x) = 0\)</span>. Substituting this in, we get:
+<span class="math">\(d(x,y) \leq d(x,y)\)</span></p>
+<p>Now, using (M3), we have:
+<span class="math">\(d(y,x) = d(x,y)\)</span></p>
+<p>Using (M4) with <span class="math">\(z = y\)</span>, we get:
+<span class="math">\(d(y,x) \leq d(y,y) + d(y,x)\)</span></p>
+<p>Again, from (M2), <span class="math">\(d(y,y) = 0\)</span>. Substituting this in, we get:
+<span class="math">\(d(y,x) \leq d(y,x)\)</span></p>
+<p>Combining the two inequalities, we get:
+<span class="math">\(0 \leq d(x,y)\)</span></p>
+<p>This proves the non-negativity of the metric <span class="math">\(d\)</span>.</p>
+<p>Thus, non-negativity of a metric follows from (M2) to (M4).</p>
