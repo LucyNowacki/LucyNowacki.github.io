@@ -506,8 +506,8 @@ function initTesseractMenu(root) {
     state.pressLabelIndex = -1;
   }
 
-  function onPointerLeave() {
-    if (!state.dragging) {
+  function onPointerLeave(event) {
+    if (!state.dragging && event.pointerType !== "touch") {
       setActiveCell(-1);
     }
   }
