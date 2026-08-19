@@ -203,6 +203,7 @@ function initTesseractMenu(root) {
     group.add(front, back);
     return { front, back };
   });
+  const surfaceLabelHitMeshes = surfaceLabelMeshes.flatMap(({ front, back }) => [front, back]);
 
   function createSurfaceLabelMesh(index, texture, side, mirrorX) {
     const geometry = new THREE.BufferGeometry();
@@ -268,6 +269,8 @@ function initTesseractMenu(root) {
     moved: false,
     longPressTimer: 0,
     longPressFired: false,
+    pressCellIndex: -1,
+    pressLabelIndex: -1,
     rotationTween: null,
     lastTime: performance.now(),
   };
@@ -403,6 +406,10 @@ function initTesseractMenu(root) {
       return;
     }
 
+    if (event.pointerType === "touch") {
+      event.preventDefault();
+    }
+
     state.dragging = true;
     state.pointerId = event.pointerId;
     state.dragStartX = event.clientX;
@@ -411,6 +418,10 @@ function initTesseractMenu(root) {
     state.lastY = event.clientY;
     state.moved = false;
     state.longPressFired = false;
+    state.pressLabelIndex = pickSurfaceLabel(event.clientX, event.clientY);
+    state.pressCellIndex = state.pressLabelIndex !== -1
+      ? state.pressLabelIndex
+      : pickCell(event.clientX, event.clientY);
     stage.classList.add("is-dragging");
     stage.setPointerCapture(event.pointerId);
 
@@ -418,7 +429,7 @@ function initTesseractMenu(root) {
       window.clearTimeout(state.longPressTimer);
       state.longPressTimer = window.setTimeout(() => {
         state.longPressFired = true;
-        const hitIndex = pickCell(event.clientX, event.clientY);
+        const hitIndex = state.pressCellIndex;
         if (hitIndex !== -1) {
           setActiveCell(hitIndex);
           startCellRotation(hitIndex);
@@ -447,8 +458,7 @@ function initTesseractMenu(root) {
       return;
     }
 
-    const hitIndex = pickCell(event.clientX, event.clientY);
-    setActiveCell(hitIndex);
+    setActiveCell(pickMenuTarget(event.clientX, event.clientY));
   }
 
   function onPointerUp(event) {
@@ -460,15 +470,27 @@ function initTesseractMenu(root) {
     stage.classList.remove("is-dragging");
     stage.releasePointerCapture(event.pointerId);
 
-    const hitIndex = pickCell(event.clientX, event.clientY);
-    if (!state.moved && !state.longPressFired && event.pointerType !== "touch" && hitIndex !== -1) {
-      window.location.href = MENU_ITEMS[hitIndex].href;
-    } else if (!state.moved && hitIndex !== -1) {
-      setActiveCell(hitIndex);
+    const releaseLabelIndex = pickSurfaceLabel(event.clientX, event.clientY);
+    const releaseCellIndex = releaseLabelIndex !== -1
+      ? releaseLabelIndex
+      : pickCell(event.clientX, event.clientY);
+    const hitIndex = state.pressCellIndex !== -1 ? state.pressCellIndex : releaseCellIndex;
+
+    if (!state.moved && !state.longPressFired && hitIndex !== -1) {
+      const isTouch = event.pointerType === "touch";
+      const tappedProjectedLabel = state.pressLabelIndex !== -1 || releaseLabelIndex !== -1;
+
+      if (!isTouch || tappedProjectedLabel || state.activeIndex === hitIndex) {
+        window.location.assign(MENU_ITEMS[hitIndex].href);
+      } else {
+        setActiveCell(hitIndex);
+      }
     }
 
     state.dragging = false;
     state.pointerId = null;
+    state.pressCellIndex = -1;
+    state.pressLabelIndex = -1;
   }
 
   function cancelPointer(event) {
@@ -480,6 +502,8 @@ function initTesseractMenu(root) {
     stage.classList.remove("is-dragging");
     state.dragging = false;
     state.pointerId = null;
+    state.pressCellIndex = -1;
+    state.pressLabelIndex = -1;
   }
 
   function onPointerLeave() {
@@ -490,20 +514,35 @@ function initTesseractMenu(root) {
 
   function onContextMenu(event) {
     event.preventDefault();
-    const hitIndex = pickCell(event.clientX, event.clientY);
+    const hitIndex = pickMenuTarget(event.clientX, event.clientY);
     if (hitIndex !== -1) {
       setActiveCell(hitIndex);
       startCellRotation(hitIndex);
     }
   }
 
+  function pickMenuTarget(clientX, clientY) {
+    const labelIndex = pickSurfaceLabel(clientX, clientY);
+    return labelIndex !== -1 ? labelIndex : pickCell(clientX, clientY);
+  }
+
+  function pickSurfaceLabel(clientX, clientY) {
+    setRaycasterFromPointer(clientX, clientY);
+    const hits = raycaster.intersectObjects(surfaceLabelHitMeshes, false);
+    return hits.length ? hits[0].object.userData.menuIndex : -1;
+  }
+
   function pickCell(clientX, clientY) {
+    setRaycasterFromPointer(clientX, clientY);
+    const hits = raycaster.intersectObjects(cellMeshes, false);
+    return hits.length ? hits[0].object.userData.menuIndex : -1;
+  }
+
+  function setRaycasterFromPointer(clientX, clientY) {
     const rect = renderer.domElement.getBoundingClientRect();
     pointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
     pointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
-    const hits = raycaster.intersectObjects(cellMeshes, false);
-    return hits.length ? hits[0].object.userData.menuIndex : -1;
   }
 
   function setActiveCell(index) {
