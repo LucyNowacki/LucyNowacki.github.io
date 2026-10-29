@@ -1,0 +1,34 @@
+/* Palette trial: Step 11 only. No changes to the story page or other steps. */
+.step-eleven {
+ --annotation-pointer:#000000;--operator-error:#008a16;--operator-safety:#454545;
+ --operator-outer:#ff8132;--operator-clearance:#996000;--operator-image:#ad1457;
+ --operator-tint:#e6f2e7;--protected-interior:#d3d3d3;
+ background:#fff;
+}
+.step-eleven :is(p,figcaption,.op-caption,.gate-map-note){color:#303030}
+.step-eleven .site-math{color:#4b0082}
+.step-eleven svg :is(circle,ellipse,line,path[stroke]):not(mjx-container *,.mjx-label *){
+ vector-effect:non-scaling-stroke;stroke-width:2px;
+}
+.step-eleven svg :is(circle,ellipse)[stroke-dasharray]{stroke-dasharray:6 4}
+.step-eleven svg :is(circle,ellipse)[stroke="#ff8132"]{stroke-dasharray:10 5}
+.step-eleven svg :is(circle,ellipse)[stroke="#008a16"],
+.step-eleven svg :is(circle,ellipse)[stroke="#ff1493"],
+.step-eleven svg :is(circle,ellipse)[stroke="#454545"]{stroke-dasharray:none}
+.step-eleven svg :is(path,line)[stroke-dasharray]:not(.annotation-pointer){stroke-dasharray:none}
+.step-eleven svg [fill="#d3d3d3"]{fill-opacity:.5}
+.step-eleven svg .annotation-pointer{
+ stroke:#000!important;stroke-width:1.5px!important;stroke-dasharray:1 4!important;
+ stroke-linecap:round;fill:none;opacity:1;vector-effect:non-scaling-stroke;
+ marker-start:none!important;marker-end:none!important;
+}
+.step-eleven svg text[fill="#1e90ff"]{fill:#055be0}
+.step-eleven svg text[fill="#ff1493"]{fill:#c21875}
+.step-eleven svg text[fill="#00b8ff"]{fill:#007c9e}
+.step-eleven svg text[fill="#ff8132"]{fill:#b54708}
+.step-eleven svg text[fill="#ff0000"]{fill:#c40000}
+.step-eleven .output-gap-bracket{stroke:#996000}
+.step-eleven .two-gate-provenance article{border-top-color:#713bc5}
+.step-eleven .two-gate-provenance .gate-provenance-matrix{border-top-color:#ff1493}
+.step-eleven .two-gate-provenance .gate-provenance-operator{border-top-color:#008a16}
+.step-eleven .gate-provenance-handoff{border-left-color:#713bc5}

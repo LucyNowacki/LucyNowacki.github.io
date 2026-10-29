@@ -1,0 +1,83 @@
+html[data-story-display="4k"]{color-scheme:light}html[data-story-display="4k"] body{margin:0;background:radial-gradient(ellipse at 0 0,#eef1ff,transparent 60%),radial-gradient(ellipse at 100% 100%,#f8f8f8,transparent 50%),#f0f2f5}#story-4k-root{padding:clamp(12px,1.1vw,42px);max-width:none;margin:0}.story-immersive{font-size:clamp(16px,.62vw,24px)}.story-immersive .story-panel{border-radius:20px;box-shadow:0 15px 70px #4b008209}.story-immersive .story-header{padding:clamp(20px,1vw,40px) clamp(24px,1.2vw,46px) 8px}.story-immersive .story-header h2{font-size:clamp(23px,1vw,40px);letter-spacing:-.02em}.story-immersive .story-header p{font-size:clamp(14px,.56vw,22px);margin-bottom:12px}.story-immersive .eyebrow{font-size:clamp(11px,.45vw,17px)}.story-immersive .story-persistent>div{padding:clamp(12px,.65vw,25px) clamp(20px,1vw,38px);gap:8px}.story-immersive .story-persistent small,.story-immersive .story-persistent span{font-size:clamp(12px,.5vw,19px)}.story-immersive .story-persistent .site-math{font-size:clamp(16px,.68vw,26px)}.story-immersive .story-persistent strong{font-size:clamp(18px,.8vw,30px)}.story-immersive .story-controls{grid-template-columns:1.1fr 1fr 1.5fr;padding:clamp(15px,.7vw,27px) 36px 10px;align-items:center;font-size:clamp(14px,.55vw,22px);gap:12px 40px}.story-immersive .story-actions{grid-column:auto;justify-content:flex-end;gap:12px}.story-immersive .story-actions button,.story-immersive .story-actions select{font-size:clamp(13px,.52vw,20px)}.story-immersive .story-scale{margin-left:0;font-size:clamp(13px,.52vw,20px)}.story-immersive .story-play-status{font-size:clamp(12px,.47vw,18px)}.story-immersive .story-camera-controls{padding:14px 36px;gap:25px}.story-immersive .story-camera-controls>label,.story-immersive .story-camera-controls button{font-size:clamp(12px,.5vw,20px)}.story-immersive .story-camera-controls>span{width:auto;margin-left:auto;font-size:clamp(12px,.47vw,18px)}.story-immersive .story-scale-note{margin:10px 36px 14px;font-size:clamp(12px,.45vw,18px);padding:9px 16px}.story-immersive .story-map{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:calc(clamp(170px,8.5vw,350px) + 250px) clamp(220px,8.2vw,320px) calc(clamp(170px,8.5vw,350px) + 250px);padding:0 40px;overflow:visible;gap:0}.story-immersive .story-stage{margin:0 30px!important;padding:12px 15px!important;justify-content:flex-start;border-radius:15px!important;background:linear-gradient(180deg,#fbfaff99,#ffffff66)!important}.story-immersive .story-stage-title{font-size:clamp(16px,.72vw,28px);min-height:54px;line-height:1.4;gap:12px}.story-immersive .story-stage-title b{min-width:30px;height:30px;font-size:17px}.story-immersive .story-stage canvas{width:100%;height:clamp(170px,8.5vw,350px);object-fit:fill;cursor:grab}.story-immersive .story-stage canvas:active{cursor:grabbing}.story-immersive .story-matrix{font-size:clamp(16px,.66vw,26px);min-height:35px}.story-immersive .story-stage-3 .story-matrix{font-size:clamp(13px,.58vw,22px)}.story-immersive .story-value{font-size:clamp(13px,.58vw,23px);margin-top:8px;font-weight:550}.story-immersive .story-evidence{font-size:clamp(11px,.45vw,18px);margin-top:8px;color:#5e4777;border-radius:20px;background:#f1ecfc;padding:4px 12px}.story-immersive .story-stage-metric{font-size:clamp(11px,.43vw,17px);line-height:1.5;color:#65567a;min-height:35px;margin-top:8px;max-width:100%}.story-immersive .story-stage-hint{font-size:clamp(10px,.4vw,16px);color:#9175ad;margin-top:6px}.story-immersive .story-route-note{padding:20px 40px;font-size:clamp(15px,.65vw,25px);gap:8px}.story-immersive .story-route-note span:last-of-type,.story-immersive .story-route-note>div{font-size:clamp(13px,.5vw,20px)}.story-immersive .story-branch{margin:20px 60px 20px 30px;border-radius:15px}.story-immersive .story-branch .story-stage{display:grid;grid-template-columns:30% 1fr;grid-template-rows:auto auto auto auto;align-items:center;background:transparent!important;margin:0!important;padding:10px 22px!important;column-gap:25px}.story-immersive .story-branch canvas{grid-area:1/1/5/2;width:100%;height:clamp(120px,5.3vw,215px)}.story-immersive .story-branch .story-stage-title{grid-area:1/2;min-height:0;font-size:clamp(17px,.7vw,27px)}.story-immersive .story-branch .story-matrix{grid-area:2/2;font-size:clamp(16px,.7vw,27px)}.story-immersive .story-branch .story-value{grid-area:3/2;font-size:clamp(14px,.6vw,23px)}.story-immersive .story-branch .story-evidence{grid-area:4/2;justify-self:start}.story-immersive .story-branch .story-stage-metric,.story-immersive .story-branch .story-stage-hint{display:none}.story-immersive .story-branch-caption{font-size:clamp(12px,.47vw,18px);padding:0 22px 12px}.story-immersive .story-legend{font-size:clamp(13px,.53vw,21px);margin:18px 30px;gap:18px 35px}.story-immersive .story-legend i{height:18px;width:18px}.story-immersive .story-endpoint-note{font-size:clamp(13px,.5vw,20px);margin:12px 36px 22px}.story-immersive .story-record{font-size:clamp(15px,.57vw,22px);padding:20px 36px}.story-immersive .story-table-wrap table{font-size:clamp(15px,.62vw,24px)}.story-immersive .story-table-wrap .site-math{font-size:inherit}.story-immersive .story-dialog{width:min(94vw,2600px);max-height:94vh;padding:clamp(22px,1.1vw,44px)}.story-immersive .story-dialog h2{font-size:clamp(24px,1vw,40px)}.story-immersive .story-dialog canvas{height:min(48vh,950px);aspect-ratio:auto;cursor:grab;max-height:none!important}.story-immersive .story-dialog .story-controls{padding-inline:0}.story-immersive .story-dialog p,.story-immersive .story-dialog nav,.story-immersive .story-detail-top,.story-immersive .story-detail-control,.story-immersive .story-dialog .enc-equation{font-size:clamp(15px,.62vw,24px)}.story-immersive .story-dialog .site-math{font-size:inherit}.story-immersive .story-matrix-controls{display:flex;flex-wrap:wrap;gap:15px;align-items:center}.story-immersive .story-matrix-controls h3{margin:0}.story-immersive .story-matrix-controls>label{flex:1;min-width:200px}.story-immersive .story-matrix-controls[hidden]{display:none}.story-immersive .story-losses{font-size:inherit}
+@media(max-width:1600px){.story-immersive .story-controls{grid-template-columns:1fr 1fr}.story-immersive .story-actions{grid-column:1/-1;justify-content:flex-start}.story-immersive .story-map{padding:0 10px;grid-template-rows:420px 230px 420px}.story-immersive .story-stage{margin:0 10px!important;padding:6px!important}.story-immersive .story-stage-metric{font-size:11px}.story-immersive .story-route-note{padding:20px}.story-immersive .story-branch{margin:20px 25px 20px 10px}.story-immersive .story-branch .story-stage{grid-template-columns:25% 1fr;padding:10px!important}.story-immersive .story-branch canvas{height:100px}}
+@media(max-width:900px){.story-immersive .story-map{overflow-x:auto;grid-template-columns:repeat(4,240px);grid-template-rows:360px 240px 360px}.story-immersive .story-connectors{min-width:980px}.story-immersive .story-camera-controls{padding:15px}.story-immersive .story-header{display:block}.story-immersive .story-4k-link{display:inline-block;margin-bottom:10px}.story-immersive .story-dialog .story-controls{grid-template-columns:1fr}}
+
+.story-all-steps{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:20px 36px;background:white;border-bottom:2px solid #4338ca}.story-all-steps a{display:grid;place-items:center;min-width:38px;height:38px;color:#4b0082;border:1px solid #d1c2e1;border-radius:6px;text-decoration:none}.story-all-steps a[aria-current]{color:white;background:#4b0082}
+/* The complete story occupies one fullscreen board. Detailed stages open above it. */
+html[data-story-display="4k"] body{height:100dvh;overflow:hidden}.story-all-steps{height:44px;padding:5px 18px;gap:6px;font-size:13px}.story-all-steps a{min-width:28px;height:28px}#story-4k-root{height:calc(100dvh - 44px);padding:8px 12px;overflow:auto}.story-immersive{height:100%;font-size:16px;padding:0!important}.story-immersive .story-panel{height:100%;min-height:1050px;display:flex;flex-direction:column;border-radius:10px;overflow:hidden}.story-immersive .story-header{padding:10px 20px 0;flex:none}.story-immersive .story-header h2{font-size:24px;margin:0}.story-immersive .story-header p{font-size:14px;margin:5px 0}.story-immersive .eyebrow{font-size:10px;margin:0 0 4px}.story-immersive .story-persistent{flex:none}.story-immersive .story-persistent>div{padding:7px 18px;gap:3px}.story-immersive .story-persistent .site-math{font-size:18px}.story-immersive .story-persistent span,.story-immersive .story-persistent small{font-size:12px}.story-immersive .story-persistent strong{font-size:20px}.story-immersive .story-controls{padding:7px 20px;gap:7px 20px;grid-template-columns:1fr 1fr 1.4fr;font-size:14px;flex:none}.story-immersive .story-actions{grid-column:auto;gap:8px}.story-immersive .story-actions button,.story-immersive .story-actions select{font-size:12px;padding:6px 9px}.story-immersive .story-scale{font-size:12px}.story-immersive .story-camera-controls{padding:5px 20px;gap:18px;flex:none}.story-immersive .story-camera-controls>label,.story-immersive .story-camera-controls button{font-size:12px}.story-immersive .story-camera-controls>span{font-size:11px}.story-immersive .story-scale-note{margin:4px 20px;font-size:12px;line-height:1.3;padding:5px 10px;flex:none}.story-immersive .story-map{flex:1;min-height:0;padding:0 24px;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:minmax(0,1fr) minmax(130px,.42fr) minmax(0,1fr);overflow:hidden}.story-immersive .story-stage{padding:7px 10px!important;margin:0 22px!important;min-height:0;justify-content:space-between}.story-immersive .story-stage-title{font-size:18px;min-height:28px;gap:8px;line-height:1.25}.story-immersive .story-stage-title b{height:23px;min-width:23px;font-size:13px}.story-immersive .story-stage canvas{height:clamp(140px,15dvh,370px);min-height:80px;flex:1}.story-immersive .story-matrix{font-size:18px;min-height:24px}.story-immersive .story-stage-3 .story-matrix{font-size:17px}.story-immersive .story-value{font-size:15px;margin-top:3px}.story-immersive .story-evidence{font-size:12px;margin-top:3px;padding:3px 7px}.story-immersive .story-stage-metric{font-size:12px;min-height:20px;line-height:1.3;margin-top:3px}.story-immersive .story-stage-hint{font-size:11px;margin-top:2px}.story-immersive .story-route-note{padding:10px 20px;font-size:15px;gap:5px}.story-immersive .story-route-note span:last-of-type,.story-immersive .story-route-note>div{font-size:12px}.story-immersive .story-branch{margin:10px 40px 10px 20px}.story-immersive .story-branch .story-stage{padding:4px 12px!important;column-gap:12px}.story-immersive .story-branch canvas{height:min(13dvh,180px)}.story-immersive .story-branch .story-stage-title{font-size:18px}.story-immersive .story-branch .story-matrix{font-size:17px}.story-immersive .story-branch .story-value{font-size:14px}.story-immersive .story-branch-caption{font-size:11px;padding:0 12px 5px}.story-immersive .story-legend{font-size:12px;margin:7px 18px;gap:8px 20px;flex:none}.story-immersive .story-endpoint-note{font-size:12px;margin:4px 18px;flex:none}.story-immersive .story-record{font-size:13px;padding:6px 18px;flex:none}.story-immersive .story-record[open]{position:absolute;z-index:35;inset:15% 5% 5%;overflow:auto;background:white;box-shadow:0 8px 35px #341c5240;border:1px solid #bca5d2}.story-immersive .story-dialog{max-height:96dvh}.story-immersive .story-dialog canvas{height:44dvh;flex:none}
+/* Keep navigation and content in separate rows, including when navigation wraps.
+   These final rules supersede the original fixed-height fullscreen board. */
+html[data-story-display="4k"] body{display:grid;grid-template-rows:auto minmax(0,1fr)}
+.story-all-steps{height:auto;min-height:44px}
+#story-4k-root{height:auto;min-height:0;min-width:0;overflow:auto}
+.story-immersive{height:auto;min-height:100%}
+.story-immersive .story-panel{height:auto;min-height:100%;overflow:visible}
+.story-immersive .story-map{flex:none;grid-template-rows:auto auto auto;overflow:visible}
+.story-immersive .story-stage{justify-content:flex-start;gap:5px}
+.story-immersive .story-stage canvas{height:clamp(240px,15dvh,370px);flex:none}
+.story-immersive .story-stage-title{min-height:0}
+.story-immersive .story-branch canvas{height:200px}
+.story-immersive .story-stage-metric,.story-immersive .story-value{overflow-wrap:anywhere}
+.story-immersive .story-controls>label{min-width:0}
+.story-immersive .story-matrix{flex-shrink:0}
+.story-immersive .story-connectors{min-width:0;width:100%}
+/* Intrinsic row heights also keep the complete four-column 4K overview clear
+   of its legend; growing canvas flex bases must not force rows past the map. */
+/* Two-column reading order uses intrinsic row heights, so captions cannot
+   collide with the SVD branch or the next stage when the panel is resized. */
+@media(max-width:1800px){
+  .story-immersive .story-header{flex-wrap:wrap}
+  .story-immersive .story-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .story-immersive .story-actions{grid-column:1/-1;justify-content:flex-start}
+  .story-immersive .story-map{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-rows:auto;
+    grid-template-areas:"note note" "stage1 stage2" "stage3 stage4" "branch branch" "stage5 stage6" "stage7 stage8";
+    gap:36px 28px;padding:12px 34px;
+  }
+  .story-immersive .story-stage{margin:0!important;padding:14px!important}
+  .story-immersive .story-stage-1{grid-area:stage1}
+  .story-immersive .story-stage-2{grid-area:stage2}
+  .story-immersive .story-stage-3{grid-area:stage3}
+  .story-immersive .story-stage-4{grid-area:stage4}
+  .story-immersive .story-stage-5{grid-area:stage5}
+  .story-immersive .story-stage-6{grid-area:stage6}
+  .story-immersive .story-stage-7{grid-area:stage7}
+  .story-immersive .story-stage-8{grid-area:stage8}
+  .story-immersive .story-stage canvas{height:280px;width:100%;flex:none}
+  .story-immersive .story-stage-title{font-size:19px}
+  .story-immersive .story-stage-metric{font-size:13px;line-height:1.5}
+  .story-immersive .story-route-note{grid-area:note;padding:12px 14px}
+  .story-immersive .story-branch{grid-area:branch;margin:0;min-width:0}
+  .story-immersive .story-branch .story-stage{grid-template-columns:minmax(220px,.8fr) minmax(0,1fr);padding:14px!important}
+  .story-immersive .story-branch canvas{height:240px}
+  .story-immersive .story-branch-caption{font-size:13px;padding:8px 16px 16px}
+  .story-immersive .story-legend{justify-content:flex-start}
+}
+@media(max-width:800px){
+  #story-4k-root{padding:8px}
+  .story-all-steps{padding:6px 10px}
+  .story-immersive .story-persistent{grid-template-columns:1fr}
+  .story-immersive .story-persistent>div{display:flex;padding:12px 18px}
+  .story-immersive .story-map{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"note" "stage1" "stage2" "stage3" "stage4" "branch" "stage5" "stage6" "stage7" "stage8";
+    padding:12px 26px;gap:36px;
+  }
+  .story-immersive .story-stage{padding:10px!important}
+  .story-immersive .story-stage canvas{height:clamp(240px,60vw,330px)}
+  .story-immersive .story-branch .story-stage{display:flex;flex-direction:column;text-align:center;padding:10px!important}
+  .story-immersive .story-branch canvas{height:clamp(240px,60vw,330px);width:100%}
+  .story-immersive .story-branch .story-stage-title{justify-content:center}
+  .story-immersive .story-camera-controls>label{flex:1 1 180px}
+  .story-immersive .story-camera-controls>span{width:100%}
+  .story-immersive .story-dialog{padding:16px}
+  .story-immersive .story-dialog canvas{height:300px}
+}
+@media(max-width:480px){
+  .story-immersive .story-controls{grid-template-columns:minmax(0,1fr)}
+  .story-immersive .story-header,.story-immersive .story-controls,.story-immersive .story-camera-controls{padding-inline:12px}
+  .story-immersive .story-scale-note{margin-inline:12px}
+  .story-immersive .story-header h2{font-size:21px}
+  .story-immersive .story-map{padding-inline:20px}
+}

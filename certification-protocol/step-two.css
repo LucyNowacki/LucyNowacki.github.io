@@ -1,0 +1,131 @@
+
+.step-two .workspace-grid{grid-template-columns:minmax(0,1fr)}.step-two .details-rail{display:none}
+.step-two .status-badge{color:var(--palette-main);background:var(--palette-main-tint);border-color:#d5bfe5}
+.step-two .status-badge .outline-dot{background:var(--palette-main);border-color:var(--palette-main)}
+.s2-root{container-type:inline-size;padding:22px;border-top:3px solid transparent;border-image:var(--phase1-gradient) 1;color:var(--ink)}
+.s2-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.s2-switch{display:flex;gap:3px;border:1px solid #d8cce3;background:#f6f1fa;padding:3px;border-radius:8px;width:fit-content;max-width:100%}
+.s2-switch button{border:0;border-radius:5px;background:transparent;color:var(--palette-main);padding:9px 13px;font-size:.8125rem;line-height:1.4}
+.s2-switch button[aria-pressed=true]{background:var(--palette-main);color:white}
+.s2-switch button:disabled{opacity:.48;cursor:default}
+.s2-reset,.s2-motion button,.s2-case-head button{background:white;border:1px solid #d8cbe3;border-radius:6px;color:var(--palette-main);font-size:.8125rem;padding:7px 10px}
+.s2-reset:hover,.s2-motion button:hover,.s2-case-head button:hover{background:#f3eafa;border-color:#ae8fc8}
+.s2-purpose{font-size:.875rem;color:var(--muted);margin:12px 0 17px;line-height:1.6}
+.s2-certificate{border:1px solid #d5bfe5;background:linear-gradient(110deg,#f4effa,#edf6ff 52%,#f8f8f8);border-radius:9px;padding:16px 18px;margin-bottom:18px}
+.s2-certificate strong{display:block;color:var(--palette-main);font-size:.9375rem;margin-bottom:7px}
+.s2-certificate>span{display:block;font:1rem/1.7 "Cambria Math",Georgia,serif}
+.s2-under{text-decoration:underline;text-underline-offset:.18em}
+.s2-motion{padding:16px 18px;border:1px solid var(--line);border-radius:9px;background:#fff;margin-bottom:18px}
+.s2-angle-head{display:flex;align-items:center;gap:15px;font-size:.8125rem}
+.s2-angle-head label{font-weight:550}.s2-angle-head output{color:var(--muted);font-variant-numeric:tabular-nums;margin-left:auto}
+.s2-motion input[type=range]{width:100%;accent-color:var(--palette-main);margin:15px 0;cursor:pointer}
+.s2-motion-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.s2-motion-bottom>span{font: .9375rem/1.6 "Cambria Math",Georgia,serif;color:var(--palette-main)}
+.s2-jump{display:flex;gap:7px;flex-wrap:wrap}.s2-jump button{font-size:.75rem}
+.s2-radius-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px 17px;margin-bottom:16px}
+.s2-radius-status{font-size:.8125rem;color:var(--muted)}
+.s2-options{display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:20px}
+.s2-options label{display:flex;align-items:center;gap:7px;font-size:.75rem;color:var(--muted)}
+.s2-options input{width:15px;height:15px;accent-color:var(--palette-main);margin:0}
+.s2-options label:has(input:disabled){opacity:.45}
+.s2-plots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.s2-view{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;min-width:0}
+.s2-view-title{padding:15px 16px 5px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.s2-view-title h3{font-size:.9375rem;margin:0;color:var(--palette-main);line-height:1.45}
+.s2-view-title>span{font-size:.625rem;letter-spacing:.07em;line-height:1.5;background:#f3ecfa;color:var(--palette-main);padding:3px 5px;border-radius:4px;white-space:nowrap}
+.s2-view>p{margin:0;padding:11px 15px;border-top:1px solid var(--line);font-size:.75rem;line-height:1.6;color:var(--muted);background:#faf9fc;min-height:61px}
+.s2-svg{width:100%;height:auto;display:block;user-select:none}
+.s2-plot-bg{fill:#fcfcff;stroke:#ddd8e5;stroke-width:.7}
+.s2-grid{stroke:#e8e5ed;stroke-width:.7}
+.s2-tick{font-size:15px;fill:#787080;font-family:"Segoe UI",sans-serif}
+.s2-real-axis{stroke:var(--palette-real);stroke-width:1}.s2-imag-axis{stroke:var(--palette-imag);stroke-width:1}
+.s2-real-label{fill:var(--palette-real-dark);font:italic 17px Georgia,serif}.s2-imag-label{fill:var(--palette-imag-dark);font:italic 17px Georgia,serif}
+.s2-spectral-fill{fill:var(--palette-real);fill-opacity:.1}.s2-spectral-line{fill:none;stroke:var(--palette-main);stroke-width:2.1}
+.s2-exclusion{stroke-width:1.7;fill-opacity:.1}
+.s2-exclusion.exclusion-0{fill:var(--palette-real);stroke:var(--palette-real-dark)}
+.s2-exclusion.exclusion-1{fill:var(--palette-imag);stroke:var(--palette-imag-dark)}
+.s2-exclusion.certified{stroke-dasharray:6 5}.s2-exclusion.exact{stroke-dasharray:none}
+.s2-zoom-box{fill:none;stroke:var(--palette-ref);stroke-width:1;stroke-dasharray:5 5}
+.s2-delta{stroke:var(--palette-ref);stroke-width:1.2;stroke-dasharray:3 3}
+.s2-centre-distance{stroke-width:2}
+.case-stroke-0{stroke:var(--palette-real-dark)}.case-stroke-1{stroke:var(--palette-imag-dark)}
+.s2-radial-reference{stroke:var(--palette-ref);stroke-width:1.1;stroke-dasharray:3 5}
+.s2-nearest-distance{stroke-width:2.2}
+.s2-moving-distance{stroke-width:1.8;stroke-dasharray:7 4}
+.s2-eigen{fill:var(--palette-main);stroke:white;stroke-width:1.6}
+.s2-eigen-label{fill:var(--palette-main);font:17px Georgia,serif;paint-order:stroke;stroke:white;stroke-width:4px}
+.s2-nearest-diamond{fill:white;stroke:var(--palette-main);stroke-width:1.8}
+.s2-nearest-point{cursor:pointer;outline:none}.s2-nearest-point:focus .s2-nearest-diamond{fill:#d8c3ec;stroke-width:3}
+.s2-hit{fill:transparent}
+.s2-nearest-label,.s2-small-label{fill:var(--palette-main);font:italic 16px Georgia,serif;paint-order:stroke;stroke:#fff;stroke-width:4px}
+.s2-center-mark{stroke:#504858;stroke-width:1.9}.s2-center-label{fill:#504858;font:italic 17px Georgia,serif;paint-order:stroke;stroke:white;stroke-width:3px}
+.s2-origin{fill:#77717d}
+.s2-U{fill:var(--palette-real-dark);font:italic 21px Georgia,serif;opacity:.65}
+.s2-Gamma{fill:var(--palette-main);font:italic 20px Georgia,serif;paint-order:stroke;stroke:white;stroke-width:3px}
+.s2-drag{cursor:grab;touch-action:none;outline:none}.s2-moving-point{fill:var(--palette-red);stroke:white;stroke-width:2}
+.s2-drag:focus .s2-moving-point{stroke:var(--palette-main);stroke-width:3}
+.s2-z-label{fill:var(--palette-red-dark);font:italic 16px Georgia,serif;paint-order:stroke;stroke:white;stroke-width:4px}
+.s2-legend{display:flex;flex-wrap:wrap;gap:9px 18px;padding:15px 0 7px;color:var(--muted);font-size:.75rem}
+.s2-key{display:flex;align-items:center;gap:7px}
+.s2-key::before{content:"";width:15px;height:10px;display:inline-block;border-radius:2px}
+.s2-key.contour::before{height:0;border-top:2px solid var(--palette-main)}
+.s2-key.disk-one::before{background:#1e90ff19;border:1px dashed var(--palette-real-dark)}
+.s2-key.disk-two::before{background:#80808019;border:1px dashed var(--palette-imag-dark)}
+.s2-key.moving::before{background:var(--palette-red);width:9px;height:9px;border-radius:50%}
+.s2-key.nearest::before{width:7px;height:7px;border:1px solid var(--palette-main);transform:rotate(45deg);border-radius:0}
+.s2-scale-note{font-size:.75rem;color:var(--muted);line-height:1.65;margin:8px 0 20px}
+.s2-cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.s2-case{border:1px solid var(--line);border-top:3px solid var(--palette-real);border-radius:9px;padding:18px;background:#fff;min-width:0}
+.s2-case.case-1{border-top-color:var(--palette-imag)}
+.s2-case-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:11px}
+.s2-case-head h3{font-size:.9375rem;line-height:1.5;color:var(--palette-main);margin:0}
+.s2-case-head button{white-space:nowrap;font-size:.75rem}
+.s2-eigenvalue{font: .875rem/1.6 "Cambria Math",Georgia,serif;color:var(--muted);overflow-wrap:anywhere}
+.s2-case-formula{font:1.2rem/1.6 "Cambria Math",Georgia,serif;color:var(--palette-main);margin:13px 0}
+.s2-case dl{margin:0}.s2-case dl>div{padding:9px 0;border-bottom:1px solid #eee9f3}
+.s2-case dt{font-size:.75rem;color:var(--muted);margin-bottom:4px}
+.s2-case dd{font: .9375rem/1.5 "Cambria Math",Georgia,serif;font-variant-numeric:tabular-nums;margin:0;color:var(--ink);overflow-wrap:anywhere}
+.s2-case .s2-lower{padding:10px 11px;margin:3px -10px;background:#edf6ff;border-bottom:0;border-radius:6px}
+.s2-case.case-1 .s2-lower{background:#f8f8f8}
+.s2-distance-bar{height:10px;border-radius:4px;background:#f0edf5;margin:19px 0 9px;position:relative}
+.s2-distance-bar>span{display:block;height:100%;background:var(--palette-real);border-radius:4px}
+.case-1 .s2-distance-bar>span{background:var(--palette-imag)}
+.s2-distance-bar>i{position:absolute;top:-4px;bottom:-4px;border-left:2px solid var(--palette-main);width:0}
+.s2-bar-caption{font-size:.6875rem;color:var(--muted);line-height:1.5;margin-bottom:17px}
+.s2-nearest{font: .9375rem/1.6 "Cambria Math",Georgia,serif;color:var(--palette-main);margin-bottom:9px;overflow-wrap:anywhere}
+.s2-case p:last-child{font-size:.8125rem;line-height:1.65;color:var(--muted);margin:0}
+.s2-geometry-note,.s2-check{padding:17px 20px;border:1px solid var(--line);border-radius:9px;background:#faf8fd;margin:21px 0;color:var(--muted);font-size:.875rem;line-height:1.7}
+.s2-geometry-note summary,.s2-check summary{cursor:pointer;color:var(--palette-main);font-weight:550}
+.s2-geometry-note p,.s2-check p{margin:15px 0 0}
+.s2-formula-strip{display:flex;flex-wrap:wrap;gap:13px 25px;font: .9375rem/1.7 "Cambria Math",Georgia,serif;color:var(--palette-main)}
+.s2-evidence{font-size:.75rem;color:var(--muted);line-height:1.6;margin:18px 0 0}
+.s2-argument{padding:10px;max-width:1000px}.s2-argument p{line-height:1.8;color:var(--muted)}
+.s2-argument>.eyebrow,.s2-argument h2,.s2-argument h3{color:var(--palette-main)}
+.s2-formula{font:1.16rem/1.8 "Cambria Math",Georgia,serif;color:var(--palette-main);padding:17px 19px;border:1px solid #ddcde8;background:#f6f1fa;border-radius:7px;overflow:auto;margin:18px 0}
+.s2-proof-cases{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.s2-proof-cases h3{margin-top:17px}.s2-proof-cases p{font-size:.9375rem}
+@container(max-width:700px){.s2-plots,.s2-cases{grid-template-columns:1fr}.s2-case dl{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}.s2-case .s2-lower{margin:0;padding:9px}.s2-view-title>span{font-size:.625rem}.s2-angle-head{gap:9px}.s2-switch button{padding:8px 9px}.s2-motion-bottom{align-items:flex-start;flex-direction:column}}
+@container(max-width:420px){.s2-case dl{grid-template-columns:1fr}.s2-angle-head{flex-wrap:wrap}.s2-view-title{flex-wrap:wrap}.s2-motion{padding:13px}.s2-certificate{padding:14px}.s2-certificate strong{font-size:.875rem}.s2-case-head{align-items:flex-start}.s2-top{align-items:stretch}}
+@media(max-width:760px){.s2-root{padding:16px 12px}.s2-proof-cases{grid-template-columns:1fr}.s2-argument{padding:0}}
+
+
+.s2-live-distances{display:flex;flex-wrap:wrap;gap:9px 15px;margin:-6px 0 18px;font: .9375rem/1.6 "Cambria Math",Georgia,serif}.s2-live-distances>span{padding:7px 11px;border-radius:5px;background:#edf6ff;color:var(--palette-real-dark)}.s2-live-distances>.case-1{background:#f8f8f8;color:var(--palette-imag-dark)}.s2-live-distances b{font-weight:500;font-variant-numeric:tabular-nums}.s2-key.distances::before{height:0;border-top:2px dashed var(--palette-ref-dark)}
+
+.s2-current-note{display:block;color:var(--muted);font:.75rem/1.6 "Segoe UI",sans-serif;margin-top:6px}
+.s2-root.is-exact .s2-key.disk-one::before,.s2-root.is-exact .s2-key.disk-two::before{border-style:solid}
+.s2-key.minimum::before,.s2-key.centres::before{height:0;border-top:2px solid var(--palette-ref-dark)}
+
+/* Keep the spectral region distinct from the auxiliary exclusion disks. */
+.s2-spectral-fill{fill:var(--palette-main);fill-opacity:.08}
+.s2-exclusion.exclusion-0,.s2-exclusion.exclusion-1{fill:none}
+.s2-U{fill:var(--palette-main);opacity:1}
+.s2-key.spectral::before{background:#4b008214;border:1px solid var(--palette-main)}
+.s2-key.spectrum::before{background:var(--palette-main);width:8px;height:8px;border-radius:50%}
+.s2-key.disk-one::before,.s2-key.disk-two::before{background:transparent}
+.s2-disk-leader{stroke:var(--palette-real-dark);stroke-width:1;fill:none}
+.s2-disk-label{fill:var(--palette-real-dark);font:17px Georgia,serif}
+.s2-disk-caption{fill:var(--palette-real-dark);font:13px system-ui,sans-serif}
+.s2-reading{padding:16px 18px;margin:0 0 20px;border-left:3px solid var(--palette-main);background:#f8f5fb;border-radius:0 8px 8px 0}
+.s2-reading h3{margin:0 0 10px;font-size:1rem;color:var(--palette-main)}
+.s2-reading p{font-size:.9rem;line-height:1.8;margin:8px 0;color:var(--muted)}
+.s2-hierarchy{overflow-x:auto;padding:8px 0;color:var(--palette-main)}

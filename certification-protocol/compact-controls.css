@@ -1,0 +1,57 @@
+
+/* Compact controls: one 72% scale per control group, never compounded. */
+:is(.g2-helper-controls,.g9-helper-controls,.g9-controls,.lift-controls,.op-controls,.s1-bottom-controls,.s1-display-controls,.s2-radius-controls,.s3-controls,.s3-ellipse-controls,.s3-input-controls,.enc-three-controls,.linked-matrix-controls,.output-camera-controls,.output-motion-controls,.output-visibility-controls,.radius-controls,.flow-controls,.prep-pair-controls,.story-camera-controls,.story-controls,.story-matrix-controls){zoom:.72}
+:is(.g2-helper-controls,.g9-helper-controls,.g9-controls,.lift-controls,.op-controls,.s1-bottom-controls,.s1-display-controls,.s2-radius-controls,.s3-controls,.s3-ellipse-controls,.s3-input-controls,.enc-three-controls,.linked-matrix-controls,.output-camera-controls,.output-motion-controls,.output-visibility-controls,.radius-controls,.flow-controls,.prep-pair-controls,.story-camera-controls,.story-controls,.story-matrix-controls) :is(.g2-helper-controls,.g9-helper-controls,.g9-controls,.lift-controls,.op-controls,.s1-bottom-controls,.s1-display-controls,.s2-radius-controls,.s3-controls,.s3-ellipse-controls,.s3-input-controls,.enc-three-controls,.linked-matrix-controls,.output-camera-controls,.output-motion-controls,.output-visibility-controls,.radius-controls,.flow-controls,.prep-pair-controls,.story-camera-controls,.story-controls,.story-matrix-controls){zoom:1}
+
+.step-eight .g2-chain{display:flex;flex-direction:column;gap:12px}
+.step-eight .g2-arrangement-toolbar{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;width:100%}
+.step-eight .g2-arrangement-toolbar .g2-helper-controls{position:static;flex-shrink:0;margin:0}
+.step-eight .g2-input-insets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:min(46%,560px);gap:12px;margin-left:auto}
+.step-eight .g2-input-insets article{min-width:0;border:1px solid var(--line);border-radius:8px;padding:8px;background:white}
+.step-eight .g2-input-insets h3{font-size:14px!important;margin:0 0 4px}
+.step-eight .g2-input-insets article>svg{display:block;width:100%;height:auto;max-height:190px!important;min-height:0!important}
+.step-eight .g2-chain>article{box-sizing:border-box;padding:12px}
+.step-eight .g2-explanation-button{padding:5px 9px;font-size:13px}
+.g2-explanation-popup{color:#4b0082;border:1px solid #c8b5e1;border-radius:12px;padding:24px;width:min(620px,85vw);max-height:80vh;overflow:auto;background:white;box-shadow:0 16px 60px #21003933}
+.g2-explanation-popup::backdrop{background:#19002b55}
+.g2-explanation-popup>button{float:right;margin:0 0 12px 12px}
+.g2-explanation-popup p{font-size:16px!important;line-height:1.6}
+@media(max-width:720px){.step-eight .g2-arrangement-toolbar{flex-wrap:wrap}.step-eight .g2-input-insets{width:100%;max-width:480px}.step-eight .g2-input-insets article>svg{max-height:150px!important}}
+
+label:has(input[type="range"]){zoom:.72}
+:is(.g2-helper-controls,.g9-helper-controls,.g9-controls,.lift-controls,.op-controls,.s1-bottom-controls,.s1-display-controls,.s2-radius-controls,.s3-controls,.s3-ellipse-controls,.s3-input-controls,.enc-three-controls,.linked-matrix-controls,.output-camera-controls,.output-motion-controls,.output-visibility-controls,.radius-controls,.flow-controls,.prep-pair-controls,.story-camera-controls,.story-controls,.story-matrix-controls) label:has(input[type="range"]){zoom:1}
+
+/* A separate key keeps the points identifiable without a connecting segment. */
+.output-point-legend{display:grid;gap:6px;width:fit-content;max-width:100%;margin:4px 0 12px auto;padding:10px 12px;border:1px solid #ded8e7;border-radius:7px;background:#ffffffed;color:#4b0082;font-size:14px;line-height:1.5;box-sizing:border-box}
+.output-point-legend>span{display:flex;align-items:center;gap:8px}
+.output-point-legend i{display:inline-block;flex:0 0 10px;width:10px;height:10px;border:1px solid white;box-shadow:0 0 0 1px #ddd;border-radius:50%}
+.output-point-blue{background:#1e90ff}.output-point-red{background:#dd5263}.output-point-legend .diamond{border-radius:0;transform:rotate(45deg)}
+.output-point-legend .math-render{display:inline}
+
+.output-gap-help{display:block;margin-top:5px}
+.output-gap-badge{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#241334!important;color:#00ff00!important;border:1px solid #00bb00!important;padding:7px 10px;border-radius:6px;cursor:help}
+.output-gap-badge small{color:#e1efdc;font-size:11px}
+.hold-explanation-popup[open]{position:fixed;inset:50% auto auto 50%;transform:translate(-50%,-50%);margin:0;z-index:10000;max-height:75vh;overflow:auto;width:min(660px,88vw);padding:22px;border:1px solid #a99ab9;border-radius:12px;background:#fff;box-shadow:0 16px 70px #240b3d55;color:#4b0082;pointer-events:none;box-sizing:border-box}
+.hold-explanation-popup p{font-size:16px!important;line-height:1.5}.hold-explanation-popup small{font-size:12px}
+[data-hold-explanation]{-webkit-touch-callout:none}
+
+.output-gap-bracket{stroke:#00ff00;stroke-width:4.2;stroke-dasharray:.5 7;fill:none;stroke-linecap:round;filter:none}
+.output-gap-segment-label{display:inline-block;background:transparent;color:#00ff00;padding:4px 7px;border-radius:5px;font-size:16px;line-height:1.4;white-space:nowrap;cursor:help}
+[data-gap-label]:focus-visible{outline:2px solid #4b0082}
+
+/* Radius lines use short, dense dashes; the lime gap remains loosely dotted. */
+:is(.g2-uniform-radius,.s5-guaranteed-radius,.s3-certified-radius),
+line:is([data-g2-z-radius],[data-g2-v-radius],[data-g9-radius],[data-g9-allowed-radius],[data-g9-violet-radius],[data-g9-contour-radius]){stroke-dasharray:3 2;stroke-linecap:butt}
+/* Generic plot SVG backgrounds must not leak into mathematical labels. */
+:is(.output-gap-badge,.output-gap-segment-label) :is(.site-math,mjx-container,svg,.enc-svg-math){background:transparent!important;border:0!important;box-shadow:none!important;color:inherit!important}
+
+line:is([data-g2-radial],[data-g9-gap-radius]){stroke-dasharray:none;stroke-linecap:butt}
+line:is([data-g2-radius],[data-bd-radius]){stroke-dasharray:3 2}
+
+.g2-magnifier-key{display:flex;justify-content:flex-end;gap:18px;flex-wrap:wrap;font-size:14px;margin:8px 0 14px;color:#4b0082}
+.g2-magnifier-key>span{display:flex;align-items:center;gap:7px}
+.g2-magnifier-key .nearest-key{width:10px;height:10px;border:2px solid #ff1493;border-radius:50%;background:white}
+.g2-magnifier-key .radius-key-line{width:24px;height:0;border-top:2px dashed #ff1493}
+.g2-ball-detail :is(.site-math,mjx-container, .site-math svg){background:transparent!important;border:0!important;box-shadow:none!important}
+
+[data-g2-uniform-label] .enc-svg-math{width:100%;text-align:center;justify-content:center}
