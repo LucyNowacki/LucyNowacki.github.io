@@ -1,0 +1,23 @@
+/* One mathematical face: MathJax New Computer Modern SVG, at every location. */
+.site-math {display:inline-block;max-width:100%;vertical-align:baseline;line-height:1.35;white-space:nowrap;font-size:1.04em;}
+.site-math>mjx-container[jax=SVG] {margin:0!important;display:inline-block;max-width:100%;vertical-align:baseline;}
+.site-math>mjx-container[jax=SVG]>svg {display:inline-block!important;width:auto!important;height:auto!important;max-height:none!important;overflow:visible!important;vertical-align:inherit;}
+.site-math [data-mml-node=mtext] {font-family:inherit;}
+.site-math.native-math {margin:.2em 0;}
+.s3-equation,.s4-equation,.s2-formula,.prep-equation,.schur-proof-line,.formula {font-family:inherit;line-height:2;overflow-wrap:normal;}
+.s3-equation .site-math,.s4-equation .site-math,.s2-formula .site-math {margin:.25em 0;}
+.math-surface,.definition-panel,.branch-equation,.squeeze-large {overflow-x:auto;overflow-y:hidden;padding-bottom:.4rem;}
+.s3-reciprocals h4 {min-height:3.2em;display:flex;align-items:center;justify-content:center;}
+.mjx-label {pointer-events:none;}
+.schur-derivation {width:min(590px,calc(100vw - 20px));}
+.schur-proof-line {font-size:.95rem;}
+.site-math[data-math-error] {color:var(--palette-red-dark);}
+
+.s3-equation,.s4-equation,.s2-formula,.prep-equation,.schur-proof-line,.formula {max-width:100%;overflow-x:auto;overflow-y:hidden;padding-block:.15em;}
+.s3-equation,.s4-equation,.prep-equation {font-size:1.06rem;}
+.site-math > mjx-container {color:inherit;}
+
+/* Plot sizing rules must never resize mathematical glyph SVGs. */
+.site-math,.site-math svg,.mjx-label svg {min-width:0!important;min-height:0!important;}
+.site-math mjx-container > svg {max-width:none!important;max-height:none!important;}
+.s3-stages .site-math {min-height:0; font-size:inherit;}

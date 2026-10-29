@@ -1,0 +1,82 @@
+/* Step 8: paired inputs, full-width outputs, and 30% smaller plot heights. */
+.step-eight .g2-chain{grid-template-columns:minmax(0,1fr);max-width:none;width:100%;gap:10px;margin:24px 0}
+.step-eight .g2-chain>article{width:100%;padding:18px 22px}
+.step-eight .g2-chain-arrow{padding:0;height:auto;transform:none;gap:0}
+.step-eight .g2-chain-arrow b{transform:none;font-size:30px}
+.step-eight .g2-chain-arrow span{font-size:14px}
+.step-eight .g2-chain-arrow .math-render{display:inline;font-size:16px}
+.step-eight .g2-chain h3,.step-eight .g2-close-area h3{font-size:20px}
+.step-eight .g2-chain article p,.step-eight .g2-chain-value{font-size:16px;line-height:1.55}
+.step-eight .g2-chain article>svg{width:100%;height:clamp(266px,28vh,462px);max-height:none!important}
+.step-eight .g2-chain article>svg[data-g2-plane]{height:clamp(287px,29.4vh,574px)}
+.step-eight .g2-close-area{width:100%;max-width:none;margin:28px 0;padding:18px 22px;border:1px solid var(--line);border-radius:8px}
+.step-eight .g2-radius-layout{grid-template-columns:minmax(0,1fr);gap:16px}
+.step-eight .g2-close-area svg{width:100%;height:clamp(308px,32.2vh,630px);max-height:none!important}
+.step-eight .g2-radius-ledger{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.step-eight .g2-radius-item strong,.step-eight .g2-radius-item p{font-size:15px}
+.step-eight .g2-visibility{display:flex;align-items:center;gap:9px;font-size:16px;color:#4b0082;margin:18px 0 8px}
+.step-eight .g2-visibility input{width:19px;height:19px;accent-color:#4b0082}
+.step-eight [data-g2-scale-note],.step-eight [data-g2-zoom-caption]{font-size:15px!important;line-height:1.5!important}
+html[data-display="4k"] .display-board-content>.g2-root{display:block}
+.display-board .g2-root>.g2-main-scene,.display-board .g2-root>.enc-card{width:100%;margin-bottom:18px}
+html[data-display="4k"] .step-eight .display-board-content .g2-chain>article>svg,
+html[data-display="4k"] .step-eight .display-board-content .g2-close-area svg{max-height:none!important}
+html[data-display="4k"] .step-eight .display-board-content .g2-chain h3,
+html[data-display="4k"] .step-eight .display-board-content .g2-close-area h3{font-size:21px}
+html[data-display="4k"] .step-eight .display-board-content .g2-chain article p{font-size:16px}
+@media(min-width:2400px){
+ .step-eight .g2-chain article>svg{height:462px}
+ .step-eight .g2-chain article>svg[data-g2-plane]{height:574px}
+ .step-eight .g2-close-area svg{height:630px}
+}
+@media(max-width:850px){
+ .step-eight .g2-radius-ledger{grid-template-columns:1fr 1fr}
+ .step-eight .g2-chain>article,.step-eight .g2-close-area{padding:12px}
+ .step-eight .g2-chain article>svg[data-g2-plane],.step-eight .g2-close-area svg{height:auto;min-height:175px}
+}
+@media(max-width:520px){.step-eight .g2-radius-ledger{grid-template-columns:1fr}}
+
+.step-eight .g2-chain{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.step-eight .g2-chain>article:first-of-type{grid-column:1;grid-row:1}
+.step-eight .g2-chain>article:nth-of-type(2){grid-column:2;grid-row:1}
+.step-eight .g2-chain>.g2-chain-arrow:first-of-type{display:none}
+.step-eight .g2-chain>.g2-chain-arrow{grid-column:1/-1}
+.step-eight .g2-chain>article:nth-of-type(3){grid-column:1/-1}
+.step-eight .g2-helper-controls{position:sticky;top:8px;z-index:4;width:440px;max-width:100%;padding:10px 12px;margin:8px 0 12px;background:#fcfafff5;border:1px solid #c8b5e1;border-radius:7px;box-shadow:0 3px 10px #4b00820c;color:#4b0082}
+.step-eight .g2-helper-controls>strong{display:block;font-size:13px;margin-bottom:6px}
+.step-eight .g2-helper-controls>label{display:grid;grid-template-columns:88px minmax(60px,1fr) 74px;gap:8px;align-items:center;font-size:14px;margin:0;line-height:1.4}
+.step-eight .g2-helper-controls input[type=range]{display:block;width:100%;min-width:0;min-height:22px;margin:3px 0;accent-color:#4b0082}
+.step-eight .g2-helper-controls output{font-size:12px;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.step-eight .g2-helper-controls>div{display:flex;gap:6px;margin-top:5px}
+.step-eight .g2-helper-controls button{font-size:12px;padding:4px 8px;line-height:1.4}
+@media(max-width:650px){
+ .step-eight .g2-chain{grid-template-columns:minmax(0,1fr)}
+ .step-eight .g2-chain>article:first-of-type,.step-eight .g2-chain>article:nth-of-type(2){grid-column:1;grid-row:auto}
+ .step-eight .g2-helper-controls>label{grid-template-columns:78px minmax(50px,1fr) 66px;gap:5px}
+}
+
+/* Make the nested minimisations and the SVD handoff readable in the existing introduction. */
+.g2-flow-route{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;background:#f2edfa;border-radius:7px;color:#4b0082;font-size:15px}
+.g2-flow-route>span{flex:1;min-width:220px}.g2-flow-route>b{font-size:25px}
+.g2-purpose-stages .g2-flow-live{display:grid;gap:8px;padding:12px;border:1px solid #b8cdef;background:#f3f7ff;border-radius:7px}
+.g2-flow-live>span{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:14px}
+.g2-flow-live output{font-variant-numeric:tabular-nums;color:#4b0082;font-weight:600}.g2-flow-live small{font-size:13px;line-height:1.5}
+.g2-purpose-stages details{margin-top:14px;font-size:14px}.g2-purpose-stages summary{cursor:pointer;color:#4b0082;font-weight:600}
+.step-eight .g2-helper-controls>div{flex-wrap:wrap}
+@media(max-width:1000px){.g2-purpose-stages{grid-template-columns:1fr}.g2-flow-route{align-items:flex-start;flex-direction:column}.g2-flow-route>b{transform:rotate(90deg)}}
+.step-eight #panel-argument .enc-argument{width:100%;max-width:none;box-sizing:border-box}
+.step-eight #panel-argument .g2-purpose-stages{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+
+/* Whole-contour protected ball inherited from the Schur argument. */
+.step-eight .g2-uniform-ball,.step-eight .g2-inball{stroke:#808080;fill:#80808012}
+.step-eight .g2-uniform-radius{stroke:#808080}
+.step-eight [data-g2-fixed]{fill:#808080}
+.step-eight .g2-radius-item.uniform{border-color:#808080}
+.step-eight [data-g2-uniform-bar]{background:#808080}
+
+.step-eight .g2-radius-ledger{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2-svd-geometry{border-top:1px solid #d8ccea;padding-top:12px}.g2-svd-geometry>summary{font-weight:600;color:#4b0082;cursor:pointer}
+@media(max-width:850px){.step-eight .g2-radius-ledger{grid-template-columns:1fr}}
+
+.step-eight #panel-optional-upper{width:100%;max-width:none;box-sizing:border-box}
+.step-eight #panel-optional-upper .g2-purpose-stages{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}

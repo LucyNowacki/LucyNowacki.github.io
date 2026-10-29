@@ -1,0 +1,233 @@
+/* Lucy's shared palette. Load last so the shell, introductory pages and future
+   scenes share one colour system. Geometry-specific rules stay in scene files. */
+:root {
+  --palette-deeppink: #ff1493;
+  --palette-deeppink-dark: #b30062;
+  --palette-deeppink-tint: #f6e4ed;
+  --palette-certificate: #4338ca;
+  --palette-certificate-tint: #eef0ff;
+  --palette-real: #1e90ff;
+  --palette-imag: #808080;
+  --palette-main: #4b0082;
+  --palette-ref: #a9a9a9;
+  --palette-bg: #f0f2f5;
+  --phase1-gradient: linear-gradient(110deg, #4b0082 0%, #1e90ff 52%, #808080 100%);
+  --palette-real-dark: #075bb5;
+  --palette-imag-dark: #5a5a5a;
+  --palette-main-dark: #300052;
+  --palette-ref-dark: #66616c;
+  --palette-red: #d52d4c;
+  --palette-red-dark: #a31f38;
+  --palette-real-tint: #edf6ff;
+  --palette-imag-tint: #f8f8f8;
+  --palette-main-tint: #f4effa;
+  --palette-ref-tint: #f5f5f6;
+  --palette-red-tint: #fff0f2;
+  --ink: #301548;
+  --muted: #696173;
+  --line: #ded8e7;
+  --paper: #fff;
+  --ground: var(--palette-bg);
+  --nav: var(--palette-main-dark);
+  --nav-muted: #c9bad8;
+  --accent: var(--palette-main);
+  --purple: var(--palette-main);
+  --deeppink: var(--palette-real);
+}
+
+/* Indigo text and light surfaces keep the bright spectrum for geometry and
+   accents; dark derivatives make small links and labels readable on white. */
+body { background: var(--palette-bg); color: var(--ink); }
+h1, h2, h3, .formula, math { color: inherit; }
+button:focus-visible, a:focus-visible, [tabindex]:focus-visible,
+input:focus-visible, summary:focus-visible {
+  outline-color: var(--palette-real-dark);
+}
+::selection { background: #efd5fa; color: var(--palette-main-dark); }
+.sidebar {
+  background: radial-gradient(ellipse at 105% 5%, #1e90ff21, transparent 52%),
+    radial-gradient(ellipse at 0% 100%, #8080801d, transparent 45%),
+    var(--palette-main-dark);
+  color: #fff;
+}
+#step-nav { scrollbar-color: #82669b transparent; }
+.brand-mark {
+  color: white;
+  border-color: #af8bca;
+  background: linear-gradient(145deg, #4b0082, #4e419d);
+  box-shadow: inset 0 -2px 0 #1e90ff;
+}
+.brand-sub, .sidebar-intro, .nav-group, .nav-number,
+.sidebar-footer div span { color: var(--nav-muted); }
+.step-link { color: #eee6f6; }
+.step-link:hover { background: #ffffff0f; }
+.step-link[aria-current], .intro-nav .step-link[aria-current] {
+  background: linear-gradient(110deg, #ffffff18, #1e90ff16 52%, #80808014);
+  border-color: #9680ae;
+  box-shadow: inset 3px 0 0 var(--palette-real);
+  color: white;
+}
+.step-link[aria-current] .nav-number, .intro-nav .nav-number {
+  color: #c3deff;
+}
+.nav-dot { border-color: #b39bc7; }
+.step-link[aria-current] .nav-dot {
+  border-color: #8dc8ff;
+  background: var(--palette-real);
+}
+.sidebar-footer { color: #efe8f5; }
+.sidebar-footer .outline-dot { border-color: var(--palette-ref); }
+.topbar {
+  background: linear-gradient(white, white) padding-box,
+    var(--phase1-gradient) border-box;
+  border-bottom: 3px solid transparent;
+}
+.topbar-label, .control-title { color: var(--ink); }
+.topbar-divider { color: var(--palette-ref); }
+.reference-button:hover, .icon-button:hover {
+  background: var(--palette-main-tint);
+  border-color: #bb9cd2;
+}
+.status-badge { background: var(--palette-main-tint); color: var(--palette-main); }
+.outline-dot { border-color: var(--palette-ref-dark); }
+.context-type { border-color: var(--palette-real); color: var(--muted); }
+.workspace-card, .protocol-board, .overview-summary {
+  box-shadow: 0 4px 20px #4b008205;
+}
+.tabs { background: #fdfbff; }
+.tab[aria-selected=true] {
+  color: var(--palette-main);
+  border-image: var(--phase1-gradient) 1;
+}
+.visual-canvas {
+  background-color: #fdfcfe;
+  background-image: radial-gradient(#c7bfd2 .65px, transparent .65px);
+}
+.canvas-topline, .canvas-bottomline, .canvas-topline > span:first-child,
+.empty-label, .detail-section > .eyebrow, #planned-views li, #guardrail,
+.status-line, .status-line > span:last-child, .argument-outline strong,
+.text-panel > .eyebrow, .connection-label, #step-position, .scope-note,
+.intro-footer-note, .diagram-hint { color: var(--muted); }
+.empty-step { color: #bba9cb; }
+.empty-label { border-color: #cfc3da; }
+.view-number, .argument-outline span, .connection-number { color: #746182; }
+.status-line:first-of-type > span:last-child { color: var(--palette-main); }
+.argument-outline > div { border-color: #d9cce2; }
+.note, .reference-callout, .convention-note {
+  background: var(--palette-main-tint);
+  color: var(--ink);
+  border-color: #c7addb;
+}
+.note, .convention-note { border-left-color: var(--palette-real); }
+.connection-link:hover, .page-button:hover {
+  background: var(--palette-main-tint);
+  border-color: #bba0d0;
+}
+.page-button { border-color: var(--line); }
+.page-button.primary {
+  background: var(--palette-main);
+  border-color: var(--palette-main);
+  color: white;
+}
+.page-button.primary:hover { background: var(--palette-main-dark); }
+.text-link { color: var(--palette-real-dark); }
+.text-link:hover { color: var(--palette-main); }
+dialog { border-color: var(--line); box-shadow: 0 30px 110px #30005233; }
+dialog::backdrop, .scrim { background: #240b3d80; }
+.matrix { border-color: var(--palette-main); }
+.notation-row { border-color: var(--line); }
+.space-list > span { background: var(--palette-main-tint); }
+
+/* The overview's eight stages sample the same indigo → blue → gray path.
+   Hue describes position in the overview, never mathematical evidence status. */
+.tone-purple, .tone-ink { --tone: var(--palette-main); }
+.tone-blue, .tone-violet { --tone: var(--palette-real); }
+.tone-coral { --tone: var(--palette-imag); }
+.tone-orange { --tone: var(--palette-deeppink); }
+.protocol-flow .flow-item:nth-child(1) { --stage-colour: #4b0082; }
+.protocol-flow .flow-item:nth-child(2) { --stage-colour: #3f28a4; }
+.protocol-flow .flow-item:nth-child(3) { --stage-colour: #324fc7; }
+.protocol-flow .flow-item:nth-child(4) { --stage-colour: #2677e9; }
+.protocol-flow .flow-item:nth-child(5) { --stage-colour: #3683f3; }
+.protocol-flow .flow-item:nth-child(6) { --stage-colour: #7960d3; }
+.protocol-flow .flow-item:nth-child(7) { --stage-colour: #bc3ab3; }
+.protocol-flow .flow-item:nth-child(8) { --stage-colour: #808080; }
+.protocol-flow .flow-node {
+  --tone: var(--stage-colour);
+  --tone-line: color-mix(in srgb, var(--tone) 27%, white);
+  --tone-bg: color-mix(in srgb, var(--tone) 5%, white);
+}
+.flow-count { color: var(--ink); }
+.flow-node > strong { color: var(--palette-main-dark); }
+.flow-arrow { color: var(--palette-ref-dark); }
+.protocol-scroll { scrollbar-color: #ad93c3 var(--palette-bg); }
+.protocol-detail { background: var(--palette-main-tint); }
+.protocol-detail p:not(.eyebrow), .overview-bottom p:not(.eyebrow),
+.error-ledger span, .overview-bottom .eyebrow { color: var(--muted); }
+.overview-number { color: var(--palette-main); }
+.branch-tag { color: var(--palette-real-dark); }
+.svd-branch {
+  background: linear-gradient(115deg, #edf6ff, #f6f0fc 65%, #f8f8f8);
+  border-color: #b49ed1;
+}
+.branch-source > span, .svd-branch p:not(.eyebrow) { color: var(--muted); }
+.branch-connector { color: var(--palette-real); }
+.svd-branch .eyebrow { color: var(--palette-real-dark); }
+.care-card { border-color: #d8c7e5; }
+.care-number { color: var(--palette-imag-dark); }
+.care-card p, .reference-section > p, .definition-panel p,
+.reference-bullets, .assumption-spaces p, .allowance-comparison span,
+.certificate-table td:last-child, .colour-key span:not(.colour-swatch) {
+  color: var(--muted);
+}
+.section-heading > span { color: var(--palette-real-dark); }
+.assumption-spaces > div:nth-child(1) { border-top: 3px solid var(--palette-main); }
+.assumption-spaces > div:nth-child(2) { border-top: 3px solid #324fc7; }
+.assumption-spaces > div:nth-child(3) { border-top: 3px solid var(--palette-real); }
+.assumption-spaces > div:nth-child(4) { border-top: 3px solid var(--palette-imag); }
+.frozen-data pre { background: #f7f4fa; color: var(--palette-main-dark); }
+.certificate-table th { background: var(--palette-main-tint); color: var(--ink); }
+.certificate-table th, .certificate-table td { border-bottom-color: var(--line); }
+.certificate-table td:nth-child(2) { color: var(--palette-main); }
+
+/* New descriptive swatches plus compatibility aliases for existing markup. */
+.swatch-real, .swatch-blue { background: var(--palette-real); }
+.swatch-imag, .swatch-gray, .swatch-coral { background: var(--palette-imag); }
+.swatch-main, .swatch-indigo, .swatch-purple { background: var(--palette-main); }
+.swatch-ref, .swatch-grey { background: var(--palette-ref); }
+.swatch-bg, .swatch-background { background: var(--palette-bg); border-color: #aaa2b2; }
+.swatch-gradient { background: var(--phase1-gradient); }
+.swatch-red { background: var(--palette-red); }
+.swatch-deeppink { background: var(--palette-deeppink-tint); border-color: var(--palette-deeppink); }
+.swatch-orange { background: var(--palette-deeppink-tint); border-color: var(--palette-deeppink); }
+.swatch-violet { background: #bbb0ed; border-color: var(--palette-main); }
+
+.palette-gradient-key{height:12px;width:100%;max-width:560px;border-radius:8px;background:var(--phase1-gradient);margin:16px 0}
+
+:root{--gate2-error:#ff1493;--operator-error:#00ff00;--operator-safety:#2e7d32;--operator-outer:#32cd32;--operator-image:#805039;--operator-clearance:#7fff00;--operator-tint:#d9ff85;--protected-interior:#d3d3d3}
+.two-gate-provenance{display:grid;grid-template-columns:1.15fr 1fr 1.15fr;gap:12px;margin:16px 0;color:#4b0082}.two-gate-provenance article{padding:12px;border:1px solid #ddd;border-top:4px solid #7b68ee;border-radius:7px;background:#fff;min-width:0}.two-gate-provenance .gate-provenance-matrix{border-top-color:var(--gate2-error)}.two-gate-provenance .gate-provenance-operator{border-top-color:var(--operator-error)}.two-gate-provenance h3{color:#4b0082;margin:0 0 6px;font-size:1rem}.two-gate-provenance p{font-size:.9rem;line-height:1.45;margin:7px 0 0}.gate-provenance-equation{margin:5px 0;overflow-x:auto}.two-gate-provenance .site-math{color:#4b0082}
+.step-eleven .op-dual-uncertainty-key{border-left-color:var(--operator-error)}.step-eleven .op-legend .changed{border-color:var(--operator-image);background:none}.step-eleven .op-legend .safe{background:var(--protected-interior);border-color:var(--operator-safety)}.step-eleven .op-legend .uncertain{background:none;border-color:var(--operator-error)}.step-eleven .op-radius-key i{border-color:var(--operator-safety)}.step-eleven .op-radius-key .slack{border-color:var(--operator-clearance)}.step-eleven .op-gauge{background:var(--protected-interior);border-color:var(--operator-safety)}.step-eleven .op-gauge-used{background:repeating-linear-gradient(135deg,var(--operator-error),var(--operator-error) 9px,var(--operator-tint) 9px,var(--operator-tint) 12px)}.step-eleven .op-gauge-labels span,.step-eleven .op-stage-error,.step-eleven .op-stage-radius{color:#4b0082}
+@media(max-width:800px){.two-gate-provenance{grid-template-columns:1fr}}
+
+.gate-provenance-picture{float:right;width:130px;height:65px;margin:-5px -4px 0 7px}.gate-map-sheet .gate-provenance-picture{width:126px;height:60px}
+
+/* Labelled gate comparisons: prevent general SVG rules from enlarging miniatures. */
+.two-gate-provenance.gate-provenance-detailed .gate-provenance-picture{display:block;float:none;width:100%;height:225px;max-height:none;margin:8px 0;overflow:visible}.two-gate-provenance.gate-provenance-compact .gate-provenance-picture{float:right;width:114px;height:86px;margin:0 0 0 8px}.two-gate-provenance .gate-provenance-note{grid-column:1/-1;margin:0;font-size:.85rem;background:#f5f5f7;padding:8px 12px}.gate-provenance-handoff{margin-top:28px;padding:12px;background:#f6f4fa;border-left:3px solid #7b68ee}.gate-provenance-detailed .gate-provenance-equation{font-size:.96rem}.site-math [fill="#00ff00"] path,.mjx-label [fill="#00ff00"] path{stroke:#2e7d32;stroke-width:9;paint-order:stroke fill}.site-math [fill="#48d1cc"] path,.mjx-label [fill="#48d1cc"] path{stroke:#287570;stroke-width:5;paint-order:stroke fill}
+
+.site-math [fill="#00ffff"] path,.mjx-label [fill="#00ffff"] path{stroke:#287570;stroke-width:7;paint-order:stroke fill}
+
+/* Keep explanatory labels readable; the generic enclosure text rule is 11px. */
+.op-moat-pair svg text.moat-bound-label{font-size:22px}.op-moat-pair svg text.moat-local-label{font-size:25px}.op-moat-pair svg text.moat-name-label{font:17px system-ui;fill:#4b0082}.op-moat-pair svg text.moat-origin-label{font-size:18px}.op-moat-pair svg text.moat-scale-label{font-size:15px}.op-moat-pair>article>div>svg{max-height:440px}
+
+/* Annotation pointers are neutral; mathematical vectors and radii keep their roles. */
+:root{--annotation-pointer:#c4c4c4}
+svg .annotation-pointer,svg .s2-disk-leader,svg .s3-radius-leader{stroke:var(--annotation-pointer)!important;stroke-dasharray:1 5!important;stroke-linecap:round;fill:none;marker-end:none!important;marker-start:none!important}
+
+/* Detailed comparison labels stay readable independently of SVG scaling. */
+.two-gate-provenance.gate-provenance-detailed .provenance-readable .gate-provenance-picture{height:300px;width:100%;max-width:460px;margin:8px auto;overflow:visible}
+.provenance-readable .provenance-number-labels text{font:22px system-ui!important;fill:#4b0082}
+.provenance-labels{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px 12px;margin:12px 0 22px;font:18px/1.45 system-ui;color:#4b0082}
+.provenance-labels>div{display:flex;gap:10px;min-width:0}
+.provenance-labels>div>b{font-size:20px;color:#4b0082}
+.provenance-labels .site-math{font-size:20px;white-space:nowrap}
+@media(max-width:1100px){.provenance-labels{grid-template-columns:1fr}}

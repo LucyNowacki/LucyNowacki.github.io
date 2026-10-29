@@ -1,0 +1,127 @@
+<!doctype html>
+<html class="night-edition" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100b1e">
+<meta name="description" content="An interactive companion to a 13-page spectral certification toy. Connected geometries explain each certificate and its mathematical role.">
+<title>Spectral certification · Dark wireframe edition</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2314243a'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%234338ca' stroke-width='2'/%3E%3Ccircle cx='19' cy='12' r='3' fill='%23ffffff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./styles.css?v=82">
+<link rel="stylesheet" href="./intro.css?v=82">
+<link rel="stylesheet" href="./step-one.css?v=82">
+<link rel="stylesheet" href="./step-two.css?v=82">
+<link rel="stylesheet" href="./step-three.css?v=82">
+<link rel="stylesheet" href="./step-four.css?v=82">
+<link rel="stylesheet" href="./step-five.css?v=82">
+<link rel="stylesheet" href="./enclosure.css?v=82">
+<link rel="stylesheet" href="./preparation.css?v=82">
+<link rel="stylesheet" href="./palette.css?v=116">
+<link rel="stylesheet" href="./math.css?v=82">
+<script src="./math-config.js?v=82"></script>
+<script defer src="./vendor/mathjax/tex-mml-svg.js" onerror="window.siteMathReject(new Error('MathJax could not load'))"></script>
+<script type="module" src="./app.mjs?v=118"></script>
+  <link rel="stylesheet" href="./step-nine.css?v=82">
+  <link rel="stylesheet" href="./step-ten.css?v=82">
+  <link rel="stylesheet" href="./step-eleven.css?v=100">
+  <link rel="stylesheet" href="./step-twelve.css?v=82">
+  <link rel="stylesheet" href="./quantity-ledger.css?v=82">
+<link rel="stylesheet" href="./display-4k.css?v=118">
+<link rel="stylesheet" href="./gate-two-radius.css?v=82">
+<link rel="stylesheet" href="./step-eight-layout.css?v=82">
+<link rel="stylesheet" href="./compact-controls.css?v=82">
+<link rel="stylesheet" href="./step-thirteen.css?v=83">
+<link rel="stylesheet" href="./operator-ball-duality.css?v=97">
+<link rel="stylesheet" href="./step-eleven-overview.css?v=111">
+<link rel="stylesheet" href="./step-eleven-palette-test.css?v=117">
+<link rel="stylesheet" href="./night.css?v=themes2">
+<script type="module" src="./night-svg.mjs?v=night1"></script>
+<link rel="stylesheet" href="./theme-switch.css?v=1">
+<script defer src="./theme-switch.js?v=1"></script>
+</head>
+<body>
+<a class="skip-link" href="#workspace">Skip to current page</a>
+<div class="app-shell">
+<aside class="sidebar" id="sidebar" aria-label="Protocol navigation">
+  <a class="brand" href="#protocol" aria-label="Certification Protocol">
+    <span class="brand-mark" aria-hidden="true">∮</span>
+    <span>Certification<span class="brand-sub">A geometric protocol</span></span>
+  </a>
+  <div class="sidebar-intro"><span class="eyebrow">THE TOY EXAMPLE</span><span class="side-counter">13 pages</span></div>
+  <nav id="step-nav" aria-label="Certification steps"></nav>
+  <div class="sidebar-footer"><span class="outline-dot" aria-hidden="true"></span><div>All 13 pages available<span>One complete geometric story</span></div></div>
+</aside>
+<button class="scrim" id="scrim" aria-label="Close navigation" hidden></button>
+<div class="main-shell">
+  <header class="topbar">
+    <button class="icon-button mobile-only" id="menu-toggle" aria-label="Open step navigation" aria-expanded="false" aria-controls="sidebar">☰</button>
+    <div class="topbar-label">Lucy's mathematical toy <span class="topbar-divider">/</span> <span>Certification protocol</span></div>
+    <button class="reference-button" id="reference-open"><span aria-hidden="true">𝑠</span> Notation &amp; data</button>
+  </header>
+  <main id="workspace" tabindex="-1">
+    <div id="intro-page" hidden></div>
+    <div id="step-page">
+    <div class="workspace-heading">
+      <div><p class="eyebrow" id="step-kicker"></p><h1 id="step-title"></h1><p class="step-intro" id="step-intro"></p></div>
+      <span class="status-badge"><span class="outline-dot" aria-hidden="true"></span>Planned</span>
+    </div>
+    <div class="context-strip"><span id="space-label"></span><span class="context-type" id="evidence-label"></span></div>
+    <div id="quantity-context" hidden></div>
+    <div class="workspace-grid">
+      <section class="workspace-card" aria-label="Step workspace">
+        <div class="tabs" role="tablist" aria-label="Step content">
+          <button id="tab-geometry" class="tab" role="tab" aria-controls="panel-geometry" aria-selected="true" tabindex="0" data-tab="geometry">Geometry</button>
+          <button id="tab-argument" class="tab" role="tab" aria-controls="panel-argument" aria-selected="false" tabindex="-1" data-tab="argument">Argument</button>
+          <button id="tab-gate-diagram" class="tab" role="tab" aria-controls="panel-gate-diagram" aria-selected="false" tabindex="-1" data-tab="gate-diagram" hidden>Gate diagram</button>
+          <button id="tab-gate2" class="tab" role="tab" aria-controls="panel-gate2" aria-selected="false" tabindex="-1" data-tab="gate2" hidden>From the rectangles to the Gate-2 radius</button>
+          <button id="tab-connections" class="tab" role="tab" aria-controls="panel-connections" aria-selected="false" tabindex="-1" data-tab="connections">Connections</button>
+          <button id="tab-optional-upper" class="tab" role="tab" aria-controls="panel-optional-upper" aria-selected="false" tabindex="-1" data-tab="optional-upper" hidden>Optional Upper Bound</button>
+        </div>
+        <div id="panel-geometry" class="tab-panel" role="tabpanel" aria-labelledby="tab-geometry" tabindex="0">
+          <div class="visual-canvas">
+            <div class="canvas-topline"><span id="canvas-label"></span><span>VISUALIZATION SLOT</span></div>
+            <div class="canvas-empty"><span class="empty-step" id="empty-step" aria-hidden="true"></span><h2 id="empty-title"></h2><p>The geometry for this step will be built here.</p><span class="empty-label">Not built yet</span></div>
+            <div class="canvas-bottomline"><span>Reserved for the interactive scene</span><span id="canvas-space"></span></div>
+          </div>
+          <div class="controls-placeholder"><span class="control-title">Interactive controls</span><span>Added when we develop this step.</span></div>
+        </div>
+        <div id="panel-argument" class="tab-panel text-panel" role="tabpanel" aria-labelledby="tab-argument" tabindex="0" hidden>
+          <p class="eyebrow">THE MATHEMATICAL ARGUMENT</p><h2>A place for each step of the reasoning</h2>
+          <p>Assumptions, intermediate bounds and the conclusion will be added with this visualization.</p>
+          <div class="argument-outline"><div><span>01</span><strong>Starting objects &amp; assumptions</strong></div><div><span>02</span><strong>Geometric construction &amp; estimates</strong></div><div><span>03</span><strong>What this step establishes</strong></div></div>
+          <div class="note" id="argument-note"></div>
+        </div>
+        <div id="panel-gate-diagram" class="tab-panel" role="tabpanel" aria-labelledby="tab-gate-diagram" tabindex="0" hidden></div>
+        <div id="panel-gate2" class="tab-panel" role="tabpanel" aria-labelledby="tab-gate2" tabindex="0" hidden></div>
+        <div id="panel-optional-upper" class="tab-panel text-panel" role="tabpanel" aria-labelledby="tab-optional-upper" tabindex="0" hidden></div>
+        <div id="panel-connections" class="tab-panel text-panel" role="tabpanel" aria-labelledby="tab-connections" tabindex="0" hidden>
+          <p class="eyebrow">PLACE IN THE PROTOCOL</p><h2 id="connections-title"></h2><p id="connections-copy"></p><div id="connection-links"></div>
+        </div>
+      </section>
+      <aside class="details-rail" aria-label="Plan for this step">
+        <section class="detail-section"><p class="eyebrow">GEOMETRY TO ADD</p><ul id="planned-views"></ul></section>
+        <section class="detail-section"><p class="eyebrow">KEEP IN VIEW</p><p id="guardrail"></p></section>
+        <section class="detail-section"><p class="eyebrow">DEVELOPMENT STATUS</p><div class="status-line"><span>Page structure</span><span>Ready</span></div><div class="status-line"><span>Mathematical scene</span><span>Planned</span></div><div class="status-line"><span>Scene interactions</span><span>Planned</span></div></section>
+      </aside>
+    </div>
+    <footer class="step-footer"><a class="page-button" id="previous-step" href="#step-01"><span aria-hidden="true">←</span> Previous step</a><span id="step-position"></span><a class="page-button primary" id="next-step" href="#step-02">Next step <span aria-hidden="true">→</span></a></footer>
+    <p class="scope-note">Abstract 2 × 2 toy · All 13 pages available · Animations illustrate the supplied toy data</p>
+    </div>
+  </main>
+</div>
+</div>
+<dialog id="reference-dialog" aria-labelledby="reference-title">
+  <div class="dialog-top"><div><p class="eyebrow">SHARED REFERENCE</p><h2 id="reference-title">Notation &amp; toy data</h2></div><button id="reference-close" class="icon-button" aria-label="Close notation and data">×</button></div>
+  <div class="dialog-body">
+    <p>Actual contour minima, certified lower bounds and pointwise values have different roles. The quantities relevant to each step also appear beside that step.</p>
+    <div class="reference-callout"><span class="formula">a<sub>∘</sub> ≤ s<sub>Γ</sub>(A<sub>2</sub><sup>∘</sup>) ≤ a<sub>∗</sub></span><p>A certified lower bound, the actual contour minimum, and one pointwise SVD value.</p></div>
+    <h3>The contour and midpoint</h3>
+    <div class="data-block"><p class="formula">c = 5/8 + i/4 &nbsp; · &nbsp; δ = 1/16</p><p class="formula">U = { z ∈ ℂ : |z − c| &lt; δ }, &nbsp; Γ = ∂U</p><div class="matrix-line"><span class="formula">A<sub>2</sub><sup>∘</sup> =</span><div class="matrix" aria-label="Midpoint matrix"><span>1/2 + i/4</span><span>3/8 − i/8</span><span>1/16 + i/8</span><span>1/4 − i/16</span></div></div></div>
+    <div id="notation-list"></div>
+    <h3>Four different spaces</h3><div class="space-list"><span>Spectral plane <b>ℂ ≅ ℝ²</b></span><span>Matrix space <b>ℂ²ˣ² ≅ ℝ⁸</b></span><span>Finite vector space <b>ℂ² ≅ ℝ⁴</b></span><span>Lifted vector space <b>ℂ³ ≅ ℝ⁶</b></span></div>
+    <p class="reference-footnote">An underline denotes a certified lower bound. Plain U is the spectral disk; U<sub>∗</sub> denotes an SVD frame. Reference data are not a new numerical validation.</p>
+  </div>
+</dialog>
+<p class="sr-only" role="status" id="route-announcement"></p>
+</body>
+</html>
