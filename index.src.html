@@ -366,6 +366,17 @@
       grid-template-columns: 1fr;
     }
   }
+/* Certification preview: share the existing grid and media-frame dimensions. */
+.certification-tile{order:-1}
+.certification-tile .column-0{background:#100b1e}
+.certification-tile .certification-tile-media{display:block;width:100%;height:100%}
+.certification-tile video,.certification-tile img{width:100%;height:100%;display:block;object-fit:contain}
+.certification-tile .certification-tile-poster{display:none}
+.certification-preview-toggle{position:absolute;right:10px;bottom:10px;z-index:1;min-height:32px;padding:5px 10px;border:1px solid #ffffff80;border-radius:5px;background:#100b1ed9;color:#fff;font:500 12px/1.2 sans-serif;cursor:pointer}
+.certification-preview-toggle:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(pointer:coarse){.certification-preview-toggle{min-height:44px;min-width:44px}}
+@media(prefers-reduced-motion:reduce){.certification-tile video,.certification-preview-toggle{display:none}.certification-tile .certification-tile-poster{display:block}}
+
 </style>
 
 <main class="live-home">
@@ -565,7 +576,32 @@
       </div>
     </div>
 
-    <div class="solutions flex-columns">
+    <div class="solutions flex-columns certification-tile" data-certification-tile>
+  <div class="row">
+    <div class="column">
+      <div class="column-0">
+        <a class="certification-tile-media" href="blog/certification-protocol/" aria-label="Open the interactive spectral certification post">
+          <video autoplay muted loop playsinline preload="metadata" width="1280" height="720" poster="./files/interactive/certification-preview/poster.png" aria-label="Schematic gate geometry: blue reference ellipsoid, gray protected interior, pink matrix uncertainty and green operator uncertainty."><source src="files/interactive/certification-preview/preview.webm" type="video/webm"><source src="files/interactive/certification-preview/preview.mp4" type="video/mp4"></video><img class="certification-tile-poster" src="files/interactive/certification-preview/poster.png" width="1280" height="720" alt="Schematic certification geometry with a protected inner ball and an uncertainty ball."></a>
+        <button type="button" class="certification-preview-toggle" data-preview-toggle aria-label="Pause certification animation" aria-pressed="true">Pause</button>
+      </div>
+    </div>
+    <div class="column">
+      <div class="column-2 bg-primary">
+        <h4>Proofs · Interactive Geometry</h4>
+        <a href="blog/certification-protocol/" class="btn btn-outline">
+          <h2>Spectral certification: an interactive proof explorer</h2>
+        </a>
+        <div class="row">
+          <p>Follow thirteen geometric steps from contour separation to the operator gate.
+             Explore balls, ellipsoids, uncertainty bounds and the preserved spectral count.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="solutions flex-columns">
       <div class="row">
         <div class="column">
           <div class="column-0">
@@ -911,3 +947,4 @@
     </div>
   </section>
 </main>
+<script type="module" src="files/assets/js/certification-tile.js?v=d76feaa4c068"></script>
