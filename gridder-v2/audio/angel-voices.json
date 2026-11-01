@@ -1,0 +1,69 @@
+{
+  "engine": "Kokoro-82M v1.0, timed ONNX export",
+  "voices": [
+    "af_heart",
+    "af_bella",
+    "am_fenrir",
+    "am_eric"
+  ],
+  "composition": "Female angel melody/harmony with harp; male devil narration followed by mocking vocal laughter",
+  "mastering": {
+    "target_lufs": -10,
+    "true_peak_ceiling_dbtp": -2.5,
+    "post_resample_sample_peak_ceiling": 0.7498,
+    "runtime_voice_gain": 1.15
+  },
+  "model_source": "https://github.com/thewh1teagle/kokoro-onnx/releases/tag/model-files-v1.1",
+  "voice_catalog": "https://huggingface.co/hexgrad/Kokoro-82M/blob/main/VOICES.md",
+  "celebrity_recording_or_clone": false,
+  "clips": [
+    {
+      "file": "resurrection-song.wav",
+      "phrase": "Resurrection!",
+      "role": "female angel duet",
+      "lead_midi": [
+        64,
+        67,
+        72,
+        72
+      ],
+      "harmony_midi": [
+        60,
+        64,
+        67,
+        64
+      ],
+      "seconds": 2.706,
+      "sample_rate": 24000,
+      "channels": 2,
+      "rms": 0.134171,
+      "peak": 0.749634,
+      "sha256": "9a97b3c9a51b940d670cae189222dc2fe4136a7ffb68b518840410758f53bd77"
+    },
+    {
+      "file": "dunces-stool-devil.wav",
+      "phrase": "Go to the dunce's stool!",
+      "role": "male devil narration and mocking laughter",
+      "voice_blend": {
+        "am_fenrir": 0.8,
+        "am_eric": 0.2
+      },
+      "laugh": "Ha! Ha-ha-ha!",
+      "character_direction": "Older burly nasty male devil; Trump-inspired rough nasal cadence, chest resonance and wheezy spiteful laugh",
+      "pitch_factor": 0.88,
+      "laugh_pitch_factor": 0.82,
+      "formant_ratio": 0.94,
+      "emphatic_pause_seconds": 0.24,
+      "rasp_strength_speech": 0.12,
+      "rasp_strength_laugh": 0.38,
+      "seconds": 3.695,
+      "sample_rate": 24000,
+      "channels": 2,
+      "rms": 0.145964,
+      "peak": 0.749786,
+      "sha256": "fb72f9f9a393706f4ceea87bb4641542d39ae07e6e9410eefbeed6cb101904ec"
+    }
+  ],
+  "model_sha256": "beb0d1848dee9a49da392cc3df26958d46cfa35d321edf434f52949153f0df3a",
+  "voice_styles_sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"
+}

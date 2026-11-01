@@ -1,0 +1,9 @@
+{
+  "text": "Hurry up!!",
+  "generator": "Existing local eSpeak NG library via tools/gridder-v2/clue_speech.py",
+  "voice": "en-gb+f3",
+  "wordsPerMinute": 160,
+  "remoteService": false,
+  "durationSeconds": 0.9411337868480726,
+  "sha256": "7d7e135d16f9b869bae7c260002355964d88e7949a39d6190ab7a71a5e666c05"
+}

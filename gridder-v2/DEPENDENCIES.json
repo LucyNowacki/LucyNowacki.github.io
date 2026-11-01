@@ -1,0 +1,25 @@
+{
+  "phaser": {
+    "version": "4.2.1",
+    "release": "https://github.com/phaserjs/phaser/releases/tag/v4.2.1",
+    "source": "https://raw.githubusercontent.com/phaserjs/phaser/v4.2.1/dist/phaser.min.js",
+    "file": "vendor/phaser.min.js",
+    "sha256": "66348b1b5141e49b7d5ebbe688cddcb502eab1cb00f21c538686a5b2c5abe4de",
+    "license": "MIT",
+    "license_file": "vendor/PHASER-LICENSE.txt",
+    "license_sha256": "c3a9ba7e38d4ef33dccf5fdd1046655c63df06714f84776118fe406f43db5cf2"
+  },
+  "mathjax": {
+    "source": "Existing derivative lesson local vendor distribution, copied unchanged",
+    "file": "vendor/tex-svg.js",
+    "sha256": "d4295dc33744836935c1399feece5159577b34c5c8ffb9f1c6324cd82e03a882",
+    "license": "Apache-2.0",
+    "license_file": "vendor/MathJax-LICENSE",
+    "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "game_art_and_audio": {
+    "source": "files/interactive/derivative/assets and files/interactive/derivative/audio",
+    "policy": "Copied unchanged; protected original-source manifest records the source hashes",
+    "audio_provenance": "audio/angel-voices.json"
+  }
+}

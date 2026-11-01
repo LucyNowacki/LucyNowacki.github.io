@@ -1,0 +1,45 @@
+{
+  "title": "Boléro · Ravel (synthesized arrangement)",
+  "composer": "Maurice Ravel",
+  "work": "Boléro, M.81 (1928)",
+  "arrangement": {
+    "bpm": 72,
+    "meter": "3/4",
+    "bars": 24,
+    "seconds": 60,
+    "scope": "Four-bar introduction; complete opening flute theme from original bars 5–21, including ties and rests; short pizzicato/snare turnaround.",
+    "instruments": "Procedurally synthesized flute, reduced C/G pizzicato cello/viola accompaniment, and the signature two-bar snare pattern.",
+    "changes": "Reduced instrumentation, synthesized timbres, restrained dynamics and a loop turnaround. This is an excerpt arrangement, not the complete orchestration or a historical performance.",
+    "audio_source": "All PCM is synthesized locally by arcade-music.js; no third-party recording or instrumental sample is used."
+  },
+  "sources": [
+    {
+      "title": "Nicolas Sceaux: Ravel_Bolero — composer score transcription",
+      "url": "https://github.com/nsceaux/Ravel_Bolero/tree/e46e0da5b2518ac9c2521308351ce02c30a4b0da",
+      "commit": "e46e0da5b2518ac9c2521308351ce02c30a4b0da",
+      "license": "CC0 1.0 Universal, as declared by the repository LICENSE and the rendered flute part footer.",
+      "locators": {
+        "melody": "common.ily: themeA, original flute bars 5–21",
+        "snare": "notes/tambour.ily: first two-bar pattern",
+        "cello": "notes/violoncelle.ily: opening repeated two-bar pizzicato",
+        "viola": "notes/alto.ily: opening repeated pizzicato bar"
+      },
+      "use": "Pitch, duration, tie and snare-pattern transcription, plus the opening accompaniment reduction."
+    },
+    {
+      "title": "Boléro — Flûte 1, Éditions Nicolas Sceaux, 2016",
+      "url": "https://s9.imslp.org/files/imglnks/usimg/e/eb/IMSLP421139-PMLP03667-Ravel_Bolero-flute1.pdf",
+      "locator": "Page 1, first three systems, bars 5–21",
+      "use": "Rendered score visually checked against the source notation; footer declares CC0 1.0."
+    },
+    {
+      "title": "IMSLP: Boléro, M.81 — original edition bibliography",
+      "url": "https://imslp.org/wiki/Bol%C3%A9ro_(Ravel,_Maurice)",
+      "locator": "First-edition parts: Paris, Durand & Cie., 1929, plate D. & F. 11.780; flute #299525 and snare #299518",
+      "use": "Historical publication and public-domain catalogue provenance. The historical scan was not used as the transcription master."
+    }
+  ],
+  "verified_on": "2026-10-20",
+  "verification": "Pure regression checks the opening pitches and cadence, ties across barlines, full three-quarter bar durations, alternating 10/14-attack snare cycles, actual PCM fundamentals, finite headroom and the unchanged playback lifecycle.",
+  "limits": "No claim of orchestral realism or full-work coverage; speaker output and perceived recognizability require listening."
+}

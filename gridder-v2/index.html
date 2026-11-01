@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#171323"><title>Gridder 2 · The maths arcade</title><meta name="description" content="Trace paths, outwit each family’s monsters, and discover calculus in a playful mathematical arcade."><link rel="stylesheet" href="style.css?v=20261101-cross-pad-compact-v2">
+
+<link rel="icon" href="data:,">
+<script defer src="vendor/phaser.min.js?v=4.2.1"></script>
+<script defer src="sprite-metrics.js?v=20261020"></script>
+<script defer src="core/math.js"></script>
+<script defer src="core/palette.js"></script>
+<script defer src="core/gridder-catalogue.js"></script>
+<script defer src="core/gridder-math.js"></script>
+<script defer src="grid-gaps.js?v=20261020-pool-leeches"></script>
+<script defer src="gap-navigation.js?v=20261020-pool-leeches"></script>
+<script defer src="pool-leeches.js?v=20261028-ecology"></script>
+<script defer src="core/worked.js"></script>
+<script defer src="core/gridder-chase.js?v=20261028-ecology"></script>
+<script defer src="core/gridder-capture.js"></script>
+<script defer src="core/gridder-remains.js?v=20261020-scale"></script>
+<script defer src="core/gridder-sound.js?v=20261020-audio"></script>
+<script defer src="arcade-music.js?v=20261020-bolero"></script>
+<script defer src="visual-theme.js?v=20261019-function-glow"></script>
+<script defer src="board-eyes.js?v=20261028"></script>
+<script defer src="chebby-avatar.js?v=20261028-board-eyes"></script>
+<script defer src="monster-roster.js?v=20261028-ecology"></script>
+<script defer src="creature-ecology.js?v=20261028"></script>
+<script defer src="actors.js?v=20261028-ecology"></script>
+<script defer src="leech-actors.js?v=20261028-upright-shark"></script>
+<script defer src="gridder-mascot.js?v=20261028-visual-only"></script>
+<script type="module" src="chebby-face.mjs?v=20261028-visual-only"></script>
+<script defer src="render-capabilities.js"></script>
+<script defer src="ocean-water.js?v=20261028-ecology"></script>
+<script defer src="liquid-gaps.js?v=20261028-ecology"></script>
+  <script defer src="renderer.js?v=20261020-no-cloud"></script>
+<script defer src="case-maths.js?v=20261019-maths-responsive"></script>
+<script defer src="controller.js?v=20261101-touch-pad"></script>
+<script defer src="math-window.js?v=20261101-maths-position"></script>
+<script defer src="panel-layout.js?v=20261101-responsive"></script>
+<script defer src="fullscreen.js?v=20261101-maths-explainer"></script>
+<script defer src="app.js?v=20261101-touch-scroll"></script>
+<script defer src="mathjax-config.js"></script><script defer src="vendor/tex-svg.js"></script></head>
+<body><a class="skip-link" href="#gridder-board">Skip to the game</a>
+<main>
+  <header class="masthead">
+    <div class="arcade-brand"><canvas id="gridder-mascot" class="mascot" width="176" height="132" aria-label="Gridder"></canvas><h1>Gridder<span>2</span></h1><span class="brand-caption">THE MATHS<br>ARCADE</span></div>
+    <div class="masthead-tools"><label for="gridder-visual-preset">Visual style</label><select id="gridder-visual-preset"><option value="neon">Function neon</option><option value="plain">Plain plum</option></select></div>
+  </header>
+  <ol id="gridder-journey" class="level-journey" aria-label="Levels for the selected function"></ol>
+<div id="view-gridder" class="game-layout"><div class="play-column"><section id="gridder-game-area" class="board-card" aria-label="Game"><div class="board-heading"><div><div class="eyebrow">YOUR MISSION</div><h2 id="gridder-level"></h2></div><p id="gridder-formula"></p><button id="gridder-fullscreen" type="button" aria-controls="gridder-game-area" aria-pressed="false">Full screen ⛶</button></div>
+<section class="board-mission" aria-label="What to discover"><p id="gridder-mission"></p><details class="mission-clue-details" open><summary>Maths clue</summary><p id="gridder-mission-clue" class="mission-clue"></p></details><a class="maths-jump" href="#math-home">Read the mathematics for this case ↓</a></section><div id="gridder-board" tabindex="0" role="application" aria-label="Gridder game board. Use arrow keys to move and Escape to pause." aria-describedby="gridder-mission gridder-mission-clue gridder-position"></div><p id="gridder-feedback" role="status" aria-live="polite"></p><div class="play-dock"><div class="game-buttons"><button id="gridder-start" class="primary" aria-pressed="false">Start game</button><button id="gridder-next" disabled>Next level →</button><button id="math-explainer" type="button" aria-controls="gridder-maths-panel" aria-expanded="false">Maths explainer</button></div><p id="gridder-lives" role="status" aria-live="polite">Lives: 7</p><div class="touch-controls"><div class="gridder-pad" role="group" aria-label="Gridder movement buttons">
+            <button id="gridder-up" class="quiet" aria-label="Move Gridder up">↑</button>
+            <button id="gridder-left" class="quiet" aria-label="Move Gridder left">←</button>
+            <button id="gridder-down" class="quiet" aria-label="Move Gridder down">↓</button>
+            <button id="gridder-right" class="quiet" aria-label="Move Gridder right">→</button>
+          </div></div>
+</div><section class="audio-console" aria-label="Music and sound">
+  <label class="point-toggle"><input id="gridder-music" type="checkbox" checked><span class="music-label">Music · Boléro<small>Ravel · synthesized arrangement</small></span></label>
+  <div class="control-group"><label for="gridder-music-volume">Music volume <output id="gridder-music-volume-value" for="gridder-music-volume">30%</output></label><input id="gridder-music-volume" type="range" min="0" max="100" step="5" value="30" aria-label="Music volume"></div>
+  <label class="point-toggle"><input id="gridder-sound" type="checkbox" checked> Sound effects</label>
+</section><div class="gridder-readouts"><p id="gridder-position"></p><p id="gridder-progress"></p><p id="gridder-chase-status" role="status" aria-live="polite"></p></div><div class="gridder-legend"><span>🕷 Avoid the family monsters</span><span><i class="legend-grid" aria-hidden="true"></i>Grid</span><span><i class="legend-path" aria-hidden="true"></i>Your path</span><span><i class="legend-fill" aria-hidden="true"></i>Captured area</span><span id="gridder-target-legend">Dashed curve: discover in later levels</span></div></section><details class="how-to"><summary>How to play · creatures, scraps &amp; surprises</summary>          <p>Later levels reveal the first derivative, the second derivative, an inverse on a stated branch, and the perpendicular normal at A. The mathematics for the current case stays expanded in its panel; completing a level adds its worked solution.</p>
+          <p id="gridder-instructions">Choose Start game beneath the board. Each node is the centre of a box reaching 1/8 along each of its four connected edges. Entering the box automatically carries Gridder smoothly to its centre, from any direction. Each tap requests an animated 1/16-edge step. Hold to move smoothly outside the boxes. The speed setting scales with the board size, so journeys take the same time after resizing; horizontal and vertical screen speeds remain equal. Use the resolution sliders to adjust incoming and outgoing halves of node boxes separately. Gridder reaches each node centre before moving on. While travelling vertically, a brief left/right press is remembered until the next node. Close a loop to fill its whole area pale pink. Each function starts with seven lives. Avoid this family’s three monsters: a catch costs one life. Only the head of a long segmented monster can catch you; its trailing body is safe to cross. Gridder looks frightened as enemies approach and relieved when you escape. Gridder swells navy-blue to three times his size over two seconds with a surprised open-mouth expression, decays, then scatters into pieces before resurrection or Game Over. Your marked areas remain. Escape pauses movement, all three enemies, feeding and the capture animation.</p>
+          <p>Clear-water pools come in different shapes and remove parts of the grid. Gridder and the land monsters follow the remaining edges around each shore. Water cannot be painted or captured. Pools stay away from the function and the discovery target, and the remaining grid always provides a route around them. Larger pools hold two or three pulsing neon leeches: when one flashes a warning ring, move away from the shore before it lunges! A catch costs one life as the leech drags Gridder into the water and drinks his blood. Your marked areas stay saved. The scorpion strikes with its tail.</p>
+          <p>A shark patrols the largest water pool. Its flashing warning gives you time to escape the shore; a catch costs one life and spreads a red blood tint through that pool. Large centipedes can lay one or two eggs on grid nodes. Eggs hatch after 10 seconds of active play into differently coloured centipedes. Every 60 seconds of active play another insect species enters from a distant border; visiting insects leave after three minutes. Timers stop during pause, capture, resurrection, completed levels and practice mode. The arrival clock carries between levels of this function; Restart resets it. Population limits keep the board playable.</p>
+          <p>Gridder can enter an edge obstructed by remains. When he meets a piece directly on the path, he strains and sweats while pushing it slowly to the next node, then shoves it aside. You will hear the stone scrape. Nearby off-path pieces are pushed aside on contact, slowing him by 70% for 40 ms. A compact monster chews a piece on its path for four seconds, with eating sounds, then becomes 30% bigger and 2% faster. Each piece multiplies its current size by 1.3. The segmented monster also stops to eat for four seconds, grows two body segments per remnant, and becomes 2% faster. During a capture, bright red blood flows from Gridder into the attacker’s branching neon veins; each drink gradually makes the attacker 15% thicker, and it keeps that growth afterwards. Its legs sweep nearby pieces aside once. Enemy growth carries into the next level; restarting the function resets it.</p>
+</details></div><aside class="mission-column"><details class="challenge-picker"><summary>Choose your challenge</summary><div class="challenge-fields">          <label for="gridder-family">Choose a family</label><select id="gridder-family" aria-describedby="gridder-family-note gridder-monster-roster"></select>
+          <label for="gridder-subfamily">Choose a subfamily</label><select id="gridder-subfamily"></select>
+          <label for="gridder-function">Choose a representative function</label><select id="gridder-function"></select>
+          <label for="gridder-difficulty">Difficulty</label><select id="gridder-difficulty"><option value="guided">Guided · larger cells, targets shown</option><option value="explorer">Explorer · finer grid, optional hints</option><option value="challenge">Challenge · finest grid, optional hints</option></select>
+</div><p id="gridder-monster-roster" class="surface-caption" aria-live="polite"></p></details>
+
+<div id="math-home" class="math-home">
+  <section id="gridder-maths-panel" class="gridder-mathematics" aria-labelledby="gridder-maths-title">
+    <div class="math-titlebar" id="math-titlebar">
+      <div><div class="eyebrow">LEARN THE MATHEMATICS</div><h2 id="gridder-maths-title">Mathematics for this level</h2></div>
+      <div class="window-actions"><button id="math-pin" aria-pressed="false" title="Keep this window fixed while scrolling" hidden>Pin</button><button id="math-expand" title="Expand or restore maths window" hidden>↗</button><button id="math-pop" aria-pressed="false" title="Open movable maths window">Float ↗</button><button id="math-move-left" class="math-move" type="button" aria-label="Move maths window left" title="Move left" hidden>←</button><button id="math-move-up" class="math-move" type="button" aria-label="Move maths window up" title="Move up" hidden>↑</button><button id="math-move-down" class="math-move" type="button" aria-label="Move maths window down" title="Move down" hidden>↓</button><button id="math-move-right" class="math-move" type="button" aria-label="Move maths window right" title="Move right" hidden>→</button><button id="math-smaller" type="button" title="Make the maths window smaller" hidden>Smaller</button><button id="math-larger" type="button" title="Make the maths window larger" hidden>Larger</button><button id="math-remember" type="button" aria-pressed="false" aria-label="Remember maths window position and size" title="Remember this position and size" hidden>Pin</button><button id="math-close" type="button" title="Close the maths explainer" hidden>Close ✕</button></div>
+    </div>
+    <div class="math-overview"><p id="gridder-context"></p><p id="gridder-family-note" class="surface-caption"></p></div>
+    <section class="case-study" aria-labelledby="gridder-case-title">
+      <h3 id="gridder-case-title"></h3>
+      <p id="gridder-rule"></p>
+      <div class="case-columns">
+        <section class="case-reasoning"><h4>Work with this function</h4><div id="gridder-case-formulas"></div><h4>Reason it through</h4><ol id="gridder-case-method"></ol></section>
+        <section class="case-interpretation"><h4>What it means</h4><p id="gridder-case-meaning"></p><h4>Domain &amp; branch</h4><p id="gridder-case-domain"></p><h4>Your grid task</h4><p id="gridder-task"></p></section>
+      </div>
+    </section>
+    <p class="solution-prompt" id="gridder-solution-prompt">Complete this level to reveal the worked solution and its substitutions here.</p>
+    <section id="gridder-solution" class="gridder-solution" hidden aria-label="Worked solution for this level"></section>
+  </section>
+</div><section class="settings-card"><div class="eyebrow">MAKE IT FEEL RIGHT</div><h2>Movement console</h2><section class="tuning" aria-label="Movement and node tuning">          <div class="control-group gridder-speed-control"><label for="gridder-speed">Gridder speed <output id="gridder-speed-value" for="gridder-speed">280 px/s</output></label><input id="gridder-speed" type="range" min="40" max="400" step="10" value="280" aria-describedby="gridder-speed-note"><div class="range-labels"><span>Slower</span><span>Faster</span></div><p id="gridder-speed-note" class="surface-caption">Speed scales with the board; this value refers to the reference size.</p></div>
+<div class="half-controls"><section aria-labelledby="half-in-title"><h3 id="half-in-title">Half in</h3><p class="half-direction">edge → centre</p>
+          <div class="control-group"><label for="gridder-resolution-vertical-in">Vertical <output id="gridder-resolution-vertical-in-value" for="gridder-resolution-vertical-in">2×</output></label><input id="gridder-resolution-vertical-in" aria-label="Half in vertical resolution" type="range" min="1" max="8" step="1" value="2"><div class="range-labels"><span>1×</span><span>8×</span></div></div>
+          <div class="control-group"><label for="gridder-resolution-horizontal-in">Horizontal <output id="gridder-resolution-horizontal-in-value" for="gridder-resolution-horizontal-in">1×</output></label><input id="gridder-resolution-horizontal-in" aria-label="Half in horizontal resolution" type="range" min="1" max="8" step="1" value="1"><div class="range-labels"><span>1×</span><span>8×</span></div></div>
+</section><section aria-labelledby="half-out-title"><h3 id="half-out-title">Half out</h3><p class="half-direction">centre → edge</p>
+          <div class="control-group"><label for="gridder-resolution-vertical-out">Vertical <output id="gridder-resolution-vertical-out-value" for="gridder-resolution-vertical-out">1×</output></label><input id="gridder-resolution-vertical-out" aria-label="Half out vertical resolution" type="range" min="1" max="8" step="1" value="1"><div class="range-labels"><span>1×</span><span>8×</span></div></div>
+          <div class="control-group"><label for="gridder-resolution-horizontal-out">Horizontal <output id="gridder-resolution-horizontal-out-value" for="gridder-resolution-horizontal-out">1×</output></label><input id="gridder-resolution-horizontal-out" aria-label="Half out horizontal resolution" type="range" min="1" max="8" step="1" value="1"><div class="range-labels"><span>1×</span><span>8×</span></div></div>
+</section></div><p class="surface-caption">Higher resolution means smaller movement per frame and longer travel time in that half of each box. Release a slider, then use the arrows to move. After keyboard adjustments, press Enter to return to the board.</p>
+          <div class="control-group"><label for="gridder-centre-pause">Centre pause <output id="gridder-centre-pause-value" for="gridder-centre-pause">20 ms</output></label><input id="gridder-centre-pause" type="range" min="0" max="500" step="10" value="20"><div class="range-labels"><span>0 ms</span><span>500 ms</span></div></div>
+</section>          <div id="gridder-normal-control" class="control-group" hidden><label for="gridder-normal-point">Normal at point A · x <output id="gridder-normal-point-value" for="gridder-normal-point"></output></label><input id="gridder-normal-point" type="range" step="0.01"><p class="surface-caption">Pause to choose A. Changing it restarts this level and keeps your lives.</p></div>
+<div class="game-options"><label class="point-toggle"><input id="gridder-spiders" type="checkbox" checked> Monsters, sharks and leeches</label>
+          <label class="point-toggle"><input id="gridder-hints" type="checkbox" checked> Show target rectangles</label>
+</div><button id="gridder-restart" class="quiet">Restart this function</button>
+          <p id="gridder-board-note" class="surface-caption"></p>
+</section></aside></div><footer><span>A little chaos. A lot of calculus.</span><a href="/">BionicMind Labs</a></footer></main></body></html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Guide Gridder around a coordinate grid, dodge creatures and discover calculus through an educational dexterity game.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Introducing Gridder 2: a maths arcade | BionicMind Labs</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https://lucynowacki.github.io/blog/gridder-2-release/">
+<link rel="icon" href="../../files/blogFavicon.ico" sizes="128x128">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YWLRJ2M88S"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script><meta name="google-site-verification" content="WF1l7hEMV49eJl7Kb2rVSOwXp2KINwX59Tig6ACvfSs">
+<meta name="author" content="Lucy Nowacki">
+<meta property="og:site_name" content="BionicMind Labs">
+<meta property="og:title" content="Introducing Gridder 2: a maths arcade">
+<meta property="og:url" content="https://lucynowacki.github.io/blog/gridder-2-release/">
+<meta property="og:description" content="Guide Gridder around a coordinate grid, dodge creatures and discover calculus through an educational dexterity game.">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-11-01T20:48:00Z">
+<meta property="article:tag" content="Numerical">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark
+bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="../../">
+
+            <span id="blog-title">BionicMind Labs</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a href="../../categories/machine-learning" class="nav-link">AI Solutions</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/numerical" class="nav-link">Numerical Computations</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/nlp" class="nav-link">NLP &amp; LLM</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/transhumanism" class="nav-link">Transhuman</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/fintech" class="nav-link">FinTech</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/proofs" class="nav-link">Proofs</a>
+                </li>
+<li class="nav-item">
+<a href="../../categories/" class="nav-link">Tags</a>
+                </li>
+<li class="nav-item">
+<a href="../../bio/index.html" class="nav-link">Contact</a>
+
+
+            </li>
+</ul>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" google custom search>
+<form method="get" action="https://www.qwant.com/" class="navbar-form navbar-right" role="search">
+  <style>
+    .btn {
+        cursor: pointer;
+        display: inline-block;
+        padding: 10px 30px;
+        /* text color in the button */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+        color: red;
+    }
+    /* Buttons for other colors */
+
+    .btn-primary,
+    .bg-primary {
+        color: #fff;
+    }
+
+    .btn-secondary,
+    .bg-secondary {
+        background: #88258b;
+        color: #fff;
+    }
+
+    .btn-outline {
+        background: transparent;
+        border: 1px solid #fff;
+    }
+  </style>
+<div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder=" Qwant Search"><button type="submit" class="btn btn-secondary">
+            <i class="fa fa-search"></i>
+        </button>
+        <input type="hidden" name="sitesearch" value="https://lucynowacki.github.io/">
+</div>
+</form>
+<!-- End of custom search -->
+
+
+            <ul class="navbar-nav navbar-right"></ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+
+
+
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Introducing Gridder 2: a maths arcade</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Lucy Nowacki
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2026-11-01T20:48:00Z" itemprop="datePublished" title="2026-11-01 20:48">2026-11-01 20:48</time></a>
+            </p>
+
+
+        </div>
+
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <p>Gridder 2 is an educational dexterity game that brings a little arcade chaos
+into exploring calculus. Guide Gridder around a coordinate grid, close loops
+to capture areas, and reveal the mathematical features hidden in each level.
+There are creatures to dodge, routes to plan and plenty of functions to
+explore along the way.</p>
+<p><a class="reference external" href="../../gridder-v2/">Play Gridder 2</a></p>
+<!-- TEASER_END -->
+<section id="how-to-play"><h2>How to play</h2>
+<p>Choose a function and a difficulty, then guide Gridder along the grid lines.
+Close a loop and the enclosed area fills in. Capture the target rectangles to
+reveal the point or graph requested by the level. You'll need to plan your
+route and steer carefully while the creatures move around the board.</p>
+<p>Each function brings its own family of monsters. There are also pools of water
+with leeches and a shark, as well as other creatures and surprises as you play.
+Gridder starts each function with seven lives; captured areas remain after a
+catch. You can turn the creatures off if you would like to concentrate on the
+mathematics.</p>
+</section><section id="discover-the-mathematics"><h2>Discover the mathematics</h2>
+<p>Depending on the function, levels invite you to find minima, maxima and
+inflection points, or reveal the first and second derivative, an inverse on a
+stated branch, and a normal line. Each mission has a clue above the board, so
+you can think about what you expect to find before tracing a route.</p>
+<p>The mathematics panel explains the current case, including formulas, reasoning,
+interpretation and the relevant domain or branch. Complete a level to reveal
+its worked solution. You can float the panel to keep the explanation close while
+you play.</p>
+</section><section id="make-it-your-own"><h2>Make it your own</h2>
+<p>Use the keyboard arrow keys or the on-screen direction buttons to move, and
+press Escape to pause. The game has a full-screen button, movement settings,
+optional target hints, and separate controls for music and sound effects.
+Touch controls are available, and the mobile experience is still evolving.</p>
+<p><a class="reference external" href="../../gridder-v2/">Open Gridder 2 and start exploring</a></p>
+</section>
+</div>
+
+
+
+
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/numerical/" rel="tag">Numerical</a></li>
+        </ul></nav></aside></article><!--End of body content--><footer id="footer"><div class="text-center">
+    <p>
+        <span class="fa-stack fa-2x">
+        <a href="https://github.com/LucyNowacki">
+            <i class="fa fa-github-square fa-stack-2x"></i>
+        </a>
+        </span>
+        <span class="fa-stack fa-2x">
+        <a href="https://www.linkedin.com/in/lucy-nowacki-02360713b">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-linkedin fa-inverse fa-stack-1x"></i>
+        </a>
+        </span>
+        <span class="fa-stack fa-2x">
+        <a href="mailto:quantlucy@gmail.com">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-envelope fa-inverse fa-stack-1x"></i>
+        </a>
+        </span>
+    </p>
+    <p>
+
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+<img alt="Creative Commons License BY-NC-SA" style="border-width:0; margin-bottom:12px;" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a> Contents © 2026  <a href="mailto:quantlucy@gmail.com">Lucy Nowacki</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>
+    </p>
+</div>
+
+
+
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
+    </script>
+</body>
+</html>

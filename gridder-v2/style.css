@@ -1,0 +1,375 @@
+:root {
+  color-scheme: dark;
+  --ink: #f6efff;
+  --violet: #c5a5ff;
+  --action: #7544bd;
+  --teal: #73ddd4;
+  --pink: #f2a5cf;
+  --line: #514063;
+  --muted: #bdb0ce;
+  --paper: #2a1d3a;
+  --wash: #21162f;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  background: #140d20;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { width: calc(100% - 40px); max-width: 1760px; margin: 20px auto; padding: 22px; background: var(--wash); border-radius: 26px; }
+a { color: var(--violet); }
+button, select, input { font: inherit; }
+button, select { border: 1px solid #88739e; border-radius: 10px; background: var(--paper); color: var(--ink); }
+button { padding: 9px 13px; min-height: 44px; cursor: pointer; font-weight: 650; transition: background .15s, transform .15s; }
+button:hover:not(:disabled) { background: #45305c; transform: translateY(-1px); }
+button:disabled { opacity: .45; cursor: default; }
+button.primary { background: var(--action); color: white; border-color: #b28be5; box-shadow: 0 3px 0 #170c27; }
+button.primary:hover:not(:disabled) { background: #8853ce; }
+button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible, a:focus-visible, #gridder-board:focus-visible { outline: 3px solid #7cebe1; outline-offset: 3px; }
+p { line-height: 1.5; }
+h1, h2, h3, p { margin-top: 0; }
+label { display: block; font-size: .8rem; font-weight: 600; margin: 12px 0 5px; }
+select { width: 100%; padding: 9px; min-height: 44px; font-size: .83rem; }
+input[type=range] { display: block; width: 100%; accent-color: var(--violet); margin: 8px 0 5px; min-height: 22px; }
+input[type=checkbox] { flex: none; width: 18px; height: 18px; accent-color: var(--teal); }
+output { color: var(--violet); font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
+[hidden] { display: none !important; }
+.masthead { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 18px; }
+.arcade-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+h1 { font-size: 2.15rem; letter-spacing: -.065em; line-height: 1; margin: 0; }
+h1 span { color: var(--violet); }
+.mascot { display: block; flex: none; width: 144px; height: 108px; border: 0; border-radius: 0; background: transparent; transform: none; box-shadow: none; }
+.brand-caption { font-size: .62rem; letter-spacing: .15em; line-height: 1.5; color: var(--muted); margin-left: 2px; }
+.back-link { font-size: .75rem; text-decoration: none; white-space: nowrap; }
+.level-journey { display: flex; flex-wrap: wrap; gap: 7px; list-style: none; padding: 0; margin: 0 0 16px; }
+.level-journey li { background: var(--paper); color: var(--muted); padding: 6px 10px; border-radius: 8px; font-size: .7rem; }
+.level-journey [aria-current=step] { background: var(--action); color: white; font-weight: 650; }
+.level-journey .level-done { color: var(--teal); }
+.game-layout { display: grid; grid-template-columns: minmax(0, 1fr) clamp(300px, 30%, 460px); gap: 16px; align-items: start; }
+.play-column, .mission-column { min-width: 0; }
+.board-card, .gridder-mathematics, .settings-card, .challenge-picker, .how-to { background: var(--paper); border-radius: 22px; }
+.board-card { padding: 20px 16px 14px; box-shadow: 0 8px 24px #08040f40, inset 0 0 0 1px #59406c55; }
+.board-heading { display: flex; justify-content: space-between; align-items: start; gap: 14px; margin: 0 6px 9px; }
+#gridder-fullscreen { flex: none; min-height: 38px; padding: 7px 10px; font-size: .75rem; white-space: nowrap; }
+.eyebrow { font-size: .62rem; letter-spacing: .14em; font-weight: 750; color: var(--teal); }
+#gridder-level { font-size: clamp(1.05rem, 1.65vw, 1.45rem); letter-spacing: -.025em; line-height: 1.25; margin: 6px 0 0; font-weight: 700; }
+#gridder-formula { color: var(--violet); font-size: 1.25rem; margin: 8px 0 0; flex: 0 1 auto; min-width: 0; }
+#gridder-formula mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+.board-mission { margin: 0 6px 13px; font-size: .8rem; color: var(--muted); }
+.board-mission p { margin: 0; }
+.mission-clue-details > summary { display: none; cursor: pointer; color: var(--teal); font-weight: 650; }
+#gridder-mission-clue { color: var(--teal); padding: 7px 0 0; }
+.board-mission mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+#gridder-board { width: 100%; min-height: 120px; height: var(--gridder-board-height, 500px); border-radius: 15px; background: #211a34; overflow: hidden; touch-action: none; }
+#gridder-board canvas { display: block; width: 100%; height: 100%; }
+#gridder-feedback { min-height: 20px; margin: 11px 6px 0; color: var(--violet); font-size: .78rem; font-weight: 550; }
+.play-dock { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 8px 6px 10px; }
+.game-buttons { display: flex; flex-wrap: wrap; gap: 9px; }
+.game-buttons button { font-size: .8rem; }
+#math-explainer { display: none; }
+.board-card.is-fullscreen #math-explainer { display: inline-block; }
+.audio-console { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; margin: 0 6px 12px; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.audio-console .control-group { flex: 1 1 180px; min-width: 140px; max-width: 320px; }
+.audio-console .control-group label { margin-top: 0; }
+.audio-console .music-label { display: flex; flex-direction: column; gap: 2px; }
+.audio-console .music-label small { color: var(--muted); font-size: .66rem; font-weight: 400; }
+#gridder-lives { margin: 0; color: #ffc3e3; background: #4c2946; padding: 7px 10px; border-radius: 10px; white-space: nowrap; font-size: .8rem; font-weight: 650; }
+.gridder-pad { display: grid; grid-template-columns: repeat(3, 40px); grid-template-rows: repeat(2, 32px); gap: 4px; margin-left: auto; padding: 5px; border-radius: 13px; background: #3c2854; }
+.gridder-pad button { padding: 2px; min-height: 32px; border-color: transparent; color: var(--violet); border-radius: 7px; font-size: 1.1rem; touch-action: none; user-select: none; transition: none; }
+.touch-controls { display: contents; }
+.gridder-pad button.is-pressed, .gridder-pad button:active { background: #e1c8ff; color: #241237; border-color: white; box-shadow: inset 0 0 0 2px #7544bd; transform: none; }
+#gridder-up { grid-column: 2; }
+#gridder-left { grid-column: 1; grid-row: 2; }
+#gridder-down { grid-column: 2; grid-row: 2; }
+#gridder-right { grid-column: 3; grid-row: 2; }
+.gridder-readouts { display: flex; flex-wrap: wrap; gap: 3px 12px; padding: 10px 6px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .69rem; }
+.gridder-readouts p { margin: 0; }
+.gridder-legend { display: flex; flex-wrap: wrap; gap: 5px 12px; margin: 9px 6px 0; color: var(--muted); font-size: .65rem; }
+.gridder-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.gridder-legend i { display: inline-block; width: 14px; height: 3px; background: #73b8b5; }
+.gridder-legend .legend-path { background: #d790ee; }
+.gridder-legend .legend-fill { height: 9px; border-radius: 2px; background: #b75b91; }
+/* The field keeps its natural proportions. The console scrolls independently. */
+.mission-column { position: sticky; top: 16px; max-height: var(--gridder-panel-height, calc(100dvh - 160px)); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-gutter: stable; display: flex; flex-direction: column; gap: 12px; padding-right: 3px; padding-bottom: 3px; }
+.mission-column > * { flex: none; min-width: 0; }
+.gridder-mathematics { padding: 18px; font-size: .9rem; line-height: 1.55; container-type: inline-size; container-name: maths; }
+.math-titlebar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.math-titlebar h2, .math-titlebar h3 { margin: 0; font-size: 1.25rem; line-height: 1.3; letter-spacing: -.02em; }
+.window-actions { display: flex; gap: 4px; }
+.window-actions button { font-size: .7rem; min-height: 32px; padding: 5px 8px; }
+.gridder-mathematics p { font-size: .9rem; line-height: 1.55; margin-bottom: 12px; overflow-wrap: anywhere; }
+#gridder-rule { color: var(--teal); }
+#gridder-task { color: var(--violet); font-weight: 550; }
+.surface-caption { font-size: .72rem; color: var(--muted); }
+.gridder-solution { border-top: 1px solid var(--line); margin-top: 12px; padding-top: 12px; font-size: .9rem; overflow-x: auto; }
+.gridder-mathematics mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+.challenge-picker { padding: 13px 18px; }
+.challenge-picker > summary { font-size: .84rem; font-weight: 650; color: var(--violet); cursor: pointer; }
+.challenge-fields { padding-bottom: 4px; }
+.settings-card { padding: 18px; }
+.settings-card h2 { font-size: 1.1rem; letter-spacing: -.02em; margin: 5px 0 12px; }
+.tuning > .control-group:first-child label { margin-top: 0; }
+.control-group label { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+.range-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: .63rem; }
+.half-controls { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; margin: 15px 0 11px; padding: 13px 0; border-block: 1px solid var(--line); }
+.half-controls h3 { font-size: .84rem; color: var(--violet); margin: 0 0 3px; }
+.half-direction { font-size: .65rem; color: var(--muted); margin: 0 0 11px; }
+.half-controls label { font-size: .7rem; }
+.half-controls input[type=range] { margin-top: 6px; }
+.tuning > .surface-caption { margin: 0 0 12px; }
+#gridder-normal-control { border-top: 1px solid var(--line); margin-top: 15px; padding-top: 2px; }
+.game-options { display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 13px; margin-top: 15px; }
+.point-toggle { display: flex; align-items: center; gap: 8px; font-weight: 450; line-height: 1.4; font-size: .76rem; margin: 0; }
+#gridder-restart { margin-top: 15px; width: 100%; font-size: .76rem; }
+#gridder-board-note { margin: 12px 0 0; }
+.how-to { margin-top: 12px; padding: 12px 18px; }
+.how-to summary { cursor: pointer; color: var(--violet); font-weight: 600; font-size: .75rem; }
+.how-to p { color: var(--muted); font-size: .82rem; margin: 14px 0 0; }
+.math-floating { position: absolute; z-index: 30; width: min(540px, calc(100vw - 24px)); height: 430px; min-width: 280px; min-height: 210px; max-width: calc(100vw - 16px); resize: both; overflow: auto; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 18px 70px #08040fa8; }
+.math-floating .math-titlebar { position: sticky; top: -18px; background: var(--paper); padding: 10px 0; z-index: 2; cursor: move; touch-action: none; }
+.math-pinned { position: fixed; }
+.math-expanded { position: fixed !important; inset: 20px !important; width: calc(100vw - 40px) !important; height: calc(100dvh - 40px) !important; resize: none; }
+.math-placeholder { border: 1px dashed #88739e; border-radius: 16px; padding: 18px; color: var(--muted); background: var(--paper); font-size: .78rem; }
+.math-placeholder button { margin-top: 10px; }
+footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 16px 4px 0; color: var(--muted); font-size: .67rem; }
+footer a { text-decoration: none; }
+.skip-link { position: fixed; left: 12px; top: -100px; z-index: 100; background: var(--paper); padding: 12px; }
+.skip-link:focus { top: 12px; }
+@media(min-width: 1550px) { main { margin-block: 26px; } }
+@media(max-width: 1512px) { main { width: auto; margin: 16px; } }
+@media(max-width: 1100px) { main { padding: 18px; margin: 12px; } .game-layout { grid-template-columns: minmax(0, 1fr); gap: 14px; } .mission-column { position: static; max-height: none; overflow: visible; padding: 0; } .board-card { padding: 16px 12px 12px; } #gridder-lives { margin-left: auto; } .gridder-pad { margin-left: 0; } }
+@media(max-width: 780px) {
+  main { margin: 10px; padding: 15px 12px; border-radius: 20px; }
+  .masthead { margin-bottom: 15px; gap: 8px; }
+  h1 { font-size: 1.9rem; }
+  .mascot { width: 120px; height: 90px; }
+  .brand-caption { display: none; }
+  .back-link { font-size: .67rem; }
+  .level-journey { margin-bottom: 13px; gap: 5px; }
+  .level-journey li { font-size: .65rem; padding: 5px 8px; }
+  .game-layout { grid-template-columns: 1fr; }
+  .board-heading { flex-wrap: wrap; gap: 3px; }
+  #gridder-formula { margin-top: 0; font-size: 1.1rem; }
+  #gridder-level { font-size: 1.05rem; }
+  .board-mission { font-size: .76rem; }
+  .board-card { padding: 15px 8px 12px; border-radius: 18px; }
+  .play-dock { gap: 9px; }
+  .game-buttons { gap: 7px; }
+  .game-buttons button { font-size: .75rem; padding: 9px 11px; }
+  #gridder-lives { font-size: .72rem; padding: 7px 8px; }
+  .gridder-pad { margin-left: auto; }
+  .mission-column { position: static; max-height: none; overflow: visible; padding: 0; }
+  .math-expanded { inset: 8px !important; width: calc(100vw - 16px) !important; height: calc(100dvh - 16px) !important; }
+}
+@media(max-width: 360px) { main { margin: 6px; padding: 12px 8px; } .arcade-brand { gap: 8px; } .gridder-pad { grid-template-columns: repeat(3, 36px); } }
+@media(max-width: 600px) {
+  .mascot { width: 76px; height: 57px; }
+  h1 { font-size: 1.65rem; }
+  .masthead { margin-bottom: 10px; }
+  .level-journey { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 3px; }
+  .level-journey li { flex: none; white-space: nowrap; }
+  .mission-clue-details > summary { display: list-item; margin-top: 7px; }
+  .play-dock { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+  .game-buttons { grid-column: 1; grid-row: 1; }
+  #gridder-lives { grid-column: 1; grid-row: 2; justify-self: start; margin: 0; }
+  .gridder-pad { grid-column: 2; grid-row: 1 / span 2; margin: 0; }
+}
+/* On short screens, keep the board and controls viewable together after
+   scrolling to the game. Width is limited, rather than distorting the grid. */
+@media(min-width: 601px) and (max-height: 850px) {
+  #gridder-board { width: min(100%, max(220px, calc((100dvh - 296px) * 1.3333 + 68px))); margin-inline: auto; }
+}
+@media(pointer: coarse) { input[type=range] { min-height: 36px; } .gridder-pad { grid-template-columns: repeat(3, 44px); grid-template-rows: repeat(2, 44px); } .gridder-pad button, .window-actions button { min-height: 44px; } }
+@media(prefers-reduced-motion: reduce) { button { transition: none; } }
+
+/* Full screen keeps the board and movement controls together. The complete
+   maths, audio settings and other page content return in normal mode. */
+html.gridder-fullscreen-open { overflow: hidden; }
+.board-card.is-fullscreen {
+  position: fixed; inset: 0; z-index: 10000; width: 100%; height: 100dvh;
+  max-width: none; max-height: none; overflow: auto; border-radius: 0;
+  padding: 12px; display: flex; flex-direction: column; justify-content: center;
+  background: var(--paper);
+}
+.board-card.is-fullscreen .board-heading, .board-card.is-fullscreen .play-dock { width: 100%; flex: none; }
+.board-card.is-fullscreen #gridder-board { width: 100%; flex: none; margin-inline: auto; }
+.board-card.is-fullscreen .board-mission,
+.board-card.is-fullscreen .audio-console,
+.board-card.is-fullscreen .gridder-readouts,
+.board-card.is-fullscreen .gridder-legend { display: none; }
+.board-card.is-fullscreen #gridder-feedback { flex: none; }
+.board-card.is-fullscreen .math-fullscreen-window { position: fixed; z-index: 10001; max-height: calc(100dvh - 16px); }
+.math-fullscreen-window .window-actions { flex-wrap: wrap; }
+.math-fullscreen-window .window-actions button { min-width: 44px; min-height: 44px; }
+.math-fullscreen-window .math-move { width: 44px; min-height: 44px; padding: 4px; font-size: 1rem; }
+
+/* Dark native controls retain their existing geometry and keyboard behavior. */
+select, select option { color-scheme: dark; background-color: var(--paper); color: var(--ink); }
+input[type=range] { color-scheme: dark; accent-color: var(--violet); }
+input[type=range] { appearance: none; -webkit-appearance: none; background: transparent; }
+input[type=range]::-webkit-slider-runnable-track { height: 6px; background-color: #88739e; border-radius: 12px; }
+input[type=range]::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 14px; height: 14px; margin-top: -4px; border: 0; border-radius: 50%; background: var(--violet); }
+input[type=range]::-moz-range-track { height: 6px; background-color: #88739e; border-radius: 12px; }
+input[type=range]::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 50%; background: var(--violet); }
+input[type=range]::-moz-range-progress { background-color: var(--violet); }
+.mission-column, .math-floating, .gridder-solution { scrollbar-color: #88739e var(--paper); }
+::selection { background: #7544bd; color: #ffffff; }
+
+/* Full case mathematics remains visible in the responsive right-hand console. */
+#math-home { min-width: 0; margin-top: 0; scroll-margin-top: 16px; }
+.maths-jump { display: inline-block; margin-top: 9px; padding-block: 3px; font-size: .875rem; font-weight: 650; text-decoration: underline; text-underline-offset: 3px; }
+.math-overview { padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.math-overview #gridder-context { color: var(--ink); }
+.gridder-mathematics .surface-caption { font-size: .875rem; line-height: 1.55; }
+.case-study { padding-top: 18px; }
+#gridder-case-title { margin: 0 0 17px; color: var(--violet); font-size: 1.12rem; line-height: 1.4; }
+.case-columns { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.case-columns > section { min-width: 0; }
+.case-columns h4 { margin: 0 0 9px; color: var(--teal); font-size: .9rem; line-height: 1.4; font-weight: 700; }
+.case-columns p + h4 { margin-top: 20px; }
+#gridder-case-formulas { min-width: 0; margin: 0 0 20px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--wash); line-height: 1.65; overflow-wrap: anywhere; }
+#gridder-case-formulas > :last-child { margin-bottom: 0; }
+#gridder-case-formulas p { margin: 0 0 12px; }
+#gridder-case-method { margin: 0; padding-left: 1.5em; }
+#gridder-case-method li { padding-left: .25em; margin-bottom: 12px; font-size: .9rem; line-height: 1.55; overflow-wrap: anywhere; }
+#gridder-case-method li::marker { color: var(--violet); font-weight: 700; }
+#gridder-case-meaning, #gridder-case-domain { color: var(--ink); }
+.gridder-mathematics #gridder-task { padding: 12px 14px; border-radius: 12px; background: #39264b; line-height: 1.55; }
+.gridder-mathematics #gridder-rule { margin: 20px 0 0; padding: 14px 0 0; border-top: 1px solid var(--line); }
+.gridder-mathematics .gridder-solution { margin-top: 20px; padding-top: 18px; }
+.gridder-solution h3 { font-size: 1.08rem; line-height: 1.4; color: var(--violet); }
+.gridder-solution li { line-height: 1.55; margin-bottom: 9px; }
+/* Keep each mathematical expression intact; long expressions scroll locally. */
+.gridder-mathematics mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding-block: .15em; }
+.gridder-mathematics mjx-container:not([display="true"]) { display: inline-block; vertical-align: middle; }
+.gridder-mathematics mjx-container[display="true"] { display: block; margin: .75em 0; text-align: left; }
+.gridder-mathematics mjx-container svg { max-width: none; }
+.math-floating .case-columns { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.math-floating .math-titlebar { border-bottom: 1px solid var(--line); }
+@container maths (max-width: 620px) {
+  .case-columns { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+}
+@media(max-width: 780px) {
+  .case-columns { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .gridder-mathematics { padding: 18px 14px; }
+  .math-floating .math-titlebar { top: -18px; }
+  #gridder-case-formulas { padding: 11px; }
+}
+
+/* The console follows the window; its maths fits the panel, not the whole page. */
+.mission-column #math-home { width: 100%; }
+.mission-column .gridder-mathematics:not(.math-floating) .case-columns { grid-template-columns: minmax(0, 1fr); }
+.mission-column .math-titlebar { align-items: flex-start; }
+.mission-column .math-titlebar h2 { flex: 1 1 180px; }
+
+
+/* Readable teaching and preset controls in both plain and neon modes. */
+.masthead { flex-wrap: wrap; }
+.masthead-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px 16px; min-width: 0; }
+.masthead-tools label { margin: 0; font-size: .875rem; color: var(--muted); }
+#gridder-visual-preset { width: auto; max-width: 100%; min-width: 142px; font-size: .9375rem; }
+.gridder-mathematics, .gridder-mathematics p, .gridder-mathematics .surface-caption,
+.gridder-mathematics .gridder-solution, #gridder-case-method li,
+.case-columns h4, .gridder-solution li { font-size: 1.0625rem; line-height: 1.55; }
+#gridder-case-formulas { font-size: 1.125rem; }
+#gridder-case-formulas p { font-size: inherit; }
+.gridder-mathematics mjx-container[display="true"] { font-size: 1.15em; }
+.gridder-mathematics .window-actions button { font-size: .875rem; }
+.math-titlebar { gap: 12px; }
+
+/* Neon atmosphere is confined to the surrounding surfaces, never a canvas filter. */
+:root[data-visual-preset=neon] {
+  --ink: var(--neon-ink, #faf6ff);
+  --muted: var(--neon-muted, #d1c5e7);
+  --violet: var(--neon-highlight, #dbbcff);
+  --pink: var(--neon-secondary, #ff9de3);
+  --teal: var(--neon-highlight, #6cfff0);
+  --line: rgba(var(--neon-primary-rgb, 169, 104, 255), .6);
+  --paper: var(--neon-panel, #261a45);
+  --wash: var(--neon-surface, #21113e);
+  background: var(--neon-deep, #100a26);
+}
+[data-visual-preset=neon] body {
+  background: radial-gradient(ellipse at 5% 12%, rgba(var(--neon-primary-rgb, 169, 104, 255), .38), transparent 55%), radial-gradient(ellipse at 95% 40%, rgba(var(--neon-secondary-rgb, 255, 80, 214), .28), transparent 58%);
+}
+[data-visual-preset=neon] main {
+  background: linear-gradient(145deg, rgba(var(--neon-primary-rgb, 169, 104, 255), .2), transparent 48%, rgba(var(--neon-highlight-rgb, 108, 255, 240), .09)), var(--neon-surface, #21113e);
+  box-shadow: 0 0 0 1px rgba(var(--neon-primary-rgb, 169, 104, 255), .8), 0 0 30px rgba(var(--neon-secondary-rgb, 255, 80, 214), .3), 0 0 75px rgba(var(--neon-primary-rgb, 169, 104, 255), .2), 0 16px 65px #08030f90;
+}
+[data-visual-preset=neon] .board-card {
+  background: linear-gradient(155deg, rgba(var(--neon-secondary-rgb, 255, 80, 214), .13), transparent 46%, rgba(var(--neon-primary-rgb, 169, 104, 255), .1)), var(--neon-panel, #261a45);
+  box-shadow: inset 0 0 0 1px rgba(var(--neon-secondary-rgb, 255, 80, 214), .65);
+}
+/* Keep the game border unlit; curves and internal grid retain their glow. */
+[data-visual-preset=neon] #gridder-board {
+  background: var(--neon-deep, #100a26);
+  box-shadow: none;
+}
+[data-visual-preset=neon] .gridder-mathematics,
+[data-visual-preset=neon] .settings-card,
+[data-visual-preset=neon] .challenge-picker {
+  box-shadow: inset 0 0 0 1px rgba(var(--neon-primary-rgb, 169, 104, 255), .72), inset 0 2px 0 rgba(var(--neon-highlight-rgb, 108, 255, 240), .9), 0 0 12px rgba(var(--neon-highlight-rgb, 108, 255, 240), .19), 0 0 26px rgba(var(--neon-primary-rgb, 169, 104, 255), .2);
+}
+[data-visual-preset=neon] .math-floating { box-shadow: 0 0 0 1px var(--neon-highlight, #6cfff0), 0 0 20px rgba(var(--neon-primary-rgb, 169, 104, 255), .5), 0 0 45px rgba(var(--neon-secondary-rgb, 255, 80, 214), .3), 0 22px 70px #08040fc9; }
+[data-visual-preset=neon] #gridder-case-formulas { background: var(--neon-deep, #100a26); border-color: rgba(var(--neon-primary-rgb, 169, 104, 255), .7); color: var(--ink); }
+[data-visual-preset=neon] .gridder-mathematics #gridder-task { background: linear-gradient(rgba(var(--neon-secondary-rgb, 255, 80, 214), .12), rgba(var(--neon-secondary-rgb, 255, 80, 214), .12)), var(--neon-panel, #261a45); color: var(--ink); }
+[data-visual-preset=neon] .gridder-pad { background: var(--neon-surface, #21113e); box-shadow: inset 0 0 0 1px var(--neon-primary, #a968ff), 0 0 12px rgba(var(--neon-primary-rgb, 169, 104, 255), .45), 0 0 25px rgba(var(--neon-secondary-rgb, 255, 80, 214), .25); }
+[data-visual-preset=neon] button.primary { background: linear-gradient(135deg, rgba(var(--neon-secondary-rgb, 255, 80, 214), .32), rgba(var(--neon-primary-rgb, 169, 104, 255), .3)), var(--neon-deep, #100a26); color: var(--ink); border-color: var(--neon-highlight, #6cfff0); box-shadow: 0 3px 0 var(--neon-deep, #100a26), 0 0 9px rgba(var(--neon-highlight-rgb, 108, 255, 240), .55), 0 0 22px rgba(var(--neon-secondary-rgb, 255, 80, 214), .5); }
+[data-visual-preset=neon] button.primary:hover:not(:disabled) { background: linear-gradient(rgba(var(--neon-primary-rgb, 169, 104, 255), .4), rgba(var(--neon-primary-rgb, 169, 104, 255), .4)), var(--neon-deep, #100a26); }
+[data-visual-preset=neon] #gridder-lives { background: linear-gradient(rgba(var(--neon-secondary-rgb, 255, 80, 214), .22), rgba(var(--neon-secondary-rgb, 255, 80, 214), .22)), var(--neon-deep, #100a26); color: var(--ink); }
+[data-visual-preset=neon] .level-journey [aria-current=step] { background: linear-gradient(rgba(var(--neon-primary-rgb, 169, 104, 255), .3), rgba(var(--neon-primary-rgb, 169, 104, 255), .3)), var(--neon-deep, #100a26); color: var(--ink); box-shadow: inset 0 -2px var(--neon-secondary, #ff9de3), 0 0 13px rgba(var(--neon-secondary-rgb, 255, 80, 214), .38); }
+[data-visual-preset=neon] .level-journey .level-done { color: var(--neon-highlight, #6cfff0); }
+[data-visual-preset=neon] input[type=range]::-webkit-slider-thumb { background: var(--neon-highlight, #6cfff0); box-shadow: 0 0 0 2px var(--neon-deep, #100a26), 0 0 8px rgba(var(--neon-highlight-rgb, 108, 255, 240), .85), 0 0 17px rgba(var(--neon-primary-rgb, 169, 104, 255), .55); }
+[data-visual-preset=neon] input[type=range]::-moz-range-thumb { background: var(--neon-highlight, #6cfff0); box-shadow: 0 0 0 2px var(--neon-deep, #100a26), 0 0 8px rgba(var(--neon-highlight-rgb, 108, 255, 240), .85), 0 0 17px rgba(var(--neon-primary-rgb, 169, 104, 255), .55); }
+[data-visual-preset=neon] h1 { color: var(--ink); }
+[data-visual-preset=neon] h1 span { color: var(--neon-secondary, #ff9de3); }
+[data-visual-preset=neon] .brand-caption { color: var(--muted); }
+[data-visual-preset=neon] .gridder-mathematics { background: var(--neon-panel, #261a45); }
+[data-visual-preset=neon] .settings-card { background: linear-gradient(155deg, rgba(var(--neon-primary-rgb, 169, 104, 255), .08), transparent 62%), var(--neon-panel, #261a45); }
+[data-visual-preset=neon] .challenge-picker { background: var(--neon-panel, #261a45); }
+[data-visual-preset=neon] select { background-color: var(--neon-deep, #100a26); border-color: rgba(var(--neon-highlight-rgb, 108, 255, 240), .7); }
+[data-visual-preset=neon] button:not(.primary):hover:not(:disabled) { background: linear-gradient(rgba(var(--neon-primary-rgb, 169, 104, 255), .18), rgba(var(--neon-primary-rgb, 169, 104, 255), .18)), var(--neon-panel, #261a45); border-color: var(--neon-highlight, #6cfff0); }
+[data-visual-preset=neon] input[type=range]::-webkit-slider-runnable-track { background-color: var(--neon-primary, #a968ff); }
+[data-visual-preset=neon] input[type=range]::-moz-range-track { background-color: var(--neon-primary, #a968ff); }
+[data-visual-preset=neon] input[type=range]::-moz-range-progress { background-color: var(--neon-highlight, #6cfff0); }
+[data-visual-preset=neon] .mission-column, [data-visual-preset=neon] .math-floating { scrollbar-color: var(--neon-primary, #a968ff) var(--neon-deep, #100a26); }
+@media(max-width: 780px) {
+  .masthead-tools { justify-content: flex-start; gap: 8px 12px; width: 100%; }
+  .masthead-tools .back-link { margin-left: auto; }
+  #gridder-visual-preset { min-width: 132px; }
+}
+
+/* Touch controls stay centred beneath the playing field. */
+@media (pointer: coarse) {
+  /* The arrows control movement; a swipe over the field can scroll the page. */
+  #gridder-board, #gridder-board canvas { touch-action: pan-y; touch-action: pan-y pinch-zoom; }
+  .play-dock { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 9px; }
+  .play-dock .game-buttons { grid-column: 1; grid-row: 1; }
+  .play-dock #gridder-lives { grid-column: 2; grid-row: 1; justify-self: end; margin: 0; }
+  .gridder-pad { grid-column: 1 / -1; grid-row: 2; justify-self: center; box-sizing: border-box; width: min(100%, 206px, calc(100dvh - 36px)); aspect-ratio: 1; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 6px; margin: 0; padding: 7px; touch-action: none; user-select: none; }
+  .gridder-pad #gridder-up { grid-column: 2; grid-row: 1; }
+  .gridder-pad #gridder-left { grid-column: 1; grid-row: 2; }
+  .gridder-pad #gridder-right { grid-column: 3; grid-row: 2; }
+  .gridder-pad #gridder-down { grid-column: 2; grid-row: 3; }
+  .board-card.is-fullscreen { justify-content: flex-start; }
+  .gridder-pad button { min-width: 0; min-height: 0; font-size: 2rem; font-weight: 700; line-height: 1; border: 1px solid #b9a0d2; border-radius: 15px; background: linear-gradient(145deg, #72558c, #48315f); color: #fff; box-shadow: inset 0 1px 0 #ffffff42, 0 3px 0 #1b102a; -webkit-user-select: none; }
+  .gridder-pad button.is-pressed, .gridder-pad button:active { background: #e1c8ff; color: #241237; border-color: white; }
+}
+@media (pointer: coarse) and (orientation: landscape) and (min-height: 501px) and (max-height: 850px) {
+  #gridder-board { width: min(100%, max(220px, calc((100dvh - 380px) * 1.3333 + 68px))); margin-inline: auto; }
+}
+@media (pointer: coarse) and (orientation: landscape) and (max-height: 500px) {
+  #gridder-board { width: min(100%, max(200px, calc((100dvh - 240px) * 1.3333 + 68px))); margin-inline: auto; }
+  #gridder-feedback { min-height: 0; margin: 0 6px; font-size: .65rem; line-height: 1; }
+  .play-dock { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); padding-block: 1px; }
+  .play-dock .game-buttons { grid-column: 1; grid-row: 1; }
+  .play-dock #gridder-lives { grid-column: 3; grid-row: 1; }
+  .play-dock .gridder-pad { grid-column: 2; grid-row: 1; width: 144px; padding: 4px; gap: 2px; }
+  .play-dock .gridder-pad button { font-size: 1.5rem; border-radius: 10px; }
+  .board-card.is-fullscreen { padding: 4px 8px; justify-content: flex-start; }
+  .board-card.is-fullscreen .board-heading { margin-bottom: 2px; }
+  .board-card.is-fullscreen #gridder-feedback { min-height: 0; margin: 0 6px; }
+  .board-card.is-fullscreen .play-dock { padding-block: 1px; }
+}
+/* Touch hover may persist in neon mode, so pressed feedback wins over it. */
+[data-visual-preset=neon] .gridder-pad button.is-pressed:not(:disabled),
+[data-visual-preset=neon] .gridder-pad button:active:not(:disabled) { background: #e1c8ff; color: #241237; border-color: white; transform: none; }
