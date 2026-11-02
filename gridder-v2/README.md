@@ -53,12 +53,15 @@ opens the family, subfamily, function and difficulty pickers. The six movement
 sliders stay exposed, with **Half in / Half out** arranged side by side.
 
 Ordinary page layouts retain 3:2 cell proportions. On touch devices, full-screen
-mode and short landscape windows use a viewport-sized dark arena: the grid fills
-its available width and height independently, while buttons and labels occupy
-reserved outer margins. The direction controls and Start/Next/Lives sit directly
-on that dark margin without a surrounding bar. Mathematical grid coordinates,
-objectives and traversal timing are preserved; bodies stay round instead of
-stretching with the grid. The Maths explainer pauses play and opens over the
+mode and short landscape windows use a viewport-sized dark arena. The grid
+maximizes its fitted area inside safe margins, with cell width/height bounded
+between 0.6 and 2.2 to avoid extreme stretching. The 88 × 44 px arrows have 8 px
+pair gaps: left/right in the left margin and up/down in the right. Start, Next
+and Maths live in a compact Game menu; opening it pauses play. Lives sits in
+the header. Grid coordinates and objectives are preserved; bodies stay round.
+Gridder uses the same screen velocity on both axes, scaled with the board,
+and both incoming node halves default to 2× slowdown (outgoing halves 1×).
+Enemy grid pacing remains unchanged. The Maths explainer pauses play and opens over the
 arena. Desktop controls scroll independently in a sticky console. Its width grows proportionally with the game window;
 `panel-layout.js` fits its height to the actual visible space below the header
 on resize, scrolling and header changes. Narrow layouts stack the expanded

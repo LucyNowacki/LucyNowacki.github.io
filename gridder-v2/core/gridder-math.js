@@ -7,8 +7,17 @@
     const w=Math.max(stretch?1:200,width||800),h=Math.max(stretch?1:120,height||500);
     if(stretch){
       const inset=name=>Math.max(0,Number.isFinite(options.insets?.[name])?options.insets[name]:0);
-      const l=Math.min(w-1,inset('left')),t=Math.min(h-1,inset('top'));
-      const pw=Math.max(1,w-l-inset('right')),ph=Math.max(1,h-t-inset('bottom'));
+      let l=Math.min(w-1,inset('left')),t=Math.min(h-1,inset('top'));
+      const availableWidth=Math.max(1,w-l-inset('right')),availableHeight=Math.max(1,h-t-inset('bottom'));
+      let pw=availableWidth,ph=availableHeight;
+      // Optional cell-shape limits fit the drawn grid inside its reserved
+      // margins without changing mathematical coordinates or grid counts.
+      const minAspect=Number.isFinite(options.minCellAspect)&&options.minCellAspect>0?options.minCellAspect:0;
+      const maxAspect=Number.isFinite(options.maxCellAspect)&&options.maxCellAspect>0?Math.max(minAspect,options.maxCellAspect):Infinity;
+      const aspect=(pw/b.nx)/(ph/b.ny);
+      if(aspect>maxAspect)pw=ph*b.nx/b.ny*maxAspect;
+      else if(aspect<minAspect)ph=pw*b.ny/b.nx/minAspect;
+      l+=(availableWidth-pw)/2;t+=(availableHeight-ph)/2;
       return {w,h,l,t,pw,ph,cellWidth:pw/b.nx,cellHeight:ph/b.ny,stretch:true};
     }
     const availableWidth=w-68,availableHeight=h-66;

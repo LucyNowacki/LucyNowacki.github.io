@@ -56,7 +56,10 @@ function closeFullscreenMath(restoreFocus=true){
   if(previous.inert&&card.classList.contains('is-fullscreen'))panel.setAttribute('inert','');
   pop.hidden=false;pin.hidden=expand.hidden=!floating;smaller.hidden=larger.hidden=close.hidden=remember.hidden=true;moveButtons.forEach(button=>button.hidden=true);
   explainer.setAttribute('aria-expanded','false');
-  if(restoreFocus&&inGameWindow())explainer.focus({preventScroll:true});
+  if(restoreFocus&&inGameWindow()){
+    const returnTarget=explainer.closest('details:not([open])')?card.querySelector('.arena-menu summary'):explainer;
+    returnTarget?.focus({preventScroll:true});
+  }
 }
 explainer?.addEventListener('click',openFullscreenMath);
 close?.addEventListener('click',()=>closeFullscreenMath());

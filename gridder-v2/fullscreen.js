@@ -7,6 +7,23 @@
   let fallback = false, changing = false, inerted = [];
   const coarse = matchMedia('(pointer: coarse)');
   const shortLandscape = matchMedia('(orientation: landscape) and (max-height: 600px)');
+  const heading = card.querySelector('.board-heading');
+  const menu = card.querySelector('.arena-menu');
+  const actions = card.querySelector('.game-buttons');
+  const lives = document.getElementById('gridder-lives');
+  const actionsHome = document.createComment('arena actions home');
+  const livesHome = document.createComment('arena lives home');
+  actions.before(actionsHome);
+  lives.before(livesHome);
+  menu.addEventListener('toggle', () => {
+    if (menu.open && window.gridderController?.snapshot()?.playing) {
+      window.gridderController.pause();
+      document.getElementById('gridder-feedback').textContent = 'Paused. Choose Start game in the Game menu to resume.';
+    }
+  });
+  actions.addEventListener('click', event => {
+    if (event.target.closest('button')) menu.open = false;
+  });
   // Measuring env() on a real element resolves safe-area insets to CSS pixels.
   const safeProbe = document.createElement('div');
   safeProbe.style.cssText = 'position:fixed;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';
@@ -24,7 +41,7 @@
         bottom: parseFloat(safe.paddingBottom) || 0, left: parseFloat(safe.paddingLeft) || 0
       };
       const landscapeControls = matchMedia('(orientation: landscape) and (min-width: 480px)').matches;
-      for (const [side, base] of Object.entries({left: 48, right: landscapeControls ? 68 : 24, top: 70, bottom: landscapeControls ? 100 : 146})) {
+      for (const [side, base] of Object.entries({left: landscapeControls ? 240 : 48, right: landscapeControls ? 104 : 24, top: landscapeControls ? 48 : 70, bottom: landscapeControls ? 52 : 146})) {
         for (const [name, value] of [[`--gridder-safe-${side}`, insets[side]], [`--gridder-arena-${side}`, base + insets[side]]]) {
           const px = `${value}px`;
           if (card.style.getPropertyValue(name) !== px) {
@@ -40,6 +57,14 @@
       }
     }
     if (active !== wasActive) {
+      if (active) {
+        menu.append(actions);
+        heading.insertBefore(lives, menu);
+      } else {
+        menu.open = false;
+        actionsHome.after(actions);
+        livesHome.after(lives);
+      }
       window.dispatchEvent(new CustomEvent('gridder-arena-change', {detail:{active}}));
       if (active && !expanded) requestAnimationFrame(() => {
         if (card.classList.contains('is-touch-arena') && !card.classList.contains('is-fullscreen')) {

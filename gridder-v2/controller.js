@@ -5,8 +5,8 @@
   const $=id=>document.getElementById(id),catalogue=window.derivativeGridderCatalogue,M=catalogue?.maths||window.derivativeMath,G=window.derivativeGridderMath,P=window.derivativePalette,C=window.derivativeGridderChase,D=window.derivativeGridderCapture,R=window.derivativeGridderRemains;
   const labels={min:'minimum',max:'maximum',inflection:'inflection point',derivative:'first derivative',second:'second derivative',inverse:'inverse function',normal:'perpendicular normal line'};
   const startingLives=7;
-  // The 280 px/s setting was tuned on a 1030px-wide plotted grid. Scale
-  // physical pixels with the plot so the same grid journey takes equal time.
+  // The 280 px/s setting was tuned on a 1030px-wide plotted grid. Player
+  // screen speed scales uniformly with the visual size on both axes.
   const referenceMovementPlotWidth=1030;
   const snagDuration=40,snagSpeed=.3;
   // Start a loaded page from its declared defaults, including restored form controls.
@@ -35,7 +35,7 @@
     if(card?.classList?.contains('is-touch-arena')){
       const style=getComputedStyle(card),insets={};
       for(const side of ['left','right','top','bottom'])insets[side]=parseFloat(style.getPropertyValue('--gridder-arena-'+side))||0;
-      options={stretch:true,insets};
+      options={stretch:true,insets,minCellAspect:.6,maxCellAspect:2.2};
     }
     const layout=G.layout(game.board,box.width,box.height,options);
     if(geometryFrame)frameGeometry={board:game.board,layout};
@@ -263,7 +263,7 @@
       // Split a frame at box boundaries so outside travel keeps the slider speed.
       const inBox=route.remaining>7/8+1e-9||route.remaining<=1/8+1e-9;
       const half=route.remaining>7/8+1e-9?'out':'in';
-      const divisor=inBox?boxResolution(route.axis,half):1,velocity=speed(route.axis)/divisor*(snagRemaining>0||playerPushes.length?snagSpeed:1);
+      const divisor=inBox?boxResolution(route.axis,half):1,velocity=playerSpeed()/divisor*(snagRemaining>0||playerPushes.length?snagSpeed:1);
       const boundary=route.remaining>7/8+1e-9?route.remaining-7/8:route.remaining>1/8+1e-9?route.remaining-1/8:route.remaining;
       const fraction=Math.min(capture?route.remaining:command.remaining,route.remaining,boundary);
       // End the movement slice at slowdown expiry as well as grid boundaries.
@@ -328,7 +328,7 @@
     const priorChaseTime=chaseTime;chaseTime+=elapsed;
     if(elapsed>0&&priorChaseTime<resurrectionUntil)changed=true;
     if(spidersEnabled()&&!game.complete()){
-      const paths=chase.advance(after,speed,elapsed,cellPixels,remains);changed=changed||elapsed>0;
+      const paths=chase.advance(after,enemySpeed,elapsed,cellPixels,remains);changed=changed||elapsed>0;
       if(elapsed>0&&chaseTime>=safeUntil){
         const layout=boardLayout();
         const attacker=paths.findIndex((path,index)=>C.collides(playerPath,path,cellPixels,window.GridderSpriteMetrics?.collisionRadius(layout,chase.spiders[index].sizeScale||1)??(11+7*(chase.spiders[index].sizeScale||1)),Math.max(0,(safeUntil-priorChaseTime)/elapsed)));
@@ -432,9 +432,18 @@
   function updateCentrePause(){const value=centrePause();$('gridder-centre-pause-value').textContent=`${value} ms`;$('gridder-centre-pause').setAttribute('aria-valuetext',`${value} milliseconds at the centre`);}
   $('gridder-centre-pause').addEventListener('input',updateCentrePause);updateCentrePause();
   function selectedSpeed(){return Math.max(40,Math.min(400,Number($('gridder-speed').value)||280));}
-  function speed(axis='x'){
+  function playerSpeed(){
+    const layout=boardLayout(),metrics=window.GridderSpriteMetrics;
+    // Use the same min-axis equivalent as round bodies/contact sizes in an
+    // arena. Both directions receive this one CSS-pixel velocity; the axis
+    // sliders still explicitly control entry/departure slowdown.
+    const equivalentWidth=metrics?metrics.scale(layout)*metrics.referencePlotWidth
+      :Math.min(layout.pw,layout.stretch?layout.cellHeight*1.5*game.board.nx:layout.pw);
+    return selectedSpeed()*equivalentWidth/referenceMovementPlotWidth;
+  }
+  function enemySpeed(axis='x'){
     const layout=boardLayout();
-    // Preserve each axis's grid traversal time from the normal 3:2 view.
+    // Retain existing enemy pacing independently of the player's screen speed.
     const factor=layout.stretch&&axis==='y'
       ?layout.ph/(referenceMovementPlotWidth*game.board.ny/game.board.nx*2/3)
       :layout.pw/referenceMovementPlotWidth;
