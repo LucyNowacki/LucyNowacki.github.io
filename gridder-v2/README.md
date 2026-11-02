@@ -58,7 +58,10 @@ maximizes its fitted area inside safe margins, with cell width/height bounded
 between 0.6 and 2.2 to avoid extreme stretching. The 88 × 44 px arrows have 8 px
 pair gaps: left/right in the left margin and up/down in the right. Start, Next
 and Maths live in a compact Game menu; opening it pauses play. Lives sits in
-the header. Grid coordinates and objectives are preserved; bodies stay round.
+the header. After a final defeat or completing every level, the main button
+becomes **Play again**. It starts the same function and difficulty from level1
+with seven lives and cleared discoveries, captures and creature timers, retaining
+fullscreen. Intermediate levels continue through **Next level** as before. Grid coordinates and objectives are preserved; bodies stay round.
 Gridder uses the same screen velocity on both axes, scaled with the board,
 and both incoming node halves default to 2× slowdown (outgoing halves 1×).
 Enemy grid pacing remains unchanged. On phone-sized touch screens (short viewport

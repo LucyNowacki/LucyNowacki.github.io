@@ -71,7 +71,7 @@
   else $('gridder-function').innerHTML=$('function-select').innerHTML;
   function stopHold(){clearHeldInputs();frame=null;held=null;lastTime=null;command=null;capture=null;pending=[];turn=null;centreUntil=0;}
   function release(){held=null;}
-  function pause(){playing=false;pushAudible=false;walkAudible=false;stopHold();sound?.stop();music?.pause();captureSoundPhase=null;$('gridder-normal-point').disabled=Boolean(deathScene||gameOver);$('gridder-start').textContent='Start game';$('gridder-start').setAttribute('aria-pressed','false');}
+  function pause(){playing=false;pushAudible=false;walkAudible=false;stopHold();sound?.stop();music?.pause();captureSoundPhase=null;$('gridder-normal-point').disabled=Boolean(deathScene||gameOver);$('gridder-start').textContent=canReplay()?'Play again':'Start game';$('gridder-start').setAttribute('aria-pressed','false');}
   function releasePlayerPushes(){for(const push of playerPushes)remains?.releasePlayerPush(push);playerPushes=[];pushAudible=false;}
   function beginPush(piece,from,to){
     const push=remains?.beginPlayerPush(piece,from,to,cellPixels);if(!push)return false;
@@ -179,6 +179,7 @@
     render();if(playing&&spidersEnabled())ensureFrame();
   }
   function restart(){pause();key=$('gridder-function').value;difficulty=$('gridder-difficulty').value;quests=G.levels(M,key);level=0;revealed=[];lives=startingLives;chase=null;ecology=null;newLevel();}
+  function canReplay(){return gameOver||Boolean(game?.complete()&&level===quests.length-1);}
   function explain(){
     const q=quests[level],node=$('gridder-solution');
     window.MathJax?.typesetClear?.([node]);
@@ -190,7 +191,7 @@
   function announceCompletion(){
     if(game.complete()&&!announced){
       announced=true;stopHold();const q=quests[level];if(q.point)revealed.push(q.point);
-      $('gridder-feedback').textContent=`Level complete! You revealed the ${labels[q.kind]}.${level===quests.length-1?' All levels complete—well done!':' Choose Next level when you are ready.'}`;
+      $('gridder-feedback').textContent=`Level complete! You revealed the ${labels[q.kind]}.${level===quests.length-1?' All levels complete—well done! Choose Play again for a new game.':' Choose Next level when you are ready.'}`;
       $('gridder-next').disabled=level===quests.length-1;explain();
     }
   }
@@ -392,7 +393,7 @@
     sound?.killed(lives>0,{deathCue:false});
     if(lives<=0){
       gameOver=true;playing=false;$('gridder-start').textContent='Start game';$('gridder-start').setAttribute('aria-pressed','false');
-      $('gridder-feedback').textContent="Game Over! Go to the ‘dunce’s stool!’ Choose Restart this function to try again.";
+      $('gridder-feedback').textContent="Game Over! Go to the ‘dunce’s stool!’ Choose Play again to try again.";
     }else{
       chase.respawn(walker.position(),cellPixels,remains);safeUntil=chaseTime+2000;resurrectionUntil=chaseTime+(sound?.resurrectionDuration?.()??3000);
       $('gridder-feedback').textContent=`Resurrection! ${lives} ${lives===1?'life':'lives'} left. Your marked areas are saved. You are safe for two seconds—keep moving.`;
@@ -492,10 +493,15 @@
     const gauge=`Lives: ${lives}`,status=gameOver?'Game over':deathScene?`Captured · ${['leech','shark'].includes(deathAttacker?.kind)?'Underwater · ':''}${deathAttacker?.attackOrgan==='tail'&&deathScene.phase().name==='bite'?'Tail sting':deathLabels[deathScene.phase().name]}`:!spidersEnabled()?'Enemies off · Practice mode':[chaseTime<safeUntil?'Safe briefly':'',leechWarning?'Leech ready to strike!':'',...meals,...growth,ecology?`Next insect: ${Math.max(0,Math.ceil((ecology.snapshot().nextArrivalAt-ecology.snapshot().clock)/1000))} s`:''].filter(Boolean).join(' · ');
     if($('gridder-lives').textContent!==gauge)$('gridder-lives').textContent=gauge;
     if($('gridder-chase-status').textContent!==status)$('gridder-chase-status').textContent=status;
-    $('gridder-start').disabled=gameOver||game.complete();
+    const replay=canReplay();
+    $('gridder-start').disabled=game.complete()&&!replay;
+    const startLabel=replay?'Play again':playing?'Pause game':'Start game';
+    if($('gridder-start').textContent!==startLabel)$('gridder-start').textContent=startLabel;
+    if(replay)$('gridder-start').setAttribute('aria-pressed','false');
     $('gridder-normal-point').disabled=Boolean(playing&&!game.complete()||deathScene||gameOver);
   }
   $('gridder-start').addEventListener('click',()=>{
+    if(canReplay())restart();
     if(playing){pause();$('gridder-feedback').textContent='Paused. Your marked path is saved.';return;}
     if(gameOver||game.complete())return;
     playing=true;$('gridder-normal-point').disabled=true;unlockSound();$('gridder-start').textContent='Pause game';$('gridder-start').setAttribute('aria-pressed','true');$('gridder-feedback').textContent=deathScene?'Capture animation resumed. Escape pauses.':'Use ← ↑ ↓ →. Escape pauses.';$('gridder-board').focus({preventScroll:true});if(deathScene||spidersEnabled()||chaseTime<resurrectionUntil||snagRemaining>0)ensureFrame();
