@@ -30,7 +30,14 @@
   function endFrame(){geometryFrame=false;frameGeometry=null;}
   function boardLayout(){
     if(geometryFrame&&frameGeometry?.board===game.board)return frameGeometry.layout;
-    const box=$('gridder-board').getBoundingClientRect(),layout=G.layout(game.board,box.width,box.height);
+    const box=$('gridder-board').getBoundingClientRect(),card=$('gridder-game-area');
+    let options;
+    if(card?.classList?.contains('is-touch-arena')){
+      const style=getComputedStyle(card),insets={};
+      for(const side of ['left','right','top','bottom'])insets[side]=parseFloat(style.getPropertyValue('--gridder-arena-'+side))||0;
+      options={stretch:true,insets};
+    }
+    const layout=G.layout(game.board,box.width,box.height,options);
     if(geometryFrame)frameGeometry={board:game.board,layout};
     return layout;
   }
@@ -136,7 +143,11 @@
     gaps=window.GridderGaps.plan(M,G,key,b,q,{revealed,difficulty});
     const traversable=window.GridderGapNavigation.create(G,b,targets,gaps);
     game=traversable.game;walker=traversable.walker;navigation=traversable.navigation;
-    const spriteOptions=window.GridderSpriteMetrics||{};
+    const spriteOptions={...window.GridderSpriteMetrics,
+      displayScale:window.GridderSpriteMetrics?()=>window.GridderSpriteMetrics.scale(boardLayout()):undefined,
+      // Route choice uses the original cell proportions, independently of
+      // arena projection. Contact and swept travel still use real pixels.
+      routePixels:axis=>boardLayout().stretch?(axis==='x'?1:2/3):cellPixels(axis)};
     chase=C.create(b,difficulty,{...spriteOptions,familyId:familyId()},navigation);
     poolLeeches=window.GridderPoolLeeches.create(b,gaps.pools,{shark:true});leechWarningId=null;
     ecology=window.GridderCreatureEcology?.create(chase,{familyId:familyId(),elapsedMs:ecologyCarry?.clock||0,arrivalIndex:ecologyCarry?.arrivalIndex||0})||null;
@@ -252,7 +263,7 @@
       // Split a frame at box boundaries so outside travel keeps the slider speed.
       const inBox=route.remaining>7/8+1e-9||route.remaining<=1/8+1e-9;
       const half=route.remaining>7/8+1e-9?'out':'in';
-      const divisor=inBox?boxResolution(route.axis,half):1,velocity=speed()/divisor*(snagRemaining>0||playerPushes.length?snagSpeed:1);
+      const divisor=inBox?boxResolution(route.axis,half):1,velocity=speed(route.axis)/divisor*(snagRemaining>0||playerPushes.length?snagSpeed:1);
       const boundary=route.remaining>7/8+1e-9?route.remaining-7/8:route.remaining>1/8+1e-9?route.remaining-1/8:route.remaining;
       const fraction=Math.min(capture?route.remaining:command.remaining,route.remaining,boundary);
       // End the movement slice at slowdown expiry as well as grid boundaries.
@@ -317,7 +328,7 @@
     const priorChaseTime=chaseTime;chaseTime+=elapsed;
     if(elapsed>0&&priorChaseTime<resurrectionUntil)changed=true;
     if(spidersEnabled()&&!game.complete()){
-      const paths=chase.advance(after,speed(),elapsed,cellPixels,remains);changed=changed||elapsed>0;
+      const paths=chase.advance(after,speed,elapsed,cellPixels,remains);changed=changed||elapsed>0;
       if(elapsed>0&&chaseTime>=safeUntil){
         const layout=boardLayout();
         const attacker=paths.findIndex((path,index)=>C.collides(playerPath,path,cellPixels,window.GridderSpriteMetrics?.collisionRadius(layout,chase.spiders[index].sizeScale||1)??(11+7*(chase.spiders[index].sizeScale||1)),Math.max(0,(safeUntil-priorChaseTime)/elapsed)));
@@ -421,7 +432,14 @@
   function updateCentrePause(){const value=centrePause();$('gridder-centre-pause-value').textContent=`${value} ms`;$('gridder-centre-pause').setAttribute('aria-valuetext',`${value} milliseconds at the centre`);}
   $('gridder-centre-pause').addEventListener('input',updateCentrePause);updateCentrePause();
   function selectedSpeed(){return Math.max(40,Math.min(400,Number($('gridder-speed').value)||280));}
-  function speed(){return selectedSpeed()*boardLayout().pw/referenceMovementPlotWidth;}
+  function speed(axis='x'){
+    const layout=boardLayout();
+    // Preserve each axis's grid traversal time from the normal 3:2 view.
+    const factor=layout.stretch&&axis==='y'
+      ?layout.ph/(referenceMovementPlotWidth*game.board.ny/game.board.nx*2/3)
+      :layout.pw/referenceMovementPlotWidth;
+    return selectedSpeed()*factor;
+  }
   function updateSpeed(){const value=selectedSpeed();$('gridder-speed-value').textContent=`${value} px/s`;$('gridder-speed').setAttribute('aria-valuetext',`${value} reference pixels per second, scaled with the board size`);}
   $('gridder-speed').addEventListener('input',updateSpeed);updateSpeed();
   // The Phaser scene owns the only browser frame loop. The pending flag retains

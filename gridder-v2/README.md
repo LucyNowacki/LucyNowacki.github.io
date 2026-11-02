@@ -52,10 +52,14 @@ Function, level and normal-anchor changes refresh the same live explanation.
 opens the family, subfamily, function and difficulty pickers. The six movement
 sliders stay exposed, with **Half in / Half out** arranged side by side.
 
-The canvas fills its available width at the grid's natural 3:2 cell proportions,
-eliminating blank bands. The page scrolls when needed rather than shrinking the
-playing field to fit the browser height. Desktop controls scroll independently
-in a sticky console. Its width grows proportionally with the game window;
+Ordinary page layouts retain 3:2 cell proportions. On touch devices, full-screen
+mode and short landscape windows use a viewport-sized dark arena: the grid fills
+its available width and height independently, while buttons and labels occupy
+reserved outer margins. The direction controls and Start/Next/Lives sit directly
+on that dark margin without a surrounding bar. Mathematical grid coordinates,
+objectives and traversal timing are preserved; bodies stay round instead of
+stretching with the grid. The Maths explainer pauses play and opens over the
+arena. Desktop controls scroll independently in a sticky console. Its width grows proportionally with the game window;
 `panel-layout.js` fits its height to the actual visible space below the header
 on resize, scrolling and header changes. Narrow layouts stack the expanded
 mathematics before movement settings below the game.
@@ -278,7 +282,7 @@ old app. Preserve unrelated current changes when consulting the saved `conf.py`.
 - Three families, 15 subfamilies, 34 functions and 187 ordered objectives,
   including extrema, inflections, first/second derivatives, restricted inverses
   and normals with the vertical-normal case.
-- Exact closed-cell targets, 3:2 screen cells, continuous movement, 1/16 taps,
+- Exact closed-cell targets, continuous movement, 1/16 taps,
   buffered turns, partial painting and complete enclosed-region fills.
 - Seven lives, three starting pursuers, swept collisions, protection, four capture phases,
   24 persistent pieces, pushing, 40 ms snags, four-second feeding, growth,

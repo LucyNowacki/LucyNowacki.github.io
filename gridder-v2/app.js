@@ -31,6 +31,11 @@
   }
   function compactLayout(snapshot = latest) {
     if (!snapshot?.game) return;
+    if(card.classList.contains('is-touch-arena')){
+      host.style.removeProperty('max-width');
+      host.style.removeProperty('--gridder-board-height');
+      return;
+    }
     const b = snapshot.game.board;
     const ratio = b.ny / b.nx * 2 / 3;
     if (card.classList.contains('is-fullscreen')) {
@@ -84,16 +89,21 @@
       });
       const themeChanged = () => { view.invalidate(); window.gridderView.render(controller.snapshot()); };
       window.addEventListener('gridder-theme-change', themeChanged);
-      const resize = new ResizeObserver(() => {
+      const resizeCanvas = () => {
         compactLayout();
         const box = host.getBoundingClientRect();
-        const width = Math.max(200, Math.round(box.width)), height = Math.max(120, Math.round(box.height));
+        const arena=card.classList.contains('is-touch-arena');
+        const width = Math.max(arena?1:200, Math.round(box.width)), height = Math.max(arena?1:120, Math.round(box.height));
         if (this.scale.width !== width || this.scale.height !== height) this.scale.resize(width, height);
-      });
+        else if(controller.snapshot().game)window.gridderView.render(controller.snapshot());
+      };
+      const resize = new ResizeObserver(resizeCanvas);
+      window.addEventListener('gridder-arena-change',resizeCanvas);
+      window.addEventListener('resize',resizeCanvas);
       resize.observe(host);
       resize.observe(card);
       for (const child of card.children) if (child !== host) resize.observe(child);
-      this.events.once('shutdown', () => { resize.disconnect(); window.removeEventListener('gridder-theme-change', themeChanged); controller.pause(); window.gridderMusic?.destroy(); window.GridderChebbyFace?.destroy(); view.destroy(); });
+      this.events.once('shutdown', () => { resize.disconnect(); window.removeEventListener('gridder-theme-change', themeChanged); window.removeEventListener('gridder-arena-change',resizeCanvas); window.removeEventListener('resize',resizeCanvas); controller.pause(); window.gridderMusic?.destroy(); window.GridderChebbyFace?.destroy(); view.destroy(); });
       this.game.canvas.setAttribute('aria-hidden', 'true');
       controller.setActive(true);
       host.dataset.renderer = this.game.renderer.type === Phaser.WEBGL ? 'WebGL' : 'Canvas';
@@ -132,9 +142,10 @@
     }
   }
   const box = host.getBoundingClientRect();
+  const arena=card.classList.contains('is-touch-arena');
   new Phaser.Game({
     type: Phaser.AUTO, parent: host,
-    width: Math.max(200, Math.round(box.width)), height: Math.max(120, Math.round(box.height)),
+    width: Math.max(arena?1:200, Math.round(box.width)), height: Math.max(arena?1:120, Math.round(box.height)),
     backgroundColor: '#211a34', banner: false,
     render: { antialias: true, roundPixels: false, preserveDrawingBuffer: true },
     input: { keyboard: { capture: [] }, mouse: { preventDefaultWheel: false }, touch: { capture: false } },

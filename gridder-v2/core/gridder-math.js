@@ -2,8 +2,15 @@
 (function(root){
   'use strict';
   const epsilon=1e-10;
-  function layout(b,width,height){
-    const w=Math.max(200,width||800),h=Math.max(120,height||500);
+  function layout(b,width,height,options={}){
+    const stretch=options.stretch===true;
+    const w=Math.max(stretch?1:200,width||800),h=Math.max(stretch?1:120,height||500);
+    if(stretch){
+      const inset=name=>Math.max(0,Number.isFinite(options.insets?.[name])?options.insets[name]:0);
+      const l=Math.min(w-1,inset('left')),t=Math.min(h-1,inset('top'));
+      const pw=Math.max(1,w-l-inset('right')),ph=Math.max(1,h-t-inset('bottom'));
+      return {w,h,l,t,pw,ph,cellWidth:pw/b.nx,cellHeight:ph/b.ny,stretch:true};
+    }
     const availableWidth=w-68,availableHeight=h-66;
     // Displayed cells have width a and height 2a/3. Fit without stretching.
     const cellWidth=Math.min(availableWidth/b.nx,availableHeight/b.ny*1.5),cellHeight=cellWidth*2/3;

@@ -31,7 +31,8 @@
     const position=s=>s.segment?{i:s.i+s.segment.di*s.segment.progress,j:s.j+s.segment.dj*s.segment.progress}:copy(s);
     const histories=new WeakMap();
     const bodyCount=s=>6+2*s.meals;
-    const displayScale=cellPixels=>options.referencePlotWidth>0?board.nx*cellPixels('x')/options.referencePlotWidth:1;
+    const displayScale=cellPixels=>options.displayScale?options.displayScale(cellPixels):options.referencePlotWidth>0?board.nx*cellPixels('x')/options.referencePlotWidth:1;
+    const routePixels=cellPixels=>options.routePixels||cellPixels;
     const spacing=(s,cellPixels)=>12*s.sizeScale*displayScale(cellPixels);
     const distance=(a,b,cellPixels)=>Math.hypot((a.i-b.i)*cellPixels('x'),(a.j-b.j)*cellPixels('y'));
     function resetHistory(s){if(s.kind==='centipede')histories.set(s,[position(s)]);}
@@ -45,7 +46,7 @@
       for(let j=0;j<=board.ny;j++)for(let i=0;i<=board.nx;i++){
         const p={i,j};if(isLegalNode(p)&&(!border||i===0||j===0||i===board.nx||j===board.ny))nodes.push(p);
       }
-      const metric=p=>Math.hypot((p.i-target.i)*cellPixels('x'),(p.j-target.j)*cellPixels('y'));
+      const cell=routePixels(cellPixels),metric=p=>Math.hypot((p.i-target.i)*cell('x'),(p.j-target.j)*cell('y'));
       nodes.sort((a,b)=>(far?metric(b)-metric(a):metric(a)-metric(b))||a.j-b.j||a.i-b.i);
       return nodes.length?copy(nodes[Math.max(0,Math.floor(offset))%nodes.length]):null;
     }
@@ -112,7 +113,8 @@
     }
     function axesFor(s,target,cellPixels){
       if(s.kind!=='centipede')return s.kind==='black'?['i','j']:['j','i'];
-      return Math.abs(target.i-s.i)*cellPixels('x')>=Math.abs(target.j-s.j)*cellPixels('y')?['i','j']:['j','i'];
+      const cell=routePixels(cellPixels);
+      return Math.abs(target.i-s.i)*cell('x')>=Math.abs(target.j-s.j)*cell('y')?['i','j']:['j','i'];
     }
     function heading(s,target){
       const at=position(s),di=target.i-at.i,dj=target.j-at.j;
@@ -132,7 +134,7 @@
     }
     function respawn(target,cellPixels,world=null){
       const corners=[{i:0,j:0},{i:board.nx,j:0},{i:0,j:board.ny},{i:board.nx,j:board.ny}];
-      const distance=p=>Math.abs(p.i-target.i)*cellPixels('x')+Math.abs(p.j-target.j)*cellPixels('y');
+      const cell=routePixels(cellPixels),distance=p=>Math.abs(p.i-target.i)*cell('x')+Math.abs(p.j-target.j)*cell('y');
       corners.sort((a,b)=>distance(b)-distance(a));
       spiders.forEach((s,index)=>{
         releaseMeal(s,world);
@@ -167,7 +169,7 @@
         if(!s.segment){
           const axes=axesFor(s,target,cellPixels);
           if(navigation?.hasGaps){
-            const step=navigation.nextStep(s,target,cellPixels,axes);
+            const step=navigation.nextStep(s,target,routePixels(cellPixels),axes);
             if(step){s.segment={...step,progress:0};s.facing={...step};}
           }else{
           // Reach the nearest target node before traversing its containing edge.
@@ -183,7 +185,10 @@
           }
           }
         }
-        const from=position(s),velocity=speed*s.rate*s.speedScale;
+        // Numeric speed remains supported for existing callers. A projection
+        // can supply per-axis pixels/s without changing logical edge timing.
+        const axis=s.segment?.di?'x':'y';
+        const from=position(s),velocity=(typeof speed==='function'?speed(axis):speed)*s.rate*s.speedScale;
         let next={kind:'idle',from,to:from,time:Infinity,velocity:0};
         if(s.segment&&velocity>0&&Number.isFinite(velocity)){
           const length=cellPixels(s.segment.di?'x':'y');

@@ -3,7 +3,12 @@
  'use strict';
  const referencePlotWidth=732,playerScale=1.25;
  function scale(layout){
-  return Number.isFinite(layout?.pw)&&layout.pw>0?layout.pw/referencePlotWidth:1;
+  if(!Number.isFinite(layout?.pw)||layout.pw<=0)return 1;
+  // Arena cells stretch independently. Keep bodies round and fit their size
+  // to the smaller equivalent of the original 3:2 cell geometry.
+  const ratio=layout.stretch&&layout.cellWidth>0&&layout.cellHeight>0
+   ?Math.min(1,layout.cellHeight*1.5/layout.cellWidth):1;
+  return layout.pw*ratio/referencePlotWidth;
  }
  function collisionRadius(layout,enemyScale=1){
   return scale(layout)*(11*playerScale+7*enemyScale);

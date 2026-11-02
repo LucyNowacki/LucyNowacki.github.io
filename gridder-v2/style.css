@@ -49,6 +49,7 @@ h1 span { color: var(--violet); }
 .board-card, .gridder-mathematics, .settings-card, .challenge-picker, .how-to { background: var(--paper); border-radius: 22px; }
 .board-card { padding: 20px 16px 14px; box-shadow: 0 8px 24px #08040f40, inset 0 0 0 1px #59406c55; }
 .board-heading { display: flex; justify-content: space-between; align-items: start; gap: 14px; margin: 0 6px 9px; }
+.arena-more { display: none; }
 #gridder-fullscreen { flex: none; min-height: 38px; padding: 7px 10px; font-size: .75rem; white-space: nowrap; }
 .eyebrow { font-size: .62rem; letter-spacing: .14em; font-weight: 750; color: var(--teal); }
 #gridder-level { font-size: clamp(1.05rem, 1.65vw, 1.45rem); letter-spacing: -.025em; line-height: 1.25; margin: 6px 0 0; font-weight: 700; }
@@ -384,3 +385,83 @@ input[type=range]::-moz-range-progress { background-color: var(--violet); }
 /* Touch hover may persist in neon mode, so pressed feedback wins over it. */
 [data-visual-preset=neon] .gridder-pad button.is-pressed:not(:disabled),
 [data-visual-preset=neon] .gridder-pad button:active:not(:disabled) { background: #e1c8ff; color: #241237; border-color: white; transform: none; }
+
+/* One canvas-sized stage, with controls in the reserved dark margins. The
+   corresponding inset variables are resolved to pixels by fullscreen.js. */
+.board-card.is-touch-arena {
+  position: relative; width: 100vw; height: 100dvh; max-width: none; max-height: none;
+  margin-left: calc(50% - 50vw);
+  display: block; padding: 0; overflow: hidden; border-radius: 0;
+  background: #100a26; box-shadow: none;
+}
+.board-card.is-touch-arena.is-fullscreen { position: fixed; inset: 0; margin: 0; }
+[data-visual-preset=neon] .board-card.is-touch-arena { background: #100a26; box-shadow: none; }
+.board-card.is-touch-arena #gridder-board {
+  position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0;
+  max-width: none; margin: 0; border-radius: 0; touch-action: none;
+}
+.board-card.is-touch-arena #gridder-board canvas { touch-action: none; }
+.board-card.is-touch-arena .board-mission,
+.board-card.is-touch-arena .audio-console,
+.board-card.is-touch-arena .gridder-readouts,
+.board-card.is-touch-arena .gridder-legend { display: none; }
+.board-card.is-touch-arena .board-heading {
+  position: absolute; z-index: 2; top: var(--gridder-safe-top, 0px);
+  left: calc(var(--gridder-safe-left, 0px) + 6px); right: calc(var(--gridder-safe-right, 0px) + 6px);
+  width: auto; height: 44px; margin: 0; display: flex; flex-wrap: nowrap;
+  align-items: center; gap: 8px; pointer-events: none;
+}
+.board-card.is-touch-arena .board-heading > div { min-width: 0; }
+.board-card.is-touch-arena .eyebrow { display: none; }
+.board-card.is-touch-arena #gridder-level { margin: 0; font-size: .8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.board-card.is-touch-arena #gridder-formula { margin: 0; font-size: .85rem; flex: 1 1 auto; text-align: center; overflow: hidden; }
+.board-card.is-touch-arena #gridder-fullscreen { min-height: 44px; padding: 4px 8px; pointer-events: auto; }
+.board-card.is-touch-arena:not(.is-fullscreen) .arena-more {
+  display: inline-flex; flex: none; align-items: center; justify-content: center;
+  min-width: 44px; min-height: 44px; padding: 4px 6px; border: 1px solid #88739e;
+  border-radius: 10px; background: var(--paper); color: var(--ink);
+  font-size: .7rem; font-weight: 650; text-decoration: none; pointer-events: auto;
+}
+.board-card.is-touch-arena #gridder-feedback {
+  position: absolute; z-index: 2; top: calc(var(--gridder-safe-top, 0px) + 46px);
+  left: calc(var(--gridder-safe-left, 0px) + 8px); right: calc(var(--gridder-safe-right, 0px) + 8px);
+  height: 20px; min-height: 0; margin: 0; overflow: auto; white-space: nowrap;
+  font-size: .7rem; line-height: 20px; pointer-events: auto;
+}
+.board-card.is-touch-arena .play-dock {
+  position: absolute; z-index: 2; left: var(--gridder-safe-left, 0px);
+  right: var(--gridder-safe-right, 0px); bottom: calc(var(--gridder-safe-bottom, 0px) + 4px);
+  width: auto; height: 92px; display: block; padding: 0; pointer-events: none;
+  background: transparent; border: 0; box-shadow: none;
+}
+.board-card.is-touch-arena .gridder-pad {
+  position: absolute; inset: 0; width: 100%; height: 92px; margin: 0; padding: 0;
+  display: grid; grid-template-columns: 44px 44px minmax(0, 1fr) 44px;
+  grid-template-rows: repeat(2, 44px); gap: 4px; background: transparent;
+  border: 0; box-shadow: none; pointer-events: none;
+}
+[data-visual-preset=neon] .board-card.is-touch-arena .gridder-pad { background: transparent; box-shadow: none; }
+.board-card.is-touch-arena .gridder-pad button { width: 44px; height: 44px; min-width: 44px; min-height: 44px; padding: 0; font-size: 1.45rem; border-radius: 9px; pointer-events: auto; }
+.board-card.is-touch-arena .gridder-pad #gridder-left { grid-column: 1; grid-row: 1 / 3; align-self: center; }
+.board-card.is-touch-arena .gridder-pad #gridder-right { grid-column: 2; grid-row: 1 / 3; align-self: center; }
+.board-card.is-touch-arena .gridder-pad #gridder-up { grid-column: 4; grid-row: 1; }
+.board-card.is-touch-arena .gridder-pad #gridder-down { grid-column: 4; grid-row: 2; }
+.board-card.is-touch-arena .play-dock .game-buttons {
+  position: absolute; top: 0; left: 98px; right: 50px; display: flex;
+  flex-wrap: nowrap; justify-content: center; gap: 4px; pointer-events: auto;
+}
+.board-card.is-touch-arena .game-buttons button {
+  flex: 0 1 auto; min-width: 44px; min-height: 44px; padding: 3px 6px;
+  font-size: .66rem; line-height: 1.1; overflow-wrap: anywhere;
+}
+.board-card.is-touch-arena #math-explainer { display: inline-block; }
+.board-card.is-touch-arena .play-dock #gridder-lives {
+  position: absolute; top: 48px; left: 98px; right: 50px; bottom: auto;
+  width: max-content; margin: 0 auto; padding: 5px 8px; font-size: .72rem;
+}
+.board-card.is-touch-arena .math-fullscreen-window { position: fixed; z-index: 10001; max-height: calc(100dvh - 16px); }
+/* In a wide arena the axis labels fit above a single row of game buttons. */
+@media (orientation: landscape) and (min-width: 480px) {
+  .board-card.is-touch-arena .play-dock .game-buttons { top: 48px; right: 115px; }
+  .board-card.is-touch-arena .play-dock #gridder-lives { top: 48px; left: auto; right: 50px; margin: 0; }
+}

@@ -8,6 +8,7 @@ const placementKey='gridder-maths-window-placement';
 let placement=null;
 try{const value=JSON.parse(localStorage.getItem(placementKey));if(value&&['left','top','width','height'].every(key=>Number.isFinite(value[key]))&&value.width>0&&value.height>0)placement=value;}catch(_){}
 let floating=false,pinned=false,drag=null,fullscreenSaved=null;
+const inGameWindow=()=>card.classList.contains('is-fullscreen')||card.classList.contains('is-touch-arena');
 const placeholder=document.createElement('div');placeholder.className='math-placeholder';placeholder.textContent='Your mathematical mission is open in its floating window. ';
 const dock=document.createElement('button');dock.textContent='Bring maths back';placeholder.append(dock);
 function savePlacement(){
@@ -29,7 +30,7 @@ function fitFullscreen(width,height,centre=false){
   savePlacement();
 }
 function openFullscreenMath(){
-  if(fullscreenSaved||!card.classList.contains('is-fullscreen'))return;
+  if(fullscreenSaved||!inGameWindow())return;
   const controller=window.gridderController,wasPlaying=controller?.snapshot()?.playing;
   controller?.pause();
   if(wasPlaying)document.getElementById('gridder-feedback').textContent='Paused for the maths explainer. Choose Start game to resume.';
@@ -55,7 +56,7 @@ function closeFullscreenMath(restoreFocus=true){
   if(previous.inert&&card.classList.contains('is-fullscreen'))panel.setAttribute('inert','');
   pop.hidden=false;pin.hidden=expand.hidden=!floating;smaller.hidden=larger.hidden=close.hidden=remember.hidden=true;moveButtons.forEach(button=>button.hidden=true);
   explainer.setAttribute('aria-expanded','false');
-  if(restoreFocus&&card.classList.contains('is-fullscreen'))explainer.focus({preventScroll:true});
+  if(restoreFocus&&inGameWindow())explainer.focus({preventScroll:true});
 }
 explainer?.addEventListener('click',openFullscreenMath);
 close?.addEventListener('click',()=>closeFullscreenMath());
@@ -71,7 +72,8 @@ for(const [dir,dx,dy] of [['left',-64,0],['up',0,-64],['down',0,64],['right',64,
     const r=panel.getBoundingClientRect();panel.style.left=(r.left+dx)+'px';panel.style.top=(r.top+dy)+'px';fitFullscreen(r.width,r.height);
   });
 }
-addEventListener('gridder-fullscreen-change',event=>{if(!event.detail.active)closeFullscreenMath(false);});
+addEventListener('gridder-fullscreen-change',()=>{if(!inGameWindow())closeFullscreenMath(false);});
+addEventListener('gridder-arena-change',()=>{if(!inGameWindow())closeFullscreenMath(false);else if(fullscreenSaved){const r=panel.getBoundingClientRect();fitFullscreen(r.width,r.height);}});
 addEventListener('resize',()=>{if(fullscreenSaved){const r=panel.getBoundingClientRect();fitFullscreen(r.width,r.height);}});
 function clampPosition(){if(!floating||panel.classList.contains('math-expanded'))return;const r=panel.getBoundingClientRect();panel.style.left=Math.max(8,Math.min(innerWidth-Math.min(r.width,innerWidth-16)-8,r.left))+'px';panel.style.top=(Math.max(8,Math.min(innerHeight-70,r.top))+(pinned?0:scrollY))+'px';}
 function toggle(){floating=!floating;pop.setAttribute('aria-pressed',String(floating));pop.textContent=floating?'Dock ↙':'Float ↗';pin.hidden=expand.hidden=!floating;if(floating){const r=panel.getBoundingClientRect();home.append(placeholder);document.body.append(panel);panel.classList.add('math-floating');panel.style.left=Math.max(8,Math.min(r.left,innerWidth-550))+'px';panel.style.top=(scrollY+Math.max(12,Math.min(r.top,innerHeight-100)))+'px';clampPosition();}else{home.append(panel);placeholder.remove();panel.classList.remove('math-floating','math-pinned','math-expanded');panel.style.cssText='';pinned=false;pin.setAttribute('aria-pressed','false');}pop.focus({preventScroll:true});}

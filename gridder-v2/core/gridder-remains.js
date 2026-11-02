@@ -10,7 +10,7 @@
   function create(board,options={}){
     const nx=Math.max(1,finite(board?.nx,1)),ny=Math.max(1,finite(board?.ny,1)),pieces=[];
     const playerFactor=Math.max(0,finite(options.playerScale,1));
-    const displayScale=cellPixels=>options.referencePlotWidth>0?nx*cellPixels('x')/options.referencePlotWidth:1;
+    const displayScale=cellPixels=>options.displayScale?options.displayScale(cellPixels):options.referencePlotWidth>0?nx*cellPixels('x')/options.referencePlotWidth:1;
     const playerReach=cellPixels=>playerRadius*playerFactor*displayScale(cellPixels);
     let serial=0;
     function metrics(cellPixels){
@@ -111,7 +111,7 @@
       let sign=Math.sign(g[across]-edge)||1;
       if(edge<=0)sign=1;else if(edge>=count)sign=-1;
       const available=Math.max(0,pitch*(7/8)-g.radius);
-      const padding=options.referencePlotWidth>0?nx*route.cell.x/options.referencePlotWidth:1;
+      const padding=displayScale(axis=>route.cell[axis]);
       const distance=Math.min(available,Math.max(pitch/2,reach+g.radius+padding));
       const position={i:g.i,j:g.j};
       position[along]=clamp(Math.floor(g[along])+.5,.5,(horizontal?nx:ny)-.5);

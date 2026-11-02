@@ -296,7 +296,7 @@
       theme=root.GridderTheme.current();
       geometry = geometryFor(s);
       const b = s.game.board, g = geometry;
-      const nextBoard = JSON.stringify([s.key, s.level, s.levelGraph?.a, b, g.w, g.h,theme.id,theme.paletteKey,s.gaps?.id,s.gaps?.pools]);
+      const nextBoard = JSON.stringify([s.key, s.level, s.levelGraph?.a, b, g.w, g.h,g.l,g.t,g.pw,g.ph,theme.id,theme.paletteKey,s.gaps?.id,s.gaps?.pools]);
       if (nextBoard !== boardKey) { boardKey = nextBoard; rebuildBoard(s); }
       liquid?.render(s,g);
       const nextFill = [...s.game.filled].join('|');
