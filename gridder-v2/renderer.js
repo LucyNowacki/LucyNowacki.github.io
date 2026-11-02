@@ -240,11 +240,11 @@
       for (let i = 0; i <= b.nx; i++) {
         latticeLine(grid, g.px(i), g.t, g.px(i), g.t + g.ph);
         const every = g.w < 500 ? 4 : g.w < 750 ? 2 : 1;
-        if (i % every === 0 || i === b.nx) labels.push(text(g.px(i), g.t + g.ph + 18, s.M.format(b.xmin + i * b.dx)));
+        if (!g.hideAxisLabels && (i % every === 0 || i === b.nx)) labels.push(text(g.px(i), g.t + g.ph + 18, s.M.format(b.xmin + i * b.dx)));
       }
       for (let j = 0; j <= b.ny; j++) {
         latticeLine(grid, g.l, g.py(j), g.l + g.pw, g.py(j));
-        if (j % Math.max(1, Math.ceil(b.ny / (g.ph / 32))) === 0 || j === b.ny)
+        if (!g.hideAxisLabels && (j % Math.max(1, Math.ceil(b.ny / (g.ph / 32))) === 0 || j === b.ny))
           labels.push(text(g.l - 9, g.py(j), s.M.format(b.ymin + j * b.dy), 1));
       }
       if(theme.id==='neon'){
@@ -283,8 +283,10 @@
       }
       // Keep the plot border; node slow zones are model-only, without markers.
       nodes.lineStyle(1.2, theme.nodeStroke, .8).strokeRect(g.l, g.t, g.pw, g.ph);
-      labels.push(text(g.l + g.pw / 2, g.t + g.ph + 39, 'x', .5, .5, { fontStyle: 'italic' }));
-      labels.push(text(g.l - 36, g.t + g.ph / 2, 'y', .5, .5, { fontStyle: 'italic' }));
+      if(!g.hideAxisLabels){
+        labels.push(text(g.l + g.pw / 2, g.t + g.ph + 39, 'x', .5, .5, { fontStyle: 'italic' }));
+        labels.push(text(g.l - 36, g.t + g.ph / 2, 'y', .5, .5, { fontStyle: 'italic' }));
+      }
       fillKey = targetKey = hintKey = pointKey = '';
       routeKey = null;
     }
@@ -296,7 +298,7 @@
       theme=root.GridderTheme.current();
       geometry = geometryFor(s);
       const b = s.game.board, g = geometry;
-      const nextBoard = JSON.stringify([s.key, s.level, s.levelGraph?.a, b, g.w, g.h,g.l,g.t,g.pw,g.ph,theme.id,theme.paletteKey,s.gaps?.id,s.gaps?.pools]);
+      const nextBoard = JSON.stringify([s.key, s.level, s.levelGraph?.a, b, g.w, g.h,g.l,g.t,g.pw,g.ph,Boolean(g.hideAxisLabels),theme.id,theme.paletteKey,s.gaps?.id,s.gaps?.pools]);
       if (nextBoard !== boardKey) { boardKey = nextBoard; rebuildBoard(s); }
       liquid?.render(s,g);
       const nextFill = [...s.game.filled].join('|');

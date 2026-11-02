@@ -15,10 +15,19 @@
       const minAspect=Number.isFinite(options.minCellAspect)&&options.minCellAspect>0?options.minCellAspect:0;
       const maxAspect=Number.isFinite(options.maxCellAspect)&&options.maxCellAspect>0?Math.max(minAspect,options.maxCellAspect):Infinity;
       const aspect=(pw/b.nx)/(ph/b.ny);
-      if(aspect>maxAspect)pw=ph*b.nx/b.ny*maxAspect;
-      else if(aspect<minAspect)ph=pw*b.ny/b.nx/minAspect;
-      l+=(availableWidth-pw)/2;t+=(availableHeight-ph)/2;
-      return {w,h,l,t,pw,ph,cellWidth:pw/b.nx,cellHeight:ph/b.ny,stretch:true};
+      // Phone fullscreen favors its usable landscape height or portrait
+      // width. Relax the opposite aspect bound rather than shrink that axis,
+      // and anchor to the reserved margins instead of adding a blank gutter.
+      if(options.fitAxis==='height'){
+        if(aspect>maxAspect)pw=ph*b.nx/b.ny*maxAspect;
+      }else if(options.fitAxis==='width'){
+        if(aspect<minAspect)ph=pw*b.ny/b.nx/minAspect;
+      }else{
+        if(aspect>maxAspect)pw=ph*b.nx/b.ny*maxAspect;
+        else if(aspect<minAspect)ph=pw*b.ny/b.nx/minAspect;
+        l+=(availableWidth-pw)/2;t+=(availableHeight-ph)/2;
+      }
+      return {w,h,l,t,pw,ph,cellWidth:pw/b.nx,cellHeight:ph/b.ny,stretch:true,hideAxisLabels:options.hideAxisLabels===true};
     }
     const availableWidth=w-68,availableHeight=h-66;
     // Displayed cells have width a and height 2a/3. Fit without stretching.

@@ -32,7 +32,10 @@
   function updateArena(expanded) {
     const active = coarse.matches && (expanded || shortLandscape.matches);
     const wasActive = card.classList.contains('is-touch-arena');
+    const phone = coarse.matches && expanded && Math.min(innerWidth, innerHeight) < 600;
+    const wasPhone = card.classList.contains('is-phone-fullscreen');
     card.classList.toggle('is-touch-arena', active);
+    card.classList.toggle('is-phone-fullscreen', phone);
     let marginsChanged = false;
     if (active) {
       const safe = getComputedStyle(safeProbe);
@@ -41,7 +44,11 @@
         bottom: parseFloat(safe.paddingBottom) || 0, left: parseFloat(safe.paddingLeft) || 0
       };
       const landscapeControls = matchMedia('(orientation: landscape) and (min-width: 480px)').matches;
-      for (const [side, base] of Object.entries({left: landscapeControls ? 240 : 48, right: landscapeControls ? 104 : 24, top: landscapeControls ? 48 : 70, bottom: landscapeControls ? 52 : 146})) {
+      const landscape = innerWidth > innerHeight;
+      const margins = phone
+        ? (landscape ? {left: 18, right: 120, top: 18, bottom: 52} : {left: 18, right: 18, top: 18, bottom: 210})
+        : {left: landscapeControls ? 240 : 48, right: landscapeControls ? 104 : 24, top: landscapeControls ? 48 : 70, bottom: landscapeControls ? 52 : 146};
+      for (const [side, base] of Object.entries(margins)) {
         for (const [name, value] of [[`--gridder-safe-${side}`, insets[side]], [`--gridder-arena-${side}`, base + insets[side]]]) {
           const px = `${value}px`;
           if (card.style.getPropertyValue(name) !== px) {
@@ -71,9 +78,11 @@
           card.scrollIntoView({block: 'start', behavior: 'instant'});
         }
       });
+    } else if (phone !== wasPhone) {
+      window.dispatchEvent(new CustomEvent('gridder-arena-change', {detail:{active}}));
     }
     // The canvas listens for resize. No second event is sent when values settle.
-    if (active !== wasActive || marginsChanged) window.dispatchEvent(new Event('resize'));
+    if (active !== wasActive || phone !== wasPhone || marginsChanged) window.dispatchEvent(new Event('resize'));
   }
 
   function setBackgroundInert(enabled) {

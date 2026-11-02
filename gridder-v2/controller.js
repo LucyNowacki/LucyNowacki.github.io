@@ -36,6 +36,10 @@
       const style=getComputedStyle(card),insets={};
       for(const side of ['left','right','top','bottom'])insets[side]=parseFloat(style.getPropertyValue('--gridder-arena-'+side))||0;
       options={stretch:true,insets,minCellAspect:.6,maxCellAspect:2.2};
+      if(card.classList.contains('is-phone-fullscreen')){
+        options.fitAxis=box.width>box.height?'height':'width';
+        options.hideAxisLabels=true;
+      }
     }
     const layout=G.layout(game.board,box.width,box.height,options);
     if(geometryFrame)frameGeometry={board:game.board,layout};

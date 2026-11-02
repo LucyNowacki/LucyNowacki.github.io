@@ -61,8 +61,19 @@ and Maths live in a compact Game menu; opening it pauses play. Lives sits in
 the header. Grid coordinates and objectives are preserved; bodies stay round.
 Gridder uses the same screen velocity on both axes, scaled with the board,
 and both incoming node halves default to 2× slowdown (outgoing halves 1×).
-Enemy grid pacing remains unchanged. The Maths explainer pauses play and opens over the
-arena. Desktop controls scroll independently in a sticky console. Its width grows proportionally with the game window;
+Enemy grid pacing remains unchanged. On phone-sized touch screens (short viewport
+side below 600 CSS px), fullscreen uses a separate fit: landscape fills the
+usable height and anchors the grid near the top-left; portrait fills the usable
+width. The opposite cell-aspect limit may relax to preserve that priority.
+An 18 px breathing frame keeps the ordinary walking face clear of the screen
+edge. Coordinate numbers and x/y titles are hidden in this mode, with axes,
+functions, discoveries and mathematical coordinates retained. Landscape puts
+mission/formula/lives/Game/Exit/status in a right rail and Left/Right in the
+44 px strip below the grid; portrait puts the information and controls below
+the full-width plot. Tablet and ordinary page arrangements are retained.
+Game actions open over paused play, with an upward-opening menu in portrait.
+Leaving phone fullscreen restores coordinate labels and the prior arrangement.
+The Maths explainer pauses play and opens over the arena. Desktop controls scroll independently in a sticky console. Its width grows proportionally with the game window;
 `panel-layout.js` fits its height to the actual visible space below the header
 on resize, scrolling and header changes. Narrow layouts stack the expanded
 mathematics before movement settings below the game.
