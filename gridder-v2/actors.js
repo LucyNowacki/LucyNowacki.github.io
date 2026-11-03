@@ -340,7 +340,7 @@ function create(scene){
   let sharkCapture=null;
   if(leechCapture){
    const a=s.deathAttacker,t=clamp(s.deathScene.elapsed/(a.dragDuration||650),0,1),ease=t*t*(3-2*t);
-   sharkCapture=a.kind==='shark'?root.GridderLeechActors?.sharkCapturePose?.(a,s.deathScene.elapsed):null;
+   sharkCapture=a.kind==='shark'?root.GridderLeechActors?.sharkCapturePose?.(a,s.deathScene.elapsed,b):null;
    const victim=sharkCapture?.victim||{i:mix(a.from.i,a.to.i,ease),j:mix(a.from.j,a.to.j,ease)};
    x=b.px(victim.i);y=b.py(victim.j);
   }
@@ -406,6 +406,10 @@ function create(scene){
     const sinking=phase.name==='decay',gone=phase.name==='scatter'||phase.name==='end';
     const size=phase.name==='swell'?1-.15*p:sinking?.85*(1-.65*p):1;
     player.setScale(size*playerFactor).setAlpha(gone?0:sinking?1-p:1).setAngle(sinking?p*18:Math.sin(bloodClock/80)*2);
+    if(sharkCapture){
+     const pressure=1-sharkCapture.bite,size=sharkCapture.avatarScale*playerFactor;
+     player.setScale(size*(1-.08*pressure),size*(1+.06*pressure)).setAlpha(sharkCapture.visible?1:0).setAngle(Math.sin(bloodClock/80)*2*(1-sharkCapture.swallow));
+    }
     face(player,tint(0xec9bc6,0x518ab2,phase.name==='bite'?.2:phase.name==='swell'?.2+.5*p:.7),false,false,bloodClock,0,'draining');
    }
    else if(phase.name==='bite'){player.x=x+Math.sin(p*Math.PI*6)*(1-p)*1.3*playerFactor;face(player,tint(0xec9bc6,0xc3a3e1,p*.7),false,false,bloodClock,0,'draining');for(const [a,c] of [[[9,-7],[15,-11]],[[11,-1],[18,-1]],[[9,5],[15,9]]])line(player,[a,c],0xd49535,2);}
@@ -419,7 +423,13 @@ function create(scene){
   // Keep Chebby's surprised eyes and mouth readable through the blue water.
   const avatarTint=leechCapture?(stage.name==='bite'?tint(0xffffff,0xd6eeff,stage.progress):stage.name==='swell'?tint(0xd6eeff,0x8fc4e6,stage.progress):tint(0x8fc4e6,0x5797bf,stage.progress)):
    stage?.name==='swell'?tint(0x000080,0x403179,stage.progress*.65):stage?.name==='bite'?tint(0xffffff,0xc3a3e1,stage.progress*.7):stage?.name==='decay'?tint(0x403179,0x78813a,stage.progress):undefined;
-  chebby?.render({visible:!s.gameOver&&stage?.name!=='scatter',x:player.x,y:player.y,scaleX:player.scaleX,scaleY:player.scaleY,angle:player.angle,alpha:player.alpha,clock,mood:emotion,capture:!!stage,tint:avatarTint,threatDirection:nearest?[b.px(nearest.at.i)-x,b.py(nearest.at.j)-y]:null,...travelPose(s,pos,clock,b)});
+  let swallowClip=null;
+  if(sharkCapture?.swallow>0){
+   const a=s.deathAttacker,dx=b.px(a.to.i)-b.px(a.from.i),dy=b.py(a.to.j)-b.py(a.from.j),length=Math.hypot(dx,dy),nx=length?dx/length:1,ny=length?dy/length:0;
+   const mouth={x:b.px(sharkCapture.mouth.i),y:b.py(sharkCapture.mouth.j)},offset=32*boardScale*(1-sharkCapture.swallow);
+   swallowClip={x:mouth.x+nx*offset,y:mouth.y+ny*offset,nx,ny};
+  }
+  chebby?.render({visible:!s.gameOver&&stage?.name!=='scatter'&&sharkCapture?.visible!==false,x:player.x,y:player.y,scaleX:player.scaleX,scaleY:player.scaleY,angle:player.angle,alpha:player.alpha,clock,mood:emotion,capture:!!stage,tint:avatarTint,swallow:sharkCapture?.swallow||0,swallowClip,threatDirection:nearest?[b.px(nearest.at.i)-x,b.py(nearest.at.j)-y]:null,...travelPose(s,pos,clock,b)});
   if(!s.gameOver&&clock<s.resurrectionUntil){
    // Native atlas frames: high / open / low / open. No Phaser timer or tween.
    const beat=Math.floor(clock/130)%4,frames=[beat,4+(beat+1)%4];

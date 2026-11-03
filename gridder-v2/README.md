@@ -210,9 +210,13 @@ reduced motion uses a still pose. The whole silhouette stays within the same
 pool-safe fit while swimming. During an attack its head and open, toothed jaws
 reach out over the shore, close around Gridder and pull him into the pool.
 The first 120 ms reach the stationary victim; both sprites then follow one
-shared path for the rest of the existing 650 ms drag. The jaws remain visible
-around the sprite. Pausing freezes the reach and drag, and the existing
-one-life cost, underwater drain and pool-local blood timing are retained.
+shared path for the rest of the existing 650 ms drag. The shark then visibly
+opens and closes its toothed jaws three times. From 1550 to 2400 ms, Gridder
+moves into a fixed mouth: his original artwork is progressively clipped at
+the lips, rather than fading beside the shark. He is completely swallowed
+before a brief belly pulse. Pausing freezes the bite and swallowing motion;
+the existing one-life cost, total capture duration and pool-local blood timing
+are retained.
 
 A centipede is large enough to breed after two remnant meals (ten body segments)
 or when its body scale reaches 1.3 from drinking. It can lay a clutch of one or
@@ -427,6 +431,10 @@ Reports are in `tools/gridder-v2/swimming-gait-evidence/`.
 speed through resize/fullscreen, plus native shoreline reach, visible teeth,
 grip, drag and pause. Prepared capture poses and controller lifecycle checks
 are distinguished in `tools/gridder-v2/shark-lunge-evidence/`.
+`test-shark-consume.cjs` and `test-shark-consume.py` check three jaw closures,
+the fixed mouth and original-art swallowing boundary, disappearance, the belly
+pulse and the preserved capture lifecycle. Native stills and a timed prepared
+preview are in `tools/gridder-v2/shark-consume-evidence/`.
 `test-jointed-gait.py` retains focused avatar acceptance. It compares
 immutable before/after snapshots in native Phaser WebGL and Canvas, including
 four-direction poses, articulation of the six original tentacles, bounded

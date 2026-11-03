@@ -76,6 +76,7 @@ function create(scene){
   info.captureExpression=captureCanvas?(state.mood==='draining'?'surprised':'decaying'):null;
   info.captureMouth=captureCanvas?{frame:6,aperture:1}:null;
   info.captureEyeScale=captureCanvas?(state.mood==='draining'?1.18:1-.96*.48):null;
+  info.swallow=state.swallow||0;info.swallowClip=state.swallowClip?{...state.swallowClip}:null;
   image.setVisible(info.visible);if(!info.visible)return;
   const walking=!!(state.walking&&!state.capture),gaitPhase=state.gaitPhase??0;
   const amplitude=state.capture?0:(state.gaitAmplitude??Number(walking));
@@ -89,9 +90,23 @@ function create(scene){
   const colour=state.tint??(state.mood==='fear'?0xe1dcff:state.mood==='pushing'?0xffbfdc:0xffffff);
   const revision=source.revision??JSON.stringify(source.pose??{}),eyes=root.GridderBoardEyes.describe(state,source.pose);info.eyes=eyes;
   const layersChanged=prepareLayers(source,revision,colour,eyes);
-  const pixelKey=JSON.stringify([amplitude?gaitPhase:0,amplitude,leanX,leanY,colour,revision,eyes.key]);
+  let textureClip=null;
+  if(state.swallowClip){
+   // Convert the fixed mouth plane to original-art coordinates. Retain only
+   // pixels outside the mouth as the avatar moves into the shark's head.
+   const clip=state.swallowClip,c=Math.cos(angle),s=Math.sin(angle),sx=.25*state.scaleX,sy=.25*state.scaleY;
+   const dx=clip.x-state.x,dy=clip.y-state.y,nx=(clip.nx*c+clip.ny*s)*sx,ny=(-clip.nx*s+clip.ny*c)*sy,length=Math.hypot(nx,ny)||1;
+   textureClip={x:124+(c*dx+s*dy)/sx,y:128+(-s*dx+c*dy)/sy,nx:nx/length,ny:ny/length};
+  }
+  info.textureClip=textureClip;
+  const pixelKey=JSON.stringify([amplitude?gaitPhase:0,amplitude,leanX,leanY,colour,revision,eyes.key,textureClip]);
   if(layersChanged||pixelKey!==lastPixels){
-   stats.compositions++;context.clearRect(0,0,256,208);context.save();context.translate(40,40);
+   stats.compositions++;context.clearRect(0,0,256,208);context.save();
+   if(textureClip){
+    const p=textureClip,r=1024,tx=-p.ny*r,ty=p.nx*r;
+    polygon(context,[[p.x+tx,p.y+ty],[p.x-tx,p.y-ty],[p.x-tx-p.nx*r*2,p.y-ty-p.ny*r*2],[p.x+tx-p.nx*r*2,p.y+ty-p.ny*r*2]]);context.clip();
+   }
+   context.translate(40,40);
    const tentacles=tentacleSpecs.map(spec=>{
     const tripod=(spec.index+(spec.side>0?1:0))%2,cycle=((gaitPhase/TAU+spec.index/6+tripod/2)%1+1)%1;
     // A longer pushing stroke and a curled recovery travel through six

@@ -2,10 +2,20 @@
 (function(root){
 'use strict';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),mix=(a,b,t)=>a+(b-a)*t;
-function sharkCapturePose(attacker,elapsed){
+function sharkCapturePose(attacker,elapsed,layout){
  const duration=Math.max(121,attacker.dragDuration||650),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
  const reach=smooth(elapsed/120),drag=smooth((elapsed-120)/(duration-120));
- return {victim:{i:mix(attacker.from.i,attacker.to.i,drag),j:mix(attacker.from.j,attacker.to.j,drag)},reach,drag};
+ const swallow=smooth((elapsed-1550)/850),chew=clamp((elapsed-650)/900,0,1);
+ const bite=elapsed>=650&&elapsed<1550?.5+.5*Math.cos(chew*6*Math.PI):elapsed>=1550?1-swallow:1;
+ const belly=elapsed>=2400&&elapsed<3200?Math.sin(Math.PI*(elapsed-2400)/800):0;
+ const di=attacker.to.i-attacker.from.i,dj=attacker.to.j-attacker.from.j;
+ let stepI=.35*di,stepJ=.35*dj;
+ if(layout&&layout.cellWidth>0&&layout.cellHeight>0){
+  const cw=layout.cellWidth,ch=layout.cellHeight,length=Math.hypot(di*cw,dj*ch),distance=26*(root.GridderSpriteMetrics?.scale(layout)??1);
+  if(length>1e-9){stepI=di*distance/length;stepJ=dj*distance/length;}
+ }
+ const contact={i:mix(attacker.from.i,attacker.to.i,drag),j:mix(attacker.from.j,attacker.to.j,drag)};
+ return {victim:{i:contact.i+stepI*swallow,j:contact.j+stepJ*swallow},mouth:contact,reach,drag,bite,swallow,belly,avatarScale:1-.55*swallow,visible:elapsed<2400};
 }
 function stroke(g,points,width,colour,alpha=1){g.lineStyle(width,colour,alpha);g.beginPath();points.forEach((p,n)=>n?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.strokePath();}
 function create(scene){
@@ -64,13 +74,14 @@ function create(scene){
     const wave=reduced?0:Math.sin(clock/150)*3,dorsalSway=reduced?0:Math.sin(clock/230+.8)*1.7;
     const pt=(x,y)=>({x:centre.x+(ux*x-uy*y*upright)*q,y:centre.y+(uy*x+ux*y*upright)*q});
     const polygon=(vertices,colour,alpha=1)=>{bodies.fillStyle(colour,alpha);bodies.beginPath();vertices.map(v=>pt(...v)).forEach((v,i)=>i?bodies.lineTo(v.x,v.y):bodies.moveTo(v.x,v.y));bodies.closePath();bodies.fillPath();};
+    const capturePose=attacker?sharkCapturePose(s.deathAttacker,elapsed,g):null,belly=capturePose?.belly||0;
     // True dorsal view: +x is the snout, ±y are the two flanks. Both
     // pectoral fins and eyes are visible, with a slender fin on the spine.
     for(const side of [-1,1])polygon([[7,side*4],[1,side*7],[-8,side*17],[-13,side*18],[-10,side*13],[-8,side*6],[-2,side*4]],0x148ba8);
     // The rear peduncle bends sideways; the two caudal lobes follow its tip.
     polygon([[-18,wave*.55],[-24,wave*.9],[-29,wave-9],[-27,wave-2],[-27,wave+2],[-29,wave+9]],0x107d9c);
-    polygon([[-20,wave*.65],[-16,-4+wave*.4],[-9,-7],[1,-8],[11,-6],[18,-3],[22,0],[18,3],[11,6],[1,8],[-9,7],[-16,4+wave*.4]],0x20b9cc);
-    polygon([[-17,wave*.5],[-9,-3.8],[2,-5],[12,-3.7],[19,0],[12,3.7],[2,5],[-9,3.8]],0x64e4e4,.8);
+    polygon([[-20,wave*.65],[-16,-4+wave*.4],[-9,-7*(1+.35*belly)],[1,-8*(1+.35*belly)],[11,-6],[18,-3],[22,0],[18,3],[11,6],[1,8*(1+.35*belly)],[-9,7*(1+.35*belly)],[-16,4+wave*.4]],0x20b9cc);
+    polygon([[-17,wave*.5],[-9,-3.8*(1+.35*belly)],[2,-5*(1+.35*belly)],[12,-3.7],[19,0],[12,3.7],[2,5*(1+.35*belly)],[-9,3.8*(1+.35*belly)]],0x64e4e4,.8);
     // A back fin seen from above: a dark centreline base and a flexing tip.
     polygon([[-10,0],[-5,-2.6],[-1,dorsalSway],[-5,2.6]],0x075776);
     polygon([[-8,0],[-5,-.9],[-2,dorsalSway*.65],[-5,.9]],0xa9f8ed,.75);
@@ -84,19 +95,23 @@ function create(scene){
     if(attacker){
      // Shared model-space target: the avatar and jaw use the same current-frame
      // position. The wet body is still fitted independently to its safe disk.
-     const pose=sharkCapturePose(s.deathAttacker,elapsed),target={x:g.px(pose.victim.i),y:g.py(pose.victim.j)},base=pt(14,0),natural=pt(21,0);
+     const pose=capturePose,target={x:g.px(pose.mouth.i),y:g.py(pose.mouth.j)},base=pt(14,0),natural=pt(21,0);
      const tip={x:mix(natural.x,target.x,pose.reach),y:mix(natural.y,target.y,pose.reach)};
      const dx=tip.x-base.x,dy=tip.y-base.y,len=Math.hypot(dx,dy),fx=len>.01?dx/len:ux,fy=len>.01?dy/len:uy,nx=-fy,ny=fx;
      const local=(along,across)=>({x:tip.x+fx*along+nx*across,y:tip.y+fy*along+ny*across});
      const draw=(points,colour)=>{jaws.fillStyle(colour,1);jaws.beginPath();points.forEach((p,n)=>n?jaws.lineTo(p.x,p.y):jaws.moveTo(p.x,p.y));jaws.closePath();jaws.fillPath();};
      // Two distinct jaw halves surround the victim; white teeth point inward.
      // Width is tied to Gridder's screen scale, not to a pool-constrained shark.
-     const spread=(17+5*(1-pose.reach))*scale,rootWidth=4*q,lip=2.3*scale,teeth=[];
+     const spread=(9+8*pose.bite+5*(1-pose.reach))*scale,rootWidth=4*q,lip=2.3*scale,teeth=[];
      const extension=Math.max(0,len-12*scale),nose={x:base.x+fx*extension,y:base.y+fy*extension};
      const flank=(p,w,side)=>({x:p.x+nx*w*side,y:p.y+ny*w*side});
      const snout=[flank(base,4*q,-1),flank(nose,5*scale,-1),{x:nose.x+fx*3*scale,y:nose.y+fy*3*scale},flank(nose,5*scale,1),flank(base,4*q,1)];
      bodies.fillStyle(0x20b9cc,1);bodies.beginPath();snout.forEach((p,n)=>n?bodies.lineTo(p.x,p.y):bodies.moveTo(p.x,p.y));bodies.closePath();bodies.fillPath();
      for(const side of [-1,1]){const eye=extension>3*scale?flank(nose,3.3*scale,side):pt(13,side*3.5);bodies.fillStyle(0x07152b,1);bodies.fillCircle(eye.x,eye.y,1.25*scale);}
+     // The oral cavity sits behind the avatar; the clipped original artwork
+     // and the foreground tooth rims show its progress into the mouth.
+     const cavity=[local(-12*scale,0),local(-7*scale,-spread*.62),local(4*scale,-spread*.62),local(10*scale,0),local(4*scale,spread*.62),local(-7*scale,spread*.62)];
+     bodies.fillStyle(0x071a2e,1);bodies.beginPath();cavity.forEach((p,n)=>n?bodies.lineTo(p.x,p.y):bodies.moveTo(p.x,p.y));bodies.closePath();bodies.fillPath();
      for(const side of [-1,1]){
       const root={x:base.x+nx*rootWidth*side,y:base.y+ny*rootWidth*side};
       const end=local(8*scale,side*spread),outer=local(3*scale,side*(spread+3*scale)),inner=local(6*scale,side*(spread-lip));
@@ -108,13 +123,13 @@ function create(scene){
        draw([a,b,point],0xf5ffff);teeth.push(point);
       }
      }
-     mouth=tip;attack={phase:elapsed<120?'reach':elapsed<(s.deathAttacker.dragDuration||650)?'drag':'drain',reach:pose.reach,drag:pose.drag,target,mouth,base,teeth};
+     mouth=tip;attack={phase:elapsed<120?'reach':elapsed<(s.deathAttacker.dragDuration||650)?'drag':elapsed<1550?'chew':elapsed<2400?'swallow':'belly',reach:pose.reach,drag:pose.drag,bite:pose.bite,swallow:pose.swallow,belly:pose.belly,bellyRegion:{centre:pt(-4,0),axis:pt(1,0),halfLength:8*q,halfWidth:8*(1+.35*belly)*q},jawHalfGap:spread,target,mouth,base,teeth};
     }
     const pulse=reduced?.8:.72+.28*Math.sin(clock/260);
     if(animal.phase==='warning'){effects.lineStyle(1.5*q,0xffe75a,.55+.4*pulse);effects.strokeCircle(centre.x,centre.y,26*q);}
     let victim=null;
-    if(attacker){const pose=sharkCapturePose(s.deathAttacker,elapsed);victim={x:g.px(pose.victim.i),y:g.py(pose.victim.j)};
-     if(drinking){for(let n=0;n<=20;n++){const f=n/20,x=mix(victim.x,mouth.x,f),y=mix(victim.y,mouth.y,f);if(wet(x,y,2*scale)){effects.fillStyle(0xff234b,.7);effects.fillCircle(x,y,1.6*scale);}}const f=reduced?.5:(elapsed/240)%1,x=mix(victim.x,mouth.x,f),y=mix(victim.y,mouth.y,f);if(wet(x,y,2*scale)){effects.fillStyle(0xffd1b8,1);effects.fillCircle(x,y,1.5*scale);}}
+    if(attacker){const pose=sharkCapturePose(s.deathAttacker,elapsed,g);victim={x:g.px(pose.victim.i),y:g.py(pose.victim.j)};
+     if(drinking&&elapsed>=120&&elapsed<1550){for(let n=0;n<=20;n++){const f=n/20,x=mix(victim.x,mouth.x,f),y=mix(victim.y,mouth.y,f);if(wet(x,y,2*scale)){effects.fillStyle(0xff234b,.7);effects.fillCircle(x,y,1.6*scale);}}const f=reduced?.5:(elapsed/240)%1,x=mix(victim.x,mouth.x,f),y=mix(victim.y,mouth.y,f);if(wet(x,y,2*scale)){effects.fillStyle(0xffd1b8,1);effects.fillCircle(x,y,1.5*scale);}}
     }
     entries.push({id:animal.id,kind:'shark',poolIndex:animal.poolIndex,phase:animal.phase,drinking,head:centre,headOffset,points:[centre,mouth],scale:q,modelScale:animal.sizeScale||1,clock,victim,
      orientation:{heading:angle,facing:upright,dorsalFin:pt(-1,dorsalSway),backbone:pt(-5,0)},
