@@ -3,18 +3,29 @@
 (function(root){
 'use strict';
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)),mix=(a,b,t)=>a+(b-a)*t;
-// Pure presentation state: reference-distance phase, finite clock-driven envelopes.
+// Pure presentation state: reference-distance phase, finite gait/turn envelopes.
 function createGait(){
- let game=null,walker=null,clock=-1,position=null,direction=[0,0],moved=false,phase=0,sampleTime=0,lastMoveTime=-Infinity;
+ const stridePixels=80,quarterTurnMs=160;
+ let game=null,walker=null,clock=-1,position=null,direction=[0,0],moved=false,distance=0,travel=[0,0],sampleTime=0,lastMoveTime=-Infinity;
  let target=0,from=0,transitionTime=0,lastTime=-1;
+ let headingFrom=0,headingTo=0,headingTime=0,headingDuration=0;
  const smooth=p=>{p=clamp(p,0,1);return p*p*(3-2*p);};
  const amplitudeAt=time=>mix(from,target,smooth((time-transitionTime)/(target?120:160)));
+ const headingAt=time=>headingDuration?mix(headingFrom,headingTo,smooth((time-headingTime)/headingDuration)):headingTo;
+ const turnDelta=(a,b)=>((b-a+180)%360+360)%360-180;
+ const facingAngle=dir=>dir[0]>0?-90:dir[0]<0?90:dir[1]>0?180:0;
  function update(s,pos,now,b){
   const time=Number.isFinite(s.gaitTime)?s.gaitTime:now;
   if(game!==s.game||walker!==s.walker||now<clock||time<lastTime){
-   game=s.game;walker=s.walker;clock=-1;position=null;direction=[0,0];moved=false;phase=0;lastMoveTime=-Infinity;target=0;from=0;transitionTime=time;
+   game=s.game;walker=s.walker;clock=-1;position=null;direction=[0,0];moved=false;distance=0;travel=[0,0];lastMoveTime=-Infinity;target=0;from=0;transitionTime=time;
+   headingFrom=headingTo=0;headingTime=time;headingDuration=0;lastTime=time;
   }
   const active=!!(s.playing&&!s.deathScene&&!s.gameOver&&!s.game?.complete?.());
+  const reducedMotion=!!s.reducedMotion||!!root.GridderTheme?.reducedMotion?.();
+  // Hard pause/capture preserve the last presented facing rather than let a
+  // presentation-time jump finish a turn while the simulation is frozen.
+  let bodyHeading=headingAt(active?time:lastTime);
+  if(!active){headingFrom=headingTo=bodyHeading;headingTime=time;headingDuration=0;}
   if(now!==clock){
    const dx=position?pos.i-position.i:0,dy=position?pos.j-position.j:0;
    moved=active&&Math.hypot(dx,dy)>1e-7;
@@ -22,21 +33,35 @@ function createGait(){
     lastMoveTime=time;
     const last=s.lastTravel;direction=last&&dx*last[0]+dy*last[1]>1e-7?[...last]:Math.abs(dx)>=Math.abs(dy)?[Math.sign(dx),0]:[0,Math.sign(dy)];
     const scale=root.GridderSpriteMetrics?.scale(b)??1;
-    phase+=Math.hypot(dx*b.cellWidth,dy*b.cellHeight)/scale*Math.PI*2/120;
+    const rx=dx*b.cellWidth/scale,ry=-dy*b.cellHeight/scale;
+    distance+=Math.hypot(rx,ry);travel[0]+=rx;travel[1]+=ry;
+    const desired=facingAngle(direction),delta=turnDelta(headingTo,desired);
+    if(Math.abs(delta)>1e-9){
+     headingFrom=bodyHeading;headingTo=bodyHeading+turnDelta(bodyHeading,desired);headingTime=time;
+     headingDuration=quarterTurnMs*Math.abs(headingTo-headingFrom)/90;
+    }
    }
    clock=now;position={i:pos.i,j:pos.j};sampleTime=time;
+  }
+  if(reducedMotion){
+   bodyHeading=direction.some(Boolean)?facingAngle(direction):bodyHeading;
+   headingFrom=headingTo=bodyHeading;headingDuration=0;headingTime=time;
   }
   // Preserve a final actual displacement even when its input command just ended.
   const walking=!!(active&&moved&&(s.moving||time===sampleTime));
   const bridging=!!(!walking&&active&&s.moving&&s.centreWaiting&&s.centrePauseMs<=90&&time-lastMoveTime<=90);
   const gaitActive=walking||bridging;
   let amplitude=amplitudeAt(time);
-  if(!active){target=0;from=0;transitionTime=time;amplitude=0;}
+  if(!active||reducedMotion){target=0;from=0;transitionTime=time;amplitude=0;}
   else if(target!==Number(gaitActive)){from=amplitude;target=Number(gaitActive);transitionTime=time;}
   lastTime=time;
-  const settling=bridging||Math.abs(amplitude-target)>1e-6;
-  const facing=gaitActive?[...direction]:[0,0];
-  return {walking,bridging,direction:facing,heading:gaitActive?(direction[0]>0?-90:direction[0]<0?90:direction[1]<0?0:180):0,gaitPhase:phase,gaitAmplitude:amplitude,settling};
+  const turning=!!(active&&!reducedMotion&&headingDuration&&time-headingTime<headingDuration);
+  const settling=!reducedMotion&&(bridging||Math.abs(amplitude-target)>1e-6||turning);
+  const angle=bodyHeading*Math.PI/180;
+  return {walking,bridging,direction:[...direction],screenDirection:[direction[0],-direction[1]],
+   heading:0,headHeading:0,bodyHeading,bodyDirection:direction.some(Boolean)?[-Math.sin(angle),-Math.cos(angle)]:[0,0],
+   targetBodyHeading:headingTo,turning,reducedMotion,gaitDistance:distance,gaitTravel:[...travel],stridePixels,
+   gaitPhase:distance*Math.PI*2/stridePixels,gaitAmplitude:amplitude,settling};
  }
  return {update};
 }
@@ -54,7 +79,7 @@ function create(scene){
  const graphics=Object.freeze({player,spiders:Object.freeze(spiders.slice(0,2)),centipede,get enemies(){return spiders.slice();},blood:shield,pieces,angels,chebby:chebby?.image});
  const eggs=scene.add.graphics().setDepth(22.4),eggLabels=[];objects.push(eggs);
  const gait=createGait();
- function travelPose(s,pos,clock,b){return gait.update(s,pos,clock,b);}
+ function travelPose(s,pos,clock,b){const pose=gait.update(s,pos,clock,b);diagnostic.gait=pose;return pose;}
  let gameIdentity=null,lastEmotionClock=-1,lastEmotionPosition=null,afraid=false,reliefUntil=0,emotion='happy',movingPose=false;
  let diagnostic={emotion,nearKind:null,clearance:Infinity,reliefUntil:0,clock:0,capturePhase:null,drinkingKinds:[],creatures:[]};
  // Exclusive vascular colours, separate from the red fangs for pixel-level QA.
@@ -412,7 +437,7 @@ function create(scene){
   }
   if(s.gameOver){const cx=b.l+b.pw/2,cy=b.t+b.ph/2,pw=Math.min(b.pw-12,560);overlay.fillStyle(0xffffff,.96);overlay.fillRoundedRect(cx-pw/2,cy-75,pw,150,12);overlay.lineStyle(2,0xdc2626);overlay.strokeRoundedRect(cx-pw/2,cy-75,pw,150,12);title.setText('Game Over!').setFontSize(Math.max(24,Math.min(60,b.pw*.10))).setPosition(cx,cy-10).setVisible(true);subtitle.setText('Go to the ‘dunce’s stool!’').setFontSize(Math.max(11,Math.min(20,b.pw/23))).setPosition(cx,cy+38).setVisible(true);}
  }
- return {render,animationState(){return chebby?.animationState()||{walking:false,settling:false};},get emotion(){return emotion;},get diagnostics(){return {...diagnostic,centipede:diagnostic.centipede?{points:diagnostic.centipede.points.map(p=>({...p})),spine:diagnostic.centipede.spine.map(p=>({...p}))}:null,chebby:chebby?.diagnostics||{ready:false,visible:false},resurrection:{...resurrection,frames:[...resurrection.frames],bounds:resurrection.bounds.map(b=>({...b}))},drinkingKinds:[...diagnostic.drinkingKinds],creatures:diagnostic.creatures.map(c=>({...c,head:{...c.head},mouth:{...c.mouth}}))};},get graphics(){return graphics;},destroy(){chebby?.destroy();objects.forEach(o=>o.destroy());}};
+ return {render,animationState(){return chebby?.animationState()||{walking:false,settling:false};},get emotion(){return emotion;},get diagnostics(){return {...diagnostic,gait:diagnostic.gait?{...diagnostic.gait,direction:[...diagnostic.gait.direction],screenDirection:[...diagnostic.gait.screenDirection],bodyDirection:[...diagnostic.gait.bodyDirection],gaitTravel:[...diagnostic.gait.gaitTravel]}:null,centipede:diagnostic.centipede?{points:diagnostic.centipede.points.map(p=>({...p})),spine:diagnostic.centipede.spine.map(p=>({...p}))}:null,chebby:chebby?.diagnostics||{ready:false,visible:false},resurrection:{...resurrection,frames:[...resurrection.frames],bounds:resurrection.bounds.map(b=>({...b}))},drinkingKinds:[...diagnostic.drinkingKinds],creatures:diagnostic.creatures.map(c=>({...c,head:{...c.head},mouth:{...c.mouth}}))};},get graphics(){return graphics;},destroy(){chebby?.destroy();objects.forEach(o=>o.destroy());}};
 }
 root.GridderActors={create,createGait};
 })(window);

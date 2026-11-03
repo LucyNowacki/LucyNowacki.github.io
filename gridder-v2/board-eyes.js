@@ -10,7 +10,7 @@ function describe(state,pose={}){
  const direction=state.direction||[0,0];
  let world=state.walking||state.bridging?unit([direction[0],-direction[1]]):[0,0];
  if(frightened&&state.threatDirection)world=unit(state.threatDirection);
- const angle=(state.capture?(state.angle||0):(state.heading||0))*Math.PI/180;
+ const angle=(state.capture?(state.angle||0):(state.headHeading??state.heading??0))*Math.PI/180;
  const local=[Math.cos(angle)*world[0]+Math.sin(angle)*world[1],-Math.sin(angle)*world[0]+Math.cos(angle)*world[1]];
  const gaze=local.map(x=>round(x,1/16));
  // The capture clock freezes on pause, so the shocked pupil pulse does too.

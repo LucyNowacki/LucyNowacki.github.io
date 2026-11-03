@@ -231,21 +231,21 @@ his face uses the atlas's round O-mouth and widened eyes instead of the resting
 smile. Decay keeps the open mouth with tired eyelids. These cached capture
 expressions use cached face artwork and restore the resting face afterwards.
 
-Six jointed legs step independently during actual travel, alongside his original
-animated gill fans. Gridder is 25% larger than the previous version.
-The added legs are now 25% shorter and thinner; their phase follows distance
-travelled, with smooth starts and a short settling motion on ordinary stops.
-Each cycle now covers 120 reference pixels, giving about 2.25 cycles per second
-at the starting 270px/s outside slow node boxes.
-Pause and capture immediately stop the walking gait.
+Gridder walks with the six original blue-purple tentacles coming from his
+head. Their original artwork bends at articulated joints in a staggered crab
+gait. Step phase follows actual distance,
+with one cycle per 80 reference pixels, smooth starts and a short settling
+motion on ordinary stops. Pause and capture immediately stop the gait;
+reduced-motion mode keeps a static pose.
 His size and the insects' sizes follow the board's plot width, including
 earned growth. Collision distances, remains and the centipede's corner-following
 body use the same scale.
-His eyes and mouth lead in the direction of movement. Brief node waits of at
-most 90ms keep that facing while the movement key remains held, with the gait
-phase frozen; this avoids a flash of the upright pose at every ordinary node.
-He returns upright on release, pause, long centre waits and border stops. Holding against the border
-does not animate a false walk.
+His face stays upright in all four travel directions. The pupils follow actual
+travel, while the legs and a subtle lean ease into a turn over 160ms per quarter
+turn. Brief node waits of at most 90ms preserve the travel pose while the
+movement key remains held, with step phase frozen. Release, long centre waits
+and border stops settle the tentacles. Holding against the border does not animate
+a false walk.
 The header portrait uses the same original neutral face instead of the old
 round smiley icon.
 
@@ -368,6 +368,7 @@ node tools/gridder-v2/test-sprite-scale.cjs
 node tools/gridder-v2/test-arcade-audio.cjs
 node tools/gridder-v2/test-smooth-gait.cjs
 node tools/gridder-v2/test-avatar-cache.cjs
+/home/lucy/anaconda3/envs/lucy/bin/python tools/gridder-v2/test-jointed-gait.py --stage after --root /tmp/gridder-reviewed-snapshot/gridder-v2
 /home/lucy/anaconda3/envs/lucy/bin/python tools/gridder-v2/test-walk-performance.py
 /home/lucy/anaconda3/envs/lucy/bin/python tools/gridder-v2/test-bolero-gait.py
 /home/lucy/anaconda3/envs/lucy/bin/python tools/gridder-v2/test-scale-audio.py
@@ -397,7 +398,15 @@ expressions. A single live page is resized through six window dimensions to
 check proportional sidebar width, available height and mobile stacking.
 Scene fixtures deliberately prepare states for visual inspection; they do not
 claim natural completion.
-`test-scale-audio.py` is the current focused acceptance for the six-leg avatar,
+`test-jointed-gait.py` is the current focused avatar acceptance. It compares
+immutable before/after snapshots in native Phaser WebGL and Canvas, including
+four-direction poses, articulation of the six original tentacles, bounded
+joint motion, rest/pause/capture, reduced motion and repeated-pose texture
+uploads. Prepared pose checks and live held-key checks are reported separately
+in `tools/gridder-v2/jointed-gait-evidence/`. Phone checks are browser emulation;
+they do not verify physical touch hardware or hardware GPU performance.
+
+`test-scale-audio.py` records the earlier six-leg avatar,
 25% size increase, proportional creature sizing and added audio; the earlier
 Chebby/crab suites retain historical crop/size assertions. It writes
 `tools/gridder-v2/scale-audio-evidence/` and checks actual native WebGL/Canvas
