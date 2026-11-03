@@ -432,7 +432,7 @@
   }
   function centrePause(){
     const value=Number($('gridder-centre-pause').value);
-    return Math.max(0,Math.min(500,Number.isFinite(value)?value:20));
+    return Math.max(0,Math.min(500,Number.isFinite(value)?value:10));
   }
   function updateCentrePause(){const value=centrePause();$('gridder-centre-pause-value').textContent=`${value} ms`;$('gridder-centre-pause').setAttribute('aria-valuetext',`${value} milliseconds at the centre`);}
   $('gridder-centre-pause').addEventListener('input',updateCentrePause);updateCentrePause();

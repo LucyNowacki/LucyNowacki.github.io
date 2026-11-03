@@ -337,15 +337,19 @@ function create(scene){
   const clock=s.chaseTime||0,reduced=root.GridderTheme?.reducedMotion?.()||false,pos=s.walker.position(),cell=axis=>axis==='x'?b.cellWidth:b.cellHeight;
   let x=b.px(pos.i),y=b.py(pos.j);
   const leechCapture=!!(s.deathScene&&['leech','shark'].includes(s.deathAttacker?.kind));
+  let sharkCapture=null;
   if(leechCapture){
    const a=s.deathAttacker,t=clamp(s.deathScene.elapsed/(a.dragDuration||650),0,1),ease=t*t*(3-2*t);
-   x=b.px(mix(a.from.i,a.to.i,ease));y=b.py(mix(a.from.j,a.to.j,ease));
+   sharkCapture=a.kind==='shark'?root.GridderLeechActors?.sharkCapturePose?.(a,s.deathScene.elapsed):null;
+   const victim=sharkCapture?.victim||{i:mix(a.from.i,a.to.i,ease),j:mix(a.from.j,a.to.j,ease)};
+   x=b.px(victim.i);y=b.py(victim.j);
   }
   for(const p of s.remains?.pieces||[]){if(p.eaten)continue;const g=s.remains.geometry(p,cell);fragment(pieces,b.px(g.i),b.py(g.j),g.radius,p.angle,p.shape);}
   const nearest=chooseEmotion(s,b,pos,clock),stage=s.deathScene?.phase(),bloodClock=s.deathScene?.elapsed||0;
   diagnostic.boardScale=boardScale;diagnostic.playerScale=playerFactor;
   diagnostic.captureKind=leechCapture?s.deathAttacker.kind:s.deathScene?'insect':null;
   diagnostic.victim={x,y};
+  diagnostic.sharkCapture=sharkCapture;
   while(spiders.length<s.chase.spiders.length){const g=scene.add.graphics().setDepth(22.5);spiders.push(g);objects.push(g);}
   while(spiders.length>Math.max(3,s.chase.spiders.length)){const g=spiders.pop();objects.splice(objects.indexOf(g),1);g.destroy();}
   eggs.clear();const eggStates=s.ecology?.eggs||[];

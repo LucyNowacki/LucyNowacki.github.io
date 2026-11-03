@@ -22,8 +22,8 @@
 <script defer src="chebby-avatar.js?v=20261103-swimming-gait"></script>
 <script defer src="monster-roster.js?v=20261028-ecology"></script>
 <script defer src="creature-ecology.js?v=20261028"></script>
-<script defer src="actors.js?v=20261103-swimming-gait"></script>
-<script defer src="leech-actors.js?v=20261103-swimming-gait"></script>
+<script defer src="actors.js?v=20261103-shark-lunge"></script>
+<script defer src="leech-actors.js?v=20261103-shark-lunge"></script>
 <script defer src="gridder-mascot.js?v=20261028-visual-only"></script>
 <script type="module" src="chebby-face.mjs?v=20261028-visual-only"></script>
 <script defer src="render-capabilities.js"></script>
@@ -31,7 +31,7 @@
 <script defer src="liquid-gaps.js?v=20261028-ecology"></script>
   <script defer src="renderer.js?v=20261102-phone-fullscreen"></script>
 <script defer src="case-maths.js?v=20261019-maths-responsive"></script>
-<script defer src="controller.js?v=20261102-play-again"></script>
+<script defer src="controller.js?v=20261103-shark-lunge"></script>
 <script defer src="math-window.js?v=20261102-arena-menu"></script>
 <script defer src="panel-layout.js?v=20261101-responsive"></script>
 <script defer src="fullscreen.js?v=20261102-phone-frame"></script>
@@ -87,12 +87,12 @@
 </div><section class="settings-card"><div class="eyebrow">MAKE IT FEEL RIGHT</div><h2>Movement console</h2><section class="tuning" aria-label="Movement and node tuning">          <div class="control-group gridder-speed-control"><label for="gridder-speed">Gridder speed <output id="gridder-speed-value" for="gridder-speed">280 px/s</output></label><input id="gridder-speed" type="range" min="40" max="400" step="10" value="280" aria-describedby="gridder-speed-note"><div class="range-labels"><span>Slower</span><span>Faster</span></div><p id="gridder-speed-note" class="surface-caption">Speed scales with the board; this value refers to the reference size.</p></div>
 <div class="half-controls"><section aria-labelledby="half-in-title"><h3 id="half-in-title">Half in</h3><p class="half-direction">edge → centre</p>
           <div class="control-group"><label for="gridder-resolution-vertical-in">Vertical <output id="gridder-resolution-vertical-in-value" for="gridder-resolution-vertical-in">2×</output></label><input id="gridder-resolution-vertical-in" aria-label="Half in vertical resolution" type="range" min="1" max="8" step="1" value="2"><div class="range-labels"><span>1×</span><span>8×</span></div></div>
-          <div class="control-group"><label for="gridder-resolution-horizontal-in">Horizontal <output id="gridder-resolution-horizontal-in-value" for="gridder-resolution-horizontal-in">2×</output></label><input id="gridder-resolution-horizontal-in" aria-label="Half in horizontal resolution" type="range" min="1" max="8" step="1" value="2"><div class="range-labels"><span>1×</span><span>8×</span></div></div>
+          <div class="control-group"><label for="gridder-resolution-horizontal-in">Horizontal <output id="gridder-resolution-horizontal-in-value" for="gridder-resolution-horizontal-in">1×</output></label><input id="gridder-resolution-horizontal-in" aria-label="Half in horizontal resolution" type="range" min="1" max="8" step="1" value="1"><div class="range-labels"><span>1×</span><span>8×</span></div></div>
 </section><section aria-labelledby="half-out-title"><h3 id="half-out-title">Half out</h3><p class="half-direction">centre → edge</p>
           <div class="control-group"><label for="gridder-resolution-vertical-out">Vertical <output id="gridder-resolution-vertical-out-value" for="gridder-resolution-vertical-out">1×</output></label><input id="gridder-resolution-vertical-out" aria-label="Half out vertical resolution" type="range" min="1" max="8" step="1" value="1"><div class="range-labels"><span>1×</span><span>8×</span></div></div>
           <div class="control-group"><label for="gridder-resolution-horizontal-out">Horizontal <output id="gridder-resolution-horizontal-out-value" for="gridder-resolution-horizontal-out">1×</output></label><input id="gridder-resolution-horizontal-out" aria-label="Half out horizontal resolution" type="range" min="1" max="8" step="1" value="1"><div class="range-labels"><span>1×</span><span>8×</span></div></div>
 </section></div><p class="surface-caption">Higher resolution means smaller movement per frame and longer travel time in that half of each box. Release a slider, then use the arrows to move. After keyboard adjustments, press Enter to return to the board.</p>
-          <div class="control-group"><label for="gridder-centre-pause">Centre pause <output id="gridder-centre-pause-value" for="gridder-centre-pause">20 ms</output></label><input id="gridder-centre-pause" type="range" min="0" max="500" step="10" value="20"><div class="range-labels"><span>0 ms</span><span>500 ms</span></div></div>
+          <div class="control-group"><label for="gridder-centre-pause">Centre pause <output id="gridder-centre-pause-value" for="gridder-centre-pause">10 ms</output></label><input id="gridder-centre-pause" type="range" min="0" max="500" step="10" value="10"><div class="range-labels"><span>0 ms</span><span>500 ms</span></div></div>
 </section>          <div id="gridder-normal-control" class="control-group" hidden><label for="gridder-normal-point">Normal at point A · x <output id="gridder-normal-point-value" for="gridder-normal-point"></output></label><input id="gridder-normal-point" type="range" step="0.01"><p class="surface-caption">Pause to choose A. Changing it restarts this level and keeps your lives.</p></div>
 <div class="game-options"><label class="point-toggle"><input id="gridder-spiders" type="checkbox" checked> Monsters, sharks and leeches</label>
           <label class="point-toggle"><input id="gridder-hints" type="checkbox" checked> Show target rectangles</label>

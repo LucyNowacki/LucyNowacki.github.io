@@ -2,13 +2,18 @@
 (function(root){
 'use strict';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),mix=(a,b,t)=>a+(b-a)*t;
+function sharkCapturePose(attacker,elapsed){
+ const duration=Math.max(121,attacker.dragDuration||650),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
+ const reach=smooth(elapsed/120),drag=smooth((elapsed-120)/(duration-120));
+ return {victim:{i:mix(attacker.from.i,attacker.to.i,drag),j:mix(attacker.from.j,attacker.to.j,drag)},reach,drag};
+}
 function stroke(g,points,width,colour,alpha=1){g.lineStyle(width,colour,alpha);g.beginPath();points.forEach((p,n)=>n?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.strokePath();}
 function create(scene){
- const bodies=scene.add.graphics().setDepth(22.7),effects=scene.add.graphics().setDepth(23.5);
- bodies.name='gridder-water-leeches';effects.name='gridder-leech-capture';
+ const bodies=scene.add.graphics().setDepth(22.7),effects=scene.add.graphics().setDepth(23.5),jaws=scene.add.graphics().setDepth(24.25);
+ bodies.name='gridder-water-leeches';effects.name='gridder-leech-capture';jaws.name='gridder-shark-jaws';
  let entries=[];
  function render(s,g){
-  bodies.clear();effects.clear();entries=[];
+  bodies.clear();effects.clear();jaws.clear();entries=[];
   if(s.spidersEnabled===false)return;
   const scale=root.GridderSpriteMetrics?.scale(g)??1,reduced=root.GridderTheme?.reducedMotion?.()||false;
   const states=Array.isArray(s.leeches)?s.leeches:s.leeches?.leeches||[];
@@ -69,22 +74,52 @@ function create(scene){
     // A back fin seen from above: a dark centreline base and a flexing tip.
     polygon([[-10,0],[-5,-2.6],[-1,dorsalSway],[-5,2.6]],0x075776);
     polygon([[-8,0],[-5,-.9],[-2,dorsalSway*.65],[-5,.9]],0xa9f8ed,.75);
-    for(const side of [-1,1]){
+    if(!attacker)for(const side of [-1,1]){
      const eye=pt(13,side*3.5),glint=pt(13.4,side*3.3);
      bodies.fillStyle(0x07152b,1);bodies.fillCircle(eye.x,eye.y,1.45*q);
      bodies.fillStyle(0xeaffff,1);bodies.fillCircle(glint.x,glint.y,.45*q);
     }
     polygon([[16,-1],[20,0],[16,1]],0x183653);
-    const mouth=pt(19,1),pulse=reduced?.8:.72+.28*Math.sin(clock/260);
+    let mouth=pt(19,1),attack=null;
+    if(attacker){
+     // Shared model-space target: the avatar and jaw use the same current-frame
+     // position. The wet body is still fitted independently to its safe disk.
+     const pose=sharkCapturePose(s.deathAttacker,elapsed),target={x:g.px(pose.victim.i),y:g.py(pose.victim.j)},base=pt(14,0),natural=pt(21,0);
+     const tip={x:mix(natural.x,target.x,pose.reach),y:mix(natural.y,target.y,pose.reach)};
+     const dx=tip.x-base.x,dy=tip.y-base.y,len=Math.hypot(dx,dy),fx=len>.01?dx/len:ux,fy=len>.01?dy/len:uy,nx=-fy,ny=fx;
+     const local=(along,across)=>({x:tip.x+fx*along+nx*across,y:tip.y+fy*along+ny*across});
+     const draw=(points,colour)=>{jaws.fillStyle(colour,1);jaws.beginPath();points.forEach((p,n)=>n?jaws.lineTo(p.x,p.y):jaws.moveTo(p.x,p.y));jaws.closePath();jaws.fillPath();};
+     // Two distinct jaw halves surround the victim; white teeth point inward.
+     // Width is tied to Gridder's screen scale, not to a pool-constrained shark.
+     const spread=(17+5*(1-pose.reach))*scale,rootWidth=4*q,lip=2.3*scale,teeth=[];
+     const extension=Math.max(0,len-12*scale),nose={x:base.x+fx*extension,y:base.y+fy*extension};
+     const flank=(p,w,side)=>({x:p.x+nx*w*side,y:p.y+ny*w*side});
+     const snout=[flank(base,4*q,-1),flank(nose,5*scale,-1),{x:nose.x+fx*3*scale,y:nose.y+fy*3*scale},flank(nose,5*scale,1),flank(base,4*q,1)];
+     bodies.fillStyle(0x20b9cc,1);bodies.beginPath();snout.forEach((p,n)=>n?bodies.lineTo(p.x,p.y):bodies.moveTo(p.x,p.y));bodies.closePath();bodies.fillPath();
+     for(const side of [-1,1]){const eye=extension>3*scale?flank(nose,3.3*scale,side):pt(13,side*3.5);bodies.fillStyle(0x07152b,1);bodies.fillCircle(eye.x,eye.y,1.25*scale);}
+     for(const side of [-1,1]){
+      const root={x:base.x+nx*rootWidth*side,y:base.y+ny*rootWidth*side};
+      const end=local(8*scale,side*spread),outer=local(3*scale,side*(spread+3*scale)),inner=local(6*scale,side*(spread-lip));
+      draw([base,root,outer,end,inner],0x118da7);
+      const lining0=local(-8*scale,side*(spread-1*scale)),lining1=local(6*scale,side*(spread-1*scale));
+      draw([root,lining0,lining1,inner],0x14344d);
+      for(const along of [-5,0,5]){
+       const a=local((along-1.4)*scale,side*(spread-1*scale)),b=local((along+1.4)*scale,side*(spread-1*scale)),point=local(along*scale,side*(spread-5.5*scale));
+       draw([a,b,point],0xf5ffff);teeth.push(point);
+      }
+     }
+     mouth=tip;attack={phase:elapsed<120?'reach':elapsed<(s.deathAttacker.dragDuration||650)?'drag':'drain',reach:pose.reach,drag:pose.drag,target,mouth,base,teeth};
+    }
+    const pulse=reduced?.8:.72+.28*Math.sin(clock/260);
     if(animal.phase==='warning'){effects.lineStyle(1.5*q,0xffe75a,.55+.4*pulse);effects.strokeCircle(centre.x,centre.y,26*q);}
     let victim=null;
-    if(attacker){const a=s.deathAttacker,t=clamp(elapsed/(a.dragDuration||650),0,1),ease=t*t*(3-2*t);victim={x:g.px(mix(a.from.i,a.to.i,ease)),y:g.py(mix(a.from.j,a.to.j,ease))};
+    if(attacker){const pose=sharkCapturePose(s.deathAttacker,elapsed);victim={x:g.px(pose.victim.i),y:g.py(pose.victim.j)};
      if(drinking){for(let n=0;n<=20;n++){const f=n/20,x=mix(victim.x,mouth.x,f),y=mix(victim.y,mouth.y,f);if(wet(x,y,2*scale)){effects.fillStyle(0xff234b,.7);effects.fillCircle(x,y,1.6*scale);}}const f=reduced?.5:(elapsed/240)%1,x=mix(victim.x,mouth.x,f),y=mix(victim.y,mouth.y,f);if(wet(x,y,2*scale)){effects.fillStyle(0xffd1b8,1);effects.fillCircle(x,y,1.5*scale);}}
     }
     entries.push({id:animal.id,kind:'shark',poolIndex:animal.poolIndex,phase:animal.phase,drinking,head:centre,headOffset,points:[centre,mouth],scale:q,modelScale:animal.sizeScale||1,clock,victim,
      orientation:{heading:angle,facing:upright,dorsalFin:pt(-1,dorsalSway),backbone:pt(-5,0)},
      anatomy:{view:'dorsal',snout:pt(22,0),eyes:[pt(13,-3.5),pt(13,3.5)],pectoralTips:[pt(-13,-18),pt(-13,18)],dorsalBase:pt(-5,0),dorsalTip:pt(-1,dorsalSway),tailJoint:pt(-20,wave*.65),tailBase:pt(-24,wave*.9),caudalTips:[pt(-29,wave-9),pt(-29,wave+9)]},
-     motion:{tail:wave,dorsal:dorsalSway}});
+     motion:{tail:wave,dorsal:dorsalSway},attack});
     continue;
    }
    const colour=[0x40ffdd,0xff4bdb,0xc7ff4b][animal.poolIndex%3],pulse=reduced?.8:.72+.28*Math.sin(clock/260);
@@ -121,7 +156,7 @@ function create(scene){
    entries.push({id:animal.id,poolIndex:animal.poolIndex,phase:animal.phase,drinking,head,headOffset,points,scale:size*scale,modelScale:animal.sizeScale||1,clock,victim});
   }
  }
- return {render,metrics:()=>({resourceCount:2,depths:[22.7,23.5],count:entries.length,leeches:entries.map(e=>({...e,head:{...e.head},points:e.points.map(p=>({...p}))}))}),destroy(){bodies.destroy();effects.destroy();entries=[];}};
+ return {render,metrics:()=>({resourceCount:3,depths:[22.7,23.5,24.25],count:entries.length,leeches:entries.map(e=>({...e,head:{...e.head},points:e.points.map(p=>({...p}))}))}),destroy(){bodies.destroy();effects.destroy();jaws.destroy();entries=[];}};
 }
-root.GridderLeechActors={create};
+root.GridderLeechActors={create,sharkCapturePose};
 })(window);

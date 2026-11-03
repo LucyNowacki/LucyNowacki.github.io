@@ -31,7 +31,12 @@ opening `index.html` directly with `file://` does not support audio/asset loadin
 Choose **Start game**, use the arrows or hold the direction buttons, and press
 Escape to pause. Controls retain the original speed, four node-resolution
 sliders, centre pause, difficulty, hints, practice mode and sound toggle.
-Gridder starts at **270 px/s**; the speed slider remains adjustable.
+Gridder starts at **280 px/s** at the reference board size. Incoming vertical
+travel uses **2×** resolution; incoming horizontal and both outgoing halves use
+**1×**, with a **10 ms** centre pause. These are the starting values on a fresh
+page, including when a browser restores older form inputs. The speed scales
+with the board as the window, orientation or fullscreen size changes; the
+sliders remain adjustable.
 Clear-water pools remove internal grid edges. Follow their shores: Gridder
 and land monsters use the remaining paths, and water cannot be captured.
 Leeches swim in the pools. Escape their flashing warning ring before the
@@ -202,7 +207,12 @@ The shark is drawn from above, with both pectoral fins and eyes visible, a
 central dorsal fin and an articulated rear body. Its tail beats sideways and
 the dorsal fin flexes with the supplied game clock. Pause freezes the motion;
 reduced motion uses a still pose. The whole silhouette stays within the same
-pool-safe fit, and its mouth, capture and blood-flow endpoints are retained.
+pool-safe fit while swimming. During an attack its head and open, toothed jaws
+reach out over the shore, close around Gridder and pull him into the pool.
+The first 120 ms reach the stationary victim; both sprites then follow one
+shared path for the rest of the existing 650 ms drag. The jaws remain visible
+around the sprite. Pausing freezes the reach and drag, and the existing
+one-life cost, underwater drain and pool-local blood timing are retained.
 
 A centipede is large enough to breed after two remnant meals (ten body segments)
 or when its body scale reaches 1.3 from drinking. It can lay a clutch of one or
@@ -413,6 +423,10 @@ acceptance. It compares immutable snapshots, measuring actual keyboard-driven
 cadence, power/recovery strokes and six original-art lobes, as well as paired
 shark anatomy, tail/back-fin pixel motion, capture and pool-local staining.
 Reports are in `tools/gridder-v2/swimming-gait-evidence/`.
+`test-shark-lunge.py` checks the screenshot movement defaults and proportional
+speed through resize/fullscreen, plus native shoreline reach, visible teeth,
+grip, drag and pause. Prepared capture poses and controller lifecycle checks
+are distinguished in `tools/gridder-v2/shark-lunge-evidence/`.
 `test-jointed-gait.py` retains focused avatar acceptance. It compares
 immutable before/after snapshots in native Phaser WebGL and Canvas, including
 four-direction poses, articulation of the six original tentacles, bounded
