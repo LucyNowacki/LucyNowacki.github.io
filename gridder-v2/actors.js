@@ -5,7 +5,7 @@
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)),mix=(a,b,t)=>a+(b-a)*t;
 // Pure presentation state: reference-distance phase, finite gait/turn envelopes.
 function createGait(){
- const stridePixels=80,quarterTurnMs=160;
+ const stridePixels=56,quarterTurnMs=160;
  let game=null,walker=null,clock=-1,position=null,direction=[0,0],moved=false,distance=0,travel=[0,0],sampleTime=0,lastMoveTime=-Infinity;
  let target=0,from=0,transitionTime=0,lastTime=-1;
  let headingFrom=0,headingTo=0,headingTime=0,headingDuration=0;

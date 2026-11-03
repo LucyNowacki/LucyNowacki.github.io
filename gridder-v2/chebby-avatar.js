@@ -4,6 +4,12 @@
 'use strict';
 let serial=0;
 const TAU=2*Math.PI;
+const powerDuty=.58;
+function tentacleStep(cycle){
+ const power=cycle<powerDuty,progress=power?cycle/powerDuty:(cycle-powerDuty)/(1-powerDuty);
+ const eased=progress*progress*(3-2*progress);
+ return {stroke:power?'power':'recovery',progress,sweep:power?1-2*eased:-1+2*eased,lift:power?0:Math.sin(Math.PI*progress)**2};
+}
 // Coordinates refer to the original 192×208 face canvas. Each polygon
 // partitions one pre-existing fan, and each source chain runs head→gill tip.
 const tentacleSpecs=[
@@ -57,7 +63,7 @@ function create(scene){
  function clipPiece(c,spec,distal){
   const dx=spec.tip[0]-spec.root[0],dy=spec.tip[1]-spec.root[1],length=Math.hypot(dx,dy),ux=dx/length,uy=dy/length,nx=-uy,ny=ux;
   const split=(spec.joint[0]-spec.root[0])*ux+(spec.joint[1]-spec.root[1])*uy;
-  const lo=distal?split-1.5:-300,hi=distal?300:split+1.5;
+  const lo=distal?split-3.5:-300,hi=distal?300:split+3.5;
   const point=(along,across)=>[spec.root[0]+ux*along+nx*across,spec.root[1]+uy*along+ny*across];
   polygon(c,[point(lo,-300),point(hi,-300),point(hi,300),point(lo,300)]);c.clip();
  }
@@ -78,7 +84,7 @@ function create(scene){
   const direction=[Math.cos(angle)*worldDirection[0]+Math.sin(angle)*worldDirection[1],-Math.sin(angle)*worldDirection[0]+Math.cos(angle)*worldDirection[1]];
   const leanX=direction[0]*amplitude,leanY=direction[1]*amplitude;
   info.walking=walking;info.heading=state.heading||0;info.direction=state.direction?[...state.direction]:[0,0];info.bridging=!!state.bridging;
-  info.gaitAmplitude=amplitude;info.settling=!!state.settling;info.gaitPhase=gaitPhase;
+  info.gaitAmplitude=amplitude;info.settling=!!state.settling;info.gaitPhase=gaitPhase;info.stridePixels=state.stridePixels??56;info.powerDuty=powerDuty;
   info.headHeading=headHeading;info.bodyHeading=state.bodyHeading||0;info.rigDirection=[...direction];
   const colour=state.tint??(state.mood==='fear'?0xe1dcff:state.mood==='pushing'?0xffbfdc:0xffffff);
   const revision=source.revision??JSON.stringify(source.pose??{}),eyes=root.GridderBoardEyes.describe(state,source.pose);info.eyes=eyes;
@@ -88,9 +94,13 @@ function create(scene){
    stats.compositions++;context.clearRect(0,0,256,208);context.save();context.translate(40,40);
    const tentacles=tentacleSpecs.map(spec=>{
     const tripod=(spec.index+(spec.side>0?1:0))%2,cycle=((gaitPhase/TAU+spec.index/6+tripod/2)%1+1)%1;
-    const phase=cycle*TAU,hip=amplitude*(.095*Math.sin(phase)+direction[0]*.018+spec.side*direction[1]*.012),elbow=amplitude*.11*Math.sin(phase-.9);
+    // A longer pushing stroke and a curled recovery travel through six
+    // staggered phases. The distal hinge follows with a small elastic lag.
+    const step=tentacleStep(cycle),delayed=tentacleStep((cycle+.9)%1);
+    const hip=amplitude*(spec.side*.155*step.sweep+direction[0]*.018+spec.side*direction[1]*.012);
+    const elbow=amplitude*spec.side*(.205*delayed.sweep-.095*step.lift);
     const joint=rotate(spec.joint,spec.root,hip),tip=rotate(rotate(spec.tip,spec.joint,elbow),spec.root,hip);
-    return {side:spec.side,index:spec.index,tripod,cycle,sourceRoot:[...spec.root],sourceJoint:[...spec.joint],sourceTip:[...spec.tip],root:[...spec.root],joint,tip,hipAngle:hip,elbowAngle:elbow};
+    return {side:spec.side,index:spec.index,tripod,cycle,stroke:step.stroke,strokeProgress:step.progress,strokeSweep:step.sweep,recoveryLift:step.lift,jointLagCycles:.1,sourceRoot:[...spec.root],sourceJoint:[...spec.joint],sourceTip:[...spec.tip],root:[...spec.root],joint,tip,hipAngle:hip,elbowAngle:elbow};
    });
    if(amplitude===0){context.drawImage(layers[0].canvas,0,0);context.drawImage(layers[1].canvas,0,0);}
    else tentacleSpecs.forEach((spec,index)=>{

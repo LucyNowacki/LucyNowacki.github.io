@@ -53,28 +53,38 @@ function create(scene){
     candidates.sort((a,b)=>Math.hypot(a.x-head.x,a.y-head.y)-Math.hypot(b.x-head.x,b.y-head.y));
     for(const factor of [1,.8,.6,.45,.3,.2,.1,.05]){for(const c of candidates)if(wet(c.x,c.y,34*q*factor+1)){centre={...c};q*=factor;fit=true;break;}if(fit)break;}
     if(!fit)continue;
-    // Mirror the local vertical axis when facing left. A 180-degree turn
-    // must keep the dorsal fin above the back and the pale belly below it.
+    // Keep the established heading and reflected local basis so the mouth
+    // and capture stream retain their exact screen-space endpoints.
     const upright=ux<0?-1:1;
-    const wave=reduced?0:Math.sin(clock/150)*3,pt=(x,y)=>({x:centre.x+(ux*x-uy*y*upright)*q,y:centre.y+(uy*x+ux*y*upright)*q});
+    const wave=reduced?0:Math.sin(clock/150)*3,dorsalSway=reduced?0:Math.sin(clock/230+.8)*1.7;
+    const pt=(x,y)=>({x:centre.x+(ux*x-uy*y*upright)*q,y:centre.y+(uy*x+ux*y*upright)*q});
     const polygon=(vertices,colour,alpha=1)=>{bodies.fillStyle(colour,alpha);bodies.beginPath();vertices.map(v=>pt(...v)).forEach((v,i)=>i?bodies.lineTo(v.x,v.y):bodies.moveTo(v.x,v.y));bodies.closePath();bodies.fillPath();};
-    // Facing right in local coordinates, transformed through the screen-space
-    // heading; model j increases upwards while screen y increases downwards.
-    polygon([[-17,0],[-29,-10+wave],[-25,wave],[-29,10+wave]],0x157caa);
-    polygon([[-9,-5],[-2,-17],[4,-7]],0x23c5de);
-    polygon([[-5,5],[-10,14],[5,6]],0x087da1);
-    polygon([[-20,0],[-16,-5],[-8,-8],[3,-8],[14,-5],[22,0],[14,5],[3,8],[-8,8],[-16,5]],0x21d5e4);
-    polygon([[-17,1],[-8,4],[5,5],[17,2],[21,0],[14,5],[3,8],[-8,8],[-16,5]],0xb7fff0);
-    polygon([[5,3],[12,2],[20,0],[13,5]],0x5b1636);
-    for(let n=0;n<3;n++)polygon([[8+n*3,2],[10+n*3,2],[9+n*3,4]],0xffffff);
-    const eye=pt(12,-3);bodies.fillStyle(0x07152b,1);bodies.fillCircle(eye.x,eye.y,1.6*q);bodies.fillStyle(0xffffff,1);bodies.fillCircle(eye.x+.3*q,eye.y-.4*q,.5*q);
+    // True dorsal view: +x is the snout, ±y are the two flanks. Both
+    // pectoral fins and eyes are visible, with a slender fin on the spine.
+    for(const side of [-1,1])polygon([[7,side*4],[1,side*7],[-8,side*17],[-13,side*18],[-10,side*13],[-8,side*6],[-2,side*4]],0x148ba8);
+    // The rear peduncle bends sideways; the two caudal lobes follow its tip.
+    polygon([[-18,wave*.55],[-24,wave*.9],[-29,wave-9],[-27,wave-2],[-27,wave+2],[-29,wave+9]],0x107d9c);
+    polygon([[-20,wave*.65],[-16,-4+wave*.4],[-9,-7],[1,-8],[11,-6],[18,-3],[22,0],[18,3],[11,6],[1,8],[-9,7],[-16,4+wave*.4]],0x20b9cc);
+    polygon([[-17,wave*.5],[-9,-3.8],[2,-5],[12,-3.7],[19,0],[12,3.7],[2,5],[-9,3.8]],0x64e4e4,.8);
+    // A back fin seen from above: a dark centreline base and a flexing tip.
+    polygon([[-10,0],[-5,-2.6],[-1,dorsalSway],[-5,2.6]],0x075776);
+    polygon([[-8,0],[-5,-.9],[-2,dorsalSway*.65],[-5,.9]],0xa9f8ed,.75);
+    for(const side of [-1,1]){
+     const eye=pt(13,side*3.5),glint=pt(13.4,side*3.3);
+     bodies.fillStyle(0x07152b,1);bodies.fillCircle(eye.x,eye.y,1.45*q);
+     bodies.fillStyle(0xeaffff,1);bodies.fillCircle(glint.x,glint.y,.45*q);
+    }
+    polygon([[16,-1],[20,0],[16,1]],0x183653);
     const mouth=pt(19,1),pulse=reduced?.8:.72+.28*Math.sin(clock/260);
     if(animal.phase==='warning'){effects.lineStyle(1.5*q,0xffe75a,.55+.4*pulse);effects.strokeCircle(centre.x,centre.y,26*q);}
     let victim=null;
     if(attacker){const a=s.deathAttacker,t=clamp(elapsed/(a.dragDuration||650),0,1),ease=t*t*(3-2*t);victim={x:g.px(mix(a.from.i,a.to.i,ease)),y:g.py(mix(a.from.j,a.to.j,ease))};
      if(drinking){for(let n=0;n<=20;n++){const f=n/20,x=mix(victim.x,mouth.x,f),y=mix(victim.y,mouth.y,f);if(wet(x,y,2*scale)){effects.fillStyle(0xff234b,.7);effects.fillCircle(x,y,1.6*scale);}}const f=reduced?.5:(elapsed/240)%1,x=mix(victim.x,mouth.x,f),y=mix(victim.y,mouth.y,f);if(wet(x,y,2*scale)){effects.fillStyle(0xffd1b8,1);effects.fillCircle(x,y,1.5*scale);}}
     }
-    entries.push({id:animal.id,kind:'shark',poolIndex:animal.poolIndex,phase:animal.phase,drinking,head:centre,headOffset,points:[centre,mouth],scale:q,modelScale:animal.sizeScale||1,clock,victim,orientation:{heading:angle,facing:upright,dorsalFin:pt(-2,-17),backbone:pt(-2,0),belly:pt(-2,6)}});
+    entries.push({id:animal.id,kind:'shark',poolIndex:animal.poolIndex,phase:animal.phase,drinking,head:centre,headOffset,points:[centre,mouth],scale:q,modelScale:animal.sizeScale||1,clock,victim,
+     orientation:{heading:angle,facing:upright,dorsalFin:pt(-1,dorsalSway),backbone:pt(-5,0)},
+     anatomy:{view:'dorsal',snout:pt(22,0),eyes:[pt(13,-3.5),pt(13,3.5)],pectoralTips:[pt(-13,-18),pt(-13,18)],dorsalBase:pt(-5,0),dorsalTip:pt(-1,dorsalSway),tailJoint:pt(-20,wave*.65),tailBase:pt(-24,wave*.9),caudalTips:[pt(-29,wave-9),pt(-29,wave+9)]},
+     motion:{tail:wave,dorsal:dorsalSway}});
     continue;
    }
    const colour=[0x40ffdd,0xff4bdb,0xc7ff4b][animal.poolIndex%3],pulse=reduced?.8:.72+.28*Math.sin(clock/260);

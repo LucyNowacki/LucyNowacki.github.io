@@ -198,6 +198,12 @@ drain sequence and costs one life. Blood flows into that pool and gradually
 changes its clear blue hue toward red, preserving its visible seabed. The stain
 persists for that board; other pools stay blue.
 
+The shark is drawn from above, with both pectoral fins and eyes visible, a
+central dorsal fin and an articulated rear body. Its tail beats sideways and
+the dorsal fin flexes with the supplied game clock. Pause freezes the motion;
+reduced motion uses a still pose. The whole silhouette stays within the same
+pool-safe fit, and its mouth, capture and blood-flow endpoints are retained.
+
 A centipede is large enough to breed after two remnant meals (ten body segments)
 or when its body scale reaches 1.3 from drinking. It can lay a clutch of one or
 two eggs on a legal dry node every 30 seconds. Accepted clutches hatch exactly
@@ -234,9 +240,13 @@ expressions use cached face artwork and restore the resting face afterwards.
 Gridder walks with the six original blue-purple tentacles coming from his
 head. Their original artwork bends at articulated joints in a staggered crab
 gait. Step phase follows actual distance,
-with one cycle per 80 reference pixels, smooth starts and a short settling
+with one cycle per 56 reference pixels (about 43% quicker than the previous
+80-pixel stride), smooth starts and a short settling
 motion on ordinary stops. Pause and capture immediately stop the gait;
-reduced-motion mode keeps a static pose.
+reduced-motion mode keeps a static pose. Each tentacle has a longer eased
+pushing stroke and a quicker curled recovery, with a small delay between the
+two joints. Six staggered phases and stronger bends animate the original
+artwork while the player's movement speed stays unchanged.
 His size and the insects' sizes follow the board's plot width, including
 earned growth. Collision distances, remains and the centipede's corner-following
 body use the same scale.
@@ -398,7 +408,12 @@ expressions. A single live page is resized through six window dimensions to
 check proportional sidebar width, available height and mobile stacking.
 Scene fixtures deliberately prepare states for visual inspection; they do not
 claim natural completion.
-`test-jointed-gait.py` is the current focused avatar acceptance. It compares
+`test-swimming-gait.py` is the focused faster-tentacle and top-view-shark
+acceptance. It compares immutable snapshots, measuring actual keyboard-driven
+cadence, power/recovery strokes and six original-art lobes, as well as paired
+shark anatomy, tail/back-fin pixel motion, capture and pool-local staining.
+Reports are in `tools/gridder-v2/swimming-gait-evidence/`.
+`test-jointed-gait.py` retains focused avatar acceptance. It compares
 immutable before/after snapshots in native Phaser WebGL and Canvas, including
 four-direction poses, articulation of the six original tentacles, bounded
 joint motion, rest/pause/capture, reduced motion and repeated-pose texture
