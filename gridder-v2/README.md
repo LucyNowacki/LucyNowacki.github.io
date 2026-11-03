@@ -209,6 +209,11 @@ the dorsal fin flexes with the supplied game clock. Pause freezes the motion;
 reduced motion uses a still pose. The whole silhouette stays within the same
 pool-safe fit while swimming. During an attack its head and open, toothed jaws
 reach out over the shore, close around Gridder and pull him into the pool.
+The attack head follows Lucy's reference photo: a broad gray snout, pale lower
+jaw and continuous pink upper/lower gums surround one dark mouth. Seven larger
+upper teeth and six smaller lower teeth have broad triangular bases rooted in
+those curved gums. The upper arch stays steady while the lower U-shaped jaw
+opens with a projected hinge angle and closes toward it.
 The first 120 ms reach the stationary victim; both sprites then follow one
 shared path for the rest of the existing 650 ms drag. The shark then visibly
 opens and closes its toothed jaws three times. From 1550 to 2400 ms, Gridder
@@ -435,6 +440,9 @@ are distinguished in `tools/gridder-v2/shark-lunge-evidence/`.
 the fixed mouth and original-art swallowing boundary, disappearance, the belly
 pulse and the preserved capture lifecycle. Native stills and a timed prepared
 preview are in `tools/gridder-v2/shark-consume-evidence/`.
+`test-shark-jaws.cjs` and `test-shark-jaws.py` verify the drawn upper/lower
+arches, tooth roots and triangles, lower-jaw movement and preserved swallowing.
+Native head previews are in `tools/gridder-v2/shark-jaws-evidence/`.
 `test-jointed-gait.py` retains focused avatar acceptance. It compares
 immutable before/after snapshots in native Phaser WebGL and Canvas, including
 four-direction poses, articulation of the six original tentacles, bounded

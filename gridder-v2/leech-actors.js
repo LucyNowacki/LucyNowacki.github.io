@@ -97,33 +97,49 @@ function create(scene){
      // position. The wet body is still fitted independently to its safe disk.
      const pose=capturePose,target={x:g.px(pose.mouth.i),y:g.py(pose.mouth.j)},base=pt(14,0),natural=pt(21,0);
      const tip={x:mix(natural.x,target.x,pose.reach),y:mix(natural.y,target.y,pose.reach)};
-     const dx=tip.x-base.x,dy=tip.y-base.y,len=Math.hypot(dx,dy),fx=len>.01?dx/len:ux,fy=len>.01?dy/len:uy,nx=-fy,ny=fx;
+     // Use the same projected shore normal as avatar clipping. Pool fitting
+     // may relocate the body, but cannot rotate the mouth away from that plane.
+     const dx=g.px(s.deathAttacker.from.i)-g.px(s.deathAttacker.to.i),dy=g.py(s.deathAttacker.from.j)-g.py(s.deathAttacker.to.j),len=Math.hypot(dx,dy),fx=len>.01?dx/len:ux,fy=len>.01?dy/len:uy,nx=-fy,ny=fx;
      const local=(along,across)=>({x:tip.x+fx*along+nx*across,y:tip.y+fy*along+ny*across});
      const draw=(points,colour)=>{jaws.fillStyle(colour,1);jaws.beginPath();points.forEach((p,n)=>n?jaws.lineTo(p.x,p.y):jaws.moveTo(p.x,p.y));jaws.closePath();jaws.fillPath();};
-     // Two distinct jaw halves surround the victim; white teeth point inward.
-     // Width is tied to Gridder's screen scale, not to a pool-constrained shark.
-     const spread=(9+8*pose.bite+5*(1-pose.reach))*scale,rootWidth=4*q,lip=2.3*scale,teeth=[];
-     const extension=Math.max(0,len-12*scale),nose={x:base.x+fx*extension,y:base.y+fy*extension};
-     const flank=(p,w,side)=>({x:p.x+nx*w*side,y:p.y+ny*w*side});
-     const snout=[flank(base,4*q,-1),flank(nose,5*scale,-1),{x:nose.x+fx*3*scale,y:nose.y+fy*3*scale},flank(nose,5*scale,1),flank(base,4*q,1)];
-     bodies.fillStyle(0x20b9cc,1);bodies.beginPath();snout.forEach((p,n)=>n?bodies.lineTo(p.x,p.y):bodies.moveTo(p.x,p.y));bodies.closePath();bodies.fillPath();
-     for(const side of [-1,1]){const eye=extension>3*scale?flank(nose,3.3*scale,side):pt(13,side*3.5);bodies.fillStyle(0x07152b,1);bodies.fillCircle(eye.x,eye.y,1.25*scale);}
-     // The oral cavity sits behind the avatar; the clipped original artwork
-     // and the foreground tooth rims show its progress into the mouth.
-     const cavity=[local(-12*scale,0),local(-7*scale,-spread*.62),local(4*scale,-spread*.62),local(10*scale,0),local(4*scale,spread*.62),local(-7*scale,spread*.62)];
-     bodies.fillStyle(0x071a2e,1);bodies.beginPath();cavity.forEach((p,n)=>n?bodies.lineTo(p.x,p.y):bodies.moveTo(p.x,p.y));bodies.closePath();bodies.fillPath();
-     for(const side of [-1,1]){
-      const root={x:base.x+nx*rootWidth*side,y:base.y+ny*rootWidth*side};
-      const end=local(8*scale,side*spread),outer=local(3*scale,side*(spread+3*scale)),inner=local(6*scale,side*(spread-lip));
-      draw([base,root,outer,end,inner],0x118da7);
-      const lining0=local(-8*scale,side*(spread-1*scale)),lining1=local(6*scale,side*(spread-1*scale));
-      draw([root,lining0,lining1,inner],0x14344d);
-      for(const along of [-5,0,5]){
-       const a=local((along-1.4)*scale,side*(spread-1*scale)),b=local((along+1.4)*scale,side*(spread-1*scale)),point=local(along*scale,side*(spread-5.5*scale));
-       draw([a,b,point],0xf5ffff);teeth.push(point);
-      }
-     }
-     mouth=tip;attack={phase:elapsed<120?'reach':elapsed<(s.deathAttacker.dragDuration||650)?'drag':elapsed<1550?'chew':elapsed<2400?'swallow':'belly',reach:pose.reach,drag:pose.drag,bite:pose.bite,swallow:pose.swallow,belly:pose.belly,bellyRegion:{centre:pt(-4,0),axis:pt(1,0),halfLength:8*q,halfWidth:8*(1+.35*belly)*q},jawHalfGap:spread,target,mouth,base,teeth};
+     // A frontal, three-quarter attack head: lateral x runs across the mouth,
+     // longitudinal y runs from the upper snout toward the hinged mandible.
+     // Both arches join at the two corners; only the lower jaw drops on a bite.
+     const width=18*scale,upperHeight=13*scale,jawAngle=.24+1.08*pose.bite+.15*(1-pose.reach),lowerHeight=17*scale*Math.sin(jawAngle);
+     const half=18, arch=(height,sign)=>Array.from({length:half+1},(_,i)=>{
+      const x=-1+2*i/half,y=sign*height*Math.sqrt(Math.max(0,1-x*x));
+      return local(y,x*width);
+     });
+     const upperArch=arch(upperHeight,-1),lowerArch=arch(lowerHeight,1),hinges=[upperArch[0],upperArch[half]];
+     const upperOuter=arch(upperHeight+3.4*scale,-1),lowerOuter=arch(lowerHeight+4.7*scale,1);
+     const upperTeeth=[],lowerTeeth=[],teeth=[];
+     const paint=(layer,points,colour)=>{layer.fillStyle(colour,1);layer.beginPath();points.forEach((p,n)=>n?layer.lineTo(p.x,p.y):layer.moveTo(p.x,p.y));layer.closePath();layer.fillPath();};
+     // The head and oral cavity sit behind the original avatar. The rims and
+     // teeth sit in front so the mouth visibly bites and swallows the artwork.
+     const headShape=[local(-23*scale,-18*scale),local(-29*scale,-12*scale),local(-32*scale,0),local(-29*scale,12*scale),local(-23*scale,18*scale),...lowerOuter.slice().reverse()];
+     paint(bodies,headShape,0x638b8c);
+     paint(bodies,[local(-21*scale,-15*scale),local(-27*scale,-9*scale),local(-29*scale,0),local(-27*scale,9*scale),local(-21*scale,15*scale),...upperOuter.slice().reverse()],0x94a9a2);
+     paint(bodies,[...upperArch,...lowerArch.slice().reverse()],0x361520);
+     // Pale lower jaw skin and pink gum form unbroken, rounded dental rims.
+     const lowerSkin=arch(lowerHeight+8*scale,1);
+     paint(jaws,[...lowerSkin,...lowerOuter.slice().reverse()],0xd5d3bd);
+     paint(jaws,[...upperOuter,...upperArch.slice().reverse()],0xad5362);
+     paint(jaws,[...lowerOuter,...lowerArch.slice().reverse()],0xb35f69);
+     // Triangles have wide bases on the actual curved gum, with their tips
+     // directed into the dark cavity rather than floating off straight prongs.
+     const tooth=(fraction,upper)=>{
+      const h=upper?upperHeight:lowerHeight,sign=upper?-1:1,x=fraction*width,delta=(upper?2.1:1.75)*scale;
+      const yAt=v=>sign*h*Math.sqrt(Math.max(0,1-(v/width)*(v/width)));
+      const a=local(yAt(x-delta),x-delta),b=local(yAt(x+delta),x+delta);
+      const length=(upper?5.8:3.7)*(1-.22*Math.abs(fraction))*scale;
+      const p=local(yAt(x)-sign*length,x*.94);
+      const tri=[a,b,p];paint(jaws,tri,0xf4efdc);teeth.push(p);(upper?upperTeeth:lowerTeeth).push(tri);
+     };
+     for(const x of [-.75,-.5,-.25,0,.25,.5,.75])tooth(x,true);
+     for(const x of [-.7,-.42,-.14,.14,.42,.7])tooth(x,false);
+     for(const side of [-1,1]){const eye=local(-20*scale,side*16*scale);bodies.fillStyle(0x142832,1);bodies.fillCircle(eye.x,eye.y,1.65*scale);bodies.fillStyle(0xd9e8df,1);bodies.fillCircle(eye.x-fx*.4*scale,eye.y-fy*.4*scale,.45*scale);}
+     mouth=tip;attack={phase:elapsed<120?'reach':elapsed<(s.deathAttacker.dragDuration||650)?'drag':elapsed<1550?'chew':elapsed<2400?'swallow':'belly',reach:pose.reach,drag:pose.drag,bite:pose.bite,swallow:pose.swallow,belly:pose.belly,bellyRegion:{centre:pt(-4,0),axis:pt(1,0),halfLength:8*q,halfWidth:8*(1+.35*belly)*q},jawHalfGap:lowerHeight,target,mouth,base,teeth,
+      jawGeometry:{origin:tip,forward:{x:fx,y:fy},lateral:{x:nx,y:ny},upperArch,lowerArch,hinges,upperTeeth,lowerTeeth,jawAngle,opening:upperHeight+lowerHeight}};
     }
     const pulse=reduced?.8:.72+.28*Math.sin(clock/260);
     if(animal.phase==='warning'){effects.lineStyle(1.5*q,0xffe75a,.55+.4*pulse);effects.strokeCircle(centre.x,centre.y,26*q);}
