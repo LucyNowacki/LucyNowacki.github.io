@@ -73,11 +73,13 @@ function create(scene){
   image.setVisible(info.visible);if(!info.visible)return;
   const walking=!!(state.walking&&!state.capture),gaitPhase=state.gaitPhase??0;
   const amplitude=state.capture?0:(state.gaitAmplitude??Number(walking));
-  const direction=state.bodyDirection?[state.bodyDirection[0],-state.bodyDirection[1]]:(state.screenDirection||[state.direction?.[0]||0,-(state.direction?.[1]||0)]);
+  const headHeading=state.capture?(state.angle||0):(state.headHeading??state.heading??0),angle=headHeading*Math.PI/180;
+  const worldDirection=state.bodyDirection?[state.bodyDirection[0],-state.bodyDirection[1]]:(state.screenDirection||[state.direction?.[0]||0,-(state.direction?.[1]||0)]);
+  const direction=[Math.cos(angle)*worldDirection[0]+Math.sin(angle)*worldDirection[1],-Math.sin(angle)*worldDirection[0]+Math.cos(angle)*worldDirection[1]];
   const leanX=direction[0]*amplitude,leanY=direction[1]*amplitude;
   info.walking=walking;info.heading=state.heading||0;info.direction=state.direction?[...state.direction]:[0,0];info.bridging=!!state.bridging;
   info.gaitAmplitude=amplitude;info.settling=!!state.settling;info.gaitPhase=gaitPhase;
-  info.headHeading=state.capture?(state.angle||0):0;info.bodyHeading=state.bodyHeading||0;info.rigDirection=[...direction];
+  info.headHeading=headHeading;info.bodyHeading=state.bodyHeading||0;info.rigDirection=[...direction];
   const colour=state.tint??(state.mood==='fear'?0xe1dcff:state.mood==='pushing'?0xffbfdc:0xffffff);
   const revision=source.revision??JSON.stringify(source.pose??{}),eyes=root.GridderBoardEyes.describe(state,source.pose);info.eyes=eyes;
   const layersChanged=prepareLayers(source,revision,colour,eyes);
@@ -103,7 +105,7 @@ function create(scene){
    lastTentacles=tentacles;texture.refresh();stats.uploads++;lastPixels=pixelKey;
   }
   info.tentacles=lastTentacles;info.gillAngles=[lastTentacles[0]?.hipAngle||0,lastTentacles[3]?.hipAngle||0];info.performance={...stats};
-  image.setPosition(state.x,state.y).setScale(.25*state.scaleX,.25*state.scaleY).setAngle(state.capture?state.angle:0).setAlpha(state.alpha??1);
+  image.setPosition(state.x,state.y).setScale(.25*state.scaleX,.25*state.scaleY).setAngle(headHeading).setAlpha(state.alpha??1);
   image.setTint(0xffffff);info.tint=colour;info.x=image.x;info.y=image.y;info.angle=image.angle;info.scaleX=image.scaleX;info.scaleY=image.scaleY;
  }
  return {image,available,render,animationState(){return {walking:!!info.walking,settling:!!info.settling};},get diagnostics(){return {...info,captureMouth:info.captureMouth?{...info.captureMouth}:null,tentacles:info.tentacles?.map(t=>({...t,sourceRoot:[...t.sourceRoot],sourceJoint:[...t.sourceJoint],sourceTip:[...t.sourceTip],root:[...t.root],joint:[...t.joint],tip:[...t.tip]}))||[],direction:info.direction?[...info.direction]:[0,0],rigDirection:info.rigDirection?[...info.rigDirection]:[0,0],gillAngles:info.gillAngles?[...info.gillAngles]:[0,0],pose:info.pose?{...info.pose}:null,sourceCrop:info.sourceCrop?{...info.sourceCrop}:null};},destroy(){image.destroy();scene.textures.remove(key);for(const layer of [sourceLayer,...layers,...branches]){layer.canvas.width=0;layer.canvas.height=0;}rawPixels=null;tintedPixels=null;}};

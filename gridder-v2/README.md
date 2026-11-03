@@ -240,11 +240,11 @@ reduced-motion mode keeps a static pose.
 His size and the insects' sizes follow the board's plot width, including
 earned growth. Collision distances, remains and the centipede's corner-following
 body use the same scale.
-His face stays upright in all four travel directions. The pupils follow actual
-travel, while the legs and a subtle lean ease into a turn over 160ms per quarter
-turn. Brief node waits of at most 90ms preserve the travel pose while the
+His whole sprite turns with travel as before: right −90°, left +90°, up 180°
+and down 0°. The pupils follow actual travel within that rotated face, while
+the tentacle lean eases into a turn. Brief node waits of at most 90ms preserve the travel pose while the
 movement key remains held, with step phase frozen. Release, long centre waits
-and border stops settle the tentacles. Holding against the border does not animate
+and border stops return the sprite upright and settle the tentacles. Holding against the border does not animate
 a false walk.
 The header portrait uses the same original neutral face instead of the old
 round smiley icon.

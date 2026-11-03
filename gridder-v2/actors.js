@@ -59,7 +59,7 @@ function createGait(){
   const settling=!reducedMotion&&(bridging||Math.abs(amplitude-target)>1e-6||turning);
   const angle=bodyHeading*Math.PI/180;
   return {walking,bridging,direction:[...direction],screenDirection:[direction[0],-direction[1]],
-   heading:0,headHeading:0,bodyHeading,bodyDirection:direction.some(Boolean)?[-Math.sin(angle),-Math.cos(angle)]:[0,0],
+   heading:gaitActive?facingAngle(direction):0,headHeading:gaitActive?facingAngle(direction):0,bodyHeading,bodyDirection:direction.some(Boolean)?[-Math.sin(angle),-Math.cos(angle)]:[0,0],
    targetBodyHeading:headingTo,turning,reducedMotion,gaitDistance:distance,gaitTravel:[...travel],stridePixels,
    gaitPhase:distance*Math.PI*2/stridePixels,gaitAmplitude:amplitude,settling};
  }
