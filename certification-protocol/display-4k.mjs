@@ -1,6 +1,6 @@
 import {stepElevenSymbols} from './step-eleven-symbols.mjs?v=117';
 import {math} from './math-render.mjs?v=103';
-import {drawStory3D} from './story-3d-render.mjs?v=103';
+import {drawStory3D} from './story-3d-render.mjs?v=three2';
 import {MATRIX_N} from './story-3d-math.mjs?v=103';
 import {THETA} from './step-five-math.mjs?v=103';
 import {mountCompactBoard} from './display-board.mjs?v=118';

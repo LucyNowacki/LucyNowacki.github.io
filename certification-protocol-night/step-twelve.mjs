@@ -1,4 +1,4 @@
-import {drawStory3D} from './story-3d-render.mjs?v=103';
+import {drawStory3D} from './story-3d-render.mjs?v=three2';
 import {MATRIX_N,matrixPoint} from './story-3d-math.mjs?v=103';
 import {math} from './math-render.mjs?v=103';
 import {VALUES as V} from './certificate-values.mjs?v=103';

@@ -1,6 +1,6 @@
 import {math as m} from './math-render.mjs?v=103';
 import {DEN,HALF,MID,ERROR,ETA,NORM_E,normUnits,copy} from './enclosure-math.mjs?v=103';
-import {mountOutputEnclosure} from './output-zonotope.mjs?v=103';
+import {mountOutputEnclosure} from './output-zonotope.mjs?v=three2';
 import {VALUES} from './certificate-values.mjs?v=103';
 const tex=String.raw,eq=s=>`<div class="radius-equation">${m(s)}</div>`;
 const index=i=>`${Math.floor(i/2)+1}${i%2+1}`, A0=Number(VALUES.midpoint);

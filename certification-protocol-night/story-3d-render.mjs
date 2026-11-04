@@ -1,3 +1,4 @@
+import {renderThreeGeometry} from './three-geometry.mjs?v=three2';
 import {measureLiftLabel,drawLiftLabel} from './lift-canvas-label.mjs?v=103';
 import {drawCanvasGap} from './output-gap-segment.mjs?v=103';
 import {outputGap} from './output-gap.mjs?v=103';
@@ -8,7 +9,7 @@ import {frame} from './step-ten-math.mjs?v=103';
 import {ETA} from './gate-two-math.mjs?v=103';
 import {output3d,matrixRay,matrixPoint,MATRIX_N,radialSection} from './story-3d-math.mjs?v=103';
 // Presentation-only night palette. Geometric maps and all certificate values are unchanged.
-export const PALETTE={certificate:'#9b83ff',image:'#1e90ff',structure:'#c5adff',finite:'#ff1493',operator:'#00ff00',actual:'#ff526f',box:'#ff1493',ref:'#b9bdd0',vector:'#00ffff',protected:'#d3d3d3',background:'#100b1e',label:'#ffffff',leader:'#f0edf8',clearance:'#ffc46b'};
+export const PALETTE={axis:'#ffd166',certificate:'#9b83ff',image:'#1e90ff',structure:'#c5adff',finite:'#ff1493',operator:'#00ff00',actual:'#ff526f',box:'#ff1493',ref:'#b9bdd0',vector:'#00ffff',protected:'#d3d3d3',background:'#100b1e',label:'#ffffff',leader:'#f0edf8',clearance:'#ffc46b'};
 const sphere=(r,n)=>n.map(x=>x*r),ellipsoid=(a,n)=>n.map((x,i)=>x*a[i]);
 export function drawStory3D(canvas,id,state){
  // The larger explorer gets a hold-to-read gap key; miniature navigation tiles stay buttons.
@@ -29,11 +30,11 @@ export function drawStory3D(canvas,id,state){
  const rotate=p=>{const x=Math.cos(yaw)*p[0]+Math.sin(yaw)*p[2],z=-Math.sin(yaw)*p[0]+Math.cos(yaw)*p[2];return[x,Math.cos(pitch)*p[1]-Math.sin(pitch)*z,Math.sin(pitch)*p[1]+Math.cos(pitch)*z];};
  const project=p=>{const q=rotate(p),s=(fitScale??Math.min(W*.42,H*.39)/range)*zoom;return[centre[0]+s*q[0],centre[1]-s*q[1],q[2]];};
  const path=(pts,color,dash=false,width=1.5)=>paths.push({pts,color,dash,width});
- const point=(p,text,color=P.actual)=>points.push({p,text,color});
+ const point=(p,text,color=P.actual)=>points.push({p,text,color,radius:Math.max(4,font*.25)});
  const circle=(c,r,color,plane=0,dash=false)=>path(Array.from({length:81},(_,j)=>{const t=j*Math.PI/40,p=[...c];p[0]+=r*Math.cos(t);p[plane===0?1:2]+=r*Math.sin(t);return p;}),color,dash,2);
  // Only certified protected interiors are filled; all other surfaces remain wireframes.
- const surface=(fn,color,opacity=0,dash=false,protectedInterior=false)=>surfaces.push({fn,color,opacity:protectedInterior?.28:0,dash,fillColor:PALETTE.protected});
- const axes=(r,names=['Re','Im',''])=>{for(let i=0;i<3;i++)if(names[i]){const p=[0,0,0];p[i]=r;path([p.map(x=>-x),p],i===0?P.image:P.ref,false,1);paths.at(-1).axis=true;labels.push({p,text:names[i],color:i===0?P.image:P.ref});}};
+ const surface=(fn,color,opacity=0,dash=false,protectedInterior=false)=>surfaces.push({fn,color,opacity:protectedInterior?.18:0,dash,fillColor:PALETTE.protected});
+ const axes=(r,names=['Re','Im',''])=>{for(let i=0;i<3;i++)if(names[i]){const p=[0,0,0];p[i]=r;path([p.map(x=>-x),p],P.axis,false,2);paths.at(-1).axis=true;labels.push({p,text:names[i],color:P.axis});}};
  let metrics='';
  if(id===1){
   range=.53;centre=[W*.56,H*.48];const transform=p=>{const dx=p.x-TOY.c.x,dy=p.y-TOY.c.y,d=Math.hypot(dx,dy),k=state.scaled&&d>.16?.28/d:1;return[dx*k,dy*k,0];};range=state.scaled?.34:.65;
@@ -69,13 +70,19 @@ export function drawStory3D(canvas,id,state){
  if(id===7){const f=frame(state.theta),b=.029445725,a=state.scaled?f.axes.map(x=>Math.min(x,3*b)):f.axes;range=Math.max(...a)*1.2;surface(n=>ellipsoid(a,n),P.image,.025);surface(n=>sphere(b,n),P.certificate,.18,false,true);axes(range*.94,['σmax','σmin','|z|']);point([0,0,0],'0',P.ref);metrics=`resolved σmin ≈ ${f.axes[1].toFixed(7)} · |z| ≈ ${f.axes[2].toFixed(7)} · exact lift, no loss`;}
  // Fit the actual geometry to its measured canvas, keeping a single Euclidean scale.
  const cloud=[];for(const sf of surfaces)for(let i=0;i<=10;i++)for(let j=0;j<24;j++){const lat=-Math.PI/2+i*Math.PI/10,u=j*Math.PI/12;cloud.push(rotate(sf.fn([Math.cos(lat)*Math.cos(u),Math.sin(lat),Math.cos(lat)*Math.sin(u)])));}for(const p of paths)if(!p.axis)cloud.push(...p.pts.map(rotate));cloud.push(...points.map(p=>rotate(p.p)));if(cloud.length){const minx=Math.min(...cloud.map(p=>p[0])),maxx=Math.max(...cloud.map(p=>p[0])),miny=Math.min(...cloud.map(p=>p[1])),maxy=Math.max(...cloud.map(p=>p[1]));fitScale=Math.min((W-90)/(maxx-minx||1),(H-55)/(maxy-miny||1));centre=[W/2-fitScale*zoom*(maxx+minx)/2,H*.48+fitScale*zoom*(maxy+miny)/2];}
- // Protected interiors are depth-sorted gray tessellations; all surface edges are wireframes.
- const faces=[];for(const surf of surfaces){const rows=12,cols=24,grid=Array.from({length:rows+1},(_,i)=>Array.from({length:cols+1},(_,j)=>{const lat=-Math.PI/2+i*Math.PI/rows,u=j*2*Math.PI/cols;return surf.fn([Math.cos(lat)*Math.cos(u),Math.sin(lat),Math.cos(lat)*Math.sin(u)]);}));for(let i=0;i<rows;i++)for(let j=0;j<cols;j++){const pts=[grid[i][j],grid[i+1][j],grid[i+1][j+1],grid[i][j+1]].map(project);faces.push({pts,depth:pts.reduce((s,p)=>s+p[2],0)/4,...surf});}for(let i=2;i<rows;i+=2)path(grid[i],surf.color+'c7',surf.dash);for(let j=0;j<cols;j+=4)path(grid.map(row=>row[j]),surf.color+'a8',surf.dash);}
- faces.sort((a,b)=>a.depth-b.depth);for(const f of faces){ctx.beginPath();f.pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.globalAlpha=f.opacity;ctx.fillStyle=f.fillColor;ctx.fill();}ctx.globalAlpha=1;
- for(const p of paths){ctx.beginPath();p.pts.map(project).forEach((v,i)=>i?ctx.lineTo(v[0],v[1]):ctx.moveTo(v[0],v[1]));ctx.setLineDash(Array.isArray(p.dash)?p.dash:p.dash?[5,5]:[]);ctx.strokeStyle=p.color;ctx.lineWidth=p.width;ctx.stroke();}ctx.setLineDash([]);
+ // One shared Three.js renderer supplies the geometry; labels retain their measured canvas layout.
+ // Invoke it before the fallback appends latitude/longitude paths to avoid drawing them twice.
+ const usingThree=renderThreeGeometry(canvas,{surfaces,paths,points,palette:P,yaw,pitch,zoom,fitScale,centre,range,width:W,height:H});
+ canvas.dataset.renderer=usingThree?'threejs':'canvas-fallback';
+ if(!usingThree){
+  // Protected interiors are depth-sorted gray tessellations; all surface edges are wireframes.
+  const faces=[];for(const surf of surfaces){const rows=12,cols=24,grid=Array.from({length:rows+1},(_,i)=>Array.from({length:cols+1},(_,j)=>{const lat=-Math.PI/2+i*Math.PI/rows,u=j*2*Math.PI/cols;return surf.fn([Math.cos(lat)*Math.cos(u),Math.sin(lat),Math.cos(lat)*Math.sin(u)]);}));for(let i=0;i<rows;i++)for(let j=0;j<cols;j++){const pts=[grid[i][j],grid[i+1][j],grid[i+1][j+1],grid[i][j+1]].map(project);faces.push({pts,depth:pts.reduce((s,p)=>s+p[2],0)/4,...surf});}for(let i=2;i<rows;i+=2)path(grid[i],surf.color+'c7',surf.dash);for(let j=0;j<cols;j+=4)path(grid.map(row=>row[j]),surf.color+'a8',surf.dash);}
+  faces.sort((a,b)=>a.depth-b.depth);for(const f of faces){ctx.beginPath();f.pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.globalAlpha=f.opacity;ctx.fillStyle=f.fillColor;ctx.fill();}ctx.globalAlpha=1;
+  for(const p of [...paths.filter(p=>!p.axis),...paths.filter(p=>p.axis)]){ctx.beginPath();p.pts.map(project).forEach((v,i)=>i?ctx.lineTo(v[0],v[1]):ctx.moveTo(v[0],v[1]));ctx.setLineDash(Array.isArray(p.dash)?p.dash:p.dash?[5,5]:[]);ctx.strokeStyle=p.color;ctx.lineWidth=p.width;ctx.stroke();}ctx.setLineDash([]);
+ }
  ctx.font=`${font}px system-ui`;const occupied=[];
  function place(text,xy,color){const tw=measureLiftLabel(ctx,text);let best=null;for(const dy of [-10,font+10,-font*1.8,font*2.5,-font*3,font*4])for(const dx of [12,-tw-12,30,-tw-30]){const tx=Math.max(6,Math.min(W-tw-6,xy[0]+dx)),ty=Math.max(font+5,Math.min(H-8,xy[1]+dy));const overlap=occupied.reduce((a,b)=>a+Math.max(0,Math.min(tx+tw+5,b.x+b.w)-Math.max(tx-5,b.x))*Math.max(0,Math.min(ty+5,b.y+5)-Math.max(ty-font-4,b.y-font-4)),0);const score=overlap*100+Math.hypot(tx-xy[0],ty-xy[1]);if(!best||score<best.score)best={tx,ty,score};}const{tx,ty}=best;occupied.push({x:tx-3,y:ty,w:tw+6});if(Math.hypot(tx-xy[0],ty-xy[1])>font*1.2){ctx.beginPath();ctx.moveTo(xy[0],xy[1]);ctx.lineTo(tx,ty-font*.3);ctx.strokeStyle=P.leader+'bf';ctx.lineWidth=1.5;ctx.setLineDash([1,4]);ctx.lineCap='round';ctx.stroke();ctx.setLineDash([]);ctx.lineCap='butt';}ctx.fillStyle='#100b1eed';ctx.fillRect(tx-3,ty-font,tw+6,font+5);ctx.textAlign='left';ctx.fillStyle=color;drawLiftLabel(ctx,text,tx,ty);}
- for(const p of points){const xy=project(p.p);ctx.beginPath();ctx.arc(xy[0],xy[1],Math.max(4,font*.25),0,Math.PI*2);ctx.fillStyle=p.color;ctx.fill();ctx.strokeStyle='white';ctx.lineWidth=2;ctx.stroke();if(p.text)place(p.text,xy,p.color);}
+ for(const p of points){const xy=project(p.p);if(!usingThree){ctx.beginPath();ctx.arc(xy[0],xy[1],Math.max(4,font*.25),0,Math.PI*2);ctx.fillStyle=p.color;ctx.fill();ctx.strokeStyle='white';ctx.lineWidth=2;ctx.stroke();}if(p.text)place(p.text,xy,p.color);}
  for(const l of labels)place(l.text,project(l.p),l.color);
  if(gapEnds&&!canvas.closest('button'))drawCanvasGap(ctx,project(gapEnds[0]),project(gapEnds[1]),gapText,W,H);
  if([6,8].includes(id)){

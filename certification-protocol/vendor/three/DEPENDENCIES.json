@@ -1,0 +1,18 @@
+{
+  "package": "three",
+  "version": "0.187.0",
+  "source": "https://registry.npmjs.org/three/-/three-0.187.0.tgz",
+  "integrity": "sha512-Qiu7R+Cmh8CstZsY1uJOSWnVlfo7ZtNLV7mF8Jltk3LB3AtDu9cRZlcnRKkAk8Y4z6KKw35z7Y7Urd7jWY8etA==",
+  "license": "MIT",
+  "local_import_adjustment": "Add-on bare imports changed to ../three.module.js; build modules unchanged.",
+  "files": {
+    "three.module.js": "104f56145899722094556490d787aae0617cc2fc3382f31df02d724ea1aee341",
+    "three.core.js": "613e370f76638fdef83926642bf256dc9615684922de1ce1f63a8583e5d78578",
+    "LICENSE": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+    "lines/Line2.js": "69dd2120d4df14208796acf199f80a64d37e042cfa65dc2b98286694b2954194",
+    "lines/LineSegments2.js": "6c96deee8d2df4dcdcd3d18034be27df934086b4472530c6c724b7b85cdd1701",
+    "lines/LineGeometry.js": "b7ec6b0011e3b09dc72e17cfd8e8945295cb2bc8c8aa9aa19e47119680bdad7e",
+    "lines/LineSegmentsGeometry.js": "380ddd79b549ceea249e8ce3f51705355239d90f403cfa6a16d47b6a24a1455c",
+    "lines/LineMaterial.js": "001da76d3ab0bbd187bee6baaadbd42213d2b1a2ec0d9bd73c55daf75a1a0fd2"
+  }
+}

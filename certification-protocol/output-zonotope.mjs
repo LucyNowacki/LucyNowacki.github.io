@@ -1,3 +1,4 @@
+import {renderThreeGeometry} from './three-geometry.mjs?v=three2';
 import {drawCanvasGap} from './output-gap-segment.mjs?v=103';
 import {outputGap} from './output-gap.mjs?v=103';
 import {HALF,DEN,ETA} from './enclosure-math.mjs?v=103';
@@ -67,13 +68,36 @@ export function mountOutputEnclosure(host,{onCameraChange=()=>{},onPhiChange=()=
   // Offsets are magnified only in visibility mode, always about moving y°.
   const offsetPlot=d=>{const q=scaled?camera(mul(d,gain)):transform(d);return[centre[0]+k*q[0],centre[1]-k*q[1],q[2]];};
   const localPhysicalPlot=d=>{const q=camera(d);return[centre[0]+k*q[0],centre[1]-k*q[1],q[2]];};
-  const line=(points,stroke,width=1,fill=null,dash=[],project=plot)=>{ctx.beginPath();points.forEach((p,i)=>{const q=project(p);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);});if(fill){ctx.closePath();ctx.fillStyle=fill;ctx.fill();}ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.setLineDash(dash);ctx.stroke();ctx.setLineDash([]);};
+  let threeRendered=false;
+  const line=(points,stroke,width=1,fill=null,dash=[],project=plot)=>{if(threeRendered)return;ctx.beginPath();points.forEach((p,i)=>{const q=project(p);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);});if(fill){ctx.closePath();ctx.fillStyle=fill;ctx.fill();}ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.setLineDash(dash);ctx.stroke();ctx.setLineDash([]);};
   const dotAt=(p,color,r=5)=>{ctx.beginPath();ctx.arc(p[0],p[1],r,0,2*Math.PI);ctx.fillStyle=color;ctx.fill();ctx.strokeStyle='white';ctx.lineWidth=1.5;ctx.stroke();};
   const text=(s,x,y,color='#493858',size=w>1600?19:14)=>{ctx.font=size+'px system-ui';const sw=ctx.measureText(s).width,tx=Math.max(10,Math.min(w-sw-10,x)),ty=Math.max(23,Math.min(h-12,y));ctx.strokeStyle='#fbfaff';ctx.lineWidth=5;ctx.lineJoin='round';ctx.strokeText(s,tx,ty);ctx.fillStyle=color;ctx.fillText(s,tx,ty);};
-  line(ellipse,'#1e90ff',3,'#1e90ff0a');
-  screenEllipse=ellipse.map((p,i)=>({point:plot(p),phi:i/2}));
   const inner=A_CIRCLE-t*ETA,circle=Array.from({length:121},(_,i)=>[inner*Math.cos(i*Math.PI/60),inner*Math.sin(i*Math.PI/60),0]);
-  line(circle,'#7754c4',2,'#7754c420');dotAt(origin,'#4b0082',5);text('0',origin[0]-19,origin[1]+24);
+  // The engine uses the same display coordinates as picking and the label overlay.
+  // Local magnification is about y°, while the centre remains on the displayed ellipse.
+  const localWorld=(p,magnification=gain)=>add(centrePosition,mul(p,magnification));
+  const paths=[{pts:ellipse,color:'#1e90ff',width:3},{pts:circle,color:'#7754c4',width:2}];
+  const faces=[{pts:circle,color:'#d3d3d3',opacity:.18}];
+  const facetPaths=(factor,color,width,dash,magnification=gain)=>{
+   for(const facet of geometry.faces){
+    const pts=facet.points.map(p=>localWorld(mul(p,factor),magnification));
+    paths.push({pts:[...pts,pts[0]],color,width,dash});
+   }
+  };
+  if(scaled&&gain>1&&t>0)facetPaths(t*ETA,'#b30062',1.2,[3,3],1);
+  if(t<.999)facetPaths(ETA,'#b8adbf',1,[5,5]);
+  if(t>0){
+   for(let axis=0;axis<3;axis++){
+    const pts=Array.from({length:73},(_,i)=>{const p=[0,0,0];p[(axis+1)%3]=t*ETA*Math.cos(i*Math.PI/36);p[(axis+2)%3]=t*ETA*Math.sin(i*Math.PI/36);return localWorld(p);});
+    paths.push({pts,color:'#849dc9',width:1.3,dash:[5,4]});
+   }
+   facetPaths(t*ETA,'#ff1493',1.7,[],gain);
+  }
+  threeRendered=renderThreeGeometry(canvas,{faces,paths,palette:{background:'#fbfaff'},rotation:[el,0,az],zoom:1,fitScale:k,centre:origin,width:w,height:h});
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+  line(ellipse,'#1e90ff',3);
+  screenEllipse=ellipse.map((p,i)=>({point:plot(p),phi:i/2}));
+  line(circle,'#7754c4',2,'rgba(211,211,211,.18)');dotAt(origin,'#4b0082',5);text('0',origin[0]-19,origin[1]+24);
   // This marked endpoint lies exactly on the protected disk, in the fixed
   // -u_min direction. Its radius is the certified bound, not a singular value.
   const radiusEnd=plot([0,-inner,0]);
@@ -88,7 +112,7 @@ export function mountOutputEnclosure(host,{onCameraChange=()=>{},onPhiChange=()=
   if(t<.999)for(const f of geometry.faces){const ps=f.points.map(p=>mul(p,ETA));line([...ps,ps[0]],'#b8adbf',1,null,[5,5],offsetPlot);}
   if(t>0){
    for(let axis=0;axis<3;axis++){const ps=Array.from({length:73},(_,i)=>{const p=[0,0,0];p[(axis+1)%3]=t*ETA*Math.cos(i*Math.PI/36);p[(axis+2)%3]=t*ETA*Math.sin(i*Math.PI/36);return p;});line(ps,'#849dc9',1.3,null,[5,4],offsetPlot);}
-   for(const p of polys)line([...p,p[0]],'#ff1493',1.7,'#ff149317',[],offsetPlot);
+   for(const p of polys)line([...p,p[0]],'#ff1493',1.7,null,[],offsetPlot);
    geometry.generators.forEach((g,i)=>{const point=offsetPlot(mul(g.slice(0,3),t)),active=Math.floor(i/2)===selected;arrow(ctx,centre,point,active?colors[i]:'#a9a1b76a',active?2.5:1);});
   }
   const point=offsetPlot(mul(geometry.delta.slice(0,3),t)),endpoint=offsetPlot(geometry.delta.slice(0,3));

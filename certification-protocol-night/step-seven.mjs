@@ -1,3 +1,4 @@
+import {renderThreeGeometry} from './three-geometry.mjs?v=three2';
 import {copyError,sectionResidual,PROJECTED_VERTICES,PROJECTED_FACES,PROJECTED_EDGES} from './matrix-box-geometry.mjs?v=103';
 import {mountMatrixDiamond} from './matrix-diamond.mjs?v=103';
 import {hardyGaugeCard,mountHardyGauge} from './hardy-gauge-connection.mjs?v=103';
@@ -68,14 +69,31 @@ export function mountStepSeven(root,{onMatrixChange=()=>{}}={}){
   const vertices=projected?PROJECTED_VERTICES:LINKED_VERTICES,boxFaces=projected?PROJECTED_FACES:LINKED_FACES,edges=projected?PROJECTED_EDGES:LINKED_EDGES;
   const faces=projected?[]:mesh.map((v,i)=>({v,depth:v.reduce((s,p)=>s+project(p).depth,0)/4,box:false,index:i}));
   if(showBox)boxFaces.forEach(f=>{const v=f.map(i=>vertices[i]);faces.push({v,depth:v.reduce((s,p)=>s+project(p).depth,0)/v.length,box:true});});faces.sort((a,b)=>a.depth-b.depth);
-  faces.forEach(f=>{const p=f.v.map(project);ctx.beginPath();ctx.moveTo(p[0].x,p[0].y);p.slice(1).forEach(v=>ctx.lineTo(v.x,v.y));ctx.closePath();if(f.box){/* Entry polytope stays unfilled in this edition. */}else{/* Norm enclosure stays unfilled in the dark edition. */if(wire||f.index%4===0){ctx.strokeStyle='rgba(30,144,255,.58)';ctx.lineWidth=.65;ctx.stroke();}}});
-  if(showBox)edges.forEach(([i,j])=>line(vertices[i],vertices[j],'#ff1493',1.8));
-  if(!projected){const ring=Array.from({length:81},(_,i)=>{const a=i*Math.PI/40;return[Math.sqrt(5)/2*Math.cos(a),Math.sqrt(5)/2*Math.sin(a),0];});ring.slice(1).forEach((p,i)=>line(ring[i],p,'#1e90ff',1.6,[4,3]));const diamond=[[1,0,0],[0,.75,0],[-1,0,0],[0,-.75,0],[1,0,0]];if(showBox)diamond.slice(1).forEach((p,i)=>line(diamond[i],p,'#ff1493',2.2));}
-  [[1.6,0,0],[0,1.6,0],[0,0,1.6]].forEach((end,i)=>{line([0,0,0],end,['#075bb5','#5a5a5a','#ddd0ff'][i],1.2);line([0,0,0],end.map(x=>-x),'#a9a9a9',.8,[4,5]);});
+  const geometryPaths=[],geometryFaces=[];
+  const geometryLine=(a,b,color,width=1,dash=false)=>geometryPaths.push({pts:[a,b],color,width,dash});
+  faces.forEach(f=>{if(!f.box&&(wire||f.index%4===0))geometryPaths.push({pts:[...f.v,f.v[0]],color:'#1e90ff94',width:.65});});
+  if(showBox)edges.forEach(([i,j])=>geometryLine(vertices[i],vertices[j],'#ff1493',1.8));
+  if(!projected){
+   const ring=Array.from({length:81},(_,i)=>{const a=i*Math.PI/40;return[Math.sqrt(5)/2*Math.cos(a),Math.sqrt(5)/2*Math.sin(a),0];});
+   geometryPaths.push({pts:ring,color:'#1e90ff',width:1.6,dash:[4,3]});
+   if(showBox)geometryPaths.push({pts:[[1,0,0],[0,.75,0],[-1,0,0],[0,-.75,0],[1,0,0]],color:'#ff1493',width:2.2});
+  }
+  [[1.6,0,0],[0,1.6,0],[0,0,1.6]].forEach((end,i)=>{geometryLine([0,0,0],end,['#075bb5','#5a5a5a','#ddd0ff'][i],1.2);geometryLine([0,0,0],end.map(x=>-x),'#a9a9a9',.8,[4,5]);});
   const origin=project([0,0,0]),tip=project(point),dx=tip.x-origin.x,dy=tip.y-origin.y,len=Math.hypot(dx,dy);
+  if(len>1)geometryLine([0,0,0],point,'#d52d4c',3);
+  // Use exactly the same orthographic scale as the DOM labels and pointer-to-matrix map.
+  const fitScale=Math.max(1,Math.min((width-Math.min(150,width*.22))/(2*fitRadius),(height-Math.min(110,height*.22))/(2*fitRadius)))/1.25;
+  const usingThree=renderThreeGeometry(canvas,{surfaces:[],faces:geometryFaces,paths:geometryPaths,points:[{p:[0,0,0],color:'#1e90ff',radius:5},{p:point,color:'#d52d4c',radius:5.5}],palette:{background:'#100b1e'},yaw,pitch,zoom,fitScale,centre:[width/2,height*.49],range:fitRadius,width,height});
+  canvas.dataset.renderer=usingThree?'threejs':'canvas-fallback';
+  if(!usingThree){
+   faces.forEach(f=>{const p=f.v.map(project);ctx.beginPath();ctx.moveTo(p[0].x,p[0].y);p.slice(1).forEach(v=>ctx.lineTo(v.x,v.y));ctx.closePath();if(f.box){/* Entry polytope stays unfilled in this edition. */}else{/* Norm enclosure stays unfilled in the dark edition. */if(wire||f.index%4===0){ctx.strokeStyle='rgba(30,144,255,.58)';ctx.lineWidth=.65;ctx.stroke();}}});
+   if(showBox)edges.forEach(([i,j])=>line(vertices[i],vertices[j],'#ff1493',1.8));
+   if(!projected){const ring=Array.from({length:81},(_,i)=>{const a=i*Math.PI/40;return[Math.sqrt(5)/2*Math.cos(a),Math.sqrt(5)/2*Math.sin(a),0];});ring.slice(1).forEach((p,i)=>line(ring[i],p,'#1e90ff',1.6,[4,3]));const diamond=[[1,0,0],[0,.75,0],[-1,0,0],[0,-.75,0],[1,0,0]];if(showBox)diamond.slice(1).forEach((p,i)=>line(diamond[i],p,'#ff1493',2.2));}
+   [[1.6,0,0],[0,1.6,0],[0,0,1.6]].forEach((end,i)=>{line([0,0,0],end,['#075bb5','#5a5a5a','#ddd0ff'][i],1.2);line([0,0,0],end.map(x=>-x),'#a9a9a9',.8,[4,5]);});
+  }
   // Shaft and head are recomputed from the same complete selected displacement.
-  if(len>1){line([0,0,0],point,'#d52d4c',3);const ux=dx/len,uy=dy/len,h=Math.min(13,len*.45);ctx.beginPath();ctx.moveTo(tip.x,tip.y);ctx.lineTo(tip.x-h*ux+5*uy,tip.y-h*uy-5*ux);ctx.lineTo(tip.x-h*ux-5*uy,tip.y-h*uy+5*ux);ctx.closePath();ctx.fillStyle='#d52d4c';ctx.fill();}
-  const reference=project([1,0,0]);ctx.beginPath();ctx.arc(reference.x,reference.y,7,0,2*Math.PI);ctx.strokeStyle='#a9a9a9';ctx.lineWidth=1.6;ctx.setLineDash([3,2]);ctx.stroke();ctx.setLineDash([]);dot([0,0,0],'#1e90ff',5);dot(point,'#d52d4c',5.5);
+  if(len>1){if(!usingThree)line([0,0,0],point,'#d52d4c',3);const ux=dx/len,uy=dy/len,h=Math.min(13,len*.45);ctx.beginPath();ctx.moveTo(tip.x,tip.y);ctx.lineTo(tip.x-h*ux+5*uy,tip.y-h*uy-5*ux);ctx.lineTo(tip.x-h*ux-5*uy,tip.y-h*uy+5*ux);ctx.closePath();ctx.fillStyle='#d52d4c';ctx.fill();}
+  const reference=project([1,0,0]);ctx.beginPath();ctx.arc(reference.x,reference.y,7,0,2*Math.PI);ctx.strokeStyle='#a9a9a9';ctx.lineWidth=1.6;ctx.setLineDash([3,2]);ctx.stroke();ctx.setLineDash([]);if(!usingThree){dot([0,0,0],'#1e90ff',5);dot(point,'#d52d4c',5.5);}
   const occupied=[];
   [['toy',point],['origin',[0,0,0]],['probe',[1,0,0]],['vector',point.map(v=>v*.52)],['axis1',[1.6,0,0]],['axis2',[0,1.6,0]],['axis3',[0,0,1.6]]].forEach(([id,pos])=>{const p=project(pos),o=project([0,0,0]),el=q(`[data-label="${id}"]`),hide=((id==='vector'&&Math.hypot(...point)<.08)||(id==='probe'&&point.every((v,i)=>Math.abs(v-[1,0,0][i])<1e-8)))||(id.startsWith('axis')&&Math.hypot(p.x-o.x,p.y-o.y)<20);el.style.display=hide?'none':'';if(hide)return;const w=el.offsetWidth||82,h=el.offsetHeight||28;let x=Math.max(5,Math.min(width-w-5,p.x+(id==='probe'?-32:10))),y=Math.max(5,Math.min(height-h-35,p.y+(id==='origin'?9:-27)));for(let k=0;k<7&&occupied.some(r=>x<r.x+r.w+4&&x+w+4>r.x&&y<r.y+r.h+3&&y+h+3>r.y);k++)y=Math.min(height-h-32,y+30);el.style.left=x+'px';el.style.top=y+'px';occupied.push({x,y,w,h});});
  }
