@@ -144,7 +144,7 @@
   }
   const box = host.getBoundingClientRect();
   const arena=card.classList.contains('is-touch-arena');
-  new Phaser.Game({
+  const config = {
     type: Phaser.AUTO, parent: host,
     width: Math.max(arena?1:200, Math.round(box.width)), height: Math.max(arena?1:120, Math.round(box.height)),
     backgroundColor: '#211a34', banner: false,
@@ -152,5 +152,13 @@
     input: { keyboard: { capture: [] }, mouse: { preventDefaultWheel: false }, touch: { capture: false } },
     scale: { mode: Phaser.Scale.NONE, autoCenter: Phaser.Scale.NO_CENTER },
     audio: { disableWebAudio: false }, fps: { target: 60 }, scene: GridderScene
-  });
+  };
+  // Work around reported mobile water and discovery artifacts. Phaser's
+  // Canvas renderer uses the existing water fallback and GeometryMask path.
+  const nav=window.navigator,screen=window.screen;
+  const mobile=/Android|iPhone|iPad|iPod|Mobile/i.test(nav?.userAgent||'')||
+    (!!nav?.maxTouchPoints&&!!window.matchMedia?.('(pointer: coarse)').matches&&
+     !!screen&&Math.min(screen.width,screen.height)<=1024);
+  if(mobile)config.type=Phaser.CANVAS;
+  new Phaser.Game(config);
 })();

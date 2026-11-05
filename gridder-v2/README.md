@@ -3,6 +3,8 @@
 On phones and tablets, water uses the masked animated texture renderer to avoid
 a reported mobile shader artifact. Desktop WebGL keeps the procedural ocean
 shader. Both paths follow the same container shapes and game clock.
+Phones and tablets also use Phaser's Canvas renderer for reliable discovered
+solution curves and GeometryMask clipping. Desktop rendering remains automatic.
 
 A separate Phaser 4.2.1 edition of Lucy's educational Gridder. Paint closed loops,
 discover features of functions, and survive family-specific land monsters and
