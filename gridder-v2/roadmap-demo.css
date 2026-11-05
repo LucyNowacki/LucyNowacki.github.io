@@ -1,0 +1,90 @@
+/* Roadmap introduction: screen-space art only; the game keeps its own grid. */
+html.rd-open { overflow: hidden; }
+.rd-overlay[hidden], .rd-overlay [hidden] { display: none !important; }
+.rd-overlay { position: fixed; inset: 0; z-index: 100000; overflow: auto; overscroll-behavior: contain; color: #fff6f2; background: #100e2a; font: 16px/1.45 system-ui, sans-serif; isolation: isolate; }
+.rd-overlay *, .rd-overlay *::before, .rd-overlay *::after { box-sizing: border-box; }
+.rd-overlay button { font: inherit; cursor: pointer; }
+.rd-overlay button:focus-visible { outline: 3px solid #fff0a8; outline-offset: 3px; }
+.rd-sky { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: linear-gradient(180deg, #0b102c 0%, #25143d 38%, #672f59 67%, #ed8b80 100%); }
+.rd-stars { position: absolute; inset: 0; opacity: .6; background-image: radial-gradient(2px 2px at 10% 17%, #fff9dc 50%, transparent 55%), radial-gradient(2px 2px at 72% 27%, #ffd5db 50%, transparent 55%), radial-gradient(1.5px 1.5px at 32% 54%, #fff 50%, transparent 55%), radial-gradient(1px 1px at 85% 70%, #fff 50%, transparent 55%); background-size: 260px 180px, 310px 220px, 190px 240px, 150px 170px; }
+.rd-sun { position: absolute; width: min(48vw, 510px); aspect-ratio: 1; bottom: 5%; left: 51%; border-radius: 50%; opacity: .55; background: repeating-linear-gradient(180deg, transparent 0 20px, #402140 21px 24px), linear-gradient(#ffd99a, #f37290); box-shadow: 0 0 100px #f5938970; }
+.rd-horizon { position: absolute; left: 0; right: 0; bottom: 0; height: 27%; background: linear-gradient(180deg, #572d56 0%, #1b163b 16%, #0d102b 100%); border-top: 2px solid #ffd9ae88; }
+.rd-grid { position: absolute; bottom: -24%; left: -40%; width: 180%; height: 55%; transform: perspective(320px) rotateX(63deg); transform-origin: center top; opacity: .45; background: repeating-linear-gradient(90deg, transparent 0 72px, #f19ec0 73px 74px), repeating-linear-gradient(0deg, transparent 0 50px, #f19ec0 51px 52px); }
+.rd-shell { min-height: 100%; max-width: 1500px; margin: auto; padding: max(20px, env(safe-area-inset-top)) clamp(20px, 5vw, 76px) max(18px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; }
+.rd-top, .rd-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.rd-brand { font-weight: 950; letter-spacing: .08em; font-size: 1.35rem; color: #fff8e8; text-shadow: 0 3px 0 #b64480; }
+.rd-brand b { color: #ffcb7c; }
+.rd-brand small { display: block; font-size: .56rem; letter-spacing: .25em; text-shadow: none; color: #ffcebd; }
+.rd-skip, .rd-cycle, .rd-music { min-height: 44px; padding: 9px 14px; color: #fff7f0; border: 1px solid #ffffff80; border-radius: 9px; background: #15112caa; }
+.rd-skip span { margin-left: 8px; font-size: 1.3rem; }
+.rd-main { flex: 1; display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); align-items: center; gap: clamp(24px, 6vw, 100px); padding: clamp(38px, 6vh, 84px) 0; }
+.rd-kicker { color: #ffcf96; font-size: .72rem; font-weight: 800; letter-spacing: .2em; margin: 0 0 15px; }
+.rd-copy h1 { margin: 0; font-size: clamp(3rem, 6.6vw, 7.2rem); line-height: .98; letter-spacing: -.055em; font-weight: 850; text-wrap: balance; text-shadow: 0 4px 30px #130b22; }
+.rd-copy h1 em { font-style: normal; color: #ffc4ad; }
+.rd-intro { max-width: 29rem; margin: 24px 0 16px; color: #fff2eb; font-size: clamp(1rem, 1.3vw, 1.2rem); }
+.rd-progress { color: #ffdfb8; font-weight: 700; font-size: .9rem; }
+.rd-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.rd-actions button { min-height: 52px; padding: 12px 20px; border-radius: 10px; font-weight: 800; }
+.rd-start { color: #241338; background: #ffcf91; border: 2px solid #ffdfb8; box-shadow: 0 5px 0 #a64f6c; }
+.rd-explore { color: #fff; border: 2px solid #fff9; background: #211735d9; }
+.rd-sound { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 20px; font-size: .8rem; color: #ffeadc; }
+.rd-music:disabled { opacity: .65; cursor: default; }
+.rd-scene { min-width: 0; padding: clamp(16px, 2.5vw, 30px); border: 1px solid #ffc9c177; border-radius: 22px; background: linear-gradient(145deg, #181a42e8, #351b45df 70%, #542944db); box-shadow: 0 24px 70px #0b082b80, inset 0 1px #ffffff30; }
+.rd-scene-head { display: flex; justify-content: space-between; gap: 10px; color: #ffdfb7; font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.rd-orbit { position: relative; height: clamp(170px, 25vw, 320px); margin: 10px 0; display: grid; place-items: center; overflow: hidden; }
+.rd-orbit svg { width: min(90%, 440px); overflow: visible; filter: drop-shadow(0 0 10px #ff9fb8a0); }
+.rd-chart-grid { fill: none; stroke: #dba8c6; stroke-width: 1; opacity: .25; }
+.rd-chart { fill: none; stroke: #ffcfad; stroke-width: 4; stroke-linecap: round; }
+.rd-orbit circle { fill: #fff5d8; stroke: #fd9cae; stroke-width: 4; }
+.rd-ring { position: absolute; width: 58%; aspect-ratio: 1; border: 1px solid #ffb9c449; border-radius: 50%; }
+.rd-ring-one { transform: rotateX(65deg) rotate(-28deg) scale(1.5); }
+.rd-ring-two { transform: rotateX(60deg) rotate(35deg) scale(1.1); }
+.rd-planet { position: absolute; border-radius: 50%; box-shadow: inset -6px -7px 0 #9c496f; }
+.rd-planet-one { width: 22px; height: 22px; background: #ffdcac; left: 15%; top: 20%; }
+.rd-planet-two { width: 13px; height: 13px; background: #a2f5ea; right: 13%; bottom: 20%; box-shadow: 0 0 18px #9fffea; }
+.rd-stage-copy h2 { font-size: clamp(1.4rem, 2vw, 2rem); margin: 0 0 5px; }
+.rd-stage-copy p { margin: 0; color: #f9e8ee; min-height: 2.8em; }
+.rd-scene-controls { display: flex; align-items: center; justify-content: flex-end; gap: 9px; margin-top: 18px; }
+.rd-prev, .rd-next { width: 46px; height: 44px; border: 1px solid #ffffff80; border-radius: 9px; color: #fff; background: #201638; font-size: 1.2rem !important; }
+.rd-map { margin: 0 0 40px; padding: clamp(18px, 3vw, 32px); border-radius: 18px; border: 1px solid #ffffff50; background: #16132af2; }
+.rd-map-heading { display: flex; gap: 10px; align-items: end; justify-content: space-between; flex-wrap: wrap; }
+.rd-map-heading h2 { margin: 0; font-size: 1.8rem; }
+.rd-map-heading p:last-child { margin: 0; color: #e3d5e4; }
+.rd-stages { display: flex; gap: 8px; flex-wrap: wrap; margin: 22px 0; }
+.rd-stage-tab { min-height: 44px; padding: 8px 12px; color: #fff; border: 1px solid #ffffff70; border-radius: 8px; background: #312544; }
+.rd-stage-tab[aria-current] { color: #231336; background: #ffc49e; border-color: #ffc49e; font-weight: 800; }
+.rd-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr)); gap: 8px; }
+.rd-entry { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 62px; padding: 10px 12px; text-align: left; color: #fff; border: 1px solid #ffffff42; border-radius: 9px; background: #ffffff0c; }
+.rd-entry:hover, .rd-stage-tab:hover { border-color: #ffcbb8; background-color: #734761; }
+.rd-stage-tab[aria-current]:hover { background: #ffdcba; }
+.rd-entry-number { color: #ffc69e; font-size: .8rem; font-weight: 800; }
+.rd-entry-title { flex: 1; min-width: 0; font-weight: 700; overflow-wrap: anywhere; }
+.rd-entry-title small { display: block; color: #dbcedd; font-weight: 400; font-size: .75rem; }
+.rd-entry-status { flex-shrink: 0; color: #ffd6ad; font-size: .75rem; }
+.rd-footer { color: #ffe2d0; font-size: .62rem; font-weight: 700; letter-spacing: .14em; }
+@media (max-width: 700px) { .rd-main { grid-template-columns: 1fr; gap: 28px; padding: 38px 0; } .rd-copy h1 { font-size: clamp(3rem, 12vw, 5rem); } .rd-orbit { height: 190px; } .rd-scene { padding: 18px; } .rd-stage-copy p { min-height: 0; } .rd-footer { flex-wrap: wrap; } }
+@media (max-height: 520px) and (min-width: 701px) { .rd-main { padding: 22px 0; } .rd-copy h1 { font-size: clamp(2.6rem, 6vw, 4.5rem); } .rd-orbit { height: 150px; } .rd-intro { margin: 12px 0; } }
+@media (prefers-reduced-motion: reduce) { .rd-overlay *, .rd-overlay *::before, .rd-overlay *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+/* The game page styles every main/footer/button. Keep the introduction's
+ * own canvas and controls independent of those page-wide defaults. */
+.rd-overlay .rd-main { width: 100%; max-width: none; margin: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.rd-overlay .rd-footer { padding: 0; }
+.rd-overlay .rd-start:hover:not(:disabled) { background: #ffe0b7; }
+.rd-overlay .rd-explore:hover:not(:disabled), .rd-overlay .rd-skip:hover:not(:disabled), .rd-overlay .rd-cycle:hover:not(:disabled), .rd-overlay .rd-music:hover:not(:disabled), .rd-overlay .rd-prev:hover:not(:disabled), .rd-overlay .rd-next:hover:not(:disabled) { background: #553455; }
+.rd-overlay .rd-stage-tab[aria-current]:hover:not(:disabled) { color: #231336; background: #ffdcba; }
+.rd-scope { margin: 14px 0 2px; color: #ffe0b6; font-weight: 800; font-size: .9rem; }
+.rd-progress { margin: 0; }
+.rd-route-heading { display: flex; justify-content: space-between; gap: 8px; margin: 22px 0 5px; color: #ffcf96; font-size: .66rem; font-weight: 800; letter-spacing: .16em; }
+.rd-route-heading span { color: #f8e9df; font-weight: 600; letter-spacing: .02em; }
+.rd-route { display: grid; grid-template-columns: repeat(auto-fit, minmax(44px, 1fr)); gap: 3px; max-width: 650px; }
+.rd-overlay .rd-route-node { min-width: 44px; min-height: 44px; padding: 0; color: #fff6ef; border: 1px solid #ffe3d080; border-radius: 9px; background: #201936d9; font-size: .75rem; font-weight: 800; }
+.rd-overlay .rd-route-node[aria-current] { color: #241338; background: #ffcf91; border-color: #ffdfb8; box-shadow: 0 0 0 2px #fff4bb; }
+.rd-overlay .rd-route-node.rd-route-done:not([aria-current]) { color: #122e2d; background: #a7e9d9; border-color: #c7fff0; }
+.rd-overlay .rd-route-node:hover:not(:disabled) { border-color: #fff5d2; background: #76516a; }
+.rd-overlay .rd-route-node[aria-current]:hover:not(:disabled) { background: #ffe2b7; }
+.rd-overlay .rd-stage-examples { min-height: 0; margin: 8px 0 0; color: #ffd3aa; font-size: .86rem; font-weight: 700; overflow-wrap: anywhere; }
+.rd-copy { min-width: 0; }
+@media (max-width: 700px) { .rd-main { grid-template-columns: minmax(0, 1fr); } }
+.rd-orbit .rd-curve-point { fill: #fff5d8; stroke: #fd9cae; stroke-width: 2.5; }
+.rd-orbit .rd-curve-point.rd-point-open { fill: #241936; stroke: #fff0d6; stroke-width: 2.5; }
+.rd-curve-caption { min-height: 2.4em; margin: 0 0 10px; color: #ffe1bc; font-size: .76rem; line-height: 1.4; overflow-wrap: anywhere; }

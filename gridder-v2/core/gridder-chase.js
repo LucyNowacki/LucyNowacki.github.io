@@ -27,7 +27,7 @@
     const spiders=[{kind:'black',i:board.nx,j:board.ny,segment:null,rate:rates[0]},{kind:'white',i:board.nx,j:0,segment:null,rate:rates[1]},
       {kind:'centipede',i:0,j:board.ny,segment:null,rate:rates[0]+.06}]
       .map(s=>Object.assign(s,{id:`creature-${nextId++}`,origin:'base',species:roster()?.get(options.familyId||'algebraic',s.kind)||null,
-        sizeScale:1,speedScale:1,meals:0,bloodMeals:0,eating:null,lastBrush:null}));
+        sizeScale:1,speedScale:1,meals:0,bloodMeals:0,eating:null,lastBrush:null,hp:s.kind==='centipede'?3:2,maxHp:s.kind==='centipede'?3:2,lastHitAt:null}));
     const position=s=>s.segment?{i:s.i+s.segment.di*s.segment.progress,j:s.j+s.segment.dj*s.segment.progress}:copy(s);
     const histories=new WeakMap();
     const bodyCount=s=>6+2*s.meals;
@@ -53,7 +53,8 @@
     function spawn({kind='centipede',species=null,origin='hatch',position:at,...extras}={}){
       if(!['black','white','centipede'].includes(kind)||!isLegalNode(at))return null;
       const s={...extras,id:`creature-${nextId++}`,origin,kind,species:species||roster()?.get(options.familyId||'algebraic',kind)||null,
-        ...copy(at),segment:null,facing:null,rate:rateFor(kind),sizeScale:1,speedScale:1,meals:0,bloodMeals:0,eating:null,lastBrush:null};
+        ...copy(at),segment:null,facing:null,rate:rateFor(kind),sizeScale:origin==='hatch'?.6:1,speedScale:1,meals:0,bloodMeals:0,eating:null,lastBrush:null,
+        hp:origin==='hatch'?1:kind==='centipede'?3:2,maxHp:origin==='hatch'?1:kind==='centipede'?3:2,lastHitAt:null};
       spiders.push(s);resetHistory(s);return s;
     }
     function releaseMeal(s,world){
@@ -64,6 +65,11 @@
     function remove(s,world=null){
       const index=spiders.indexOf(s);if(index<0)return false;
       releaseMeal(s,world);histories.delete(s);spiders.splice(index,1);return true;
+    }
+    function damage(s,amount=1,world=null){
+      if(!spiders.includes(s)||!Number.isFinite(amount)||amount<=0)return null;
+      s.hp=Math.max(0,s.hp-amount);const killed=s.hp===0;
+      if(killed)remove(s,world);return {hp:s.hp,killed};
     }
     function remember(s,from,to,cellPixels){
       if(s.kind!=='centipede'||distance(from,to,cellPixels)<=epsilon)return;
@@ -188,7 +194,8 @@
         // Numeric speed remains supported for existing callers. A projection
         // can supply per-axis pixels/s without changing logical edge timing.
         const axis=s.segment?.di?'x':'y';
-        const from=position(s),velocity=(typeof speed==='function'?speed(axis):speed)*s.rate*s.speedScale;
+        const baseSpeed=typeof speed==='function'?speed(axis):speed;
+        const from=position(s),velocity=baseSpeed*s.rate*s.speedScale;
         let next={kind:'idle',from,to:from,time:Infinity,velocity:0};
         if(s.segment&&velocity>0&&Number.isFinite(velocity)){
           const length=cellPixels(s.segment.di?'x':'y');
@@ -247,7 +254,7 @@
       if(!spiders.includes(spider))return false;
       spider.bloodMeals++;spider.sizeScale*=bloodGrowth;return true;
     }
-    return {spiders,position,heading,bodyPositions,advance,respawn,consumeBlood,spawn,remove,isLegalNode,findSpawnNode};
+    return {spiders,position,heading,bodyPositions,advance,respawn,consumeBlood,spawn,remove,damage,isLegalNode,findSpawnNode};
   }
   const api={create,collides,bloodGrowth};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.derivativeGridderChase=api;

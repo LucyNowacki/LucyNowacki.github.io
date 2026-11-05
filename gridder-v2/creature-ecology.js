@@ -1,101 +1,120 @@
-/* Active-time ecology. Chase owns movement, feeding, grid trails and contact. */
+/* Active-time eggs, descendants and visitors; all motion remains in the models. */
 (function(root){
   'use strict';
-  const arrivalInterval=60000,residency=180000,hatchDelay=10000,clutchCooldown=30000;
-  const populationLimit=12,visitorLimit=3;
+  const arrivalInterval=60000,residency=180000,hatchDelay=10000,layInterval=10000;
+  const populationLimit=12,visitorLimit=3,EPS=1e-9;
   const roster=root.GridderMonsterRoster||(typeof require==='function'?require('./monster-roster.js'):null);
-  const copy=p=>({i:p.i,j:p.j});
-  const nonnegative=n=>Number.isFinite(n)?Math.max(0,n):0;
-  function create(chase,{familyId='algebraic',elapsedMs=0,arrivalIndex=0}={}){
+  const copy=p=>({i:p.i,j:p.j}),nonnegative=n=>Number.isFinite(n)?Math.max(0,n):0;
+  function seedValue(value){let n=2166136261;for(const c of String(value))n=Math.imul(n^c.charCodeAt(0),16777619);return n>>>0;}
+  function create(chase,{familyId='algebraic',elapsedMs=0,arrivalIndex=0,poolLeeches=null,seed=1,random=null,randomState=null}={}){
     if(!roster)throw new Error('GridderMonsterRoster must load before creature ecology.');
-    let clock=nonnegative(elapsedMs),index=Math.floor(nonnegative(arrivalIndex)),nextEgg=1,clutchIndex=0,lastEvent=null;
-    let nextArrivalAt=(Math.floor(clock/arrivalInterval)+1)*arrivalInterval;
-    const eggs=[],cooldowns=new Map();
-    // The selected family supplies each new board's three permanent creatures.
-    for(const s of chase.spiders)if(s.origin==='base'||!s.origin){
-      s.origin='base';s.species=roster.get(familyId,s.kind);
-    }
+    let clock=nonnegative(elapsedMs),index=Math.floor(nonnegative(arrivalIndex)),nextEgg=1,lastEvent=null;
+    let state=Number.isInteger(randomState)?randomState>>>0:seedValue(seed);
+    let nextArrivalAt=(Math.floor(clock/arrivalInterval)+1)*arrivalInterval,nextLayAt=(Math.floor(clock/layInterval)+1)*layInterval;
+    const eggs=[];
+    const draw=()=>{if(typeof random==='function'){const value=random();return Number.isFinite(value)?Math.max(0,Math.min(1-EPS,value)):0;}
+      state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;};
+    for(const s of chase.spiders)if(s.origin==='base'||!s.origin){s.origin='base';s.species=roster.get(familyId,s.kind);}
+    const water=()=>poolLeeches?.leeches||[];
     const visitors=()=>chase.spiders.filter(s=>s.origin==='timed').sort((a,b)=>a.arrivedAt-b.arrivedAt||String(a.id).localeCompare(String(b.id)));
     const present=()=>new Set(chase.spiders.map(s=>roster.identity(s.species)));
-    const reserved=()=>chase.spiders.filter(s=>s.origin!=='timed').length+eggs.reduce((sum,e)=>sum+e.count,0);
-    const large=s=>s.kind==='centipede'&&(s.meals>=2||s.sizeScale>=1.3);
+    const reserved=()=>chase.spiders.filter(s=>s.origin!=='timed').length+water().filter(s=>s.origin==='hatch').length+eggs.length;
+    const descendants=()=>[...chase.spiders,...water()].filter(s=>s.origin==='hatch').sort((a,b)=>a.hatchedAt-b.hatchedAt||String(a.id).localeCompare(String(b.id)));
+    function emit(events,type,name,count=1,extra={}){lastEvent={type,name,count,clock,...extra};events.push({...lastEvent});}
+    function retire(s,world,events){
+      if(!s)return false;
+      const removed=chase.spiders.includes(s)?chase.remove(s,world):poolLeeches?.remove(s);
+      if(removed)emit(events,'retired',s.species?.name||s.kind,1,{id:s.id});return removed;
+    }
     function parentNode(s,cellPixels){
+      if(water().includes(s)){
+        const at=s.position,metric=p=>Math.hypot((p.i-at.i)*cellPixels('x'),(p.j-at.j)*cellPixels('y'));
+        return poolLeeches.shoreNodes(s).filter(p=>chase.isLegalNode(p)).sort((a,b)=>metric(a)-metric(b)||a.j-b.j||a.i-b.i)[0]||null;
+      }
       const at=chase.position(s),near={i:Math.round(at.i),j:Math.round(at.j)};
       return chase.isLegalNode(near)?near:chase.findSpawnNode(at,cellPixels);
     }
-    function emit(events,type,name,count){
-      lastEvent={type,name,count,clock};events.push({...lastEvent});
-    }
     function arrive(player,cellPixels,world,events,previouslyPresent){
-      // Keep room for another absent species even after descendants have
-      // retained the identity of a departed segmented visitor.
       while(visitors().length>=visitorLimit||present().size>=roster.all.length-1){
-        const oldest=visitors()[0];if(!oldest)break;
-        chase.remove(oldest,world);
+        const oldest=visitors()[0]||descendants().find(s=>chase.spiders.includes(s));if(!oldest)break;
+        retire(oldest,world,events);
       }
-      const occupied=present();
-      for(const id of previouslyPresent)occupied.add(id);
-      const candidates=roster.all.filter(s=>!occupied.has(s.id));
-      const species=candidates.length?roster.all.slice(index%roster.all.length).concat(roster.all.slice(0,index%roster.all.length))
-        .find(s=>!occupied.has(s.id)):null;
-      const at=chase.findSpawnNode(player,cellPixels,{border:true,far:true});
-      index++;nextArrivalAt+=arrivalInterval;
+      const occupied=present();for(const id of previouslyPresent)occupied.add(id);
+      const species=roster.all.slice(index%roster.all.length).concat(roster.all.slice(0,index%roster.all.length)).find(s=>!occupied.has(s.id));
+      const at=chase.findSpawnNode(player,cellPixels,{border:true,far:true});index++;nextArrivalAt+=arrivalInterval;
       if(!species||!at)return;
       const s=chase.spawn({kind:species.kind,species,origin:'timed',position:at,arrivedAt:clock,retireAt:clock+residency});
-      if(s)emit(events,'arrival',species.name,1);
+      if(s)emit(events,'arrival',species.name);
     }
-    function process(cellPixels,player,world,events){
-      const previouslyPresent=present();
-      for(const s of visitors())if(s.retireAt<=clock)chase.remove(s,world);
-      // Capacity is reserved at laying time. A scheduled clutch always hatches
-      // at its deadline, even if its parent has since left the board.
-      for(let n=0;n<eggs.length;){
-        const egg=eggs[n];if(egg.hatchAt>clock){n++;continue;}
-        for(const species of egg.species){
-          const s=chase.spawn({kind:'centipede',species,origin:'hatch',position:egg.position,parentId:egg.parentId,hatchedAt:clock});
-          if(!s)throw new Error('A reserved clutch lost its legal grid node.');
-        }
-        eggs.splice(n,1);emit(events,'hatched',egg.name,egg.count);
+    // Earliest closed-disk pickup along the actual grid-edge player path.
+    function pickupAt(egg,paths,cellPixels,radius,start,end,from=clock){
+      let first=null;
+      for(const path of paths){
+        const a=start+path.start*(end-start),b=start+path.end*(end-start),lo=Math.max(a,from,egg.laidAt),hi=Math.min(b,end,egg.hatchAt);
+        if(hi<lo-EPS)continue;
+        const at=t=>{const u=b>a?(t-a)/(b-a):0;return {i:path.from.i+(path.to.i-path.from.i)*u,j:path.from.j+(path.to.j-path.from.j)*u};};
+        const p=at(lo),q=at(hi),x=(p.i-egg.position.i)*cellPixels('x'),y=(p.j-egg.position.j)*cellPixels('y');
+        const dx=(q.i-p.i)*cellPixels('x'),dy=(q.j-p.j)*cellPixels('y'),aa=dx*dx+dy*dy,c=x*x+y*y-radius*radius;
+        let t=c<=EPS?0:null;
+        if(t===null&&aa>EPS){const bb=2*(x*dx+y*dy),d=bb*bb-4*aa*c;if(d>=0){const root=(-bb-Math.sqrt(Math.max(0,d)))/(2*aa);if(root>=-EPS&&root<=1+EPS)t=Math.max(0,Math.min(1,root));}}
+        if(t!==null){const time=lo+(hi-lo)*t;if(first===null||time<first)first=time;}
       }
-      if(nextArrivalAt<=clock)arrive(player,cellPixels,world,events,previouslyPresent);
-      for(const s of chase.spiders){
-        if(!large(s)||(cooldowns.get(s.id)??-Infinity)>clock)continue;
-        const capacity=populationLimit-reserved();if(capacity<1)break;
-        const at=parentNode(s,cellPixels);if(!at)continue;
-        const count=Math.min(1+clutchIndex%2,capacity);
-        const species=Array.from({length:count},(_,n)=>roster.hatchVariant(s.species,clutchIndex+n));
-        const egg={id:`clutch-${nextEgg++}`,position:copy(at),laidAt:clock,hatchAt:clock+hatchDelay,count,parentId:s.id,
-          name:s.species.name,species};
-        eggs.push(egg);clutchIndex++;cooldowns.set(s.id,clock+clutchCooldown);
-        emit(events,'laid',egg.name,count);
-      }
-      const alive=new Set(chase.spiders.map(s=>s.id));
-      for(const id of cooldowns.keys())if(!alive.has(id))cooldowns.delete(id);
+      return first;
     }
-    function advance(ms,player,cellPixels,world=null){
+    function collect(paths,cellPixels,radius=12){
+      const found=[];
+      for(let n=eggs.length-1;n>=0;n--)if(pickupAt(eggs[n],paths,cellPixels,radius,clock,clock+1)!==null)found.unshift(eggs.splice(n,1)[0]);
+      return found.map(e=>({...e,position:copy(e.position),species:e.species.slice()}));
+    }
+    function advance(ms,player,cellPixels,world=null,options={}){
       const duration=nonnegative(ms),events=[];if(!duration)return events;
-      const end=clock+duration;
-      process(cellPixels,player,world,events);
-      while(clock<end){
-        let next=Math.min(end,nextArrivalAt);
-        for(const egg of eggs)next=Math.min(next,egg.hatchAt);
-        for(const s of visitors())if(s.retireAt>clock)next=Math.min(next,s.retireAt);
-        if(reserved()<populationLimit)for(const s of chase.spiders){
-          const deadline=cooldowns.get(s.id);
-          if(large(s)&&deadline>clock)next=Math.min(next,deadline);
+      const start=clock,end=clock+duration,paths=options.playerPath||[],radius=Number.isFinite(options.collectRadius)?Math.max(0,options.collectRadius):12;
+      const collectDue=()=>{
+        for(let n=0;n<eggs.length;){
+          const egg=eggs[n],when=pickupAt(egg,paths,cellPixels,radius,start,end);
+          if(when===null||when>clock+EPS){n++;continue;}
+          eggs.splice(n,1);emit(events,'collected',egg.name,1,{id:egg.id});options.onCollect?.(egg);
         }
-        clock=next;process(cellPixels,player,world,events);
+      };
+      while(true){
+        const previouslyPresent=present();
+        collectDue(); // At a shared deadline, reaching the egg takes priority over hatching.
+        for(const s of visitors())if(s.retireAt<=clock)retire(s,world,events);
+        for(let n=0;n<eggs.length;){
+          const egg=eggs[n];if(egg.hatchAt>clock+EPS){n++;continue;}
+          const spec={kind:egg.kind,origin:'hatch',parentId:egg.parentId,hatchedAt:clock};
+          const s=egg.aquatic?poolLeeches.spawn({...spec,poolIndex:egg.poolIndex}):chase.spawn({...spec,species:egg.species[0],position:egg.position});
+          if(!s)throw new Error('A reserved egg lost its legal habitat.');
+          eggs.splice(n,1);emit(events,'hatched',egg.name);
+        }
+        if(nextArrivalAt<=clock+EPS)arrive(player,cellPixels,world,events,previouslyPresent);
+        if(nextLayAt<=clock+EPS){
+          nextLayAt+=layInterval;
+          while(reserved()>=populationLimit&&descendants().length)retire(descendants()[0],world,events);
+          // Only creatures roaming the dry grid lay eggs; pool predators never do.
+          const candidates=chase.spiders.filter(s=>s.hp!==0).map(s=>({s,at:parentNode(s,cellPixels)})).filter(c=>c.at);
+          if(candidates.length&&reserved()<populationLimit){
+            const {s,at}=candidates[Math.floor(draw()*candidates.length)],aquatic=water().includes(s);
+            const species=s.species||{id:s.kind,kind:s.kind,name:s.kind==='shark'?'Shark':'Leech'};
+            const egg={id:`egg-${nextEgg++}`,position:copy(at),laidAt:clock,hatchAt:clock+hatchDelay,count:1,parentId:s.id,
+              name:species.name,species:[species],kind:s.kind,aquatic,poolIndex:aquatic?s.poolIndex:null};
+            eggs.push(egg);emit(events,'laid',egg.name,1,{parentId:s.id,kind:s.kind});
+          }
+        }
+        collectDue();
+        if(clock>=end-EPS)break;
+        let next=Math.min(end,nextArrivalAt,nextLayAt);
+        for(const egg of eggs){next=Math.min(next,egg.hatchAt);const when=pickupAt(egg,paths,cellPixels,radius,start,end);if(when!==null&&when>clock+EPS)next=Math.min(next,when);}
+        for(const s of visitors())if(s.retireAt>clock)next=Math.min(next,s.retireAt);
+        clock=next;
       }
       return events;
     }
-    function snapshot(){
-      return {clock,arrivalIndex:index,nextArrivalAt,
-        eggs:eggs.map(e=>({...e,position:copy(e.position),species:e.species.slice(),progress:Math.max(0,Math.min(1,(clock-e.laidAt)/hatchDelay))})),
-        lastEvent:lastEvent?{...lastEvent}:null};
-    }
-    return {advance,snapshot};
+    function snapshot(){return {clock,arrivalIndex:index,nextArrivalAt,nextLayAt,randomState:state,
+      eggs:eggs.map(e=>({...e,position:copy(e.position),species:e.species.slice(),progress:Math.max(0,Math.min(1,(clock-e.laidAt)/hatchDelay))})),
+      lastEvent:lastEvent?{...lastEvent}:null};}
+    return {advance,snapshot,collect};
   }
-  const api=Object.freeze({create,arrivalInterval,residency,hatchDelay,clutchCooldown,populationLimit,visitorLimit});
-  root.GridderCreatureEcology=api;
-  if(typeof module==='object'&&module.exports)module.exports=api;
+  const api=Object.freeze({create,arrivalInterval,residency,hatchDelay,layInterval,populationLimit,visitorLimit});
+  root.GridderCreatureEcology=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window==='object'?window:globalThis);

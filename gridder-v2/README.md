@@ -1,9 +1,85 @@
 # Gridder 2
 
+On phones and tablets, water uses the masked animated texture renderer to avoid
+a reported mobile shader artifact. Desktop WebGL keeps the procedural ocean
+shader. Both paths follow the same container shapes and game clock.
+
 A separate Phaser 4.2.1 edition of Lucy's educational Gridder. Paint closed loops,
 discover features of functions, and survive family-specific land monsters and
 hungry neon leeches and a pool shark. Source:
 `subsites/gridder-v2/`; Nikola destination: `/gridder-v2/`.
+
+## Eggs and the three-shot shooter — 4 November 2026
+
+Every 10 seconds of active monster play, one randomly selected living monster
+outside the water containers lays an egg on a legal grid node. Sharks and
+leeches in containers do not lay eggs. After 10 more active seconds, an
+uncollected egg hatches into a smaller creature of the same kind/species.
+Hatchlings use the same movement speed as the original monsters of their
+kind and difficulty, including the ordinary speed setting and resize scaling.
+Their smaller size and one-hit health remain.
+
+Cross an egg to refill the shooter to exactly **3 bullets**. Turn by moving,
+then press **Space** once for each shot. Touchscreens also have a **Fire** button.
+Gridder holds the shooter centrally with **both hands**; the weapon and armed
+face keep the same direction while stopped. Hatchlings take one
+hit, adult centipedes three, and other adults two, including sharks and leeches.
+A bullet hits the first creature it reaches and is spent even if it misses.
+Damage lasts for that creature's lifetime on the current board.
+Each shot has a sharp report, a quieter flying-bullet whoosh, and a monster
+impact sound. A fatal hit adds an explosion. The Sound effects switch controls
+these sounds; pausing stops them and misses make no monster-impact sound.
+
+Unused bullets survive a life loss and carry between levels within the current
+function. Restarting or changing function clears the shooter; a new level
+clears travelling bullets and starts its new creature population. Timers pause
+with the game, capture, resurrection, completed objectives and enemies-off
+practice. The active ecology clock carries between levels. To keep the board
+bounded while preserving the ten-second rhythm, the oldest hatchlings depart
+when space is needed. Existing minute visitors retain their separate limit.
+
+Feature record: `docs/chebby/agents/gridder-team/EGGS-SHOOTER.md`.
+Local changes only; public deployment is separate.
+
+## Expanded challenge catalogue — 3 November 2026
+
+The chooser contains **102 functions** (three times the previous 34), in four
+families and 16 subfamilies, with **615 levels**. The 52 new smooth examples add
+polynomials through degree eight, rational curves, exponential/logarithmic
+composites, faster trigonometric waves and hyperbolic functions.
+
+Choose **Discontinuities and special functions → Explore special examples**
+for 16 additional studies: absolute value, sign, unit step, floor, ceiling,
+fractional part, distance to the nearest integer, triangle wave, a jump between
+lines, a removable hole, a reciprocal pole, sinc, two oscillatory examples,
+Dirichlet and Thomae. Each starts with exploration and then offers applicable
+Next level challenges: minima, maxima, first and second derivatives,
+singularities, discontinuities and differentiability. There are 74 follow-on
+challenges, making 90 study levels in addition to 525 smooth-function levels.
+Targets use explicit segments and filled/open markers; they cover the stated finite depiction;
+no lines are drawn across jumps or between isolated samples. The maths panel
+explains the full definition, continuity and derivative applicability. Window
+extrema are distinguished from local extrema. Missing derivatives are explained
+without inventing a derivative curve; fractional part has no maximum, and the
+reciprocal across its pole has no finite global extrema. Vertical location
+markers identify inputs, not extra values of the function.
+
+Dirichlet uses constructed rational/irrational examples. Thomae uses all 181
+reduced fractions in [0,1] with denominator at most 24, plus 24 constructed
+irrational examples at height zero. Neither classifies floating-point inputs
+as rational or claims its finite dots depict a dense infinite graph. Nonlinear
+exploration polylines and unresolved oscillations are labelled explicitly.
+New smooth critical coordinates are numerical approximations obtained from
+bounded root isolation or explicit formulas, not interval-certified bounds.
+
+Checks: `test-expanded-catalogue.cjs`, `test-exploration-levels.cjs`,
+`test-gridder-catalogue.cjs`, `test-gridder-all-levels.cjs` and
+`test-expanded-catalogue-browser.py` under `tools/gridder-v2/`. Study progression
+also has `test-study-progression.cjs` and `test-study-progression-browser.py`.
+The latter exercises native WebGL and phone-width Canvas Next/replay flows.
+The original 34 definitions and their 187 objectives retain their previous
+boards, targets and pool placement. This expansion is local; public deployment
+is separate.
 
 ## Speech removed
 
@@ -325,9 +401,10 @@ old app. Preserve unrelated current changes when consulting the saved `conf.py`.
 
 ## Preserved game and mathematics
 
-- Three families, 15 subfamilies, 34 functions and 187 ordered objectives,
+- Four families, 16 subfamilies, 102 functions and 615 ordered objectives,
   including extrema, inflections, first/second derivatives, restricted inverses
-  and normals with the vertical-normal case.
+  and normals with the vertical-normal case, plus finite-model exploration
+  and supported special-function follow-on levels.
 - Exact closed-cell targets, continuous movement, 1/16 taps,
   buffered turns, partial painting and complete enclosed-region fills.
 - Seven lives, three starting pursuers, swept collisions, protection, four capture phases,

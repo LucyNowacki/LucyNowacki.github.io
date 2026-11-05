@@ -78,6 +78,8 @@ function create(scene){
  let resurrection={visible:false,frames:[],bounds:[]};
  const graphics=Object.freeze({player,spiders:Object.freeze(spiders.slice(0,2)),centipede,get enemies(){return spiders.slice();},blood:shield,pieces,angels,chebby:chebby?.image});
  const eggs=scene.add.graphics().setDepth(22.4),eggLabels=[];objects.push(eggs);
+ // Separate persistent layers: shots are in board space, hand follows the head.
+ const projectiles=scene.add.graphics().setDepth(23.1),weaponHand=scene.add.graphics().setDepth(24.2);objects.push(projectiles,weaponHand);
  const gait=createGait();
  function travelPose(s,pos,clock,b){const pose=gait.update(s,pos,clock,b);diagnostic.gait=pose;return pose;}
  let gameIdentity=null,lastEmotionClock=-1,lastEmotionPosition=null,afraid=false,reliefUntil=0,emotion='happy',movingPose=false;
@@ -331,7 +333,7 @@ function create(scene){
   }
  }
  function render(s,b){
-  if(!s.walker||!s.chase)return;objects.forEach(o=>o.setVisible(true));pieces.clear();shield.clear();player.clear();overlay.clear();title.setVisible(false);subtitle.setVisible(false);angel.setVisible(false);angelPartner.setVisible(false);
+  if(!s.walker||!s.chase)return;objects.forEach(o=>o.setVisible(true));pieces.clear();shield.clear();player.clear();overlay.clear();projectiles.clear();weaponHand.clear();title.setVisible(false);subtitle.setVisible(false);angel.setVisible(false);angelPartner.setVisible(false);
   resurrection={visible:false,frames:[],bounds:[]};
   const boardScale=root.GridderSpriteMetrics?.scale(b)??1,playerFactor=boardScale*(root.GridderSpriteMetrics?.playerScale??1.25);
   const clock=s.chaseTime||0,reduced=root.GridderTheme?.reducedMotion?.()||false,pos=s.walker.position(),cell=axis=>axis==='x'?b.cellWidth:b.cellHeight;
@@ -355,7 +357,15 @@ function create(scene){
   eggs.clear();const eggStates=s.ecology?.eggs||[];
   while(eggLabels.length<eggStates.length){const label=scene.add.text(0,0,'',{fontFamily:'system-ui, sans-serif',fontStyle:'bold',fontSize:'11px',color:'#fff3c4'}).setOrigin(.5).setDepth(23);eggLabels.push(label);objects.push(label);}
   while(eggLabels.length>eggStates.length){const label=eggLabels.pop();objects.splice(objects.indexOf(label),1);label.destroy();}
-  eggStates.forEach((egg,index)=>{const ex=b.px(egg.position.i),ey=b.py(egg.position.j),progress=clamp(Number(egg.progress)||0,0,1),pulse=reduced?1:1+.12*Math.sin(clock/180),r=5*boardScale*pulse;eggs.fillStyle(0xffc86a,.9);eggs.fillEllipse(ex,ey,r*1.55,r*2);eggs.fillStyle(0xfff1b1,.95);eggs.fillCircle(ex-r*.2,ey-r*.3,r*.27);eggs.lineStyle(1.5*boardScale,0xff76c9,.9);eggs.beginPath();eggs.arc(ex,ey,9*boardScale,-Math.PI/2,-Math.PI/2+Math.PI*2*progress);eggs.strokePath();const seconds=Math.max(0,Math.ceil((egg.hatchAt-(s.ecology?.clock||0))/1000));eggLabels[index].setPosition(ex,ey-15*boardScale).setText(Number.isFinite(seconds)?String(seconds):String(egg.count||''));});
+  eggStates.forEach((egg,index)=>{
+   const ex=b.px(egg.position.i),ey=b.py(egg.position.j),progress=clamp(Number(egg.progress)||0,0,1),pulse=reduced?1:1+.12*Math.sin(clock/180),r=5*boardScale*pulse;
+   const species=Array.isArray(egg.species)?egg.species[0]:egg.species,accent=species?.accent??(egg.kind==='shark'?0x80f1ee:egg.kind==='leech'?0x40ffdd:0xff76c9);
+   eggs.fillStyle(0xffc86a,.95);eggs.fillEllipse(ex,ey,r*1.55,r*2);
+   eggs.fillStyle(accent,.95);eggs.fillCircle(ex+r*.13,ey+r*.18,r*.32);
+   eggs.fillStyle(0xfff1b1,.98);eggs.fillCircle(ex-r*.2,ey-r*.3,r*.27);
+   eggs.lineStyle(1.5*boardScale,accent,.95);eggs.beginPath();eggs.arc(ex,ey,9*boardScale,-Math.PI/2,-Math.PI/2+Math.PI*2*progress);eggs.strokePath();
+   const seconds=Math.max(0,Math.ceil((egg.hatchAt-(s.ecology?.clock||0))/1000));eggLabels[index].setPosition(ex,ey-15*boardScale).setText(Number.isFinite(seconds)?String(seconds):String(egg.count||''));
+  });
   for(const g of spiders)g.setVisible(false);
   s.chase.spiders.forEach((sp,index)=>{
    const g=spiders[index];if(!g)return;g.clear();if(!s.spidersEnabled&&!s.deathScene)return;g.setVisible(true);
@@ -429,7 +439,48 @@ function create(scene){
    const mouth={x:b.px(sharkCapture.mouth.i),y:b.py(sharkCapture.mouth.j)},offset=32*boardScale*(1-sharkCapture.swallow);
    swallowClip={x:mouth.x+nx*offset,y:mouth.y+ny*offset,nx,ny};
   }
-  chebby?.render({visible:!s.gameOver&&stage?.name!=='scatter'&&sharkCapture?.visible!==false,x:player.x,y:player.y,scaleX:player.scaleX,scaleY:player.scaleY,angle:player.angle,alpha:player.alpha,clock,mood:emotion,capture:!!stage,tint:avatarTint,swallow:sharkCapture?.swallow||0,swallowClip,threatDirection:nearest?[b.px(nearest.at.i)-x,b.py(nearest.at.j)-y]:null,...travelPose(s,pos,clock,b)});
+  const pose=travelPose(s,pos,clock,b),weapon=s.weapon||{},ammo=Math.max(0,Number(weapon.ammo)||0);
+  const armed=ammo>0&&!s.deathScene&&!s.gameOver;
+  const rawDirection=weapon.direction||s.lastTravel||[0,-1];
+  const di=Math.sign(Number(rawDirection[0])||0),dj=Math.sign(Number(rawDirection[1])||0);
+  const aim=di?[di,0]:dj?[0,dj]:[0,-1],heading=aim[0]>0?-90:aim[0]<0?90:aim[1]>0?180:0;
+  // Grid j increases upward; SVG/Phaser y increases downward. The avatar's
+  // natural face points down, so this same heading rotates face and handgun.
+  if(armed){pose.headHeading=heading;pose.bodyHeading=heading;pose.bodyDirection=[...aim];}
+  chebby?.render({visible:!s.gameOver&&stage?.name!=='scatter'&&sharkCapture?.visible!==false,x:player.x,y:player.y,scaleX:player.scaleX,scaleY:player.scaleY,angle:player.angle,alpha:player.alpha,clock,mood:emotion,capture:!!stage,tint:avatarTint,swallow:sharkCapture?.swallow||0,swallowClip,threatDirection:nearest?[b.px(nearest.at.i)-x,b.py(nearest.at.j)-y]:null,...pose});
+  const bulletVisuals=[];
+  for(const shot of weapon.bullets||[]){
+   if(!Number.isFinite(shot.position?.i)||!Number.isFinite(shot.position?.j))continue;
+   const bx=b.px(shot.position.i),by=b.py(shot.position.j),dx=Number(shot.direction?.[0])||0,dy=-(Number(shot.direction?.[1])||0),length=Math.hypot(dx,dy)||1,ux=dx/length,uy=dy/length;
+   line(projectiles,[[bx-ux*9*boardScale,by-uy*9*boardScale],[bx,by]],0xffb05c,3.2*boardScale,.8);
+   circle(projectiles,bx,by,2.8*boardScale,0xffedaa,0x93527c);
+   bulletVisuals.push({id:shot.id,x:bx,y:by,direction:[dx/length,dy/length]});
+  }
+  const hit=weapon.lastHit,hitAge=Number(weapon.clock)-Number(hit?.at);
+  if(hit&&Number.isFinite(hit.position?.i)&&Number.isFinite(hit.position?.j)&&hitAge>=0&&hitAge<180){
+   const alpha=reduced?.75:1-hitAge/180;
+   projectiles.lineStyle(2*boardScale,0xffeda9,alpha);projectiles.strokeCircle(b.px(hit.position.i),b.py(hit.position.j),(6+(reduced?0:5*hitAge/180))*boardScale);
+  }
+  let muzzle=null,grip=null,hands=[];
+  if(armed){
+   weaponHand.setPosition(x,y).setScale(playerFactor).setAngle(heading);
+   // The gun is centered along the head's forward (+y) axis. Two short
+   // sleeves and distinct gloves meet the grip symmetrically; neither moves
+   // with the original tentacle gait.
+   for(const side of [-1,1]){
+    line(weaponHand,[[side*8,6],[side*8,12],[side*5,17]],0x443052,4.7);
+    line(weaponHand,[[side*8,6],[side*8,12],[side*5,17]],0xc59ada,2.7);
+   }
+   weaponHand.fillStyle(0x292a40,1);weaponHand.fillRoundedRect(-4,12,8,16,1.8);
+   weaponHand.fillStyle(0x92afbb,1);weaponHand.fillRoundedRect(-3,13,6,11,1);
+   weaponHand.fillStyle(0x34495d,1);weaponHand.fillRect(-3.5,24,7,4);
+   weaponHand.lineStyle(.8,0xffe9cf,1);weaponHand.strokeRect(-3.5,24,7,4);
+   for(const side of [-1,1])circle(weaponHand,side*5,17,3.2,0xffd5c3,0x805176);
+   const rad=heading*Math.PI/180,c=Math.cos(rad),sn=Math.sin(rad);
+   const world=(u,v)=>({x:x+(u*c-v*sn)*playerFactor,y:y+(u*sn+v*c)*playerFactor});
+   muzzle=world(0,28);grip=world(0,17);hands=[world(-5,17),world(5,17)];
+  }
+  diagnostic.weapon={visible:armed,ammo,heading:armed?heading:null,anchor:{x,y},muzzle,grip,hands,direction:armed?[...aim]:null,bullets:bulletVisuals};
   if(!s.gameOver&&clock<s.resurrectionUntil){
    // Native atlas frames: high / open / low / open. No Phaser timer or tween.
    const beat=Math.floor(clock/130)%4,frames=[beat,4+(beat+1)%4];

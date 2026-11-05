@@ -3,8 +3,40 @@
 (() => {
   'use strict';
   const $=id=>document.getElementById(id),catalogue=window.derivativeGridderCatalogue,M=catalogue?.maths||window.derivativeMath,G=window.derivativeGridderMath,P=window.derivativePalette,C=window.derivativeGridderChase,D=window.derivativeGridderCapture,R=window.derivativeGridderRemains;
-  const labels={min:'minimum',max:'maximum',inflection:'inflection point',derivative:'first derivative',second:'second derivative',inverse:'inverse function',normal:'perpendicular normal line'};
+  const labels={min:'minimum',max:'maximum',inflection:'inflection point',derivative:'first derivative',second:'second derivative',inverse:'inverse function',normal:'perpendicular normal line',exploration:'displayed function model',singularity:'singular locations',discontinuity:'discontinuities',nondifferentiable:'points without a derivative'};
   const startingLives=7;
+  const roadmap=catalogue&&window.GridderFunctionRoadmap?.build(catalogue,G);
+  const roadmapStorageKey='gridder-v2-roadmap-v1',completedFunctions=new Set();
+  let roadmapCurrentKey=roadmap?.keys[0]||null;
+  if(roadmap){
+    try{
+      const saved=JSON.parse(window.localStorage?.getItem(roadmapStorageKey)||'null');
+      if(saved?.version===roadmap.version&&Array.isArray(saved.completedKeys)){
+        if(typeof saved.currentKey==='string'&&roadmap.byKey[saved.currentKey])roadmapCurrentKey=saved.currentKey;
+        for(const savedKey of saved.completedKeys)if(typeof savedKey==='string'&&roadmap.byKey[savedKey])completedFunctions.add(savedKey);
+      }
+    }catch{} // Private browsing, unavailable storage and malformed saves start safely.
+  }
+  function roadmapSnapshot(){
+    const currentKey=roadmapCurrentKey||key,currentIndex=roadmap?roadmap.keys.indexOf(currentKey):-1;
+    return {route:roadmap||null,currentKey,currentIndex,
+      completedKeys:roadmap?roadmap.keys.filter(k=>completedFunctions.has(k)):[],
+      nextKey:roadmap?.keys[currentIndex+1]||null,
+      finished:Boolean(roadmap&&roadmap.keys.every(k=>completedFunctions.has(k)))};
+  }
+  function saveRoadmap(){
+    if(!roadmap)return;
+    try{window.localStorage?.setItem(roadmapStorageKey,JSON.stringify({version:roadmap.version,currentKey:roadmapCurrentKey,completedKeys:roadmapSnapshot().completedKeys}));}catch{}
+  }
+  function announceRoadmapChange(){
+    const Event=window.CustomEvent;
+    if(roadmap&&typeof Event==='function'&&typeof window.dispatchEvent==='function')window.dispatchEvent(new Event('gridder-roadmap-change',{detail:roadmapSnapshot()}));
+  }
+  function selectRoadmapKey(nextKey){
+    if(!roadmap?.byKey[nextKey]||roadmapCurrentKey===nextKey)return;
+    roadmapCurrentKey=nextKey;saveRoadmap();announceRoadmapChange();
+  }
+  const roadmapOpen=()=>Boolean(window.GridderRoadmapDemo?.isOpen());
   // The 280 px/s setting was tuned on a 1030px-wide plotted grid. Player
   // screen speed scales uniformly with the visual size on both axes.
   const referenceMovementPlotWidth=1030;
@@ -25,7 +57,7 @@
   const pointerHolds=new Map();
   let keyboardHold=null,inputOrder=0;
   let deathScene=null,deathAttacker=null,remains=null,captureSoundPhase=null,snagRemaining=0,playerPushes=[],pushAudible=false,walkAudible=false,levelGraph=null;
-  let frameGeometry=null,geometryFrame=false,gaps=null,navigation=null,poolLeeches=null,leechWarningId=null,ecology=null;
+  let frameGeometry=null,geometryFrame=false,gaps=null,navigation=null,poolLeeches=null,leechWarningId=null,ecology=null,weapon=null;
   function beginFrame(){geometryFrame=true;frameGeometry=null;}
   function endFrame(){geometryFrame=false;frameGeometry=null;}
   function boardLayout(){
@@ -67,11 +99,20 @@
     const membership=catalogue.membership(nextKey);if(!membership)return;
     $('gridder-family').value=membership.family.id;$('gridder-subfamily').value=membership.subfamily.id;chooseFamily(nextKey);restart();
   }
-  if(catalogue){populate($('gridder-family'),catalogue.families.map(f=>[f.id,f.label]),'algebraic');chooseFamily('quadratic');}
+  function continueRoadmap(){
+    if(!roadmap)return;
+    const currentKey=roadmapCurrentKey||roadmap.keys[0];
+    if(!game||key!==currentKey)selectFunction(currentKey);
+    else pause(); // Returning from the map retains this session's board and level.
+  }
+  if(catalogue){
+    const initialKey=roadmapCurrentKey||'quadratic',membership=catalogue.membership(initialKey);
+    populate($('gridder-family'),catalogue.families.map(f=>[f.id,f.label]),membership?.family.id||'algebraic');chooseFamily(initialKey);
+  }
   else $('gridder-function').innerHTML=$('function-select').innerHTML;
   function stopHold(){clearHeldInputs();frame=null;held=null;lastTime=null;command=null;capture=null;pending=[];turn=null;centreUntil=0;}
   function release(){held=null;}
-  function pause(){playing=false;pushAudible=false;walkAudible=false;stopHold();sound?.stop();music?.pause();captureSoundPhase=null;$('gridder-normal-point').disabled=Boolean(deathScene||gameOver);$('gridder-start').textContent=canReplay()?'Play again':'Start game';$('gridder-start').setAttribute('aria-pressed','false');}
+  function pause(){playing=false;pushAudible=false;walkAudible=false;stopHold();sound?.stop();music?.pause();captureSoundPhase=null;$('gridder-normal-point').disabled=Boolean(deathScene||gameOver);$('gridder-start').textContent=canReplay()?'Play again':'Start game';$('gridder-start').setAttribute('aria-pressed','false');updateFireControl();}
   function releasePlayerPushes(){for(const push of playerPushes)remains?.releasePlayerPush(push);playerPushes=[];pushAudible=false;}
   function beginPush(piece,from,to){
     const push=remains?.beginPlayerPush(piece,from,to,cellPixels);if(!push)return false;
@@ -89,6 +130,7 @@
     if(walking&&!intent)sound?.step?.('gridder-walk');
     sound?.activity?.('walk','gridder-walk',walking&&intent);
     sound?.activity?.('push','gridder-push',running&&pushing);
+    sound?.bulletFlight?.(running&&canFire()&&weapon.snapshot().bullets.length>0);
     for(const spider of chase?.spiders||[])sound?.activity?.('chew',spider.kind,running&&spidersEnabled()&&Boolean(spider.eating),(spider.eating?.elapsed||0)/1000);
   }
   function syncMusic(){
@@ -111,22 +153,31 @@
     const c=M.curves[key];
     const node=$('gridder-formula'),rule=$('gridder-rule'),context=$('gridder-context'),mission=$('gridder-mission'),clue=$('gridder-mission-clue');
     const caseNodes=['gridder-case-formulas','gridder-case-method','gridder-case-meaning','gridder-case-domain'].map($),nodes=[node,rule,context,mission,clue,...caseNodes];window.MathJax?.typesetClear?.(nodes);
-    node.textContent=String.raw`\(f(x)=${c.tex}\)`;
+    // Dense-set definitions remain fully displayed in the maths panel; a
+    // conventional function name keeps the small arena heading readable.
+    const headingTex=key==='study_dirichlet'?'D(x)':key==='study_thomae'?'T(x)':c.tex;
+    node.textContent=String.raw`\(f(x)=${headingTex}\)`;
     context.textContent=`${c.context||''} ${c.note||''}`.trim()||String.raw`Study \(f(x)=${c.tex}\) on the stated domain. Connect the formulas and reasoning below with the shapes you uncover on the grid.`;
     if(catalogue&&$('gridder-subfamily').value==='symmetry')context.textContent+=c.parity==='even'?String.raw` The original function is even: \(f(-x)=f(x)\). Its graph reflects in the y-axis.`:String.raw` The original function is odd: \(f(-x)=-f(x)\). Its graph has symmetry about the origin.`;
-    if(catalogue&&$('gridder-subfamily').value==='periodic')context.textContent+=String.raw` The original function has period \(${key==='tangent'?'\\pi':'2\\pi'}\): \(f(x+p)=f(x)\), wherever both sides are defined.`;
-    const kind=quests[level]?.kind,g=levelGraph;
-    rule.textContent=kind==='derivative'?String.raw`Your clue: \(f'(x)=${g.tex}\). Use this rule to predict its path.`
+    if(catalogue&&$('gridder-subfamily').value==='periodic'&&c.period)context.textContent+=String.raw` The original function has period \(p\approx${M.format(c.period)}\): \(f(x+p)=f(x)\), wherever both sides are defined.`;
+    const q=quests[level],kind=q?.kind,g=levelGraph;
+    rule.textContent=q.graph?`${q.clue||q.displayNote} ${q.tex?String.raw`\(${q.tex}\)`:''}`.trim()
+      :kind==='exploration'?c.study.displayNote
+      :kind==='derivative'?String.raw`Your clue: \(f'(x)=${g.tex}\). Use this rule to predict its path.`
       :kind==='second'?String.raw`Differentiate twice: \(f''(x)=${g.tex}\). Positive means the function bends upwards; negative means it bends downwards.`
       :kind==='inverse'?String.raw`Chosen branch: \(${g.sourceTex}\). Swap coordinates to discover \(f^{-1}(x)=${g.tex}\). An inverse undoes the function; it is not the reciprocal \(1/f(x)\).`
       :kind==='normal'?String.raw`At \(a=${g.a}\), the tangent gradient is \(f'(a)\approx ${M.format(g.tangent).replaceAll('−','-')}\). Your normal: \(${g.tex}\). ${g.vertical?'A flat tangent has a vertical normal.':'Its gradient is the negative reciprocal of the tangent gradient.'}`
       :kind==='min'?String.raw`Look for a change from decreasing to increasing. At a smooth minimum, solve \(f'(a)=0\) and check the change of sign from − to +; at a corner, compare the two sides.`
       :kind==='max'?String.raw`Look for a change from increasing to decreasing. At a smooth maximum, solve \(f'(a)=0\) and check the change of sign from + to −; at a corner, compare the two sides.`
       :kind==='inflection'?String.raw`Find a change between upwards and downwards bending. Check that \(f''\) changes sign across the candidate; it may be undefined at the point, and \(f''(a)=0\) alone is not enough.`:'';
-    const q=quests[level],peers=quests.filter(item=>item.kind===kind&&item.point).sort((a,b)=>a.point.x-b.point.x);
+    const peers=quests.filter(item=>item.kind===kind&&item.point).sort((a,b)=>a.point.x-b.point.x);
     const number=q.point?peers.findIndex(item=>item.point.x===q.point.x)+1:0;
     const pointName=peers.length>1?`${labels[kind]} ${number} of ${peers.length}, counting from left to right`:labels[kind];
-    mission.textContent=q.point
+    mission.textContent=q.graph
+      ? `${q.title}. Use the arrows to close loops around every rectangle touched by this level's target segments or filled dots. Completed rectangles reveal the targets. ${q.displayNote}`
+      :kind==='exploration'
+      ? `Explore the displayed function model. Use the arrows to close loops around every rectangle touched by its segments or filled dots. Hollow circles are excluded points. Finite samples and approximations are explained in Maths explainer.`
+      :q.point
       ? `Find the ${pointName} on the coloured function. Use the arrows to close loops around every rectangle touching that point, including neighbouring rectangles at a grid edge or corner.`
       : `Discover the ${labels[kind]}. Use the arrows to close loops around every rectangle its graph crosses or touches. Completed target rectangles reveal the graph.`;
     clue.textContent=rule.textContent;
@@ -141,7 +192,8 @@
   function newLevel(){
     releasePlayerPushes();stopHold();sound?.stop();music?.stop();walkAudible=false;lastTravel=null;announced=false;
     const ecologyCarry=ecology?.snapshot();
-    const bonuses=chase?.spiders.filter(s=>(s.origin||'base')==='base').map(s=>({sizeScale:s.sizeScale||1,speedScale:s.speedScale||1,meals:s.meals||0,bloodMeals:s.bloodMeals||0}));
+    const ammo=weapon?.snapshot().ammo||0;
+    const bonuses=new Map(chase?.spiders.filter(s=>(s.origin||'base')==='base').map(s=>[s.kind,{sizeScale:s.sizeScale||1,speedScale:s.speedScale||1,meals:s.meals||0,bloodMeals:s.bloodMeals||0}])||[]);
     const q=quests[level],b=G.board(M,key,difficulty,q);levelGraph=G.graph(M,key,q);
     const targets=G.targets(M,key,b,q);
     gaps=window.GridderGaps.plan(M,G,key,b,q,{revealed,difficulty});
@@ -154,21 +206,29 @@
       routePixels:axis=>boardLayout().stretch?(axis==='x'?1:2/3):cellPixels(axis)};
     chase=C.create(b,difficulty,{...spriteOptions,familyId:familyId()},navigation);
     poolLeeches=window.GridderPoolLeeches.create(b,gaps.pools,{shark:true});leechWarningId=null;
-    ecology=window.GridderCreatureEcology?.create(chase,{familyId:familyId(),elapsedMs:ecologyCarry?.clock||0,arrivalIndex:ecologyCarry?.arrivalIndex||0})||null;
-    chase.spiders.forEach((s,index)=>{if(bonuses?.[index])Object.assign(s,bonuses[index]);});
+    ecology=window.GridderCreatureEcology?.create(chase,{familyId:familyId(),elapsedMs:ecologyCarry?.clock||0,arrivalIndex:ecologyCarry?.arrivalIndex||0,poolLeeches,seed:key,randomState:ecologyCarry?.randomState})||null;
+    weapon=window.GridderWeapons?.create(b,{ammo})||null;
+    chase.spiders.forEach(s=>{if(bonuses.has(s.kind))Object.assign(s,bonuses.get(s.kind));});
     remains=R?.create(b,spriteOptions)??null;chaseTime=0;safeUntil=1000;resurrectionUntil=0;gameOver=false;deathScene=null;deathAttacker=null;captureSoundPhase=null;snagRemaining=0;
     $('gridder-hints').checked=difficulty==='guided';
-    $('gridder-next').disabled=true;$('gridder-solution').hidden=true;$('gridder-solution-prompt').hidden=false;
+    $('gridder-next').disabled=true;$('gridder-next').textContent='Next level';$('gridder-solution').hidden=true;$('gridder-solution-prompt').hidden=false;
     $('gridder-solution').innerHTML='';
-    $('gridder-level').textContent=`Level ${level+1} of ${quests.length} · Find the ${labels[q.kind]}`;
-    $('gridder-task').textContent=!q.point
+    $('gridder-level').textContent=`Level ${level+1} of ${quests.length} · ${q.title||(q.kind==='exploration'?'Explore this function':'Find the '+labels[q.kind])}`;
+    $('gridder-task').textContent=q.graph
+      ? `Outline every rectangle touched by this level's target segments or filled dots. Hollow circles are excluded. ${q.displayNote}`
+      :q.kind==='exploration'
+      ? 'Outline every rectangle touched by a displayed segment or filled dot. Hollow circles are excluded. This challenge covers the finite model described below.'
+      :!q.point
       ? `Outline every rectangle the ${labels[q.kind]} passes through or touches—even at an edge or corner. Its graph appears inside completed target rectangles.`
       : `Outline every rectangle touching this ${labels[q.kind]} on the coloured function. If the point lies on a grid line or corner, complete every neighbouring rectangle. The point is revealed when all target rectangles are filled.`;
-    const detail=q.kind==='inverse'?'Only the stated one-to-one branch is coloured; the grey dashed line is y = x. '
+    const detail=q.graph?`${q.displayNote} `
+      :q.kind==='exploration'?`${M.curves[key].study.displayNote} `
+      :q.kind==='inverse'?'Only the stated one-to-one branch is coloured; the grey dashed line is y = x. '
       :q.kind==='normal'?'Point A and its grey tangent are shown. Discover the normal within the visible window. '
       :levelGraph?`The y-range fits both the function and its ${labels[q.kind]}. `:'';
     $('gridder-board-note').textContent=`${difficulty==='guided'?'Guided: target rectangles are outlined.':difficulty==='explorer'?'Explorer: more rectangles; turn on hints if needed.':'Challenge: the finest grid; targets are hidden until you request a hint.'} ${key==='log'&&q.kind!=='inverse'?'This board uses x ≥ 0.5, within the logarithm’s positive domain. ':''}${detail}The outer border is a playable grid edge.${gaps.pools.length?' Follow the pools’ shores. A flashing leech is preparing to lunge—move away before it drags you underwater!':''}`;
-    $('gridder-target-legend').textContent=levelGraph?`${q.kind==='second'?'Lime':q.kind==='inverse'?'Teal':q.kind==='normal'?'Orange':'Purple'} dashed curve: revealed ${labels[q.kind]}`:'Dashed curve: discover in later levels';
+    const finiteColors={min:'Salmon',max:'Blue',derivative:'Purple',second:'Lime',singularity:'Orange',discontinuity:'Pink',nondifferentiable:'Amber'};
+    $('gridder-target-legend').textContent=q.graph?`${finiteColors[q.kind]||'Turquoise'}: revealed targets · hollow circles: excluded points`:q.kind==='exploration'?'Turquoise: captured model · hollow circles: excluded points':levelGraph?`${q.kind==='second'?'Lime':q.kind==='inverse'?'Teal':q.kind==='normal'?'Orange':'Purple'} dashed curve: revealed ${labels[q.kind]}`:'Dashed curve: discover in later levels';
     $('gridder-normal-control').hidden=q.kind!=='normal';
     if(q.kind==='normal'){
       const input=$('gridder-normal-point');input.min=levelGraph.domain[0];input.max=levelGraph.domain[1];input.value=levelGraph.a;
@@ -178,7 +238,7 @@
     formula();
     render();if(playing&&spidersEnabled())ensureFrame();
   }
-  function restart(){pause();key=$('gridder-function').value;difficulty=$('gridder-difficulty').value;quests=G.levels(M,key);level=0;revealed=[];lives=startingLives;chase=null;ecology=null;newLevel();}
+  function restart(){pause();key=$('gridder-function').value;difficulty=$('gridder-difficulty').value;quests=G.levels(M,key);level=0;revealed=[];lives=startingLives;chase=null;ecology=null;weapon=null;newLevel();selectRoadmapKey(key);}
   function canReplay(){return gameOver||Boolean(game?.complete()&&level===quests.length-1);}
   function explain(){
     const q=quests[level],node=$('gridder-solution');
@@ -191,8 +251,18 @@
   function announceCompletion(){
     if(game.complete()&&!announced){
       announced=true;stopHold();const q=quests[level];if(q.point)revealed.push(q.point);
-      $('gridder-feedback').textContent=`Level complete! You revealed the ${labels[q.kind]}.${level===quests.length-1?' All levels complete—well done! Choose Play again for a new game.':' Choose Next level when you are ready.'}`;
-      $('gridder-next').disabled=level===quests.length-1;explain();
+      const finalLevel=level===quests.length-1,newCompletion=Boolean(roadmap&&finalLevel&&!completedFunctions.has(key));
+      if(newCompletion){completedFunctions.add(key);saveRoadmap();}
+      const progress=roadmapSnapshot(),nextFunction=Boolean(roadmap&&finalLevel&&progress.nextKey);
+      const ending=!finalLevel?' Choose Next level when you are ready.'
+        :!roadmap?' All levels complete—well done! Choose Play again for a new game.'
+        :nextFunction?' Function complete! Read the worked solution, then choose Next function → when you are ready. Play again restarts this function.'
+        :progress.finished?` Roadmap complete! All ${roadmap.keys.length} functions are complete. Read the worked solution or choose Play again.`
+        :' Function complete! You reached the end of the roadmap. Read the worked solution, replay, or choose another function from the roadmap.';
+      $('gridder-feedback').textContent=`Level complete! ${q.graph?q.title+'.':'You revealed the '+labels[q.kind]+'.'}${ending}`;
+      $('gridder-next').disabled=finalLevel&&!nextFunction;
+      $('gridder-next').textContent=nextFunction?'Next function →':roadmap&&finalLevel?(progress.finished?'Roadmap complete':'End of roadmap'):'Next level';
+      explain();if(newCompletion)announceRoadmapChange();
     }
   }
   function cellPixels(axis){
@@ -201,7 +271,7 @@
   }
   function ensureFrame(){if(frame===null){lastTime=null;frame=true;}}
   function move(direction){
-    if(!active||!playing||gameOver||deathScene||game.complete())return;
+    if(roadmapOpen()||!active||!playing||gameOver||deathScene||game.complete())return;
     if(direction[0]&&!walker.atNode()){
       const vertical=walker.route(capture||command?.direction||lastTravel||direction);
       if(vertical.axis==='y'){
@@ -213,7 +283,7 @@
     pending.push(direction);ensureFrame();
   }
   function begin(direction){
-    if(!active||!playing||gameOver||deathScene||game.complete())return;
+    if(roadmapOpen()||!active||!playing||gameOver||deathScene||game.complete())return;
     if(held&&(held[0]!==direction[0]||held[1]!==direction[1])&&!capture){
       command=null;pending=[];
     }
@@ -302,7 +372,7 @@
         stopHold();$('gridder-feedback').textContent='You reached the border. Choose another direction.';break;
       }
       playerPath.push({from,to:walker.position(),start:elapsed?used/elapsed:0,end:elapsed?(used+duration)/elapsed:1});used+=duration;
-      lastTravel=route.direction;changed=true;milliseconds-=duration;spendSnagTime(duration);
+      lastTravel=route.direction;weapon?.aim(lastTravel);changed=true;milliseconds-=duration;spendSnagTime(duration);
       if(playerPushes.length){
         pushAudible=true;
         for(const push of playerPushes)remains.advancePlayerPush(push,distance,cellPixels);
@@ -332,28 +402,47 @@
     if(used<elapsed||!playerPath.length)playerPath.push({from:after,to:after,start:elapsed?used/elapsed:0,end:1});
     const priorChaseTime=chaseTime;chaseTime+=elapsed;
     if(elapsed>0&&priorChaseTime<resurrectionUntil)changed=true;
+    let landPaths=[],landCreatures=chase.spiders.slice(),waterAttack=null;
     if(spidersEnabled()&&!game.complete()){
-      const paths=chase.advance(after,enemySpeed,elapsed,cellPixels,remains);changed=changed||elapsed>0;
-      if(elapsed>0&&chaseTime>=safeUntil){
-        const layout=boardLayout();
-        const attacker=paths.findIndex((path,index)=>C.collides(playerPath,path,cellPixels,window.GridderSpriteMetrics?.collisionRadius(layout,chase.spiders[index].sizeScale||1)??(11+7*(chase.spiders[index].sizeScale||1)),Math.max(0,(safeUntil-priorChaseTime)/elapsed)));
-        if(attacker>=0)caught(attacker);
-      }
+      landPaths=chase.advance(after,enemySpeed,elapsed,cellPixels,remains);changed=changed||elapsed>0;
+    }
+    if(!game.complete()){
+      waterAttack=poolLeeches.advance(elapsed,after,cellPixels,{enabled:spidersEnabled(),canAttack:priorChaseTime>=safeUntil,playerPath,playerSpeed:playerSpeed(),recordPaths:true});
+    }
+    const activeElapsed=Math.max(0,chaseTime-Math.max(priorChaseTime,resurrectionUntil));
+    if(!game.complete()&&spidersEnabled()&&weapon){
+      const hadBullets=weapon.snapshot().bullets.length>0;
+      const layout=boardLayout(),scale=window.GridderSpriteMetrics?.scale(layout)||layout.pw/referenceMovementPlotWidth;
+      const targets=landCreatures.map((s,index)=>({id:s.id,creature:s,position:chase.position(s),paths:landPaths[index],radius:10*(s.sizeScale||1)*scale,alive:()=>chase.spiders.includes(s)}))
+        .concat(poolLeeches.leeches.map(s=>({id:s.id,creature:s,aquatic:true,position:s.position,radius:(s.kind==='shark'?16:8)*(s.sizeScale||1)*scale,
+          paths:poolLeeches.motionPaths(s),alive:()=>poolLeeches.leeches.includes(s)})));
+      const hits=weapon.advance(activeElapsed,cellPixels,targets,{speed:Math.max(playerSpeed()*2.5,1),hit:(target,at)=>{
+        target.creature.lastHitAt=at;
+        return target.aquatic?poolLeeches.damage(target.creature):chase.damage(target.creature,1,remains);
+      }});
+      for(const hit of hits)sound?.hit?.(hit.killed);
+      if(hits.length){const hit=hits.at(-1);$('gridder-feedback').textContent=hit.killed?'Monster defeated.':'Hit! Fire again to defeat this monster.';}
+      changed=changed||hadBullets||hits.length>0;
+    }
+    // Resolve captures only against surviving bodies. Shooting never leaves a
+    // stale array index that can award a killed creature another bite.
+    if(spidersEnabled()&&!game.complete()&&elapsed>0&&chaseTime>=safeUntil){
+      const layout=boardLayout();
+      const attacker=landCreatures.find((s,index)=>chase.spiders.includes(s)&&C.collides(playerPath,landPaths[index],cellPixels,window.GridderSpriteMetrics?.collisionRadius(layout,s.sizeScale||1)??(11+7*(s.sizeScale||1)),Math.max(0,(safeUntil-priorChaseTime)/elapsed)));
+      if(attacker)caught(chase.spiders.indexOf(attacker));
     }
     if(!deathScene&&!game.complete()){
-      const attack=poolLeeches.advance(elapsed,after,cellPixels,{enabled:spidersEnabled(),canAttack:priorChaseTime>=safeUntil,playerPath});
       const warning=poolLeeches.snapshot().find(l=>l.phase==='warning');
-      if(attack)caughtLeech(attack);
+      if(waterAttack&&poolLeeches.leeches.some(s=>s.id===waterAttack.id))caughtLeech(waterAttack);
       else if(warning&&warning.id!==leechWarningId)$('gridder-feedback').textContent=warning.kind==='shark'?'The shark is preparing to bite! Move away from the flashing shoreline.':'A leech is preparing to lunge! Move away from the flashing creature.';
       leechWarningId=warning?.id??null;
       if(spidersEnabled()&&elapsed>0&&gaps.pools.length)changed=true;
     }
     if(!deathScene&&!game.complete()&&spidersEnabled()&&ecology){
-      const activeElapsed=Math.max(0,chaseTime-Math.max(priorChaseTime,resurrectionUntil));
-      const events=ecology.advance(activeElapsed,after,cellPixels,remains);
+      const events=ecology.advance(activeElapsed,after,cellPixels,remains,{playerPath,collectRadius:(window.GridderSpriteMetrics?.scale(boardLayout())||boardLayout().pw/referenceMovementPlotWidth)*12,onCollect:()=>weapon?.refill()});
       const event=events.at(-1);
       if(event){
-        const messages={arrival:`A ${event.name||'new insect'} has entered the board!`,laid:`A large centipede laid ${event.count||1} egg${event.count===1?'':'s'} — hatching in 10 seconds.`,hatched:`${event.count||1} new centipede${event.count===1?'':'s'} hatched!`};
+        const messages={arrival:`A ${event.name||'new insect'} has entered the board!`,laid:`A ${event.name||'monster'} laid an egg — hatching in 10 seconds.`,hatched:`A young ${event.name||'monster'} hatched!`,collected:'Egg collected! Exactly 3 bullets loaded. Press Space or Fire.'};
         if(messages[event.type])$('gridder-feedback').textContent=messages[event.type];changed=true;
       }
     }
@@ -469,7 +558,7 @@
       (deathScene||spidersEnabled()||chaseTime<resurrectionUntil||snagRemaining>0||held||capture||command||pending.length));
   }
   function snapshot(){
-    return {game,walker,chase,remains,deathScene,deathAttacker,levelGraph,quests,gaps,leeches:poolLeeches?.snapshot()||[],poolBlood:poolLeeches?.bloodSnapshot?.()||[],ecology:ecology?.snapshot()||null,
+    return {game,walker,chase,remains,deathScene,deathAttacker,levelGraph,quests,gaps,leeches:poolLeeches?.snapshot()||[],poolBlood:poolLeeches?.bloodSnapshot?.()||[],ecology:ecology?.snapshot()||null,weapon:weapon?.snapshot()||null,
       level,key,familyId:familyId(),M,G,P,active,playing,revealed,lives,chaseTime,safeUntil,
       resurrectionUntil,gameOver,lastTravel,playerPushes,snagRemaining,
       moving:Boolean(playing&&!deathScene&&(held||capture||command||pending.length)),
@@ -494,19 +583,37 @@
     if($('gridder-lives').textContent!==gauge)$('gridder-lives').textContent=gauge;
     if($('gridder-chase-status').textContent!==status)$('gridder-chase-status').textContent=status;
     const replay=canReplay();
+    updateFireControl();
     $('gridder-start').disabled=game.complete()&&!replay;
     const startLabel=replay?'Play again':playing?'Pause game':'Start game';
     if($('gridder-start').textContent!==startLabel)$('gridder-start').textContent=startLabel;
     if(replay)$('gridder-start').setAttribute('aria-pressed','false');
     $('gridder-normal-point').disabled=Boolean(playing&&!game.complete()||deathScene||gameOver);
   }
+  function canFire(){return Boolean(weapon&&active&&playing&&spidersEnabled()&&!roadmapOpen()&&!deathScene&&!gameOver&&!game?.complete()&&chaseTime>=resurrectionUntil);}
+  function updateFireControl(){
+    const button=$('gridder-fire'),ammo=weapon?.snapshot().ammo||0;
+    if(button){button.textContent=`Fire · ${ammo}/3`;button.disabled=!canFire()||!ammo;button.setAttribute('aria-label',`Fire. ${ammo} of 3 bullets remaining.`);button.title=ammo?'Fire in the direction Gridder is facing (Space).':'Collect an egg to load exactly 3 bullets.';}
+  }
+  function fire(){
+    if(!canFire()||!weapon.fire(walker.position(),lastTravel||[0,1]))return false;
+    sound?.shot?.();
+    sound?.bulletFlight?.(true);
+    ensureFrame();render();return true;
+  }
+  $('gridder-fire')?.addEventListener('click',()=>{if(fire())$('gridder-board').focus({preventScroll:true});});
   $('gridder-start').addEventListener('click',()=>{
+    if(roadmapOpen())return;
     if(canReplay())restart();
     if(playing){pause();$('gridder-feedback').textContent='Paused. Your marked path is saved.';return;}
     if(gameOver||game.complete())return;
-    playing=true;$('gridder-normal-point').disabled=true;unlockSound();$('gridder-start').textContent='Pause game';$('gridder-start').setAttribute('aria-pressed','true');$('gridder-feedback').textContent=deathScene?'Capture animation resumed. Escape pauses.':'Use ← ↑ ↓ →. Escape pauses.';$('gridder-board').focus({preventScroll:true});if(deathScene||spidersEnabled()||chaseTime<resurrectionUntil||snagRemaining>0)ensureFrame();
+    playing=true;$('gridder-normal-point').disabled=true;unlockSound();$('gridder-start').textContent='Pause game';$('gridder-start').setAttribute('aria-pressed','true');$('gridder-feedback').textContent=deathScene?'Capture animation resumed. Escape pauses.':'Use ← ↑ ↓ →. Escape pauses.';$('gridder-board').focus({preventScroll:true});if(deathScene||spidersEnabled()||chaseTime<resurrectionUntil||snagRemaining>0)ensureFrame();render();
   });
-  $('gridder-next').addEventListener('click',()=>{if(!game.complete()||level===quests.length-1)return;level++;newLevel();});
+  $('gridder-next').addEventListener('click',()=>{
+    if(roadmapOpen()||!game.complete())return;
+    if(level===quests.length-1){const nextKey=roadmapSnapshot().nextKey;if(roadmap&&nextKey)selectFunction(nextKey);return;}
+    level++;newLevel();
+  });
   $('gridder-restart').addEventListener('click',restart);
   $('gridder-function').addEventListener('change',restart);$('gridder-difficulty').addEventListener('change',restart);
   if(catalogue){
@@ -530,8 +637,15 @@
     input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();returnToBoard();}});
   }
   function keydown(e){
-    if(!active||!playing||e.defaultPrevented||e.ctrlKey||e.altKey||e.metaKey||e.target?.closest?.('input,select,textarea,[contenteditable="true"],#math-titlebar,.window-actions'))return;
+    if(roadmapOpen()||!active||!playing||e.defaultPrevented||e.ctrlKey||e.altKey||e.metaKey||e.target?.closest?.('input,select,textarea,[contenteditable="true"],#math-titlebar,.window-actions'))return;
     if(e.key==='Escape'){pause();$('gridder-feedback').textContent='Paused. Your marked path is saved.';return;}
+    if(e.code==='Space'||e.key===' '){
+      const button=e.target?.closest?.('button');
+      // Movement buttons keep focus after touch/pointer use. Space shoots there
+      // and cancels their native click; Fire keeps its single native activation.
+      if(button&&!directionControls.some(control=>control.button===button))return;
+      e.preventDefault();e.stopPropagation();if(!e.repeat)fire();return;
+    }
     const d=directions[e.key];if(!d)return;
     e.preventDefault();e.stopPropagation();if(!e.repeat){keyboardHold={direction:d,order:++inputOrder};selectHeldInput();}
   }
@@ -564,7 +678,7 @@
     button.addEventListener('pointerdown',e=>{
       if(e.pointerType==='mouse'&&e.button!==0)return;
       e.preventDefault();
-      if(!active||!playing||gameOver||deathScene||game.complete())return;
+      if(roadmapOpen()||!active||!playing||gameOver||deathScene||game.complete())return;
       button.focus({preventScroll:true});button.setPointerCapture(e.pointerId);
       pointerHolds.set(e.pointerId,{origin:button,control,order:++inputOrder});syncPressedDirections();selectHeldInput();
     });
@@ -581,7 +695,7 @@
     for(const event of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(event,finishPointer);
     button.addEventListener('click',e=>{if(e.detail===0)move(direction);});
   }
-  window.gridderController={setActive(value){active=value;if(!value)pause();else{if(!game)restart();render();}},restart,selectFunction,tick,snapshot,pause,begin,release,move,keydown,keyup,beginFrame,endFrame,updateAudio:syncMusic};
+  window.gridderController={setActive(value){active=value;if(!value)pause();else{if(!game)restart();render();}},restart,selectFunction,roadmapSnapshot,continueRoadmap,tick,snapshot,pause,begin,release,move,fire,keydown,keyup,beginFrame,endFrame,updateAudio:syncMusic};
   window.derivativeGridder=window.gridderController;
   window.refreshGridderMath=()=>{if(!game)return Promise.resolve();return Promise.resolve(formula()).then(()=>{if(announced)explain();});};
   new ResizeObserver(()=>render()).observe($('gridder-board'));

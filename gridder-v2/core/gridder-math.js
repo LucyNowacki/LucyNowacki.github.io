@@ -37,6 +37,26 @@
   }
   const asQuest=q=>q===true?{kind:'derivative'}:typeof q==='string'?{kind:q}:q||{};
   const toX=tex=>tex.replace(/\\(?:begin|end)\{[^}]+\}|\\[A-Za-z]+|a/g,token=>token==='a'?'x':token);
+  const curveDomain=(c,key)=>c.domain||(key==='log'?[.5,4.5]:c.range.slice(0,2));
+  function originalGraph(M,key){
+    const c=M.curves[key],domain=curveDomain(c,key);
+    if(c.study)return {...c.study.graph,kind:'exploration',domain,critical:[],tex:c.tex,value:c.value,finiteModel:true};
+    return {kind:'original',domain,critical:M.pointsInRange(key,...domain).map(p=>p.x),tex:c.tex,value:c.value};
+  }
+  function finiteGeometryPoints(target){
+    const points=[];
+    for(const segment of target.segments||[]){
+      for(const p of [segment.from,segment.to]){
+        if(!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite))throw new RangeError('Exploration segment endpoints must be finite coordinate pairs');
+        points.push(p);
+      }
+    }
+    for(const p of target.points||[]){
+      if(!Number.isFinite(p.x)||!Number.isFinite(p.y))throw new RangeError('Exploration points must have finite coordinates');
+      points.push([p.x,p.y]);
+    }
+    return points;
+  }
   function inverseBranch(M,key){
     const c=M.curves[key],end=c.range[1];
     const choices={
@@ -60,6 +80,11 @@
   }
   function graph(M,key,quest){
     const q=asQuest(quest),c=M.curves[key],domain=c.domain||(key==='log'?[.5,4.5]:c.range.slice(0,2));
+    if(c.study){
+      if(q.kind==='exploration')return originalGraph(M,key);
+      const studyQuest=q.graph?q:c.study.quests?.find(item=>item.kind===q.kind);
+      return studyQuest?.graph?{...studyQuest.graph,kind:studyQuest.kind,domain,critical:[],tex:studyQuest.tex||c.tex,value:c.value,finiteModel:true}:null;
+    }
     if(q.kind==='inverse'){const inverse=inverseBranch(M,key);return inverse?{kind:q.kind,...inverse}:null;}
     if(q.kind==='normal'){
       const a=Math.max(domain[0],Math.min(domain[1],Number.isFinite(q.anchor)?q.anchor:c.initial)),y=c.value(a),tangent=c.derivative(a),vertical=Math.abs(tangent)<1e-12;
@@ -75,16 +100,21 @@
   }
   function board(M,key,difficulty,quest=false){
     const curve=M.curves[key],n={guided:8,explorer:12,challenge:16}[difficulty]||8;
-    const q=asQuest(quest),target=graph(M,key,q),inverse=q.kind==='inverse';
-    const domain=inverse?target.originalDomain:curve.domain||(key==='log'?[.5,4.5]:curve.range.slice(0,2));
-    const xmin=inverse?Math.min(domain[0],target.domain[0]):domain[0],xmax=inverse?Math.max(domain[1],target.domain[1]):domain[1];
-    const points=M.pointsInRange(key,xmin,xmax);
+    const q=asQuest(quest),target=graph(M,key,q),inverse=q.kind==='inverse'&&!curve.study;
+    const domain=inverse?target.originalDomain:curveDomain(curve,key);
+    const finite=curve.study?[...finiteGeometryPoints(originalGraph(M,key)),...(target?.finiteModel===true?finiteGeometryPoints(target):[])]:null;
+    const xmin=finite?Math.min(domain[0],...finite.map(p=>p[0])):inverse?Math.min(domain[0],target.domain[0]):domain[0];
+    const xmax=finite?Math.max(domain[1],...finite.map(p=>p[0])):inverse?Math.max(domain[1],target.domain[1]):domain[1];
+    const points=finite?[]:M.pointsInRange(key,xmin,xmax);
     const candidates=[...domain,...points.map(p=>p.x).filter(x=>x>=domain[0]&&x<=domain[1])];
-    const values=candidates.map(curve.value);
-    if(target&&!inverse&&q.kind!=='normal')values.push(...[...target.domain,...target.critical.filter(x=>x>=target.domain[0]&&x<=target.domain[1])].map(target.value));
+    const values=finite?finite.map(p=>p[1]):candidates.map(curve.value);
+    if(target&&!finite&&!inverse&&q.kind!=='normal')values.push(...[...target.domain,...target.critical.filter(x=>x>=target.domain[0]&&x<=target.domain[1])].map(target.value));
     if(inverse)values.push(...domain);
-    let low=Math.min(inverse?Infinity:curve.range[2],...values),high=Math.max(inverse?-Infinity:curve.range[3],...values);
-    const raw=(high-low)/n,power=10**Math.floor(Math.log10(raw));
+    const finiteValues=values.filter(Number.isFinite);
+    const low=Math.min(...finiteValues,...(!inverse&&Number.isFinite(curve.range[2])?[curve.range[2]]:[]));
+    const high=Math.max(...finiteValues,...(!inverse&&Number.isFinite(curve.range[3])?[curve.range[3]]:[]));
+    if(![xmin,xmax,low,high].every(Number.isFinite)||xmax<=xmin)throw new RangeError('A finite nonempty graph window is required');
+    const raw=(high-low||1)/n,power=10**Math.floor(Math.log10(raw));
     const dy=[1,2,2.5,5,10].find(v=>v*power>=raw)*power;
     // All four borders ARE grid edges. Leave a full row above/below extrema.
     const ymin=(Math.floor(low/dy)-1)*dy,ymax=(Math.ceil(high/dy)+1)*dy;
@@ -102,6 +132,38 @@
   function graphCells(b,target){
     const cells=new Set();
     if(!target)return cells;
+    if(target.finiteModel===true){
+      finiteGeometryPoints(target);
+      // Clip each explicit segment to each closed cell. A nonzero interval
+      // contains graph points even with open ends; a lone omitted endpoint
+      // does not. Never join independent pieces across a jump.
+      const grid=(v,lo,step)=>{
+        const u=(v-lo)/step,nearest=Math.round(u);
+        return Math.abs(u-nearest)<=16*Number.EPSILON*Math.max(1,Math.abs(u))?nearest:u;
+      };
+      for(const segment of target.segments||[]){
+        const x=grid(segment.from[0],b.xmin,b.dx),y=grid(segment.from[1],b.ymin,b.dy);
+        const u=grid(segment.to[0],b.xmin,b.dx)-x,v=grid(segment.to[1],b.ymin,b.dy)-y;
+        if(u===0&&v===0){
+          if(!segment.openStart&&!segment.openEnd)for(const cell of pointCells(b,...segment.from))cells.add(cell);
+          continue;
+        }
+        for(let i=0;i<b.nx;i++)for(let j=0;j<b.ny;j++){
+          let lo=0,hi=1;
+          for(const [start,delta,min,max]of [[x,u,i,i+1],[y,v,j,j+1]]){
+            if(delta===0){if(start<min||start>max){lo=1;hi=0;break;}}
+            else{const a=(min-start)/delta,z=(max-start)/delta;lo=Math.max(lo,Math.min(a,z));hi=Math.min(hi,Math.max(a,z));}
+          }
+          // Two slab calculations of the same corner parameter can differ
+          // by roundoff. Reconcile only that numerical contact, without
+          // extending an open endpoint into a real interval.
+          if(lo>hi&&lo-hi<=32*Number.EPSILON*Math.max(1,Math.abs(lo),Math.abs(hi)))lo=hi=Math.max(0,Math.min(1,(lo+hi)/2));
+          if(lo<=hi&&!(segment.openStart&&hi===0)&&!(segment.openEnd&&lo===1))cells.add(cellKey(i,j));
+        }
+      }
+      for(const p of target.points||[])if(!p.open)for(const cell of pointCells(b,p.x,p.y))cells.add(cell);
+      return cells;
+    }
     if(target.vertical){
       for(let i=0;i<b.nx;i++)if(target.a>=b.xmin+i*b.dx-epsilon*b.dx&&target.a<=b.xmin+(i+1)*b.dx+epsilon*b.dx)for(let j=0;j<b.ny;j++)cells.add(cellKey(i,j));
       return cells;
@@ -163,7 +225,9 @@
     return state;
   }
   function levels(M,key){
-    const c=M.curves[key],points=M.pointsInRange(key,...c.range.slice(0,2));
+    const c=M.curves[key];
+    if(c.study)return [{kind:'exploration'},...(c.study.quests||[])];
+    const points=M.pointsInRange(key,...c.range.slice(0,2));
     const result=[];
     for(const kind of ['min','max','inflection'])for(const point of points.filter(p=>p.kind===kind))result.push({kind,point});
     result.push({kind:'derivative'});
@@ -227,6 +291,6 @@
     }
     return {position,painted,advance,axis,finishNearNode,settleInNodeHole,atNode,route};
   }
-  const api={board,layout,pointCells,derivativeCells,graph,graphCells,targets,inverseBranch,edgeKey,cellEdges,enclosedCells,create,createWalker,levels};
+  const api={board,layout,pointCells,derivativeCells,graph,originalGraph,graphCells,targets,inverseBranch,edgeKey,cellEdges,enclosedCells,create,createWalker,levels};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.derivativeGridderMath=api;
 })(typeof window!=='undefined'?window:globalThis);

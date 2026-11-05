@@ -45,11 +45,11 @@
     const delta=Math.min(.1,(p.x-c.range[0])/2,(c.range[1]-p.x)/2),left=p.x-delta,right=p.x+delta;
     let html=`<h2>Find this ${type}, step by step</h2><p>Original function: ${raw`\(f(x)=${c.tex}\)`}.</p><p>${c.context||''}</p><ol class="worked-steps">`;
     html+=item('Differentiate the function',`<p>${d.rule}</p>`+eq(d.first)+eq(d.second));
-    html+=item(p.kind==='inflection'?'Find a possible change of bending':'Find a flat tangent',eq(raw`${p.kind==='inflection'?"f''":"f'"}(a)=0,\quad a=${a}`)+`<p>This is a candidate. Classify it using the signs around it.</p>`);
+    html+=item(p.kind==='inflection'?'Find a possible change of bending':'Find a flat tangent',eq(raw`${p.kind==='inflection'?"f''":"f'"}(a)=0,\quad a${p.approximate?'\\approx':'='}${a}`)+`<p>This is a candidate. Classify it using the signs around it.${p.approximate?' The displayed root is a numerical approximation.':''}</p>`);
     if(p.kind==='inflection')html+=item('Check bending on both sides',eq(raw`f''(${n(left)})\approx${n(c.second(left))},\quad f''(${n(right)})\approx${n(c.second(right))}`)+`<p>The displayed derivative formulas give opposite signs to the left and right of this root; the decimal values illustrate that change. The original curve changes its bending. A zero alone is not enough.</p>`);
     else if(Math.abs(c.second(p.x))>1e-10)html+=item('Use the second derivative test',eq(raw`f''(${a})\approx${n(c.second(p.x))}${p.kind==='min'?'>0':'<0'}`)+`<p>At a stationary point, ${p.kind==='min'?'positive':'negative'} second derivative proves a local ${p.kind==='min'?'minimum':'maximum'}.</p>`);
-    else html+=item('Use the first derivative sign test',eq(raw`f''(${a})=0`)+`<p>The second derivative test is inconclusive. Check the sign of the first derivative instead:</p>`+eq(raw`f'(${n(left)})\approx${n(c.derivative(left))},\quad f'(${n(right)})\approx${n(c.derivative(right))}`)+`<p>The branch formulas show decreasing on the left and increasing on the right, which proves this local minimum.</p>`);
-    html+=item('Find the height',eq(raw`f(${a})\approx${n(c.value(p.x))}`)+eq(raw`A\approx(${n(p.x)},${n(c.value(p.x))})`)+`<p>Coordinate decimals are rounded; the exact candidate is stated above.</p>`);
+    else html+=item('Use the first derivative sign test',eq(raw`f''(${a})${p.approximate?'\\approx':'='}0`)+`<p>The second derivative test is inconclusive. Check the sign of the first derivative instead:</p>`+eq(raw`f'(${n(left)})\approx${n(c.derivative(left))},\quad f'(${n(right)})\approx${n(c.derivative(right))}`)+`<p>The branch formulas show ${p.kind==='min'?'decreasing on the left and increasing on the right, which proves this local minimum':'increasing on the left and decreasing on the right, which proves this local maximum'}.</p>`);
+    html+=item('Find the height',eq(raw`f(${a})\approx${n(c.value(p.x))}`)+eq(raw`A\approx(${n(p.x)},${n(c.value(p.x))})`)+`<p>Coordinate decimals are rounded; ${p.approximate?'the candidate above is approximate':'the exact candidate is stated above'}.</p>`);
     return html+'</ol>';
   }
   function render(key,p,M){
@@ -76,6 +76,11 @@
     return result+'</ol>';
   }
   function renderGraph(key,q,M,target){
+    if(M.curves[key].study&&(q.kind==='exploration'||q.graph)){
+      const c=M.curves[key],s=q.kind==='exploration'?c.study:q;
+      const escape=value=>String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+      return `<h2>${escape(s.title)}</h2><p>${raw`\(f(x)=${escape(c.tex)}\)`}</p>${q.tex?`<p>${raw`\[${escape(q.tex)}\]`}</p>`:''}<ol class="worked-steps">${s.method.map(step=>`<li><p>${escape(step)}</p></li>`).join('')}</ol><p>${escape(s.meaning)}</p><p>${escape(s.displayNote)}</p><p>${escape(c.study.applicability||'')}</p><p>You captured this level's displayed model. The reasoning above explains the mathematical property; the drawing alone is not a proof. Hollow circles are excluded. Location markers identify x-values, not additional function values.</p>`;
+    }
     const c=M.curves[key],d=derivations[key]||c.lesson||{first:raw`f'(x)=\frac1x`,second:raw`f''(x)=-\frac1{x^2}`,rule:'The derivative of natural logarithm is 1/x, for positive x.'};
     const eq=tex=>raw`\[${tex}\]`,item=(title,body)=>`<li><h3>${title}</h3>${body}</li>`;
     const toX=tex=>tex.replace(/\\(?:begin|end)\{[^}]+\}|\\[A-Za-z]+|a/g,t=>t==='a'?'x':t);

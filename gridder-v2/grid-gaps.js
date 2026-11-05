@@ -4,6 +4,8 @@
  * samples. Its premise is the catalogue's named continuous finite branches and
  * complete analytic critical-point metadata. It is not a certifier for arbitrary
  * black-box functions, discontinuous branches, or floating-point interval bounds.
+ * Exploration studies instead protect their explicitly supplied finite pieces;
+ * this is protection of that finite display model, not the full infinite graph.
  */
 (function(root){
  'use strict';
@@ -92,11 +94,11 @@
   const difficulty=['guided','explorer','challenge'].includes(options.difficulty)?options.difficulty:'guided';
   const target=G.graph(M,key,q);
   const domain=target?.originalDomain||c.domain||(key==='log'?[.5,4.5]:c.range.slice(0,2));
-  const critical=M.pointsInRange(key,...domain).map(p=>p.x);
-  const original={value:c.value,domain,critical};
+  const critical=c.study?[]:M.pointsInRange(key,...domain).map(p=>p.x);
+  const original=c.study?G.originalGraph(M,key):{value:c.value,domain,critical};
   function graphCells(graph,label){
    if(!graph)return new Set();
-   if(!graph.vertical){
+   if(!graph.vertical&&graph.finiteModel!==true){
     // Reject unsupported nonfinite endpoints/critical values instead of allowing
     // graphCells' finite filtering to make a singular branch appear empty.
     const abscissae=[...graph.domain,...graph.critical];
@@ -194,10 +196,11 @@
    const [i,j]=k.split(',').map(Number);
    if(G.cellEdges(i,j).some(e=>blockedEdges.has(e)))throw new Error('Pool blocks a target-cell boundary');
   }
+  const numericalCritical=c.criticalCoordinates==='numerical';
   return {id:`gaps-v2-${hash(fingerprint+JSON.stringify(pools)).toString(16).padStart(8,'0')}`,
    pools,cells,blockedEdges,protectedCells,diagnostics:{
-    method:'Closed-cell analytic range envelopes; deterministic finite greedy connected polyomino selection.',
-    assumptions:'Catalogue continuous finite named branches and complete analytic critical-point metadata; not interval certification for arbitrary functions.',
+    method:c.study?'Explicit finite segment/point contacts; deterministic finite greedy connected polyomino selection.':numericalCritical?'Closed-cell range envelopes from numerically located critical points; deterministic finite greedy connected polyomino selection.':'Closed-cell analytic range envelopes; deterministic finite greedy connected polyomino selection.',
+    assumptions:c.study?'Only the supplied finite display model is protected; no claim to cover an infinite or dense graph.':numericalCritical?'Catalogue continuous finite named branches and numerically located critical points; completeness and accuracy assumed, not interval certification for arbitrary functions.':'Catalogue continuous finite named branches and complete analytic critical-point metadata; not interval certification for arbitrary functions.',
     originalDomain:[...domain],originalCritical:[...critical],originalCells:originalCells.size,
     targetCells:targetCells.size,protectedCells:protectedCells.size,revealedPoints:revealedCount,
     candidates:{shaped:candidates.large.length,fallback:candidates.small.length},budget,selectedScores,

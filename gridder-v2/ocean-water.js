@@ -82,7 +82,15 @@ void main(){
 }
 `;
 function create(scene){
- const webgl=scene.sys.renderer.type===Phaser.WEBGL,items=[];let activeCount=0;
+ // Work around a reported phone water artifact by keeping Phaser's WebGL
+ // renderer but uploading the existing masked Canvas water on mobile.
+ // Desktop WebGL retains the more detailed procedural shader.
+ const nav=root.navigator,screen=root.screen;
+ const mobile=/Android|iPhone|iPad|iPod|Mobile/i.test(nav?.userAgent||'')||
+  (!!nav?.maxTouchPoints&&!!root.matchMedia?.('(pointer: coarse)').matches&&
+   !!screen&&Math.min(screen.width,screen.height)<=1024);
+ const rendererWebgl=scene.sys.renderer.type===Phaser.WEBGL;
+ const webgl=rendererWebgl&&!mobile,items=[];let activeCount=0;
  let uploads=0,updates=0;
  const randomGenerator=seed=>()=>{seed^=seed<<13;seed^=seed>>>17;seed^=seed<<5;return (seed>>>0)/4294967296;};
  function bedCanvas(seed){
@@ -162,8 +170,12 @@ function create(scene){
   const frame=Math.floor(time*25),paintKey=frame+':'+JSON.stringify(blood||null);if(item.lastPaint===paintKey)return;item.lastPaint=paintKey;
   const c=item.context,t=frame/25,seed=item.seed%997,w=256,h=192;
   c.clearRect(0,0,w,h);
+  // Crop to the pool's aspect before scaling so stones retain their shape on
+  // screen, even though this reusable texture has fixed dimensions.
+  const aspect=item.pool.w/item.pool.h,sourceW=Math.min(w-16,h*aspect),sourceH=sourceW/aspect;
+  const sourceX=(w-sourceW)/2,sourceY=(h-sourceH)/2;
   // Sample thin displaced strips of the immutable seabed: moving optical refraction.
-  for(let y=0;y<h;y+=2){const dx=Math.sin(y*.075+t*.65+seed)*3+Math.sin(y*.13-t*.4)*1.5;c.drawImage(item.bed,8+dx,y,w-16,2,0,y,w,2);}
+  for(let y=0;y<h;y+=2){const dx=(Math.sin(y*.075+t*.65+seed)*3+Math.sin(y*.13-t*.4)*1.5)*sourceW/(w-16);c.drawImage(item.bed,sourceX+dx,sourceY+y/h*sourceH,sourceW,2/h*sourceH,0,y,w,2);}
   const water=c.createLinearGradient(0,0,w,h);water.addColorStop(0,'rgba(0,35,98,.25)');water.addColorStop(.55,'rgba(0,46,123,.40)');water.addColorStop(1,'rgba(0,80,153,.24)');c.fillStyle=water;c.fillRect(0,0,w,h);
   // Caustics illuminate the bottom instead of drawing a surface road-like grid.
   c.save();c.globalCompositeOperation='screen';
@@ -178,7 +190,7 @@ function create(scene){
   item.texture.refresh();uploads++;
  }
  function paint(time,stains=[]){updates++;items.slice(0,activeCount).forEach((item,index)=>{const blood=stains.find(b=>b.poolIndex===index),level=Math.max(0,Math.min(1,Number(blood?.level)||0)),source=blood?.source; if(webgl){item.object.setUniform('uTime',time);item.object.setUniform('uBloodLevel',level);item.object.setUniform('uBloodClock',Number(blood?.clock)||0);item.object.setUniform('uBloodSource',source?[(source.x-item.pool.x)/item.pool.w,(source.y-item.pool.y)/item.pool.h]:[.5,.5]);}else canvasPaint(item,time,blood);});}
- return {setPools,paint,metrics:()=>({backend:webgl?'webgl-shader':'canvas-refraction',activeCount,resourceCount:items.length,shaderCount:webgl?items.length:0,textureCount:items.length*(webgl?1:2),maskCount:items.length,textureUploads:uploads,updates,compiled:webgl?items.map(item=>{const r=item.object.renderNode.renderer,programs=Object.values(item.object.renderNode.programManager.programs);return programs.length>0&&programs.every(s=>s.program&&!s.program.compiling&&!!s.program.webGLProgram&&r.gl.getProgramParameter(s.program.webGLProgram,r.gl.LINK_STATUS));}):null}),destroy(){while(items.length)remove(items.pop());}};
+ return {setPools,paint,metrics:()=>({backend:webgl?'webgl-shader':'canvas-refraction',backendReason:webgl?'desktop-webgl':rendererWebgl?'mobile-webgl-fallback':'canvas-renderer',activeCount,resourceCount:items.length,shaderCount:webgl?items.length:0,textureCount:items.length*(webgl?1:2),maskCount:items.length,textureUploads:uploads,updates,compiled:webgl?items.map(item=>{const r=item.object.renderNode.renderer,programs=Object.values(item.object.renderNode.programManager.programs);return programs.length>0&&programs.every(s=>s.program&&!s.program.compiling&&!!s.program.webGLProgram&&r.gl.getProgramParameter(s.program.webGLProgram,r.gl.LINK_STATUS));}):null}),destroy(){while(items.length)remove(items.pop());}};
 }
 root.GridderOceanWater={create};
 })(window);

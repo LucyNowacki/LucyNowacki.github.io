@@ -32,6 +32,12 @@
  function describe(M,key,quest,graph,board){
   const c=M?.curves?.[key];if(!c)throw new RangeError(`Unknown function: ${key}`);
   const kind=typeof quest==='string'?quest:quest?.kind;
+  if(c.study&&(kind==='exploration'||quest?.graph)){
+   const study=kind==='exploration'?c.study:quest,domain=c.domain||c.range.slice(0,2);
+   return {title:study.title,formulas:[raw`f(x)=${c.tex}`,...(quest?.tex?[quest.tex]:[])],method:study.method,
+    meaning:`${study.meaning} ${c.study.applicability||''}`.trim(),
+    domain:`Displayed x-window: ${interval(domain)}. ${study.displayNote} Capture this level's displayed segments and filled dots. Hollow circles mark excluded points and are not targets.`};
+  }
   const names={min:'Find a local minimum',max:'Find a local maximum',inflection:'Find an inflection point',derivative:'Find the first derivative',second:'Find the second derivative',inverse:'Find the inverse on this branch',normal:'Find the normal at the selected point'};
   if(!names[kind])throw new RangeError(`Unknown mathematical case: ${kind}`);
   const lesson=c.lesson||{},fallback=legacyRules[key]||[];

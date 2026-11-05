@@ -3,7 +3,7 @@
 (function (root) {
   'use strict';
   const numericColour = colour => Number.parseInt(colour.replace('#', ''), 16);
-  const targetColours = { derivative: 0xbc94ff, second: 0x76df00, inverse: 0x65d2d1, normal: 0xffa257 };
+  const targetColours = { derivative: 0xbc94ff, second: 0x76df00, inverse: 0x65d2d1, normal: 0xffa257, exploration: 0x57dce2, min: 0xff707f, max: 0x51b0f4, singularity: 0xffa257, discontinuity: 0xff79b5, nondifferentiable: 0xffce6b };
   const pointColours = { min: 0xff707f, max: 0x72d6a3, inflection: 0xfacc15 };
   const hotColour=colour=>{let result=0;for(const shift of [16,8,0])result|=Math.round((colour>>shift&255)*.25+255*.75)<<shift;return result;};
   const pointLabels = { min: 'minimum', max: 'maximum', inflection: 'inflection point' };
@@ -55,7 +55,7 @@
     const actors = root.GridderActors.create(scene);
     const liquid=root.GridderLiquidGaps?.create(scene);
     const leeches=root.GridderLeechActors?.create(scene);
-    let labels = [], pointTexts = [], boardKey = '', targetKey = '', fillKey = '', hintKey = '', pointKey = '', routeKey = null, geometry;
+    let labels = [], pointTexts = [], boardKey = '', targetKey = '', fillKey = '', hintKey = '', pointKey = '', routeKey = null, geometry, explorationGeometry=null;
     const counters = { renders: 0, boardRebuilds: 0, targetRebuilds: 0, routeRebuilds: 0 };
     let theme=root.GridderTheme.current(),lastGame=null,wasFading=false;
     const captureTimes=new Map();
@@ -71,7 +71,12 @@
       if(!q)return;const g=geometry,b=s.game.board;
       let run=0,previous=null;
       const add=(a,z)=>{const c=clipSegment(...a,...z,g);if(!c)return;const length=Math.hypot(c[2]-c[0],c[3]-c[1]);if(length>1e-8){const prior=pathSegments[pathSegments.length-1];if(prior&&Math.hypot(prior.c[2]-c[0],prior.c[3]-c[1])>1e-5)run++;pathSegments.push({c,start:pathLength,end:pathLength+length,run});pathLength+=length;}};
-      if(q.vertical)add([g.sx(q.a),g.t],[g.sx(q.a),g.t+g.ph]);
+      if(q.finiteModel===true){
+        for(const segment of q.segments||[]){
+          const a=segment.from,z=segment.to;if(!Array.isArray(a)||!Array.isArray(z))continue;
+          run++;add([g.sx(a[0]),g.sy(a[1])],[g.sx(z[0]),g.sy(z[1])]);
+        }
+      }else if(q.vertical)add([g.sx(q.a),g.t],[g.sx(q.a),g.t+g.ph]);
       else{
         const lo=Math.max(b.xmin,q.domain[0]),hi=Math.min(b.xmax,q.domain[1]);
         for(let k=0;k<=700&&hi>=lo;k++){
@@ -194,6 +199,32 @@
       }
       if(continuous)ctx.strokePath();
     }
+    // Draw only explicitly supplied pieces. Every segment has its own path,
+    // and isolated samples are never joined to their neighbours.
+    function drawStudy(ctx, graph, colour, width, alpha=1) {
+      const g=geometry,inside=(x,y)=>Number.isFinite(x)&&Number.isFinite(y)&&x>=g.l&&x<=g.l+g.pw&&y>=g.t&&y<=g.t+g.ph;
+      ctx.lineStyle(width,colour,alpha);
+      const open=[];
+      for(const segment of graph.segments||[]){
+        if(!Array.isArray(segment.from)||!Array.isArray(segment.to))continue;
+        let [x0,y0]=[g.sx(segment.from[0]),g.sy(segment.from[1])], [x1,y1]=[g.sx(segment.to[0]),g.sy(segment.to[1])];
+        if(![x0,y0,x1,y1].every(Number.isFinite))continue;
+        if(segment.openStart&&inside(x0,y0))open.push([x0,y0]);
+        if(segment.openEnd&&inside(x1,y1))open.push([x1,y1]);
+        const dx=x1-x0,dy=y1-y0,length=Math.hypot(dx,dy),r=3.5;
+        if(length>0){
+          const a=segment.openStart?Math.min(.5,r/length):0,z=segment.openEnd?Math.max(.5,1-r/length):1;
+          const clipped=clipSegment(x0+dx*a,y0+dy*a,x0+dx*z,y0+dy*z,g);
+          if(clipped)line(ctx,...clipped);
+        }
+      }
+      for(const p of graph.points||[]){
+        const x=g.sx(p.x),y=g.sy(p.y);if(!inside(x,y))continue;
+        if(p.open)open.push([x,y]);
+        else ctx.fillStyle(colour,alpha).fillCircle(x,y,Math.max(2,Math.min(5,width*.7)));
+      }
+      for(const [x,y] of open)ctx.lineStyle(Math.max(1,Math.min(2.2,width*.5)),colour,alpha).strokeCircle(x,y,3.5);
+    }
     function rebuildBoard(s) {
       counters.boardRebuilds++;
       const b = s.game.board, g = geometry, c = s.M.curves[s.key];
@@ -258,7 +289,25 @@
       if (b.xmin <= 0 && b.xmax >= 0) latticeLine(grid, g.sx(0), g.t, g.sx(0), g.t + g.ph);
       if (b.ymin <= 0 && b.ymax >= 0) latticeLine(grid, g.l, g.sy(0), g.l + g.pw, g.sy(0));
       const domain = s.levelGraph?.originalDomain || c.domain || (s.key === 'log' ? [.5, 4.5] : c.range.slice(0, 2));
-      if(theme.id==='neon'){
+      const study=c.study?.graph;
+      if(study){
+        if(theme.id==='neon'){
+          for(const [width,alpha] of [[17,.06],[11,.12],[7,.24]])drawStudy(original,study,theme.curveGlow,width,alpha);
+          drawStudy(original,study,theme.curveCore,4.5);drawStudy(original,study,theme.curveRim,1.4);
+        }else{drawStudy(original,study,0xb9a4ce,5);drawStudy(original,study,0x41414b,2.5);}
+        const studyLabelRects=[];
+        for(const p of study.points||[])if(p.label&&Number.isFinite(p.x)&&Number.isFinite(p.y)&&p.x>=b.xmin&&p.x<=b.xmax&&p.y>=b.ymin&&p.y<=b.ymax){
+          // Keep the complete label inside the plot, including labels on the
+          // right endpoint. The irrational baseline gets its own space below.
+          const label=text(0,0,String(p.label),0,0),margin=2;
+          const x=Math.max(g.l+margin,Math.min(g.sx(p.x)+8,g.l+g.pw-margin-label.width));
+          const proposed=p.sampleKind==='irrational'?g.sy(p.y)+9:g.sy(p.y)-9-label.height;
+          const y=Math.max(g.t+margin,Math.min(proposed,g.t+g.ph-margin-label.height));
+          const rect={left:x,top:y,right:x+label.width,bottom:y+label.height},gap=4;
+          if(studyLabelRects.some(r=>rect.left<r.right+gap&&rect.right+gap>r.left&&rect.top<r.bottom+gap&&rect.bottom+gap>r.top)){label.destroy();continue;}
+          studyLabelRects.push(rect);label.setPosition(x,y);labels.push(label);
+        }
+      }else if(theme.id==='neon'){
         for(const [width,alpha] of [[38,.025],[30,.04],[23,.06],[17,.1],[11,.19],[7,.4]])
           trace(original,c.value,domain,s,theme.curveGlow,width,false,false,alpha);
         trace(original,c.value,domain,s,theme.curveCore,4.5);
@@ -298,6 +347,7 @@
       theme=root.GridderTheme.current();
       geometry = geometryFor(s);
       const b = s.game.board, g = geometry;
+      const q=s.levelGraph;explorationGeometry=q?.finiteModel===true?{segments:(q.segments||[]).length,points:(q.points||[]).length,openEndpoints:(q.segments||[]).reduce((n,p)=>n+Number(!!p.openStart)+Number(!!p.openEnd),0),openPoints:(q.points||[]).filter(p=>p.open).length,finiteModel:!!q.finiteModel}:null;
       const nextBoard = JSON.stringify([s.key, s.level, s.levelGraph?.a, b, g.w, g.h,g.l,g.t,g.pw,g.ph,Boolean(g.hideAxisLabels),theme.id,theme.paletteKey,s.gaps?.id,s.gaps?.pools]);
       if (nextBoard !== boardKey) { boardKey = nextBoard; rebuildBoard(s); }
       liquid?.render(s,g);
@@ -348,7 +398,8 @@
           const q = s.levelGraph;
           function drawTarget(width,alpha,colour=targetColours[q.kind],isDashed=true){
             discovered.lineStyle(width,colour,alpha);
-            if(q.vertical){if(isDashed)dashed(discovered,g.sx(q.a),g.t,g.sx(q.a),g.t+g.ph,6,4);else line(discovered,g.sx(q.a),g.t,g.sx(q.a),g.t+g.ph);}
+            if(q.finiteModel===true)drawStudy(discovered,q,colour,width,alpha);
+            else if(q.vertical){if(isDashed)dashed(discovered,g.sx(q.a),g.t,g.sx(q.a),g.t+g.ph,6,4);else line(discovered,g.sx(q.a),g.t,g.sx(q.a),g.t+g.ph);}
             else trace(discovered,q.value,q.domain,s,colour,width,isDashed,false,alpha);
           }
           // The entire target stroke, including its colour halo, shares the
@@ -410,7 +461,7 @@
     }
     return {
       render, animateDiscoveries, animateLiquid:(time,snapshot)=>liquid?.animate(time,snapshot), geometry: () => geometry, animationState: () => actors.animationState(),
-      metrics: () => ({ ...counters, leeches:leeches?.metrics()??null, liquid:liquid?.metrics()??null, discoveryPulse:{...discoveryPulse,sampleBuilds,motionDraws,pathLength,segmentCount:pathSegments.length,highlightPositions:highlightPositions.map(p=>({...p})),pointRingRadii:motionVisible&&pointLocations.length?[7+discoveryPulse.phaseMs/1800*18,7+((discoveryPulse.phaseMs/1800+.5)%1)*18]:[]}, displayObjects: scene.children.length, actors: actors.diagnostics }),
+      metrics: () => ({ ...counters, exploration:explorationGeometry&&{...explorationGeometry}, leeches:leeches?.metrics()??null, liquid:liquid?.metrics()??null, discoveryPulse:{...discoveryPulse,sampleBuilds,motionDraws,pathLength,segmentCount:pathSegments.length,highlightPositions:highlightPositions.map(p=>({...p})),pointRingRadii:motionVisible&&pointLocations.length?[7+discoveryPulse.phaseMs/1800*18,7+((discoveryPulse.phaseMs/1800+.5)%1)*18]:[]}, displayObjects: scene.children.length, actors: actors.diagnostics }),
       invalidate() { boardKey = ''; },
       destroy() {
         liquid?.destroy();leeches?.destroy();actors.destroy(); labels.concat(pointTexts).forEach(t => t.destroy()); revealMask.destroy();travellingMask.destroy(); discoveryArea.destroy();

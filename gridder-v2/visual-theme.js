@@ -24,9 +24,14 @@
   const hex=n=>'#'+n.toString(16).padStart(6,'0');
   const rgb=n=>[(n>>16)&255,(n>>8)&255,n&255].join(', ');
   const palettes=new Map();
+  function generatedHues(key){
+    // Keep added functions recognisable without changing existing palettes.
+    let hash=2166136261;for(const character of key)hash=Math.imul(hash^character.charCodeAt(0),16777619);
+    const hue=(hash>>>0)%360;return [hue,(hue+110+(hash>>>16)%80)%360];
+  }
   function forFunction(key){
     if(!palettes.has(key)){
-      const [p,s]=hues[key]||hues.quadratic,frame=colour(p,100,63),accent=colour(s,100,66),highlight=colour(s,90,94);
+      const [p,s]=hues[key]||generatedHues(key),frame=colour(p,100,63),accent=colour(s,100,66),highlight=colour(s,90,94);
       palettes.set(key,Object.freeze({id:'neon',paletteKey:key,
         surface:colour(p,58,6),grid:colour(p,94,58),gridAlpha:.58,axis:colour(s,95,73),
         node:colour(p,52,10),nodeStroke:colour(s,85,76),fill:colour(p,100,55),fillAlpha:.28,

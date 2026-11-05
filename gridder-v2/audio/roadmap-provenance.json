@@ -1,0 +1,30 @@
+{
+  "title": "Copper Trails",
+  "description": "Original layered tracker-style introductory music composed in code for Gridder 2, with bright retro game-music textures requested by Lucy.",
+  "implementation": "../roadmap-audio.js",
+  "created": "2026-11-04",
+  "bpm": 136,
+  "meter": "4/4",
+  "bars": 32,
+  "parts": [
+    "harmonic-limited pulse lead with vibrato and short glide",
+    "independent countermelody",
+    "three-voice chord pad",
+    "rising arpeggio",
+    "answering arpeggio",
+    "octave bass",
+    "synthesized kick",
+    "synthesized snare and fills",
+    "synthesized hi-hat",
+    "soft cross-channel delay"
+  ],
+  "reference": {
+    "title": "Giana Sisters (Theme), Rainbows",
+    "artist": "Chris Huelsbeck",
+    "official_page": "https://chrishuelsbeck.bandcamp.com/album/rainbows",
+    "scope": "The artist release page was consulted to identify the user-requested reference. The recording was not auditioned in this environment; no recording, samples or transcribed melody were used. This is not an arrangement of the Giana Sisters score."
+  },
+  "assets": "No external audio assets or network playback. PCM is synthesized locally on the first music gesture.",
+  "playback": "Explicit user gesture; pauses on closing the demo, page hiding or visibility loss. Existing in-game Bolero remains separate.",
+  "arrangement": "32 bars at 136 BPM: an initial idea, a variation with answering arpeggio, a contrasting section and a lighter bridge returning to full rhythm. Notes, synthesis and percussion are original."
+}

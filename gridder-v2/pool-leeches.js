@@ -5,7 +5,8 @@
   const copy=p=>({i:p.i,j:p.j}),key=p=>`${p.i},${p.j}`,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   const mix=(a,b,t)=>({i:a.i+(b.i-a.i)*t,j:a.j+(b.j-a.j)*t});
   function create(board,pools,options={}){
-    let clock=0,nextScan=0,serial=0,captureLatched=false;
+    let clock=0,nextScan=0,serial=0,spawnSerial=0,captureLatched=false;
+    let recording=null,lastPaths=new Map();
     const internal=new WeakMap();
     function cellsOf(pool){
       if(pool.cells)return pool.cells.map(copy);
@@ -35,7 +36,7 @@
       visit(start);if(visited.size!==cells.length)throw new RangeError('Leech pool cells must be connected by shared edges.');
       const leech={kind,id:kind==='shark'?`pool-shark-${index}`:`pool-leech-${index}${slot?`-${slot}`:''}`,poolId:pool.id||`pool-${seed}-${index}`,poolIndex:index,
         position:copy(tour[0]),heading:{di:1,dj:0},phase:'swim',phaseProgress:slot/count,clock:0,
-        sizeScale:1,bloodMeals:0,target:null,shore:null};
+        origin:'base',hp:2,maxHp:2,lastHitAt:null,sizeScale:1,bloodMeals:0,target:null,shore:null};
       internal.set(leech,{pool,cells,occupied,boundary,tour,distance:0,speed:kind==='shark'?.44:.28+((seed+slot*2)%5)*.025,
         phaseOffset:1600*slot/count,firstAttackAt:slot*180,warningMs:kind==='shark'?900:warningMs,lungeMs:kind==='shark'?230:lungeMs,stainBase:0,
         phaseStart:0,phaseEnd:Infinity,home:copy(tour[0]),attackTo:null,returnFrom:null,
@@ -52,21 +53,44 @@
       const count=Math.max(1,Math.min(3,Math.ceil(cellsOf(pools[largest]).length/2)));
       leeches.push(prepare(pools[largest],largest,count,count+1,'shark'));
     }
-    function patrol(leech,milliseconds){
+    function record(leech,from,to,start,end){
+      if(!recording||end<=start)return;
+      const paths=lastPaths.get(leech.id)||[];
+      paths.push({from:copy(from),to:copy(to),start:(start-recording.start)/recording.duration,end:(end-recording.start)/recording.duration});lastPaths.set(leech.id,paths);
+    }
+    function patrol(leech,milliseconds,cellPixels,playerSpeed,endTime){
       const s=internal.get(leech),count=s.tour.length-1;
-      if(count<=0)return;
-      s.distance=(s.distance+milliseconds*s.speed/1000)%count;
+      if(count<=0){record(leech,leech.position,leech.position,endTime-milliseconds,endTime);return;}
+      if(recording||leech.origin==='hatch'&&Number.isFinite(playerSpeed)&&playerSpeed>=0){
+        let left=milliseconds,used=0;
+        while(left>EPS){
+          const at=Math.floor(s.distance),a=s.tour[at],b=s.tour[at+1],axis=a.i!==b.i?'x':'y';
+          const rate=leech.origin==='hatch'&&Number.isFinite(playerSpeed)?playerSpeed/cellPixels(axis):s.speed;
+          if(rate<=0){record(leech,leech.position,leech.position,endTime-milliseconds+used,endTime);break;}
+          const elapsed=Math.min(left,(1-(s.distance-at))/rate*1000),from=copy(leech.position);
+          s.distance+=rate*elapsed/1000;
+          leech.position=mix(a,b,Math.min(1,s.distance-at));leech.heading={di:b.i-a.i,dj:b.j-a.j};
+          record(leech,from,leech.position,endTime-milliseconds+used,endTime-milliseconds+used+elapsed);
+          left-=elapsed;used+=elapsed;
+          if(s.distance>=count-EPS)s.distance=0;
+          else if(Math.abs(s.distance-Math.round(s.distance))<EPS)s.distance=Math.round(s.distance);
+        }
+      }else s.distance=(s.distance+milliseconds*s.speed/1000)%count;
       const at=Math.floor(s.distance),a=s.tour[at],b=s.tour[at+1];
       leech.position=mix(a,b,s.distance-at);leech.heading={di:b.i-a.i,dj:b.j-a.j};
     }
-    function updateState(leech,delta,time){
+    function updateState(leech,delta,time,cellPixels,playerSpeed){
       const s=internal.get(leech);
-      if(leech.phase==='swim')patrol(leech,delta);
+      const from=copy(leech.position);
+      if(leech.phase==='swim')patrol(leech,delta,cellPixels,playerSpeed,time);
       else if(leech.phase==='cooldown'){
         const before=time-delta-s.phaseStart,after=time-s.phaseStart;
-        if(before<returnMs&&s.returnFrom)leech.position=mix(s.returnFrom,s.home,clamp(after/returnMs,0,1));
-        if(after>returnMs)patrol(leech,Math.min(delta,after-returnMs));
-      }else if(leech.phase==='lunge')leech.position=mix(s.home,s.attackTo,clamp((time-s.phaseStart)/s.lungeMs,0,1));
+        if(before<returnMs&&s.returnFrom){leech.position=mix(s.returnFrom,s.home,clamp(after/returnMs,0,1));record(leech,from,leech.position,time-delta,Math.min(time,s.phaseStart+returnMs));}
+        if(after>returnMs)patrol(leech,Math.min(delta,after-returnMs),cellPixels,playerSpeed,time);
+      }else{
+        if(leech.phase==='lunge')leech.position=mix(s.home,s.attackTo,clamp((time-s.phaseStart)/s.lungeMs,0,1));
+        record(leech,from,leech.position,time-delta,time);
+      }
       leech.clock=time;
       leech.phaseProgress=Number.isFinite(s.phaseEnd)?clamp((time-s.phaseStart)/(s.phaseEnd-s.phaseStart),0,1):((time+s.phaseOffset)%1600)/1600;
     }
@@ -135,6 +159,7 @@
       // shared latch, another leech cannot emit a second event for the same life.
       if(captureLatched)return null;
       const duration=Number.isFinite(milliseconds)?Math.max(0,milliseconds):0;
+      recording=options.recordPaths&&duration>0?{start:clock,duration}:null;lastPaths=new Map();
       const enabled=options.enabled!==false,canAttack=enabled&&options.canAttack!==false;
       if(!canAttack)for(const leech of leeches)if(leech.phase==='warning'||leech.phase==='lunge')cool(leech);
       if(!duration)return null;
@@ -198,7 +223,7 @@
         const hit=canAttack?contactBetween(clock,until):null,escape=canAttack?escapeBetween(clock,until):null;
         const escaping=escape&&(!hit||escape.time<hit.time-EPS);
         const finish=escaping?escape.time:hit?hit.time:until,delta=finish-clock;
-        for(const leech of leeches)updateState(leech,delta,finish);
+        for(const leech of leeches)updateState(leech,delta,finish,cellPixels,options.playerSpeed);
         clock=finish;
         if(escaping){cool(escape.leech);continue;}
         if(hit){
@@ -227,10 +252,41 @@
       blood.source=copy(animal.position);blood.clock=Number.isFinite(elapsed)?Math.max(blood.clock,elapsed):blood.clock;
       return true;
     }
+    function spawn({kind='leech',poolIndex=0,origin='hatch',...extras}={}){
+      if(!['leech','shark'].includes(kind)||!pools?.[poolIndex])return null;
+      const animal=prepare(pools[poolIndex],poolIndex,0,1,kind);
+      Object.assign(animal,extras,{id:`pool-hatch-${++spawnSerial}`,origin,sizeScale:origin==='hatch'?.6:1,hp:origin==='hatch'?1:2,maxHp:origin==='hatch'?1:2});
+      leeches.push(animal);return animal;
+    }
+    function remove(id){
+      const animal=typeof id==='object'?id:leeches.find(l=>l.id===id),index=leeches.indexOf(animal);
+      if(index<0)return false;
+      if(animal.phase==='feeding')captureLatched=false;
+      internal.delete(animal);leeches.splice(index,1);return true;
+    }
+    function damage(id,amount=1){
+      const animal=typeof id==='object'?id:leeches.find(l=>l.id===id);
+      if(!leeches.includes(animal)||!Number.isFinite(amount)||amount<=0)return null;
+      animal.hp=Math.max(0,animal.hp-amount);const killed=animal.hp===0;
+      if(killed)remove(animal);return {hp:animal.hp,killed};
+    }
+    function shoreNodes(id){
+      const animal=typeof id==='object'?id:leeches.find(l=>l.id===id),state=internal.get(animal);
+      if(!state)return [];
+      const nodes=new Map();for(const edge of state.boundary)for(const p of [edge.a,edge.b])nodes.set(key(p),copy(p));
+      return [...nodes.values()];
+    }
+    function motionPaths(id){
+      const animal=typeof id==='object'?id:leeches.find(l=>l.id===id);if(!animal)return [];
+      const paths=(lastPaths.get(animal.id)||[]).map(p=>({...p,from:copy(p.from),to:copy(p.to)}));
+      const end=paths.at(-1)?.end||0;
+      if(end<1)paths.push({from:copy(animal.position),to:copy(animal.position),start:end,end:1});
+      return paths;
+    }
     const bloodSnapshot=()=>poolBlood.map(b=>({...b,source:b.source?copy(b.source):null}));
     const snapshot=()=>leeches.map(l=>({...l,position:copy(l.position),heading:{...l.heading},target:l.target?copy(l.target):null,
       shore:l.shore?{a:copy(l.shore.a),b:copy(l.shore.b)}:null}));
-    return {leeches,advance,snapshot,bloodSnapshot,stainBlood,resetCooldown,consumeBlood,get clock(){return clock;}};
+    return {leeches,advance,snapshot,bloodSnapshot,stainBlood,resetCooldown,consumeBlood,spawn,remove,damage,shoreNodes,motionPaths,get clock(){return clock;}};
   }
   const api={create,warningMs,lungeMs,strikeMs,cooldownMs};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.GridderPoolLeeches=api;

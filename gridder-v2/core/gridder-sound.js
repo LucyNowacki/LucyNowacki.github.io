@@ -98,6 +98,25 @@
           // Repeated wet crunches, with small tooth clicks between chews.
           const pulse=Math.exp(-(t%.2)*32),click=Math.exp(-((t+.085)%.2)*75);
           value=low*pulse*.8+(noise-low)*(pulse*.45+click*.18)+Math.sin(2*Math.PI*92*t)*pulse*.3;
+        }else if(name==='shot'){
+          // A dry percussive crack followed by a low, rapidly falling thump.
+          // These are noise and pitch-swept pressure, not a sustained note.
+          frequency=62+145*Math.exp(-t*44);phase+=2*Math.PI*frequency/rate;
+          const crack=(noise-low)*Math.exp(-t*65),body=Math.sin(phase)*Math.exp(-t*22);
+          value=crack*.92+body*.67+low*Math.exp(-t*32)*.3;
+        }else if(name==='bullet-flight'){
+          // Quiet air hiss with smooth periodic energy, bounded at loop edges.
+          const flutter=.65+.35*Math.sin(2*Math.PI*7*t)**2;
+          value=(noise-low)*.22*flutter+low*.36*flutter;
+        }else if(name==='impact'){
+          // A compact crunchy impact, distinct from the gun's sharp report.
+          frequency=130-55*u;phase+=2*Math.PI*frequency/rate;
+          value=(noise-low)*Math.exp(-t*48)*.55+low*Math.exp(-t*20)*.75+Math.sin(phase)*Math.exp(-t*25)*.34;
+        }else if(name==='explosion'){
+          // A short impact leads into a heavier noisy burst and low rumble.
+          frequency=80-36*u;phase+=2*Math.PI*frequency/rate;
+          const burst=t<.025?1:Math.exp(-(t-.025)*10);
+          value=(noise-low)*Math.exp(-t*45)*.44+low*burst*.94+Math.sin(phase)*Math.exp(-t*9)*.58;
         }else if(name==='walk'){
           // Four soft alternating crab steps, with a little arcade tick.
           const step=Math.floor(t/.25),age=t%.25,pulse=Math.exp(-age*44),pitch=step%2?210:160;
@@ -110,7 +129,8 @@
           const debris=[.07,.15,.26,.40,.58].reduce((sum,start)=>sum+(t>=start?Math.exp(-(t-start)*75):0),0);
           value=noise*Math.exp(-t*8)*.65+Math.sin(phase)*Math.exp(-t*7)*.5+(noise-low)*debris*.32;
         }
-        const envelope=Math.min(1,t/.004)*Math.min(1,(duration-t)/.025);
+        const attack=name==='shot'?.0006:.004;
+        const envelope=Math.min(1,t/attack)*Math.min(1,(duration-t)/.025);
         samples[i]=value*envelope;peak=Math.max(peak,Math.abs(samples[i]));
       }
       // Leave room for browser resampling; this bus does not boost voice gain.
@@ -129,7 +149,7 @@
       return true;
     }
     function activity(name,key,active,progress=0){
-      if(!['push','chew','walk'].includes(name))return false;
+      if(!['push','chew','walk','bullet-flight'].includes(name))return false;
       const existing=activities.get(key);
       if(!active||!ready()){
         if(existing){try{existing.stop();}catch{}existing.onended?.();}
@@ -137,14 +157,24 @@
       }
       if(existing)return true;
       const source=context.createBufferSource(),gain=context.createGain();
-      source.buffer=effectBuffer(name,1);source.loop=true;
-      gain.gain.setValueAtTime(name==='push'?.32:name==='walk'?.13:.24,context.currentTime);
+      const duration=name==='bullet-flight'?.32:1;
+      source.buffer=effectBuffer(name,duration);source.loop=true;
+      gain.gain.setValueAtTime(name==='push'?.32:name==='walk'?.13:name==='bullet-flight'?.08:.24,context.currentTime);
       track(source,gain);const ended=source.onended;
       source.onended=()=>{if(activities.get(key)===source)activities.delete(key);ended?.();};
       activities.set(key,source);
-      source.start(context.currentTime,Math.max(0,Number.isFinite(progress)?progress:0)%1);
+      source.start(context.currentTime,Math.max(0,Number.isFinite(progress)?progress:0)%duration);
       return true;
     }
+    function oneShot(name,duration,volume){
+      if(!ready())return false;
+      const source=context.createBufferSource(),gain=context.createGain();
+      source.buffer=effectBuffer(name,duration);gain.gain.setValueAtTime(volume,context.currentTime);
+      track(source,gain);source.start(context.currentTime);return true;
+    }
+    const shot=()=>oneShot('shot',.16,.72);
+    const bulletFlight=active=>activity('bullet-flight','bullet-flight',!!active);
+    const hit=(killed=false)=>killed?oneShot('explosion',.36,.62):oneShot('impact',.13,.48);
     function capturePhase(name,progress=0,duration){
       const lengths={bite:.25,swell:2,decay:.65,scatter:.9};
       if(!ready()||!Object.hasOwn(lengths,name))return false;
@@ -168,7 +198,7 @@
       else voice('gameover',.4);
     }
     const resurrectionDuration=()=>((clips.get('resurrection')?.duration??2.8)+.15)*1000;
-    return {unlock,fill,bite,capturePhase,activity,step,killed,stop,resurrectionDuration,
+    return {unlock,fill,bite,capturePhase,activity,step,shot,bulletFlight,hit,killed,stop,resurrectionDuration,
       get diagnostics(){return {...history,activeSources:sources.size,activities:[...activities.keys()],ready:ready()};}};
   }
   const api={create};

@@ -11,7 +11,7 @@
   let view = null, latest = null, gaitTime = 0, updating = false, renderRequested = false;
   const card = host.closest('.board-card');
   const journey = document.getElementById('gridder-journey');
-  const objectiveNames = { min: 'Minimum', max: 'Maximum', inflection: 'Inflection', derivative: 'Derivative', second: 'Second derivative', inverse: 'Inverse', normal: 'Normal' };
+  const objectiveNames = { min: 'Minimum', max: 'Maximum', inflection: 'Inflection', derivative: 'Derivative', second: 'Second derivative', inverse: 'Inverse', normal: 'Normal', exploration: 'Explore the function', singularity: 'Singularities', discontinuity: 'Discontinuities', nondifferentiable: 'Differentiability' };
   let journeyKey = '';
   function showJourney(snapshot) {
     const key = `${snapshot.key}:${snapshot.level}:${snapshot.game.complete()}`;
@@ -23,6 +23,7 @@
       const number = peers.length > 1 ? ` ${peers.indexOf(quest) + 1}` : '';
       const done = index < snapshot.level || index === snapshot.level && snapshot.game.complete();
       item.textContent = `${done ? '✓ ' : ''}${index + 1} · ${objectiveNames[quest.kind]}${number}`;
+      if (quest.title) item.title = quest.title;
       if (index === snapshot.level) item.setAttribute('aria-current', 'step');
       if (done) item.classList.add('level-done');
       return item;

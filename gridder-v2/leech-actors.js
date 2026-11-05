@@ -64,6 +64,7 @@ function create(scene){
     // Draw inside a safe disk wholly contained in the cell union. Scaling the
     // entire silhouette (including tail and fins) handles narrow pool notches.
     let q=scale*(animal.sizeScale||1),centre={...head},fit=false;
+    const attackScale=scale*(animal.origin==='hatch'?size:1);
     const candidates=[head,...cells.map(c=>({x:g.px(c.i+.5),y:g.py(c.j+.5)}))];
     candidates.sort((a,b)=>Math.hypot(a.x-head.x,a.y-head.y)-Math.hypot(b.x-head.x,b.y-head.y));
     for(const factor of [1,.8,.6,.45,.3,.2,.1,.05]){for(const c of candidates)if(wet(c.x,c.y,34*q*factor+1)){centre={...c};q*=factor;fit=true;break;}if(fit)break;}
@@ -105,39 +106,39 @@ function create(scene){
      // A frontal, three-quarter attack head: lateral x runs across the mouth,
      // longitudinal y runs from the upper snout toward the hinged mandible.
      // Both arches join at the two corners; only the lower jaw drops on a bite.
-     const width=18*scale,upperHeight=13*scale,jawAngle=.24+1.08*pose.bite+.15*(1-pose.reach),lowerHeight=17*scale*Math.sin(jawAngle);
+     const width=18*attackScale,upperHeight=13*attackScale,jawAngle=.24+1.08*pose.bite+.15*(1-pose.reach),lowerHeight=17*attackScale*Math.sin(jawAngle);
      const half=18, arch=(height,sign)=>Array.from({length:half+1},(_,i)=>{
       const x=-1+2*i/half,y=sign*height*Math.sqrt(Math.max(0,1-x*x));
       return local(y,x*width);
      });
      const upperArch=arch(upperHeight,-1),lowerArch=arch(lowerHeight,1),hinges=[upperArch[0],upperArch[half]];
-     const upperOuter=arch(upperHeight+3.4*scale,-1),lowerOuter=arch(lowerHeight+4.7*scale,1);
+     const upperOuter=arch(upperHeight+3.4*attackScale,-1),lowerOuter=arch(lowerHeight+4.7*attackScale,1);
      const upperTeeth=[],lowerTeeth=[],teeth=[];
      const paint=(layer,points,colour)=>{layer.fillStyle(colour,1);layer.beginPath();points.forEach((p,n)=>n?layer.lineTo(p.x,p.y):layer.moveTo(p.x,p.y));layer.closePath();layer.fillPath();};
      // The head and oral cavity sit behind the original avatar. The rims and
      // teeth sit in front so the mouth visibly bites and swallows the artwork.
-     const headShape=[local(-23*scale,-18*scale),local(-29*scale,-12*scale),local(-32*scale,0),local(-29*scale,12*scale),local(-23*scale,18*scale),...lowerOuter.slice().reverse()];
+     const headShape=[local(-23*attackScale,-18*attackScale),local(-29*attackScale,-12*attackScale),local(-32*attackScale,0),local(-29*attackScale,12*attackScale),local(-23*attackScale,18*attackScale),...lowerOuter.slice().reverse()];
      paint(bodies,headShape,0x638b8c);
-     paint(bodies,[local(-21*scale,-15*scale),local(-27*scale,-9*scale),local(-29*scale,0),local(-27*scale,9*scale),local(-21*scale,15*scale),...upperOuter.slice().reverse()],0x94a9a2);
+     paint(bodies,[local(-21*attackScale,-15*attackScale),local(-27*attackScale,-9*attackScale),local(-29*attackScale,0),local(-27*attackScale,9*attackScale),local(-21*attackScale,15*attackScale),...upperOuter.slice().reverse()],0x94a9a2);
      paint(bodies,[...upperArch,...lowerArch.slice().reverse()],0x361520);
      // Pale lower jaw skin and pink gum form unbroken, rounded dental rims.
-     const lowerSkin=arch(lowerHeight+8*scale,1);
+     const lowerSkin=arch(lowerHeight+8*attackScale,1);
      paint(jaws,[...lowerSkin,...lowerOuter.slice().reverse()],0xd5d3bd);
      paint(jaws,[...upperOuter,...upperArch.slice().reverse()],0xad5362);
      paint(jaws,[...lowerOuter,...lowerArch.slice().reverse()],0xb35f69);
      // Triangles have wide bases on the actual curved gum, with their tips
      // directed into the dark cavity rather than floating off straight prongs.
      const tooth=(fraction,upper)=>{
-      const h=upper?upperHeight:lowerHeight,sign=upper?-1:1,x=fraction*width,delta=(upper?2.1:1.75)*scale;
+      const h=upper?upperHeight:lowerHeight,sign=upper?-1:1,x=fraction*width,delta=(upper?2.1:1.75)*attackScale;
       const yAt=v=>sign*h*Math.sqrt(Math.max(0,1-(v/width)*(v/width)));
       const a=local(yAt(x-delta),x-delta),b=local(yAt(x+delta),x+delta);
-      const length=(upper?5.8:3.7)*(1-.22*Math.abs(fraction))*scale;
+      const length=(upper?5.8:3.7)*(1-.22*Math.abs(fraction))*attackScale;
       const p=local(yAt(x)-sign*length,x*.94);
       const tri=[a,b,p];paint(jaws,tri,0xf4efdc);teeth.push(p);(upper?upperTeeth:lowerTeeth).push(tri);
      };
      for(const x of [-.75,-.5,-.25,0,.25,.5,.75])tooth(x,true);
      for(const x of [-.7,-.42,-.14,.14,.42,.7])tooth(x,false);
-     for(const side of [-1,1]){const eye=local(-20*scale,side*16*scale);bodies.fillStyle(0x142832,1);bodies.fillCircle(eye.x,eye.y,1.65*scale);bodies.fillStyle(0xd9e8df,1);bodies.fillCircle(eye.x-fx*.4*scale,eye.y-fy*.4*scale,.45*scale);}
+     for(const side of [-1,1]){const eye=local(-20*attackScale,side*16*attackScale);bodies.fillStyle(0x142832,1);bodies.fillCircle(eye.x,eye.y,1.65*attackScale);bodies.fillStyle(0xd9e8df,1);bodies.fillCircle(eye.x-fx*.4*attackScale,eye.y-fy*.4*attackScale,.45*attackScale);}
      mouth=tip;attack={phase:elapsed<120?'reach':elapsed<(s.deathAttacker.dragDuration||650)?'drag':elapsed<1550?'chew':elapsed<2400?'swallow':'belly',reach:pose.reach,drag:pose.drag,bite:pose.bite,swallow:pose.swallow,belly:pose.belly,bellyRegion:{centre:pt(-4,0),axis:pt(1,0),halfLength:8*q,halfWidth:8*(1+.35*belly)*q},jawHalfGap:lowerHeight,target,mouth,base,teeth,
       jawGeometry:{origin:tip,forward:{x:fx,y:fy},lateral:{x:nx,y:ny},upperArch,lowerArch,hinges,upperTeeth,lowerTeeth,jawAngle,opening:upperHeight+lowerHeight}};
     }
@@ -145,46 +146,49 @@ function create(scene){
     if(animal.phase==='warning'){effects.lineStyle(1.5*q,0xffe75a,.55+.4*pulse);effects.strokeCircle(centre.x,centre.y,26*q);}
     let victim=null;
     if(attacker){const pose=sharkCapturePose(s.deathAttacker,elapsed,g);victim={x:g.px(pose.victim.i),y:g.py(pose.victim.j)};
-     if(drinking&&elapsed>=120&&elapsed<1550){for(let n=0;n<=20;n++){const f=n/20,x=mix(victim.x,mouth.x,f),y=mix(victim.y,mouth.y,f);if(wet(x,y,2*scale)){effects.fillStyle(0xff234b,.7);effects.fillCircle(x,y,1.6*scale);}}const f=reduced?.5:(elapsed/240)%1,x=mix(victim.x,mouth.x,f),y=mix(victim.y,mouth.y,f);if(wet(x,y,2*scale)){effects.fillStyle(0xffd1b8,1);effects.fillCircle(x,y,1.5*scale);}}
+     if(drinking&&elapsed>=120&&elapsed<1550){for(let n=0;n<=20;n++){const f=n/20,x=mix(victim.x,mouth.x,f),y=mix(victim.y,mouth.y,f);if(wet(x,y,2*attackScale)){effects.fillStyle(0xff234b,.7);effects.fillCircle(x,y,1.6*attackScale);}}const f=reduced?.5:(elapsed/240)%1,x=mix(victim.x,mouth.x,f),y=mix(victim.y,mouth.y,f);if(wet(x,y,2*attackScale)){effects.fillStyle(0xffd1b8,1);effects.fillCircle(x,y,1.5*attackScale);}}
     }
-    entries.push({id:animal.id,kind:'shark',poolIndex:animal.poolIndex,phase:animal.phase,drinking,head:centre,headOffset,points:[centre,mouth],scale:q,modelScale:animal.sizeScale||1,clock,victim,
+    entries.push({id:animal.id,origin:animal.origin||null,kind:'shark',poolIndex:animal.poolIndex,phase:animal.phase,drinking,head:centre,headOffset,points:[centre,mouth],scale:q,modelScale:animal.sizeScale||1,clock,victim,
      orientation:{heading:angle,facing:upright,dorsalFin:pt(-1,dorsalSway),backbone:pt(-5,0)},
      anatomy:{view:'dorsal',snout:pt(22,0),eyes:[pt(13,-3.5),pt(13,3.5)],pectoralTips:[pt(-13,-18),pt(-13,18)],dorsalBase:pt(-5,0),dorsalTip:pt(-1,dorsalSway),tailJoint:pt(-20,wave*.65),tailBase:pt(-24,wave*.9),caudalTips:[pt(-29,wave-9),pt(-29,wave+9)]},
      motion:{tail:wave,dorsal:dorsalSway},attack});
     continue;
    }
+   // Hatchlings retain their parent's silhouette but scale the whole leech,
+   // including its tail and eyes, instead of shrinking just its body radius.
+   const detailScale=scale*(animal.origin==='hatch'?size:1);
    const colour=[0x40ffdd,0xff4bdb,0xc7ff4b][animal.poolIndex%3],pulse=reduced?.8:.72+.28*Math.sin(clock/260);
    const points=[];
    for(let n=0;n<13;n++){
-    const t=n/12,d=t*24*scale,wiggle=Math.sin(phase-t*7)*3.2*scale*Math.sin(t*Math.PI/2);
+    const t=n/12,d=t*24*detailScale,wiggle=Math.sin(phase-t*7)*3.2*detailScale*Math.sin(t*Math.PI/2);
     let p={x:head.x-ux*d-uy*wiggle,y:head.y-uy*d+ux*wiggle};
     // Keep the entire tapered tail within its occupied cell union. No diagonal
     // shortcuts across a dry notch; points contract towards the last safe point.
-    const r=radius*(1-.77*t)+2*scale;
+    const r=radius*(1-.77*t)+2*detailScale;
     if(!wet(p.x,p.y,r)){const anchor=points[n-1]||head;for(let k=0;k<8&&!wet(p.x,p.y,r);k++)p={x:mix(p.x,anchor.x,.5),y:mix(p.y,anchor.y,.5)};}
     points.push(p);
    }
    for(let n=12;n>=0;n--){const p=points[n],r=radius*(1-.77*n/12);
-    bodies.fillStyle(colour,.07+.06*pulse);bodies.fillCircle(p.x,p.y,r+2*scale);
-    bodies.fillStyle(0x031b35,1);bodies.fillCircle(p.x,p.y,r+.8*scale);
+    bodies.fillStyle(colour,.07+.06*pulse);bodies.fillCircle(p.x,p.y,r+2*detailScale);
+    bodies.fillStyle(0x031b35,1);bodies.fillCircle(p.x,p.y,r+.8*detailScale);
     bodies.fillStyle(colour,.76+.2*pulse);bodies.fillCircle(p.x,p.y,r);
     bodies.fillStyle(0x103d55,.68);bodies.fillCircle(p.x-uy*r*.23,p.y+ux*r*.23,r*.65);
    }
-   stroke(bodies,points,Math.max(.7,scale),0xd8ffff,.6);
-   for(const side of [-1,1]){const ex=head.x+ux*1.5*scale-uy*side*2*scale,ey=head.y+uy*1.5*scale+ux*side*2*scale;bodies.fillStyle(0xe8ffff,1);bodies.fillCircle(ex,ey,1.4*scale);bodies.fillStyle(0x07101e,1);bodies.fillCircle(ex+ux*.5*scale,ey+uy*.5*scale,.7*scale);}
-   if(animal.phase==='warning'){effects.lineStyle(1.5*scale,colour,.45+.35*pulse);effects.strokeCircle(head.x,head.y,(8+2*pulse)*scale);}
+   stroke(bodies,points,Math.max(.7,detailScale),0xd8ffff,.6);
+   for(const side of [-1,1]){const ex=head.x+ux*1.5*detailScale-uy*side*2*detailScale,ey=head.y+uy*1.5*detailScale+ux*side*2*detailScale;bodies.fillStyle(0xe8ffff,1);bodies.fillCircle(ex,ey,1.4*detailScale);bodies.fillStyle(0x07101e,1);bodies.fillCircle(ex+ux*.5*detailScale,ey+uy*.5*detailScale,.7*detailScale);}
+   if(animal.phase==='warning'){effects.lineStyle(1.5*detailScale,colour,.45+.35*pulse);effects.strokeCircle(head.x,head.y,(8+2*pulse)*detailScale);}
    if(drinking){
-    stroke(bodies,points,3*scale,0xff083f,.5);stroke(bodies,points,1.2*scale,0xff234b,1);
-    const flow=reduced?0:(elapsed/95)%12;for(let n=0;n<3;n++){const at=(flow+n*4)%12,k=Math.floor(at),p={x:mix(points[k].x,points[k+1].x,at-k),y:mix(points[k].y,points[k+1].y,at-k)};bodies.fillStyle(0xffd1b8,1);bodies.fillCircle(p.x,p.y,1.1*scale);}
+    stroke(bodies,points,3*detailScale,0xff083f,.5);stroke(bodies,points,1.2*detailScale,0xff234b,1);
+    const flow=reduced?0:(elapsed/95)%12;for(let n=0;n<3;n++){const at=(flow+n*4)%12,k=Math.floor(at),p={x:mix(points[k].x,points[k+1].x,at-k),y:mix(points[k].y,points[k+1].y,at-k)};bodies.fillStyle(0xffd1b8,1);bodies.fillCircle(p.x,p.y,1.1*detailScale);}
    }
    let victim=null;
    if(attacker){
     const a=s.deathAttacker,t=clamp(elapsed/(a.dragDuration||650),0,1),ease=t*t*(3-2*t);victim={x:g.px(mix(a.from.i,a.to.i,ease)),y:g.py(mix(a.from.j,a.to.j,ease))};
-    if(drinking){stroke(effects,[victim,head],4*scale,0xff083f,.3);stroke(effects,[victim,head],1.4*scale,0xff234b,.95);const flow=reduced?.5:(elapsed/240)%1;effects.fillStyle(0xffd1b8,1);effects.fillCircle(mix(victim.x,head.x,flow),mix(victim.y,head.y,flow),1.5*scale);}
-    if(stage.name==='decay'){for(let n=0;n<6;n++){const q=(stage.progress+n/6)%1,a=n*2.4;effects.lineStyle(scale,0xb7ffff,.75*(1-q));effects.strokeCircle(victim.x+Math.cos(a)*7*scale,victim.y-q*19*scale,(1.5+q*2)*scale);}}
-    if(t<1)for(let n=0;n<5;n++){const a=n*Math.PI*2/5+elapsed/450,r=(7+8*Math.sin(t*Math.PI))*scale;effects.fillStyle(0x9bffff,.75*(1-t));effects.fillCircle(victim.x+Math.cos(a)*r,victim.y+Math.sin(a)*r*.65,1.8*scale);}
+    if(drinking){stroke(effects,[victim,head],4*detailScale,0xff083f,.3);stroke(effects,[victim,head],1.4*detailScale,0xff234b,.95);const flow=reduced?.5:(elapsed/240)%1;effects.fillStyle(0xffd1b8,1);effects.fillCircle(mix(victim.x,head.x,flow),mix(victim.y,head.y,flow),1.5*detailScale);}
+    if(stage.name==='decay'){for(let n=0;n<6;n++){const q=(stage.progress+n/6)%1,a=n*2.4;effects.lineStyle(detailScale,0xb7ffff,.75*(1-q));effects.strokeCircle(victim.x+Math.cos(a)*7*detailScale,victim.y-q*19*detailScale,(1.5+q*2)*detailScale);}}
+    if(t<1)for(let n=0;n<5;n++){const a=n*Math.PI*2/5+elapsed/450,r=(7+8*Math.sin(t*Math.PI))*detailScale;effects.fillStyle(0x9bffff,.75*(1-t));effects.fillCircle(victim.x+Math.cos(a)*r,victim.y+Math.sin(a)*r*.65,1.8*detailScale);}
    }
-   entries.push({id:animal.id,poolIndex:animal.poolIndex,phase:animal.phase,drinking,head,headOffset,points,scale:size*scale,modelScale:animal.sizeScale||1,clock,victim});
+   entries.push({id:animal.id,origin:animal.origin||null,kind:animal.kind||'leech',poolIndex:animal.poolIndex,phase:animal.phase,drinking,head,headOffset,points,scale:size*scale,modelScale:animal.sizeScale||1,clock,victim});
   }
  }
  return {render,metrics:()=>({resourceCount:3,depths:[22.7,23.5,24.25],count:entries.length,leeches:entries.map(e=>({...e,head:{...e.head},points:e.points.map(p=>({...p}))}))}),destroy(){bodies.destroy();effects.destroy();jaws.destroy();entries=[];}};
