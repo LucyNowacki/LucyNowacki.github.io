@@ -1,0 +1,23 @@
+{
+  "phrase": "rotten egg",
+  "role": "female house",
+  "callStarts": [
+    0.05,
+    1.05
+  ],
+  "callEnds": [
+    0.733042,
+    1.733042
+  ],
+  "duration": 2,
+  "file": "house-rotten-egg.wav",
+  "engine": "Installed FFmpeg libflite slt voice",
+  "effects": null,
+  "generation": "Complete locally synthesized utterances in a 2-second capture-phase clip",
+  "sampleRate": 24000,
+  "channels": 1,
+  "samplePeak": 0.649993896484375,
+  "sha256": "1d428582dfb03fcd6090c95bb1413cc143b2f515416f1ba2e33e90e416f891b9",
+  "runtime": "Embedded local data URI decoded through the shared audio context; no speech service or browser speech voice",
+  "celebrityRecordingOrClone": false
+}

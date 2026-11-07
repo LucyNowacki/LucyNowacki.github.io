@@ -30,7 +30,7 @@
         sizeScale:1,speedScale:1,meals:0,bloodMeals:0,eating:null,lastBrush:null,hp:s.kind==='centipede'?3:2,maxHp:s.kind==='centipede'?3:2,lastHitAt:null}));
     const position=s=>s.segment?{i:s.i+s.segment.di*s.segment.progress,j:s.j+s.segment.dj*s.segment.progress}:copy(s);
     const histories=new WeakMap();
-    const bodyCount=s=>6+2*s.meals;
+    const bodyCount=s=>s.species?.bodySegments===4?4+2*s.meals+2*s.bloodMeals:6+2*s.meals;
     const displayScale=cellPixels=>options.displayScale?options.displayScale(cellPixels):options.referencePlotWidth>0?board.nx*cellPixels('x')/options.referencePlotWidth:1;
     const routePixels=cellPixels=>options.routePixels||cellPixels;
     const spacing=(s,cellPixels)=>12*s.sizeScale*displayScale(cellPixels);

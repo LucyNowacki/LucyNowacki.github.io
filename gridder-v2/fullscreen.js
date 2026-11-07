@@ -130,6 +130,7 @@
   shortLandscape.addEventListener('change', update);
   update();
   document.addEventListener('keydown', event => {
+    if (window.GridderSettings?.isOpen()) return;
     if (fallback && event.key === 'Escape') {
       event.preventDefault();
       event.stopImmediatePropagation();

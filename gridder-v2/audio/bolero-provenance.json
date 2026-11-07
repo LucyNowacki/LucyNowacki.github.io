@@ -5,12 +5,12 @@
   "arrangement": {
     "bpm": 72,
     "meter": "3/4",
-    "bars": 24,
-    "seconds": 60,
-    "scope": "Four-bar introduction; complete opening flute theme from original bars 5–21, including ties and rests; short pizzicato/snare turnaround.",
-    "instruments": "Procedurally synthesized flute, reduced C/G pizzicato cello/viola accompaniment, and the signature two-bar snare pattern.",
-    "changes": "Reduced instrumentation, synthesized timbres, restrained dynamics and a loop turnaround. This is an excerpt arrangement, not the complete orchestration or a historical performance.",
-    "audio_source": "All PCM is synthesized locally by arcade-music.js; no third-party recording or instrumental sample is used."
+    "bars": 340,
+    "seconds": 850,
+    "scope": "Complete 340-bar reduced form: four introductory bars, 18 successive A/A/B/B theme presentations, source-specific final altered B, eight-bar E-major modulation and final six-bar coda.",
+    "instruments": "Locally synthesized melody, arranged harmony and pizzicato bass, with the two-bar snare rhythm.",
+    "changes": "Reduced instrumentation, arranged harmony and synthesized timbres. This is not the full orchestration or a historical performance.",
+    "audio_source": "All PCM is generated locally on demand in bounded windows; no third-party recording or instrumental sample is used."
   },
   "sources": [
     {
@@ -19,12 +19,12 @@
       "commit": "e46e0da5b2518ac9c2521308351ce02c30a4b0da",
       "license": "CC0 1.0 Universal, as declared by the repository LICENSE and the rendered flute part footer.",
       "locators": {
-        "melody": "common.ily: themeA, original flute bars 5–21",
-        "snare": "notes/tambour.ily: first two-bar pattern",
-        "cello": "notes/violoncelle.ily: opening repeated two-bar pizzicato",
-        "viola": "notes/alto.ily: opening repeated pizzicato bar"
+        "global": "notes/global.ily: 20 + 17×18 + 14 bars, tempo 72, 3/4",
+        "melodies": "common.ily: themeA, themeBI, themeBII and themeFinal",
+        "final_coda": "notes/flute.ily: flute2 part after themeFinalQuarte, final six bars",
+        "rhythm": "notes/tambour.ily: two-bar snare pattern"
       },
-      "use": "Pitch, duration, tie and snare-pattern transcription, plus the opening accompaniment reduction."
+      "use": "Complete melody-form and final score transcription; reconstructed reduced layers rather than full orchestration."
     },
     {
       "title": "Boléro — Flûte 1, Éditions Nicolas Sceaux, 2016",
@@ -37,9 +37,15 @@
       "url": "https://imslp.org/wiki/Bol%C3%A9ro_(Ravel,_Maurice)",
       "locator": "First-edition parts: Paris, Durand & Cie., 1929, plate D. & F. 11.780; flute #299525 and snare #299518",
       "use": "Historical publication and public-domain catalogue provenance. The historical scan was not used as the transcription master."
+    },
+    {
+      "title": "Nicolas Sceaux: flute part, pinned revision",
+      "url": "https://github.com/nsceaux/Ravel_Bolero/blob/e46e0da5b2518ac9c2521308351ce02c30a4b0da/notes/flute.ily",
+      "locator": "Section 17–18 and the final six bars after themeFinalQuarte",
+      "use": "Reduced coda melody and ending."
     }
   ],
-  "verified_on": "2026-10-20",
-  "verification": "Pure regression checks the opening pitches and cadence, ties across barlines, full three-quarter bar durations, alternating 10/14-attack snare cycles, actual PCM fundamentals, finite headroom and the unchanged playback lifecycle.",
-  "limits": "No claim of orchestral realism or full-work coverage; speaker output and perceived recognizability require listening."
+  "verified_on": "2026-11-06",
+  "verification": "Source-backed score data and bounded window/player checks; source note and timing claims are limited to the listed melodies and final part.",
+  "limits": "This is a reduced arrangement, not a reproduction of the full orchestration. Physical-device performance and listening remain separate checks."
 }

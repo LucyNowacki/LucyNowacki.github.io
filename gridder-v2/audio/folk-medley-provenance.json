@@ -1,0 +1,55 @@
+{
+  "title": "Gridder synthesized three-melody cycle",
+  "scope": "Complete written melody forms in a locally synthesized reduced arrangement: Boléro, then Szła dzieweczka with written repeats and alternate endings, then all ten bars of O mój rozmarynie. No recordings or sampled instruments.",
+  "order_seconds": [
+    {
+      "title": "Boléro",
+      "start": 0,
+      "end": 850,
+      "source": "bolero-provenance.json"
+    },
+    {
+      "title": "Szła dzieweczka do laseczka",
+      "start": 850,
+      "end": 910,
+      "bpm": 144,
+      "meter": "3/4",
+      "bars_played": 48
+    },
+    {
+      "title": "O mój rozmarynie",
+      "start": 910,
+      "end": 935,
+      "bpm": 96,
+      "meter": "4/4",
+      "bars_played": 10
+    }
+  ],
+  "sources": [
+    {
+      "title": "Szla dzieweczka, John Chambers ABC collection",
+      "url": "https://abcnotation.com/tunePage?a=trillian.mit.edu%2F~jc%2Fmusic%2Fabc%2FContra%2FKC%2Ffreilach%2FSzlaDzieweczka_D%2F0000",
+      "locator": "First melody: full A section with first and second repeat endings and all 16 B bars; K:D, L:1/4, M:3/4",
+      "use": "Melody pitch, duration, ties, written repeat and alternate endings. The lead, parallel harmony, bass and percussion are a new synthesized reduction."
+    },
+    {
+      "title": "Szła dzieweczka, Biblioteka Polskiej Piosenki",
+      "url": "https://bibliotekapiosenki.pl/utwory/Szla_dzieweczka",
+      "locator": "Title and melody metadata",
+      "use": "Identifies the melody as traditional and associated with Silesia."
+    },
+    {
+      "title": "O, mój rozmarynie, Biblioteka Polskiej Piosenki melody score",
+      "url": "https://bibliotekapiosenki.pl/strona/pliki/files/teksty_i_nuty/064_o_moj_rozmarynie_n.pdf",
+      "locator": "Page 1, all 10 bars of the vocal melody, C minor",
+      "use": "Complete 10-bar melody, including written rests and flats, transposed up 14 semitones into D minor and up an octave. Mia independently visually checked the notes and durations."
+    },
+    {
+      "title": "O mój rozmarynie nuty literowe, Proste Nuty",
+      "url": "https://prostenuty.pl/o-moj-rozmarynie-nuty-literowe/",
+      "locator": "First lyric-aligned phrase in D minor",
+      "use": "Independent note-letter check of the opening pitch sequence."
+    }
+  ],
+  "limits": "One complete notated tune form for each folk song, not a rendition of every lyrical verse or a recording. Boléro is a reduced synthesized arrangement, not the full orchestration. Playback quality, recognition and natural device behavior require listening and physical-device checks."
+}

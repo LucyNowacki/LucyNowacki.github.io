@@ -1,0 +1,75 @@
+{
+  "house": {
+    "phrase": "rotten egg",
+    "role": "female house",
+    "callStarts": [
+      0.05,
+      1.05
+    ],
+    "callEnds": [
+      0.733042,
+      1.733042
+    ],
+    "duration": 2,
+    "file": "house-rotten-egg.wav",
+    "engine": "Installed FFmpeg libflite slt voice",
+    "effects": null,
+    "generation": "Complete locally synthesized utterances in a 2-second capture-phase clip",
+    "sampleRate": 24000,
+    "channels": 1,
+    "samplePeak": 0.649993896484375,
+    "sha256": "1d428582dfb03fcd6090c95bb1413cc143b2f515416f1ba2e33e90e416f891b9",
+    "runtime": "Embedded local data URI decoded through the shared audio context; no speech service or browser speech voice",
+    "celebrityRecordingOrClone": false
+  },
+  "witch": {
+    "phrase": "convergy theraphy",
+    "role": "female witch, three mocking rising-pitch taunts",
+    "callStarts": [
+      0.05,
+      0.98,
+      1.91
+    ],
+    "callEnds": [
+      0.759667,
+      1.669833,
+      2.610958
+    ],
+    "duration": 2.9,
+    "file": "witch-conversion.wav",
+    "engine": "Installed FFmpeg libflite slt voice",
+    "effects": [
+      "rubberband=pitch=1.04:tempo=1.45,vibrato=f=6.8:d=0.4,aecho=0.8:0.5:40:0.12",
+      "rubberband=pitch=1.1:tempo=1.45,vibrato=f=6.8:d=0.4,aecho=0.8:0.5:40:0.12",
+      "rubberband=pitch=1.17:tempo=1.45,vibrato=f=6.8:d=0.4,aecho=0.8:0.5:40:0.12"
+    ],
+    "generation": "Complete locally synthesized utterances in a 2.9-second capture-phase clip",
+    "sampleRate": 24000,
+    "channels": 1,
+    "samplePeak": 0.719970703125,
+    "sha256": "381554bd9d7f6dcfc64987f3b4bd64065cd7dbc6e2755230fa5fc8250e3ebed6",
+    "runtime": "Embedded local data URI decoded through the shared audio context; no speech service or browser speech voice",
+    "celebrityRecordingOrClone": false
+  },
+  "boruta": {
+    "phrase": "I am a Polish devil",
+    "role": "deep male Polish devil",
+    "callStarts": [
+      0.05
+    ],
+    "callEnds": [
+      1.212458
+    ],
+    "duration": 2,
+    "file": "boruta-laugh.wav",
+    "engine": "Installed FFmpeg libflite rms voice",
+    "effects": "rubberband=pitch=0.72:tempo=1.3,bass=g=5:f=130,aecho=0.8:0.5:50:0.12",
+    "generation": "Complete locally synthesized utterances in a 2-second capture-phase clip",
+    "sampleRate": 24000,
+    "channels": 1,
+    "samplePeak": 0.649993896484375,
+    "sha256": "4f45b8858f81b7231db69fc34ab91c5f391cf2eba99ea05c387ee73b967ebf6e",
+    "runtime": "Embedded local data URI decoded through the shared audio context; no speech service or browser speech voice",
+    "celebrityRecordingOrClone": false
+  }
+}

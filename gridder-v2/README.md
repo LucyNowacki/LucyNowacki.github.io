@@ -11,36 +11,181 @@ discover features of functions, and survive family-specific land monsters and
 hungry neon leeches and a pool shark. Source:
 `subsites/gridder-v2/`; Nikola destination: `/gridder-v2/`.
 
-## Eggs and the three-shot shooter — 4 November 2026
+## MAGA crawler — 7 November 2026
+
+A distinct armored segmented creature starts with four abdomen balls bearing
+red M, A, G, A lettering and jointed walking legs. Every consumed remnant and
+every kill of Gridder adds two more balls, continuing the MAGA letter cycle.
+It follows the existing grid
+edges and unfolds its tail along travelled corners. It appears in the third
+slot on level 2 of each function, after the opening folklore trio, and also
+belongs to the wider monster roster. Its hatchlings inherit the same anatomy.
+
+## Character voices and electric explosion — 7 November 2026
+
+The witch says "convergy theraphy" three times in a louder, mocking female
+voice, with rising pitch across her shock attack; an explosion sounds when
+Gridder scatters. The house's two "rotten egg" calls use a female voice, while
+Boruta says "I am a Polish devil" in a deep male voice. Locally synthesized
+voice clips are embedded for file
+loading and seek to their saved position after pause. Existing smoke,
+plasma, movement and resurrection timing remain in place.
+
+## Attack smoke and speech — 7 November 2026
+
+Gridder emits rising smoke while the witch shocks him or Boruta burns him.
+The witch's broom bears red "TERF" lettering, and her plasma attack has sharp
+electrical sparks and crackles. The hen-leg house says "rotten egg" twice
+during its attack. The local two-call voice clip is embedded for reliable
+direct-file loading and follows the same pause, mute and resume controls as
+the attack sounds. Capture timing and resurrection remain in place.
+
+## Witch plasma shocks — 7 November 2026
+
+The witch directs multiple violet electrical filaments towards Gridder, with
+branching paths, pale cores and purple halos. Their movement follows the
+capture clock, including paused and reduced-motion rendering. Contact rules,
+capture timing, sound and resurrection follow the existing folklore attack.
+
+## Fire, electricity and rotten eggs — 6 November 2026
+
+Boruta catches Gridder with a stream of fire, the broom witch strikes with
+electricity, and the hen-leg house launches rotten eggs that break into green
+splats. Each has a distinct Gridder reaction and procedural sound. These
+replace their draining capture visuals while retaining grid-edge pursuit,
+contact detection, one lost life, pause and the angel resurrection sequence.
+The opening trio and all other creatures keep their existing behavior. Details
+and verification: `docs/chebby/agents/gridder-team/FOLKLORE-ATTACKS.md`.
+
+## Folklore visitors and lightning eggs — 6 November 2026
+
+Five additional species bring the roster to **44**: a witch riding a broom,
+a hopping house on **one** articulated hen's leg, **Diabeł Boruta**, a sheet
+ghost and a wisp ghost. Their logical positions still follow the grid edges.
+The witch has hinged knees, the house bends its knee and plants its three-toed
+foot before hopping, and the ghosts have jointed arms and distinct floating
+silhouettes. Boruta has a Polish nobleman-devil silhouette: crimson coat, gold
+sash, fur-trimmed cap, horns, curled moustache, boots, pointed tail and a sabre.
+His two walking legs and two arms bend at their joints as he travels along the
+edges. This replaces his earlier six-legged artwork. The earlier 39 identities
+remain available.
+
+The five folklore creatures use a tilted overhead camera with projected 3D
+forms, shaded surfaces and ground shadows. Turning changes the visible roof,
+wall and body faces while height stays upright in the camera. Articulated limbs
+keep their lengths in 3D; their screen lengths change with perspective. Grid
+positions, edge travel and contact rules continue to use the same game models.
+
+The broom witch has a hooked hat, visible face and hair, a seated body, hands
+gripping the shaft, bent boots and a broad bound straw bundle. **Level 1 of
+every function starts with the broom witch, hen-leg house and Diabeł Boruta
+together**, including Restart and continuing to the next function. These are
+three full-sized grid-edge monsters; Boruta uses his own normal pursuer body
+and health. From level 2, the usual seeded newcomer and two family monsters
+return, including the family centipede. Egg laying and hatching keep their
+existing active-time clocks. See `OPENING-FOLKLORE.md` in the team records.
+
+**Lightning eggs** give Gridder **3× movement speed for five seconds of active
+play**, with a cyan/lime neon trail and a small remaining-time badge beside the
+weapon controls. Running into a monster during the boost defeats it, including
+contact with a centipede's body. Keep moving to ram: the fading trail itself
+does not cause damage. Another lightning egg refreshes the boost to five
+seconds. It does not add rounds, upgrade the gun or add bombs.
+
+The temporary boost affects Gridder's movement only. Hatching, bomb fuses,
+monster movement and weapon timing keep their own clocks. Pause, Settings,
+capture/resurrection, completed levels and enemies-off practice freeze active
+time. Death or changing/restarting the level clears the temporary effect.
+The first egg remains ammunition; later seeded rewards preserve the existing
+bomb outcomes and choose lightning for approximately one quarter of the
+remaining ammunition outcomes.
+
+Feature and acceptance record:
+`docs/chebby/agents/gridder-team/FOLKLORE-SPEED-BOOST.md`.
+
+## Spider-like monsters and planted bombs — 6 November 2026
+
+The original nine species and thirty additions remain in the roster. The thirty
+new Halloween/fantasy creatures now use low, contorted bodies with long,
+clawed, jointed limbs. Alternating support groups keep feet planted while other
+legs lift and step; movement drives the gait. Skeletons, vampires, mummies,
+werewolves, witches, ghosts and the other species retain distinct features.
+The monsters still follow the grid edges, with the existing population limits.
+
+Some eggs carry a bomb symbol. Collecting one stores a bomb. Normal eggs add
+three rounds and advance the double-damage/machine-gun upgrades. The first egg
+introduces ammunition; later rewards use a separate seeded selection with
+roughly one quarter bombs.
+
+**Shift** switches between **gun** and **bomb**. The touch weapon switch performs
+the same action. **Space** or the main action button uses the selected weapon:
+shoot in gun mode, or **Plant** one bomb in bomb mode. Switching consumes nothing
+and clears held firing. Planting is always one action per press, even when the
+machine gun upgrade is available.
+
+A bomb stays exactly where Gridder plants it. Its **three-second countdown**
+uses active play time, independent of speed or slow frames. Detonation produces
+a loud layered blast, expanding fire, metallic shrapnel, smoke and a shockwave.
+The circular blast deals three damage to nearby land and pool monsters within
+1.5 times the smaller cell dimension (including body contact). Gridder and
+painted areas are safe. Pause, Settings, capture, angels, completed levels and
+practice freeze the countdown and block planting.
+
+Bomb inventory and weapon selection carry through lives and Next within the
+function; function restart/change resets them. Planted charges carry through
+capture/resurrection but are cleared on Next. The mode and action buttons share
+the existing control margin, preserving the plotted field.
+
+## Settings page — 6 November 2026
+
+Open **Settings** from the header or game controls; in the touch/fullscreen
+arena it is in the **Game** menu. Music, volume, sound effects, visual style,
+function/difficulty, hints, monsters and movement/node tuning share one page.
+The original speed slider is also a shortcut below the board. It moves into
+Settings while open and returns afterward, retaining its value and listeners.
+Opening pauses play. **Back to game**, Escape and browser Back return without
+reloading or resetting the board/ammo; choose **Start game** to resume.
+Function/difficulty changes keep their existing restart behavior, explained
+beside those controls. Settings remain for the current loaded game session.
+
+## Eggs and shooter upgrades — 6 November 2026
 
 Every 10 seconds of active monster play, one randomly selected living monster
 outside the water containers lays an egg on a legal grid node. Sharks and
 leeches in containers do not lay eggs. After 10 more active seconds, an
 uncollected egg hatches into a smaller creature of the same kind/species.
+Laying and hatching use elapsed active play time independently of Gridder
+speed or the capped movement frame budget, including on slow frames.
 Hatchlings use the same movement speed as the original monsters of their
 kind and difficulty, including the ordinary speed setting and resize scaling.
 Their smaller size and one-hit health remain.
 
-Cross an egg to refill the shooter to exactly **3 bullets**. Turn by moving,
-then press **Space** once for each shot. Touchscreens also have a **Fire** button.
+Each normal egg **adds 3 rounds**. The second normal egg upgrades bullets to
+**double damage**; the third normal egg unlocks a **machine gun**. Further normal eggs keep adding
+ammunition. The pickup count stays separate from the remaining round count.
+Turn by moving, then press **Space** or **Fire** to shoot. With the machine gun,
+hold Space or the touch Fire button for automatic fire; every shot uses one round.
 Gridder holds the shooter centrally with **both hands**; the weapon and armed
-face keep the same direction while stopped. Hatchlings take one
-hit, adult centipedes three, and other adults two, including sharks and leeches.
+face keep the same direction while stopped. Hatchlings have one health point,
+adult centipedes three, and other adults two, including sharks and leeches.
+Ordinary bullets deal one damage point; upgraded bullets deal two. Pink-white
+projectiles and a pink gun band show double damage; a gold band marks automatic fire.
 A bullet hits the first creature it reaches and is spent even if it misses.
 Damage lasts for that creature's lifetime on the current board.
 Each shot has a sharp report, a quieter flying-bullet whoosh, and a monster
 impact sound. A fatal hit adds an explosion. The Sound effects switch controls
 these sounds; pausing stops them and misses make no monster-impact sound.
 
-Unused bullets survive a life loss and carry between levels within the current
-function. Restarting or changing function clears the shooter; a new level
+Unused rounds and collected-egg upgrades survive a life loss and carry between
+levels within the current function. Restarting or changing function clears them; a new level
 clears travelling bullets and starts its new creature population. Timers pause
 with the game, capture, resurrection, completed objectives and enemies-off
 practice. The active ecology clock carries between levels. To keep the board
 bounded while preserving the ten-second rhythm, the oldest hatchlings depart
 when space is needed. Existing minute visitors retain their separate limit.
 
-Feature record: `docs/chebby/agents/gridder-team/EGGS-SHOOTER.md`.
+Feature records: `docs/chebby/agents/gridder-team/EGGS-SHOOTER.md` and
+`docs/chebby/agents/gridder-team/UPGRADE-PLAYLIST.md`.
 Local changes only; public deployment is separate.
 
 ## Expanded challenge catalogue — 3 November 2026
@@ -131,7 +276,7 @@ panel displays **Mathematics for this level**: the actual function and derivativ
 formulas, three reasoning steps, interpretation, real domain/branch and grid
 task. Completing a level adds its full worked solution and substitutions.
 Function, level and normal-anchor changes refresh the same live explanation.
-**Choose your challenge**
+**Settings → Challenge**
 opens the family, subfamily, function and difficulty pickers. The six movement
 sliders stay exposed, with **Half in / Half out** arranged side by side.
 
@@ -162,7 +307,7 @@ Leaving phone fullscreen restores coordinate labels and the prior arrangement.
 The Maths explainer pauses play and opens over the arena. Desktop controls scroll independently in a sticky console. Its width grows proportionally with the game window;
 `panel-layout.js` fits its height to the actual visible space below the header
 on resize, scrolling and header changes. Narrow layouts stack the expanded
-mathematics before movement settings below the game.
+mathematics beside the game; configuration is on the Settings page.
 
 Gridder 2 now uses the dark plum arcade palette, with lilac controls, teal
 maths clues and a dark canvas. Lighter actor outlines keep both spiders and
@@ -382,16 +527,33 @@ steps, the bite and flowing-drain sounds, and a completion chime whenever a
 closed loop fills rectangles. Filling several at once makes a richer flourish.
 Blocked movement and centre waits have no walking loop.
 
-**Music · Boléro** plays a synthesized arrangement of Ravel's opening theme:
-a 60-second loop at 72 BPM in 3/4, with flute, pizzicato accompaniment and
-the characteristic two-bar snare rhythm. This is an excerpt arrangement;
-the complete orchestral work is not included. Score sources and transcription
-details are in `audio/bolero-provenance.json`; all PCM is synthesized locally.
+**Music · 3-melody cycle** plays complete written melody forms in order:
+Boléro (**14:10**), **Szła dzieweczka do laseczka** (**1:00**) and
+**O mój rozmarynie** (**0:25**), then repeats the **15:35** cycle.
+Boléro follows 340 bars at 72 BPM, including both themes, final modulation
+and coda. Szła includes its written repeats and alternate endings; Rozmarynie
+includes all ten notated bars. Melody, arranged harmony, bass and percussion
+provide more layers. These are reduced synthesized arrangements, rather than
+orchestral recordings or every sung verse. Score provenance is in
+`audio/bolero-provenance.json` and `audio/folk-medley-provenance.json`.
+Playback generates two sequential four-second buffers at most, preserving
+musical position across pause/mute without allocating a full-cycle PCM buffer.
 The music toggle, **Music volume** slider (0–100%, initially 30%) and separate
-**Sound effects** toggle sit directly beneath the Start and movement controls.
+**Sound effects** toggle are on the **Settings** page. The speed slider replaces
+their former position beneath the game controls.
 Music pauses during capture, resurrection, game pause and hidden-page
 states. Restart resets the tune. Sound effects and music can be switched
 independently; the original resurrection voices remain.
+
+During resurrection, the angels animate while Gridder, monsters, eggs and
+bullets wait. When the angels disappear, the same level resumes automatically
+with captured areas, remaining lives and ammunition intact, plus two seconds
+of safety. Movement needs a fresh input so a key or finger held during the
+animation cannot cause a delayed move. Explicit Pause, Escape or leaving the
+page still pauses the game until you choose Start again. The angel duet also
+pauses: after returning from Settings or another pause, Start resumes its
+remaining audio at the saved resurrection position. Sound effects controls
+the voice. A completed phrase is not replayed during the brief visual tail.
 
 ## Backup before the arcade layout
 

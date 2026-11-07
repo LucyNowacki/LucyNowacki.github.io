@@ -55,9 +55,13 @@
   const directions={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,1],ArrowDown:[0,-1]};
   const directionControls=[['left',directions.ArrowLeft],['right',directions.ArrowRight],['up',directions.ArrowUp],['down',directions.ArrowDown]].map(([name,direction])=>({button:$('gridder-'+name),direction}));
   const pointerHolds=new Map();
+  const fireButton=$('gridder-fire'),firePointerHolds=new Map();
+  let keyboardFireHeld=false,keyboardFireConsumed=false,keyboardActionDown=false,suppressFireClick=false,selectedWeapon='gun';
+  const shiftHolds=new Set();
   let keyboardHold=null,inputOrder=0;
   let deathScene=null,deathAttacker=null,remains=null,captureSoundPhase=null,snagRemaining=0,playerPushes=[],pushAudible=false,walkAudible=false,levelGraph=null;
-  let frameGeometry=null,geometryFrame=false,gaps=null,navigation=null,poolLeeches=null,leechWarningId=null,ecology=null,weapon=null;
+  let frameGeometry=null,geometryFrame=false,gaps=null,navigation=null,poolLeeches=null,leechWarningId=null,ecology=null,weapon=null,bombs=null,boost=null;
+  let resurrectionStartedAt=0,resurrectionSoundSynced=false;
   function beginFrame(){geometryFrame=true;frameGeometry=null;}
   function endFrame(){geometryFrame=false;frameGeometry=null;}
   function boardLayout(){
@@ -80,6 +84,14 @@
   const familyId=()=>$('gridder-family')?.value||'algebraic';
   const enemyName=enemy=>enemy.species?.name?.toLowerCase()||window.GridderMonsterRoster?.get(familyId(),enemy.kind).name.toLowerCase()||(enemy.kind==='centipede'?'centipede':`${enemy.kind} spider`);
   const deathLabels={bite:'Bite',swell:'Swelling',decay:'Decaying',scatter:'Scattering'};
+  const specialAttacks={
+    fire:{action:'burns Gridder with fire; flames, charring and scattering follow',labels:{bite:'Burning',swell:'Flames',decay:'Charred aftermath',scatter:'Scattering'}},
+    electric:{action:'shocks Gridder with electricity; aftershocks, scorching and scattering follow',labels:{bite:'Electric shock',swell:'Electric aftershocks',decay:'Scorched aftermath',scatter:'Scattering'}},
+    'rotten-egg':{action:'pelts Gridder with rotten eggs; a foul aftermath and scattering follow',labels:{bite:'Rotten-egg impact',swell:'Covered in rotten egg',decay:'Foul aftermath',scatter:'Remains scattering'}}
+  };
+  function captureLabel(phase){
+    return specialAttacks[deathAttacker?.attackType]?.labels[phase]||(deathAttacker?.attackOrgan==='tail'&&phase==='bite'?'Tail sting':deathLabels[phase]);
+  }
   function populate(select,entries,value){select.innerHTML=entries.map(([id,label])=>`<option value="${id}">${label}</option>`).join('');select.value=entries.some(e=>e[0]===value)?value:entries[0][0];}
   function chooseFamily(keepKey){
     const family=catalogue.families.find(f=>f.id===$('gridder-family').value)||catalogue.families[0];
@@ -110,9 +122,11 @@
     populate($('gridder-family'),catalogue.families.map(f=>[f.id,f.label]),membership?.family.id||'algebraic');chooseFamily(initialKey);
   }
   else $('gridder-function').innerHTML=$('function-select').innerHTML;
-  function stopHold(){clearHeldInputs();frame=null;held=null;lastTime=null;command=null;capture=null;pending=[];turn=null;centreUntil=0;}
+  function clearMovement(){clearHeldInputs();held=null;command=null;capture=null;pending=[];turn=null;centreUntil=0;}
+  function stopHold(){clearMovement();frame=null;lastTime=null;}
+  function resurrecting(){return !gameOver&&chaseTime<resurrectionUntil;}
   function release(){held=null;}
-  function pause(){playing=false;pushAudible=false;walkAudible=false;stopHold();sound?.stop();music?.pause();captureSoundPhase=null;$('gridder-normal-point').disabled=Boolean(deathScene||gameOver);$('gridder-start').textContent=canReplay()?'Play again':'Start game';$('gridder-start').setAttribute('aria-pressed','false');updateFireControl();}
+  function pause(){playing=false;pushAudible=false;walkAudible=false;stopHold();clearFireInputs();shiftHolds.clear();sound?.stop();music?.pause();captureSoundPhase=null;resurrectionSoundSynced=false;$('gridder-normal-point').disabled=Boolean(deathScene||gameOver);$('gridder-start').textContent=canReplay()?'Play again':'Start game';$('gridder-start').setAttribute('aria-pressed','false');updateFireControl();updateBombControl();}
   function releasePlayerPushes(){for(const push of playerPushes)remains?.releasePlayerPush(push);playerPushes=[];pushAudible=false;}
   function beginPush(piece,from,to){
     const push=remains?.beginPlayerPush(piece,from,to,cellPixels);if(!push)return false;
@@ -122,7 +136,8 @@
     return true;
   }
   function syncGameSounds(){
-    const running=active&&playing&&!deathScene&&!gameOver&&!game?.complete()&&$('gridder-sound').checked;
+    if(!canFire()||!weapon?.snapshot().ammo)clearFireInputs();
+    const running=active&&playing&&!deathScene&&!resurrecting()&&!gameOver&&!game?.complete()&&$('gridder-sound').checked;
     // A released tap can finish between nodes with no further scheduled simulation frame in practice
     // mode. Stop here when movement ends or the last piece reaches its node.
     const pushing=pushAudible&&playerPushes.length>0&&Boolean(held||capture||command||pending.length);
@@ -141,12 +156,17 @@
     const phase=deathScene.phase();if(phase.name==='end')return;
     if(phase.name!==captureSoundPhase){
       const duration=phase.name==='bite'&&deathAttacker?.kind==='leech'?deathAttacker.dragDuration:D.durations[phase.name];
-      const started=sound?.capturePhase?.(phase.name,phase.progress,duration/1000);
+      const started=sound?.capturePhase?.(phase.name,phase.progress,duration/1000,deathAttacker?.attackType);
       if(started!==false)captureSoundPhase=phase.name;
     }
   }
+  function syncResurrectionSound(){
+    if(!active||!playing||!resurrecting()||!$('gridder-sound').checked||resurrectionSoundSynced||!sound?.resurrection)return;
+    const offset=Math.max(0,(chaseTime-resurrectionStartedAt)/1000);
+    if(sound.resurrection(offset)!==false)resurrectionSoundSynced=true;
+  }
   function unlockSound(){
-    Promise.all([sound?.unlock(),music?.unlock()]).then(()=>{syncCaptureSound();syncGameSounds();syncMusic();});
+    Promise.all([sound?.unlock(),music?.unlock()]).then(()=>{syncCaptureSound();syncResurrectionSound();syncGameSounds();syncMusic();});
   }
   const mathsText=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function formula(){
@@ -190,10 +210,11 @@
     return window.MathJax?.typesetPromise?.(nodes).catch(console.error);
   }
   function newLevel(){
-    releasePlayerPushes();stopHold();sound?.stop();music?.stop();walkAudible=false;lastTravel=null;announced=false;
+    releasePlayerPushes();stopHold();clearFireInputs();sound?.stop();music?.pause();walkAudible=false;lastTravel=null;announced=false;
     const ecologyCarry=ecology?.snapshot();
-    const ammo=weapon?.snapshot().ammo||0;
-    const bonuses=new Map(chase?.spiders.filter(s=>(s.origin||'base')==='base').map(s=>[s.kind,{sizeScale:s.sizeScale||1,speedScale:s.speedScale||1,meals:s.meals||0,bloodMeals:s.bloodMeals||0}])||[]);
+    const weaponCarry=weapon?.snapshot();
+    const bombCarry=bombs?.snapshot();
+    const bonuses=new Map(chase?.spiders.filter(s=>(s.origin||'base')==='base').map(s=>[s.baseSlot??s.kind,{sizeScale:s.sizeScale||1,speedScale:s.speedScale||1,meals:s.meals||0,bloodMeals:s.bloodMeals||0}])||[]);
     const q=quests[level],b=G.board(M,key,difficulty,q);levelGraph=G.graph(M,key,q);
     const targets=G.targets(M,key,b,q);
     gaps=window.GridderGaps.plan(M,G,key,b,q,{revealed,difficulty});
@@ -206,10 +227,14 @@
       routePixels:axis=>boardLayout().stretch?(axis==='x'?1:2/3):cellPixels(axis)};
     chase=C.create(b,difficulty,{...spriteOptions,familyId:familyId()},navigation);
     poolLeeches=window.GridderPoolLeeches.create(b,gaps.pools,{shark:true});leechWarningId=null;
-    ecology=window.GridderCreatureEcology?.create(chase,{familyId:familyId(),elapsedMs:ecologyCarry?.clock||0,arrivalIndex:ecologyCarry?.arrivalIndex||0,poolLeeches,seed:key,randomState:ecologyCarry?.randomState})||null;
-    weapon=window.GridderWeapons?.create(b,{ammo})||null;
-    chase.spiders.forEach(s=>{if(bonuses.has(s.kind))Object.assign(s,bonuses.get(s.kind));});
-    remains=R?.create(b,spriteOptions)??null;chaseTime=0;safeUntil=1000;resurrectionUntil=0;gameOver=false;deathScene=null;deathAttacker=null;captureSoundPhase=null;snagRemaining=0;
+    ecology=window.GridderCreatureEcology?.create(chase,{familyId:familyId(),elapsedMs:ecologyCarry?.clock||0,arrivalIndex:ecologyCarry?.arrivalIndex||0,poolLeeches,seed:key,encounterSeed:`${key}:${level}`,openingEncounter:level===0,featuredCrawler:level===1,randomState:ecologyCarry?.randomState})||null;
+    weapon=window.GridderWeapons?.create(b,{ammo:weaponCarry?.ammo||0,eggsCollected:weaponCarry?.eggsCollected||0})||null;
+    bombs=window.GridderBombs?.create(b,{count:bombCarry?.count||0})||null;
+    boost=window.GridderBoost.create({clock:ecologyCarry?.clock||0});
+    const rosterNote=$('gridder-monster-roster');
+    if(rosterNote)rosterNote.textContent=`Monsters: ${chase.spiders.map(s=>s.species?.name||enemyName(s)).join(' · ')}`;
+    chase.spiders.forEach(s=>{const slot=s.baseSlot??s.kind;if(bonuses.has(slot))Object.assign(s,bonuses.get(slot));});
+    remains=R?.create(b,spriteOptions)??null;chaseTime=0;safeUntil=1000;resurrectionUntil=0;resurrectionStartedAt=0;resurrectionSoundSynced=false;gameOver=false;deathScene=null;deathAttacker=null;captureSoundPhase=null;snagRemaining=0;
     $('gridder-hints').checked=difficulty==='guided';
     $('gridder-next').disabled=true;$('gridder-next').textContent='Next level';$('gridder-solution').hidden=true;$('gridder-solution-prompt').hidden=false;
     $('gridder-solution').innerHTML='';
@@ -238,7 +263,7 @@
     formula();
     render();if(playing&&spidersEnabled())ensureFrame();
   }
-  function restart(){pause();key=$('gridder-function').value;difficulty=$('gridder-difficulty').value;quests=G.levels(M,key);level=0;revealed=[];lives=startingLives;chase=null;ecology=null;weapon=null;newLevel();selectRoadmapKey(key);}
+  function restart(){pause();music?.stop();selectedWeapon='gun';key=$('gridder-function').value;difficulty=$('gridder-difficulty').value;quests=G.levels(M,key);level=0;revealed=[];lives=startingLives;chase=null;ecology=null;weapon=null;bombs=null;newLevel();selectRoadmapKey(key);}
   function canReplay(){return gameOver||Boolean(game?.complete()&&level===quests.length-1);}
   function explain(){
     const q=quests[level],node=$('gridder-solution');
@@ -250,7 +275,7 @@
   }
   function announceCompletion(){
     if(game.complete()&&!announced){
-      announced=true;stopHold();const q=quests[level];if(q.point)revealed.push(q.point);
+      announced=true;stopHold();clearFireInputs();const q=quests[level];if(q.point)revealed.push(q.point);
       const finalLevel=level===quests.length-1,newCompletion=Boolean(roadmap&&finalLevel&&!completedFunctions.has(key));
       if(newCompletion){completedFunctions.add(key);saveRoadmap();}
       const progress=roadmapSnapshot(),nextFunction=Boolean(roadmap&&finalLevel&&progress.nextKey);
@@ -271,7 +296,7 @@
   }
   function ensureFrame(){if(frame===null){lastTime=null;frame=true;}}
   function move(direction){
-    if(roadmapOpen()||!active||!playing||gameOver||deathScene||game.complete())return;
+    if(roadmapOpen()||!active||!playing||gameOver||deathScene||resurrecting()||game.complete())return;
     if(direction[0]&&!walker.atNode()){
       const vertical=walker.route(capture||command?.direction||lastTravel||direction);
       if(vertical.axis==='y'){
@@ -283,7 +308,7 @@
     pending.push(direction);ensureFrame();
   }
   function begin(direction){
-    if(roadmapOpen()||!active||!playing||gameOver||deathScene||game.complete())return;
+    if(roadmapOpen()||!active||!playing||gameOver||deathScene||resurrecting()||game.complete())return;
     if(held&&(held[0]!==direction[0]||held[1]!==direction[1])&&!capture){
       command=null;pending=[];
     }
@@ -295,7 +320,8 @@
   }
   function animate(now){
     frame=null;if(!active||!playing)return;
-    const elapsed=lastTime===null?0:Math.max(0,Math.min(50,now-lastTime));lastTime=now;
+    const activeWallElapsed=lastTime===null?0:Math.max(0,now-lastTime),movementBudget=Math.min(50,activeWallElapsed);
+    let elapsed=movementBudget;lastTime=now;
     if(deathScene){
       deathScene.advance(elapsed);
       if(!deathAttacker.bloodConsumed&&deathScene.phase().name!=='bite'){
@@ -311,7 +337,29 @@
       else lastTime=null;
       return;
     }
+    if(resurrecting()){
+      // Angels use the shared game clock, but normal simulation waits behind
+      // them. A crossing frame gives combat only the time after their deadline.
+      const waiting=Math.min(elapsed,resurrectionUntil-chaseTime);
+      chaseTime+=waiting;elapsed-=waiting;
+      if(resurrecting()){
+        syncResurrectionSound();syncGameSounds();syncMusic();announceCompletion();render();
+        if(playing&&!gameOver&&!game.complete())frame=true;
+        else lastTime=null;
+        return;
+      }
+      // Inputs made during capture/resurrection cannot start a delayed move.
+      // Keep playing authoritative: Pause/blur/hidden never reach this branch.
+      clearMovement();clearFireInputs();
+      $('gridder-feedback').textContent=`Back in play! ${lives} ${lives===1?'life':'lives'} left. Your marked areas are saved. You are safe for two seconds. Use ← ↑ ↓ → to move.`;
+      syncMusic();render();
+    }
     pushAudible=false;walkAudible=false;
+    const activePlayElapsed=movementBudget?activeWallElapsed*elapsed/movementBudget:0;
+    const boostStart=boost.snapshot(),wallPerMotion=elapsed?activePlayElapsed/elapsed:0;
+    let plannedBoostEnd=boostStart.active?boostStart.endsAt:0;
+    const boostEggs=spidersEnabled()?ecology?.snapshot().eggs.filter(e=>e.reward==='boost')||[]:[],plannedPickups=new Set();
+    const collectRadius=(window.GridderSpriteMetrics?.scale(boardLayout())||boardLayout().pw/referenceMovementPlotWidth)*12;
     const before=walker.position(),beforeFilled=game.filled.size,playerPath=[],available=Math.min(elapsed,Math.max(0,now-centreUntil));
     const priorSnagTime=snagRemaining;
     let milliseconds=available,changed=false,used=elapsed-available;
@@ -338,14 +386,20 @@
       // Split a frame at box boundaries so outside travel keeps the slider speed.
       const inBox=route.remaining>7/8+1e-9||route.remaining<=1/8+1e-9;
       const half=route.remaining>7/8+1e-9?'out':'in';
-      const divisor=inBox?boxResolution(route.axis,half):1,velocity=playerSpeed()/divisor*(snagRemaining>0||playerPushes.length?snagSpeed:1);
+      const time=boostStart.clock+used*wallPerMotion;
+      // Plan pickup/expiry boundaries before moving, then commit rewards in
+      // chronological contact order below. Only Gridder's velocity is scaled.
+      const start=walker.position();
+      for(const egg of boostEggs)if(!plannedPickups.has(egg.id)&&time>=egg.laidAt&&time<=egg.hatchAt&&Math.hypot((start.i-egg.position.i)*cellPixels('x'),(start.j-egg.position.j)*cellPixels('y'))<=collectRadius+1e-9){plannedPickups.add(egg.id);plannedBoostEnd=time+window.GridderBoost.durationMs;}
+      const boosted=spidersEnabled()&&time<plannedBoostEnd;
+      const divisor=inBox?boxResolution(route.axis,half):1,velocity=playerSpeed()/divisor*(snagRemaining>0||playerPushes.length?snagSpeed:1)*(boosted?window.GridderBoost.multiplier:1);
       const boundary=route.remaining>7/8+1e-9?route.remaining-7/8:route.remaining>1/8+1e-9?route.remaining-1/8:route.remaining;
       const fraction=Math.min(capture?route.remaining:command.remaining,route.remaining,boundary);
       // End the movement slice at slowdown expiry as well as grid boundaries.
-      const budget=Math.min(milliseconds,snagRemaining>0?snagRemaining:Infinity);
+      const budget=Math.min(milliseconds,snagRemaining>0?snagRemaining:Infinity,boosted&&wallPerMotion?(plannedBoostEnd-time)/wallPerMotion:Infinity);
       let distance=Math.min(velocity*budget/1000,fraction*length);
       for(const push of playerPushes)distance=Math.min(distance,remains.playerPushDistance(push,cellPixels));
-      const start=walker.position(),to={i:start.i+route.direction[0]*distance/cellPixels('x'),j:start.j+route.direction[1]*distance/cellPixels('y')};
+      const to={i:start.i+route.direction[0]*distance/cellPixels('x'),j:start.j+route.direction[1]*distance/cellPixels('y')};
       const barrier=remains?.playerLimit(start,to,cellPixels);let contact=barrier?.blocked;
       if(contact)distance*=Math.max(0,Math.min(1,barrier.fraction));
       if(contact&&distance<=1e-9){
@@ -367,11 +421,22 @@
           distance=contactDistance;contact=barrier?.blocked&&snag.fraction>=1-1e-9;
         }
       }
+      // A swept pickup can occur between endpoints, including on a slow frame.
+      // End this edge slice there so its remaining travel gets the new speed.
+      let picked=null,pickupDistance=distance;
+      const proposed={i:start.i+route.direction[0]*distance/cellPixels('x'),j:start.j+route.direction[1]*distance/cellPixels('y')},span=distance/velocity*1000*wallPerMotion;
+      for(const egg of boostEggs)if(!plannedPickups.has(egg.id)&&span>0){
+        const lo=Math.max(0,(egg.laidAt-time)/span),hi=Math.min(1,(egg.hatchAt-time)/span);if(hi<lo)continue;
+        const path={from:start,to:proposed,start:0,end:1},hits=window.GridderBoost.contacts([path],[{from:egg.position,to:egg.position,start:lo,end:hi}],cellPixels,collectRadius);
+        const hit=hits[0];if(hit&&hit.start*distance<pickupDistance-1e-9){picked=egg;pickupDistance=hit.start*distance;}
+      }
+      if(picked){distance=pickupDistance;contact=false;snag=null;}
       const from=walker.position(),duration=distance/velocity*1000;
       if(!walker.advance(direction,distance,cellPixels)){
         stopHold();$('gridder-feedback').textContent='You reached the border. Choose another direction.';break;
       }
-      playerPath.push({from,to:walker.position(),start:elapsed?used/elapsed:0,end:elapsed?(used+duration)/elapsed:1});used+=duration;
+      playerPath.push({from,to:walker.position(),start:elapsed?used/elapsed:0,end:elapsed?(used+duration)/elapsed:1,boosted});used+=duration;
+      if(picked){plannedPickups.add(picked.id);plannedBoostEnd=boostStart.clock+used*wallPerMotion+window.GridderBoost.durationMs;}
       lastTravel=route.direction;weapon?.aim(lastTravel);changed=true;milliseconds-=duration;spendSnagTime(duration);
       if(playerPushes.length){
         pushAudible=true;
@@ -403,6 +468,7 @@
     const priorChaseTime=chaseTime;chaseTime+=elapsed;
     if(elapsed>0&&priorChaseTime<resurrectionUntil)changed=true;
     let landPaths=[],landCreatures=chase.spiders.slice(),waterAttack=null;
+    const bodyBefore=landCreatures.map(s=>s.kind==='centipede'?chase.bodyPositions(s,cellPixels,undefined,true):null);
     if(spidersEnabled()&&!game.complete()){
       landPaths=chase.advance(after,enemySpeed,elapsed,cellPixels,remains);changed=changed||elapsed>0;
     }
@@ -410,41 +476,106 @@
       waterAttack=poolLeeches.advance(elapsed,after,cellPixels,{enabled:spidersEnabled(),canAttack:priorChaseTime>=safeUntil,playerPath,playerSpeed:playerSpeed(),recordPaths:true});
     }
     const activeElapsed=Math.max(0,chaseTime-Math.max(priorChaseTime,resurrectionUntil));
-    if(!game.complete()&&spidersEnabled()&&weapon){
-      const hadBullets=weapon.snapshot().bullets.length>0;
+    // Bomb fuses and ecology use full active-play time. Movement/collision and
+    // gun rounds retain their 50 ms budget; an angel exit counts its fraction.
+    if(!game.complete()&&spidersEnabled()&&(weapon||bombs)){
+      const hadBullets=Boolean(weapon?.snapshot().bullets.length);
       const layout=boardLayout(),scale=window.GridderSpriteMetrics?.scale(layout)||layout.pw/referenceMovementPlotWidth;
       const targets=landCreatures.map((s,index)=>({id:s.id,creature:s,position:chase.position(s),paths:landPaths[index],radius:10*(s.sizeScale||1)*scale,alive:()=>chase.spiders.includes(s)}))
         .concat(poolLeeches.leeches.map(s=>({id:s.id,creature:s,aquatic:true,position:s.position,radius:(s.kind==='shark'?16:8)*(s.sizeScale||1)*scale,
           paths:poolLeeches.motionPaths(s),alive:()=>poolLeeches.leeches.includes(s)})));
-      const hits=weapon.advance(activeElapsed,cellPixels,targets,{speed:Math.max(playerSpeed()*2.5,1),hit:(target,at)=>{
+      const hits=weapon?.advance(activeElapsed,cellPixels,targets,{speed:Math.max(playerSpeed()*2.5,1),firing:selectedWeapon==='gun'&&canFire()&&fireHeld(),sourceAt:t=>{
+        const path=playerPath.find(p=>t>=p.start-1e-9&&t<=p.end+1e-9)||playerPath.at(-1),span=path.end-path.start;
+        const u=span>0?Math.max(0,Math.min(1,(t-path.start)/span)):0,di=path.to.i-path.from.i,dj=path.to.j-path.from.j;
+        return {position:{i:path.from.i+di*u,j:path.from.j+dj*u},direction:Math.abs(di)+Math.abs(dj)>1e-9?[Math.sign(di),Math.sign(dj)]:lastTravel||[0,1]};
+      },onFire:()=>{sound?.shot?.();sound?.bulletFlight?.(true);changed=true;},hit:(target,at,damage)=>{
         target.creature.lastHitAt=at;
-        return target.aquatic?poolLeeches.damage(target.creature):chase.damage(target.creature,1,remains);
-      }});
+        return target.aquatic?poolLeeches.damage(target.creature,damage):chase.damage(target.creature,damage,remains);
+      }})||[];
       for(const hit of hits)sound?.hit?.(hit.killed);
       if(hits.length){const hit=hits.at(-1);$('gridder-feedback').textContent=hit.killed?'Monster defeated.':'Hit! Fire again to defeat this monster.';}
       changed=changed||hadBullets||hits.length>0;
+      if(bombs){
+        const before=bombs.snapshot(),events=bombs.advance(activePlayElapsed,cellPixels,targets,{hit:(target,at,damage)=>{
+          target.creature.lastHitAt=at;
+          return target.aquatic?poolLeeches.damage(target.creature,damage):chase.damage(target.creature,damage,remains);
+        }});
+        for(const event of events){sound?.bombBlast?.();$('gridder-feedback').textContent=`Bomb exploded! ${event.hits.length} ${event.hits.length===1?'monster':'monsters'} hit.`;}
+        changed=changed||Boolean(before.planted.length||before.blasts.length||events.length);
+      }
     }
-    // Resolve captures only against surviving bodies. Shooting never leaves a
-    // stale array index that can award a killed creature another bite.
-    if(spidersEnabled()&&!game.complete()&&elapsed>0&&chaseTime>=safeUntil){
-      const layout=boardLayout();
-      const attacker=landCreatures.find((s,index)=>chase.spiders.includes(s)&&C.collides(playerPath,landPaths[index],cellPixels,window.GridderSpriteMetrics?.collisionRadius(layout,s.sizeScale||1)??(11+7*(s.sizeScale||1)),Math.max(0,(safeUntil-priorChaseTime)/elapsed)));
-      if(attacker)caught(chase.spiders.indexOf(attacker));
+    // Pickups and contact use one active-wall timeline. A pickup at the
+    // contact instant activates first; an earlier bite stops later rewards.
+    // Projectiles have already removed their victims, preserving their priority.
+    if(!game.complete()&&spidersEnabled()&&ecology&&activePlayElapsed>0){
+      const B=window.GridderBoost,layout=boardLayout(),scale=window.GridderSpriteMetrics?.scale(layout)||layout.pw/referenceMovementPlotWidth;
+      const contacts=[],checkpoints=[],windows=boostStart.active?[{start:boostStart.startedAt,end:boostStart.endsAt}]:[];
+      const add=(creature,aquatic,paths,radius,normal=false)=>{
+        for(const range of B.contacts(playerPath,paths,cellPixels,radius,{movingOnly:!normal,ignoreEating:normal})){
+          contacts.push({creature,aquatic,normal,...range});checkpoints.push(range.start,range.end);
+        }
+      };
+      for(let n=0;n<landCreatures.length;n++){
+        const s=landCreatures[n],paths=landPaths[n]||[];
+        const radius=window.GridderSpriteMetrics?.collisionRadius(layout,s.sizeScale||1)??(11+7*(s.sizeScale||1));
+        add(s,false,paths,radius,true);add(s,false,paths,radius);
+        if(bodyBefore[n]){
+          const bodyScale=window.GridderSpriteMetrics?window.GridderSpriteMetrics.scale(layout):1;
+          for(const body of B.bodyPaths(bodyBefore[n],paths,6+2*(s.meals||0),12*(s.sizeScale||1)*bodyScale,cellPixels))add(s,false,body,radius);
+        }
+      }
+      for(const s of poolLeeches.leeches)add(s,true,poolLeeches.motionPaths(s),(12+(s.kind==='shark'?16:8)*(s.sizeScale||1))*scale);
+      const grace=elapsed?Math.max(0,(safeUntil-priorChaseTime)/elapsed):Infinity;
+      if(grace<=1)checkpoints.push(grace);
+      const waterTime=waterAttack&&elapsed?waterAttack.elapsed/elapsed:Infinity;if(waterTime<=1)checkpoints.push(waterTime);
+      const alive=c=>c.aquatic?poolLeeches.leeches.includes(c.creature):chase.spiders.includes(c.creature);
+      const moving=t=>playerPath.some(p=>t>=p.start-1e-9&&t<=p.end+1e-9&&Math.hypot(p.to.i-p.from.i,p.to.j-p.from.j)>1e-9);
+      const defeat=c=>{
+        if(!alive(c))return;
+        const hit=c.aquatic?poolLeeches.damage(c.creature,c.creature.hp):chase.damage(c.creature,c.creature.hp,remains);
+        if(hit?.killed){sound?.hit?.(true);changed=true;$('gridder-feedback').textContent='Boost strike! Monster defeated.';}
+      };
+      const events=ecology.advance(activePlayElapsed,after,cellPixels,remains,{playerPath,collectRadius,onCollect:(egg,at)=>{
+        if(egg.reward==='bomb')bombs?.collect();
+        else if(egg.reward==='boost'){boost.collect(at);windows.push({start:at,end:at+B.durationMs});}
+        else weapon?.collectEgg();
+      },nextTime:(at,end)=>{
+        let next=end;
+        for(const t of checkpoints){const time=boostStart.clock+t*activePlayElapsed;if(time>at+1e-9)next=Math.min(next,time);}
+        const expiry=boost.snapshot().endsAt;if(expiry>at+1e-9)next=Math.min(next,expiry);
+        return next;
+      },onTime:at=>{
+        boost.advanceTo(at);const t=(at-boostStart.clock)/activePlayElapsed;
+        if(boost.activeAt(at)){
+          for(const c of contacts)if(!c.normal&&t>=c.start-1e-9&&t<=c.end+1e-9)defeat(c);
+          if(waterAttack&&Math.abs(t-waterTime)<1e-9&&moving(t)){
+            const creature=poolLeeches.leeches.find(s=>s.id===waterAttack.id);if(creature)defeat({creature,aquatic:true});
+          }
+        }
+        const attacker=contacts.find(c=>c.normal&&alive(c)&&t>=grace-1e-9&&t>=c.start-1e-9&&t<=c.end+1e-9);
+        if(attacker)caught(chase.spiders.indexOf(attacker.creature));
+        else if(waterAttack&&t>=waterTime-1e-9&&poolLeeches.leeches.some(s=>s.id===waterAttack.id))caughtLeech(waterAttack);
+        return !deathScene;
+      }});
+      if(!deathScene){
+        for(const p of playerPath)for(const w of windows){
+          const a=Math.max(boostStart.clock+p.start*activePlayElapsed,w.start),b=Math.min(boostStart.clock+p.end*activePlayElapsed,w.end,boost.snapshot().clock);
+          if(b>a){const from=B.position(p,(a-boostStart.clock)/activePlayElapsed),to=B.position(p,(b-boostStart.clock)/activePlayElapsed);boost.record(from,to,a,b);}
+        }
+      }
+      const event=events.at(-1);
+      if(event&&!deathScene){
+        const w=weapon?.snapshot();
+        const messages={arrival:`A ${event.name||'new monster'} has entered the board!`,laid:`A ${event.name||'monster'} laid an egg — hatching in 10 seconds.`,hatched:`A young ${event.name||'monster'} hatched!`,collected:event.reward==='boost'?'Boost egg collected! Five seconds of triple speed — run over monsters!':event.reward==='bomb'?`Bomb egg collected! ${bombs?.snapshot().count||0} bombs stored. Shift selects bombs; Space or Plant sets one for a three-second fuse.`:`Egg collected! +3 bullets · ${w?.ammo||0} remaining. ${w?.automatic?'Machine gun unlocked! Hold Space or Fire in gun mode.':w?.damage===2?'Double-strength bullets unlocked! Press Space or Fire in gun mode.':'Press Space or Fire in gun mode.'}`};
+        if(messages[event.type])$('gridder-feedback').textContent=messages[event.type];
+      }
+      changed=true;
     }
     if(!deathScene&&!game.complete()){
       const warning=poolLeeches.snapshot().find(l=>l.phase==='warning');
-      if(waterAttack&&poolLeeches.leeches.some(s=>s.id===waterAttack.id))caughtLeech(waterAttack);
-      else if(warning&&warning.id!==leechWarningId)$('gridder-feedback').textContent=warning.kind==='shark'?'The shark is preparing to bite! Move away from the flashing shoreline.':'A leech is preparing to lunge! Move away from the flashing creature.';
+      if(warning&&warning.id!==leechWarningId)$('gridder-feedback').textContent=warning.kind==='shark'?'The shark is preparing to bite! Move away from the flashing shoreline.':'A leech is preparing to lunge! Move away from the flashing creature.';
       leechWarningId=warning?.id??null;
       if(spidersEnabled()&&elapsed>0&&gaps.pools.length)changed=true;
-    }
-    if(!deathScene&&!game.complete()&&spidersEnabled()&&ecology){
-      const events=ecology.advance(activeElapsed,after,cellPixels,remains,{playerPath,collectRadius:(window.GridderSpriteMetrics?.scale(boardLayout())||boardLayout().pw/referenceMovementPlotWidth)*12,onCollect:()=>weapon?.refill()});
-      const event=events.at(-1);
-      if(event){
-        const messages={arrival:`A ${event.name||'new insect'} has entered the board!`,laid:`A ${event.name||'monster'} laid an egg — hatching in 10 seconds.`,hatched:`A young ${event.name||'monster'} hatched!`,collected:'Egg collected! Exactly 3 bullets loaded. Press Space or Fire.'};
-        if(messages[event.type])$('gridder-feedback').textContent=messages[event.type];changed=true;
-      }
     }
     announceCompletion();syncGameSounds();if(changed)render();
     if(playing&&!gameOver&&!game.complete()&&(deathScene||spidersEnabled()||chaseTime<resurrectionUntil||snagRemaining>0||held||capture||command||pending.length))frame=true;
@@ -453,15 +584,19 @@
   function spidersEnabled(){return $('gridder-spiders').checked;}
   function caught(index){
     if(deathScene||gameOver)return;
-    lives--;releasePlayerPushes();stopHold();resurrectionUntil=0;safeUntil=0;snagRemaining=0;
-    const tail=(chase.spiders[index].species||window.GridderMonsterRoster?.get(familyId(),chase.spiders[index].kind))?.shape==='scorpion';
-    deathScene=D.create();deathAttacker={index,position:chase.position(chase.spiders[index]),bloodConsumed:false,attackOrgan:tail?'tail':'mouth'};
+    lives--;boost?.reset();releasePlayerPushes();stopHold();clearFireInputs();resurrectionUntil=0;safeUntil=0;snagRemaining=0;
+    const attacker=chase.spiders[index],species=attacker.species||window.GridderMonsterRoster?.get(familyId(),attacker.kind),tail=species?.shape==='scorpion';
+    const speciesId=window.GridderMonsterRoster?.identity(species)||species?.rosterId||species?.id||null;
+    const types={boruta:'fire','broom-witch':'electric','hen-leg-house':'rotten-egg'},attackType=types[speciesId]||types[species?.shape]||null;
+    deathScene=D.create();deathAttacker={index,position:chase.position(attacker),bloodConsumed:false,attackOrgan:tail?'tail':'mouth',attackType,speciesId};
     captureSoundPhase=null;syncCaptureSound();
-    $('gridder-feedback').textContent=`Caught! The ${enemyName(chase.spiders[index])} ${tail?'stings with its tail and drains':'drains'} Gridder; swelling, decay and scattering follow. Your marked areas are saved.`;
+    $('gridder-feedback').textContent=specialAttacks[attackType]
+      ?`Caught! The ${enemyName(attacker)} ${specialAttacks[attackType].action}. Your marked areas are saved.`
+      :`Caught! The ${enemyName(attacker)} ${tail?'stings with its tail and drains':'drains'} Gridder; swelling, decay and scattering follow. Your marked areas are saved.`;
   }
   function caughtLeech(event){
     if(deathScene||gameOver||game.complete())return;
-    lives--;releasePlayerPushes();stopHold();resurrectionUntil=0;safeUntil=0;snagRemaining=0;leechWarningId=null;
+    lives--;boost?.reset();releasePlayerPushes();stopHold();clearFireInputs();resurrectionUntil=0;safeUntil=0;snagRemaining=0;leechWarningId=null;
     const base=D.create(),dragDuration=650;let elapsed=0;
     // Preserve the existing capture phases, giving the visible underwater drag
     // enough time without moving the grid walker or painting an illegal edge.
@@ -479,25 +614,26 @@
     if(!['leech','shark'].includes(deathAttacker?.kind))remains?.add(deathScene);
     poolLeeches?.resetCooldown(2200);
     deathScene=null;deathAttacker=null;captureSoundPhase=null;
-    sound?.killed(lives>0,{deathCue:false});
+    resurrectionSoundSynced=sound?.killed(lives>0,{deathCue:false})!==false;
     if(lives<=0){
       gameOver=true;playing=false;$('gridder-start').textContent='Start game';$('gridder-start').setAttribute('aria-pressed','false');
       $('gridder-feedback').textContent="Game Over! Go to the ‘dunce’s stool!’ Choose Play again to try again.";
     }else{
-      chase.respawn(walker.position(),cellPixels,remains);safeUntil=chaseTime+2000;resurrectionUntil=chaseTime+(sound?.resurrectionDuration?.()??3000);
-      $('gridder-feedback').textContent=`Resurrection! ${lives} ${lives===1?'life':'lives'} left. Your marked areas are saved. You are safe for two seconds—keep moving.`;
+      clearMovement();chase.respawn(walker.position(),cellPixels,remains);resurrectionStartedAt=chaseTime;resurrectionUntil=chaseTime+(sound?.resurrectionDuration?.()??3000);safeUntil=resurrectionUntil+2000;
+      $('gridder-feedback').textContent=`Resurrection! ${lives} ${lives===1?'life':'lives'} left. Your marked areas are saved. Play continues automatically when the angels disappear; you will be safe for two seconds.`;
     }
   }
   $('gridder-spiders').addEventListener('change',()=>{
     if(!game)return;
-    if(!deathScene){
+    if(!spidersEnabled())clearFireInputs();
+    if(!deathScene&&!resurrecting()){
       poolLeeches?.resetCooldown(1000);leechWarningId=null;
       if(!chase.spiders.some(s=>s.eating))chase.respawn(walker.position(),cellPixels,remains);
       safeUntil=chaseTime+1000;
     }
-    if(playing&&(deathScene||spidersEnabled()))ensureFrame();syncGameSounds();render();
+    if(playing&&(deathScene||spidersEnabled()||resurrecting()))ensureFrame();syncGameSounds();render();
   });
-  $('gridder-sound').addEventListener('change',()=>{if(!$('gridder-sound').checked){sound?.stop();captureSoundPhase=null;}else if(playing)unlockSound();});
+  $('gridder-sound').addEventListener('change',()=>{if(!$('gridder-sound').checked){sound?.stop();captureSoundPhase=null;resurrectionSoundSynced=false;}else if(playing)unlockSound();});
   $('gridder-music')?.addEventListener('change',()=>{
     if(!$('gridder-music').checked)music?.pause();
     else Promise.resolve(music?.unlock()).then(syncMusic);
@@ -558,10 +694,10 @@
       (deathScene||spidersEnabled()||chaseTime<resurrectionUntil||snagRemaining>0||held||capture||command||pending.length));
   }
   function snapshot(){
-    return {game,walker,chase,remains,deathScene,deathAttacker,levelGraph,quests,gaps,leeches:poolLeeches?.snapshot()||[],poolBlood:poolLeeches?.bloodSnapshot?.()||[],ecology:ecology?.snapshot()||null,weapon:weapon?.snapshot()||null,
+    return {game,walker,chase,remains,deathScene,deathAttacker,levelGraph,quests,gaps,leeches:poolLeeches?.snapshot()||[],poolBlood:poolLeeches?.bloodSnapshot?.()||[],ecology:ecology?.snapshot()||null,weapon:weapon?.snapshot()||null,bombs:bombs?.snapshot()||null,boost:boost?.snapshot()||null,
       level,key,familyId:familyId(),M,G,P,active,playing,revealed,lives,chaseTime,safeUntil,
-      resurrectionUntil,gameOver,lastTravel,playerPushes,snagRemaining,
-      moving:Boolean(playing&&!deathScene&&(held||capture||command||pending.length)),
+      resurrectionUntil,gameOver,lastTravel,playerPushes,snagRemaining,selectedWeapon,firing:Boolean(selectedWeapon==='gun'&&canFire()&&weapon?.snapshot().automatic&&fireHeld()),
+      moving:Boolean(playing&&!deathScene&&!resurrecting()&&(held||capture||command||pending.length)),
       centreWaiting:Boolean(playing&&held&&walker?.atNode()&&centreUntil>(lastTime??centreUntil)),
       centrePauseMs:centrePause(),
       hints:$('gridder-hints').checked,spidersEnabled:spidersEnabled(),
@@ -579,11 +715,13 @@
     const meals=chase.spiders.filter(s=>s.eating).map(s=>`${enemyName(s)} eating · ${Math.ceil((4000-s.eating.elapsed)/1000)} s`);
     const growth=chase.spiders.filter(s=>s.meals||s.bloodMeals).map(s=>`${enemyName(s)}: ${s.meals||0} remnant meals, ${s.bloodMeals||0} blood meals`);
     const leechWarning=poolLeeches.snapshot().some(l=>l.phase==='warning'||l.phase==='lunge');
-    const gauge=`Lives: ${lives}`,status=gameOver?'Game over':deathScene?`Captured · ${['leech','shark'].includes(deathAttacker?.kind)?'Underwater · ':''}${deathAttacker?.attackOrgan==='tail'&&deathScene.phase().name==='bite'?'Tail sting':deathLabels[deathScene.phase().name]}`:!spidersEnabled()?'Enemies off · Practice mode':[chaseTime<safeUntil?'Safe briefly':'',leechWarning?'Leech ready to strike!':'',...meals,...growth,ecology?`Next insect: ${Math.max(0,Math.ceil((ecology.snapshot().nextArrivalAt-ecology.snapshot().clock)/1000))} s`:''].filter(Boolean).join(' · ');
+    const gauge=`Lives: ${lives}`,status=gameOver?'Game over':deathScene?`Captured · ${['leech','shark'].includes(deathAttacker?.kind)?'Underwater · ':''}${captureLabel(deathScene.phase().name)}`:!spidersEnabled()?'Enemies off · Practice mode':[chaseTime<safeUntil?'Safe briefly':'',leechWarning?'Leech ready to strike!':'',...meals,...growth,ecology?`Next monster: ${Math.max(0,Math.ceil((ecology.snapshot().nextArrivalAt-ecology.snapshot().clock)/1000))} s`:''].filter(Boolean).join(' · ');
     if($('gridder-lives').textContent!==gauge)$('gridder-lives').textContent=gauge;
     if($('gridder-chase-status').textContent!==status)$('gridder-chase-status').textContent=status;
     const replay=canReplay();
-    updateFireControl();
+    updateFireControl();updateBombControl();
+    const boostStatus=$('gridder-boost-status'),boostState=boost?.snapshot();
+    if(boostStatus){boostStatus.hidden=!boostState?.active;const text=boostState?.active?`⚡ ${Math.ceil(boostState.remainingMs/1000)} s`:'';if(boostStatus.textContent!==text)boostStatus.textContent=text;}
     $('gridder-start').disabled=game.complete()&&!replay;
     const startLabel=replay?'Play again':playing?'Pause game':'Start game';
     if($('gridder-start').textContent!==startLabel)$('gridder-start').textContent=startLabel;
@@ -591,23 +729,79 @@
     $('gridder-normal-point').disabled=Boolean(playing&&!game.complete()||deathScene||gameOver);
   }
   function canFire(){return Boolean(weapon&&active&&playing&&spidersEnabled()&&!roadmapOpen()&&!deathScene&&!gameOver&&!game?.complete()&&chaseTime>=resurrectionUntil);}
+  function canPlant(){return Boolean(selectedWeapon==='bomb'&&bombs&&canFire()&&!window.GridderSettings?.isOpen());}
+  function canSwitchWeapon(){return Boolean(active&&game&&!deathScene&&!resurrecting()&&!gameOver&&!window.GridderSettings?.isOpen()&&!roadmapOpen());}
+  function selectWeapon(mode){
+    if(!['gun','bomb'].includes(mode)||mode===selectedWeapon||!canSwitchWeapon())return false;
+    // An in-progress Space press or pointer activation belongs to its old mode.
+    // A fresh pointerdown clears suppression; keyup consumes old native Space.
+    if(keyboardActionDown)keyboardFireConsumed=true;
+    clearFireInputs();suppressFireClick=true;selectedWeapon=mode;syncGameSounds();render();return true;
+  }
+  function toggleWeapon(){return selectWeapon(selectedWeapon==='gun'?'bomb':'gun');}
+  function updateBombControl(){
+    const button=$('gridder-bomb'),count=bombs?.snapshot().count||0;
+    if(button){button.textContent=selectedWeapon==='bomb'?'Bomb ⇄':'Gun ⇄';button.disabled=!canSwitchWeapon();button.setAttribute('aria-pressed',String(selectedWeapon==='bomb'));button.setAttribute('aria-label',`Weapon mode: ${selectedWeapon}. ${count} bombs stored. Switch to ${selectedWeapon==='gun'?'bomb':'gun'} with Shift or this button.`);button.title='Shift switches gun and bomb modes. Space or the action button uses the selected weapon.';}
+  }
+  function plantBomb(){
+    if(!canPlant()||!bombs.plantBomb(walker.position()))return false;
+    sound?.bombPlant?.();ensureFrame();render();return true;
+  }
+  function activateWeapon(){return selectedWeapon==='bomb'?plantBomb():fire();}
+  $('gridder-bomb')?.addEventListener('click',()=>{if(toggleWeapon())$('gridder-board').focus({preventScroll:true});});
+  $('gridder-bomb')?.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.repeat)e.preventDefault();});
   function updateFireControl(){
-    const button=$('gridder-fire'),ammo=weapon?.snapshot().ammo||0;
-    if(button){button.textContent=`Fire · ${ammo}/3`;button.disabled=!canFire()||!ammo;button.setAttribute('aria-label',`Fire. ${ammo} of 3 bullets remaining.`);button.title=ammo?'Fire in the direction Gridder is facing (Space).':'Collect an egg to load exactly 3 bullets.';}
+    const button=$('gridder-fire'),w=weapon?.snapshot(),ammo=w?.ammo||0,mode=w?.automatic?'Machine gun':w?.damage===2?'Double strength':'Fire';
+    if(!button)return;
+    button.setAttribute('data-weapon',selectedWeapon);
+    if(selectedWeapon==='bomb'){
+      const count=bombs?.snapshot().count||0;button.textContent=`Plant · ${count}`;button.disabled=!canPlant()||!count;
+      button.setAttribute('aria-label',`Plant bomb. ${count} bombs stored. Sets a stationary bomb here for 3 active-play seconds. Press Shift to select the gun.`);button.title='Press Space or Plant once to set a bomb at Gridder’s position. Three-second active-play fuse; Gridder and painted areas are safe.';
+    }else{button.textContent=`Fire · ${ammo}${w?.damage===2?' · 2×':''}`;button.disabled=!canFire()||!ammo;button.setAttribute('aria-label',`${mode}. ${ammo} bullets remaining. ${w?.eggsCollected||0} eggs collected. ${w?.damage||1} damage per bullet.`);button.title=w?.automatic?'Hold Space or Fire for 8 shots per second. Each shot uses one bullet.':'Press Space or Fire. Each normal egg adds 3 bullets; 2 normal eggs double damage and 3 unlock the machine gun.';}
+  }
+  function fireHeld(){return keyboardFireHeld||firePointerHolds.size>0;}
+  function syncFirePressed(){fireButton?.classList?.toggle('is-pressed',fireHeld());}
+  function clearFireInputs(){
+    keyboardFireHeld=false;const pointers=[...firePointerHolds.entries()];firePointerHolds.clear();syncFirePressed();
+    for(const [id,button] of pointers)if(button.hasPointerCapture?.(id))button.releasePointerCapture(id);
   }
   function fire(){
-    if(!canFire()||!weapon.fire(walker.position(),lastTravel||[0,1]))return false;
+    if(selectedWeapon!=='gun'||!canFire()||!weapon.fire(walker.position(),lastTravel||[0,1]))return false;
     sound?.shot?.();
     sound?.bulletFlight?.(true);
+    if(!weapon.snapshot().ammo)clearFireInputs();
     ensureFrame();render();return true;
   }
-  $('gridder-fire')?.addEventListener('click',()=>{if(fire())$('gridder-board').focus({preventScroll:true});});
+  fireButton?.addEventListener('click',e=>{
+    if(e?.detail>0&&suppressFireClick){suppressFireClick=false;e.preventDefault();return;}
+    if(activateWeapon())$('gridder-board').focus({preventScroll:true});
+  });
+  fireButton?.addEventListener('pointerdown',e=>{
+    if(e.pointerType==='mouse'&&e.button!==0)return;
+    if(selectedWeapon==='bomb'){
+      if(canPlant()&&bombs.snapshot().count)suppressFireClick=false;
+      return;
+    }
+    if(!canFire()||!weapon.snapshot().ammo)return;
+    // A canceled automatic press may have no matching click. A new semi-auto
+    // press owns its native click, so discard that old suppression here.
+    if(!weapon.snapshot().automatic){suppressFireClick=false;return;}
+    e.preventDefault();suppressFireClick=true;firePointerHolds.set(e.pointerId,fireButton);fireButton.setPointerCapture?.(e.pointerId);syncFirePressed();
+    fire();ensureFrame();
+  });
+  function finishFirePointer(e){
+    const button=firePointerHolds.get(e.pointerId);if(!button)return;
+    firePointerHolds.delete(e.pointerId);syncFirePressed();
+    if(button.hasPointerCapture?.(e.pointerId))button.releasePointerCapture(e.pointerId);
+  }
+  for(const event of ['pointerup','pointercancel','lostpointercapture'])fireButton?.addEventListener(event,finishFirePointer);
+  fireButton?.addEventListener('keydown',e=>{if(selectedWeapon==='bomb'&&e.key==='Enter'&&e.repeat)e.preventDefault();});
   $('gridder-start').addEventListener('click',()=>{
     if(roadmapOpen())return;
     if(canReplay())restart();
     if(playing){pause();$('gridder-feedback').textContent='Paused. Your marked path is saved.';return;}
     if(gameOver||game.complete())return;
-    playing=true;$('gridder-normal-point').disabled=true;unlockSound();$('gridder-start').textContent='Pause game';$('gridder-start').setAttribute('aria-pressed','true');$('gridder-feedback').textContent=deathScene?'Capture animation resumed. Escape pauses.':'Use ← ↑ ↓ →. Escape pauses.';$('gridder-board').focus({preventScroll:true});if(deathScene||spidersEnabled()||chaseTime<resurrectionUntil||snagRemaining>0)ensureFrame();render();
+    playing=true;$('gridder-normal-point').disabled=true;unlockSound();$('gridder-start').textContent='Pause game';$('gridder-start').setAttribute('aria-pressed','true');$('gridder-feedback').textContent=deathScene?'Capture animation resumed. Escape pauses.':resurrecting()?'Resurrection resumed. Play continues automatically when the angels disappear. Escape pauses.':'Use ← ↑ ↓ →. Escape pauses.';$('gridder-board').focus({preventScroll:true});if(deathScene||spidersEnabled()||chaseTime<resurrectionUntil||snagRemaining>0)ensureFrame();render();
   });
   $('gridder-next').addEventListener('click',()=>{
     if(roadmapOpen()||!game.complete())return;
@@ -630,26 +824,42 @@
   // Pointer adjustments return the arrows to the game. Keyboard users keep
   // native slider arrows until explicitly returning to the board with Enter.
   for(const id of ['gridder-speed','gridder-resolution-vertical-in','gridder-resolution-horizontal-in','gridder-resolution-vertical-out','gridder-resolution-horizontal-out','gridder-centre-pause','gridder-music-volume']){
-    const input=$(id),returnToBoard=()=>{$('gridder-board').focus({preventScroll:true});};
+    const input=$(id),returnToBoard=()=>{if(!window.GridderSettings?.isOpen())$('gridder-board').focus({preventScroll:true});};
     if(!input)continue;
     input.addEventListener('pointerup',returnToBoard);
     input.addEventListener('click',returnToBoard);
     input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();returnToBoard();}});
   }
   function keydown(e){
-    if(roadmapOpen()||!active||!playing||e.defaultPrevented||e.ctrlKey||e.altKey||e.metaKey||e.target?.closest?.('input,select,textarea,[contenteditable="true"],#math-titlebar,.window-actions'))return;
+    if(window.GridderSettings?.isOpen()||roadmapOpen()||!active||e.defaultPrevented||e.ctrlKey||e.altKey||e.metaKey||e.target?.closest?.('input,select,textarea,[contenteditable="true"],#math-titlebar,.window-actions'))return;
+    if(e.key==='Shift'||e.code==='ShiftLeft'||e.code==='ShiftRight'){
+      e.preventDefault();e.stopPropagation();const code=e.code||'Shift',wasHeld=shiftHolds.size>0;shiftHolds.add(code);
+      if(!e.repeat&&!wasHeld)toggleWeapon();return;
+    }
+    if(!playing)return;
     if(e.key==='Escape'){pause();$('gridder-feedback').textContent='Paused. Your marked path is saved.';return;}
     if(e.code==='Space'||e.key===' '){
       const button=e.target?.closest?.('button');
-      // Movement buttons keep focus after touch/pointer use. Space shoots there
-      // and cancels their native click; Fire keeps its single native activation.
-      if(button&&!directionControls.some(control=>control.button===button))return;
-      e.preventDefault();e.stopPropagation();if(!e.repeat)fire();return;
+      if(button&&!directionControls.some(control=>control.button===button)&&button!==fireButton)return;
+      keyboardActionDown=true;
+      // Semi-automatic gun Fire keeps native button activation. Planting and
+      // automatic gun Space are owned here; keyup cannot add a native click.
+      if(button===fireButton&&selectedWeapon==='gun'&&!weapon?.snapshot().automatic)return;
+      e.preventDefault();e.stopPropagation();keyboardFireConsumed=true;
+      if(!e.repeat){
+        if(selectedWeapon==='bomb')plantBomb();
+        else if(canFire()&&weapon.snapshot().ammo){keyboardFireHeld=weapon.snapshot().automatic;syncFirePressed();fire();ensureFrame();}
+      }return;
     }
     const d=directions[e.key];if(!d)return;
-    e.preventDefault();e.stopPropagation();if(!e.repeat){keyboardHold={direction:d,order:++inputOrder};selectHeldInput();}
+    e.preventDefault();e.stopPropagation();if(deathScene||resurrecting()||gameOver||game.complete())return;
+    if(!e.repeat){keyboardHold={direction:d,order:++inputOrder};selectHeldInput();}
   }
-  function keyup(e){const d=directions[e.key];if(d&&keyboardHold?.direction===d){keyboardHold=null;selectHeldInput();}}
+  function keyup(e){
+    if(e.key==='Shift'||e.code==='ShiftLeft'||e.code==='ShiftRight'){if(e.code)shiftHolds.delete(e.code);else shiftHolds.clear();}
+    if(e.code==='Space'||e.key===' '){keyboardActionDown=false;keyboardFireHeld=false;syncFirePressed();if(keyboardFireConsumed){e.preventDefault?.();e.stopPropagation?.();keyboardFireConsumed=false;}}
+    const d=directions[e.key];if(d&&keyboardHold?.direction===d){keyboardHold=null;selectHeldInput();}
+  }
   // Phaser forwards keyboard input in the browser. Non-engine hosts can still
   // exercise the same controls without installing a second keyboard listener.
   if(!window.Phaser){document.addEventListener('keydown',keydown,true);document.addEventListener('keyup',keyup);}
@@ -678,7 +888,7 @@
     button.addEventListener('pointerdown',e=>{
       if(e.pointerType==='mouse'&&e.button!==0)return;
       e.preventDefault();
-      if(roadmapOpen()||!active||!playing||gameOver||deathScene||game.complete())return;
+      if(roadmapOpen()||!active||!playing||gameOver||deathScene||resurrecting()||game.complete())return;
       button.focus({preventScroll:true});button.setPointerCapture(e.pointerId);
       pointerHolds.set(e.pointerId,{origin:button,control,order:++inputOrder});syncPressedDirections();selectHeldInput();
     });
@@ -695,7 +905,7 @@
     for(const event of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(event,finishPointer);
     button.addEventListener('click',e=>{if(e.detail===0)move(direction);});
   }
-  window.gridderController={setActive(value){active=value;if(!value)pause();else{if(!game)restart();render();}},restart,selectFunction,roadmapSnapshot,continueRoadmap,tick,snapshot,pause,begin,release,move,fire,keydown,keyup,beginFrame,endFrame,updateAudio:syncMusic};
+  window.gridderController={setActive(value){active=value;if(!value)pause();else{if(!game)restart();render();}},restart,selectFunction,roadmapSnapshot,continueRoadmap,tick,snapshot,pause,begin,release,move,fire,plantBomb,activateWeapon,selectWeapon,toggleWeapon,keydown,keyup,beginFrame,endFrame,updateAudio:syncMusic};
   window.derivativeGridder=window.gridderController;
   window.refreshGridderMath=()=>{if(!game)return Promise.resolve();return Promise.resolve(formula()).then(()=>{if(announced)explain();});};
   new ResizeObserver(()=>render()).observe($('gridder-board'));
