@@ -1,7 +1,7 @@
 import {mountDyadicConnections} from './step-zero-connections.mjs?v=origins2';
-import {mountDyadicReason, mountMatrixOrigin} from './step-zero-lessons.mjs?v=origins2';
+import {mountDyadicReason, mountMatrixOrigin} from './step-zero-lessons.mjs?v=midpoint1';
 import {mountStepZeroExercises} from './step-zero-exercises.mjs?v=exercises1';
-import {mountStepZero,stepZeroArgument} from './step-zero.mjs?v=origins2';
+import {mountStepZero,stepZeroArgument} from './step-zero.mjs?v=midpoint1';
 import {mountGateOverview} from './step-eleven-overview.mjs?v=117';
 import {mountStepThirteen,stepThirteenArgument} from './step-thirteen.mjs?v=103';
 import {mountHoldExplanations} from './hold-explanations.mjs?v=103';

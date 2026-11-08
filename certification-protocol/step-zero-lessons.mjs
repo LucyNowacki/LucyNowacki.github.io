@@ -1,4 +1,4 @@
-import {stepZeroOriginsNotice} from './step-zero.mjs?v=origins2';
+import {stepZeroOriginsNotice} from './step-zero.mjs?v=midpoint1';
 import {math} from './math-render.mjs?v=103';
 const tex=String.raw;
 const eq=s=>`<div class="s0l-equation">${math(s)}</div>`;

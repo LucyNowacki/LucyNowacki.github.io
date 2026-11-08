@@ -6,5 +6,5 @@ if (new URL(location.href).searchParams.has('example')) {
 } else if (document.querySelector('#story-4k-root')) {
   await import('./story-4k.mjs?v=responsive1');
 } else {
-  await import('./app.mjs?v=4kscale1');
+  await import('./app.mjs?v=midpoint1');
 }
