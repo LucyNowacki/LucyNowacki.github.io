@@ -18,7 +18,7 @@
      <div class="night-post-copy"><p class="night-post-eyebrow">PROOFS · DARK WIREFRAME EDITION</p>
        <h2>From a contour to<br>one protected count.</h2>
        <p>The same thirteen-step certification argument, with bright geometry on a quiet dark background.</p>
-       <nav aria-label="Explore the dark edition"><a class="night-post-primary" href="/certification-protocol-night/story-4k.html">Explore the 3D overview ↗</a><a href="/certification-protocol-night/?display=4k#step-01">Start with Step 1 →</a></nav>
+       <nav aria-label="Explore the dark edition"><a class="night-post-primary" href="/certification-protocol-night/story-4k.html">Explore the 3D overview ↗</a><a href="/certification-protocol-night/?display=4k#step-00">Start with Step 00 →</a></nav>
      </div>
      <figure class="night-post-preview"><video autoplay muted loop playsinline width="1280" height="720" poster="/files/interactive/certification-preview/poster.png" aria-label="Schematic gate geometry with a blue image ellipsoid, gray protected interior and pink or green uncertainty"><source src="/files/interactive/certification-preview/preview.webm" type="video/webm"><source src="/files/interactive/certification-preview/preview.mp4" type="video/mp4"></video><figcaption><span>Schematic geometry · long axes compressed for visibility.</span><button type="button" data-night-video-toggle aria-label="Pause preview animation">Pause</button></figcaption></figure>
    </div>

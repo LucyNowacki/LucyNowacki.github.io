@@ -1,0 +1,265 @@
+/* Connected overview: use the available panel width, including split windows.
+   Load after step-twelve.css, story-4k.css and theme styles in both editions. */
+.story-root {
+  container: story-layout / inline-size;
+  min-width: 0;
+  --story-title-size: clamp(15px, 1.04cqi, 26px);
+  --story-body-size: clamp(13px, .78cqi, 19px);
+  --story-small-size: clamp(12px, .62cqi, 16px);
+  --story-math-size: clamp(16px, .94cqi, 25px);
+  --story-canvas-height: clamp(180px, 8.6cqi, 350px);
+  --story-map-gutter: clamp(18px, 1.1cqi, 40px);
+  font-size: var(--story-body-size);
+}
+.story-root .story-panel { height: auto; min-height: 0; overflow: visible; }
+.story-root .story-header {
+  display: flex;
+  padding: 12px 18px 6px;
+  gap: 12px;
+  align-items: center;
+}
+.story-root .story-header h2 { font-size: clamp(20px, 1.18cqi, 34px); line-height: 1.24; margin: 0; }
+.story-root .story-header p { font-size: var(--story-body-size); line-height: 1.4; margin: 5px 0; }
+.story-root .eyebrow { font-size: clamp(10px, .53cqi, 15px); line-height: 1.3; margin: 0 0 4px; }
+.story-root .story-4k-link { padding: 8px 12px; font-size: var(--story-body-size); line-height: 1.3; }
+.story-root .story-persistent { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.story-root .story-persistent > div { min-width: 0; padding: 7px 14px; gap: 3px; display: flex; flex-direction: column; }
+.story-root .story-persistent small,
+.story-root .story-persistent span { font-size: var(--story-small-size); line-height: 1.35; }
+.story-root .story-persistent .site-math { font-size: clamp(15px, .83cqi, 23px); max-width: 100%; overflow-x: auto; }
+.story-root .story-persistent strong { font-size: clamp(17px, .94cqi, 27px); line-height: 1.25; }
+.story-root .story-controls {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 7px 18px;
+  gap: 5px 18px;
+  font-size: var(--story-body-size);
+  align-items: center;
+}
+.story-root .story-controls > label { min-width: 0; line-height: 1.35; }
+.story-root .story-controls input[type="range"] { margin-top: 5px; }
+.story-root .story-actions { grid-column: 1 / -1; justify-content: flex-start; gap: 7px; flex-wrap: wrap; }
+.story-root .story-actions button,
+.story-root .story-actions select,
+.story-root .story-scale { font-size: var(--story-small-size); }
+.story-root .story-actions button { min-height: 30px; padding: 5px 9px; }
+.story-root .story-actions select { min-height: 30px; padding: 4px 6px; }
+.story-root .story-scale { margin-left: 6px; }
+.story-root .story-play-status { font-size: var(--story-small-size); line-height: 1.35; }
+.story-root .story-camera-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto auto;
+  padding: 7px 18px;
+  gap: 6px 12px;
+  align-items: end;
+}
+.story-root .story-camera-controls > label { min-width: 0; font-size: var(--story-small-size); gap: 4px; line-height: 1.35; }
+.story-root .story-camera-controls input { width: 100%; min-width: 0; margin: 0; }
+.story-root .story-camera-controls button { font-size: var(--story-small-size); min-height: 30px; padding: 5px 9px; }
+.story-root .story-camera-controls > span { width: auto; grid-column: 1 / -1; font-size: var(--story-small-size); line-height: 1.35; margin: 0; }
+.story-root .story-scale-note { margin: 5px 18px 8px; padding: 5px 9px; font-size: var(--story-small-size); line-height: 1.4; }
+.story-root .story-map {
+  flex: none;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: auto auto auto;
+  grid-template-areas: "stage1 stage2 stage3 stage4" "note note branch branch" "stage8 stage7 stage6 stage5";
+  gap: 18px 24px;
+  padding: 6px var(--story-map-gutter) 12px;
+  overflow: visible;
+  min-width: 0;
+}
+.story-root .story-stage-1 { grid-area: stage1; }
+.story-root .story-stage-2 { grid-area: stage2; }
+.story-root .story-stage-3 { grid-area: stage3; }
+.story-root .story-stage-4 { grid-area: stage4; }
+.story-root .story-stage-5 { grid-area: stage5; }
+.story-root .story-stage-6 { grid-area: stage6; }
+.story-root .story-stage-7 { grid-area: stage7; }
+.story-root .story-stage-8 { grid-area: stage8; }
+.story-root .story-stage {
+  min-width: 0;
+  min-height: 0;
+  margin: 0 !important;
+  padding: 7px !important;
+  gap: 4px;
+  justify-content: flex-start;
+}
+.story-root .story-stage-title { font-size: var(--story-title-size); min-height: 0; gap: 7px; line-height: 1.26; }
+.story-root .story-stage-title b { min-width: 22px; height: 22px; font-size: 12px; flex-shrink: 0; }
+.story-root .story-stage canvas {
+  display: block;
+  width: 100%;
+  height: var(--story-canvas-height);
+  min-height: 0;
+  max-height: none;
+  flex: none;
+  object-fit: contain;
+}
+.story-root.story-immersive .story-stage canvas { object-fit: fill; }
+.story-root .story-matrix,
+.story-root .story-stage-3 .story-matrix { font-size: var(--story-math-size); min-height: 25px; flex-shrink: 0; max-width: 100%; overflow-x: auto; }
+.story-root .story-value { font-size: var(--story-body-size); line-height: 1.35; margin-top: 2px; overflow-wrap: anywhere; }
+.story-root .story-evidence { font-size: var(--story-small-size); padding: 2px 7px; line-height: 1.3; margin-top: 2px; }
+.story-root .story-stage-metric { font-size: var(--story-small-size); line-height: 1.4; min-height: 0; margin-top: 2px; overflow-wrap: anywhere; }
+.story-root .story-stage-hint { font-size: var(--story-small-size); line-height: 1.3; margin-top: 1px; }
+.story-root .story-route-note { grid-area: note; padding: 8px 12px; font-size: var(--story-body-size); line-height: 1.45; gap: 5px; min-width: 0; }
+.story-root .story-route-note span:last-of-type,
+.story-root .story-route-note > div { font-size: var(--story-small-size); }
+.story-root .story-branch { grid-area: branch; min-width: 0; margin: 0 14px 0 0; }
+.story-root .story-branch .story-stage {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(150px, .8fr) minmax(0, 1fr);
+  grid-template-rows: auto auto auto auto;
+  column-gap: 12px;
+  padding: 9px 12px !important;
+  text-align: left;
+}
+.story-root .story-branch canvas { grid-area: 1 / 1 / 5 / 2; height: clamp(150px, 5.8cqi, 230px); }
+.story-root .story-branch .story-stage-title { grid-area: 1 / 2; font-size: var(--story-title-size); justify-content: flex-start; }
+.story-root .story-branch .story-matrix { grid-area: 2 / 2; font-size: var(--story-math-size); justify-content: flex-start; }
+.story-root .story-branch .story-value { grid-area: 3 / 2; font-size: var(--story-body-size); }
+.story-root .story-branch .story-evidence { grid-area: 4 / 2; justify-self: start; }
+.story-root .story-branch .story-stage-metric,
+.story-root .story-branch .story-stage-hint { display: none; }
+.story-root .story-branch-caption { padding: 0 12px 9px; font-size: var(--story-small-size); line-height: 1.4; }
+.story-root .story-connectors { min-width: 0; width: 100%; }
+.story-root .story-legend { justify-content: flex-start; margin: 6px 18px; gap: 6px 18px; font-size: var(--story-small-size); line-height: 1.4; }
+.story-root .story-legend i { width: 13px; height: 13px; flex-shrink: 0; }
+.story-root .story-endpoint-note { font-size: var(--story-small-size); line-height: 1.45; margin: 5px 18px 9px; }
+.story-root .story-record { font-size: var(--story-body-size); padding: 9px 18px; }
+.story-root .story-record[open] { position: static; inset: auto; overflow: visible; box-shadow: none; border: 0; border-top: 1px solid currentColor; }
+.story-root .story-table-wrap table,
+.story-root .story-table-wrap .site-math { font-size: var(--story-body-size); }
+.story-root .story-table-wrap th,
+.story-root .story-table-wrap td { padding: 10px; }
+.story-root .story-dialog {
+  width: min(94vw, 2600px);
+  max-height: 94dvh;
+  padding: 16px;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.story-root .story-detail-top { position: sticky; top: -1px; z-index: 2; padding: 4px 0; background: inherit; font-size: var(--story-body-size); }
+.story-root .story-dialog h2 { font-size: clamp(21px, 1.2cqi, 36px); line-height: 1.3; margin: 9px 0; }
+.story-root .story-dialog canvas { height: clamp(210px, 42dvh, 760px); min-height: 0; flex: none; margin: 10px 0; }
+.story-root .story-dialog p,
+.story-root .story-dialog nav,
+.story-root .story-detail-control,
+.story-root .story-dialog .enc-equation { font-size: var(--story-body-size); line-height: 1.5; }
+.story-root .story-dialog .site-math { font-size: inherit; }
+.story-root .story-dialog nav { flex-wrap: wrap; gap: 8px; }
+.story-root .story-matrix-controls { gap: 8px; padding: 12px; }
+.story-root .story-matrix-controls > label { min-width: 160px; }
+
+/* Two legible diagrams per row on laptops and landscape tablets. */
+@container story-layout (max-width: 1439px) {
+  .story-root .story-map {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "stage1 stage2" "stage3 stage4" "branch branch" "note note" "stage5 stage6" "stage7 stage8";
+    gap: 26px 24px;
+    padding-inline: 24px;
+  }
+  .story-root .story-stage canvas { height: clamp(190px, 20cqi, 250px); }
+  .story-root .story-stage-hint { display: none; }
+  .story-root .story-branch { margin: 0; }
+  .story-root .story-branch canvas { height: 180px; }
+  .story-root .story-header { flex-wrap: wrap; }
+  .story-root .story-camera-controls { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .story-root .story-camera-controls button { justify-self: start; }
+  .story-root .story-camera-controls > span { grid-column: 1 / -1; }
+}
+/* The compact laptop header shares a row with the overview link and camera
+   actions, so the first geometry starts within the initial viewport. */
+@container story-layout (min-width: 900px) and (max-width: 1439px) {
+  .story-root .story-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; padding-block: 8px 4px; }
+  .story-root .story-persistent > div { padding-block: 5px; }
+  .story-root .story-controls { padding-block: 5px; gap: 4px 16px; }
+  .story-root .story-camera-controls { grid-template-columns: repeat(3, minmax(0, 1fr)) auto auto; padding-block: 5px; gap: 4px 10px; }
+  .story-root .story-camera-controls button { align-self: end; }
+  .story-root .story-scale-note { margin-block: 4px 6px; padding-block: 4px; }
+}
+@container story-layout (min-width: 1440px) {
+  .story-root .story-controls { grid-template-columns: 1fr 1fr 1.4fr; gap: 5px 22px; }
+  .story-root .story-actions { grid-column: auto; justify-content: flex-end; }
+}
+
+/* Phone / narrow split-panel reading order keeps all eight stages accessible. */
+@container story-layout (max-width: 639px) {
+  .story-root .story-header { padding: 10px 12px 6px; gap: 8px; }
+  .story-root .story-header h2 { font-size: 20px; }
+  .story-root .story-persistent { grid-template-columns: minmax(0, 1fr); }
+  .story-root .story-persistent > div {
+    display: grid;
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+    padding: 7px 12px;
+    gap: 2px 8px;
+    align-items: center;
+  }
+  .story-root .story-persistent small { grid-column: 1; grid-row: 1 / 3; }
+  .story-root .story-persistent .site-math,
+  .story-root .story-persistent span,
+  .story-root .story-persistent strong { grid-column: 2; }
+  .story-root .story-controls { grid-template-columns: minmax(0, 1fr); padding: 7px 12px; gap: 7px; }
+  .story-root .story-actions { gap: 6px; }
+  .story-root .story-scale { margin-left: 0; }
+  .story-root .story-camera-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 8px 12px; gap: 8px; }
+  .story-root .story-camera-controls > label:last-of-type { grid-column: 1 / -1; }
+  .story-root .story-camera-controls button { justify-self: stretch; }
+  .story-root .story-scale-note { margin-inline: 12px; }
+  .story-root .story-map {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "stage1" "stage2" "stage3" "stage4" "branch" "note" "stage5" "stage6" "stage7" "stage8";
+    padding: 4px 20px 12px;
+    gap: 28px;
+  }
+  .story-root .story-stage { padding: 7px !important; }
+  .story-root .story-stage canvas { height: clamp(205px, 65cqi, 290px); }
+  .story-root .story-branch .story-stage { display: flex; flex-direction: column; text-align: center; gap: 5px; }
+  .story-root .story-branch canvas { width: 100%; height: clamp(205px, 65cqi, 290px); }
+  .story-root .story-branch .story-stage-title { justify-content: center; }
+  .story-root .story-branch .story-evidence { align-self: center; }
+  .story-root .story-route-note { padding: 7px 0; }
+  .story-root .story-legend { margin-inline: 12px; gap: 7px 12px; }
+  .story-root .story-endpoint-note { margin-inline: 12px; }
+  .story-root .story-record { padding-inline: 12px; }
+  .story-root .story-losses { grid-template-columns: minmax(0, 1fr); }
+  .story-root .story-dialog { width: calc(100vw - 16px); padding: 12px; max-height: 96dvh; }
+  .story-root .story-detail-top { align-items: flex-start; gap: 8px; }
+}
+
+/* Compact displays scroll the document. Reserving a full-height inner board
+   here otherwise gives laptops two independent scroll areas. */
+@media (max-width: 1439px) {
+  html[data-story-display="4k"] { height: auto; min-height: 100%; overflow-y: auto; }
+  html[data-story-display="4k"] body { display: block; height: auto; min-height: 100dvh; overflow: visible; }
+  html[data-story-display="4k"] #story-4k-root { height: auto; min-height: 0; overflow: visible; }
+  html[data-story-display="4k"] .story-immersive { height: auto; min-height: 0; }
+}
+
+/* Comfortable controls on touch, without enlarging the mathematical captions. */
+@media (pointer: coarse) {
+  .story-root .story-actions button,
+  .story-root .story-actions select,
+  .story-root .story-camera-controls button,
+  .story-root .story-dialog button { min-height: 40px; }
+  .story-root input[type="range"] { min-height: 28px; }
+}
+@media (min-width: 2800px) and (min-height: 1500px) {
+  .story-root.story-immersive .story-stage canvas { height: clamp(280px, 16dvh, 400px); }
+  .story-root.story-immersive .story-branch canvas { height: clamp(180px, 10dvh, 240px); }
+  .story-root.story-immersive .story-header { padding: 16px 24px 8px; }
+  .story-root.story-immersive .story-map { row-gap: 20px; }
+}
+/* Step links stay available in a horizontal strip; theme and map selector
+   receive their own space without creating a third navigation row. */
+html body .story-all-steps {display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:7px 12px;}
+html body .story-all-steps .story-step-links {display:flex;align-items:center;gap:5px;flex:1 1 500px;min-width:0;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;}
+html body .story-all-steps .story-step-links>* {flex:0 0 auto;}
+html body .story-all-steps .example-chooser {order:2;flex:1 0 100%;margin:0;padding:4px 0;border:0;}
+html body .story-all-steps .cert-theme-switch {order:1;margin-left:auto;padding:3px 5px;font-size:12px;}
+@media(max-width:700px){
+  html body .story-all-steps .story-step-links {flex:1 1 120px;}
+  html body .story-all-steps .example-chooser {flex-wrap:wrap;gap:4px 8px;}
+  html body .story-all-steps .example-chooser select {flex:1 1 180px;width:auto;min-width:0;}
+  html body .story-all-steps .example-chooser output {font-size:11px;}
+}

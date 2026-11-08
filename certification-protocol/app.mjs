@@ -1,11 +1,15 @@
+import {mountDyadicConnections} from './step-zero-connections.mjs?v=origins2';
+import {mountDyadicReason, mountMatrixOrigin} from './step-zero-lessons.mjs?v=origins2';
+import {mountStepZeroExercises} from './step-zero-exercises.mjs?v=exercises1';
+import {mountStepZero,stepZeroArgument} from './step-zero.mjs?v=origins2';
 import {mountGateOverview} from './step-eleven-overview.mjs?v=117';
 import {mountStepThirteen,stepThirteenArgument} from './step-thirteen.mjs?v=103';
 import {mountHoldExplanations} from './hold-explanations.mjs?v=103';
 mountHoldExplanations();
 import {stepEightOptionalUpperBound} from './step-eight-optional.mjs?v=103';
 import {mountGateTwoRadius} from './gate-two-radius.mjs?v=three2';
-import {is4K,mountDisplay4K,displayURL} from './display-4k.mjs?v=three2';
-import {mountStepTwelve,stepTwelveArgument} from './step-twelve.mjs?v=three2';
+import {is4K,mountDisplay4K,displayURL} from './display-4k.mjs?v=4kscale1';
+import {mountStepTwelve,stepTwelveArgument} from './step-twelve.mjs?v=responsive1';
 import {mountStepEleven,stepElevenArgument} from './step-eleven.mjs?v=117';
 import {fullQuantityLedger,quantityContext} from './quantity-ledger.mjs?v=103';
 import {mountStepTen,stepTenArgument} from './step-ten.mjs?v=three2';
@@ -13,15 +17,15 @@ import {mountStepNine,stepNineArgument} from './step-nine.mjs?v=103';
 import {mountStepEight,stepEightArgument} from './step-eight.mjs?v=103';
 import {startMath} from './math-render.mjs?v=103';
 import { mountPreparation } from './preparation.mjs?v=103';
-import { mountStepSix, stepSixArgument } from './step-six.mjs?v=103';
+import { mountStepSix, stepSixArgument } from './step-six.mjs?v=zero1';
 import { mountStepSeven, stepSevenArgument } from './step-seven.mjs?v=three2';
 import { mountStepFive, stepFiveArgument } from './step-five.mjs?v=103';
 import { mountStepFour, stepFourArgument } from './step-four.mjs?v=103';
 import { mountStepThree, stepThreeArgument } from './step-three.mjs?v=103';
 import { mountStepTwo, stepTwoArgument } from './step-two.mjs?v=103';
 import { mountStepOne, stepOneArgument } from './step-one.mjs?v=103';
-import { steps } from './steps.mjs?v=103';
-import { protocolPage, assumptionsPage, protocolStages, stageDetails } from './intro-pages.mjs?v=103';
+import { steps } from './steps.mjs?v=zero1';
+import { protocolPage, assumptionsPage, protocolStages, stageDetails } from './intro-pages.mjs?v=zero1';
 const $ = (selector) => document.querySelector(selector);
 const sidebar = $('#sidebar');
 const menu = $('#menu-toggle');
@@ -30,16 +34,20 @@ const dialog = $('#reference-dialog');
 const tabs = [...document.querySelectorAll('[role="tab"]')];
 const geometrySkeleton = $('#panel-geometry').innerHTML;
 const argumentSkeleton = $('#panel-argument').innerHTML;
+const connectionsSkeleton = $('#panel-connections').innerHTML;
+let unmountConnections = null;
 let unmountScene = null;
+let unmountExercises = null;
+let unmountLessons = null;
 let unmountRadius = null;
 let unmountDisplay = null;
 let unmountGateOverview = null;
 const displayLaunch=element('a','display-launch','4K display ↗');displayLaunch.target='_blank';displayLaunch.rel='noopener';
 const headingActions=element('div','heading-actions');headingActions.append($('.status-badge'),displayLaunch);$('.workspace-heading').append(headingActions);
-const displayNav=element('nav','display-nav');displayNav.setAttribute('aria-label','4K step navigation');displayNav.append(element('strong','','4K display'));for(let id=1;id<=steps.length;id++){const a=element('a','',String(id).padStart(2,'0'));a.href=displayURL(id);a.setAttribute('aria-label','4K step '+id);displayNav.append(a);}$('.topbar').prepend(displayNav);
+const displayNav=element('nav','display-nav');displayNav.setAttribute('aria-label','4K step navigation');displayNav.append(element('strong','','4K display'));for(const {id} of steps){const a=element('a','',String(id).padStart(2,'0'));a.href=displayURL(id);a.dataset.stepId=String(id);a.setAttribute('aria-label','4K step '+id);displayNav.append(a);}$('.topbar').prepend(displayNav);
 let activeId = 1;
 const requestedTab = new URLSearchParams(location.search).get('tab');
-let activeTab = ['geometry','argument','gate2','connections','optional-upper','gate-diagram'].includes(requestedTab) ? requestedTab : 'geometry';
+let activeTab = ['geometry','argument','gate2','connections','exercises','why-dyadic','matrix-origin','optional-upper','gate-diagram'].includes(requestedTab) ? requestedTab : 'geometry';
 function element(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -51,6 +59,11 @@ function closeMenu() {
   sidebar.classList.remove('is-open'); menu.setAttribute('aria-expanded','false'); scrim.hidden = true;
 }
 function selectTab(name, focus = false) {
+  if(['exercises','why-dyadic','matrix-origin'].includes(name)&&activeId!==0)name='geometry';
+  const tabURL=new URL(location.href);
+  if(['connections','exercises','why-dyadic','matrix-origin'].includes(name))tabURL.searchParams.set('tab',name);
+  else if(['connections','exercises','why-dyadic','matrix-origin'].includes(tabURL.searchParams.get('tab')))tabURL.searchParams.delete('tab');
+  if(tabURL.href!==location.href)history.replaceState(null,'',tabURL);
   if(name==='gate-diagram'&&activeId!==11)name='geometry';
   if(name==='gate2'&&activeId!==7)name='geometry';
   if(name==='optional-upper'&&activeId!==8)name='geometry';
@@ -89,8 +102,17 @@ for (const step of steps) {
   $('#step-nav').append(a);
 }
 $('#notation-list').innerHTML=fullQuantityLedger();
+$('.side-counter').textContent='14 pages · 00–13';
 
 function render() {
+  if(unmountConnections){unmountConnections();unmountConnections=null;}
+  $('#panel-connections').innerHTML=connectionsSkeleton;
+  $('#panel-connections').classList.remove('dyadic-connections-panel');
+  if(unmountLessons){unmountLessons();unmountLessons=null;}
+  for(const name of ['why-dyadic','matrix-origin']){$('#panel-'+name).replaceChildren();$('#tab-'+name).hidden=true;}
+  if(unmountExercises){unmountExercises();unmountExercises=null;}
+  $('#panel-exercises').replaceChildren();
+  $('#tab-exercises').hidden=true;
   if(unmountGateOverview){unmountGateOverview();unmountGateOverview=null;}
   $('#panel-gate-diagram').replaceChildren();
   $('#tab-gate-diagram').hidden=true;
@@ -103,7 +125,7 @@ function render() {
   if (unmountScene) { unmountScene(); unmountScene = null; }
   $('#panel-geometry').innerHTML = geometrySkeleton;
   $('#panel-argument').innerHTML = argumentSkeleton;
-  $('#step-page').classList.remove('step-one','step-two','step-three','step-four','step-five','step-six','step-seven','step-eight','step-nine','step-ten','step-eleven','step-twelve','step-thirteen');
+  $('#step-page').classList.remove('step-zero','step-one','step-two','step-three','step-four','step-five','step-six','step-seven','step-eight','step-nine','step-ten','step-eleven','step-twelve','step-thirteen');
   $('.status-badge').innerHTML = '<span class="outline-dot" aria-hidden="true"></span>Planned';
   const introductory = location.hash === '#preparation' ? 'preparation' : location.hash === '#assumptions' ? 'assumptions' : (location.hash === '#protocol' || !location.hash ? 'protocol' : null);
   $('#intro-page').hidden = !introductory;
@@ -124,18 +146,20 @@ function render() {
   }
   const match = /^#step-(\d{2})$/.exec(location.hash);
   const chosen = match ? Number(match[1]) : 1;
-  activeId = chosen >= 1 && chosen <= steps.length ? chosen : 1;
-  const step = steps[activeId-1];
+  const step = steps.find(s=>s.id===chosen) || steps.find(s=>s.id===1);
+  activeId = step.id;
+  $('#tab-exercises').hidden=activeId!==0;
+  for(const name of ['why-dyadic','matrix-origin'])$('#tab-'+name).hidden=activeId!==0;
   $('#tab-gate2').hidden=activeId!==7;
   $('#tab-gate-diagram').hidden=activeId!==11;
   $('#tab-optional-upper').hidden=activeId!==8;
   displayLaunch.href=is4K?'./#step-'+String(activeId).padStart(2,'0'):displayURL(activeId);displayLaunch.textContent=is4K?'Standard view ↗':'4K display ↗';
-  [...displayNav.querySelectorAll('a')].forEach((a,i)=>{if(i+1===activeId)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');});
-  $('#quantity-context').innerHTML=activeId>=12?'':quantityContext(activeId);
+  [...displayNav.querySelectorAll('a')].forEach(a=>{if(Number(a.dataset.stepId)===activeId)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');});
+  $('#quantity-context').innerHTML=activeId===0||activeId>=12?'':quantityContext(activeId);
   $('#quantity-context').hidden=!$('#quantity-context').firstElementChild;
   if (location.hash !== path(activeId)) history.replaceState(null,'',path(activeId));
   document.title = step.title + ' · Certification protocol';
-  $('#step-kicker').textContent = 'STEP ' + String(activeId).padStart(2,'0') + ' / ' + steps.length + ' · ' + step.group;
+  $('#step-kicker').textContent = 'STEP ' + String(activeId).padStart(2,'0') + ' · ' + step.group;
   $('#step-title').textContent = step.title;
   $('#step-intro').textContent = step.intro;
   $('#space-label').textContent = step.space;
@@ -162,22 +186,34 @@ function render() {
     else a.removeAttribute('aria-current');
   }
   for (const [selector,id] of [['#previous-step',activeId-1],['#next-step',activeId+1]]) {
-    const a = $(selector), valid = id >= 1 && id <= steps.length;
+    const a = $(selector), valid = steps.some(s=>s.id===id);
     a.classList.toggle('is-disabled',!valid);
     if (valid) { a.href = path(id); a.removeAttribute('aria-disabled'); a.removeAttribute('tabindex'); }
     else { a.removeAttribute('href'); a.setAttribute('aria-disabled','true'); a.tabIndex = -1; }
   }
-  $('#previous-step').textContent = activeId === 1 ? '← Preparation' : '← Previous step';
-  if (activeId === 1) {
+  $('#previous-step').textContent = activeId === 0 ? '← Protocol overview' : activeId===1 ? '← Step 00 · exact inputs' : '← Previous step';
+  if (activeId === 0) {
     const previous = $('#previous-step');
-    previous.href = '#preparation';
+    previous.href = '#protocol';
     previous.classList.remove('is-disabled');
     previous.removeAttribute('aria-disabled');
     previous.removeAttribute('tabindex');
   }
   window.scrollTo(0,0);
-  $('#step-position').textContent = 'Step ' + String(activeId).padStart(2,'0') + ' of ' + steps.length;
+  $('#step-position').textContent = 'Step ' + String(activeId).padStart(2,'0') + ' · 00–13';
   $('#route-announcement').textContent = 'Step ' + activeId + ': ' + step.title + '. Visualization planned.';
+  if (activeId === 0) {
+    $('#step-page').classList.add('step-zero');
+    $('.status-badge').innerHTML = '<span class="outline-dot" aria-hidden="true"></span>Interactive';
+    unmountScene = mountStepZero($('#panel-geometry'));
+    unmountExercises = mountStepZeroExercises($('#panel-exercises'));
+    const stopWhy=mountDyadicReason($('#panel-why-dyadic')),stopOrigin=mountMatrixOrigin($('#panel-matrix-origin'));
+    unmountLessons=()=>{stopWhy();stopOrigin();};
+    $('#panel-argument').innerHTML = stepZeroArgument();
+    $('#panel-connections').classList.add('dyadic-connections-panel');
+    unmountConnections=mountDyadicConnections($('#panel-connections'));
+    $('#route-announcement').textContent = 'Step 00: exact dyadic inputs, binary64, and the three certification gates.';
+  }
   if (activeId === 1) {
     $('#step-page').classList.add('step-one');
     $('.status-badge').innerHTML = '<span class="outline-dot" aria-hidden="true"></span>Interactive';

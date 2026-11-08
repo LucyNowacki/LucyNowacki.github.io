@@ -1,0 +1,218 @@
+/* Responsive reading and geometry layouts. Loaded after both theme variants.
+   Keep the mathematical model and colours in their original components. */
+html:not([data-story-display]) body {--reading-gutter:clamp(12px,1.5vw,28px);}
+html:not([data-story-display]) body .main-shell {min-width:0;}
+html:not([data-story-display]) body :is(.workspace-grid,.workspace-card,.text-panel) {min-width:0;}
+html:not([data-story-display]) body :is(.s0-root,.s0x-root) {line-height:1.5;}
+html:not([data-story-display]) body :is(.s0-equation,.s0c-equation,.s0l-equation,.s0x-equation) {max-width:100%;overflow-x:auto;overflow-y:hidden;}
+html:not([data-story-display]) body .tabs {flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scroll-padding-inline:12px;}
+html:not([data-story-display]) body .tabs .tab {flex:0 0 auto;}
+/* Replace nested 72% control zooms with ordinary, readable controls. */
+html body :is(.g2-helper-controls,.g9-helper-controls,.g9-controls,.lift-controls,.op-controls,.s1-bottom-controls,.s1-display-controls,.s2-radius-controls,.s3-controls,.s3-ellipse-controls,.s3-input-controls,.enc-three-controls,.linked-matrix-controls,.output-camera-controls,.output-motion-controls,.output-visibility-controls,.radius-controls,.flow-controls,.prep-pair-controls,.story-camera-controls,.story-controls,.story-matrix-controls),
+html body label:has(input[type="range"]) {zoom:1!important;}
+html:not([data-story-display]) body :is(button,select,input) {max-width:100%;}
+html:not([data-story-display]) body input[type="range"] {min-width:0;}
+
+@media (min-width:1101px) and (max-width:1599px) {
+  html:not([data-display="4k"]):not([data-story-display]) .app-shell {grid-template-columns:218px minmax(0,1fr);}
+  html:not([data-display="4k"]):not([data-story-display]) .sidebar {padding:18px 10px 12px;}
+  html:not([data-display="4k"]):not([data-story-display]) .brand {padding:0 9px 16px;font-size:16px;}
+  html:not([data-display="4k"]):not([data-story-display]) .sidebar-intro {padding:12px 9px 5px;}
+  html:not([data-display="4k"]):not([data-story-display]) .step-link {font-size:13px;min-height:36px;padding:7px 8px;gap:8px;}
+  html:not([data-display="4k"]):not([data-story-display]) .nav-group {margin:12px 9px 5px;}
+  html:not([data-display="4k"]):not([data-story-display]) .sidebar-footer {padding:12px 9px 0;}
+}
+
+/* Laptops and tablets use a drawer so the lesson receives the screen width. */
+@media (max-width:1100px) {
+  html:not([data-display="4k"]):not([data-story-display]) .app-shell {display:block;}
+  html:not([data-display="4k"]):not([data-story-display]) .sidebar {position:fixed;inset:0 auto 0 0;width:min(284px,86vw);height:100dvh;transform:translateX(-100%);transition:transform .18s ease;}
+  html:not([data-display="4k"]):not([data-story-display]) .sidebar.is-open {transform:translateX(0);}
+  html:not([data-display="4k"]):not([data-story-display]) #menu-toggle {display:grid;}
+}
+
+/* Compact desktop density: reclaim space before reducing reading size. */
+@media (max-width:1599px), (max-height:800px) and (max-width:2399px) {
+  html:not([data-story-display]) body {font-size:15px;line-height:1.5;}
+  html:not([data-story-display]) body .topbar {height:auto;min-height:52px;padding:7px var(--reading-gutter);gap:10px;flex-wrap:wrap;}
+  html:not([data-story-display]) body .topbar-label {font-size:13px;flex:1;}
+  html:not([data-story-display]) body #workspace {padding:14px var(--reading-gutter) 18px;}
+  html:not([data-story-display]) body .workspace-heading {gap:12px;margin-bottom:10px;}
+  html:not([data-story-display]) body .workspace-heading h1 {font-size:clamp(22px,2.1vw,28px);line-height:1.18;margin-bottom:7px;}
+  html:not([data-story-display]) body .workspace-heading .eyebrow {margin-bottom:5px;font-size:11px;}
+  html:not([data-story-display]) body .step-intro {font-size:14px;line-height:1.45;max-width:72ch;}
+  html:not([data-story-display]) body .context-strip {font-size:12px;margin-bottom:10px;gap:5px 14px;}
+  html:not([data-story-display]) body .heading-actions {gap:7px;align-items:center;}
+  html:not([data-story-display]) body .display-launch {padding:7px 10px;font-size:12px;}
+  html:not([data-story-display]) body .status-badge {font-size:11px;padding:4px 8px;}
+  html:not([data-story-display]) body .tabs {gap:6px;padding-inline:10px;}
+  html:not([data-story-display]) body .tabs .tab {font-size:13px;padding:10px 12px;min-height:40px;}
+  html:not([data-story-display]) body .workspace-grid {gap:16px;}
+  html:not([data-story-display]) body .text-panel {padding:18px;}
+  html:not([data-story-display]) body :is(.s0-root,.s0x-root) {font-size:15px;gap:14px;padding:14px;}
+  html:not([data-story-display]) body :is(.s0-card,.s0x-workbook,.s0l-card,.s0c-detail,.s0c-default) {padding:16px;border-radius:10px;}
+  html:not([data-story-display]) body :is(.s0-card,.s0x-root) h2 {font-size:22px;line-height:1.25;margin:2px 0 10px;}
+  html:not([data-story-display]) body :is(.s0-card,.s0x-root) h3 {font-size:18px;line-height:1.3;margin:8px 0 10px;}
+  html:not([data-story-display]) body :is(.s0-card,.s0x-root) p {margin:8px 0;}
+  html:not([data-story-display]) body :is(.s0-equation,.s0x-equation) {font-size:17px;line-height:1.55;padding:9px 12px;margin:10px 0;}
+  html:not([data-story-display]) body :is(.s0-jump,.s0-actions,.s0-presets) {gap:7px;margin:10px 0;}
+  html:not([data-story-display]) body .s0x-intro {padding:4px 14px;}
+  html:not([data-story-display]) body .s0c-version-switch {gap:12px;}
+  html:not([data-story-display]) body .s0c-version-switch button {padding:14px;}
+  html:not([data-story-display]) body .s0c-version-switch [aria-pressed=true] {padding:13px;}
+  html:not([data-story-display]) body .s0c-version-switch strong {font-size:18px;margin-bottom:5px;}
+  html:not([data-story-display]) body .s0c-version-switch span {font-size:14px;line-height:1.4;}
+  html:not([data-story-display]) body .s0c-origin-flow {gap:8px;margin:16px 0;}
+  html:not([data-story-display]) body .s0c-origin-flow span {padding:10px;}
+  html:not([data-story-display]) body .s0c-stage-nav button {padding:11px;}
+  html:not([data-story-display]) body .s0c-stage-nav [aria-pressed=true] {padding:10px;}
+  html:not([data-story-display]) body .s0c-stage-nav button b {font-size:14px;}
+  html:not([data-story-display]) body .s0c-stage-nav button small {font-size:12px;}
+  html:not([data-story-display]) body .s0c-down {height:25px;font-size:21px;}
+  html:not([data-story-display]) body .s0c-proof {padding-top:18px;}
+  html:not([data-story-display]) body :is(.s0c-gate,.s0c-proof-rest article) {padding:16px;}
+  html:not([data-story-display]) body .s0c-map-control select {padding:9px;font-size:14px;}
+  html:not([data-story-display]) body :is(.s1-root,.s2-root,.s3-root,.s4-root,.s5-root,.enc-root,.lift-root,.op-root,.g2-root,.g9-root) {padding:14px;gap:14px;}
+  html:not([data-story-display]) body :is(.s3-card,.s4-card,.s5-card,.enc-card) {padding:14px;}
+  html:not([data-story-display]) body :is(.s1-root,.s2-root,.s3-root,.s4-root,.s5-root,.enc-root,.lift-root,.op-root,.g2-root,.g9-root) h2 {font-size:20px;line-height:1.25;}
+  html:not([data-story-display]) body :is(.s1-root,.s2-root,.s3-root,.s4-root,.s5-root,.enc-root,.lift-root,.op-root,.g2-root,.g9-root) h3 {font-size:17px;line-height:1.3;}
+  html:not([data-story-display]) body :is(.g2-helper-controls,.g9-helper-controls,.g9-controls,.lift-controls,.op-controls,.s1-bottom-controls,.s1-display-controls,.s2-radius-controls,.s3-controls,.s3-ellipse-controls,.s3-input-controls,.enc-three-controls,.linked-matrix-controls,.output-camera-controls,.output-motion-controls,.output-visibility-controls,.radius-controls,.flow-controls,.prep-pair-controls) {font-size:13px;line-height:1.4;gap:10px;}
+  html:not([data-story-display]) body :is(.s1-root,.s2-root,.s3-root,.s4-root,.s5-root,.enc-root,.lift-root,.op-root,.g2-root,.g9-root) :is(button,select) {font-size:13px;padding:7px 10px;min-height:32px;}
+  html:not([data-story-display]) body .example-chooser {padding:7px var(--reading-gutter);gap:8px 12px;font-size:12px;}
+  html:not([data-story-display]) body .example-chooser select {font-size:13px;min-height:32px;}
+  html:not([data-story-display]) body .step-footer {margin-top:16px;}
+  html:not([data-story-display]) body .scope-note {margin-top:12px;}
+  html:not([data-story-display]) body :is(.dialog-top,.dialog-body) {padding:16px;}
+}
+
+/* The first two introductory cards share a row when their container is wide. */
+html body .s0-root {container-type:inline-size;}
+@container (min-width:850px) {
+  .s0-root>.s0-origin-notice,.s0-root>.s0-lead {width:auto;}
+}
+@media (min-width:900px) {
+  html body .s0-root {grid-template-columns:repeat(2,minmax(0,1fr));}
+  html body .s0-root>* {grid-column:1/-1;}
+  html body .s0-root>:is(.s0-origin-notice,.s0-lead) {grid-column:auto;}
+}
+
+/* Between a full poster and phone flow, retain useful paired panels. */
+html[data-display="4k"] .display-board[data-board-layout="compact"] .display-board-content>div {display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start;min-width:0;container-type:normal;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .display-board-content>div>* {grid-area:auto!important;min-width:0;max-width:100%;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .display-board-content>div>:is(.s3-controls,.s4-chain,.s5-summary,.s5-jumps,.enc-entry-grid,.enc-four,.g2-arrangement-toolbar,.g2-chain,.lift-grid,.op-grid,.g9-plots) {grid-column:1/-1!important;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .display-board-content>.s1-root,
+html[data-display="4k"] .display-board[data-board-layout="compact"] .display-board-content>.s2-root {grid-template-columns:230px minmax(0,1fr);}
+html[data-display="4k"] .display-board[data-board-layout="compact"] :is(.s1-root,.s2-root)>* {grid-column:1!important;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .s1-root>.s1-scene-grid {grid-column:2!important;grid-row:1/10!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .s1-scene-grid>.s1-matrix-panel {grid-column:1/-1;order:1;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .s1-matrix-grid {max-width:420px;margin-inline:auto;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .s2-root>.s2-plots {grid-column:2!important;grid-row:1/8!important;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .s2-root>.s2-cases {grid-column:2!important;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] :is(.s1-bottom-controls,.s3-controls,.lift-controls,.op-control-grid) {grid-template-columns:minmax(0,1fr);}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .s3-controls>p {grid-column:auto;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] :is(.s3-ellipsoids,.s5-pair,.enc-pair,.g2-close-area,.lift-grid,.op-grid) {grid-template-columns:repeat(2,minmax(0,1fr));}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .display-board-content>div {zoom:1;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .display-board-content svg:not(mjx-container svg):not(.s1-cell-links) {max-height:360px;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .display-board-content :is(.lift-stage canvas,.lift-stage.close canvas) {height:300px;}
+
+/* The explanatory gate board reflows. The explicit original-poster option remains. */
+html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-sheet {min-width:0;padding:16px;gap:16px;}
+html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-card {min-height:0;padding:14px;overflow-x:visible;gap:8px;}
+html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-card>svg {width:100%;min-width:0;max-width:100%;height:auto;aspect-ratio:3/1;}
+html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-card h3 {font-size:19px;}
+html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-card p {font-size:14px;}
+html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-eq {font-size:17px;overflow-x:auto;}
+html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-purpose h2 {font-size:24px;}
+html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-purpose p {font-size:15px;}
+@media (min-width:2400px) {
+  html:not([data-display="4k"]):not([data-story-display]) body {font-size:18px;}
+  html:not([data-display="4k"]):not([data-story-display]) #workspace {max-width:2800px;}
+  html:not([data-display="4k"]):not([data-story-display]) .workspace-grid {grid-template-columns:minmax(0,1fr) 290px;}
+  html:not([data-display="4k"]) body :is(.s0-root,.s0x-root) {max-width:2100px;font-size:18px;gap:24px;}
+  html:not([data-display="4k"]) body :is(.s0-card,.s0x-root) h2 {font-size:28px;}
+  html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-grid {grid-template-columns:repeat(3,minmax(0,1fr));}
+  html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-card h3 {font-size:24px;}
+  html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-card p {font-size:18px;}
+  html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-eq {font-size:21px;}
+}
+
+/* Small screens scroll the document; only formulas, tables and dialogs scroll inside. */
+@media (max-width:1100px) {
+  html[data-display="4k"] body {height:auto;overflow:visible;}
+  html[data-display="4k"] .app-shell {height:auto;min-height:100dvh;}
+  html[data-display="4k"] .main-shell {height:auto;}
+  html[data-display="4k"] .topbar {position:static;}
+  html[data-display="4k"] #workspace {height:auto;overflow:visible;}
+  html[data-display="4k"] #step-page {height:auto;}
+  html[data-display="4k"] .workspace-grid {display:block;}
+  html[data-display="4k"] .canvas-card {display:block;}
+  html[data-display="4k"] .tab-panel {overflow:visible;}
+  html[data-display="4k"] .tab-panel.display-board {overflow:visible;min-height:420px;}
+  html[data-display="4k"] .display-board-area {overflow:visible;flex:none;}
+  html[data-display="4k"] .display-board .display-reading,
+  html[data-display="4k"] .display-board .display-companion {position:fixed;inset:12px;max-height:calc(100dvh - 24px);z-index:80;overflow:auto;}
+  html[data-display="4k"] .display-nav {flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;}
+  html[data-display="4k"] .display-nav>* {flex-shrink:0;}
+  html[data-display="4k"] .display-board-tools {padding:7px 9px;gap:7px;}
+  html[data-display="4k"] .display-board-tools output {flex-basis:100%;margin:0;}
+  html[data-display="4k"] .display-board-key span {float:none;display:block;}
+  html:not([data-story-display]) body #panel-gate-diagram {height:auto;min-height:500px;overflow:visible;}
+  html:not([data-story-display]) body .gate-map-shell {height:auto;}
+  html:not([data-story-display]) body .gate-map-viewport:not(.gate-map-unfitted) {overflow:visible;}
+}
+
+@media (max-width:700px) {
+  html:not([data-story-display]) body {font-size:16px;}
+  html:not([data-story-display]) body #workspace {padding:12px 8px;}
+  html:not([data-story-display]) body .topbar {gap:8px;padding:7px 10px;min-height:52px;}
+  html:not([data-story-display]) body .topbar-label {display:none;}
+  html:not([data-story-display]) body .reference-button {padding:8px 10px;font-size:12px;}
+  html:not([data-story-display]) body .workspace-heading {display:flex;flex-wrap:wrap;margin-bottom:8px;gap:6px;}
+  html:not([data-story-display]) body .workspace-heading h1 {font-size:22px;}
+  html:not([data-story-display]) body .step-intro {font-size:14px;}
+  html:not([data-story-display]) body .heading-actions {gap:6px;}
+  html:not([data-story-display]) body .context-strip {font-size:11px;gap:4px;}
+  html:not([data-story-display]) body .context-type {display:none;}
+  html:not([data-story-display]) body :is(.s0-root,.s0x-root) {font-size:16px;padding:10px;gap:12px;}
+  html:not([data-story-display]) body :is(.s0-card,.s0x-workbook,.s0l-card,.s0c-detail,.s0c-default) {padding:14px;}
+  html:not([data-story-display]) body :is(.s0-card,.s0x-root) h2 {font-size:20px;}
+  html:not([data-story-display]) body .tabs {gap:2px;padding-inline:5px;}
+  html:not([data-story-display]) body .tabs .tab {padding:10px 12px;min-height:44px;}
+  html:not([data-story-display]) body .example-chooser {display:flex;flex-wrap:wrap;align-items:center;}
+  html:not([data-story-display]) body .example-chooser>label {flex:0 0 auto;}
+  html:not([data-story-display]) body .example-chooser select {width:auto;flex:1 1 190px;min-width:0;}
+  html:not([data-story-display]) body .example-chooser output {flex:1 1 100%;font-size:11px;}
+  html body :is(.s0-root,.s0x-root) :is(button,select,input[type=text]) {min-height:44px;}
+  html body .s0-root .s0-bit {min-height:40px;}
+  html body .s0c-stage-nav button {min-height:70px;}
+  html body .s0c-stage-nav button small {display:block;}
+  html[data-display="4k"] .display-nav a {min-width:36px;height:36px;}
+  html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-grid {grid-template-columns:minmax(0,1fr);}
+  html body .gate-map-viewport:not(.gate-map-unfitted) .gate-map-purpose h2 {font-size:21px;}
+  html body .gate-map-tools {flex-wrap:wrap;padding:8px;gap:8px;font-size:12px;}
+  html body .gate-map-tools button {min-height:36px;}
+}
+@media (pointer:coarse) {
+  html body :is(.tab,.page-button,.icon-button,.reference-button,.display-board-tools button,.display-board-tools select,.display-nav a,.s0-root button,.s0x-root button) {min-height:44px;}
+  html body input[type=range] {min-height:32px;}
+}
+@media (prefers-reduced-motion:reduce) {html body .sidebar {transition:none;}}
+/* Native Step 1 assigns the close-up to column three in a wide container.
+   Compact boards have two plot columns, so reset all three placements. */
+html[data-display="4k"] .display-board[data-board-layout="compact"] .s1-scene-grid>.s1-view-wide {grid-area:1/1!important;order:0;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .s1-scene-grid>.s1-view-zoom {grid-area:1/2!important;order:0;}
+html[data-display="4k"] .display-board[data-board-layout="compact"] .s1-scene-grid>.s1-matrix-panel {grid-area:2/1/3/-1!important;order:0;}
+@media (min-width:701px) and (max-width:1599px) {
+  html body .s0-jump {font-size:13px;gap:7px;}
+  html body .s0-jump a {margin-right:0;}
+}
+@media (min-width:701px) and (max-width:1100px) {
+  html[data-display="4k"] .display-nav {flex:1 1 530px;}
+}
+@media (min-width:2400px) {
+  html:not([data-display="4k"]) #step-page.step-zero .workspace-grid {grid-template-columns:minmax(0,1fr);}
+}
+@media (pointer:coarse) {html body :is(button,select) {min-height:44px;}}
+@media (pointer:coarse) {
+  html body :is(button,select) {min-height:44px!important;}
+}

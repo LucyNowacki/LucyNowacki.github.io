@@ -1,0 +1,167 @@
+/* Dense desktop presentation follows the available reading pane. Small section
+   kickers keep their existing type size. MathJax's internal layout is untouched. */
+html body .workspace-card {container:lesson / inline-size;}
+/* Entry grids denote matrices, with square corners instead of norm bars. */
+html body #workspace :is(.s0-complex-matrix,.s1-matrix-grid,.s3-mini-matrix,.op-matrix,.prep-matrix,.prep-exact-matrix) {position:relative;border:0;padding-inline:11px;}
+html body #workspace :is(.s0-complex-matrix,.s1-matrix-grid,.s3-mini-matrix,.op-matrix,.prep-matrix,.prep-exact-matrix)::before,
+html body #workspace :is(.s0-complex-matrix,.s1-matrix-grid,.s3-mini-matrix,.op-matrix,.prep-matrix,.prep-exact-matrix)::after {content:"";position:absolute;top:0;bottom:0;width:7px;border-block:2px solid var(--accent,#4b0082);pointer-events:none;}
+html body #workspace :is(.s0-complex-matrix,.s1-matrix-grid,.s3-mini-matrix,.op-matrix,.prep-matrix,.prep-exact-matrix)::before {left:0;border-left:2px solid var(--accent,#4b0082);}
+html body #workspace :is(.s0-complex-matrix,.s1-matrix-grid,.s3-mini-matrix,.op-matrix,.prep-matrix,.prep-exact-matrix)::after {right:0;border-right:2px solid var(--accent,#4b0082);}
+@media (hover:hover) and (pointer:fine) and (max-width:2399px) {
+  html body {font-size:13px;line-height:1.4;}
+  html body .topbar {min-height:42px;padding-block:4px;gap:7px;}
+  html body #workspace {padding:10px 12px 14px;}
+  html body #workspace h1 {font-size:18px;line-height:1.2;margin-block:0 6px;}
+  html body #workspace .workspace-heading {margin-bottom:7px;gap:8px;}
+  html body #workspace .workspace-heading h1 {font-size:18px;line-height:1.15;margin:0 0 5px;}
+  html body #workspace .step-intro {font-size:13px;line-height:1.4;}
+  html body #workspace .context-strip {margin-bottom:7px;}
+  html body #workspace .tabs {gap:3px;padding-inline:7px;}
+  html body #workspace .tabs .tab {min-height:32px;padding:7px 10px;font-size:12px;}
+  html body .example-chooser {padding-block:4px;gap:5px 9px;}
+  html body .example-chooser select {min-height:27px;padding-block:3px;font-size:12px;}
+  html body #workspace .heading-actions {gap:5px;}
+  html body #workspace .display-launch {padding:5px 8px;font-size:12px;}
+  html body #workspace .text-panel {padding:12px;}
+  html body #workspace :is(.s0-root,.s0x-root,.s1-root,.s2-root,.s3-root,.s4-root,.s5-root,.enc-root,.lift-root,.op-root,.g2-root,.g9-root,.prep-root) {font-size:13px;line-height:1.4;padding:8px;gap:8px;}
+  html body #workspace :is(.s0-card,.s0x-workbook,.s0l-card,.s0c-detail,.s0c-default,.s3-card,.s4-card,.s5-card,.enc-card) {padding:8px;border-radius:8px;}
+  html body #workspace :is(h2,h3,h4) {line-height:1.25;}
+  html body #workspace h2 {font-size:14px;font-weight:600;margin:2px 0 6px;}
+  html body #workspace h3 {font-size:13px;font-weight:600;margin:6px 0;}
+  html body #workspace h4 {font-size:13px;margin:5px 0;}
+  html body #workspace p:not(.eyebrow):not(.s0-eyebrow):not(.s0x-eyebrow):not(.enc-kicker):not(.gate-map-kicker) {font-size:13px;line-height:1.4;margin-block:6px;}
+  html body #workspace :is(button,select) {font-size:12px;line-height:1.3;min-height:28px;padding:5px 8px;}
+  html body #workspace :is(.s0-equation,.s0x-equation,.s0l-equation,.s0c-equation,.enc-equation,.s3-equation,.s4-equation,.s5-equation) {font-size:15px;line-height:1.4;padding:7px 9px;margin:8px 0;}
+  html body #workspace :is(.s0-jump,.s0-actions,.s0-presets,.enc-actions,.s3-actions,.s4-actions,.s5-actions) {gap:5px;margin:7px 0;}
+  html body #workspace :is(.s0-note,.s0x-hint,.note) {padding:8px 10px;font-size:12px;}
+  html body #workspace .s0x-intro {padding:4px 10px;}
+  html body #workspace .s0c-version-switch {gap:8px;}
+  html body #workspace .s0c-version-switch button {padding:10px;min-height:0;}
+  html body #workspace .s0c-version-switch [aria-pressed=true] {padding:9px;}
+  html body #workspace .s0c-version-switch strong {font-size:14px;margin-bottom:4px;}
+  html body #workspace .s0c-version-switch span {font-size:13px;line-height:1.4;}
+  html body #workspace .s0c-origin-flow {gap:6px;margin:11px 0;}
+  html body #workspace .s0c-origin-flow span {padding:7px;font-size:13px;}
+  html body #workspace .s0c-stage-nav button {padding:8px;gap:8px;min-height:0;}
+  html body #workspace .s0c-stage-nav [aria-pressed=true] {padding:7px;}
+  html body #workspace .s0c-stage-nav button b {font-size:13px;}
+  html body #workspace .s0c-stage-nav button small {font-size:12px;}
+  html body #workspace .s0c-stage-nav .s0c-equation {font-size:14px;padding-block:5px;margin-block:4px;}
+  html body #workspace .s0c-down {height:20px;font-size:18px;}
+  html body #workspace .s0c-proof {padding-top:14px;}
+  html body #workspace :is(.s0c-gate,.s0c-proof-rest article,.s0c-midpoint-focus,.s0c-operation) {padding:11px;}
+  html body #workspace .s0c-reference {padding:7px 14px;margin-top:14px;}
+  html body #workspace .s0c-proof-rest {gap:12px;margin-block:16px;}
+  html body #workspace .s0x-chooser button {padding:11px;}
+  html body #workspace .s0x-step-nav {padding-top:12px;gap:6px;}
+  html body #workspace .s0x-step-nav button {padding:7px;font-size:12px;}
+  html body #workspace .s0x-prompt {font-size:13px;}
+  html body #workspace :is(.s0x-givens,.s0x-hint) {margin-block:12px;}
+  html body #workspace .s0x-current-step {padding-top:12px;}
+  html body #workspace :is(.enc-range,.s4-control,.s5-control) {margin-block:8px;}
+  html body #workspace :is(.enc-readouts,.lift-axes,.op-summary,.op-metrics) {gap:6px;margin-block:8px;}
+  html body #workspace :is(.enc-readouts,.lift-axes,.op-summary,.op-metrics)>div {padding:8px;}
+  html body #workspace .s0-root details {padding:8px;margin-block:11px;}
+  html body #workspace .s0-root .s0-values {gap:8px;}
+  html body #workspace .s0-root .s0-values>div {padding:8px;}
+  html body #workspace .s0-root .s0-values dd {font-size:13px;}
+  html body #workspace .s0-matrix-identity {font-size:18px;gap:10px;margin-block:12px;}
+  html body #workspace .s0-matrix-layout {gap:14px;}
+  html body #workspace .s0-complex-matrix {gap:5px;padding:6px 10px;}
+  html body #workspace .s0-matrix-cell {padding:5px;}
+  html body #workspace .s0-matrix-cell>small {font-size:10px;}
+  html body #workspace .s0-coordinate-buttons {gap:4px;margin-top:4px;}
+  html body #workspace .s0-coordinate-buttons button {grid-template-columns:18px minmax(0,1fr);align-items:center;gap:4px;min-height:24px;padding:3px 4px;}
+  html body #workspace .s0-coordinate-buttons span {font-size:10px;}
+  html body #workspace .s0-coordinate-buttons strong {font-size:11px;}
+  html body #workspace .s0-root .s0-bit-fields {grid-template-columns:84px minmax(0,1fr);gap:8px;margin-block:12px;}
+  html body #workspace .s0-root .s0-field {padding:8px;}
+  html body #workspace .s0-root .s0-bit-grid {gap:3px;}
+  html body #workspace .s0-root .s0-bit {flex-basis:22px;min-height:24px;padding:3px 1px;font-size:12px;}
+  html body #workspace .s0-root .s0-field legend {font-size:12px;}
+  html body #workspace .s0-root .s0-field output {font-size:11px;margin-top:5px;overflow-wrap:normal;}
+  html body #workspace .s0-root .s0-decimal-form {gap:8px;margin-top:11px;}
+  html body #workspace .s0-root .s0-decimal-form input {padding:7px 9px;font-size:13px;}
+  html body #workspace .s0-root .s0-decimal-form button {min-height:34px;}
+  html body #workspace .s0-root .s0-origin {padding-top:9px;}
+  html body #workspace .s0-root .s0-decode {padding-top:9px;}
+  html body #workspace .s0-root [data-s0-classification] {font-size:15px;}
+  html body #workspace .enc-card {margin-bottom:0;}
+  html body #workspace .enc-range {font-size:13px;line-height:1.4;}
+  html body #workspace .enc-range input {margin-block:7px;}
+  html body #workspace :is(.op-summary,.op-metrics) strong {font-size:16px;}
+  html body #workspace .lift-axes output {font-size:14px;}
+  html body #workspace .g9-certificate output {font-size:18px;}
+  html body #workspace .quantity-context {padding:9px;margin:8px 0 10px;}
+  html body #workspace .quantity-context-heading {gap:7px;margin-bottom:7px;}
+  html body #workspace .quantity-context-heading h2 {font-size:14px;margin:0;}
+  html body #workspace .quantity-cards {gap:8px;}
+  html body #workspace .quantity-cards article {padding:8px;}
+  html body #workspace .quantity-cards h3 {font-size:12px;margin:0 0 5px;}
+  html body #workspace .quantity-card-row {font-size:12px;gap:6px;margin:5px 0;}
+  html body #workspace .quantity-card-row>div {line-height:1.35;}
+  html body #workspace .quantity-card-row strong {font-size:13px;}
+  html body #workspace .quantity-card-row small {font-size:11px;margin:3px 0;}
+  html body #workspace .quantity-context-extras {gap:6px;margin-top:6px;}
+  html body #workspace .quantity-context-extras>div {padding:5px 7px;font-size:12px;line-height:1.35;}
+  html body #workspace .quantity-context-key {font-size:11px;line-height:1.4;margin:7px 0 0;}
+  html body #workspace .display-board-tools {font-size:12px;padding:5px 8px;gap:5px 7px;}
+  html body #workspace .display-board-content :is(h2,h3) {font-size:14px;}
+  html body #workspace .display-board-content :is(label,p) {font-size:13px;line-height:1.4;}
+  html body #workspace .gate-map-viewport:not(.gate-map-unfitted) .gate-map-card {padding:10px;}
+  html body #workspace .gate-map-viewport:not(.gate-map-unfitted) .gate-map-card h3 {font-size:14px;}
+  html body #workspace .gate-map-viewport:not(.gate-map-unfitted) .gate-map-card p {font-size:13px;}
+  html body #workspace .gate-map-viewport:not(.gate-map-unfitted) .gate-map-eq {font-size:15px;}
+  html body #workspace :is(.dialog-top,.dialog-body) {padding:12px;}
+  html body .story-root {--story-title-size:14px;--story-body-size:13px;--story-small-size:12px;--story-math-size:15px;}
+  html body .story-root .story-header {padding:9px 12px 5px;}
+  html body .story-root .story-header h2 {font-size:16px;}
+  html body .story-root :is(.story-actions button,.story-actions select,.story-camera-controls button) {min-height:27px;font-size:12px;padding:4px 7px;}
+  html body .story-root .story-persistent>div {padding:6px 10px;}
+  html body .story-root .story-scale-note {margin-block:5px;padding:5px 8px;}
+}
+
+/* This applies to the card's actual width, even inside a split desktop pane. */
+@media (hover:hover) and (pointer:fine) {
+  @container lesson (max-width:3000px) {
+    html body #workspace .s0-small-bits {display:grid;grid-template-columns:16px repeat(6,minmax(24px,30px)) auto;gap:3px;padding:6px 0 8px;align-items:center;}
+    html body #workspace .s0-small-bits>strong {font-size:16px;}
+    html body #workspace .s0-small-bits>button {min-width:0;min-height:30px;height:30px;grid-template-rows:15px 9px;width:auto;padding:2px 1px;gap:0;}
+    html body #workspace .s0-small-bits>button b {font:700 14px/15px ui-monospace,monospace;}
+    html body #workspace .s0-small-bits>button span,
+    html body #workspace .s0-small-bits>small {font-size:9px;white-space:nowrap;}
+    html body #workspace .s0-small-bits>button span {line-height:9px;}
+    html body #workspace .s0-ruler {height:16px;margin:6px 6px 0;}
+    html body #workspace .s0-ruler-grid {height:9px;}
+    html body #workspace .s0-ruler-labels {font-size:11px;margin:5px 3px 8px;}
+    html body #workspace .s0-small-bits~.s0-equation {font-size:14px;}
+    html body #workspace .s0-actions button {min-height:28px;font-size:12px;padding:5px 7px;}
+  }
+  @container lesson (max-width:330px) {
+    html body #workspace .s0-small-bits {grid-template-columns:18px repeat(6,minmax(24px,1fr));}
+    html body #workspace .s0-small-bits>small {grid-column:2/-1;}
+  }
+}
+
+/* Uniform compact desktop scale, including fixed-size controls and diagrams.
+   Keep navigation/drawer geometry and explicit 4K boards in their own space. */
+@media (hover:hover) and (pointer:fine) and (max-width:2399px) {
+  html:not([data-display="4k"]):not([data-story-display]) .main-shell {zoom:.935;}
+  html:not([data-display="4k"]):not([data-story-display]) body #workspace
+  :is(.eyebrow,.s0-eyebrow,.s0x-eyebrow,.enc-kicker,.gate-map-kicker) {font-size:12.834224599px;}
+}
+
+/* The same compact scale also applies to the explicit 4K display. Its logical
+   height compensates for zoom so the fitted workspace still fills the screen. */
+@media (hover:hover) and (pointer:fine) {
+  html[data-display="4k"]:not([data-story-display]) .main-shell {
+    --cert-ui-scale:.935;zoom:.935;width:auto;height:106.951871658dvh;max-height:106.951871658dvh;min-height:0;
+  }
+  html[data-display="4k"]:not([data-story-display]) body #workspace
+  :is(.eyebrow,.s0-eyebrow,.s0x-eyebrow,.enc-kicker,.gate-map-kicker) {zoom:1.069518717;}
+}
+@media (hover:hover) and (pointer:fine) and (max-width:1100px) {
+  html[data-display="4k"]:not([data-story-display]) .main-shell {
+    height:auto;max-height:none;min-height:0;
+  }
+}

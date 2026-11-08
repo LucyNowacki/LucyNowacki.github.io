@@ -18,16 +18,11 @@ return `<svg viewBox="0 0 330 307" data-entry-plane="${i}" role="img" aria-label
  <g data-probe-mark style="display:none"><line x1="160" y1="152" x2="${px}" y2="${py}" class="enc-probe-line"/><circle cx="${px}" cy="${py}" r="7.5" class="enc-probe"/></g>
  ${[-4,-2,2,4].map(t=>`<text x="${cx+t*k}" y="299" text-anchor="middle">${t}</text>`).join('')}
  <text x="310" y="304">Re</text><text x="169" y="16">Im</text><text x="172" y="146">0</text></svg>`;}
-export function stepSixArgument(){return `<div class="enc-argument"><h2>Exact midpoint, mathematical Hardy block, and enclosing box</h2>
-<p><strong>The exact-dyadic midpoint matrix ${m(tex`A_2^\circ`)} is the reference:</strong></p>
-${eq(tex`A_2^\circ=${integerMatrix(MID)}`)}
-<p><strong>The chosen exact perturbation ${m('E')} is added to that reference:</strong></p>
-${eq(tex`E=${integerMatrix(ERROR)}`)}
-<p><strong>The mathematical toy Hardy matrix ${m(tex`A_{2,M}^{X}`)} is the result:</strong></p>
-${eq(tex`A_{2,M}^{X}=A_2^\circ+E=${integerMatrix(HARDY)}`)}
-<p>The toy Hardy block ${m(tex`A_{2,M}^{X}`)} uses the Euclidean norm in its two coordinates, serving the role of the orthonormal Hardy-coordinate block ${m(tex`A_{N,M}^{X}`)} in the thesis. Both the toy Hardy entries ${m(tex`(A_{2,M}^{X})_{ij}`)} and the midpoint entries ${m(tex`(A_2^\circ)_{ij}`)} are exact dyadic complex numbers: their real and imaginary parts are integers divided by ${m(tex`1024=2^{10}`)}.</p>
-<p><strong>What “block” means:</strong> the Hardy block ${m(tex`A_{2,M}^{X}`)} is the entire displayed ${m(tex`2\times2`)} matrix acting on the resolved two-dimensional space. In the larger lifted operator ${m(tex`B_{\mathrm{lift}}=A_{2,M}^{X}\oplus0`)} of Step 10, it is the upper-left ${m(tex`2\times2`)} block.</p>
-<p>The mathematical Hardy matrix ${m(tex`A_{N,M}^{X}`)} need not have dyadic entries in general. Exact-dyadic entries are a feature of this toy; the midpoint reference ${m(tex`A_2^\circ`)}, the mathematical Hardy matrix ${m(tex`A_{2,M}^{X}`)}, and the interval enclosure ${m(tex`\boldsymbol A`)} retain different roles.</p>
+export function stepSixArgument(){return `<div class="enc-argument"><h2>Gate 2 starts from the already certified midpoint</h2>
+<p>The exact midpoint ${m(tex`A_2^\circ`)} was introduced in <a href="#step-00">Step 00</a> and certified by <a href="#step-04">Gate 1 in Step 04</a>. It is the same fixed matrix here. The full matrix definition, dyadic-number lesson and binary64 inspector belong to Step 00.</p>
+${eq(tex`A_{2,M}^{X}=A_2^\circ+E,\qquad\|E\|_2\le\eta_A`)}
+<p>Here we construct the entry enclosure around that midpoint. The selected toy error ${m('E')} and target ${m(tex`A_{2,M}^{X}`)} happen to be dyadic as well. A general mathematical Hardy matrix need not be dyadic, and its validated enclosure is a set of possible entries, not another exact point matrix.</p>
+<p><strong>Different gates, different differences:</strong> Gate 1 controls ${m(tex`A_2^\circ-S_2^\circ`)} by ${m(tex`\eta_{\mathrm{Schur}}`)}. Gate 2 controls ${m(tex`A_{2,M}^{X}-A_2^\circ`)} by ${m(tex`\eta_A`)}. The separate operator gate later controls ${m(tex`\mathcal L-B_{\mathrm{lift}}`)}. These allowances are not interchangeable.</p>
 ${eq(tex`I_{p,q}=[-p/1024,p/1024]+i[-q/1024,q/1024]`)}
 ${eq(tex`\boldsymbol A=A_2^\circ+\begin{pmatrix}I_{3,4}&I_{4,3}\\I_{3,4}&I_{4,3}\end{pmatrix}`)}
 <p>The interval matrix ${m(tex`\boldsymbol A`)} describes the Cartesian matrix box ${m(tex`\mathcal A\subset\mathbb C^{2\times2}\cong\mathbb R^8`)}. The four rectangles include their edges and corners.</p>
@@ -40,9 +35,9 @@ ${eq(tex`E^\ast E=\frac1{1024^2}\begin{pmatrix}50&24-18i\\24+18i&50\end{pmatrix}
 export function mountStepSix(root){
 let probe=copy(ERROR),active=0,exploring=false,drag=null,playing=false,raf=0,last=0,trace=64;const abort=new AbortController(),{signal}=abort;
 root.innerHTML=`<div class="enc-root">
- <section class="enc-card"><h2>The exact entries, before the enclosure</h2><p>Choose a matrix entry to inspect its magnifier below. The blue midpoint is an exact point. The deeppink rectangle will describe possible exact values around it.</p>
- <div class="enc-matrix-route"><article><span>Exact midpoint</span>${eq(tex`A_2^\circ=${integerMatrix(MID)}`)}</article><b>+</b><article><span>Chosen exact error</span>${eq(tex`E=${integerMatrix(ERROR)}`)}</article><b>=</b><article><span>Exact toy Hardy block</span>${eq(tex`A_{2,M}^{X}=${integerMatrix(HARDY)}`)}</article></div>
- <p>The toy Hardy block ${m(tex`A_{2,M}^{X}`)} uses the Euclidean norm in its two coordinates, matching the role of the orthonormal Hardy-coordinate block ${m(tex`A_{N,M}^{X}`)} in the thesis. The midpoint reference ${m(tex`A_2^\circ`)} and the chosen Hardy matrix ${m(tex`A_{2,M}^{X}`)} are distinct exact-dyadic matrices in this toy.</p>
+ <section class="enc-card"><h2>The same midpoint, now used for Gate 2</h2><p><a href="#step-00">Step 00 defines and decodes the dyadic midpoint ${m(tex`A_2^\circ`)}.</a> <a href="#step-04">Gate 1 in Step 04</a> already supplied its whole-contour certificate. Here the blue centres are those same exact entries, and the pink rectangles describe the allowed replacement error.</p>
+ ${eq(tex`A_2^\circ\quad\xrightarrow{\ E\ }\quad A_{2,M}^{X}=A_2^\circ+E,\qquad\|E\|_2\le\eta_A=5/512`)}
+ <p>This step introduces the <strong>Gate 2 enclosure</strong>, not a new midpoint. Choose an entry to see its exact addition and the corresponding rectangle below. The chosen target is one member of the box.</p>
  <div class="enc-entry-tabs" role="group" aria-label="Select entry">${MID.map((_,i)=>`<button data-select-entry="${i}" aria-pressed="${i===0}">Entry (${Math.floor(i/2)+1}, ${i%2+1})</button>`).join('')}</div><div data-entry-addition class="enc-equation"></div>
  </section>
  <section class="enc-card"><div class="enc-heading"><h2>Four complex rectangles · four magnifiers</h2><span class="enc-chip">Equal axis scales</span></div>

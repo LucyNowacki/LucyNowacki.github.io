@@ -1,10 +1,12 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script>if(new URLSearchParams(location.search).has("example"))document.documentElement.classList.add("map-loading");</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#14243a">
-<meta name="description" content="An interactive companion to a 13-page spectral certification toy. Connected geometries explain each certificate and its mathematical role.">
+<meta name="description" content="An interactive companion to a spectral certification toy with Step 00 and 13 subsequent steps. Connected geometries explain each certificate and its mathematical role.">
 <title>Certification protocol · Lucy’s mathematical toy</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2314243a'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%234338ca' stroke-width='2'/%3E%3Ccircle cx='19' cy='12' r='3' fill='%23ffffff'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="./styles.css?v=82">
@@ -20,7 +22,7 @@
 <link rel="stylesheet" href="./math.css?v=82">
 <script src="./math-config.js?v=82"></script>
 <script defer src="./vendor/mathjax/tex-mml-svg.js" onerror="window.siteMathReject(new Error('MathJax could not load'))"></script>
-<script type="module" src="./app.mjs?v=three2"></script>
+<script type="module" src="./certification-entry.mjs?v=4kscale1"></script>
   <link rel="stylesheet" href="./step-nine.css?v=82">
   <link rel="stylesheet" href="./step-ten.css?v=82">
   <link rel="stylesheet" href="./step-eleven.css?v=100">
@@ -36,6 +38,19 @@
 <link rel="stylesheet" href="./step-eleven-palette-test.css?v=117">
 <link rel="stylesheet" href="../certification-protocol-night/theme-switch.css?v=1">
 <script defer src="../certification-protocol-night/theme-switch.js?v=1"></script>
+<link rel="stylesheet" href="./example-chooser.css?v=maps1">
+<script type="module" src="./example-chooser.mjs?v=zero1"></script>
+<link rel="stylesheet" href="./map-protocol.css?v=maps2">
+<link rel="stylesheet" href="./map-shell.css?v=maps2">
+<link rel="stylesheet" href="./step-zero.css?v=zero1">
+<link rel="stylesheet" href="./step-zero-exercises.css?v=exercises1">
+<link rel="stylesheet" href="./step-zero-lessons.css?v=lessons1">
+<link rel="stylesheet" href="./step-zero-connections.css?v=origins2">
+<link rel="stylesheet" href="./responsive-layout.css?v=responsive2">
+<link rel="stylesheet" href="./story-responsive.css?v=responsive2">
+<link rel="stylesheet" href="./compact-density.css?v=dense6">
+<link rel="stylesheet" href="./roadmap.css?v=roadmap1">
+<script type="module" src="./roadmap.mjs?v=roadmap1"></script>
 </head>
 <body>
 <a class="skip-link" href="#workspace">Skip to current page</a>
@@ -47,7 +62,7 @@
   </a>
   <div class="sidebar-intro"><span class="eyebrow">THE TOY EXAMPLE</span><span class="side-counter">13 pages</span></div>
   <nav id="step-nav" aria-label="Certification steps"></nav>
-  <div class="sidebar-footer"><span class="outline-dot" aria-hidden="true"></span><div>All 13 pages available<span>One complete geometric story</span></div></div>
+  <div class="sidebar-footer"><span class="outline-dot" aria-hidden="true"></span><div>Steps 00–13 available<span>One complete geometric story</span></div></div>
 </aside>
 <button class="scrim" id="scrim" aria-label="Close navigation" hidden></button>
 <div class="main-shell">
@@ -56,6 +71,7 @@
     <div class="topbar-label">Lucy's mathematical toy <span class="topbar-divider">/</span> <span>Certification protocol</span></div>
     <button class="reference-button" id="reference-open"><span aria-hidden="true">𝑠</span> Notation &amp; data</button>
   </header>
+  <div class="example-chooser" data-example-chooser></div>
   <main id="workspace" tabindex="-1">
     <div id="intro-page" hidden></div>
     <div id="step-page">
@@ -73,6 +89,9 @@
           <button id="tab-gate-diagram" class="tab" role="tab" aria-controls="panel-gate-diagram" aria-selected="false" tabindex="-1" data-tab="gate-diagram" hidden>Gate diagram</button>
           <button id="tab-gate2" class="tab" role="tab" aria-controls="panel-gate2" aria-selected="false" tabindex="-1" data-tab="gate2" hidden>From the rectangles to the Gate-2 radius</button>
           <button id="tab-connections" class="tab" role="tab" aria-controls="panel-connections" aria-selected="false" tabindex="-1" data-tab="connections">Connections</button>
+          <button id="tab-exercises" class="tab" role="tab" aria-controls="panel-exercises" aria-selected="false" tabindex="-1" data-tab="exercises" hidden>Exercises</button>
+          <button id="tab-why-dyadic" class="tab" role="tab" aria-controls="panel-why-dyadic" aria-selected="false" tabindex="-1" data-tab="why-dyadic" hidden>Why dyadic?</button>
+          <button id="tab-matrix-origin" class="tab" role="tab" aria-controls="panel-matrix-origin" aria-selected="false" tabindex="-1" data-tab="matrix-origin" hidden>From map to matrix</button>
           <button id="tab-optional-upper" class="tab" role="tab" aria-controls="panel-optional-upper" aria-selected="false" tabindex="-1" data-tab="optional-upper" hidden>Optional Upper Bound</button>
         </div>
         <div id="panel-geometry" class="tab-panel" role="tabpanel" aria-labelledby="tab-geometry" tabindex="0">
@@ -91,6 +110,9 @@
         </div>
         <div id="panel-gate-diagram" class="tab-panel" role="tabpanel" aria-labelledby="tab-gate-diagram" tabindex="0" hidden></div>
         <div id="panel-gate2" class="tab-panel" role="tabpanel" aria-labelledby="tab-gate2" tabindex="0" hidden></div>
+        <div id="panel-exercises" class="tab-panel" role="tabpanel" aria-labelledby="tab-exercises" tabindex="0" hidden></div>
+        <div id="panel-why-dyadic" class="tab-panel" role="tabpanel" aria-labelledby="tab-why-dyadic" tabindex="0" hidden></div>
+        <div id="panel-matrix-origin" class="tab-panel" role="tabpanel" aria-labelledby="tab-matrix-origin" tabindex="0" hidden></div>
         <div id="panel-optional-upper" class="tab-panel text-panel" role="tabpanel" aria-labelledby="tab-optional-upper" tabindex="0" hidden></div>
         <div id="panel-connections" class="tab-panel text-panel" role="tabpanel" aria-labelledby="tab-connections" tabindex="0" hidden>
           <p class="eyebrow">PLACE IN THE PROTOCOL</p><h2 id="connections-title"></h2><p id="connections-copy"></p><div id="connection-links"></div>
@@ -103,7 +125,7 @@
       </aside>
     </div>
     <footer class="step-footer"><a class="page-button" id="previous-step" href="#step-01"><span aria-hidden="true">←</span> Previous step</a><span id="step-position"></span><a class="page-button primary" id="next-step" href="#step-02">Next step <span aria-hidden="true">→</span></a></footer>
-    <p class="scope-note">Abstract 2 × 2 toy · All 13 pages available · Animations illustrate the supplied toy data</p>
+    <p class="scope-note">Abstract 2 × 2 toy · Steps 00–13 available · Animations illustrate the supplied toy data</p>
     </div>
   </main>
 </div>

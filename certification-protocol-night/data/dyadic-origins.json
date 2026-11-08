@@ -1,0 +1,1448 @@
+{
+  "schemaVersion": 1,
+  "scope": "Validated finite-quadrature target enclosures and exact coarse dyadic midpoints",
+  "N": 3,
+  "M": 3,
+  "r": 2,
+  "precisionBits": 256,
+  "flintVersion": "0.8.0",
+  "endpointDenominator": 4096,
+  "midpointDenominator": 8192,
+  "radiusDenominator": 8192,
+  "basis": "p_n=sqrt((2n+1)/2)P_n; L2([-1,1],dx) orthonormal",
+  "rawConvention": "Lhat[k,l]=sum_j w_j p_k(x_j) sum_b phi_b(x_j) p_l(tau_b(x_j))",
+  "hardyConvention": "A=C Lhat C^-1; C=T_3(2)diag(1,2,4)",
+  "CFormula": "[[1/sqrt(2),0,sqrt(5/2)/4],[0,sqrt(51/2)/4,0],[0,0,3sqrt(1285/2)/32]]",
+  "C": [
+    [
+      0.7071067811865476,
+      0.0,
+      0.39528470752104744
+    ],
+    [
+      0.0,
+      1.2624381172952597,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      2.376335972931858
+    ]
+  ],
+  "CIntervals": [
+    [
+      "[0.70710678118654752440084436210484904 +/- 7.16e-37]",
+      "0",
+      "[0.39528470752104741649986169305408982 +/- 3.29e-36]"
+    ],
+    [
+      "0",
+      "[1.2624381172952597441704232396337001 +/- 1.12e-35]",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "[2.3763359729318579669111789907930081 +/- 2.80e-35]"
+    ]
+  ],
+  "CInverseIntervals": [
+    [
+      "[1.4142135623730950488016887242096981 +/- 2.15e-35]",
+      "0",
+      "[-0.23524324874198980841754561022927632 +/- 4.83e-36]"
+    ],
+    [
+      "0",
+      "[0.79211803438133944732261850329957653 +/- 3.68e-36]",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "[0.42081591634798487818712447670938873 +/- 1.42e-36]"
+    ]
+  ],
+  "source": [
+    {
+      "path": "Final Deployment/Numerics/blaschke_deformation_spectral_certification.py",
+      "sha256": "b20bac59a78a8233ce7d1e11f10e54f5fbbf10d2c6951a983c76c15328c31824",
+      "locator": "_orthonormal_legendre_values, _real_branch_values, _connection_matrix, assemble_interval_hardy_matrix, _dyadic_midpoint_payload"
+    },
+    {
+      "path": "Numerics/mpmath_pf_raw.py",
+      "sha256": "ab0f82c9928888d243660af3ae472a1b839b014a74c54ae1450c02e4f356461b",
+      "locator": "ortho_legendre_values; assemble_transfer_block"
+    },
+    {
+      "path": "Numerics/maps_test.ipynb",
+      "sha256": "189739c141aa01b3a972c1673966f129aedd5a3e3a69fcc6354165aeaf20b714",
+      "locator": "Literal Cell 2 symmetric Blaschke and Möbius inverse-branch definitions"
+    },
+    {
+      "path": "chapters/numerical_certification_transfer.tex",
+      "sha256": "7c2b0690702054ac54a8dced1860c0ef5ff4c0ce14e835ffc357821f265e4c40",
+      "locator": "eq:numerics-transfer-block-entry; eq:numerics-X-gauge-matrix; legEDMD:prop-exact-dyadic-Hardy-matrix-replacement"
+    }
+  ],
+  "generatorSha256": "7685f5a370ee57e879b6e044f185fdde1f1be15e5db9f4e987ba7f758a0fc0e1",
+  "maps": [
+    {
+      "id": "skew",
+      "label": "Asymmetric affine doubling · α = 1/4",
+      "N": 3,
+      "M": 3,
+      "r": 2,
+      "rawMatrix": [
+        [
+          1.0,
+          0.0,
+          -3.0226589942830556e-77
+        ],
+        [
+          0.0,
+          0.625,
+          0.3630921887069453
+        ],
+        [
+          -3.994227956731181e-77,
+          -3.7783237428538195e-78,
+          0.4375
+        ]
+      ],
+      "rawIntervals": [
+        [
+          "[1.0000000000000000000000000000000000 +/- 3e-40]",
+          "[+/- 1.15e-76]",
+          "[+/- 1.78e-76]"
+        ],
+        [
+          "[+/- 8.99e-77]",
+          "[0.62500000000000000000000000000000000 +/- 3e-40]",
+          "[0.36309218870694533298555613122959996 +/- 3.52e-36]"
+        ],
+        [
+          "[+/- 1.92e-76]",
+          "[+/- 1.69e-76]",
+          "[0.43750000000000000000000000000000000 +/- 3e-40]"
+        ]
+      ],
+      "hardyMatrix": [
+        [
+          1.0,
+          -1.1830389672667666e-78,
+          -0.0935674292327708
+        ],
+        [
+          0.0,
+          0.625,
+          0.19289419692210982
+        ],
+        [
+          -1.3423188379839459e-76,
+          -7.112084336806581e-78,
+          0.4375
+        ]
+      ],
+      "hardyIntervals": [
+        [
+          "[1.0000000000000000000000000000000000 +/- 3e-40]",
+          "[+/- 1.18e-76]",
+          "[-0.093567429232770801740494288468998923 +/- 3.94e-37]"
+        ],
+        [
+          "[+/- 1.61e-76]",
+          "[0.62500000000000000000000000000000000 +/- 3e-40]",
+          "[0.19289419692210981838864043091553043 +/- 2.77e-36]"
+        ],
+        [
+          "[+/- 6.45e-76]",
+          "[+/- 3.19e-76]",
+          "[0.43750000000000000000000000000000000 +/- 3e-40]"
+        ]
+      ],
+      "entries": [
+        [
+          {
+            "lowerNumerator": 4095,
+            "upperNumerator": 4097,
+            "denominator": 4096,
+            "midpointNumerator": 8192,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[1.0000000000000000000000000000000000 +/- 3e-40]",
+            "lower": 0.999755859375,
+            "upper": 1.000244140625,
+            "midpoint": 1.0,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": -1,
+            "upperNumerator": 1,
+            "denominator": 4096,
+            "midpointNumerator": 0,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[+/- 1.18e-76]",
+            "lower": -0.000244140625,
+            "upper": 0.000244140625,
+            "midpoint": 0.0,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": -384,
+            "upperNumerator": -383,
+            "denominator": 4096,
+            "midpointNumerator": -767,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[-0.093567429232770801740494288468998923 +/- 3.94e-37]",
+            "lower": -0.09375,
+            "upper": -0.093505859375,
+            "midpoint": -0.0936279296875,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          }
+        ],
+        [
+          {
+            "lowerNumerator": -1,
+            "upperNumerator": 1,
+            "denominator": 4096,
+            "midpointNumerator": 0,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[+/- 1.61e-76]",
+            "lower": -0.000244140625,
+            "upper": 0.000244140625,
+            "midpoint": 0.0,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": 2559,
+            "upperNumerator": 2561,
+            "denominator": 4096,
+            "midpointNumerator": 5120,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[0.62500000000000000000000000000000000 +/- 3e-40]",
+            "lower": 0.624755859375,
+            "upper": 0.625244140625,
+            "midpoint": 0.625,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": 790,
+            "upperNumerator": 791,
+            "denominator": 4096,
+            "midpointNumerator": 1581,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[0.19289419692210981838864043091553043 +/- 2.77e-36]",
+            "lower": 0.19287109375,
+            "upper": 0.193115234375,
+            "midpoint": 0.1929931640625,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          }
+        ],
+        [
+          {
+            "lowerNumerator": -1,
+            "upperNumerator": 1,
+            "denominator": 4096,
+            "midpointNumerator": 0,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[+/- 6.45e-76]",
+            "lower": -0.000244140625,
+            "upper": 0.000244140625,
+            "midpoint": 0.0,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": -1,
+            "upperNumerator": 1,
+            "denominator": 4096,
+            "midpointNumerator": 0,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[+/- 3.19e-76]",
+            "lower": -0.000244140625,
+            "upper": 0.000244140625,
+            "midpoint": 0.0,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": 1791,
+            "upperNumerator": 1793,
+            "denominator": 4096,
+            "midpointNumerator": 3584,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[0.43750000000000000000000000000000000 +/- 3e-40]",
+            "lower": 0.437255859375,
+            "upper": 0.437744140625,
+            "midpoint": 0.4375,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          }
+        ]
+      ],
+      "midpointNumerators": [
+        [
+          8192,
+          0,
+          -767
+        ],
+        [
+          0,
+          5120,
+          1581
+        ],
+        [
+          0,
+          0,
+          3584
+        ]
+      ],
+      "midpointDenominator": 8192,
+      "radiusNumerators": [
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "radiusDenominator": 8192,
+      "imaginaryMatrix": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "nodes": [
+        {
+          "x": -0.7745966692414834,
+          "w": 0.5555555555555556,
+          "xInterval": "[-0.77459666924148337703585307995647992 +/- 2.17e-36]",
+          "wInterval": "[0.55555555555555555555555555555555556 +/- 4.45e-36]",
+          "pValues": [
+            0.7071067811865476,
+            -0.9486832980505138,
+            0.6324555320336759
+          ],
+          "branches": [
+            {
+              "label": 1,
+              "tau": -0.9436491673103709,
+              "phi": 0.25,
+              "tauInterval": "[-0.94364916731037084425896326998911998 +/- 5.42e-37]",
+              "phiInterval": "0.25000000000000000000000000000000000",
+              "pValues": [
+                0.7071067811865476,
+                -1.1557294780563203,
+                1.3213745221914448
+              ]
+            },
+            {
+              "label": 2,
+              "tau": -0.33094750193111255,
+              "phi": 0.75,
+              "tauInterval": "[-0.33094750193111253277688980996735994 +/- 1.63e-36]",
+              "phiInterval": "0.75000000000000000000000000000000000",
+              "pValues": [
+                0.7071067811865476,
+                -0.4053262556899881,
+                -0.5308051071493499
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "w": 0.8888888888888888,
+          "xInterval": "0",
+          "wInterval": "[0.88888888888888888888888888888888889 +/- 1.12e-36]",
+          "pValues": [
+            0.7071067811865476,
+            0.0,
+            -0.7905694150420949
+          ],
+          "branches": [
+            {
+              "label": 1,
+              "tau": -0.75,
+              "phi": 0.25,
+              "tauInterval": "-0.75000000000000000000000000000000000",
+              "phiInterval": "0.25000000000000000000000000000000000",
+              "pValues": [
+                0.7071067811865476,
+                -0.9185586535436918,
+                0.5435164728414402
+              ]
+            },
+            {
+              "label": 2,
+              "tau": 0.25,
+              "phi": 0.75,
+              "tauInterval": "0.25000000000000000000000000000000000",
+              "phiInterval": "0.75000000000000000000000000000000000",
+              "pValues": [
+                0.7071067811865476,
+                0.30618621784789724,
+                -0.642337649721702
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.7745966692414834,
+          "w": 0.5555555555555556,
+          "xInterval": "[0.77459666924148337703585307995647992 +/- 2.17e-36]",
+          "wInterval": "[0.55555555555555555555555555555555556 +/- 4.45e-36]",
+          "pValues": [
+            0.7071067811865476,
+            0.9486832980505138,
+            0.6324555320336759
+          ],
+          "branches": [
+            {
+              "label": 1,
+              "tau": -0.5563508326896291,
+              "phi": 0.25,
+              "tauInterval": "[-0.55635083268962915574103673001088002 +/- 5.42e-37]",
+              "phiInterval": "0.25000000000000000000000000000000000",
+              "pValues": [
+                0.7071067811865476,
+                -0.6813878290310633,
+                -0.05646345812409297
+              ]
+            },
+            {
+              "label": 2,
+              "tau": 0.8309475019311126,
+              "phi": 0.75,
+              "tauInterval": "[0.83094750193111253277688980996735994 +/- 1.63e-36]",
+              "phiInterval": "0.75000000000000000000000000000000000",
+              "pValues": [
+                0.7071067811865476,
+                1.0176986913857826,
+                0.8470328731661878
+              ]
+            }
+          ]
+        }
+      ],
+      "branchMatrices": [
+        [
+          [
+            0.25,
+            -0.3247595264191645,
+            0.2096313728906053
+          ],
+          [
+            0.0,
+            0.0625,
+            -0.18154609435347266
+          ],
+          [
+            -9.71568962448125e-78,
+            1.349401336733507e-77,
+            0.015625
+          ]
+        ],
+        [
+          [
+            0.75,
+            0.3247595264191645,
+            -0.2096313728906053
+          ],
+          [
+            0.0,
+            0.5625,
+            0.544638283060418
+          ],
+          [
+            -3.0226589942830556e-77,
+            -1.727233711018889e-77,
+            0.421875
+          ]
+        ]
+      ],
+      "checks": {
+        "gaussRuleEnclosed": true,
+        "gramIdentityContained": true,
+        "branchRangesAndPositiveWeightsProven": true,
+        "hardyConnectionInverseEnclosed": true,
+        "allCoarseBoxesContainArbTargets": true,
+        "independent110DigitRawAndHardyResultsContained": true,
+        "exactAffineRawAndHardyFormulaContained": true
+      }
+    },
+    {
+      "id": "symmetric",
+      "label": "Symmetric Blaschke · μ = 3/10",
+      "N": 3,
+      "M": 3,
+      "r": 2,
+      "rawMatrix": [
+        [
+          1.0,
+          4.3180842775472223e-78,
+          0.000326629649213756
+        ],
+        [
+          0.0,
+          0.6705130704815297,
+          0.0
+        ],
+        [
+          -3.8862758497925e-77,
+          1.0795210693868056e-78,
+          0.5130329478696978
+        ]
+      ],
+      "rawIntervals": [
+        [
+          "[1.0000000000000000000000000000000000 +/- 3e-40]",
+          "[+/- 1.66e-76]",
+          "[0.00032662964921375596948711870603551483 +/- 1.59e-39]"
+        ],
+        [
+          "[+/- 1.10e-76]",
+          "[0.67051307048152973781858923572365892 +/- 3.05e-37]",
+          "[+/- 2.72e-76]"
+        ],
+        [
+          "[+/- 2.03e-76]",
+          "[+/- 2.05e-76]",
+          "[0.51303294786969773817751294255830885 +/- 4.19e-36]"
+        ]
+      ],
+      "hardyMatrix": [
+        [
+          1.0,
+          2.756621841957075e-78,
+          -0.08090592783334961
+        ],
+        [
+          0.0,
+          0.6705130704815297,
+          0.0
+        ],
+        [
+          -1.3060399485231417e-76,
+          2.0320238388525723e-78,
+          0.5130329478696978
+        ]
+      ],
+      "hardyIntervals": [
+        [
+          "[1.0000000000000000000000000000000000 +/- 3e-40]",
+          "[+/- 1.57e-76]",
+          "[-0.080905927833349617063398344487857397 +/- 4.32e-38]"
+        ],
+        [
+          "[+/- 1.95e-76]",
+          "[0.67051307048152973781858923572365892 +/- 3.05e-37]",
+          "[+/- 1.77e-76]"
+        ],
+        [
+          "[+/- 6.83e-76]",
+          "[+/- 3.85e-76]",
+          "[0.51303294786969773817751294255830885 +/- 4.19e-36]"
+        ]
+      ],
+      "entries": [
+        [
+          {
+            "lowerNumerator": 4095,
+            "upperNumerator": 4097,
+            "denominator": 4096,
+            "midpointNumerator": 8192,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[1.0000000000000000000000000000000000 +/- 3e-40]",
+            "lower": 0.999755859375,
+            "upper": 1.000244140625,
+            "midpoint": 1.0,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": -1,
+            "upperNumerator": 1,
+            "denominator": 4096,
+            "midpointNumerator": 0,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[+/- 1.57e-76]",
+            "lower": -0.000244140625,
+            "upper": 0.000244140625,
+            "midpoint": 0.0,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": -332,
+            "upperNumerator": -331,
+            "denominator": 4096,
+            "midpointNumerator": -663,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[-0.080905927833349617063398344487857397 +/- 4.32e-38]",
+            "lower": -0.0810546875,
+            "upper": -0.080810546875,
+            "midpoint": -0.0809326171875,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          }
+        ],
+        [
+          {
+            "lowerNumerator": -1,
+            "upperNumerator": 1,
+            "denominator": 4096,
+            "midpointNumerator": 0,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[+/- 1.95e-76]",
+            "lower": -0.000244140625,
+            "upper": 0.000244140625,
+            "midpoint": 0.0,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": 2746,
+            "upperNumerator": 2747,
+            "denominator": 4096,
+            "midpointNumerator": 5493,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[0.67051307048152973781858923572365892 +/- 3.05e-37]",
+            "lower": 0.67041015625,
+            "upper": 0.670654296875,
+            "midpoint": 0.6705322265625,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": -1,
+            "upperNumerator": 1,
+            "denominator": 4096,
+            "midpointNumerator": 0,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[+/- 1.77e-76]",
+            "lower": -0.000244140625,
+            "upper": 0.000244140625,
+            "midpoint": 0.0,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          }
+        ],
+        [
+          {
+            "lowerNumerator": -1,
+            "upperNumerator": 1,
+            "denominator": 4096,
+            "midpointNumerator": 0,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[+/- 6.83e-76]",
+            "lower": -0.000244140625,
+            "upper": 0.000244140625,
+            "midpoint": 0.0,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": -1,
+            "upperNumerator": 1,
+            "denominator": 4096,
+            "midpointNumerator": 0,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 2,
+            "radiusDenominator": 8192,
+            "arbInterval": "[+/- 3.85e-76]",
+            "lower": -0.000244140625,
+            "upper": 0.000244140625,
+            "midpoint": 0.0,
+            "radius": 0.000244140625,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": 2101,
+            "upperNumerator": 2102,
+            "denominator": 4096,
+            "midpointNumerator": 4203,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[0.51303294786969773817751294255830885 +/- 4.19e-36]",
+            "lower": 0.512939453125,
+            "upper": 0.51318359375,
+            "midpoint": 0.5130615234375,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          }
+        ]
+      ],
+      "midpointNumerators": [
+        [
+          8192,
+          0,
+          -663
+        ],
+        [
+          0,
+          5493,
+          0
+        ],
+        [
+          0,
+          0,
+          4203
+        ]
+      ],
+      "midpointDenominator": 8192,
+      "radiusNumerators": [
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          2,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "radiusDenominator": 8192,
+      "imaginaryMatrix": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "nodes": [
+        {
+          "x": -0.7745966692414834,
+          "w": 0.5555555555555556,
+          "xInterval": "[-0.77459666924148337703585307995647992 +/- 2.17e-36]",
+          "wInterval": "[0.55555555555555555555555555555555556 +/- 4.45e-36]",
+          "pValues": [
+            0.7071067811865476,
+            -0.9486832980505138,
+            0.6324555320336759
+          ],
+          "branches": [
+            {
+              "label": 1,
+              "tau": -0.8541298452212467,
+              "phi": 0.6414630904919343,
+              "tauInterval": "[-0.85412984522124667907312835286741090 +/- 2.96e-36]",
+              "phiInterval": "[0.64146309049193428415727279298441605 +/- 2.82e-36]",
+              "pValues": [
+                0.7071067811865476,
+                -1.0460911474372137,
+                0.9396813825558595
+              ]
+            },
+            {
+              "label": 2,
+              "tau": 0.0795331759797633,
+              "phi": 0.3585369095080657,
+              "tauInterval": "[0.079533175979763302037275272910930975 +/- 1.22e-37]",
+              "phiInterval": "[0.35853690950806571584272720701558395 +/- 2.82e-36]",
+              "pValues": [
+                0.7071067811865476,
+                0.09740784938669983,
+                -0.7755671126800107
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "w": 0.8888888888888888,
+          "xInterval": "0",
+          "wInterval": "[0.88888888888888888888888888888888889 +/- 1.12e-36]",
+          "pValues": [
+            0.7071067811865476,
+            0.0,
+            -0.7905694150420949
+          ],
+          "branches": [
+            {
+              "label": 1,
+              "tau": -0.4030133159793217,
+              "phi": 0.5,
+              "tauInterval": "[-0.40301331597932170949863307893086143 +/- 4.33e-36]",
+              "phiInterval": "0.50000000000000000000000000000000000",
+              "pValues": [
+                0.7071067811865476,
+                -0.4935884918481922,
+                -0.40535719545477283
+              ]
+            },
+            {
+              "label": 2,
+              "tau": 0.4030133159793217,
+              "phi": 0.5,
+              "tauInterval": "[0.40301331597932170949863307893086143 +/- 4.33e-36]",
+              "phiInterval": "0.50000000000000000000000000000000000",
+              "pValues": [
+                0.7071067811865476,
+                0.4935884918481922,
+                -0.40535719545477283
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.7745966692414834,
+          "w": 0.5555555555555556,
+          "xInterval": "[0.77459666924148337703585307995647992 +/- 2.17e-36]",
+          "wInterval": "[0.55555555555555555555555555555555556 +/- 4.45e-36]",
+          "pValues": [
+            0.7071067811865476,
+            0.9486832980505138,
+            0.6324555320336759
+          ],
+          "branches": [
+            {
+              "label": 1,
+              "tau": -0.0795331759797633,
+              "phi": 0.3585369095080657,
+              "tauInterval": "[-0.079533175979763302037275272910930975 +/- 1.22e-37]",
+              "phiInterval": "[0.35853690950806571584272720701558395 +/- 2.82e-36]",
+              "pValues": [
+                0.7071067811865476,
+                -0.09740784938669983,
+                -0.7755671126800107
+              ]
+            },
+            {
+              "label": 2,
+              "tau": 0.8541298452212467,
+              "phi": 0.6414630904919343,
+              "tauInterval": "[0.85412984522124667907312835286741090 +/- 2.96e-36]",
+              "phiInterval": "[0.64146309049193428415727279298441605 +/- 2.82e-36]",
+              "pValues": [
+                0.7071067811865476,
+                1.0460911474372137,
+                0.9396813825558595
+              ]
+            }
+          ]
+        }
+      ],
+      "branchMatrices": [
+        [
+          [
+            0.5,
+            -0.4324444940124726,
+            0.000163314824606878
+          ],
+          [
+            -0.10544036221572307,
+            0.3352565352407649,
+            -0.4642436317991858
+          ],
+          [
+            -1.94313792489625e-77,
+            -0.07461734182540772,
+            0.2565164739348489
+          ]
+        ],
+        [
+          [
+            0.5,
+            0.4324444940124726,
+            0.000163314824606878
+          ],
+          [
+            0.10544036221572307,
+            0.3352565352407649,
+            0.4642436317991858
+          ],
+          [
+            -1.94313792489625e-77,
+            0.07461734182540772,
+            0.2565164739348489
+          ]
+        ]
+      ],
+      "checks": {
+        "gaussRuleEnclosed": true,
+        "gramIdentityContained": true,
+        "branchRangesAndPositiveWeightsProven": true,
+        "hardyConnectionInverseEnclosed": true,
+        "allCoarseBoxesContainArbTargets": true,
+        "independent110DigitRawAndHardyResultsContained": true
+      }
+    },
+    {
+      "id": "mobius",
+      "label": "Möbius-warped doubling · b = 1/5",
+      "N": 3,
+      "M": 3,
+      "r": 2,
+      "rawMatrix": [
+        [
+          0.9999892502015587,
+          -0.0001362558946341318,
+          -0.0010655823794666801
+        ],
+        [
+          0.23273996339275427,
+          0.4910102607707253,
+          -0.031014152806662112
+        ],
+        [
+          0.03576747272797299,
+          0.14860068951727,
+          0.2102469141455546
+        ]
+      ],
+      "rawIntervals": [
+        [
+          "[0.99998925020155872077398548777210427 +/- 3.05e-36]",
+          "[-0.00013625589463413181258883378729465839 +/- 4.25e-39]",
+          "[-0.0010655823794666800223958915726813401 +/- 4.82e-38]"
+        ],
+        [
+          "[0.23273996339275427217514731812763671 +/- 3.89e-36]",
+          "[0.49101026077072530299892942581097096 +/- 2.33e-36]",
+          "[-0.031014152806662112264921361671051513 +/- 3.65e-37]"
+        ],
+        [
+          "[0.035767472727972986490264449546596496 +/- 2.23e-38]",
+          "[0.14860068951727002136306778743417349 +/- 4.17e-36]",
+          "[0.21024691414555461094779291485435951 +/- 4.89e-36]"
+        ]
+      ],
+      "hardyMatrix": [
+        [
+          1.019983875302338,
+          0.04645236215762338,
+          -0.13501042026075266
+        ],
+        [
+          0.4155239477577594,
+          0.4910102607707253,
+          -0.08559551896410213
+        ],
+        [
+          0.1202018342430774,
+          0.27971681087935474,
+          0.19025228904477526
+        ]
+      ],
+      "hardyIntervals": [
+        [
+          "[1.0199838753023380811609782316581564 +/- 9.57e-36]",
+          "[0.046452362157623374668847615929835522 +/- 4.18e-37]",
+          "[-0.13501042026075264805492423787961290 +/- 1.38e-36]"
+        ],
+        [
+          "[0.41552394775775939429804587368725581 +/- 4.15e-36]",
+          "[0.49101026077072530299892942581097096 +/- 2.33e-36]",
+          "[-0.085595518964102124542655574879490453 +/- 4.10e-37]"
+        ],
+        [
+          "[0.12020183424307739491532136461690638 +/- 3.67e-36]",
+          "[0.27971681087935472198438389725170600 +/- 3.66e-36]",
+          "[0.19025228904477525056080017096830738 +/- 1.64e-36]"
+        ]
+      ],
+      "entries": [
+        [
+          {
+            "lowerNumerator": 4177,
+            "upperNumerator": 4178,
+            "denominator": 4096,
+            "midpointNumerator": 8355,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[1.0199838753023380811609782316581564 +/- 9.57e-36]",
+            "lower": 1.019775390625,
+            "upper": 1.02001953125,
+            "midpoint": 1.0198974609375,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": 190,
+            "upperNumerator": 191,
+            "denominator": 4096,
+            "midpointNumerator": 381,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[0.046452362157623374668847615929835522 +/- 4.18e-37]",
+            "lower": 0.04638671875,
+            "upper": 0.046630859375,
+            "midpoint": 0.0465087890625,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": -554,
+            "upperNumerator": -553,
+            "denominator": 4096,
+            "midpointNumerator": -1107,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[-0.13501042026075264805492423787961290 +/- 1.38e-36]",
+            "lower": -0.13525390625,
+            "upper": -0.135009765625,
+            "midpoint": -0.1351318359375,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          }
+        ],
+        [
+          {
+            "lowerNumerator": 1701,
+            "upperNumerator": 1702,
+            "denominator": 4096,
+            "midpointNumerator": 3403,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[0.41552394775775939429804587368725581 +/- 4.15e-36]",
+            "lower": 0.415283203125,
+            "upper": 0.41552734375,
+            "midpoint": 0.4154052734375,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": 2011,
+            "upperNumerator": 2012,
+            "denominator": 4096,
+            "midpointNumerator": 4023,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[0.49101026077072530299892942581097096 +/- 2.33e-36]",
+            "lower": 0.490966796875,
+            "upper": 0.4912109375,
+            "midpoint": 0.4910888671875,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": -351,
+            "upperNumerator": -350,
+            "denominator": 4096,
+            "midpointNumerator": -701,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[-0.085595518964102124542655574879490453 +/- 4.10e-37]",
+            "lower": -0.085693359375,
+            "upper": -0.08544921875,
+            "midpoint": -0.0855712890625,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          }
+        ],
+        [
+          {
+            "lowerNumerator": 492,
+            "upperNumerator": 493,
+            "denominator": 4096,
+            "midpointNumerator": 985,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[0.12020183424307739491532136461690638 +/- 3.67e-36]",
+            "lower": 0.1201171875,
+            "upper": 0.120361328125,
+            "midpoint": 0.1202392578125,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": 1145,
+            "upperNumerator": 1146,
+            "denominator": 4096,
+            "midpointNumerator": 2291,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[0.27971681087935472198438389725170600 +/- 3.66e-36]",
+            "lower": 0.279541015625,
+            "upper": 0.27978515625,
+            "midpoint": 0.2796630859375,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          },
+          {
+            "lowerNumerator": 779,
+            "upperNumerator": 780,
+            "denominator": 4096,
+            "midpointNumerator": 1559,
+            "midpointDenominator": 8192,
+            "radiusNumerator": 1,
+            "radiusDenominator": 8192,
+            "arbInterval": "[0.19025228904477525056080017096830738 +/- 1.64e-36]",
+            "lower": 0.190185546875,
+            "upper": 0.1904296875,
+            "midpoint": 0.1903076171875,
+            "radius": 0.0001220703125,
+            "containsArbTarget": true,
+            "imaginaryLower": 0,
+            "imaginaryUpper": 0
+          }
+        ]
+      ],
+      "midpointNumerators": [
+        [
+          8355,
+          381,
+          -1107
+        ],
+        [
+          3403,
+          4023,
+          -701
+        ],
+        [
+          985,
+          2291,
+          1559
+        ]
+      ],
+      "midpointDenominator": 8192,
+      "radiusNumerators": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "radiusDenominator": 8192,
+      "imaginaryMatrix": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "nodes": [
+        {
+          "x": -0.7745966692414834,
+          "w": 0.5555555555555556,
+          "xInterval": "[-0.77459666924148337703585307995647992 +/- 2.17e-36]",
+          "wInterval": "[0.55555555555555555555555555555555556 +/- 4.45e-36]",
+          "pValues": [
+            0.7071067811865476,
+            -0.9486832980505138,
+            0.6324555320336759
+          ],
+          "branches": [
+            {
+              "label": 1,
+              "tau": -0.9219327881515492,
+              "phi": 0.35986361141329953,
+              "tauInterval": "[-0.92193278815154920182091135079826881 +/- 4.19e-36]",
+              "phiInterval": "[0.35986361141329950745044616770562754 +/- 4.83e-36]",
+              "pValues": [
+                0.7071067811865476,
+                -1.1291324540563583,
+                1.2252878812072299
+              ]
+            },
+            {
+              "label": 2,
+              "tau": 0.0780672118484508,
+              "phi": 0.35986361141329953,
+              "tauInterval": "[0.078067211848450798179088649201731186 +/- 1.81e-37]",
+              "phiInterval": "[0.35986361141329950745044616770562754 +/- 4.83e-36]",
+              "pValues": [
+                0.7071067811865476,
+                0.0956124173352308,
+                -0.7761150638890725
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.0,
+          "w": 0.8888888888888888,
+          "xInterval": "0",
+          "wInterval": "[0.88888888888888888888888888888888889 +/- 1.12e-36]",
+          "pValues": [
+            0.7071067811865476,
+            0.0,
+            -0.7905694150420949
+          ],
+          "branches": [
+            {
+              "label": 1,
+              "tau": -0.6,
+              "phi": 0.48,
+              "tauInterval": "[-0.60000000000000000000000000000000000 +/- 3e-40]",
+              "phiInterval": "[0.48000000000000000000000000000000000 +/- 3e-40]",
+              "pValues": [
+                0.7071067811865476,
+                -0.7348469228349535,
+                0.06324555320336758
+              ]
+            },
+            {
+              "label": 2,
+              "tau": 0.4,
+              "phi": 0.48,
+              "tauInterval": "[0.40000000000000000000000000000000000 +/- 1e-40]",
+              "phiInterval": "[0.48000000000000000000000000000000000 +/- 3e-40]",
+              "pValues": [
+                0.7071067811865476,
+                0.4898979485566356,
+                -0.41109609582188933
+              ]
+            }
+          ]
+        },
+        {
+          "x": 0.7745966692414834,
+          "w": 0.5555555555555556,
+          "xInterval": "[0.77459666924148337703585307995647992 +/- 2.17e-36]",
+          "wInterval": "[0.55555555555555555555555555555555556 +/- 4.45e-36]",
+          "pValues": [
+            0.7071067811865476,
+            0.9486832980505138,
+            0.6324555320336759
+          ],
+          "branches": [
+            {
+              "label": 1,
+              "tau": -0.16003442496320489,
+              "phi": 0.6721170389495061,
+              "tauInterval": "[-0.16003442496320489653974438690664922 +/- 1.40e-36]",
+              "phiInterval": "[0.67211703894950618994272771028416016 +/- 3.70e-36]",
+              "pValues": [
+                0.7071067811865476,
+                -0.1960013412197873,
+                -0.7298275544460997
+              ]
+            },
+            {
+              "label": 2,
+              "tau": 0.8399655750367951,
+              "phi": 0.6721170389495061,
+              "tauInterval": "[0.83996557503679510346025561309335078 +/- 1.40e-36]",
+              "phiInterval": "[0.67211703894950618994272771028416016 +/- 3.70e-36]",
+              "pValues": [
+                0.7071067811865476,
+                1.0287435301718018,
+                0.8827707603016314
+              ]
+            }
+          ]
+        }
+      ],
+      "branchMatrices": [
+        [
+          [
+            0.49999462510077936,
+            -0.4330761750402685,
+            -0.00040086198704819374
+          ],
+          [
+            0.11636998169637713,
+            0.14472576999836992,
+            -0.49092571709882604
+          ],
+          [
+            0.017883736363986494,
+            0.05881257475283916,
+            -0.03875854186105416
+          ]
+        ],
+        [
+          [
+            0.49999462510077936,
+            0.4329399191456344,
+            -0.0006647203924184863
+          ],
+          [
+            0.11636998169637713,
+            0.3462844907723554,
+            0.45991156429216395
+          ],
+          [
+            0.017883736363986494,
+            0.08978811476443087,
+            0.24900545600660878
+          ]
+        ]
+      ],
+      "checks": {
+        "gaussRuleEnclosed": true,
+        "gramIdentityContained": true,
+        "branchRangesAndPositiveWeightsProven": true,
+        "hardyConnectionInverseEnclosed": true,
+        "allCoarseBoxesContainArbTargets": true,
+        "independent110DigitRawAndHardyResultsContained": true
+      }
+    }
+  ],
+  "limitations": [
+    "These enclosures cover evaluation, finite Gauss assembly and Hardy coordinate transport at N=M=3; they do not bound quadrature/discretization error versus the full operator.",
+    "The radius r=2 specifies coordinates for the finite polynomial space. Map-specific complex ellipse admissibility and inverse-branch inclusion have not been certified here.",
+    "For the affine map the degree-at-most-four integrands make M=3 exact in exact arithmetic. Nonlinear Blaschke and Möbius quadrature targets remain finite discretizations.",
+    "Coarse dyadic boxes are deliberately wider than the 256-bit Arb enclosures for readable teaching arithmetic. They are not the default website toy matrix.",
+    "No Schur/residual/contour gate, full-operator spectral count, or theorem certificate is asserted by this payload.",
+    "Decimal numeric fields are display approximations. Integer numerators with their stated denominators define the authoritative exact boxes and midpoints.",
+    "Asymmetric Blaschke principal-angle diagnostics are not included in this validated three-map payload."
+  ],
+  "checks": {
+    "status": "pass",
+    "coarseBoxes": 27,
+    "independentRawAndHardyEntries": 54,
+    "exactAffineEntries": 18,
+    "sourceHashesUnchanged": true,
+    "scientificSourcesModified": false
+  }
+}

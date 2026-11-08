@@ -3,7 +3,7 @@ import {math} from './math-render.mjs?v=103';
 import {drawStory3D} from './story-3d-render.mjs?v=three2';
 import {MATRIX_N} from './story-3d-math.mjs?v=103';
 import {THETA} from './step-five-math.mjs?v=103';
-import {mountCompactBoard} from './display-board.mjs?v=118';
+import {mountCompactBoard} from './display-board.mjs?v=4kscale1';
 const tex=String.raw;
 export const is4K=new URLSearchParams(location.search).get('display')==='4k';
 if(is4K)document.documentElement.dataset.display='4k';

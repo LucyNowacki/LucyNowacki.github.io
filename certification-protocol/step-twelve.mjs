@@ -167,7 +167,7 @@ export function mountStepTwelve(root,{immersive=false}={}){
   const boxes=STORY.slice(0,8).map(d=>q(`[data-story-stage="${d.id}"]`).getBoundingClientRect());
   const canvases=STORY.slice(0,8).map(d=>q(`[data-story-canvas="${d.id}"]`).getBoundingClientRect());
   const pt=(x,y)=>[x-mr.left,y-mr.top],paths=[];
-  const reflow=immersive&&getComputedStyle(map).gridTemplateColumns.split(' ').length<4;
+  const reflow=getComputedStyle(map).gridTemplateColumns.split(' ').length<4;
   for(let i=0;i<7;i++){
    const a=boxes[i],b=boxes[i+1],ac=canvases[i],bc=canvases[i+1];
    const ay=ac.y+ac.height/2,by=bc.y+bc.height/2;

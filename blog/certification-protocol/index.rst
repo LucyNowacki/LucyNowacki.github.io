@@ -20,7 +20,7 @@ from contour separation to the final operator gate and preservation of the
 enclosed spectral count. Its thirteen steps connect the written argument to
 the geometry of balls, ellipsoids, inverse bounds and uncertainty.
 
-`Open the interactive explorer </certification-protocol/?display=4k#step-01>`_
+`Open the interactive explorer </certification-protocol/?display=4k#step-00>`_
 or `open the complete 4K overview </certification-protocol/story-4k.html>`_.
 
 .. TEASER_END
@@ -38,7 +38,7 @@ links above to open it as a full page.
 
 .. raw:: html
 
-   <iframe src="/certification-protocol/?display=4k#step-01"
+   <iframe src="/certification-protocol/?display=4k#step-00"
            title="Interactive spectral certification protocol: thirteen geometric steps"
            loading="lazy" allow="fullscreen" allowfullscreen
            class="night-post-explorer">

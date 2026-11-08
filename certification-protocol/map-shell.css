@@ -1,0 +1,30 @@
+.map-certification { --map-text: #30263e; --map-panel: #fff; --map-line: #d8c9ef; }
+.map-certification.night-edition { --map-text: #eee8fb; --map-panel: #181128; --map-line: #53416d; }
+.map-certification .map-workspace-grid { display:block; min-width:0; }
+.map-certification .workspace-card, .map-certification #panel-geometry { min-width:0; width:100%; }
+.map-certification #workspace { overflow:visible; }
+.map-certification .workspace-heading { flex-wrap:wrap; gap:12px; }
+.map-certification .workspace-heading>div { min-width:0; flex:1 1 440px; }
+.map-certification .map-step-strip { display:flex; gap:5px; align-items:center; flex-wrap:wrap; padding:10px 20px; border-bottom:1px solid var(--map-line); }
+.map-step-strip a { border:1px solid var(--map-line); border-radius:5px; padding:4px 7px; text-decoration:none; }
+.map-certification a[aria-current=step] { background:#713bc5; color:white; }
+.map-certification .nav-group-title { font-size:12px; margin:18px 8px 6px; opacity:.85; }
+.map-certification #step-nav .step-link { display:flex; align-items:baseline; gap:12px; padding:10px 9px; border-radius:7px; text-decoration:none; }
+.map-certification .step-number { flex:0 0 20px; }
+.map-certification .map-protocol-intro { padding:24px; max-width:1100px; margin:auto; color:var(--map-text); }
+.map-certification .map-connection-links { display:flex; flex-wrap:wrap; gap:24px; margin:20px 0; }
+.map-certification .scope-note { font-size:13px; line-height:1.6; }
+.map-certification .text-panel { overflow:auto; }
+.map-certification .tabs { flex-wrap:wrap; }
+.map-certification .topbar-label { overflow-wrap:anywhere; }
+.map-certification .step-footer { flex-wrap:wrap; gap:12px; }
+.map-certification #step-position { flex:1 1 140px; text-align:center; }
+@media(max-width:700px) {
+  .map-certification .context-strip { align-items:flex-start; flex-direction:column; gap:6px; }
+  .map-certification #workspace { padding:12px; }
+  .map-certification .workspace-heading h1 { font-size:25px; }
+  .map-certification .map-step-strip { padding:10px; }
+}
+.map-loading #step-page,.map-loading #sidebar,.map-loading #reference-open { visibility:hidden; }
+.map-loading #workspace::before,.map-loading #story-4k-root::before { content:'Loading the selected map’s certification…'; display:block; padding:24px; }
+.map-loading .story-all-steps>a { visibility:hidden; }

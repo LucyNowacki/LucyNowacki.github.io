@@ -33,17 +33,19 @@ export function mountCompactBoard(root,id,reading,companion){
  candidates.forEach((n,i)=>{const title=n.querySelector('h2,h3,h4')?.textContent.trim()||'Geometry '+(i+1);n.dataset.boardPanel=i;const opt=document.createElement('option');opt.value=i;opt.textContent=title;choices.append(opt);n.setAttribute('data-panel-title',title);});
  function fit(){pending=0;if(!area.isConnected||!area.clientHeight||!native.getClientRects().length)return;
   // Reflow at the actual panel width, not the physical monitor resolution.
-  root.dataset.boardLayout=area.clientWidth<1600?'flow':'overview';
+  root.dataset.boardLayout=area.clientWidth<850?'flow':area.clientWidth<1600?'compact':'overview';
   root.style.setProperty('--board-tools-height',toolbar.offsetHeight+'px');
   root.style.setProperty('--board-key-height',key.offsetHeight+'px');
   board.style.zoom='1';board.style.width='100%';
   if(focus){board.style.height='100%';toolbar.querySelector('[data-board-fit-status]').textContent='Enlarged panel · Esc to return';return;}
   board.style.height='auto';
-  if(root.dataset.boardLayout==='flow'){
-   toolbar.querySelector('[data-board-fit-status]').textContent='Panels fit this width · scroll down for all views';return;
+  if(root.dataset.boardLayout!=='overview'){
+   toolbar.querySelector('[data-board-fit-status]').textContent=root.dataset.boardLayout==='compact'?'Compact paired panels · natural reading size':'Panels fit this width · scroll down for all views';return;
   }
   if(id===8||id===9){toolbar.querySelector('[data-board-fit-status]').textContent='Full-width plots · scroll between scenes';return;}
-  const h=board.scrollHeight,w=board.scrollWidth,scale=Math.min(1,area.clientHeight/Math.max(h,1),area.clientWidth/Math.max(w,1));
+  // Do not let the extra logical height undo the requested desktop reduction.
+  const uiScale=Number(getComputedStyle(root).getPropertyValue('--cert-ui-scale'))||1;
+  const h=board.scrollHeight,w=board.scrollWidth,scale=Math.min(1,area.clientHeight*uiScale/Math.max(h,1),area.clientWidth/Math.max(w,1));
   // A reading-size floor must never push the rightmost panel out of view.
   const applied=Math.min(area.clientWidth/Math.max(w,1),Math.max(.72,scale));board.style.zoom=String(applied);board.style.width='100%';
   toolbar.querySelector('[data-board-fit-status]').textContent=scale<.72?'Compact board · slight vertical scroll available':`Fit ${Math.round(applied*100)}% · all panels`;
