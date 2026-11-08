@@ -65,4 +65,7 @@ function sweep(){scheduled=false;if(!MJ)return;observer.disconnect();
   const walk=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);const nodes=[];while(walk.nextNode()){const n=walk.currentNode,p=n.parentElement;if(p&&!p.closest(skip+',svg,math')&&n.textContent.trim())nodes.push(n);}nodes.forEach(n=>replaceText(n,!!n.parentElement.closest('.matrix,.s3-mini-matrix,.prep-exact-matrix')));
  }finally{observer.observe(document.body,{childList:true,subtree:true,characterData:true});}
 }
-export function startMath(){observer=new MutationObserver(records=>{if(records.every(r=>r.target.nodeType===1&&r.target.closest?.(skip)||r.target.parentElement?.closest(skip)))return;if(!scheduled){scheduled=true;setTimeout(sweep,90);}});window.siteMathReady.then(m=>{MJ=m;sweep();document.documentElement.dataset.mathRenderer='MathJax 4.1.3';}).catch(e=>console.error('MathJax failed to load',e));}
+export function startMath(){observer=new MutationObserver(records=>{const explicit=records.some(r=>[...r.addedNodes].some(n=>n.nodeType===1&&(n.matches('[data-tex]:not([data-math-source])')||n.querySelector('[data-tex]:not([data-math-source])'))));if(!explicit&&records.every(r=>r.target.nodeType===1&&r.target.closest?.(skip)||r.target.parentElement?.closest(skip)))return;if(!scheduled){scheduled=true;setTimeout(sweep,90);}});window.siteMathReady.then(m=>{MJ=m;sweep();document.documentElement.dataset.mathRenderer='MathJax 4.1.3';}).catch(e=>console.error('MathJax failed to load',e));}
+
+// Explicit formula opt-in also works in panels that intentionally suppress legacy text conversion.
+export async function typesetExplicit(root){MJ ||= await window.siteMathReady;root.querySelectorAll("[data-tex]:not([data-math-source])").forEach(el=>put(el,el.dataset.tex));}

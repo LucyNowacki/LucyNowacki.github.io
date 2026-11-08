@@ -1,7 +1,7 @@
 import {loadMapProtocolContext, protocolURL} from './map-protocol-context.mjs?v=maps2';
 import {defaultToyURL} from './example-chooser.mjs?v=maps2';
 import {mountMapProtocolStep,mountMapProtocolOverview,mapProtocolMetadata,mapProtocolArgument,
-  mapProtocolPreparation,mapProtocolAssumptions,mapProtocolLedger} from './map-protocol-view.mjs?v=maps2';
+  mapProtocolPreparation,mapProtocolAssumptions,mapProtocolLedger} from './map-protocol-view.mjs?v=latex2';
 
 const $ = selector => document.querySelector(selector);
 const escape = text => String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

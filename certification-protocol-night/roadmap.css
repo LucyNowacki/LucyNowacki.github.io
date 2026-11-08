@@ -75,3 +75,6 @@ html[data-cert-theme="dark"] #cert-roadmap{--rm-bg:#100b1e;--rm-card:#1d1630;--r
 @media(max-width:600px){#cert-roadmap .rm-graph{grid-template-columns:minmax(0,1fr);gap:24px}#cert-roadmap .rm-header{padding:12px;gap:8px}#cert-roadmap .rm-actions{gap:4px;flex-direction:column}#cert-roadmap .rm-actions button{min-height:38px}#cert-roadmap h1{font-size:22px}#cert-roadmap h1 span{font-size:14px}#cert-roadmap .rm-kicker{font-size:9px}#cert-roadmap #cert-roadmap-intro{font-size:11px}#cert-roadmap .rm-content{padding:12px 22px 20px 14px}#cert-roadmap .rm-context,#cert-roadmap .rm-guide,#cert-roadmap .rm-footnote{font-size:11px}#cert-roadmap .rm-phase h2{font-size:17px}#cert-roadmap .rm-node{margin-bottom:24px}#cert-roadmap .rm-handoff{font-size:12px}#cert-roadmap .rm-origin-links{font-size:12px}.cert-header-tools{gap:5px}.cert-roadmap-launch{padding-inline:8px;min-height:36px}}
 @media(pointer:coarse){.cert-roadmap-launch{min-height:44px}#cert-roadmap button{min-height:44px}#cert-roadmap .rm-origin-links a{padding-block:9px}}
 @media(prefers-reduced-motion:reduce){#cert-roadmap .rm-node{transition:none}}
+
+#cert-roadmap .rm-formula {max-width:100%;overflow-x:auto;}
+#cert-roadmap .rm-formula .site-math {white-space:nowrap;}

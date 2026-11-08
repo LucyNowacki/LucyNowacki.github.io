@@ -124,3 +124,9 @@ html[data-cert-theme="dark"] .s0-root {
 /* The completed preparation lesson uses the full workspace, without the legacy planning rail. */
 #step-page.step-zero .workspace-grid { grid-template-columns: minmax(0,1fr); }
 #step-page.step-zero .details-rail { display: none; }
+
+/* Typeset formulae retain the compact layout; wide tables scroll within their card. */
+.s0-encoding-table {max-width:100%;overflow-x:auto;}
+.s0-encoding-table th,.s0-encoding-table td {vertical-align:middle;}
+.s0-encoding-table td .site-math {white-space:nowrap;}
+.s0-coordinate-buttons strong .site-math {font-size:inherit;color:inherit;}

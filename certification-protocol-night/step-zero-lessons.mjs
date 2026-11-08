@@ -1,4 +1,4 @@
-import {stepZeroOriginsNotice} from './step-zero.mjs?v=midpoint1';
+import {stepZeroOriginsNotice} from './step-zero.mjs?v=latex2';
 import {math} from './math-render.mjs?v=103';
 const tex=String.raw;
 const eq=s=>`<div class="s0l-equation">${math(s)}</div>`;
@@ -43,7 +43,7 @@ const mapChoices=[['skew','Asymmetric doubling · unequal branch lengths'],['bla
 function skewLesson(q=1){const d=skewData(q);return `<p class="s0l-note"><strong>Explicit teaching definition.</strong> Here “asymmetric doubling” means a two-full-branch affine map with unequal branch lengths. This is an additional hand-computable example, not a claim about the origin of the default website matrix. The appendix’s Möbius-warped doubling has its own option.</p><label class="s0l-control">Left-branch length as a fraction of the interval <select data-skew-parameter aria-label="Left branch fraction">${[1,2,3].map(n=>`<option value="${n}" ${n===q?'selected':''}>${n}/4${n===2?' · symmetric':''}</option>`).join('')}</select></label>
  ${eq(tex`\alpha=\frac{${q}}4,\quad T(x)=\begin{cases}(x+1)/\alpha-1,&-1\le x\le2\alpha-1,\\(x-\alpha)/(1-\alpha),&2\alpha-1<x\le1.\end{cases}`)}
  ${eq(tex`\tau_1(y)=\alpha y+\alpha-1,\quad\tau_2(y)=(1-\alpha)y+\alpha,\quad\phi_1=\alpha,\quad\phi_2=1-\alpha.`)}
- <div class="s0l-split" role="img" aria-label="Inverse branches cover fractions ${q}/4 and ${4-q}/4 of the input interval"><span style="flex:${q}">τ₁ · ${q}/4</span><span style="flex:${4-q}">τ₂ · ${4-q}/4</span></div><p>Each output y receives two contributions. At y = 0, the input points are ${q-4}/4 and ${q}/4, with weights ${q}/4 and ${4-q}/4.</p>
+ <div class="s0l-split" role="img" aria-label="Inverse branches cover fractions ${q}/4 and ${4-q}/4 of the input interval"><span style="flex:${q}">${math(tex`\tau_1:\ \frac{${q}}4`)}</span><span style="flex:${4-q}">${math(tex`\tau_2:\ \frac{${4-q}}4`)}</span></div><p>Each output y receives two contributions. At y = 0, the input points are ${q-4}/4 and ${q}/4, with weights ${q}/4 and ${4-q}/4.</p>
  ${eq(tex`(\mathcal Lf)(y)=\alpha f(\alpha y+\alpha-1)+(1-\alpha)f((1-\alpha)y+\alpha).`)}
  <h4>Build the first columns by hand</h4><p>Use ${math(tex`p_0=1/\sqrt2,\ p_1=\sqrt{3/2}\,y,\ p_2=\sqrt{5/2}\,(3y^2-1)/2`)}. Apply the operator to each basis polynomial and read off its output coefficients.</p>
  ${eq(tex`\mathcal Lp_0=p_0,\qquad\mathcal Lp_1=(\alpha^2+(1-\alpha)^2)p_1.`)}
