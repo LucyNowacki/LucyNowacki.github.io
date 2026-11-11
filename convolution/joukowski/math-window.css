@@ -1,0 +1,127 @@
+.jl-window {
+  --jl-window-scale: 1;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  width: min(560px, calc(100vw - 16px));
+  height: 65vh;
+  min-width: min(300px, calc(100vw - 16px));
+  min-height: min(200px, calc(100vh - 16px));
+  max-width: calc(100vw - 16px);
+  max-height: calc(100vh - 16px);
+  color: #f4eafd;
+  background: #221331;
+  border: 1px solid #ae86c9;
+  border-radius: 12px;
+  box-shadow: 0 14px 48px #10051f99;
+  overflow: hidden;
+  font: 14px/1.5 system-ui, sans-serif;
+  color-scheme: dark;
+}
+.jl-window[hidden] { display: none; }
+.jl-window * { box-sizing: border-box; }
+.jl-window:focus-within { border-color: #d7a6fb; }
+.jl-window-header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #39204f;
+  cursor: move;
+  touch-action: none;
+  user-select: none;
+}
+.jl-window-title { flex: 1 1 160px; font-size: 16px; line-height: 1.3; margin: 0; }
+.jl-window-actions { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
+.jl-window button {
+  font: inherit;
+  line-height: 1.2;
+  min-height: 32px;
+  padding: 5px 8px;
+  border: 1px solid #89679c;
+  border-radius: 6px;
+  color: #f4eafd;
+  background: #1d112c;
+  cursor: pointer;
+}
+.jl-window button:hover { border-color: #d7a6fb; background: #453054; }
+.jl-window button:focus-visible, .jl-window input:focus-visible { outline: 3px solid #ffd06a; outline-offset: 2px; }
+.jl-window button:disabled { opacity: .45; cursor: default; }
+.jl-window button[aria-pressed="true"] { background: #c6ed91; color: #243314; border-color: #c6ed91; }
+.jl-window .jl-window-move { cursor: move; }
+.jl-window .jl-window-close { font-size: 23px; padding: 1px 8px; }
+.jl-window .jl-window-expand { font-size: 20px; padding: 2px 8px; }
+.jl-window-scale-controls {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  padding: 8px 13px 4px;
+  font-size: 12px;
+}
+.jl-window-scale-controls label { color: #dfcbea; }
+.jl-window-scale-controls input { flex: 1 1 65px; min-width: 45px; max-width: 170px; accent-color: #c6ed91; }
+.jl-window-scale-value { min-width: 35px; font-variant-numeric: tabular-nums; }
+.jl-window-scale-controls button { min-height: 29px; padding: 4px 6px; }
+.jl-window-status { flex: none; margin: 3px 13px 7px; color: #cbb6d8; font-size: 12px; }
+.jl-window-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  margin: 0 7px 7px;
+  padding: 3px 8px 25px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  font-size: calc(14px * var(--jl-window-scale));
+  scrollbar-color: #9674ac #221331;
+  scrollbar-width: thin;
+}
+.jl-window-body h3 { color: #c6ed91; font-size: 1.06em; margin: 1em 0 .4em; }
+.jl-window-body p { margin: .55em 0; }
+.jl-window-body a { color: #d7a6fb; }
+.jl-window-body button { font-size: 1em; }
+.jl-window-body mjx-container { max-width: none; }
+.jl-window-body .math-block { font-size: 1.1em; }
+.jl-window-body .hint, .jl-window-body .numeric { font-size: .9em; }
+.jl-window[data-interacting] { user-select: none; }
+.jl-window-edge { position: absolute; z-index: 2; touch-action: none; }
+.jl-window-edge-n, .jl-window-edge-s { left: 14px; right: 14px; height: 7px; cursor: ns-resize; }
+.jl-window-edge-n { top: 0; }
+.jl-window-edge-s { bottom: 0; right: 27px; }
+.jl-window-edge-w, .jl-window-edge-e { top: 14px; bottom: 14px; width: 7px; cursor: ew-resize; }
+.jl-window-edge-w { left: 0; }
+.jl-window-edge-e { right: 0; bottom: 27px; }
+.jl-window-edge-nw, .jl-window-edge-ne, .jl-window-edge-sw { width: 14px; height: 14px; }
+.jl-window-edge-nw { top: 0; left: 0; cursor: nwse-resize; }
+.jl-window-edge-ne { top: 0; right: 0; cursor: nesw-resize; }
+.jl-window-edge-sw { bottom: 0; left: 0; cursor: nesw-resize; }
+.jl-window .jl-window-resize {
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  right: 0;
+  width: 27px;
+  height: 27px;
+  min-height: 0;
+  padding: 0;
+  border-radius: 7px 0 10px 0;
+  border: 0;
+  color: #d7a6fb;
+  background: #39204f;
+  cursor: nwse-resize;
+  touch-action: none;
+  font-size: 21px;
+}
+@media (max-width: 520px) {
+  .jl-window-header { gap: 6px; padding: 10px; }
+  .jl-window-title { flex-basis: 100%; }
+  .jl-window-actions { margin-left: auto; }
+  .jl-window-scale-controls { gap: 5px; }
+  .jl-window-scale-controls label { flex-basis: 100%; }
+  .jl-window-status { font-size: 11px; }
+}

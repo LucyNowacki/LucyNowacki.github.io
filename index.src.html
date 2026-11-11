@@ -378,6 +378,14 @@
 @media(prefers-reduced-motion:reduce){.certification-tile video,.certification-preview-toggle{display:none}.certification-tile .certification-tile-poster{display:block}}
 
 </style>
+<link rel="stylesheet" href="/files/interactive/convolution-preview/preview.css">
+<style>.convolution-tile{order:-2}
+.convolution-tile .column-0{background:#221331}
+.convolution-tile .convolution-preview{margin:0;width:100%;height:100%;max-width:none}
+.convolution-tile .convolution-preview a{display:block;width:100%;height:100%}
+.convolution-tile .convolution-preview video,.convolution-tile .convolution-preview img{width:100%;height:100%;object-fit:contain}
+</style>
+
 
 <main class="live-home">
   <header class="live-hero">
@@ -587,7 +595,29 @@
       </div>
     </div>
 
-    <div class="solutions flex-columns certification-tile" data-certification-tile>
+    <div class="solutions flex-columns convolution-tile" data-convolution-tile>
+  <div class="row">
+    <div class="column"><div class="column-0">
+      <figure class="convolution-preview" data-convolution-preview>
+        <a href="/blog/convolution-atlas/" aria-label="Read Convolution Atlas and open the interactive lessons">
+          <video muted loop playsinline preload="metadata" width="960" height="540" poster="/files/interactive/convolution-preview/poster.png" aria-label="Cyan input, blue reversed kernel, green products and purple output: finite convolution in motion.">
+            <source src="/files/interactive/convolution-preview/preview.webm" type="video/webm">
+            <source src="/files/interactive/convolution-preview/preview.mp4" type="video/mp4">
+          </video>
+          <img class="convolution-preview-poster" src="/files/interactive/convolution-preview/poster.png" width="960" height="540" alt="Four linked stem plots show how a convolution output is formed.">
+        </a>
+        <button type="button" hidden data-convolution-toggle aria-label="Pause convolution animation" aria-pressed="true">Pause</button>
+      </figure>
+    </div></div>
+    <div class="column"><div class="column-2 bg-primary">
+      <h4>Proofs · Interactive Mathematics</h4>
+      <a href="/blog/convolution-atlas/" class="btn btn-outline"><h2>Convolution Atlas: from discrete sums to Legendre geometry</h2></a>
+      <div class="row"><p>Flip, slide, multiply and sum. Then explore Joukowski geometry and why Legendre modes stay within one on the real interval.</p></div>
+    </div></div>
+  </div>
+</div>
+
+<div class="solutions flex-columns certification-tile" data-certification-tile>
   <div class="row">
     <div class="column">
       <div class="column-0">
@@ -865,7 +895,7 @@
         LucyNowacki.github.io. The links below cover every generated post page.
       </p>
 
-      <div class="post-grid">
+      <div class="post-grid"><a class="post-link" href="/blog/convolution-atlas/"><span class="post-meta">2026-11-11 | Proofs</span><span class="post-title">Convolution Atlas: from discrete sums to Legendre geometry</span></a>
         <a class="post-link" href="/blog/gridder-2-release/">
           <span class="post-meta">2026-11-01 | Numerical</span>
           <span class="post-title">Introducing Gridder 2: a maths arcade</span>
@@ -967,3 +997,5 @@
   </section>
 </main>
 <script type="module" src="files/assets/js/certification-tile.js?v=d76feaa4c068"></script>
+
+<script type="module" src="/files/interactive/convolution-preview/preview.js"></script>

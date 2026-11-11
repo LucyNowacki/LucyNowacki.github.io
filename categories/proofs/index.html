@@ -20,7 +20,15 @@
   gtag('js', new Date());
   gtag('config', 'GA_MEASUREMENT_ID);
 </script><meta name="google-site-verification" content="WF1l7hEMV49eJl7Kb2rVSOwXp2KINwX59Tig6ACvfSs">
-</head>
+
+<link rel="stylesheet" href="/files/interactive/convolution-preview/preview.css">
+<style>.convolution-tile{order:-2}
+.convolution-tile .column-0{background:#221331}
+.convolution-tile .convolution-preview{margin:0;width:100%;height:100%;max-width:none}
+.convolution-tile .convolution-preview a{display:block;width:100%;height:100%}
+.convolution-tile .convolution-preview video,.convolution-tile .convolution-preview img{width:100%;height:100%;object-fit:contain}
+</style>
+<style>.convolution-proof-feature{max-width:720px;margin:1.5rem 0 2rem}</style></head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
 
@@ -131,7 +139,13 @@ bg-dark
         </div>
         
 
-    </header><ul class="postlist">
+    </header><section class="convolution-proof-feature" aria-label="Featured interactive proof"><h2><a href="/blog/convolution-atlas/">Convolution Atlas</a></h2><p>From finite sums to Legendre geometry. Open the post to explore three interactive lessons.</p><figure class="convolution-preview" data-convolution-preview><video muted loop playsinline preload="metadata" width="960" height="540" poster="/files/interactive/convolution-preview/poster.png" aria-label="Finite convolution: the reversed kernel slides across an input, products form and add to the selected output."><source src="/files/interactive/convolution-preview/preview.webm" type="video/webm"><source src="/files/interactive/convolution-preview/preview.mp4" type="video/mp4"></source></source></video><img class="convolution-preview-poster" src="/files/interactive/convolution-preview/poster.png" width="960" height="540" alt="Cyan input, blue reversed kernel, green products and a purple convolution output."><button type="button" hidden data-convolution-toggle aria-label="Pause convolution animation" aria-pressed="true">Pause</button>
+</figure></section>
+<ul class="postlist">
+<li>
+<time class="listdate" datetime="2026-11-11T12:00:00Z" title="2026-11-11 12:00">2026-11-11 12:00</time><a href="../../blog/convolution-atlas/" class="listtitle">Convolution Atlas: from discrete sums to Legendre geometry</a><a></a>
+</li>
+            
 <li>
 <time class="listdate" datetime="2026-10-29T16:10:00Z" title="2026-10-29 16:10">2026-10-29 16:10</time><a href="../../blog/certification-protocol-night/" class="listtitle">Spectral certification: dark wireframe edition</a><a></a>
 </li>
@@ -207,5 +221,7 @@ bg-dark
         ignoreClass: 'islink',
         captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
+
+<script type="module" src="/files/interactive/convolution-preview/preview.js"></script>
 </body>
 </html>
