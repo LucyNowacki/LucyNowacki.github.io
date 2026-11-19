@@ -123,3 +123,33 @@
 @media (forced-colors: active) {
   .hyper-ai-progress progress { appearance: auto; mask: none; }
 }
+
+.hyper-ai-tile .hyper-ai-rotate {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  min-height: 44px;
+  box-sizing: border-box;
+  margin: -.2rem clamp(20px, 2.1vw, 40px) 1.3rem;
+  padding: .45rem .9rem;
+  border: 1px solid #d3b3f7;
+  border-radius: .35rem;
+  background: #352047;
+  color: #f6efff;
+  font: 600 .94rem/1.25 system-ui, sans-serif;
+  text-decoration: none;
+}
+.hyper-ai-tile .hyper-ai-rotate span {
+  color: #9ae5ff;
+}
+.hyper-ai-tile .hyper-ai-rotate:hover,
+.hyper-ai-tile .hyper-ai-rotate:focus-visible {
+  background: #271735;
+  color: #bdebff;
+}
+.hyper-ai-tile .hyper-ai-rotate:focus-visible {
+  outline: 3px solid #bdebff;
+  outline-offset: 2px;
+}
