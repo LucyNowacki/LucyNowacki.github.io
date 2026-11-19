@@ -35,7 +35,7 @@
         <div class="hero-copy">
           <p class="kicker"><span aria-hidden="true"></span>Local &amp; Hybrid Hyper AI</p>
           <h1 id="hero-title">What if your AI<br>could <em>keep learning?</em></h1>
-          <p class="lede">We want useful AI to fit inside the devices we rely on, from a laptop to a prosthetic hand, and to call on a larger model when we choose.</p>
+          <p class="lede">We want AI to learn on the devices we use every day, from laptops to prosthetic hands. When you need a larger model, you choose whether to bring it in.</p>
           <a class="button" href="#aim">Explore our research goals</a>
         </div>
       </div>
@@ -46,9 +46,9 @@
         <div class="target"><span class="label">Our wider efficiency ambition</span><div class="big">100<span>×</span></div></div>
         <div class="aim-story">
           <h2 id="aim-title">The same quality.<br><em>A tenth of the training time.</em></h2>
-          <p>We’re committing ten months of research to a goal for Christmas 2027. We aim to train a model 10× faster, reaching comparable quality on the same task and hardware in one tenth of the time. We also want it to use less physical memory, so a field team could run it on a laptop it already owns.</p>
-          <p>Imagine teaching a field recorder a new birdcall. The next morning, can it recognise that call and still identify the species it learned last spring? We’ll test how well our models adapt to new examples and retain earlier skills. Longer term, we want self-learning models that can improve from experience on the device.</p>
-          <p>Our wider ambition is 100× more efficient general AI. One part of that ambition is doing the same work at comparable quality using one hundredth of the energy.</p>
+          <p>Suppose a model takes ten hours to learn a task. Our goal for Christmas 2027 is to train ours in one hour on the same computer and have it do the job just as well. We’re committing ten months of research to that 10× speedup. We also want our model to use less memory, so a field team could run it on a laptop it already owns.</p>
+          <p>Now imagine teaching a field recorder to recognise a robin’s song. When you take it out tomorrow, you’d like it to recognise both the robin and the blackbird you taught it last spring. We’ll test whether our models can adapt in just that way. In the longer term, we want self-learning models that can pick up new skills from experience, right there on the device.</p>
+          <p>Faster training is part of our wider ambition to make general AI 100× more efficient. For that field recorder, our energy target would mean identifying the same birds just as reliably on one hundredth of the energy.</p>
           <dl class="deadline"><div><dt>Research effort</dt><dd>10 months</dd></div><div><dt>Training target date</dt><dd><time datetime="2027-12-25">Christmas 2027</time></dd></div></dl>
         </div>
         <div class="milestones">
@@ -65,9 +65,9 @@
           <h2 id="local-title">What still works <em>when the signal drops?</em></h2>
         </div>
         <div class="play-copy">
-          <p>A survey UAV counting nesting birds can be miles from mobile coverage. A washing machine listening for a worn bearing sits within reach of Wi-Fi, but its owner may want the sound to stay in the kitchen. In both cases, a model that fits on the device can act where the observation is made.</p>
-          <p>Once installed, a local model can work offline, keep recordings on the device, and respond without a network round trip or a per-request cloud fee. With a model you can run and adapt under its licence, you can keep a version you trust and choose your own application’s content filters.</p>
-          <p>For a model to fit in a household appliance, a small aircraft or a prosthetic limb, its processor must be affordable and its working memory must fit. MIT’s MCUNet showed what that can mean for a specialised task by running image recognition on a commercial microcontroller. We want to find out how far that economy can extend to general models.</p>
+          <p>A survey drone could count nesting birds even when it flies beyond mobile coverage. At home, a washing machine could listen for the rattle of a worn bearing and let you know when it needs a repair. It could give you that warning without sending sounds from your kitchen to a cloud service.</p>
+          <p>A model running on your device can answer even when you’re offline. There’s no wait for a server to reply and no cloud fee each time you use it. You can keep a version you trust. If its licence allows, you can also adapt it yourself and choose which content filters your app uses.</p>
+          <p>An appliance, a small aircraft and a prosthetic hand all have room for only so much memory. The processor has to be affordable, too. With MCUNet, researchers at MIT showed that an off-the-shelf microcontroller, the kind of small chip found in everyday devices, could recognise images. We want to find out how much more a general-purpose model could do within those limits.</p>
           <p class="refs"><a href="https://developers.google.com/ml-kit/genai">Google’s on-device AI guide</a> · <a href="https://hanlab.mit.edu/projects/mcunet">MIT’s MCUNet study</a> · <a href="https://allenai.org/olmo2">Ai2’s open model</a></p>
         </div>
       </div>
@@ -76,11 +76,11 @@
     <section id="research" class="research wrap" aria-labelledby="research-title">
       <p class="label">Research directions</p>
       <h2 id="research-title">Where could the savings come from?</h2>
-      <p class="intro">The Transformer arrived in 2017. Researchers went on to show how language models improve with more data, larger models and more compute. We’re asking what changes when memory, timing and the way a network learns become the starting point. <span class="refs"><a href="https://arxiv.org/abs/1706.03762">The Transformer paper</a> · <a href="https://arxiv.org/abs/2001.08361">Scaling laws</a></span></p>
+      <p class="intro">Since the Transformer appeared in 2017, researchers have shown how much language models can gain from more data, larger networks and more computing power. We’d like to know how much a model could gain by remembering the right detail, or by learning from the precise moment a signal arrives. <span class="refs"><a href="https://arxiv.org/abs/1706.03762">The Transformer paper</a> · <a href="https://arxiv.org/abs/2001.08361">Scaling laws</a></span></p>
       <div class="studies">
-        <article><img loading="lazy" src="art/memory.webp" alt="" width="640" height="360"><h3>A memory worth keeping</h3><p>A useful observation can be brief. <strong>Dirac measures</strong> give us a mathematical language for pinpoint events. What should a model remember from one, and what does it cost to recall it later?</p></article>
-        <article><img loading="lazy" src="art/spikes.webp" alt="" width="640" height="360"><h3>Learning in pulses</h3><p><strong>Spiking neural networks</strong> communicate through discrete events. Is there a <strong>neuromorphic counterpart to backpropagation</strong> that lets a network learn from the timing of those events?</p></article>
-        <article><img loading="lazy" src="art/liquid.webp" alt="" width="640" height="360"><h3>Learning from change</h3><p><strong>Liquid neural networks</strong> evolve over time. <strong>Neural operators</strong> learn mappings between functions. Could either help a small device interpret a changing signal as it arrives?</p></article>
+        <article><img loading="lazy" src="art/memory.webp" alt="" width="640" height="360"><h3>A memory worth keeping</h3><p>A sensor may pick up a sound that lasts only an instant. <strong>Dirac measures</strong> give us a way to describe an event at a precise moment. Which detail is worth keeping, and how much work will it take to recall it later?</p></article>
+        <article><img loading="lazy" src="art/spikes.webp" alt="" width="640" height="360"><h3>Learning in pulses</h3><p><strong>Spiking neural networks</strong> send short pulses. The gap between two pulses can carry information. We’re asking whether a network could use that timing to learn, and what a <strong>neuromorphic counterpart to backpropagation</strong> might look like.</p></article>
+        <article><img loading="lazy" src="art/liquid.webp" alt="" width="640" height="360"><h3>Learning from change</h3><p><strong>Liquid neural networks</strong> can follow a signal as it changes over time. <strong>Neural operators</strong> learn how one whole pattern maps to another. We want to see whether either approach could help a small device make sense of what its sensors are picking up.</p></article>
       </div>
     </section>
 
@@ -91,9 +91,9 @@
           <h2 id="bionic-title">A watch you can read <em>by feel.</em></h2>
         </div>
         <div class="play-copy">
-          <p>Keep your eyes on the trail. Your watch taps out the time. Imagine a second rhythm that echoes your heart rate, and a distinct double tap that tells you an email has arrived. Each cue means something you can recognise by touch.</p>
-          <p>That exchange can run both ways. Could a small spiking model recognise the electrical activity of a muscle as you intend to move a prosthetic hand? And when the hand touches a cup, could it translate grip pressure into a sensation you can use to ease your grasp?</p>
-          <p>Watches can already tell time through taps. In a prosthetics study, wearers used muscle signals to control a hand and could feel pressure from its grip. Our question is whether local models that learn from the timing of spikes could make this two-way exchange practical across more devices. That is the kind of “feeling” machine we have in mind at BionicMind Labs. It senses contact, and its wearer can feel what it senses.</p>
+          <p>Imagine walking a trail and feeling your watch tap out the time. A different rhythm could tell you your heart rate, or a familiar double tap could let you know an email has arrived. You could keep your eyes on the path.</p>
+          <p>Picking up a cup with a prosthetic hand takes that idea a step further. A small model could learn to read the electrical signals from your muscles as you reach for it. As the fingers close, could the hand send a signal back that lets you feel how tightly you’re holding the cup?</p>
+          <p>Parts of this are already possible. Some watches tell time by touch. In a prosthetics study, people used their own muscle signals to move a hand and could feel the pressure of its grip. At BionicMind Labs, we want to find out whether local models that learn from the timing of electrical pulses could bring that two-way sense of touch to more devices. That exchange is what we mean by a “feeling” machine.</p>
           <p class="refs"><a href="https://support.apple.com/en-ie/guide/watch/apd2c755c294/watchos">Apple’s Taptic Time</a> · <a href="https://research.chalmers.se/en/publication/517022">The bidirectional prosthesis study</a></p>
         </div>
       </div>
@@ -103,16 +103,16 @@
       <div class="wrap play-grid">
         <div><p class="label">The shared playground</p><h2 id="play-title">What happens when several minds<br><em>share a task?</em></h2><img loading="lazy" src="art/actors.webp" width="640" height="360" alt="Two constellations of connected nodes exchanging a pulse."></div>
         <div class="play-copy">
-          <p>An ecologist records a birdcall and tells her local agent why it worries her. One agent recalls a sighting from last spring. Another hears a different species. When she returns tomorrow, can they tell her who heard what, where they disagreed and what she wanted to check?</p>
-          <p>That is an early test we plan to run in our multi-agent sandbox. We’ll give different agents overlapping observations, including conflicting ones. Then we’ll test our memory architecture on what it retains, what it forgets and whether each agent can trace an idea back to its source.</p>
-          <p>We envision a shared environment for people, open-source agents and proprietary models to exchange ideas and work through voice, text and sensors. The ecologist could ask a hosted specialist for a second opinion, share only the clip she chooses, and bring its reply back into the local record.</p>
-          <p>That’s the hybrid part. We want local agents to work smoothly alongside the AI services people already subscribe to. For automated handoffs to models from OpenAI, Anthropic or Google, we plan to use each provider’s supported API and its access and billing terms. The user chooses when to call out and what leaves the device.</p></div>
+          <p>Back in the field, an ecologist records a bird she can’t quite identify. One of her AI assistants finds a note about a blackbird she saw there last spring. Another listens to the new recording and suggests a robin. When she comes back tomorrow, she’ll want to know what each assistant noticed and why they disagreed.</p>
+          <p>That gives us a way to test how our agents’ memory works. In our shared playground, we’ll give several agents observations that overlap and sometimes conflict. Then we’ll see what they remember, what they forget and whether they can trace each suggestion back to the recording or field note that prompted it.</p>
+          <p>If the ecologist wants a second opinion, she could choose a few seconds of birdsong and send just that clip to a specialist AI online. Its answer would go into the field notes on her laptop, alongside her own observations. The rest of the recording would stay with her.</p>
+          <p>That’s what we mean by hybrid AI. We want people, open-source agents and proprietary models to work together through speech, text and sensors. If you subscribe to an AI service from OpenAI, Anthropic or Google, we want your local agent to be able to work with it. We plan to use each provider’s API under its own access and billing terms. You decide when to ask for help and what to share.</p></div>
       </div>
     </section>
     <section id="contact" class="playground" aria-labelledby="contact-title">
       <div class="contact wrap">
       <div><p class="label">Early supporters</p><h2 id="contact-title">What could your device<br><em>learn from you?</em></h2></div>
-      <div class="contact-copy"><p>We’re laying the groundwork for a future startup. If you build devices, use one in the field, or might back this research, I’d like to hear what you’d teach a local model and what it would need to remember.</p>
+      <div class="contact-copy"><p>We’re laying the groundwork for a startup. If you build devices, use one in the field or are thinking about backing this research, I’d love to hear from you. What would you teach it, and what would you want it to remember?</p>
         <a class="button" href="mailto:quantlucy@gmail.com?subject=Local%20%26%20Hybrid%20Hyper%20AI">Email Lucy Nowacki</a></div>
       </div>
     </section>
