@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Single-Space Deterministic Bounds for Spectral Approximation of Analytic Transfer Operators | BionicMind Labs</title>
+  <link rel="stylesheet" href="../site.css">
+  <style>
+    body.paper {
+      margin: 0;
+      background: radial-gradient(ellipse at top, #351b36, #160f1d 48rem);
+      color: #f8eef9;
+      color-scheme: dark;
+      min-height: 100vh;
+    }
+
+    .paper * { box-sizing: border-box; }
+    .paper-main { width: min(100% - 2rem, 72rem); margin: 0 auto; padding: 2rem 0 3rem; }
+    .paper-home { color: #8eeefa; }
+    .paper-title {
+      max-width: 24ch;
+      margin: 1.5rem 0 .5rem;
+      color: #fff1fa;
+      font-size: clamp(1.7rem, 5vw, 3.2rem);
+      line-height: 1.12;
+    }
+
+    .paper-author { margin: 0 0 1.5rem; color: #efb5d6; }
+    .paper-reader { border: 1px solid #65425f; border-radius: .8rem; background: #201426; }
+    .paper-reader summary {
+      cursor: pointer;
+      padding: .8rem 1rem;
+      color: #ffb6df;
+      font-weight: 700;
+      border-radius: .8rem;
+    }
+
+    .paper-reader summary::marker { color: #8eeefa; }
+    .paper-body { padding: 0 clamp(.5rem, 2vw, 1rem) .8rem; }
+    .paper-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .55rem 1.25rem;
+      padding: .7rem 0;
+      border-top: 1px solid #65425f;
+    }
+
+    .paper-group, .paper-jump { display: flex; align-items: center; gap: .4rem; margin: 0; }
+    .paper-status { min-width: 6.5em; text-align: center; white-space: nowrap; }
+    .paper button, .paper input {
+      min-height: 2.75rem;
+      padding: .35rem .6rem;
+      border: 1px solid #87617e;
+      border-radius: .4rem;
+      background: #312038;
+      color: inherit;
+      font: inherit;
+    }
+
+    .paper button { cursor: pointer; }
+    .paper button:hover:not(:disabled) { border-color: #8eeefa; color: #8eeefa; }
+    .paper button:disabled { opacity: .55; cursor: default; }
+    .paper :focus-visible { outline: 2px solid #8eeefa; outline-offset: 2px; }
+    .paper input { width: 4.3em; }
+    .paper-zoom-value { min-width: 3.5em; text-align: center; color: #8eeefa; }
+    .paper-viewport {
+      max-height: 78vh;
+      max-height: 78dvh;
+      overflow: auto;
+      border: 1px solid #65425f;
+      border-radius: .35rem;
+      background: #100b16;
+    }
+
+    .paper-sheet {
+      width: min(calc(100% * var(--paper-scale, 1)), calc(1000px * var(--paper-scale, 1)));
+      margin-inline: auto;
+    }
+
+    .paper-sheet img { display: block; width: 100%; max-width: none; height: auto; }
+    .paper-help, .paper-error { margin: .65rem 0 0; color: #efb5d6; font-size: .9rem; }
+    .paper-error { margin: 0; padding: .75rem; }
+  </style>
+</head>
+<body class="paper">
+  <main class="paper-main">
+    <a class="paper-home" href="../index.html">BionicMind Labs</a>
+    <h1 class="paper-title">Single-Space Deterministic Bounds for Spectral Approximation of Analytic Transfer Operators</h1>
+    <p class="paper-author">Lucy Nowacki</p>
+
+    <details class="paper-reader" id="reader">
+      <summary>Open thesis</summary>
+      <div class="paper-body">
+        <div class="paper-toolbar">
+          <div class="paper-group" role="group" aria-label="Thesis navigation">
+            <button type="button" id="previous">Previous</button>
+            <span class="paper-status" id="page-status" role="status">Page 1 of 112</span>
+            <button type="button" id="next">Next</button>
+          </div>
+
+          <form class="paper-jump" id="jump">
+            <label for="page-number">Go to page</label>
+            <input id="page-number" type="number" inputmode="numeric" min="1" max="112" step="1" value="1" required>
+            <button type="submit">Go</button>
+          </form>
+
+          <div class="paper-group" role="group" aria-label="Zoom">
+            <button type="button" id="zoom-out" aria-label="Zoom out">−</button>
+            <output class="paper-zoom-value" id="zoom-value" aria-label="Zoom level">100%</output>
+            <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
+            <button type="button" id="fit">Fit width</button>
+          </div>
+        </div>
+
+        <div class="paper-viewport" id="viewport" tabindex="0" role="region" aria-label="Thesis page" aria-describedby="keyboard-help">
+          <div class="paper-sheet" id="sheet"></div>
+          <p class="paper-error" id="page-error" role="alert" hidden></p>
+        </div>
+        <p class="paper-help" id="keyboard-help">Use ← and → to turn pages, and +, − or 0 to adjust zoom. At higher zoom, the focused page uses the arrow keys to pan.</p>
+        <noscript><p>Enable JavaScript to view the thesis pages.</p></noscript>
+      </div>
+    </details>
+  </main>
+
+  <script>
+    (() => {
+      const total = 112;
+      const maximumZoom = 300;
+      const step = 25;
+      const reader = document.getElementById('reader');
+      const viewport = document.getElementById('viewport');
+      const sheet = document.getElementById('sheet');
+      const error = document.getElementById('page-error');
+      const previous = document.getElementById('previous');
+      const next = document.getElementById('next');
+      const pageNumber = document.getElementById('page-number');
+      const pageStatus = document.getElementById('page-status');
+      const zoomOut = document.getElementById('zoom-out');
+      const zoomIn = document.getElementById('zoom-in');
+      const zoomValue = document.getElementById('zoom-value');
+      let page = 1;
+      let zoom = 100;
+
+      function showPage(number) {
+        page = Math.min(total, Math.max(1, number));
+        pageNumber.value = page;
+        pageStatus.textContent = `Page ${page} of ${total}`;
+        previous.disabled = page === 1;
+        next.disabled = page === total;
+
+        const image = new Image(1600, 2263);
+        image.alt = `Thesis page ${page} of ${total}`;
+        image.decoding = 'async';
+        image.addEventListener('error', () => {
+          if (sheet.firstElementChild !== image) return;
+          image.remove();
+          error.textContent = `Page ${page} failed to load. Select Go to retry.`;
+          error.hidden = false;
+        }, { once: true });
+
+        error.hidden = true;
+        sheet.replaceChildren(image);
+        viewport.scrollTo(0, 0);
+        image.src = `pages/page-${String(page).padStart(3, '0')}.webp`;
+      }
+
+      function setZoom(value) {
+        zoom = Math.min(maximumZoom, Math.max(100, value));
+        sheet.style.setProperty('--paper-scale', zoom / 100);
+        zoomValue.value = `${zoom}%`;
+        zoomOut.disabled = zoom === 100;
+        zoomIn.disabled = zoom === maximumZoom;
+      }
+
+      setZoom(100);
+      reader.addEventListener('toggle', () => {
+        if (reader.open && !sheet.firstElementChild) showPage(page);
+      });
+      previous.addEventListener('click', () => showPage(page - 1));
+      next.addEventListener('click', () => showPage(page + 1));
+      document.getElementById('jump').addEventListener('submit', event => {
+        event.preventDefault();
+        showPage(pageNumber.valueAsNumber);
+      });
+      zoomOut.addEventListener('click', () => setZoom(zoom - step));
+      zoomIn.addEventListener('click', () => setZoom(zoom + step));
+      document.getElementById('fit').addEventListener('click', () => setZoom(100));
+
+      reader.addEventListener('keydown', event => {
+        if (!reader.open || event.altKey || event.ctrlKey || event.metaKey || event.target === pageNumber) return;
+
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+          if (event.target === viewport && zoom > 100) return;
+          const target = page + (event.key === 'ArrowLeft' ? -1 : 1);
+          if (target >= 1 && target <= total) showPage(target);
+        } else if (event.key === '+' || event.key === '=') {
+          setZoom(zoom + step);
+        } else if (event.key === '-') {
+          setZoom(zoom - step);
+        } else if (event.key === '0') {
+          setZoom(100);
+        } else {
+          return;
+        }
+        event.preventDefault();
+      });
+    })();
+  </script>
+</body>
+</html>
