@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#291731">
   <title>Local &amp; Hybrid Hyper AI · BionicMind Labs</title>
-  <meta name="description" content="Lucy Nowacki’s research programme aims to build general AI that can do the same work with one hundredth of the energy. Explore the science and the shared agent playground we envision.">
+  <meta name="description" content="Lucy Nowacki’s research programme aims to build general AI that can do the same work with one hundredth of the energy. Discover our plans for on-device models, two-way bionic interfaces and shared agent memory.">
   <link rel="canonical" href="https://lucynowacki.github.io/hyper-ai/">
   <meta property="og:title" content="Local &amp; Hybrid Hyper AI">
   <meta property="og:description" content="What can AI do with one joule? Inside a research programme with a 100× energy-efficiency target.">
@@ -35,7 +35,7 @@
         <div class="hero-copy">
           <p class="kicker"><span aria-hidden="true"></span>Local &amp; Hybrid Hyper AI</p>
           <h1 id="hero-title">What can AI do<br>with <em>one joule?</em></h1>
-          <p class="lede">We want general AI to do useful work where people need it, on the energy their devices can spare.</p>
+          <p class="lede">We want useful AI to fit inside the devices we rely on, from a laptop to a prosthetic hand, and to call on a larger model when we choose.</p>
           <a class="button" href="#aim">Explore the 100× aim</a>
         </div>
       </div>
@@ -47,12 +47,27 @@
         <div class="aim-story">
           <h2 id="aim-title">The same task.<br><em>One hundredth of the energy.</em></h2>
           <p>Imagine a field team running a capable assistant through the night on a single battery. Our 100× target is simple. Against a reference model, complete the same task, at comparable quality, using one hundredth of the energy.</p>
-          <p>We’re committing ten months of research to deliver that result by Christmas 2027. We’re preparing the experiments now. We’ll measure joules per completed task and check quality on examples the models haven’t seen.</p>
+          <p>We’re committing ten months of research to deliver that result by Christmas 2027. We’re preparing the experiments now. We’ll measure joules per completed task and check quality on examples the models haven’t seen. We’ll also measure peak memory and response time, then test which lower-cost processors can do the job.</p>
           <dl class="deadline"><div><dt>Research effort</dt><dd>10 months</dd></div><div><dt>Our promised delivery</dt><dd><time datetime="2027-12-25">Christmas 2027</time></dd></div></dl>
         </div>
         <div class="milestones">
           <h3>Project milestones</h3>
           <ol><li class="done"><span>Project announced</span><small>Complete</small></li><li><span>Measure baseline energy</span><small>Up next</small></li><li><span>Test at matched quality</span><small>Planned</small></li><li><span>Report the energy result</span><small>Planned</small></li></ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="local-models" class="playground" aria-labelledby="local-title">
+      <div class="wrap play-grid">
+        <div>
+          <p class="label">Why local models matter</p>
+          <h2 id="local-title">What still works <em>when the signal drops?</em></h2>
+        </div>
+        <div class="play-copy">
+          <p>A survey UAV counting nesting birds can be miles from mobile coverage. A washing machine listening for a worn bearing sits within reach of Wi-Fi, but its owner may want the sound to stay in the kitchen. In both cases, a model that fits on the device can act where the observation is made.</p>
+          <p>Once installed, a local model can work offline, keep recordings on the device, and respond without a network round trip or a per-request cloud fee. With a model you can run and adapt under its licence, you can keep a version you trust and choose your own application’s content filters.</p>
+          <p>For a model to fit in a household appliance, a small aircraft or a prosthetic limb, its processor must be affordable and its working memory must fit. MIT’s MCUNet showed what that can mean for a specialised task by running image recognition on a commercial microcontroller. We want to find out how far that economy can extend to general models.</p>
+          <p class="refs"><a href="https://developers.google.com/ml-kit/genai">Google’s on-device AI guide</a> · <a href="https://hanlab.mit.edu/projects/mcunet">MIT’s MCUNet study</a> · <a href="https://allenai.org/olmo2">Ai2’s open model</a></p>
         </div>
       </div>
     </section>
@@ -68,18 +83,37 @@
       </div>
     </section>
 
-    <section id="playground" class="playground" aria-labelledby="play-title">
+    <section id="bionic" class="playground" aria-labelledby="bionic-title">
       <div class="wrap play-grid">
-        <div><p class="label">The shared playground</p><h2 id="play-title">What happens when several minds<br><em>share a task?</em></h2><img loading="lazy" src="art/actors.webp" width="640" height="360" alt="Two constellations of connected nodes exchanging a pulse."></div>
-        <div class="play-copy"><p>Picture an ecologist on a night survey. She hears a call, records it and says why it worries her. A local agent recalls an earlier sighting. A specialist audio model offers an identification. Through her earpiece, she asks the team what evidence would settle the question.</p>
-          <p>That’s the kind of playground we want to build. People could bring feelings, ideas and unfinished work. Agents could exchange observations, challenge an interpretation and hand a task to a peer. Voice, text and sensor interfaces would give each participant a way in.</p>
-          <p>Local models would work on the device. A hybrid session could invite a remote specialist when its contribution is worth the extra energy. We envision open-source and proprietary models, agents and tools sharing those environments.</p></div>
+        <div>
+          <p class="label">Why BionicMind Labs?</p>
+          <h2 id="bionic-title">A watch you can read <em>by feel.</em></h2>
+        </div>
+        <div class="play-copy">
+          <p>Keep your eyes on the trail. Your watch taps out the time. Imagine a second rhythm that echoes your heart rate, and a distinct double tap that tells you an email has arrived. Each cue means something you can recognise by touch.</p>
+          <p>That exchange can run both ways. Could a small spiking model recognise the electrical activity of a muscle as you intend to move a prosthetic hand? And when the hand touches a cup, could it translate grip pressure into a sensation you can use to ease your grasp?</p>
+          <p>Watches can already tell time through taps. In a prosthetics study, wearers used muscle signals to control a hand and could feel pressure from its grip. Our question is whether local models that learn from the timing of spikes could make this two-way exchange practical across more devices. That is the kind of “feeling” machine we have in mind at BionicMind Labs. It senses contact, and its wearer can feel what it senses.</p>
+          <p class="refs"><a href="https://support.apple.com/en-ie/guide/watch/apd2c755c294/watchos">Apple’s Taptic Time</a> · <a href="https://research.chalmers.se/en/publication/517022">The bidirectional prosthesis study</a></p>
+        </div>
       </div>
     </section>
-    <section id="contact" class="contact wrap" aria-labelledby="contact-title">
+
+    <section id="playground" aria-labelledby="play-title">
+      <div class="wrap play-grid">
+        <div><p class="label">The shared playground</p><h2 id="play-title">What happens when several minds<br><em>share a task?</em></h2><img loading="lazy" src="art/actors.webp" width="640" height="360" alt="Two constellations of connected nodes exchanging a pulse."></div>
+        <div class="play-copy">
+          <p>An ecologist records a birdcall and tells her local agent why it worries her. One agent recalls a sighting from last spring. Another hears a different species. When she returns tomorrow, can they tell her who heard what, where they disagreed and what she wanted to check?</p>
+          <p>That is an early test we plan to run in our multi-agent sandbox. We’ll give different agents overlapping observations, including conflicting ones. Then we’ll test our memory architecture on what it retains, what it forgets and whether each agent can trace an idea back to its source.</p>
+          <p>We envision a shared environment for people, open-source agents and proprietary models to exchange ideas and work through voice, text and sensors. The ecologist could ask a hosted specialist for a second opinion, share only the clip she chooses, and bring its reply back into the local record.</p>
+          <p>That’s the hybrid part. We want local agents to work smoothly alongside the AI services people already subscribe to. For automated handoffs to models from OpenAI, Anthropic or Google, we plan to use each provider’s supported API and its access and billing terms. The user chooses when to call out and what leaves the device.</p></div>
+      </div>
+    </section>
+    <section id="contact" class="playground" aria-labelledby="contact-title">
+      <div class="contact wrap">
       <div><p class="label">Early supporters</p><h2 id="contact-title">What would you do<br>with <em>that energy budget?</em></h2></div>
       <div class="contact-copy"><p>We’re laying the groundwork for a future startup. If you build devices, work somewhere power is scarce, or might back this research, I’d like to hear which task you’d put to the test first.</p>
         <a class="button" href="mailto:quantlucy@gmail.com?subject=Local%20%26%20Hybrid%20Hyper%20AI">Email Lucy Nowacki</a></div>
+      </div>
     </section>
   </main>
   <footer><div class="wrap"><a href="../index.html">BionicMind Labs</a><span>Local &amp; Hybrid Hyper AI</span></div></footer>
