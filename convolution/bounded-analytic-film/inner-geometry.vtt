@@ -1,0 +1,107 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.534
+One coefficient has many contours.
+
+00:00:02.534 --> 00:00:04.411
+Pick one Legendre degree, n.
+
+00:00:04.411 --> 00:00:10.021
+The coefficient measures how much of that polynomial occurs in the function on the red interval.
+
+00:00:10.021 --> 00:00:13.860
+The surrounding ellipse gives us another way to measure the same number.
+
+00:00:13.860 --> 00:00:17.252
+Watch the contour move out while the coefficient stays put.
+
+00:00:17.252 --> 00:00:19.726
+The estimate above it has three ingredients.
+
+00:00:19.726 --> 00:00:28.685
+The largest allowed function value sets a scale, the perimeter measures how far we integrate, and the kernel supplies a power that shrinks with degree.
+
+00:00:28.685 --> 00:00:33.037
+Lesson four, Bandtlow’s Lemma one point seven, gives us the contour.
+
+00:00:33.037 --> 00:00:37.623
+Lesson five, Lemma one point eight, gives us the decaying kernel waves.
+
+00:00:37.623 --> 00:00:41.569
+Together they prove the coefficient estimate in Lemma one point nine.
+
+00:00:41.869 --> 00:00:43.589
+Start on the real interval.
+
+00:00:43.589 --> 00:00:47.428
+Take the function one divided by two and a half minus x.
+
+00:00:47.428 --> 00:00:48.921
+Choose degree two.
+
+00:00:48.921 --> 00:00:53.379
+Its Legendre polynomial is one half of three x squared minus one.
+
+00:00:53.379 --> 00:00:58.178
+Multiply these two functions and sweep the signed area from minus one to one.
+
+00:00:58.178 --> 00:01:02.082
+The central region subtracts area and the two ends add it back.
+
+00:01:02.082 --> 00:01:08.908
+Multiplying the result by five halves gives a coefficient of about zero point zero four nine four two.
+
+00:01:08.908 --> 00:01:11.703
+Its definition uses only real inputs.
+
+00:01:12.003 --> 00:01:14.128
+A circle draws each inner ellipse.
+
+00:01:14.128 --> 00:01:16.986
+Choose an outer radius rho greater than one.
+
+00:01:16.986 --> 00:01:21.188
+The function is bounded and holomorphic in the open outer ellipse.
+
+00:01:21.188 --> 00:01:24.323
+Choose a smaller radius s, still greater than one.
+
+00:01:24.323 --> 00:01:28.525
+The point z moves counterclockwise on the circle of radius s.
+
+00:01:28.525 --> 00:01:32.023
+The Joukowski map sends it to omega on the inner ellipse.
+
+00:01:32.023 --> 00:01:34.966
+At angle zero, omega is at the right tip.
+
+00:01:34.966 --> 00:01:37.590
+At a quarter turn, omega is at the top.
+
+00:01:37.590 --> 00:01:44.672
+The entire closed inner ellipse lies inside the open outer one, so its contour is available to Cauchy's formula.
+
+00:01:44.972 --> 00:01:47.588
+The nearest point gives the largest value.
+
+00:01:47.588 --> 00:01:50.766
+For our example, the cross at two and a half is the pole.
+
+00:01:50.766 --> 00:01:55.864
+The size of the function is one over the distance from the moving point to that cross.
+
+00:01:55.864 --> 00:01:58.445
+Trace the outer ellipse and watch the distance.
+
+00:01:58.445 --> 00:02:04.140
+It is smallest at the right tip, giving the largest boundary value for this particular function.
+
+00:02:04.140 --> 00:02:09.729
+Interior points approach that tip, so the same number is the supremum in the open ellipse.
+
+00:02:09.729 --> 00:02:14.784
+At outer radius two point one five, this gives about zero point eight three nine.
+
+00:02:14.784 --> 00:02:18.624
+In the general theorem we only use the finite supremum inside.
+

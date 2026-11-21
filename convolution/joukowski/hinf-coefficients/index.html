@@ -4,10 +4,10 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bounded analytic coefficient decay · Joukowski–Legendre</title>
 <meta name="description" content="Explore how nested Bernstein ellipses, the second-kind kernel and contour arclength give geometric decay of Legendre coefficients.">
-<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../math-window.css?v=2bca698ac08e"><link rel="stylesheet" href="../coefficient-lessons.css?v=cff5ff89777e"><link rel="stylesheet" href="style.css?v=2b8d5156ba21">
+<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../math-window.css?v=2bca698ac08e"><link rel="stylesheet" href="../coefficient-lessons.css?v=cff5ff89777e"><link rel="stylesheet" href="style.css?v=67c50e476008">
 <script defer src="../../mathjax-config.js?v=fb5c0f9a8785"></script><script defer src="../../vendor/tex-svg.js?v=d4295dc33744"></script>
 <script defer src="../../vendor/d3.min.js?v=f2094bbf6141"></script><script defer src="../coefficient-math.js?v=ede7bfda9876"></script>
-<script defer src="../math-window.js?v=31277e048601"></script><script defer src="../lesson-navigation.js?v=bb9ff39db220"></script><script defer src="../coefficient-lessons.js?v=ad2d0604d318"></script><script defer src="lesson.js?v=2115a368892b"></script>
+<script defer src="../math-window.js?v=31277e048601"></script><script defer src="../lesson-navigation.js?v=bb9ff39db220"></script><script defer src="../coefficient-lessons.js?v=ad2d0604d318"></script><script defer src="lesson.js?v=8da84091a4d5"></script>
 <link rel="stylesheet" href="../home-palette.css?v=ca2188dd1bc9">
 </head>
 <body class="coefficient-page">
@@ -17,14 +17,15 @@
 <header class="coefficient-intro">
   <p class="eyebrow">THESIS WALKTHROUGH · SUBSECTION <bdi data-thesis-ref="legEDMD:subsec-Hinf-coefficient-bound">3.2.6</bdi> · LEMMA <bdi data-thesis-ref="legEDMD:lem-1-9">3.25</bdi></p>
   <h1>Analyticity forces coefficient decay</h1>
-  <p>The second-kind kernel decays geometrically on an ellipse. The contour formula transfers that decay to the Legendre coefficient, with an explicit cost for the function’s size and the boundary’s length.</p>
+  <p class="math-static">On each inner contour \(\partial E_s\) with \(1&lt;s&lt;\rho\), the second-kind kernel decays geometrically with degree. The contour formula transfers that decay to the Legendre coefficient, using the size of the function on the outer analytic domain \(E_\rho\).</p>
   <div class="math-static coefficient-theorem">\[|a_n(f)|\le(2n+1)C_\infty(\varrho)\,\|f\|_{H^\infty(E_\varrho)}\,\varrho^{-n}.\]</div>
+  <a class="hi-watch" href="../../bounded-analytic-film/index.html">▶ Watch the narrated lesson</a>
 </header>
 <nav class="thesis-switcher" data-lesson-navigation data-lesson="hinf-coefficients" aria-label="Switch thesis lesson"><a href="../index.html"><span>1 · Laurent expansion</span><small>How the finite packet is formed</small></a><a href="../real-line/index.html"><span>2 · Real-line stability</span><small>The neutral radius-one case</small></a><a href="../ellipse-growth/index.html"><span>3 · Geometric growth</span><small>Radial weights on an ellipse</small></a><a href="../contour-coefficients/index.html"><span>4 · Boundary coefficients</span><small>Recover a coefficient from a circuit</small></a><a href="../kernel-structure/index.html"><span>5 · Kernel frequencies</span><small>The surviving parity ladder</small></a><a href="index.html" aria-current="page"><span>6 · Bounded analytic coefficients</span><small>Viewing this lesson</small></a><a href="../hardy-coefficients/index.html"><span>7 · Hardy coefficients and tails</span><small>From angular energy to truncation</small></a><a href="../factorisation/index.html"><span>8 · Factorisation and embeddings</span><small>Follow the function through three operations</small></a><a href="../weighted-synthesis/index.html"><span>9 · Weighted synthesis and tails</span><small>Split the coefficient budget</small></a><a href="../hardy-to-uniform/index.html"><span>10 · Hardy to uniform</span><small>From angular energy to a pointwise ceiling</small></a><a href="../uniform-to-hardy/index.html"><span>11 · Uniform to Hardy</span><small>From a ceiling to angular energy</small></a><a href="../transfer-tails/index.html"><span>12 · Two gaps and operator tails</span><small>Balance the input and output restrictions</small></a></nav>
 <noscript><p>The proof below remains readable without the controls. Enable JavaScript to explore the figures and render the formulas.</p></noscript>
 <section class="coefficient-lab" id="lesson-lab" aria-label="Bounded analytic coefficient experiment">
 <div class="lesson-heading"><h2>Compare an inner contour with the outer limit</h2><button type="button" data-explain="hinf-bound">Intuitive/geometric explanation</button></div>
-<p class="coefficient-hint math-static">Keep \(f(\omega)=1/(2.5-\omega)\) fixed. Changing the ellipse leaves its coefficients unchanged, while both the norm and the coefficient envelope change. Move the inner contour towards the outer boundary to follow the proof.</p>
+<p class="coefficient-hint math-static">Keep \(f(\omega)=1/(2.5-\omega)\) fixed. Moving the integration contour \(\partial E_s\) leaves the coefficients fixed. Changing the outer analytic domain \(E_\rho\) also changes the supremum used to bound them. Move the inner contour toward \(\partial E_\rho\) to follow the proof.</p>
 <div id="bounded-analytic-coefficient-decay">
   <div class="viz-controls">
     <label class="form-label">Outer radius ϱ = <output id="hi-rv"></output><input class="form-range" type="range" id="hi-r" min="1.2" max="3" step="0.01" value="1.8"></label>
@@ -32,6 +33,7 @@
     <label class="form-label">Inspect degree n = <output id="hi-nv"></output><input class="form-range" type="range" id="hi-n" min="0" max="24" step="1" value="6"></label>
     <label class="form-label">Perimeter constant<select class="form-select" id="hi-constant"><option value="perimeter">Perimeter integral · quadrature</option><option value="fallback">Explicit upper bound</option></select></label>
   </div>
+  <button type="button" id="hi-film-example">Use the film’s degree-ten example</button>
   <div class="hi-math" id="hi-function"></div>
   <div class="hi-panels">
     <section><div class="hi-card-heading"><h3>Nested ellipses · input plane</h3><button type="button" data-explain="inner-contours">Intuitive/geometric explanation</button></div><svg id="hi-geometry" class="hi-plot" role="img" aria-label="Inner contour inside the analytic outer ellipse and the fixed outside pole"></svg></section>
@@ -51,10 +53,68 @@
 <section class="lesson-proof math-static" aria-labelledby="hi-proof-heading">
   <h2 id="hi-proof-heading">The proof in three steps</h2>
   <div class="coefficient-proof-grid">
-    <article class="card"><h3>1 · Start strictly inside</h3><p>Choose \(1&lt;s&lt;\varrho\). The function is continuous on the smaller closed ellipse, so the contour formula applies there. Its real-line coefficient is still the same \(a_n(f)\).</p><div class="math-block">\[\|f\|_{A(E_s)}\le M_\varrho:=\|f\|_{H^\infty(E_\varrho)}.\]</div></article>
-    <article class="card"><h3>2 · Add absolute contributions</h3><p>The triangle inequality replaces the complex differential by arclength. Bound the function by \(M_\varrho\) and the kernel by its geometric tail.</p><div class="math-block">\[|a_n(f)|\le\frac{2n+1}{2\pi}|\partial E_s|M_\varrho\sup_{\partial E_s}|Q_n|.\]</div><div class="math-block">\[\sup_{\partial E_s}|Q_n|\le\frac{2s^{-n}}{s-s^{-1}}.\]</div></article>
-    <article class="card"><h3>3 · Approach the outer radius</h3><p>Let \(s\uparrow\varrho\). The perimeter and the explicit kernel bound depend continuously on the radius. A continuous trace of a general bounded holomorphic function on the outer boundary is not required.</p><div class="math-block">\[C_\infty(\varrho)=\frac{|\partial E_\varrho|}{\pi(\varrho-\varrho^{-1})}.\]</div></article>
+    <article class="card" id="hi-inner-proof"><h3>1 · Start strictly inside</h3><p>Choose \(1&lt;s&lt;\varrho\). The function is continuous on the smaller closed ellipse, so the contour formula applies there. Its real-line coefficient is still the same \(a_n(f)\).</p><div class="math-block">\[\|f\|_{A(E_s)}\le M_\varrho:=\|f\|_{H^\infty(E_\varrho)}.\]</div><a class="hi-chapter" href="../../bounded-analytic-film/contour-coefficient.html">Watch this proof step</a></article>
+    <article class="card" id="hi-absolute-proof"><h3>2 · Add absolute contributions</h3><p>The triangle inequality replaces the complex differential by arclength. Bound the function by \(M_\varrho\) and the kernel by its geometric tail.</p><div class="math-block">\[|a_n(f)|\le\frac{2n+1}{2\pi}|\partial E_s|M_\varrho\sup_{\partial E_s}|Q_n|.\]</div><div class="math-block">\[\sup_{\partial E_s}|Q_n|\le\frac{2s^{-n}}{s-s^{-1}}.\]</div><a class="hi-chapter" href="../../bounded-analytic-film/absolute-contributions.html">Watch this proof step</a></article>
+    <article class="card" id="hi-limit-proof"><h3>3 · Approach the outer radius</h3><p>Let \(s\uparrow\varrho\). The perimeter and the explicit kernel bound depend continuously on the radius. A continuous trace of a general bounded holomorphic function on the outer boundary is not required.</p><div class="math-block">\[C_\infty(\varrho)=\frac{|\partial E_\varrho|}{\pi(\varrho-\varrho^{-1})}.\]</div><a class="hi-chapter" href="../../bounded-analytic-film/outer-limit.html">Watch this proof step</a></article>
   </div>
+</section>
+<section class="lesson-proof math-static" id="hi-prerequisites" aria-labelledby="hi-lemma-heading">
+  <h2 id="hi-lemma-heading">Where the earlier lessons enter the proof</h2>
+  <p>The lemma numbers below follow Bandtlow’s preprint. Its Lemma 1.9 is Lemma 3.25 in the thesis.</p>
+  <ol class="hi-lemma-map">
+    <li><a href="../index.html">Lesson 1 · Lemma 1.1</a> supplies the positive Laurent weights used to determine the signs of the surviving kernel coefficients.</li>
+    <li><a href="../real-line/index.html">Lesson 2 · Lemma 1.2</a> bounds the Legendre modes by one on the interval. This gives the upper bound of two on the kernel coefficients and later controls the polynomial tail on the interval.</li>
+    <li><a href="../ellipse-growth/index.html">Lesson 3 · Lemma 1.6(a)</a> controls how the polynomials grow on a smaller ellipse when we reconstruct the function from its coefficients.</li>
+    <li><a href="../contour-coefficients/index.html">Lesson 4 · Lemma 1.7</a> writes the coefficient as an integral on any strictly inner ellipse.</li>
+    <li><a href="../kernel-structure/index.html">Lesson 5 · Lemma 1.8</a> gives the kernel’s one-sided expansion on the exterior circle. Its first power and its spacing by two give the geometric ceiling in Lemma 1.9.</li>
+  </ol>
+  <div id="hi-reconstruction">
+    <h3>Which ellipse supplies each power?</h3>
+    <p>Choose the violet ellipse \(E_\rho\) on which \(f\) is bounded and analytic. Choose a smaller gold ellipse \(E_r\) on which to approximate it. The radii belong to the circles <em>before</em> the Joukowski map. The two image ellipses have foci at \(-1\) and \(1\).</p>
+    <div class="hi-radius-factors">
+      <div><a href="../ellipse-growth/index.html">Gold · Lesson 3 · Bandtlow’s Lemma 1.6(a)</a>
+        <p>Evaluating the basis on a larger target allows higher modes to be larger.</p>
+        <div class="math-block">\[\sup_{E_r}|P_n|\leq \frac{r^n+r^{-n}}{2}\leq r^n.\]</div></div>
+      <div><a href="#hi-proof-heading">Violet · Lesson 6 · Bandtlow’s Lemma 1.9</a>
+        <p>The outer ellipse supplies the coefficient decay. The one-sided kernel modes from Lemma 1.8 shrink on the preimage circles as the contour moves outward.</p>
+        <div class="math-block">\[|a_n(f)|\leq K_\rho(2n+1)\rho^{-n},\qquad K_\rho=C_\infty(\rho)M_\rho.\]</div></div>
+    </div>
+    <p>Multiply the estimates. The degree-\(n\) term carries \(r^n\rho^{-n}=(r/\rho)^n\). For each fixed \(1&lt;r&lt;\rho\), the entire omitted tail tends to zero <strong>as \(N\) increases</strong>.</p>
+    <div class="math-block">\[\sup_{E_r}|f-S_N|\leq K_\rho\sum_{n=N}^\infty(2n+1)(r/\rho)^n \xrightarrow[N\to\infty]{}0,\qquad S_N=\sum_{n=0}^{N-1}a_n(f)P_n.\]</div>
+    <h4>How many terms guarantee the same accuracy?</h4>
+    <p>The film fixes the violet outer ellipse \(E_{2.15}\), where \(f(\omega)=1/(2.5-\omega)\) is bounded and analytic. The cyan curve bounds the error everywhere in \(E_{1.29}\), and the pink curve bounds it everywhere in \(E_{1.935}\). Both target boundaries lie strictly inside \(E_{2.15}\), so continuity extends each estimate to its target boundary. Here the gold rim selects one target at a time. Fix both domains and increase \(N\) to compare the bound with the tolerance \(0.01\). <a href="../../bounded-analytic-film/pullback-convergence.html#t=333.943">Hear which ellipse each curve describes.</a></p>
+    <div class="hi-radius-plots">
+      <figure><figcaption>Analytic domain and error domain</figcaption>
+        <div class="hi-domain-key">
+          <span>Outer analytic domain <var>E</var><sub id="hi-domain-source-label">2.15</sub></span>
+          <span>Error measured on <var>E</var><sub id="hi-domain-target-label">1.29</sub></span>
+        </div>
+        <svg id="hi-target-plot" viewBox="0 0 420 235" role="img" aria-label="Gold reconstruction ellipse and violet ellipse of analyticity">
+          <ellipse id="hi-domain-outer" cx="210" cy="115" fill="none" stroke="#d79dff" stroke-width="3"/>
+          <ellipse id="hi-domain-inner" cx="210" cy="115" fill="none" stroke="#ffca62" stroke-width="3" stroke-dasharray="9 3"/>
+          <path d="M 94 115 H 326" fill="none" stroke="#ff6b7e" stroke-width="2"/>
+          <circle cx="94" cy="115" r="3" fill="#ff6b7e"/><circle cx="326" cy="115" r="3" fill="#ff6b7e"/>
+          <text x="94" y="137" text-anchor="middle">−1</text><text x="326" y="137" text-anchor="middle">1</text>
+        </svg></figure>
+      <figure><figcaption>Uniform-error bound on <var>E</var><sub id="hi-tail-target-label">1.29</sub> · log scale</figcaption>
+        <svg id="hi-target-tail" viewBox="0 0 420 235" role="img" aria-label="Tail bound against the number of terms kept, with the tolerance marked"></svg>
+      </figure>
+    </div>
+    <div class="hi-radius-controls">
+      <label>Gold target radius \(r\) <output for="hi-target-radius" id="hi-target-rv"></output><input id="hi-target-radius" type="range" min="1.075" max="2.15" step=".005" value="1.29"></label>
+      <label>Violet analytic radius \(\rho\)<select id="hi-analytic-radius"><option value="1.72">1.72</option><option value="2.15" selected>2.15</option></select></label>
+      <label>Terms kept \(N\) <output for="hi-target-count" id="hi-target-nv"></output><input id="hi-target-count" type="range" min="1" max="150" step="1" value="19"></label>
+    </div>
+    <div class="hi-target-actions"><button type="button" data-target-radius="1.29">Smaller target · r = 1.29</button><button type="button" data-target-radius="1.935">Larger target · r = 1.935</button><button id="hi-target-guarantee" type="button">Use the first sufficient N</button></div>
+    <p id="hi-target-report" role="status"></p>
+    <p>To change the denominator alone, choose the smaller gold target \(r=1.29\) and switch the violet radius from \(1.72\) to \(2.15\). Then \(q\) falls from \(0.75\) to \(0.60\). The geometric factor decays faster. The prefactor \(K_\rho\) can also change. A new outer radius is admissible only while \(f\) stays bounded and analytic on its ellipse.</p>
+    <details><summary>How the bound is calculated</summary>
+      <p>Both targets use the same elementary perimeter estimate from the film. With \(q=r/\rho\) and \(K_* =M_\rho(\rho+\rho^{-1})/(\rho-\rho^{-1})\), the displayed upper bound is</p>
+      <div class="math-block">\[B_N=K_*q^N\left(\frac{2N+1}{1-q}+\frac{2q}{(1-q)^2}\right).\]</div>
+      <p>At the film’s outer radius \(2.15\), this gives \(K_*\approx 1.30162\). The count is the first \(N\) for which this upper bound falls below \(0.01\). The actual error may be smaller. For this rational function every finite partial sum has positive uniform error. The infinite series equals \(f\) on each smaller ellipse.</p>
+    </details>
+  </div>
+  <a class="hi-chapter" href="../../bounded-analytic-film/pullback-convergence.html#t=193.5">Watch how the two radii enter the proof</a>
 </section>
 <details class="coefficient-source card math-static"><summary>Source, normalization and numerical meaning</summary>
   <p>This lesson follows <strong>Subsection <bdi data-thesis-ref="legEDMD:subsec-Hinf-coefficient-bound">3.2.6</bdi> — \(H^\infty\) coefficient bounds from the second-kind kernel</strong> and <strong>Lemma <bdi data-thesis-ref="legEDMD:lem-1-9">3.25</bdi></strong>, in thesis Section <bdi data-thesis-ref="legEDMD:sec-legendre-coefficient-bounds">3.2</bdi>. Bandtlow’s original result is EDMD–Legendre Lemma 1.9.</p>

@@ -1,0 +1,26 @@
+.rl-film { background: #191221; color: #fff5ff; }
+.rl-film .film-stage { border-color: #755489; background: #191221; }
+.rl-film a, .rl-film .film-script summary { color: #ffc0ec; }
+.rl-film .film-chapters a { background: #22192f; border-color: #70527f; color: #fff5ff; }
+.rl-film .film-chapters a[aria-current] { background: #512448; box-shadow: inset 3px 0 #ff57cb; border-color: #e66ebc; }
+.rl-film .film-chapters a:hover, .rl-film .film-tools button:hover { border-color: #73e5fa; }
+.rl-film .film-cover-action, .rl-film .film-tools button { background: #402041; border-color: #ec71c9; }
+.rl-film :focus-visible { outline-color: #73e5fa; }
+
+.rl-film .film-script .film-time {
+  display: inline-block;
+  min-width: 3em;
+  margin-right: .35em;
+  padding: .15em .35em;
+  border: 1px solid #695179;
+  border-radius: .3em;
+  color: #78e6f8;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  text-decoration: none;
+}
+.rl-film .film-script .film-time:hover,
+.rl-film .film-script .film-time:focus-visible {
+  border-color: #78e6f8;
+  color: #fff5ff;
+}

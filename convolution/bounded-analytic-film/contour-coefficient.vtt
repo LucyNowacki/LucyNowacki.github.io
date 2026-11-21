@@ -1,0 +1,104 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.364
+Recover one real value first.
+
+00:00:02.364 --> 00:00:05.840
+Fix x on the red interval inside the moving contour.
+
+00:00:05.840 --> 00:00:08.037
+The Cauchy kernel has its pole at x.
+
+00:00:08.037 --> 00:00:14.074
+Turn once counterclockwise around that pole, weighting the kernel by the boundary values of the function.
+
+00:00:14.074 --> 00:00:17.102
+Cauchy's formula recovers the value at x.
+
+00:00:17.102 --> 00:00:24.014
+Now let x run along the interval, weight these recoveries by the second Legendre polynomial, and integrate.
+
+00:00:24.014 --> 00:00:27.853
+Collecting their kernels gives the second-kind kernel Q two.
+
+00:00:27.853 --> 00:00:33.293
+With the coefficient normalization, a factor of five remains outside the contour integral.
+
+00:00:33.593 --> 00:00:35.526
+Let the tangent turn the product.
+
+00:00:35.526 --> 00:00:37.787
+One angle chooses the boundary point.
+
+00:00:37.787 --> 00:00:42.842
+As the point turns, the tangent gives the complex direction and speed per radian.
+
+00:00:42.842 --> 00:00:45.380
+At the right tip the tangent points straight up.
+
+00:00:45.380 --> 00:00:47.044
+At the top it points left.
+
+00:00:47.044 --> 00:00:54.851
+The next small change in the coefficient integral comes from multiplying the function value, the kernel value and this tangent.
+
+00:00:54.851 --> 00:00:58.562
+Multiply also by five divided by two pi i.
+
+00:00:58.562 --> 00:01:02.231
+The gold arrow in the output plane shows this complex rate.
+
+00:01:02.231 --> 00:01:06.221
+A small angle in radians turns the rate into a small increment.
+
+00:01:06.521 --> 00:01:08.859
+Two contours add different increments.
+
+00:01:08.859 --> 00:01:13.722
+Keep the same function and use two inner radii, one point five four and two.
+
+00:01:13.722 --> 00:01:16.068
+Start both running integrals at zero.
+
+00:01:16.068 --> 00:01:18.905
+Turn both boundary points through the same angle.
+
+00:01:18.905 --> 00:01:24.558
+Their radii differ, so they sample different function values, kernel values and tangents.
+
+00:01:24.558 --> 00:01:28.845
+The tips in the output plane trace the accumulated complex integrals.
+
+00:01:28.845 --> 00:01:30.359
+Stop at a quarter turn.
+
+00:01:30.359 --> 00:01:32.257
+The two tips are visibly apart.
+
+00:01:32.257 --> 00:01:36.055
+A partly traversed contour still remembers which ellipse we chose.
+
+00:01:36.355 --> 00:01:38.714
+Both circuits give the same coefficient.
+
+00:01:38.714 --> 00:01:41.402
+Complete the remaining three quarters of each circuit.
+
+00:01:41.402 --> 00:01:45.625
+Watch the cyan and pink traces come together on the real axis.
+
+00:01:45.625 --> 00:01:52.131
+Both reach the real integral from our first chapter, approximately zero point zero four nine four two.
+
+00:01:52.131 --> 00:01:53.389
+Why do they meet?
+
+00:01:53.389 --> 00:01:58.828
+The product of the function and the kernel is holomorphic in the region between the two contours.
+
+00:01:58.828 --> 00:02:03.030
+Deforming one contour into the other preserves its complete integral.
+
+00:02:03.030 --> 00:02:06.977
+Now we can choose any inner contour to estimate that same coefficient.
+

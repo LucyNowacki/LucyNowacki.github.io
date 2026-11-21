@@ -1,0 +1,113 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.428
+Straighten the contour contributions.
+
+00:00:02.428 --> 00:00:05.179
+Follow four successive arcs of the inner ellipse.
+
+00:00:05.179 --> 00:00:10.085
+For each arc, integrate the complex density, including the oriented tangent.
+
+00:00:10.085 --> 00:00:13.946
+In the output plane each coloured arrow is one such increment.
+
+00:00:13.946 --> 00:00:15.353
+Join them head to tail.
+
+00:00:15.353 --> 00:00:18.809
+The displacement from start to finish gives the coefficient.
+
+00:00:18.809 --> 00:00:22.605
+Now turn the arrows until they all face right, keeping their lengths.
+
+00:00:22.605 --> 00:00:27.170
+The straightened path can be longer because the original arrows partly cancel.
+
+00:00:27.170 --> 00:00:32.439
+Splitting into finer arcs gives the integral of the absolute density as an upper bound.
+
+00:00:32.739 --> 00:00:34.928
+Replace the local heights by ceilings.
+
+00:00:34.928 --> 00:00:39.408
+At each boundary point the absolute density contains three factors.
+
+00:00:39.408 --> 00:00:42.074
+The first is the modulus of the function.
+
+00:00:42.074 --> 00:00:45.934
+Its height on the inner rim stays below the outer supremum, M rho.
+
+00:00:45.934 --> 00:00:48.537
+The second is the modulus of the kernel.
+
+00:00:48.537 --> 00:00:52.291
+Bound every height by the largest kernel height on this inner rim.
+
+00:00:52.291 --> 00:00:54.765
+The third is the speed of the moving point.
+
+00:00:54.765 --> 00:00:58.113
+Integrating that speed over one turn gives the perimeter.
+
+00:00:58.113 --> 00:01:01.036
+Those three pieces give the estimate on the screen.
+
+00:01:01.336 --> 00:01:03.418
+Every second frequency survives.
+
+00:01:03.418 --> 00:01:05.636
+Look inside the kernel at degree three.
+
+00:01:05.636 --> 00:01:08.558
+The first three frequencies are four, six and eight.
+
+00:01:08.558 --> 00:01:13.059
+At one moving point each coloured ridge gives the real part of its wave.
+
+00:01:13.059 --> 00:01:16.003
+The matching arrow carries the whole complex value.
+
+00:01:16.003 --> 00:01:18.818
+Its length is sigma times s to the minus k.
+
+00:01:18.818 --> 00:01:22.935
+A full turn rotates the fourth frequency four times clockwise.
+
+00:01:22.935 --> 00:01:25.771
+All three arrows have fixed lengths at this radius.
+
+00:01:25.771 --> 00:01:28.565
+Their sum changes as their directions change.
+
+00:01:28.565 --> 00:01:32.661
+To bound it at every angle, add their lengths and include the rest of the ladder.
+
+00:01:32.961 --> 00:01:34.958
+Sum the geometric majorant.
+
+00:01:34.958 --> 00:01:38.584
+For general degree n, the first frequency is n plus one.
+
+00:01:38.584 --> 00:01:42.232
+Replace each nonnegative sigma by its upper bound of two.
+
+00:01:42.232 --> 00:01:47.906
+Successive upper bounds have ratio one over s squared, since the exponents differ by two.
+
+00:01:47.906 --> 00:01:54.369
+The first upper bound divided by one minus that ratio sums the entire geometric series.
+
+00:01:54.369 --> 00:02:01.067
+Simplify the fraction to get two times s to the minus n divided by s minus its reciprocal.
+
+00:02:01.067 --> 00:02:04.224
+Insert this kernel ceiling into the contour estimate.
+
+00:02:04.224 --> 00:02:07.509
+The two cancels the two in the contour normalization.
+
+00:02:07.509 --> 00:02:12.714
+What remains is the perimeter constant, the function norm, and the geometric decay.
+

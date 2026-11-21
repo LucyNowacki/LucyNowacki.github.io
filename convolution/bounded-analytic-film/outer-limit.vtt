@@ -1,0 +1,116 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:01.980
+Move the inner contour outward.
+
+00:00:01.980 --> 00:00:06.715
+Fix rho at two point one five and keep the function and its outer norm fixed.
+
+00:00:06.715 --> 00:00:10.128
+The amber ellipse starts at the inner radius from the lesson.
+
+00:00:10.128 --> 00:00:14.820
+Its value is one point five four zero five before display rounding.
+
+00:00:14.820 --> 00:00:16.932
+Expand it toward the violet rim.
+
+00:00:16.932 --> 00:00:22.563
+Along the way, the perimeter and the gap s minus its reciprocal both change continuously.
+
+00:00:22.563 --> 00:00:28.131
+Their quotient therefore tends to the outer perimeter constant, since rho is greater than one.
+
+00:00:28.131 --> 00:00:31.159
+The coefficient stays on the left of every inequality.
+
+00:00:31.159 --> 00:00:39.799
+Taking the limit on the right gives the theorem without ever needing values of a general bounded holomorphic function on the outer boundary.
+
+00:00:40.099 --> 00:00:42.843
+Read degree ten on the logarithmic scale.
+
+00:00:42.843 --> 00:00:46.554
+The cyan curve holds the coefficients of our fixed function.
+
+00:00:46.554 --> 00:00:49.092
+The amber curve gives the inner envelope.
+
+00:00:49.092 --> 00:00:51.374
+The violet curve gives its outer limit.
+
+00:00:51.374 --> 00:00:53.059
+Read all three at degree ten.
+
+00:00:53.059 --> 00:00:57.752
+The real coefficient is about three point eight times ten to the minus seven.
+
+00:00:57.752 --> 00:01:01.058
+The inner estimate is about zero point four two three.
+
+00:01:01.058 --> 00:01:08.332
+As the amber contour approaches the violet one, the amber marker descends to about zero point zero one zero eight.
+
+00:01:08.332 --> 00:01:10.102
+The cyan marker stays put.
+
+00:01:10.102 --> 00:01:15.713
+Each step of four powers of ten on this vertical axis represents a factor of ten thousand.
+
+00:01:16.013 --> 00:01:18.052
+Estimate the perimeter in two ways.
+
+00:01:18.052 --> 00:01:22.361
+In the geometric formula the perimeter is the integral of the speed.
+
+00:01:22.361 --> 00:01:26.862
+Numerical quadrature samples this speed at equally spaced angles.
+
+00:01:26.862 --> 00:01:31.960
+The displayed perimeter constant is about one point two nine one for the outer ellipse.
+
+00:01:31.960 --> 00:01:34.285
+There is also an elementary upper bound.
+
+00:01:34.285 --> 00:01:37.356
+The speed never exceeds the major semiaxis.
+
+00:01:37.356 --> 00:01:44.225
+Replacing every speed by this horizontal ceiling bounds the perimeter by two pi times that semiaxis.
+
+00:01:44.225 --> 00:01:51.925
+The elementary envelope is about zero point zero one three at degree ten, a little higher than the perimeter based estimate.
+
+00:01:51.925 --> 00:01:54.442
+The elementary inequality is analytic.
+
+00:01:54.442 --> 00:01:59.349
+The quadrature gives a numerical evaluation of the exact perimeter formula.
+
+00:01:59.649 --> 00:02:01.880
+Follow one coefficient through the proof.
+
+00:02:01.880 --> 00:02:06.232
+Start inside, where the contour integral recovers the fixed coefficient.
+
+00:02:06.232 --> 00:02:09.879
+Take absolute values and pay for the lost cancellation.
+
+00:02:09.879 --> 00:02:13.228
+The kernel frequencies supply the geometric factor.
+
+00:02:13.228 --> 00:02:15.681
+Let the inner rim approach the outer ellipse.
+
+00:02:15.681 --> 00:02:18.027
+Now move the selected degree to the right.
+
+00:02:18.027 --> 00:02:23.189
+The degree multiplier grows linearly, while the reciprocal power falls geometrically.
+
+00:02:23.189 --> 00:02:28.351
+For a fixed outer radius greater than one, the geometric factor eventually wins.
+
+00:02:28.351 --> 00:02:35.071
+This is how the size of a holomorphic function on an ellipse controls the decay of its Legendre coefficients.
+
