@@ -1,0 +1,81 @@
+/* Shared teaching layout for the four Hardy embedding lessons. */
+.hardy-page{--hardy-input:#68b7ff;--hardy-image:#ffd36f;--hardy-response:#f38cc8;--hardy-output:#78d79b;--hardy-source:var(--hardy-input);--hardy-target:var(--hardy-image);--background:var(--panel);--foreground:var(--ink);--muted-foreground:var(--muted);--border:var(--line);--red:#ff666d;--viz-series-1:var(--hardy-input);--viz-series-2:var(--hardy-image);--viz-series-3:var(--hardy-response);--viz-series-5:var(--hardy-output)}
+.hardy-main{max-width:1440px}.hardy-intro{max-width:1080px;margin-bottom:22px}.hardy-intro>p:not(.eyebrow){color:var(--muted);max-width:90ch;font-size:16px}.hardy-intro h1{font-size:clamp(28px,3vw,42px)}
+.hardy-page .thesis-switcher{margin:24px 0 30px;grid-template-columns:repeat(4,minmax(0,1fr))}.hardy-page .thesis-switcher>a{padding:10px 12px;min-height:70px}.hardy-page .thesis-switcher>a span{font-size:14px}.hardy-page .thesis-switcher>a small{font-size:12px}
+#hardy-app{scroll-margin-top:16px;min-width:0}.hardy-stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 20px}.hardy-stages button{min-height:58px;text-align:left;padding:13px 16px;font-size:15px;font-weight:600}.hardy-stages button[aria-pressed=true]{background:var(--pair);color:#213219;border-color:var(--pair)}
+#hardy-stage-copy{padding:16px 20px;border-left:3px solid var(--pair);background:var(--panel);margin-bottom:22px;min-height:104px}#hardy-stage-copy h2{font-size:20px;margin-bottom:8px}#hardy-stage-copy p{margin:0;max-width:100ch;color:var(--muted);font-size:15px}#hardy-stage-copy .stage-equation{color:var(--ink);margin-top:12px;overflow-x:auto;overflow-y:hidden}
+.hardy-workspace{display:grid;grid-template-columns:260px minmax(0,1fr);gap:24px;align-items:start}.hardy-visual-column{min-width:0}#hardy-controls{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0;position:sticky;top:16px}#hardy-controls h3{font-size:16px;margin-bottom:20px}.hardy-control{margin-bottom:19px}.hardy-control label{display:flex;justify-content:space-between;gap:12px;font-size:14px;font-weight:500}.hardy-control output{white-space:nowrap}.hardy-control small{display:block;color:var(--muted);line-height:1.45;margin-top:4px}.hardy-motion{display:flex;gap:8px;flex-wrap:wrap}.hardy-motion button{flex:1;font-size:14px}.hardy-motion button[data-action=play]{background:var(--pair);color:#213219;border-color:var(--pair)}.hardy-control select{font-size:14px;margin-top:7px}.hardy-presets{border-top:1px solid var(--line);padding-top:16px;margin-top:16px}.hardy-presets button{width:100%;margin-top:8px;font-size:13px}
+#hardy-legend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}#hardy-legend button{flex:1;min-width:160px;display:flex;align-items:center;gap:12px;text-align:left;font-size:14px;padding:10px 12px}#hardy-legend button[aria-pressed=true]{border-color:var(--meter-color);box-shadow:inset 0 -3px var(--meter-color)}.hardy-swatch{width:22px;height:3px;display:inline-block;background:var(--meter-color);flex:none}#hardy-legend small{display:block;color:var(--muted)}
+.hardy-diagram-wrap{background:var(--panel);border-radius:10px;border:1px solid var(--line);padding:8px 14px 12px;min-width:0}#hardy-scene,#hardy-profile,#hardy-budget{display:block;width:100%;max-width:100%;overflow:hidden;touch-action:pan-y}#hardy-scene{min-height:330px}#hardy-scene text,#hardy-profile text,#hardy-budget text{font-size:13px;fill:var(--muted)}.hardy-diagram-caption{display:flex;flex-wrap:wrap;gap:6px 20px;color:var(--muted);font-size:12px;padding:8px 12px 0}.hardy-diagram-caption .line-dash{display:inline-block;width:22px;border-top:2px dashed var(--ink);vertical-align:middle;margin-right:6px}.hardy-diagram-caption .line-solid{display:inline-block;width:22px;border-top:2px solid var(--ink);vertical-align:middle;margin-right:6px}
+#hardy-readings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}.hardy-reading{border-left:3px solid var(--meter-color);padding:9px 12px;background:var(--panel);min-width:0}.hardy-reading strong{font-size:14px;font-weight:600}.hardy-reading dl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;margin:10px 0 0;font-size:13px}.hardy-reading dt{color:var(--muted)}.hardy-reading dd{margin:0;font-variant-numeric:tabular-nums}.hardy-profile-panel{margin:20px 0 0;padding:18px 14px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}.hardy-profile-heading{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:0 6px}.hardy-profile-heading h3{margin-bottom:0}.hardy-profile-heading span{color:var(--muted);font-size:12px}.hardy-profile-note{padding:0 6px;color:var(--muted);font-size:13px;margin:8px 0 0}
+#hardy-results{margin:28px 0 0;min-width:0}.hardy-result-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}.hardy-result-heading p{font-size:13px;color:var(--muted);margin:0}.hardy-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:18px}.hardy-metric{padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:9px}.hardy-metric span{display:block;color:var(--muted);font-size:13px}.hardy-metric strong{display:block;font-size:25px;margin-top:6px;font-weight:600;font-variant-numeric:tabular-nums}.hardy-metric small{display:block;color:var(--muted);margin-top:7px}.hardy-results-table{font-size:14px;table-layout:fixed;background:var(--panel)}.hardy-results-table th{position:static;white-space:normal}.hardy-results-table td,.hardy-results-table th{padding:13px 16px;overflow-wrap:anywhere}.hardy-results-table td:first-child,.hardy-results-table th:first-child{text-align:left;width:42%}.hardy-results-table tr[data-active=true]{background:var(--raised);box-shadow:inset 3px 0 var(--gold)}.hardy-result-note{font-size:13px;color:var(--muted);margin:12px 0 0}.hardy-factors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.hardy-factor{min-width:0;background:var(--panel);padding:18px;border-radius:9px;border:1px solid var(--line)}.hardy-factor-head{display:flex;justify-content:space-between;gap:14px;margin-bottom:14px}.hardy-factor .track{height:12px;background:var(--raised);margin:12px 0}.hardy-factor .bar{height:100%;background:var(--meter-color)}.hardy-factor small{color:var(--muted)}.hardy-factor output{font-size:20px}.hardy-budget-panel{padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:9px}.hardy-budget-key{display:flex;flex-wrap:wrap;gap:12px 24px;font-size:13px;color:var(--muted)}.hardy-budget-key i{display:inline-block;width:12px;height:12px;margin-right:7px;background:var(--meter-color)}
+.hardy-explanation{margin:22px 0 0;border-top:1px solid var(--line);padding-top:18px}.hardy-explanation>summary{font-size:17px;font-weight:600;color:var(--degree);cursor:pointer}.hardy-explanation>div,.hardy-explanation>p{margin-top:16px;max-width:100ch}.hardy-explanation p{color:var(--muted);font-size:15px;line-height:1.65}.hardy-explanation li{margin-bottom:9px}.hardy-page .try-this{border-left:3px solid var(--gold);padding:12px 18px;margin:24px 0;color:var(--muted);background:var(--panel)}.hardy-page .math-block{font-size:15px}.hardy-page mjx-container[jax="SVG"]{font-size:100%!important;max-width:100%}.hardy-page mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;padding-block:4px}.hardy-page .math-static{min-width:0}.hardy-page footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:30px;border-top:1px solid var(--line);padding-top:18px;font-size:14px}.hardy-page .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:1100px){.hardy-page .thesis-switcher{grid-template-columns:repeat(3,minmax(0,1fr))}.hardy-workspace{grid-template-columns:220px minmax(0,1fr);gap:16px}#hardy-controls{padding:15px}.hardy-stages button{font-size:14px;padding:11px}.hardy-stages{gap:8px}}
+@media(max-width:850px){.hardy-workspace{grid-template-columns:1fr}#hardy-controls{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 20px}#hardy-controls h3{grid-column:1/-1;margin:0}.hardy-control{margin:0}.hardy-motion,.hardy-presets{grid-column:1/-1}.hardy-presets{display:flex;gap:10px;margin:0;padding-top:12px}.hardy-presets button{width:auto;flex:1;margin:0}.hardy-page .thesis-switcher{grid-template-columns:repeat(2,minmax(0,1fr))}.hardy-stages button{min-height:62px}}
+@media(max-width:540px){.hardy-main{padding:24px 14px}.hardy-page .site-header{padding:14px;gap:12px;flex-wrap:wrap}.hardy-page .site-header nav{gap:12px;flex-wrap:wrap}.hardy-page .thesis-switcher{gap:7px;margin-block:20px}.hardy-page .thesis-switcher>a{min-height:72px;padding:9px}.hardy-page .thesis-switcher>a span{font-size:12px}.hardy-page .thesis-switcher>a small{font-size:11px}.hardy-stages{grid-template-columns:1fr}.hardy-stages button{min-height:44px;padding:10px 14px}#hardy-stage-copy{padding:14px;min-height:0}.hardy-diagram-wrap{padding-inline:0}.hardy-metrics{grid-template-columns:1fr}.hardy-factors{grid-template-columns:1fr}.hardy-reading{padding:9px}#hardy-readings{gap:8px}.hardy-reading dl{grid-template-columns:1fr;gap:3px}.hardy-reading dd{margin-bottom:6px}.hardy-results-table{font-size:12px}.hardy-results-table th,.hardy-results-table td{padding:10px 6px}.hardy-results-table td:first-child,.hardy-results-table th:first-child{width:38%}.hardy-profile-panel{padding-inline:0}.hardy-profile-heading,.hardy-profile-note{padding-inline:12px}#hardy-controls{padding:14px;gap:16px 12px}.hardy-control label{font-size:13px;flex-wrap:wrap;gap:4px}#hardy-legend button{min-width:130px;font-size:13px}.hardy-budget-panel{padding-inline:0}.hardy-budget-key{padding-inline:12px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* The paired embeddings share the same boundary instruments. */
+.hardy-experiment-link a + a { margin-inline-start: 1.25rem; }
+#boundary-diagram {
+  scroll-margin-block-start: 1rem;
+  padding: clamp(12px, 1.7vw, 24px);
+  background: var(--panel);
+  border-color: #775d88;
+}
+.boundary-heading { display: flex; align-items: center; justify-content: space-between; gap: .7rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.boundary-heading h3 { margin: 0; font-size: clamp(19px, 2.1vw, 26px); font-weight: 650; }
+.boundary-heading button { font-size: .85rem; min-height: 40px; }
+#boundary-diagram #hardy-legend { margin-bottom: .25rem; }
+#boundary-diagram #hardy-legend button {
+  min-width: min(100%, 10rem); border-radius: 8px; padding: .55rem .8rem;
+  background: transparent; gap: .7rem;
+}
+#boundary-diagram #hardy-legend button[aria-pressed=true] {
+  background: color-mix(in srgb,var(--meter-color) 10%,var(--panel));
+  box-shadow: inset 3px 0 var(--meter-color);
+}
+#boundary-diagram #hardy-scene { min-height: 0; }
+#boundary-diagram .hardy-diagram-caption { display: block; padding: .55rem 0 0; font-size: .82rem; }
+.boundary-motion {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.1rem;
+  border-block: 1px solid var(--line); padding: .85rem 0;
+}
+.boundary-motion .hardy-control { flex: 1 1 13rem; margin: 0; }
+.boundary-motion .hardy-control label { font-size: .96rem; }
+.boundary-motion .hardy-control output { font-variant-numeric: tabular-nums; }
+.boundary-motion .hardy-control small { font-size: .79rem; }
+.boundary-motion button { min-height: 44px; }
+.boundary-settings {
+  position: sticky; top: 1rem; min-width: 0; border: 1px solid var(--line);
+  background: var(--panel); border-radius: 10px; align-self: start;
+}
+.boundary-settings > summary { padding: .85rem 1rem; font-size: .91rem; cursor: pointer; font-weight: 650; }
+.boundary-settings[open] > summary { border-bottom: 1px solid var(--line); }
+.boundary-settings #hardy-controls { position: static; border: 0; }
+#boundary-diagram #hardy-readings { margin: .85rem 0 0; }
+#boundary-diagram .hardy-reading { background: var(--raised); border-radius: 3px 8px 8px 3px; }
+.boundary-reading-angle { display: inline-block; font-size: .82rem; margin-left: .65rem; color: var(--meter-color); font-variant-numeric: tabular-nums; }
+#boundary-diagram .hardy-reading dd { color: var(--ink); font-weight: 600; }
+.boundary-dialog {
+  width: min(96vw, 1600px); max-width: 96vw; max-height: 94dvh;
+  padding: 0; border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel); color: var(--ink); overscroll-behavior: contain;
+}
+.boundary-dialog::backdrop { background: rgb(15 8 24 / 88%); }
+.boundary-dialog #boundary-diagram { border: 0; }
+.boundary-dialog .boundary-heading { position: sticky; top: 0; padding-block: .35rem; z-index: 1; background: var(--panel); }
+@media (max-width:850px) {
+  .boundary-settings { position: static; }
+}
+@media (max-width:540px) {
+  .hardy-experiment-link a { margin-right: 1rem; }
+  .hardy-experiment-link a + a { margin-inline-start: 0; }
+  .boundary-motion { row-gap: .6rem; }
+  .boundary-motion .hardy-motion { flex: 1 0 100%; }
+  #boundary-diagram { padding: 12px 9px; }
+  #boundary-diagram .hardy-reading dl { font-size: .83rem; }
+  #boundary-diagram #hardy-legend { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
+  #boundary-diagram #hardy-legend button { min-width: 0; padding: .5rem; }
+  #boundary-diagram .hardy-swatch { display: none; }
+}

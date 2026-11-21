@@ -1,0 +1,81 @@
+/* The factorisation overview and its four follow-on lessons share a chapter index. */
+nav.hardy-chapter-nav {
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 8px;
+  margin-block: 1.25rem;
+}
+.hardy-chapter-heading {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .15rem .85rem;
+  margin-bottom: .15rem;
+}
+.hardy-chapter-heading h2 { font-size: 1.12rem; margin: 0; }
+.hardy-chapter-heading > span, .hardy-prerequisites { color: var(--muted); font-size: .875rem; }
+.hardy-chapter-nav > a { justify-content: flex-start; }
+.hardy-prerequisites { grid-column: 1 / -1; }
+.hardy-prerequisites summary { cursor: pointer; padding-block: .55rem; }
+.hardy-prerequisites > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%,14rem),1fr));
+  gap: .15rem 1rem;
+  padding-block: .2rem .5rem;
+}
+.hardy-prerequisites a { display: block; padding: .5rem .2rem; text-underline-offset: .17em; }
+.hardy-prerequisites a[aria-current] { color: var(--pair); font-weight: 650; }
+.hardy-experiment-link { margin: .2rem 0 1.25rem; }
+.hardy-experiment-link a { display: inline-block; padding-block: .35rem; font-weight: 600; color: var(--pair); text-underline-offset: .22em; }
+#tail-target, #angular-window, #gap-explorer { scroll-margin-block-start: 1rem; }
+@media (max-width: 850px) {
+  nav.hardy-chapter-nav { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+
+/* Keep the boundary choice, angular window and measured value together above the graph. */
+.hardy-profile-panel:has(#angular-window) { container-type: inline-size; }
+#angular-window {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .55rem 1.15rem;
+  margin: .8rem 0 .35rem;
+  padding: .85rem clamp(.55rem, 2%, 1rem);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-inline-start: 3px solid var(--arc-color, var(--hardy-input));
+  border-radius: 7px;
+}
+#angular-window[hidden] { display: none; }
+#angular-window > * { margin: 0; min-width: 0; max-width: none; }
+#angular-window h3 { font-size: 1rem; }
+#angular-window .hardy-motion { grid-column: auto; gap: .4rem; }
+#angular-window .hardy-motion button { flex: 1 1 auto; min-height: 36px; padding: .3rem .65rem; }
+#angular-window [data-arc-focus][aria-pressed="true"] {
+  color: var(--arc-color);
+  background: color-mix(in srgb, var(--arc-color) 12%, var(--panel));
+}
+#angular-window .hardy-control output, #angular-window [data-arc-value] {
+  color: var(--arc-color);
+  font-variant-numeric: tabular-nums;
+}
+#angular-window input[type="range"] { accent-color: var(--arc-color); }
+#angular-window [data-arc-help], #angular-window-summary {
+  font-size: .875rem;
+  line-height: 1.4;
+}
+#angular-window p:has([data-arc-value]) {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .15rem .55rem;
+  color: var(--ink);
+  padding-block-start: .45rem;
+  border-top: 1px solid var(--line);
+}
+#angular-window [data-arc-value] { font-size: 1.15rem; font-weight: 650; }
+#angular-window [data-arc-comparison] { color: var(--muted); font-size: .85rem; }
+#angular-window-summary { padding: 0; }
+@container (min-width: 37rem) {
+  #angular-window { grid-template-columns: minmax(11rem, 1fr) auto; align-items: center; }
+  #angular-window [data-arc-help], #angular-window p:has([data-arc-value]), #angular-window-summary { grid-column: 1 / -1; }
+}

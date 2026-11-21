@@ -1,0 +1,11 @@
+
+#lesson-lab [hidden]{display:none!important}
+#lesson-lab .cj-planes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+#lesson-lab .cj-plot{display:block;width:100%;height:280px;overflow:visible}
+#lesson-lab .cj-plot text{fill:var(--foreground);font-size:12px}
+#lesson-lab .cj-math{margin:12px 0;overflow-wrap:anywhere}
+#lesson-lab mjx-container{font-size:100%!important;max-width:100%}
+@media(max-width:760px){#lesson-lab .cj-planes{grid-template-columns:1fr}}
+
+.lesson-section-heading{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:18px 0}.lesson-section-heading h2{margin:0}.lesson-section-heading button{font-size:13px}.lesson-proof{margin:30px 0}.lesson-proof>p,.lesson-intro>p{max-width:95ch}.lesson-proof-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.lesson-proof-grid>.card{min-width:0}.lesson-formula{font-size:17px;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0}.lesson-formula mjx-container svg{max-width:none}.lesson-source{margin:24px 0}.lesson-source summary{cursor:pointer;font-weight:600}.lesson-source p{line-height:1.65}#lesson-lab .cj-math{font-size:17px;overflow-x:auto;overflow-y:hidden;padding:8px 0}#lesson-lab .cj-math mjx-container svg{max-width:none}.coefficient-footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.jl-window .lesson-formula{font-size:1em}@media(max-width:1050px){.lesson-proof-grid{grid-template-columns:1fr}}@media(max-width:760px){.lesson-section-heading{align-items:start}.lesson-section-heading button{max-width:100%}}
+

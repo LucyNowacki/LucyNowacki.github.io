@@ -1,0 +1,132 @@
+/* Native Atlas shell for the accepted moving-meter visualization. */
+.factorisation-page{--background:var(--panel);--foreground:var(--ink);--muted-foreground:var(--muted);--border:var(--line);--red:#ff666d;--viz-series-1:#68b7ff;--viz-series-2:var(--gold);--viz-series-3:#f38cc8;--viz-series-5:#78d79b}
+.factorisation-main{max-width:1260px}
+.factorisation-intro>p:not(.eyebrow){max-width:90ch;color:var(--muted)}
+.factorisation-chain{display:flex;align-items:center;flex-wrap:wrap;gap:12px 10px;padding:17px 0;font-size:17px}
+.factorisation-main .thesis-switcher{margin:22px 0}
+.factorisation-lab{padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.experiment-note{color:var(--muted);margin-bottom:22px;max-width:95ch}
+.factorisation-page .viz-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:18px;align-items:end;margin:20px 0 14px}
+.factorisation-page .form-label{font-weight:500;font-size:14px;min-width:0}
+.factorisation-page .hm-motion{display:flex;flex-wrap:wrap;gap:8px}
+.factorisation-page .form-label output{float:right;margin-left:6px}
+.factorisation-page .form-check{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:400}
+.factorisation-page .form-check-input{width:18px;height:18px;accent-color:var(--pair);flex-shrink:0}
+.factorisation-page .text-small{font-size:13px;line-height:1.55}
+.factorisation-page .text-muted{color:var(--muted)}
+.factorisation-page .tabular-nums{font-variant-numeric:tabular-nums}
+.factorisation-page .text-end{text-align:right}
+.factorisation-page .table{width:100%;border-collapse:collapse;table-layout:fixed}
+.factorisation-page .table th,.factorisation-page .table td{padding:10px 8px;border-bottom:1px solid var(--line);white-space:normal;overflow-wrap:anywhere;font-size:14px}
+.factorisation-page .table th:first-child{width:44%}
+.factorisation-page .table tr.selected{background:transparent}
+.factorisation-page .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.factorisation-page .cursor-interaction{cursor:grab}
+.factorisation-page .cursor-interaction:active{cursor:grabbing}
+.factorisation-page .math,.factorisation-page .math-static{min-width:0;max-width:100%}
+.factorisation-page mjx-container[jax="SVG"]{font-size:100%!important;max-width:100%}
+.factorisation-page mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;padding:3px 0}
+.factorisation-page mjx-container>svg{max-width:none}
+.factorisation-page .math-block{font-size:15px}
+.factorisation-explanation{margin-top:30px}
+.factorisation-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:18px 0}
+.factorisation-steps p{font-size:14px}
+.factorisation-steps summary{font-size:14px;color:var(--pair);margin:16px 0 10px}
+.factorisation-notes{margin-top:18px}.factorisation-notes summary{margin-bottom:14px}
+.factorisation-page footer{font-size:14px;flex-wrap:wrap}
+@media(max-width:1000px){.factorisation-page .viz-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.factorisation-steps{grid-template-columns:1fr}}
+@media(max-width:600px){.factorisation-lab{padding:16px 0;border:0;background:transparent}.factorisation-page{--background:var(--bg)}.factorisation-page .viz-controls{grid-template-columns:1fr;gap:10px}.factorisation-page .table th,.factorisation-page .table td{font-size:12px;padding:9px 4px}.factorisation-chain{font-size:15px}.factorisation-page footer{display:flex}}
+
+#hardy-moving-landscape{color:var(--foreground)}
+#hardy-moving-landscape .hm-flow{display:flex;flex-wrap:wrap;gap:4px;margin-block:8px}
+#hardy-moving-landscape .hm-legend{display:flex;gap:8px 18px;flex-wrap:wrap;margin-top:12px}
+#hardy-moving-landscape .hm-legend>span{display:inline-flex;align-items:center;gap:6px}
+#hardy-moving-landscape .hm-legend i{display:inline-block;width:18px;height:3px;background:var(--c)}
+#hardy-moving-landscape .hm-legend .hm-dashed{height:0;background:none;border-top:2px dashed var(--muted-foreground)}
+#hardy-moving-landscape .hm-diagram{display:block;width:100%;touch-action:pan-y;user-select:none}
+#hardy-moving-landscape .hm-diagram text{font-size:12px;font-weight:400;fill:var(--foreground)}
+#hardy-moving-landscape .hm-note{margin-block:10px}
+#hardy-moving-landscape .hm-readings{margin-block:16px}
+#hardy-moving-landscape .hm-key{display:inline-block;border-bottom:3px solid var(--c);margin-right:5px}
+#hardy-moving-landscape mjx-container{max-width:100%}
+
+/* Labels have their own layout rows, outside the moving diagram at every angle. */
+#hardy-moving-landscape .hm-meter-labels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:22px 0 4px}
+#hardy-moving-landscape .hm-meter-labels>div{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;border-top:2px solid var(--c);padding-top:10px;font-size:14px}
+#hardy-moving-landscape .hm-meter-labels>div>span:last-child{flex-basis:100%;color:var(--muted-foreground);font-size:13px}
+#hardy-moving-landscape .hm-symbol{width:48px;height:28px;flex-shrink:0;fill:none;stroke:var(--c);stroke-width:2}
+#hardy-moving-landscape .hm-map-labels{border-block:1px solid var(--border);padding:4px 0 16px;margin-bottom:14px}
+#hardy-moving-landscape .hm-map-labels p{font-size:13px;color:var(--muted-foreground);margin:12px 0 8px}
+#hardy-moving-landscape .hm-map-row{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center}
+#hardy-moving-landscape .hm-map-row>span{display:flex;align-items:center;gap:12px;font-size:16px}
+#hardy-moving-landscape .hm-arrow-key{display:inline-block;width:32px;height:0;border-top:2px dashed var(--c);position:relative}
+#hardy-moving-landscape .hm-arrow-key::after{content:'';position:absolute;right:-1px;top:-5px;border-left:7px solid var(--c);border-block:4px solid transparent}
+#hardy-moving-landscape .hm-branch-key{display:inline-block;width:9px;height:9px;background:var(--foreground);margin-inline:11px}
+#hardy-moving-landscape .hm-circle-key{border-radius:50%}
+#hardy-moving-landscape .hm-diamond-key{transform:rotate(45deg)}
+@media(max-width:760px){#hardy-moving-landscape .hm-meter-labels{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* These four chapter links preview the operation taught in each lesson. */
+.factorisation-main .hardy-chapter-nav {
+  margin-block: clamp(1.4rem, 3vw, 2.2rem);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .6rem;
+}
+.factorisation-main .hardy-chapter-heading {
+  justify-content: space-between;
+  align-items: baseline;
+  margin-block-end: .35rem;
+}
+.factorisation-main .hardy-chapter-heading h2 {
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  letter-spacing: -.018em;
+}
+.factorisation-main .hardy-chapter-nav > a {
+  position: relative;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: .8rem .95rem .9rem;
+  border-color: #705383;
+  background: var(--panel);
+  gap: .3rem;
+}
+.factorisation-main .hardy-chapter-nav > a::after {
+  content: '→';
+  position: absolute;
+  top: .85rem;
+  right: .9rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.factorisation-main .hardy-chapter-nav > a:is(:hover, :focus-visible) {
+  border-color: var(--pair);
+  background: var(--raised);
+}
+.factorisation-main .hardy-chapter-nav > a:is(:hover, :focus-visible)::after {
+  color: var(--pair);
+}
+.factorisation-main .hardy-chapter-nav > a small { font-size: .82rem; line-height: 1.45; }
+.lesson-thumbnail { display: block; width: 7rem; max-width: 70%; height: 2.25rem; margin-bottom: .3rem; }
+.lesson-thumbnail .mini-input { color: var(--viz-series-1); }
+.lesson-thumbnail .mini-image { color: var(--viz-series-2); }
+.lesson-thumbnail .mini-response { color: var(--viz-series-3); }
+.lesson-thumbnail .mini-axis { color: var(--muted); opacity: .66; stroke-width: 1; }
+.lesson-thumbnail .mini-balance { fill: var(--ink); stroke: var(--panel); stroke-width: 1.25; }
+.factorisation-main .hardy-prerequisites summary { width: fit-content; padding-block: .65rem; }
+@media (max-width: 850px) {
+  .factorisation-main .hardy-chapter-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 510px) {
+  .factorisation-main .hardy-chapter-nav { grid-template-columns: 1fr; }
+  .factorisation-main .hardy-chapter-nav > a {
+    display: grid;
+    grid-template-columns: 4.4rem minmax(0, 1fr);
+    align-content: center;
+    align-items: center;
+    gap: .15rem .75rem;
+    padding: .65rem .8rem;
+  }
+  .factorisation-main .hardy-chapter-nav > a::after { display: none; }
+  .factorisation-main .lesson-thumbnail { grid-row: 1 / 3; width: 100%; max-width: none; margin: 0; }
+}

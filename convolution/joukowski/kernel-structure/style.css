@@ -1,0 +1,186 @@
+
+#lesson-lab {color:var(--foreground);}
+#lesson-lab .sk-formula {margin-block:12px; overflow-wrap:anywhere;}
+#lesson-lab .sk-select-row {margin-block:12px;}
+#lesson-lab .sk-figures {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;}
+#lesson-lab section {min-width:0;}
+#lesson-lab .sk-chart {display:block;width:100%;overflow:visible;}
+#lesson-lab .sk-chart text {fill:var(--foreground);font-size:12px;}
+#lesson-lab .sk-chart .grid {stroke:var(--border);stroke-width:1;}
+#lesson-lab .sk-chart .axis-line {stroke:var(--muted-foreground);stroke-width:1;}
+#lesson-lab .sk-chart .frame {fill:none;stroke:var(--border);stroke-width:1;}
+#lesson-lab .sk-chart .d3-axis path,#lesson-lab .sk-chart .d3-axis line {stroke:var(--border);}
+#lesson-lab .sk-legend,#lesson-lab .sk-structure {margin-block:8px;}
+#lesson-lab .sk-result {margin-block:10px;}
+#lesson-lab mjx-container {max-width:100%;}
+@media(max-width:620px){#lesson-lab .sk-figures {grid-template-columns:minmax(0,1fr);}}
+
+.lesson-section-heading{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:18px 0}.lesson-section-heading h2{margin:0}.lesson-section-heading button{font-size:13px}.lesson-proof{margin:30px 0}.lesson-proof>p,.lesson-intro>p{max-width:95ch}.lesson-proof-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.lesson-proof-grid>.card{min-width:0}.lesson-formula{font-size:17px;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0}.lesson-formula mjx-container svg{max-width:none}.lesson-source{margin:24px 0}.lesson-source summary{cursor:pointer;font-weight:600}.lesson-source p{line-height:1.65}#lesson-lab .sk-formula{font-size:17px;overflow-x:auto;overflow-y:hidden;padding:8px 0}#lesson-lab .sk-formula mjx-container svg{max-width:none}#lesson-lab .sk-figures>section{padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:8px}.coefficient-footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.jl-window .lesson-formula{font-size:1em}@media(max-width:1050px){.lesson-proof-grid{grid-template-columns:1fr}}@media(max-width:760px){.lesson-section-heading{align-items:start}.lesson-section-heading button{max-width:100%}}
+
+
+#lesson-lab .sk-vector-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+#lesson-lab .sk-vector-controls label{flex:1 1 200px;font-size:14px}
+#lesson-lab .sk-vector-controls output{margin-left:10px}
+#lesson-lab .sk-vector-controls button{font-size:13px}
+#lesson-lab .sk-chart[data-plot="vectors"] text{font-size:13px}
+#lesson-lab #sk-vector-view-note{margin:10px 0;color:var(--muted-foreground)}
+@media(max-width:950px){#lesson-lab .sk-figures{grid-template-columns:minmax(0,1fr)}}
+
+/* Keep the same instruments across the steps of the circle construction. */
+.kw-start { display: inline-block; color: var(--pair); padding: .4rem 0; font-weight: 650; text-underline-offset: .22em; }
+#lesson-lab { scroll-margin-top: .75rem; }
+#lesson-lab [hidden] { display: none !important; }
+.kw-path { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: .42rem; margin: 1rem 0; }
+.kw-path button { font-size: .91rem; font-weight: 650; line-height: 1.25; text-align:left; padding: .7rem .8rem; }
+.kw-path button[aria-pressed=true], .kw-controls button[aria-pressed=true] { color: #203019; background: var(--pair); border-color: var(--pair); }
+#lesson-lab .viz-controls { grid-template-columns: repeat(auto-fit,minmax(min(12rem,100%),1fr)); border-block: 1px solid var(--line); padding-block: .7rem; }
+.kw-panel { padding-block: .45rem; }
+.kw-panel h3 { margin-block: .55rem .65rem; }
+.kw-panel p { max-width: 90ch; }
+.kw-panel button, .kw-panel select { min-height: 40px; }
+.kw-controls { display:flex; align-items:center; flex-wrap:wrap; gap:.5rem 1rem; margin-block:.75rem; }
+.kw-controls label { min-width: min(100%,10rem); flex: 1; }
+.kw-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin-block:.85rem; }
+.kw-card { min-width:0; padding:clamp(.65rem,1.4vw,1.1rem); border:1px solid var(--line); border-radius:9px; background:#281a36; }
+.kw-plot { display:block; width:100%; height:auto; min-width:0; }
+.kw-readout { margin-block:.5rem; color:var(--ink); font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+.kw-pager { display:flex; justify-content:space-between; gap:.7rem; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:1rem; margin-top:.85rem; }
+.kw-pager button { color:var(--pair); }
+.kw-panel .math-static { overflow-x:auto; overflow-y:hidden; }
+.kw-maps .kw-plot { max-height:240px; }
+.kw-key { display:inline-flex; align-items:center; gap:.4rem; }
+.kw-key i { width:.6rem; height:.6rem; border-radius:50%; background:var(--chip); }
+.kw-plane-readout { display:flex; flex-wrap:wrap; gap:.25rem 1.15rem; margin:.5rem 0 0; font-size:.88rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+#kw-series-depth { width:min(14rem,100%); }
+.kw-disc-values { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.3rem 1rem; }
+.kw-disc-values dd { margin:0; font-variant-numeric:tabular-nums; }
+.kw-disc-note { color:var(--muted); font-size:.86rem; }
+@media(max-width:800px){ .kw-path { grid-template-columns:repeat(3,minmax(0,1fr)); } .kw-grid {grid-template-columns:1fr;} }
+@media(max-width:550px){ .kw-path {grid-template-columns:repeat(2,minmax(0,1fr));} .kw-path button {min-height:40px; padding:.45rem .55rem;} .kw-pager button{font-size:.82rem;} }
+
+.pb-plane,.pb-wave,.jac-direction {display:block;width:100%;margin:.6rem auto;}
+.pb-plane,.jac-direction {max-width:450px;}
+.pb-wave {max-height:235px;}
+#kernel-pullback output {display:block;margin-top:.45rem;font-variant-numeric:tabular-nums;color:var(--foreground);}
+
+#kernel-chain .sk-wide-spectrum {grid-column:1/-1;}
+#kernel-chain #sk-lens-values {display:flex;flex-wrap:wrap;gap:.5rem 1rem;}
+#kernel-chain #sk-lens-values span {border-inline-start:3px solid var(--term-ink);padding-inline-start:.45rem;font-size:.95rem;}
+#kernel-chain .sk-detail svg {margin-top:1rem;}
+#kernel-chain .sk-detail p {line-height:1.5;}
+
+.space-card {margin:1rem 0;}
+.space-card summary {cursor:pointer;font-weight:700;padding:.35rem 0;}
+.space-layout {display:grid;grid-template-columns:minmax(0,2.3fr) minmax(14rem,1fr);gap:1.25rem;align-items:center;}
+.space-stage,.space-inset {border:1px solid var(--line);border-radius:8px;background:radial-gradient(ellipse at 45% 32%,#2c2440,#181423 90%);}
+.space-stage {overflow:hidden;}
+.space-scene {width:100%;display:block;cursor:grab;touch-action:none;}
+.space-scene:active {cursor:grabbing;}
+.space-inset {width:100%;height:150px;display:block;}
+.space-legend {display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem 1rem;font-size:.88rem;padding:.65rem .5rem;}
+.space-stage .space-legend {background:#21182c;}
+.space-data output,.space-data [data-stack-rows] {font-variant-numeric:tabular-nums;}
+.space-camera,.space-probe {display:flex;align-items:end;gap:.6rem 1rem;flex-wrap:wrap;margin:.8rem 0;}
+.space-camera label,.space-probe label {flex:1 1 10rem;font-size:.9rem;font-weight:600;}
+#kernel-pullback .space-camera output,#kernel-pullback .space-probe output,.space-camera output {display:inline;margin-left:.5em;color:var(--pair);}
+.space-camera input,.space-probe input {width:100%;display:block;margin:.35rem 0;}
+@media(max-width:760px){.space-layout {grid-template-columns:minmax(0,1fr);}.space-camera label {flex-basis:7rem;}}
+
+/* Remainder-disc overview and detail use separate complex-plane scales. */
+#kernel-disc [data-disc-planes] { align-items: start; }
+#kernel-disc [data-disc-planes].kw-disc-single { grid-template-columns: minmax(0, 1fr); }
+#kernel-disc [data-disc-panel] { min-width: 0; }
+#kernel-disc [data-disc-panel] h4 { font-size: 1rem; margin-block: 0 .5rem; }
+#kernel-disc [data-disc-panel="all"] h4 { margin-bottom: calc(40px + 2rem); }
+#kernel-disc .kw-disc-single [data-disc-panel="all"] h4 { margin-bottom: .5rem; }
+#kernel-disc .kw-disc-values output, #kernel-disc [data-disc-value="bracketWidth"] { color: var(--pair); font-weight: 600; }
+#kernel-disc [data-disc-plot] text, #kernel-disc [data-disc-comparison] text { font-size: 13px; }
+@media (max-width:800px) {
+  #kernel-disc [data-disc-panel="all"] h4 { margin-bottom: .5rem; }
+}
+@media (max-width:450px) {
+  #kernel-disc .kw-disc-values { grid-template-columns: minmax(0,1fr); row-gap: 0; }
+  #kernel-disc .kw-disc-values dd { margin-bottom: .4rem; }
+  #kernel-disc [data-disc-plot] text, #kernel-disc [data-disc-comparison] text { font-size: 12px; }
+}
+
+.pb-branches {margin:.75rem 0;}
+.pb-branches summary {font-weight:650;cursor:pointer;}
+.pm-card {margin:1rem 0;}
+.pm-layout {display:grid;grid-template-columns:minmax(0,1.65fr) minmax(200px,1fr);gap:1rem 2rem;align-items:center;}
+.pm-drawing {background:#20192a;border:1px solid var(--line);border-radius:8px;padding:.6rem;text-align:center;}
+#pm-vectors {width:100%;max-height:220px;display:block;}
+.pm-angle {display:block;max-width:38rem;}
+.pm-angle input {display:block;width:100%;}
+#kernel-pullback .pm-angle output {display:inline;color:var(--pair);margin-left:.7em;}
+.pm-product {display:flex;align-items:center;gap:clamp(.3rem,1vw,.95rem);flex-wrap:wrap;margin:.75rem 0 1rem;}
+.pm-product small {display:block;text-align:center;margin-bottom:.5em;}
+.pm-product b {align-self:flex-end;margin-bottom:1.1em;}
+.pm-array {display:grid;gap:.5em;padding:.2em .5em;border:solid currentColor;border-width:1px 2px;background:#20192a;text-align:right;font-family:ui-monospace,monospace;line-height:1.35;font-variant-numeric:tabular-nums;}
+.pm-square {grid-template-columns:repeat(2,minmax(0,1fr));color:var(--gold);}
+#pm-in {color:var(--positive);}
+#pm-out {color:var(--degree);}
+.pm-links {margin-bottom:0;}
+@media(max-width:720px){.pm-layout{grid-template-columns:minmax(0,1fr);}.pm-product{font-size:clamp(11px,3.1vw,15px);}.pm-array{padding:.15em .25em;}}
+.pm-layout > *, .pm-links > * {min-width:0;}
+#pm-example {margin-top:.65rem;}
+
+/* Keep the selected Fourier product and its boundary measurement in one workspace. */
+#hardy-pair-lab {scroll-margin-top:1rem;min-width:0;}
+.hp-title,.hp-probe,.hp-selects,.hp-matrix-key {display:flex;align-items:center;flex-wrap:wrap;gap:.5rem 1rem;}
+.hp-title {justify-content:space-between;}
+.hp-title h3,.hp-linked h4 {margin:0;}
+.hp-lab > p {max-width:82ch;}
+.hp-equation {display:flex;align-items:center;flex-wrap:wrap;gap:.2rem .35rem;margin:.85rem 0;padding:.5rem .75rem;background:#20172d;border-radius:6px;}
+.hp-equation span {padding:.2em .12em;}
+.hp-equation [data-hp-zone] {border-bottom:3px solid transparent;}
+.hp-equation [data-hp-zone=diag].hp-lit {border-color:#6eddeb;background:rgba(105,221,235,.10);}
+.hp-equation [data-hp-zone=near].hp-lit {border-color:#ffce78;background:rgba(255,206,120,.1);}
+.hp-probe {justify-content:space-between;margin:.75rem 0 1rem;}
+.hp-probe label {flex:1 1 12rem;max-width:28rem;}
+#kernel-jacobian .hp-probe output {display:inline;color:var(--pair);margin-left:.35rem;}
+.hp-probe input {width:100%;display:block;}
+.hp-probe .kw-controls {margin:0;}
+.hp-linked {display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:.8rem;align-items:start;}
+.hp-matrix-panel,.hp-hump-panel {min-width:0;padding:clamp(.6rem,1.15vw,1rem);border:1px solid var(--line);border-radius:8px;background:#23192f;}
+.hp-matrix-panel > p,.hp-hump-panel > p,.hp-selects {font-size:.92rem;line-height:1.42;}
+.hp-grid-scroll {max-width:100%;overflow-x:auto;padding:.2rem .08rem .45rem;scrollbar-color:#80708c #251d30;}
+.hp-matrix {border-spacing:2px;width:100%;font-variant-numeric:tabular-nums;}
+.hp-matrix th {font-weight:550;color:#d9cbe6;text-align:center;font-size:.84rem;white-space:nowrap;}
+.hp-matrix th[scope=row],.hp-matrix tr:first-child th:first-child {position:sticky;left:0;background:#23192f;z-index:1;padding-right:.25rem;}
+.hp-matrix td {padding:0;}
+#kernel-jacobian .hp-matrix button {display:block;width:100%;min-width:3.1rem;padding:.37rem .06rem;min-height:2rem;border:1px solid #584663;border-radius:3px;line-height:1.1;font-size:clamp(.71rem,.78vw,.84rem);font-family:ui-monospace,monospace;letter-spacing:-.045em;white-space:nowrap;}
+#kernel-jacobian .hp-matrix [data-sign=plus] {color:#b8f7ff;background:#234759;}
+#kernel-jacobian .hp-matrix [data-sign=minus] {color:#ffdfa1;background:#4b392b;}
+#kernel-jacobian .hp-matrix [data-sign=zero] {color:#a895b5;background:#261d31;}
+#kernel-jacobian .hp-matrix [aria-pressed=true],#kernel-jacobian .hp-matrix .hp-partner {outline:2px solid #fff;outline-offset:-2px;}
+#kernel-jacobian .hp-matrix .hp-partner {outline:2px dashed #e1b5f7;}
+#kernel-jacobian .hp-matrix button:focus-visible {box-shadow:inset 0 0 0 4px #a9c0ff;}
+.hp-matrix-key {font-size:.8rem;color:#d1c3dd;gap:.3rem .8rem;}
+.hp-matrix-key span::before {content:"";display:inline-block;width:.8rem;height:.6rem;vertical-align:baseline;margin-right:.35rem;border:2px solid white;}
+.hp-matrix-key span+span::before {border:2px dashed #e1b5f7;}
+.hp-readout,.hp-check {font-variant-numeric:tabular-nums;overflow-wrap:anywhere;}
+.hp-readout {color:#eee6f8;margin:.85rem 0 .3rem;}
+.hp-explain {margin:.45rem 0 .8rem;}
+.hp-selects label {display:flex;align-items:center;gap:.4rem;}
+.hp-selects select {width:auto;}
+.hp-shortcuts.kw-controls {margin:.55rem 0 0;gap:.3rem;}
+.hp-shortcuts button {font-size:.83rem;padding:.35rem .48rem;}
+.hp-weight {margin-top:1rem;}
+.hp-weight summary {cursor:pointer;}
+@media(max-width:760px) {
+  .hp-linked {grid-template-columns:minmax(0,1fr);}
+  .hp-matrix-panel,.hp-hump-panel {padding:.65rem;}
+}
+
+.hp-product {display:flex;flex-wrap:wrap;align-items:center;gap:.22rem .4rem;line-height:1.8;padding:.5rem 0 .15rem;}
+.hp-product [data-hp-factor=row] {color:#69dbee;}
+.hp-product [data-hp-factor=col] {color:#dfa9ff;}
+.hp-product [data-hp-factor=mean] {color:#b9e997;}
+.hp-product mjx-assistive-mml {position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%);}
+#kernel-jacobian .hp-all-terms {min-height:2rem;margin:.1rem 0 .8rem;}
+
+.kernel-calculations {margin:0 0 1rem;padding:.8rem 1rem;border-left:3px solid var(--pair);background:var(--panel);scroll-margin-top:1rem;}
+.kernel-calculations h3 {font-size:1rem;margin:0 0 .55rem;}
+.kernel-calculations [role=group] {display:flex;flex-wrap:wrap;gap:.5rem;}
+.kernel-calculations button {min-height:40px;text-align:left;}

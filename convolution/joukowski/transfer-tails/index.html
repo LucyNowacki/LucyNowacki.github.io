@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transfer geometry and tails · Convolution Atlas</title>
+<meta name="description" content="Follow the two Hardy restrictions through an affine transfer example and compare the input gap and output decay ratios without confusing them with a full operator-error bound.">
+<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../hardy-embeddings/style.css?v=7c1918bd1ec1">
+<link rel="stylesheet" href="gap-explorer.css?v=2e4f9e9d20f7">
+<link rel="stylesheet" href="../hardy-embeddings/chapter.css?v=37295e81b75b">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'none'},startup:{typeset:false},options:{enableMenu:false}};</script>
+<script defer src="../../vendor/tex-svg.js?v=d4295dc33744"></script>
+<script defer src="../lesson-navigation.js?v=bb9ff39db220"></script>
+<script defer src="../hardy-embeddings/math.js?v=1237b8bf1726"></script>
+<script defer src="../hardy-embeddings/plots.js?v=da161f155f1c"></script>
+<script defer src="../hardy-embeddings/lesson.js?v=5523d9bbfcf2"></script>
+<script defer src="gap-explorer.js?v=2ef17c78d408"></script>
+<link rel="stylesheet" href="../home-palette.css?v=ca2188dd1bc9">
+</head>
+<body class="hardy-page">
+<a class="skip" href="#hardy-app">Skip to the interactive laboratory</a>
+<header class="site-header"><a href="../index.html">← Joukowski–Legendre</a><nav aria-label="Atlas navigation"><a href="../../index.html">Convolution Atlas</a><a href="../factorisation/index.html">Factorisation overview</a></nav></header>
+<main class="hardy-main">
+<header class="hardy-intro math-static">
+<p class="eyebrow">12 · TRANSFER GEOMETRY AND TAILS</p>
+<h1>Generic consequences carried into the operator framework</h1>
+<p>The transfer operator samples the input on a smaller branch-image ellipse, builds its response on a larger ellipse, and returns to the original Hardy space. Each strict gap supplies a geometric decay ratio.</p>
+<p>Write \(s=r_\tau(\rho)\) and \(X=H^2(E_r)\), with \(1&lt;s&lt;r&lt;\rho\). The larger of \(s/r\) and \(r/\rho\) gives the slower geometric factor.</p>
+</header>
+<nav class="thesis-switcher hardy-chapter-nav" data-lesson-navigation data-lesson="transfer-tails" aria-label="Switch thesis lesson">
+<div class="hardy-chapter-heading"><h2>Two Hardy embeddings and Legendre projection tails</h2><span>Lessons 9–12</span></div>
+<a href="../weighted-synthesis/index.html"><span>9 · Weighted synthesis and tails</span><small>Choose how much tail to allow.</small></a>
+<a href="../hardy-to-uniform/index.html"><span>10 · Hardy to uniform</span><small>Compare angular energy with the inner peak.</small></a>
+<a href="../uniform-to-hardy/index.html"><span>11 · Uniform to Hardy</span><small>Measure how an arc contributes to the mean.</small></a>
+<a href="index.html" aria-current="page"><span>12 · Two gaps and operator tails</span><small>Find where the two decay ratios meet.</small></a>
+<details class="hardy-prerequisites"><summary>Lessons 1–8 · Laurent expansion to factorisation</summary><div><a href="../index.html">1 · Laurent expansion</a><a href="../real-line/index.html">2 · Real-line stability</a><a href="../ellipse-growth/index.html">3 · Geometric growth</a><a href="../contour-coefficients/index.html">4 · Boundary coefficients</a><a href="../kernel-structure/index.html">5 · Kernel frequencies</a><a href="../hinf-coefficients/index.html">6 · Bounded analytic coefficients</a><a href="../hardy-coefficients/index.html">7 · Hardy coefficients and tails</a><a href="../factorisation/index.html">8 · Factorisation and embeddings</a></div></details></nav>
+<p class="hardy-experiment-link" hidden><a href="#gap-explorer">Explore the two decay ratios ↓</a></p>
+<noscript><p>Enable JavaScript to explore the controls and render the formulas. The explanations below remain available.</p></noscript>
+<section id="hardy-app" class="hardy-lab" data-kind="transfer" aria-label="Interactive transfer factorisation and radius gaps">
+<div class="hardy-stages" role="group" aria-label="Choose a transfer step">
+<button type="button" data-stage="0" aria-pressed="true">1 · Locate the branch images</button>
+<button type="button" data-stage="1" aria-pressed="false">2 · Follow the three operators</button>
+<button type="button" data-stage="2" aria-pressed="false">3 · Compare the two decay rates</button>
+</div>
+<div id="hardy-controls"></div>
+<div id="hardy-stage-copy"></div>
+<div id="hardy-legend"></div>
+<svg id="hardy-scene" viewBox="0 0 800 480" role="img" aria-label="Three nested ellipses with inverse-branch images and transfer measurements"></svg>
+<div id="hardy-readings"></div>
+<svg id="hardy-profile" viewBox="0 0 800 300" role="img" aria-label="Input-gap and output geometric factors as the truncation grows"></svg>
+<div id="hardy-results"></div>
+<section id="gap-explorer" class="gap-explorer math-static" aria-labelledby="gap-explorer-title" hidden>
+<header>
+<h3 id="gap-explorer-title">Where do the two ratios balance?</h3>
+<p>Drag across the plot or use the Hardy ellipse slider. The circles track the current radius. The diamond marks the balance. Shaded edges show the slider limits.</p>
+</header>
+<div class="gap-explorer-key">
+<span><i class="gap-input"></i>Input \(q_{\rm gap}=s/r\)</span>
+<span><i class="gap-output"></i>Output \(q_{\rm out}=r/\rho\)</span>
+<span><i class="gap-maximum"></i>Larger ratio \(q_\ast\)</span>
+</div>
+<svg class="gap-explorer-plot" role="img" aria-labelledby="gap-plot-title gap-plot-description">
+<title id="gap-plot-title">Input and output ratios across the Hardy radius</title>
+<desc id="gap-plot-description">The input ratio falls as the radius increases. The output ratio rises. Their maximum is smallest where they cross. The shaded edges mark the limits of the slider.</desc>
+<g data-gap-plot></g>
+</svg>
+<div class="gap-explorer-readings" aria-live="polite" aria-atomic="true">
+<div><span>Current radius</span> <output data-gap-current></output></div>
+<div><span>Balanced radius</span> <output data-gap-balanced></output></div>
+<div><span>Current geometric factor</span> <output data-gap-factor></output></div>
+<div><span>Balanced geometric factor</span> <output data-gap-balanced-factor></output></div>
+</div>
+<p>For fixed \(s,\rho\), the product \(q_{\rm gap}q_{\rm out}=s/\rho\) stays fixed. The larger ratio is smallest when the two coincide at \(r=\sqrt{s\rho}\). The values here compare the geometric factors \(q_\ast^N\). The full error estimate also depends on the operator and the approximation.</p>
+</section>
+<p id="hardy-live" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+</section>
+<section class="hardy-explanation math-static" aria-label="Understanding the transfer geometry">
+<p class="try-this"><strong>What to try.</strong> Move the evaluation point on the outer ellipse and follow both inverse-branch images. Then drag the middle radius across the gap plot. Try both sides of the diamond, then increase the exponent to see how the difference between the geometric factors grows in relative size.</p>
+<p class="dependency"><strong>Earlier ingredients.</strong> The <a href="../factorisation/index.html">factorisation overview</a> separates operators on whole functions from inverse-branch maps on points. <a href="../hardy-to-uniform/index.html">Hardy to uniform</a> controls the input restriction, and <a href="../uniform-to-hardy/index.html">uniform to Hardy</a> controls the output restriction.</p>
+<details>
+<summary>Intuitive/geometric explanation</summary>
+<p>The containment \(\tau_b(\overline{E_\rho})\subset E_s\) places every branch evaluation where the restricted input is uniformly controlled. The illustrative branches are \(\tau_\pm(z)=(z\pm1)/2\), with weights \(1/2\). Their response is</p>
+<div class="math-block">\[h(z)=\tfrac12f(\tau_-(z))+\tfrac12f(\tau_+(z)).\]</div>
+<p>The point maps move \(z\) inward to two sampling points. The transfer operator combines the sampled values into the new function \(h\) on the outer ellipse. Restricting \(h\) back to \(E_r\) gives the output in the same space \(X\).</p>
+<p>The two humps show local input and output energies. Lighthouses show local moduli, with the corresponding global norm readings kept separate. Their inward stems are magnitude gauges. They do not trace the function through the ellipse.</p>
+</details>
+<details>
+<summary>Why the estimate follows</summary>
+<p>For holomorphic branches and weights on a neighbourhood of \(\overline{E_\rho}\), together with the stated containment, the three steps are</p>
+<div class="hardy-chain">
+<div class="math-block">\[X\xrightarrow{\mathcal J_2^{r\to s}}H^\infty(E_s),\]</div>
+<div class="math-block">\[H^\infty(E_s)\xrightarrow{\widetilde{\mathcal L}_{\rho,\tau}}A(E_\rho),\]</div>
+<div class="math-block">\[A(E_\rho)\xrightarrow{\mathcal J_\infty^{\rho\to r}}X.\]</div>
+</div>
+<p>The generic Hardy-to-uniform bound supplies \(C_2(r)\mathsf S_\infty(s/r)\) on the input leg. The sum of the outer suprema of the branch weights bounds the middle map, and the output restriction has norm one. These bounds establish a bounded factorisation before approximation is introduced.</p>
+<div class="math-block">\[\begin{aligned}q_{\rm gap}&=s/r,\\q_{\rm out}&=r/\rho,\\q_\ast&=\max\{q_{\rm gap},q_{\rm out}\}.\end{aligned}\]</div>
+<p>The plotted powers \(q_{\rm gap}^N\) and \(q_{\rm out}^N\) display geometric factors. A full operator-error estimate also contains constants, approximation prefactors, coordinate geometry, and collocation terms. Equalizing the ratios at \(r=\sqrt{s\rho}\), for fixed admissible \(s,\rho\), balances these factors alone.</p>
+</details>
+<details>
+<summary>Connection to the thesis</summary>
+<p>This follows “Generic consequences carried into the operator framework,” the final subsection of “Two Hardy embeddings and Legendre projection tails.” It passes the restriction and coefficient ingredients to the single-space chapter.</p>
+<p>The preparatory input starts in \(H^2(E_\eta)\), giving \(q_{\rm in}=s/\eta\). The single-space theorem controls every \(f\in X=H^2(E_r)\), which need not extend to \(E_\eta\). Its input ratio is therefore \(q_{\rm gap}=s/r\). This change of source space does not identify \(\eta\) with \(r\).</p>
+<p>The single-space input remainder uses \(I-\mathcal P_N^X\), with \(\mathcal P_N^X\) the Hardy orthogonal projector. The later Chebyshev-packet estimate handles this projector. The earlier real-line truncation \(\mathcal P_N\) cannot simply be substituted into that argument.</p>
+<p>Under the later factorisation and collocation hypotheses, including the subexponential prefactor condition, the convergence result gives \(O(q_0^N)\) for every \(q_\ast&lt;q_0&lt;1\). The endpoint \(O(q_\ast^N)\) follows in the additional regime \(q_{\rm gap}&gt;q_{\rm out}\), using the packet input bound and the strict separation of the two rates. The endpoint is not asserted generally, and neither statement proves optimality.</p>
+</details>
+</section>
+<footer><a href="../uniform-to-hardy/index.html">← 11 · Uniform to Hardy</a><a href="../factorisation/index.html">Return to the factorisation overview →</a></footer>
+</main>
+</body>
+</html>

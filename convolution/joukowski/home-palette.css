@@ -1,0 +1,90 @@
+/* Homepage feature violet, release-strip plum, rose controls and cyan focus. */
+:root {
+  --bg: #100b1e;
+  --panel: #221331;
+  --raised: #38204a;
+  --ink: #fff;
+  --muted: #e0d0eb;
+  --line: #79518d;
+  --feature: #593196;
+  --plum: #24102d;
+  --rose: #ef84eb;
+  --rim: #bd53c6;
+  --focus: #6efaff;
+}
+.site-header { background: var(--bg); border-color: var(--rim); }
+.site-header > a, .site-header nav a[aria-current] { color: var(--rose); }
+.site-header nav a:hover { color: var(--focus); }
+main > .intro,
+main > :is(.rl-intro, .eg-intro, .lesson-intro, .coefficient-intro, .factorisation-intro, .hardy-intro) {
+  padding: clamp(1rem, 2.4vw, 2.2rem);
+  background: linear-gradient(110deg, var(--feature) 12%, #542b83 60%, var(--plum));
+  border: 1px solid var(--rim);
+  border-radius: 12px;
+}
+.intro p, .eyebrow span { color: #f2e6fc; }
+.hero-identity, .lesson-scope { background: var(--plum); border-color: var(--rim); }
+.lesson-scope { border-left-color: var(--rose); }
+.thesis-switcher > a, button, select { background: var(--panel); border-color: #9968a7; }
+.thesis-switcher > a:hover, button:hover { background: #51295d; border-color: var(--rose); }
+.button-row #play, .together-time button {
+  background: var(--plum); color: var(--ink); border-color: var(--rose);
+}
+.thesis-switcher > a[aria-current=page],
+.tabs [aria-selected=true], #laurent-lesson .ll-nav [aria-pressed=true],
+.button-row #play[aria-pressed=true], .together-time button[aria-pressed=true] {
+  background: var(--feature); color: white; border-color: var(--rose);
+  box-shadow: inset 0 -3px var(--rose);
+}
+.thesis-switcher > a[aria-current=page] small { color: #f5ddfb; }
+input[type=range], input[type=checkbox], .series-view-controls input[type=checkbox] { accent-color: var(--rose); }
+.controls output, .ll-toolbar output, .together-time output, .series-view-controls output { color: var(--ink); }
+:where(button, input, select, summary, a, [tabindex]):focus-visible,
+.thesis-switcher > a:focus-visible { outline-color: var(--focus); }
+.lesson-view :focus-visible { outline-color: var(--focus); }
+.jl-window {background:var(--panel);border-color:var(--rim);}
+.jl-window-header {background:var(--feature);}
+.jl-window .jl-window-body h3 {color:var(--rose);}
+
+/* Lesson instruments share surfaces and state indicators. The colour of a
+   curve, mode or boundary is inherited by its own legend and readout. */
+.coefficient-page { --muted-foreground: var(--muted); }
+.hardy-page { --hardy-input: #78caff; --hardy-response: var(--rose); }
+.factorisation-page { --viz-series-1: #78caff; --viz-series-3: var(--rose); }
+.kw-card, .hardy-diagram-wrap, .hardy-profile-panel { background: var(--panel); }
+.space-stage, .space-inset {
+  background: radial-gradient(ellipse at 45% 32%, var(--raised), var(--bg) 90%);
+}
+.coefficient-page .kw-card, .coefficient-lab, .factorisation-lab, #hardy-controls {
+  border-color: var(--line);
+}
+main > header .eyebrow { color: #f3defb; }
+#hardy-stage-copy, .kw-start { border-inline-start-color: var(--rose); }
+.hardy-prerequisites a[aria-current], .hardy-experiment-link a,
+.kw-pager button, .factorisation-steps summary { color: var(--rose); }
+.factorisation-main .hardy-chapter-nav > a:is(:hover, :focus-visible) {
+  background: var(--raised); border-color: var(--rose);
+}
+.factorisation-main .hardy-chapter-nav > a:is(:hover, :focus-visible)::after { color: var(--rose); }
+
+.rl-controls #rl-play, .eg-actions #eg-play, .hm-motion #hm-play,
+.hardy-motion button[data-action=play], .coefficient-page .btn-primary {
+  background: var(--plum); border-color: var(--rose); color: var(--ink);
+}
+.rl-steps [aria-pressed=true], .hardy-stages button[aria-pressed=true],
+.kw-path button[aria-pressed=true], .kw-controls button[aria-pressed=true],
+.jl-window button[aria-pressed=true], #ll-swap[aria-pressed=true],
+#laurent-lesson [data-ll-degree][aria-pressed=true],
+.rl-controls #rl-play[aria-pressed=true], .eg-actions #eg-play[aria-pressed=true],
+.hm-motion #hm-play[aria-pressed=true], .hardy-motion button[data-action=play][aria-pressed=true] {
+  background: var(--feature); color: var(--ink); border-color: var(--rose);
+  box-shadow: inset 0 -3px var(--rose);
+}
+.eg-check input, .rl-check input, .factorisation-page .form-check-input,
+.jl-window-scale-controls input { accent-color: var(--rose); }
+.form-label output, .hardy-control output, .eg-controls output, .rl-controls output,
+.space-camera output, #kernel-pullback .space-camera output, #kernel-pullback .space-probe output,
+#kernel-pullback .pm-angle output, #kernel-jacobian .hp-probe output { color: var(--ink); }
+body :is(button, a, input, select, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--focus); outline-offset: 2px;
+}

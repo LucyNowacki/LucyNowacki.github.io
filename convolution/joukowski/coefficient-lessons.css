@@ -1,0 +1,44 @@
+/* Native Atlas presentation for the four coefficient lessons. */
+.coefficient-page {
+  --background: var(--panel); --foreground: var(--ink);
+  --muted-foreground: #c2b2d2; --border: var(--line);
+  --popover: var(--raised); --popover-foreground: var(--ink);
+  --viz-series-1: var(--positive); --viz-series-2: var(--negative);
+  --viz-series-3: var(--pair); --viz-series-4: var(--degree);
+  --viz-series-5: var(--gold); --viz-series-6: #efa6d2;
+  --font-size-base: 15px;
+}
+.coefficient-main {max-width:1440px}
+.coefficient-main>header {margin-bottom:22px;max-width:100ch}
+.coefficient-main>header p:not(.eyebrow) {color:var(--muted-foreground);font-size:16px}
+.coefficient-main .thesis-switcher {margin:20px 0 26px}
+.coefficient-lab {min-width:0;padding:22px;background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:22px 0}
+.coefficient-lab>div {min-width:0}
+.coefficient-page .viz-controls {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 24px;margin:18px 0;align-items:end}
+.coefficient-page .form-label {display:block;min-width:0;color:var(--ink);font-size:14px;font-weight:500}
+.coefficient-page .form-label>output {float:right;margin-left:8px}
+.coefficient-page .form-label>select,.coefficient-page .form-label>input {display:block;margin-top:7px}
+.coefficient-page .form-select {width:100%;min-height:40px;font-size:14px}
+.coefficient-page .viz-row {display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:12px 0}
+.coefficient-page .viz-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:16px 0}
+.coefficient-page .viz-stat-value {font-size:17px;margin-top:6px;overflow-wrap:anywhere}
+.coefficient-page .text-small {font-size:13px;line-height:1.55}
+.coefficient-page .text-muted {color:var(--muted-foreground)}
+.coefficient-page .tabular-nums {font-variant-numeric:tabular-nums}
+.coefficient-page .btn-primary {background:var(--pair);color:#213219}
+.coefficient-page .sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.coefficient-page .tooltip {z-index:10;border:1px solid var(--line);border-radius:7px;box-shadow:0 8px 25px #0005}
+.coefficient-page .lesson-heading {display:flex;align-items:start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:22px 0 14px}
+.coefficient-page .lesson-proof {max-width:105ch;margin:26px 0}
+.coefficient-page .lesson-proof p {margin:12px 0}
+.coefficient-page details {margin:18px 0}
+.coefficient-page details>summary {margin-bottom:10px}
+.coefficient-page [data-explain] {font-size:13px;white-space:normal;text-align:left}
+.coefficient-page mjx-container[jax="SVG"] {font-size:100%!important;max-width:100%;}
+.coefficient-page mjx-container[jax="SVG"][display="true"] {overflow-x:auto;overflow-y:hidden;padding:3px 0}
+.coefficient-page mjx-container svg {width:auto!important;height:auto!important;max-width:none;font-size:inherit!important}
+.coefficient-page .math-static {max-width:100%;min-width:0}
+.coefficient-page .jl-window-body mjx-container {font-size:100%!important}
+.coefficient-page footer {display:flex;justify-content:space-between;gap:14px 24px;font-size:14px;flex-wrap:wrap}
+@media(max-width:1000px){.coefficient-page .viz-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.coefficient-lab{padding:14px 10px}.coefficient-page .viz-controls,.coefficient-page .viz-grid{grid-template-columns:1fr}.coefficient-main>header p:not(.eyebrow){font-size:15px}.coefficient-page .form-label>output{float:none;display:inline}.coefficient-page .site-header nav{flex-wrap:wrap}}

@@ -1,0 +1,138 @@
+/* The colour of each space follows its measurement in the ellipse diagram. */
+.factorisation-intro .eyebrow {
+  color: var(--degree);
+  text-transform: uppercase;
+  letter-spacing: .11em;
+  margin-bottom: .55rem;
+}
+.factorisation-intro h1 {
+  font-size: clamp(1.85rem, 3.4vw, 2.8rem);
+  text-wrap: balance;
+  margin-block: 0 .55rem;
+}
+.factorisation-intro > .factor-lead {
+  max-width: 88ch;
+  font-size: clamp(.94rem, 1.45vw, 1.04rem);
+  line-height: 1.52;
+  margin: 0;
+}
+.factor-flow {
+  margin: 1.1rem 0 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.factor-flow-path {
+  padding: clamp(14px, 2vw, 23px);
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(max-content,.68fr) minmax(0,1.35fr)
+                         minmax(max-content,.68fr) minmax(0,1.18fr) minmax(max-content,.68fr) minmax(0,1.08fr);
+  align-items: center;
+  gap: clamp(5px, .9vw, 14px);
+}
+.factor-input { --flow-color: var(--viz-series-1); }
+.factor-inner { --flow-color: var(--viz-series-2); }
+.factor-outer { --flow-color: var(--viz-series-3); }
+.factor-output { --flow-color: var(--viz-series-5); }
+.factor-space {
+  display: grid;
+  align-content: center;
+  gap: .35rem;
+  padding-inline-start: .7rem;
+  border-inline-start: 3px solid var(--flow-color);
+}
+.factor-space > span {
+  color: var(--flow-color);
+  font-size: .83rem;
+  font-weight: 650;
+}
+.factor-space > strong { font-size: clamp(.98rem,1.65vw,1.18rem); font-weight: normal; }
+.factor-map {
+  display: grid;
+  gap: .36rem;
+  justify-items: center;
+  color: var(--ink);
+  font-size: .94rem;
+}
+.factor-map > i {
+  width: 100%;
+  position: relative;
+  height: 0;
+  border-top: 1px dashed var(--muted);
+}
+.factor-map > i::after {
+  content: "";
+  position: absolute;
+  right: 2px;
+  top: -3.5px;
+  height: 5px;
+  width: 5px;
+  border-right: 1.5px solid var(--muted);
+  border-top: 1.5px solid var(--muted);
+  transform: rotate(45deg);
+}
+.factor-flow figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .3rem 1rem;
+  padding: .45rem clamp(14px, 2vw, 23px);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .91rem;
+}
+.factor-flow figcaption > span { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .9rem; }
+.factor-divider { height: 1rem; width: 1px; background: var(--line); }
+.factor-flow figcaption a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.45rem;
+  gap: .6rem;
+  color: var(--pair);
+  font-size: .91rem;
+  font-weight: 650;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+}
+.factor-flow figcaption a:hover { color: var(--ink); }
+@media(max-width: 820px) {
+  .factor-flow-path {
+    grid-template-columns: 1fr;
+    padding: .9rem 1rem;
+    gap: .3rem;
+  }
+  .factor-space {
+    grid-template-columns: minmax(6.8rem,.73fr) minmax(0,1fr);
+    align-items: center;
+    padding-block: .25rem;
+  }
+  .factor-map {
+    display: flex;
+    gap: .65rem;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    padding-inline-start: 1.1rem;
+    font-size: .88rem;
+  }
+  .factor-map > i { height: 1.25rem; width: 0; border: 0; border-left: 1px dashed var(--muted); }
+  .factor-map > i::after { right: -2.2px; top: auto; bottom: 0; transform: rotate(135deg); }
+  .factor-flow figcaption { padding-block: .5rem; }
+}
+@media(max-width: 430px) {
+  .factor-space { grid-template-columns: minmax(6.35rem,.8fr) minmax(0,1fr); }
+  .factor-flow figcaption > span { font-size: .86rem; column-gap: .65rem; }
+}
+
+.factor-map { text-align: center; text-decoration: none; min-height: 44px; align-content: center; }
+.factor-map-name {
+  color: var(--degree); font-size: .8rem; line-height: 1.25; white-space: nowrap;
+  text-decoration: underline; text-underline-offset: .18em;
+}
+.factor-map:is(:focus-visible, :hover) .factor-map-name { color: var(--pair); }
+.factorisation-steps > article:target { border-color: var(--pair); scroll-margin-top: 1rem; }
+@media (max-width: 820px) {
+  .factor-map { flex-direction: row; justify-content: flex-start; min-height: 35px; }
+  .factor-map > i { order: -1; }
+}

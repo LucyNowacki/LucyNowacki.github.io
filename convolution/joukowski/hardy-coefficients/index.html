@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hardy coefficient bounds and projection tails · Joukowski–Legendre</title>
+<meta name="description" content="Explore angular Hardy energy, the negative nearest-neighbour correction in the second-kind kernel, and the geometric Legendre projection-tail envelope.">
+<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../math-window.css?v=2bca698ac08e"><link rel="stylesheet" href="../coefficient-lessons.css?v=cff5ff89777e"><link rel="stylesheet" href="style.css?v=f1754db7d86f">
+<script defer src="../../mathjax-config.js?v=fb5c0f9a8785"></script><script defer src="../../vendor/tex-svg.js?v=d4295dc33744"></script>
+<script defer src="../../vendor/d3.min.js?v=f2094bbf6141"></script><script defer src="../coefficient-math.js?v=ede7bfda9876"></script>
+<script defer src="../math-window.js?v=31277e048601"></script><script defer src="../lesson-navigation.js?v=bb9ff39db220"></script><script defer src="../coefficient-lessons.js?v=ad2d0604d318"></script><script defer src="lesson.js?v=bdec6a6d4e15"></script>
+<link rel="stylesheet" href="../home-palette.css?v=ca2188dd1bc9">
+</head>
+<body class="coefficient-page">
+<a class="skip" href="#lesson-lab">Skip to the interactive lesson</a>
+<header class="site-header"><a href="../index.html">← Joukowski–Legendre</a><nav aria-label="Atlas navigation"><a href="../../index.html">Convolution Atlas</a><a href="../hinf-coefficients/index.html">Bounded analytic coefficients</a></nav></header>
+<main class="coefficient-main">
+<header class="coefficient-intro">
+  <p class="eyebrow">THESIS WALKTHROUGH · SUBSECTION <bdi data-thesis-ref="legEDMD:subsec-H2-coefficient-bound">3.2.7</bdi> · LEMMA <bdi data-thesis-ref="legEDMD:lem-1-10">3.28</bdi></p>
+  <h1>Hardy energy controls the discarded modes</h1>
+  <p>Average boundary energy replaces the supremum norm. Fourier orthogonality turns the weighted kernel energy into a diagonal sum minus a neighbour correction. The resulting coefficient decay then competes with mode growth on a smaller ellipse.</p>
+  <div class="math-static coefficient-theorem">\[|a_n(f)|\le(2n+1)C_2(\varrho)\,\|f\|_{H^2(E_\varrho)}\,\varrho^{-n}.\]</div>
+</header>
+<nav class="thesis-switcher" data-lesson-navigation data-lesson="hardy-coefficients" aria-label="Switch thesis lesson"><a href="../index.html"><span>1 · Laurent expansion</span><small>How the finite packet is formed</small></a><a href="../real-line/index.html"><span>2 · Real-line stability</span><small>The neutral radius-one case</small></a><a href="../ellipse-growth/index.html"><span>3 · Geometric growth</span><small>Radial weights on an ellipse</small></a><a href="../contour-coefficients/index.html"><span>4 · Boundary coefficients</span><small>Recover a coefficient from a circuit</small></a><a href="../kernel-structure/index.html"><span>5 · Kernel frequencies</span><small>The surviving parity ladder</small></a><a href="../hinf-coefficients/index.html"><span>6 · Bounded analytic coefficients</span><small>From boundary size to decay</small></a><a href="index.html" aria-current="page"><span>7 · Hardy coefficients and tails</span><small>Viewing this lesson</small></a><a href="../factorisation/index.html"><span>8 · Factorisation and embeddings</span><small>Follow the function through three operations</small></a><a href="../weighted-synthesis/index.html"><span>9 · Weighted synthesis and tails</span><small>Split the coefficient budget</small></a><a href="../hardy-to-uniform/index.html"><span>10 · Hardy to uniform</span><small>From angular energy to a pointwise ceiling</small></a><a href="../uniform-to-hardy/index.html"><span>11 · Uniform to Hardy</span><small>From a ceiling to angular energy</small></a><a href="../transfer-tails/index.html"><span>12 · Two gaps and operator tails</span><small>Balance the input and output restrictions</small></a></nav>
+<noscript><p>The proof below remains readable without the controls. Enable JavaScript to explore the figures and render the formulas.</p></noscript>
+<section class="coefficient-lab" id="lesson-lab" aria-label="Hardy energy and projection tail experiment">
+<div class="lesson-heading"><h2>From the kernel energy to an infinite tail bound</h2><button type="button" data-explain="energy">Intuitive/geometric explanation</button></div>
+<p class="coefficient-hint math-static">Use <strong>Kernel energy</strong> to inspect the cancellation between neighbouring Fourier coefficients. Switch to <strong>Projection tail</strong> to combine outer decay with inner mode growth. Here \(R\) is the outer ellipse radius; the second view also introduces \(1&lt;r&lt;R\).</p>
+<div id="hardy-energy-tail">
+  
+  <div class="viz-controls">
+    <label class="form-label">View
+      <select class="form-select" id="het-view">
+        <option value="energy">Kernel energy</option>
+        <option value="tail">Projection tail</option>
+      </select>
+    </label>
+    <label class="form-label">Outer radius R = <output id="het-R-value" class="tabular-nums">1.70</output>
+      <input class="form-range" id="het-R" type="range" min="1.15" max="2.5" step="0.01" value="1.7">
+    </label>
+  </div>
+  <div class="viz-controls het-controls" id="het-energy-controls">
+    <label class="form-label">Legendre degree n = <output id="het-n-value" class="tabular-nums">3</output>
+      <input class="form-range" id="het-n" type="range" min="0" max="8" step="1" value="3">
+    </label>
+    <label class="form-label">Retained kernel terms L = <output id="het-L-value" class="tabular-nums">12</output>
+      <input class="form-range" id="het-L" type="range" min="1" max="160" step="1" value="12">
+    </label>
+  </div>
+  <div class="viz-controls het-controls" id="het-tail-controls" hidden>
+    <label class="form-label">Inner radius r = <output id="het-r-value" class="tabular-nums">1.25</output>
+      <input class="form-range" id="het-r" type="range" min="1.01" max="1.69" step="0.01" value="1.25">
+    </label>
+    <label class="form-label">Keep degrees 0 through N − 1; N = <output id="het-N-value" class="tabular-nums">6</output>
+      <input class="form-range" id="het-N" type="range" min="1" max="25" step="1" value="6">
+    </label>
+  </div>
+  <div id="het-energy-formulas" class="het-formula">
+    <div>\(c_\ell=\sigma_{n,n+1+2\ell}R^{-(n+1+2\ell)}\ge0\)</div>
+    <div>\(\displaystyle q_{n,R}=D-C,\quad D=\frac{R^2+R^{-2}}4\sum_{\ell\ge0}c_\ell^2\)</div>
+    <div>\(\displaystyle C=\frac12\sum_{\ell\ge0}c_\ell c_{\ell+1}\ge0\)</div>
+    <div>\(\displaystyle q_{n,R}\le D\le C_2(R)^2R^{-2n}\)</div>
+    <div>\(\displaystyle C_2(R)=\sqrt{\frac{R^2+R^{-2}}{R^2-R^{-2}}}\)</div>
+    <div>\(\displaystyle |a_n(f)|\le(2n+1)\|f\|_{H^2(E_R)}\sqrt{q_{n,R}}\)</div>
+  </div>
+  <div id="het-tail-formulas" class="het-formula" hidden>
+    <div>\(\displaystyle |a_n(f)|\le(2n+1)C_2(R)\|f\|_{H^2(E_R)}R^{-n}\)</div>
+    <div>\(\displaystyle \|P_n\|_{H^\infty(E_r)}\le\frac{r^n+r^{-n}}2\le r^n\)</div>
+    <div>\(\displaystyle \begin{gathered}\|f-\mathcal P_Nf\|_{H^\infty(E_r)}\\\le C_2(R)\|f\|_{H^2(E_R)}\,\mathsf T_N(r/R)\end{gathered}\)</div>
+  </div>
+  <svg class="het-chart" id="het-chart" role="img" aria-labelledby="het-chart-title het-chart-desc"></svg>
+  <div class="het-detail tabular-nums" id="het-result" aria-live="polite"></div>
+  <div class="het-detail text-small" id="het-evidence"></div>
+  <div class="viz-row"><button type="button" data-explain="energy">Intuitive/geometric explanation · energy</button><button type="button" data-explain="projection-tail">Intuitive/geometric explanation · tail</button></div>
+  <details class="het-detail">
+    <summary>Normalization and finite-sum details</summary>
+    <div class="het-formula" id="het-energy-details">
+      <div>\(\displaystyle q_{n,R}=\frac1{2\pi}\int_0^{2\pi}|Q_n(\Gamma_R(\theta))\Gamma'_R(\theta)|^2\,d\theta\)</div>
+      <div>\(\displaystyle |\Gamma'_R|^2=\frac14(R^2+R^{-2}-e^{2i\theta}-e^{-2i\theta})\)</div>
+      <div>\(\displaystyle q_L=D_L-C_L\)</div>
+      <div>\(\displaystyle D_L=\frac{R^2+R^{-2}}4\sum_{\ell=0}^{L-1}c_\ell^2\)</div>
+      <div>\(\displaystyle C_L=\frac12\sum_{\ell=0}^{L-2}c_\ell c_{\ell+1}\)</div>
+      <div>\(\displaystyle \varepsilon_L=\frac{2R^{-(n+1+2L)}}{1-R^{-2}}\)</div>
+      <div>\(\displaystyle a_R=\frac{R+R^{-1}}2\)</div>
+      <div>\(\displaystyle |q_{n,R}-q_L|\le2\sqrt{q_L}\,a_R\varepsilon_L+(a_R\varepsilon_L)^2\)</div>
+      <div class="text-small">Angular measure dθ/(2π); the Jacobian is already inside q. The ±2 Fourier modes couple neighbours on the parity ladder. Nonnegative cℓ make the correction subtractive. Finite qL is not assumed to lie above or below q.</div>
+    </div>
+    <div class="het-formula" id="het-tail-details" hidden>
+      <div>\(\displaystyle \mathcal P_Nf=\sum_{n=0}^{N-1}a_n(f)P_n,\quad 1&lt;r&lt;R\)</div>
+      <div>\(\displaystyle \mathsf T_N(q)=\sum_{n=N}^{\infty}(2n+1)q^n\)</div>
+      <div>\(\displaystyle \mathsf T_N(q)=\frac{q^N\big((2N+1)-(2N-1)q\big)}{(1-q)^2}\)</div>
+      <div class="text-small">The bars are an envelope for unit Hardy norm, not actual coefficients or an actual error. The sum extends to infinity even though only finitely many bars are displayed. This is Legendre truncation, not Hardy-orthogonal projection.</div>
+    </div>
+  </details>
+</div>
+</section>
+<section class="lesson-proof math-static" aria-labelledby="het-proof-heading">
+  <h2 id="het-proof-heading">Why the Hilbert-space estimate works</h2>
+  <div class="coefficient-proof-grid">
+    <article class="card"><h3>1 · Separate two boundary energies</h3><p>Apply Cauchy–Schwarz to the contour formula with normalized angular measure. One factor is the Hardy norm of the function. The other is the weighted kernel energy.</p><div class="math-block">\[|a_n(f)|^2\le(2n+1)^2\|f\|_{H^2(E_R)}^2q_{n,R}.\]</div><p>The factor \(|\Gamma'_R|^2\) belongs inside \(q_{n,R}\). The Hardy norm itself uses \(d\theta/(2\pi)\), not arclength.</p></article>
+    <article class="card"><h3>2 · Keep only allowed interactions</h3><p>The kernel uses one parity ladder. The boundary weight has only frequencies \(0,2,-2\), so it couples a coefficient only with itself and its two neighbours.</p><div class="math-block">\[|\Gamma'_R(\theta)|^2=\tfrac14(R^2+R^{-2}-e^{2i\theta}-e^{-2i\theta}).\]</div><p>All surviving kernel coefficients are nonnegative. Their neighbour correction is therefore subtracted; discarding it gives an upper bound. Then use \(\sigma_{n,k}\le2\) to sum a geometric series.</p></article>
+    <article class="card"><h3>3 · Extend, then restrict inward</h3><p>First prove the coefficient bound for functions holomorphic inside the ellipse and continuous on its closure, \(f\in A(E_R)\). Density extends the bounded coefficient functional to all of \(H^2(E_R)\).</p><p>On a smaller ellipse, the mode-growth estimate pays at most \(r^n\), while the coefficient contributes \(R^{-n}\). The remaining factor is \((r/R)^n\), with \(r/R&lt;1\).</p><div class="math-block">\[R^{-n}r^n=(r/R)^n.\]</div></article>
+  </div>
+</section>
+<details class="coefficient-source card math-static"><summary>Source, normalization and numerical meaning</summary>
+  <p>This lesson follows <strong>Subsection <bdi data-thesis-ref="legEDMD:subsec-H2-coefficient-bound">3.2.7</bdi> — \(H^2\) coefficient bound and bridge to projection tails</strong> and <strong>Lemma <bdi data-thesis-ref="legEDMD:lem-1-10">3.28</bdi></strong>, in thesis Section <bdi data-thesis-ref="legEDMD:sec-legendre-coefficient-bounds">3.2</bdi>. Bandtlow’s original result is EDMD–Legendre Lemma 1.10.</p>
+  <p>The polynomials satisfy \(P_n(1)=1\). The Hardy norm is the angular norm \(\|f\|_{H^2(E_R)}^2=(2\pi)^{-1}\int_0^{2\pi}|f(\Gamma_R(\theta))|^2\,d\theta\). For a general Hardy element, the coefficient functional is defined by continuous extension; it agrees with the real-line coefficient of its canonical holomorphic representative.</p>
+  <p>The kernel graph uses the displayed finite number \(L\) of Laurent terms. It shows the exact finite-sum identity evaluated in floating-point arithmetic, alongside an analytic truncation estimate. A finite weighted kernel energy is not assumed to lie above or below the full infinite energy. The estimate does not enclose floating-point rounding.</p>
+  <p>The projection graph shows an envelope for functions of unit outer Hardy norm, not actual coefficients or an actual error. It retains modes \(0,\ldots,N-1\). The displayed tail value sums all omitted envelope terms through infinity, even though the chart displays only finitely many bars.</p>
+  <p>This \(\mathcal P_N\) is the Legendre truncation defined by real-line coefficients. It is not the orthogonal projection for the Hardy inner product. The smaller-radius estimate concerns the canonical holomorphic representative on \(E_r\).</p>
+</details>
+<footer class="coefficient-footer"><a href="../hinf-coefficients/index.html">← Bounded analytic coefficient decay</a><a href="../factorisation/index.html">8 · Factorisation and embeddings →</a></footer>
+</main>
+<template id="explain-energy"><h3>Why the neighbour correction is negative</h3><p>Without the boundary weight, averaging the squared Fourier sum would retain only diagonal squares. Multiplication by \(|\Gamma'_R|^2\) introduces frequencies \(\pm2\), so neighbours on the same parity ladder also survive the angular average.</p><div class="math-block">\[q_{n,R}=\frac{R^2+R^{-2}}4\sum_{\ell\ge0}c_\ell^2-\frac12\sum_{\ell\ge0}c_\ell c_{\ell+1}.\]</div><p>Both sums are nonnegative, and the second is subtracted. The first bar is the finite diagonal contribution, the second is the amount removed, and the third is the energy left over. Increasing \(L\) changes the approximation, while the displayed error estimate controls its distance from the infinite energy.</p><p>The theorem drops the negative correction and replaces each \(\sigma_{n,k}\) by its upper bound 2. That gives a simpler, valid upper bound for the full energy.</p></template>
+<template id="explain-projection-tail"><h3>Outer decay beats inner growth</h3><p>The outer ellipse controls the coefficient size, contributing \(R^{-n}\). Evaluating the corresponding mode on a smaller ellipse costs at most \(r^n\). Their product is \((r/R)^n\), which decays because \(r&lt;R\).</p><div class="math-block">\[(2n+1)C_2(R)R^{-n}\times r^n=(2n+1)C_2(R)(r/R)^n.\]</div><p>The muted bars represent modes kept by the truncation. The coloured bars begin at the first omitted degree \(N\). The bound sums all those omitted contributions, including every term beyond the plotted range.</p><p>Move \(r\) closer to \(R\): the geometric ratio approaches one, so many more modes can be needed. Increasing \(N\) removes more terms from the tail. These bars are a guaranteed analytic envelope in exact arithmetic; the displayed numerical evaluation uses floating-point arithmetic.</p></template>
+</body>
+</html>

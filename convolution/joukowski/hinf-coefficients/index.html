@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bounded analytic coefficient decay · Joukowski–Legendre</title>
+<meta name="description" content="Explore how nested Bernstein ellipses, the second-kind kernel and contour arclength give geometric decay of Legendre coefficients.">
+<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../math-window.css?v=2bca698ac08e"><link rel="stylesheet" href="../coefficient-lessons.css?v=cff5ff89777e"><link rel="stylesheet" href="style.css?v=2b8d5156ba21">
+<script defer src="../../mathjax-config.js?v=fb5c0f9a8785"></script><script defer src="../../vendor/tex-svg.js?v=d4295dc33744"></script>
+<script defer src="../../vendor/d3.min.js?v=f2094bbf6141"></script><script defer src="../coefficient-math.js?v=ede7bfda9876"></script>
+<script defer src="../math-window.js?v=31277e048601"></script><script defer src="../lesson-navigation.js?v=bb9ff39db220"></script><script defer src="../coefficient-lessons.js?v=ad2d0604d318"></script><script defer src="lesson.js?v=2115a368892b"></script>
+<link rel="stylesheet" href="../home-palette.css?v=ca2188dd1bc9">
+</head>
+<body class="coefficient-page">
+<a class="skip" href="#lesson-lab">Skip to the interactive lesson</a>
+<header class="site-header"><a href="../index.html">← Joukowski–Legendre</a><nav aria-label="Atlas navigation"><a href="../../index.html">Convolution Atlas</a><a href="../kernel-structure/index.html">Second-kind kernel</a></nav></header>
+<main class="coefficient-main">
+<header class="coefficient-intro">
+  <p class="eyebrow">THESIS WALKTHROUGH · SUBSECTION <bdi data-thesis-ref="legEDMD:subsec-Hinf-coefficient-bound">3.2.6</bdi> · LEMMA <bdi data-thesis-ref="legEDMD:lem-1-9">3.25</bdi></p>
+  <h1>Analyticity forces coefficient decay</h1>
+  <p>The second-kind kernel decays geometrically on an ellipse. The contour formula transfers that decay to the Legendre coefficient, with an explicit cost for the function’s size and the boundary’s length.</p>
+  <div class="math-static coefficient-theorem">\[|a_n(f)|\le(2n+1)C_\infty(\varrho)\,\|f\|_{H^\infty(E_\varrho)}\,\varrho^{-n}.\]</div>
+</header>
+<nav class="thesis-switcher" data-lesson-navigation data-lesson="hinf-coefficients" aria-label="Switch thesis lesson"><a href="../index.html"><span>1 · Laurent expansion</span><small>How the finite packet is formed</small></a><a href="../real-line/index.html"><span>2 · Real-line stability</span><small>The neutral radius-one case</small></a><a href="../ellipse-growth/index.html"><span>3 · Geometric growth</span><small>Radial weights on an ellipse</small></a><a href="../contour-coefficients/index.html"><span>4 · Boundary coefficients</span><small>Recover a coefficient from a circuit</small></a><a href="../kernel-structure/index.html"><span>5 · Kernel frequencies</span><small>The surviving parity ladder</small></a><a href="index.html" aria-current="page"><span>6 · Bounded analytic coefficients</span><small>Viewing this lesson</small></a><a href="../hardy-coefficients/index.html"><span>7 · Hardy coefficients and tails</span><small>From angular energy to truncation</small></a><a href="../factorisation/index.html"><span>8 · Factorisation and embeddings</span><small>Follow the function through three operations</small></a><a href="../weighted-synthesis/index.html"><span>9 · Weighted synthesis and tails</span><small>Split the coefficient budget</small></a><a href="../hardy-to-uniform/index.html"><span>10 · Hardy to uniform</span><small>From angular energy to a pointwise ceiling</small></a><a href="../uniform-to-hardy/index.html"><span>11 · Uniform to Hardy</span><small>From a ceiling to angular energy</small></a><a href="../transfer-tails/index.html"><span>12 · Two gaps and operator tails</span><small>Balance the input and output restrictions</small></a></nav>
+<noscript><p>The proof below remains readable without the controls. Enable JavaScript to explore the figures and render the formulas.</p></noscript>
+<section class="coefficient-lab" id="lesson-lab" aria-label="Bounded analytic coefficient experiment">
+<div class="lesson-heading"><h2>Compare an inner contour with the outer limit</h2><button type="button" data-explain="hinf-bound">Intuitive/geometric explanation</button></div>
+<p class="coefficient-hint math-static">Keep \(f(\omega)=1/(2.5-\omega)\) fixed. Changing the ellipse leaves its coefficients unchanged, while both the norm and the coefficient envelope change. Move the inner contour towards the outer boundary to follow the proof.</p>
+<div id="bounded-analytic-coefficient-decay">
+  <div class="viz-controls">
+    <label class="form-label">Outer radius ϱ = <output id="hi-rv"></output><input class="form-range" type="range" id="hi-r" min="1.2" max="3" step="0.01" value="1.8"></label>
+    <label class="form-label">Inner contour toward outer boundary <output id="hi-sv"></output><input class="form-range" type="range" id="hi-fraction" min="0.05" max="1" step="0.01" value="0.7"></label>
+    <label class="form-label">Inspect degree n = <output id="hi-nv"></output><input class="form-range" type="range" id="hi-n" min="0" max="24" step="1" value="6"></label>
+    <label class="form-label">Perimeter constant<select class="form-select" id="hi-constant"><option value="perimeter">Perimeter integral · quadrature</option><option value="fallback">Explicit upper bound</option></select></label>
+  </div>
+  <div class="hi-math" id="hi-function"></div>
+  <div class="hi-panels">
+    <section><div class="hi-card-heading"><h3>Nested ellipses · input plane</h3><button type="button" data-explain="inner-contours">Intuitive/geometric explanation</button></div><svg id="hi-geometry" class="hi-plot" role="img" aria-label="Inner contour inside the analytic outer ellipse and the fixed outside pole"></svg></section>
+    <section><div class="hi-card-heading"><h3>Same coefficients · different bounds</h3><button type="button" data-explain="decay-envelope">Intuitive/geometric explanation</button></div><div class="hi-legend" id="hi-legend"></div><svg id="hi-decay" class="hi-plot" role="img" aria-label="Legendre coefficients and inner and limiting coefficient envelopes on a logarithmic scale"></svg></section>
+  </div>
+  <div class="hi-math" id="hi-bound"></div>
+  <div class="viz-grid" aria-live="polite">
+    <div class="card viz-stat"><div class="text-small">Coefficient |aₙ| · numerical</div><div class="viz-stat-value tabular-nums" id="hi-coefficient"></div></div>
+    <div class="card viz-stat"><div class="text-small">Inner-contour envelope</div><div class="viz-stat-value tabular-nums" id="hi-inner"></div></div>
+    <div class="card viz-stat"><div class="text-small">Outer-limit envelope</div><div class="viz-stat-value tabular-nums" id="hi-outer"></div></div>
+  </div>
+  <div class="text-small" id="hi-detail"></div>
+  <div class="text-small">Filled point: selected degree · pole fixed at 2.5 · continuous outer boundary values are not assumed by the theorem.</div>
+  <div class="tooltip" role="tooltip" id="hi-tooltip" hidden></div>
+</div>
+</section>
+<section class="lesson-proof math-static" aria-labelledby="hi-proof-heading">
+  <h2 id="hi-proof-heading">The proof in three steps</h2>
+  <div class="coefficient-proof-grid">
+    <article class="card"><h3>1 · Start strictly inside</h3><p>Choose \(1&lt;s&lt;\varrho\). The function is continuous on the smaller closed ellipse, so the contour formula applies there. Its real-line coefficient is still the same \(a_n(f)\).</p><div class="math-block">\[\|f\|_{A(E_s)}\le M_\varrho:=\|f\|_{H^\infty(E_\varrho)}.\]</div></article>
+    <article class="card"><h3>2 · Add absolute contributions</h3><p>The triangle inequality replaces the complex differential by arclength. Bound the function by \(M_\varrho\) and the kernel by its geometric tail.</p><div class="math-block">\[|a_n(f)|\le\frac{2n+1}{2\pi}|\partial E_s|M_\varrho\sup_{\partial E_s}|Q_n|.\]</div><div class="math-block">\[\sup_{\partial E_s}|Q_n|\le\frac{2s^{-n}}{s-s^{-1}}.\]</div></article>
+    <article class="card"><h3>3 · Approach the outer radius</h3><p>Let \(s\uparrow\varrho\). The perimeter and the explicit kernel bound depend continuously on the radius. A continuous trace of a general bounded holomorphic function on the outer boundary is not required.</p><div class="math-block">\[C_\infty(\varrho)=\frac{|\partial E_\varrho|}{\pi(\varrho-\varrho^{-1})}.\]</div></article>
+  </div>
+</section>
+<details class="coefficient-source card math-static"><summary>Source, normalization and numerical meaning</summary>
+  <p>This lesson follows <strong>Subsection <bdi data-thesis-ref="legEDMD:subsec-Hinf-coefficient-bound">3.2.6</bdi> — \(H^\infty\) coefficient bounds from the second-kind kernel</strong> and <strong>Lemma <bdi data-thesis-ref="legEDMD:lem-1-9">3.25</bdi></strong>, in thesis Section <bdi data-thesis-ref="legEDMD:sec-legendre-coefficient-bounds">3.2</bdi>. Bandtlow’s original result is EDMD–Legendre Lemma 1.9.</p>
+  <p>The normalization is \(P_n(1)=1\) and \(a_n(f)=\frac{2n+1}{2}\int_{-1}^1 f(x)P_n(x)\,dx\). All ellipse radii exceed one.</p>
+  <p>The plotted function is analytic beyond every displayed closed ellipse. Its pole stays at \(2.5\), and its outer norm is the closed expression shown above. Its coefficients are evaluated using 80 positive Laurent terms at \(z=2.5+\sqrt{5.25}\), so they do not depend on the displayed ellipse radius.</p>
+  <p>The perimeter option uses 2,048-point angular quadrature. It illustrates the exact perimeter formula but is not an interval enclosure. The explicit fallback uses the analytic estimate</p>
+  <div class="math-block">\[|\partial E_\varrho|\le\pi(\varrho+\varrho^{-1}),\qquad C_\infty(\varrho)\le\frac{\varrho+\varrho^{-1}}{\varrho-\varrho^{-1}}.\]</div>
+  <p>At the final slider position, the inner curve displays the limiting expression \(s\uparrow\varrho\). Between integer degrees, hover values interpolate the plotted curves; they are not coefficients of noninteger Legendre modes. All computed values use ordinary floating-point arithmetic.</p>
+</details>
+<footer class="coefficient-footer"><a href="../kernel-structure/index.html">← Circle structure of the kernel</a><a href="../hardy-coefficients/index.html">Hardy coefficient bounds and projection tails →</a></footer>
+</main>
+<template id="explain-hinf-bound"><h3>Analytic room becomes geometric decay</h3><p>The coefficient is a weighted sum around the ellipse. The function contributes its size, the kernel contributes a factor that shrinks like \(s^{-n}\), and the integration contributes the boundary length.</p><div class="math-block">\[|a_n(f)|\le(2n+1)C_\infty(s)M_\varrho s^{-n}.\]</div><p>For a fixed radius greater than one, successive powers decay geometrically. The polynomial factor \(2n+1\) does not remove that eventual decay. Changing the outer radius also changes the function norm and the geometric constant, so those factors remain visible.</p></template>
+<template id="explain-inner-contours"><h3>Why use an inner ellipse first?</h3><p>The outer ellipse describes the open region where the function is holomorphic and bounded. A general function in this space need not extend continuously to its boundary. Every smaller closed ellipse lies safely inside that region.</p><p>Apply Cauchy’s contour argument on \(\partial E_s\), where \(1&lt;s&lt;\varrho\), and then let \(s\) increase towards \(\varrho\). This changes the contour used in the proof, not the original Legendre coefficient.</p><p>In this illustration the pole at \(2.5\) is outside every displayed ellipse. The horizontal segment is \([-1,1]\), where the coefficient was originally defined. The two coloured curves are ellipse boundaries in the input plane.</p></template>
+<template id="explain-decay-envelope"><h3>Read the three curves separately</h3><p>The coefficient curve belongs to one fixed function, so it stays put as the radius changes. The inner envelope is the bound obtained before the limiting step. The outer envelope is the limit of that same formula.</p><p>The vertical axis is logarithmic: equal vertical distances represent equal multiplicative changes. The perimeter control switches between a numerical evaluation of the exact perimeter and a slightly larger elementary upper bound.</p><p>At fixed \(\varrho\), both envelopes use the same outer norm \(M_\varrho\). This makes the inner-to-outer limiting argument visible without changing the object being bounded.</p></template>
+</body>
+</html>

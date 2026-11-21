@@ -187,7 +187,11 @@
     const v=terms[S.j],col=colour(v.k),weight=fraction(v.weight,S.n,true),pair=M.pair(S.n,S.j,S.r,S.t,amp());
     const nodes=[];
     nodes.push(setMath('selected-formula',tex(T`(p,q)=(${v.p},${v.q}),\quad ${tint(C.degree,T`p+q=${S.n}`)},\quad ${tint(col,T`p-q=${v.k}`)}`)+'<br>'+tex(T`\alpha_{${v.p}}\alpha_{${v.q}}z^{${v.k}}u^{${S.n}}\ \longmapsto\ ${tint(col,T`${weight}z^{${v.k}}`)}`)));
-    const summands=terms.map(v=>tint(colour(v.k),T`${fraction(v.weight,S.n,true)}${v.k===0?'':T`r^{${v.k}}e^{${v.k}it}`}`)).join('+');
+    const summands=terms.map(term=>{
+      const phase=term.k===0?'':T`r^{${term.k}}e^{${term.k}it}`;
+      const value=tint(colour(term.k),T`${fraction(term.weight,S.n,true)}${phase}`);
+      return term.j===S.j?tint(C.gold,T`\underline{${value}}`):value;
+    }).join('+');
     nodes.push(setMath('packet-formula',tex(T`P_{${S.n}}(\Gamma_r(t))=${summands}`)));
     const pairFormula=pair.constant?tex(T`A\alpha_{${S.j}}^2=A\,${weight}\quad(k=0,\text{ counted once})`):tex(T`A\,${fraction(pair.weight,S.n,true)}\left[${tint(C.pair,T`(r^{${pair.k}}+r^{-${pair.k}})\cos(${pair.k}t)+i(r^{${pair.k}}-r^{-${pair.k}})\sin(${pair.k}t)`)}\right]`);
     nodes.push(setMath('pair-formula',pairFormula));

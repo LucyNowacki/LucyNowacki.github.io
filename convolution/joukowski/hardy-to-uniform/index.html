@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hardy to uniform · Convolution Atlas</title>
+<meta name="description" content="See how Hardy boundary energy on a larger ellipse controls uniform size and Legendre projection tails on a smaller ellipse.">
+<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../hardy-embeddings/style.css?v=7c1918bd1ec1">
+<link rel="stylesheet" href="../hardy-embeddings/chapter.css?v=37295e81b75b">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'none'},startup:{typeset:false},options:{enableMenu:false}};</script>
+<script defer src="../../vendor/tex-svg.js?v=d4295dc33744"></script>
+<script defer src="../lesson-navigation.js?v=bb9ff39db220"></script>
+<script defer src="../hardy-embeddings/math.js?v=1237b8bf1726"></script>
+<script defer src="../hardy-embeddings/plots.js?v=da161f155f1c"></script>
+<script defer src="../hardy-embeddings/probe-experiment.js?v=4c79d862ad28"></script>
+<script defer src="../hardy-embeddings/lesson.js?v=5523d9bbfcf2"></script>
+<link rel="stylesheet" href="../home-palette.css?v=ca2188dd1bc9">
+</head>
+<body class="hardy-page">
+<a class="skip" href="#hardy-app">Skip to the interactive laboratory</a>
+<header class="site-header"><a href="../index.html">← Joukowski–Legendre</a><nav aria-label="Atlas navigation"><a href="../../index.html">Convolution Atlas</a><a href="../factorisation/index.html">Factorisation overview</a></nav></header>
+<main class="hardy-main">
+<header class="hardy-intro math-static">
+<p class="eyebrow">10 · HARDY TO UNIFORM</p>
+<h1>The generic embedding \(\mathcal J_2^{R\to r}\)</h1>
+<div class="math-block">\[H^2(E_R)\hookrightarrow H^\infty(E_r),\qquad 1&lt;r&lt;R.\]</div>
+<p>Average boundary energy on the larger ellipse controls every value on the smaller one. The radius gap makes the coefficient decay strong enough to sum all the reconstructed modes.</p>
+</header>
+<nav class="thesis-switcher hardy-chapter-nav" data-lesson-navigation data-lesson="hardy-to-uniform" aria-label="Switch thesis lesson">
+<div class="hardy-chapter-heading"><h2>Two Hardy embeddings and Legendre projection tails</h2><span>Lessons 9–12</span></div>
+<a href="../weighted-synthesis/index.html"><span>9 · Weighted synthesis and tails</span><small>Choose how much tail to allow.</small></a>
+<a href="index.html" aria-current="page"><span>10 · Hardy to uniform</span><small>Compare angular energy with the inner peak.</small></a>
+<a href="../uniform-to-hardy/index.html"><span>11 · Uniform to Hardy</span><small>Measure how an arc contributes to the mean.</small></a>
+<a href="../transfer-tails/index.html"><span>12 · Two gaps and operator tails</span><small>Find where the two decay ratios meet.</small></a>
+<details class="hardy-prerequisites"><summary>Lessons 1–8 · Laurent expansion to factorisation</summary><div><a href="../index.html">1 · Laurent expansion</a><a href="../real-line/index.html">2 · Real-line stability</a><a href="../ellipse-growth/index.html">3 · Geometric growth</a><a href="../contour-coefficients/index.html">4 · Boundary coefficients</a><a href="../kernel-structure/index.html">5 · Kernel frequencies</a><a href="../hinf-coefficients/index.html">6 · Bounded analytic coefficients</a><a href="../hardy-coefficients/index.html">7 · Hardy coefficients and tails</a><a href="../factorisation/index.html">8 · Factorisation and embeddings</a></div></details></nav>
+<p class="hardy-experiment-link" hidden><a href="#boundary-diagram">Explore the ellipses ↓</a><a href="#angular-window">Compare outer energy and inner peak ↓</a></p>
+<noscript><p>Enable JavaScript to explore the controls and render the formulas. The explanations below remain available.</p></noscript>
+<section id="hardy-app" class="hardy-lab" data-kind="j2" aria-label="Interactive Hardy-to-uniform restriction">
+<div class="hardy-stages" role="group" aria-label="Choose a Hardy-to-uniform step">
+<button type="button" data-stage="0" aria-pressed="true">1 · Measure outer Hardy energy</button>
+<button type="button" data-stage="1" aria-pressed="false">2 · Restrict to the inner ellipse</button>
+<button type="button" data-stage="2" aria-pressed="false">3 · Discard modes from N</button>
+</div>
+<div id="hardy-controls"></div>
+<div id="hardy-stage-copy"></div>
+<div id="hardy-legend"></div>
+<svg id="hardy-scene" viewBox="0 0 800 480" role="img" aria-label="Outer Hardy energy and inner uniform values on nested ellipses"></svg>
+<div id="hardy-readings"></div>
+<svg id="hardy-profile" viewBox="0 0 800 300" role="img" aria-label="Hardy-to-uniform finite-prefix and tail estimates"></svg>
+<section id="angular-window" class="hardy-explanation" aria-labelledby="angular-window-title" hidden>
+<h3 id="angular-window-title">Measure an arc around the probe</h3>
+<div class="hardy-motion" role="group" aria-label="Boundary measured in the angular window">
+<button type="button" data-arc-focus="source" aria-pressed="true">Outer energy</button>
+<button type="button" data-arc-focus="target" aria-pressed="false">Inner modulus</button>
+</div>
+<p data-arc-help></p>
+<div class="hardy-control">
+<label for="angular-window-width">Angular width <output id="angular-window-size" for="angular-window-width">90°</output></label>
+<input id="angular-window-width" type="range" min="0" max="360" step="1" value="90" aria-describedby="angular-window-summary">
+</div>
+<div class="hardy-motion" role="group" aria-label="Move the angular window">
+<button type="button" data-arc-step="-30">Move arc −30°</button>
+<button type="button" data-arc-step="30">Move arc +30°</button>
+</div>
+<p><strong data-arc-label></strong> <output data-arc-value></output> <span data-arc-comparison></span></p>
+<p id="angular-window-summary" class="hardy-profile-note"></p>
+</section>
+<div id="hardy-results"></div>
+<p id="hardy-live" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+</section>
+<section class="hardy-explanation math-static" aria-label="Understanding the Hardy-to-uniform estimate">
+<p class="try-this"><strong>What to try.</strong> Move the probe around the ellipse and compare local energy with the full Hardy norm. Then increase \(N\), keeping the radii fixed, to compare the actual polynomial remainder with its upper bound.</p>
+<p class="dependency"><strong>Earlier ingredients.</strong> <a href="../hardy-coefficients/index.html">Hardy coefficients</a> gives the coefficient estimate. <a href="../ellipse-growth/index.html">Geometric growth</a> and <a href="../weighted-synthesis/index.html">weighted synthesis</a> turn it into uniform control.</p>
+<details>
+<summary>Intuitive/geometric explanation</summary>
+<p>The nine-term example starts from \(p=\sum_{n=0}^{8}0.45^nP_n\) and sets \(f=Ap/\|p\|_{\mathrm{source}}\). The source norm is the one shown in the first stage. The constant option uses \(f\equiv A\).</p>
+<p>Restriction keeps the same holomorphic function and changes where it is measured. The outer hump shows the local energy \(|f(\Gamma_R(t))|^2\). Its normalized angular mean is the squared source norm. The inner lighthouse shows \(|f(\Gamma_r(t))|\), and the target norm is the supremum over the smaller ellipse.</p>
+<div class="math-block">\[\|f\|_{H^2(E_R)}^2=\frac1{2\pi}\int_0^{2\pi}|f(\Gamma_R(t))|^2\,dt.\]</div>
+<p>Here \(\Gamma_R(t)=(Re^{it}+R^{-1}e^{-it})/2\). This is an average in the Joukowski angle, rather than in arclength. For a general Hardy element, the boundary expression is understood through the Hardy completion. Polynomial examples have ordinary continuous boundary values.</p>
+<p>A local value or a finite polynomial example is not an operator norm. In this direction, the restriction need not be a contraction. The available bound accounts for both the source radius and its gap from the target.</p>
+</details>
+<details>
+<summary>Why the estimate follows</summary>
+<p>Write \(q=r/R\) and</p>
+<div class="math-block">\[C_2(R)=\left(\frac{R^2+R^{-2}}{R^2-R^{-2}}\right)^{1/2}.\]</div>
+<p>The Hardy coefficient estimate is \(|a_n(f)|\le(2n+1)C_2(R)\|f\|_{H^2(E_R)}R^{-n}\). Multiply by \(\|P_n\|_{A(E_r)}\le r^n\), then sum the full series, its prefix, or its tail.</p>
+<div class="math-block">\[\begin{aligned}\|\mathcal J_2^{R\to r}\|&\le C_2(R)\mathsf S_\infty(q),\\\|\mathcal P_N\|&\le C_2(R)\mathsf S_N(q),\\\|\mathcal J_2^{R\to r}-\mathcal P_N\|&\le C_2(R)\mathsf T_N(q).\end{aligned}\]</div>
+<p>All three operator norms here run from \(H^2(E_R)\) to \(H^\infty(E_r)\). Neumann reconstruction identifies the sum with the canonical holomorphic representative of \(f\). The scalar sums are exact, while these are upper bounds.</p>
+<p>For a fixed strict gap, \(\mathsf T_N(q)\to0\). Since \(\mathcal P_N\) has finite rank, the restriction is compact. The argument requires \(r&lt;R\).</p>
+</details>
+<details>
+<summary>Connection to the thesis</summary>
+<p>This follows “The generic embedding \(\mathcal J_2^{R\to r}:H^2(E_R)\hookrightarrow H^\infty(E_r)\)” in the Distilled section “Two Hardy embeddings and Legendre projection tails.” The manuscript organizes the earlier Hardy-to-uniform mechanism by exact scalar sums and refines its coarse tail bound.</p>
+<p>In the later transfer factorisation, this restriction reaches the smaller ellipse containing the inverse-branch images. The single-space input remainder instead uses \(\mathcal J_2^{r\to s}(I-\mathcal P_N^X)\), where \(X=H^2(E_r)\). Its Hardy orthogonal projector requires the later Chebyshev-packet argument. Replacing the real-line \(\mathcal P_N\) in the generic tail by \(\mathcal P_N^X\) would leave a proof obligation.</p>
+</details>
+</section>
+<footer><a href="../weighted-synthesis/index.html">← 9 · Weighted synthesis and exact tails</a><a href="../uniform-to-hardy/index.html">11 · Uniform to Hardy →</a></footer>
+</main>
+</body>
+</html>

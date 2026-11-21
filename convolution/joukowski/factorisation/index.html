@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factorisation and embeddings · Convolution Atlas</title>
+<meta name="description" content="Follow a function through two Hardy embeddings and a transfer response, with moving Hardy humps, supremum lighthouses and inverse-branch point maps on nested Bernstein ellipses.">
+<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="style.css?v=d690c2abf78e">
+<link rel="stylesheet" href="intro.css?v=e1d0680f1f7a">
+<link rel="stylesheet" href="../hardy-embeddings/chapter.css?v=37295e81b75b">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'none'},startup:{typeset:false},options:{enableMenu:false}};</script>
+<script defer src="../../vendor/tex-svg.js?v=d4295dc33744"></script>
+<script defer src="../lesson-navigation.js?v=bb9ff39db220"></script><script defer src="lesson.js?v=067b18c5b7f2"></script>
+<link rel="stylesheet" href="../home-palette.css?v=ca2188dd1bc9">
+</head>
+<body class="factorisation-page">
+<a class="skip" href="#lesson-lab">Skip to the interactive diagram</a>
+<header class="site-header"><a href="../index.html">← Joukowski–Legendre</a><nav aria-label="Atlas navigation"><a href="../../index.html">Convolution Atlas</a><a href="../hardy-coefficients/index.html">Hardy coefficients and tails</a></nav></header>
+<main class="factorisation-main">
+<header class="factorisation-intro math-static" id="factorisation-overview">
+<p class="eyebrow">08 · Factorisation and embeddings</p>
+<h1>One function, three operations, the same Hardy space</h1>
+<p class="factor-lead">Restrict \(f\) to the inner ellipse. Its values at the inverse-branch images enter a weighted sum that defines the outer response \(h\). Back on \(E_r\), the input \(f\) and output \(h|_{E_r}\) share a Hardy space and can have different values.</p>
+<figure class="factor-flow" aria-label="Four stages of the fixed-space factorisation">
+<div class="factor-flow-path" role="group" aria-label="Input, restriction, transfer and return">
+  <div class="factor-space factor-input"><span>Hardy input</span><strong>\(f\in X\)</strong></div>
+  <a class="factor-map" href="#restrict-input" aria-label="Restrict input — operator explanation"><span class="factor-map-name">Restrict input</span><span>\(\mathcal J_2^{r\to s}\)</span><i aria-hidden="true"></i></a>
+  <div class="factor-space factor-inner"><span>Restricted input</span><strong>\(g\in H^\infty(E_s)\)</strong></div>
+  <a class="factor-map" href="#form-response" aria-label="Sum branches — operator explanation"><span class="factor-map-name">Sum branches</span><span>\(\widetilde{\mathcal L}_{\rho,\tau}\)</span><i aria-hidden="true"></i></a>
+  <div class="factor-space factor-outer"><span>Outer response</span><strong>\(h\in A(E_\rho)\)</strong></div>
+  <a class="factor-map" href="#restrict-output" aria-label="Restrict output — operator explanation"><span class="factor-map-name">Restrict output</span><span>\(\mathcal J_\infty^{\rho\to r}\)</span><i aria-hidden="true"></i></a>
+  <div class="factor-space factor-output"><span>Hardy output</span><strong>\(h|_{E_r}\in X\)</strong></div>
+</div>
+<figcaption>
+  <span>\(X=H^2(E_r)\)<span class="factor-divider" aria-hidden="true"></span>\(1&lt;s=r_\tau(\rho)&lt;r&lt;\rho\)</span>
+  <a href="#lesson-lab">Explore the nested ellipses <span aria-hidden="true">↓</span></a>
+</figcaption>
+</figure>
+</header>
+<nav class="thesis-switcher hardy-chapter-nav" data-lesson-navigation data-lesson="factorisation" aria-label="Switch thesis lesson">
+<div class="hardy-chapter-heading"><h2>Two Hardy embeddings and Legendre projection tails</h2><span>Lessons 9–12</span></div>
+<a href="../weighted-synthesis/index.html"><svg class="lesson-thumbnail" viewBox="0 0 120 38" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><path class="mini-axis" d="M1 32H116M41 3V35"/><path class="mini-input" d="M5 32V24.00"/><path class="mini-input" d="M13 32V14.72"/><path class="mini-input" d="M21 32V11.26"/><path class="mini-input" d="M29 32V11.10"/><path class="mini-input" d="M37 32V12.65"/><path class="mini-image" d="M45 32V14.97"/><path class="mini-image" d="M53 32V17.51"/><path class="mini-image" d="M61 32V19.96"/><path class="mini-image" d="M69 32V22.18"/><path class="mini-image" d="M77 32V24.10"/><path class="mini-image" d="M85 32V25.71"/><path class="mini-image" d="M93 32V27.04"/><path class="mini-image" d="M101 32V28.12"/><path class="mini-image" d="M109 32V28.98"/></svg><span>9 · Weighted synthesis and tails</span><small>Choose how much tail to allow.</small></a>
+<a href="../hardy-to-uniform/index.html"><svg class="lesson-thumbnail" viewBox="0 0 120 38" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><path class="mini-axis" d="M2 31H45M73 31H116M51 20h15l-4-4m4 4-4 4"/><g transform="translate(0 0)" class="mini-input"><path d="M3 29C12 29 12 10 22 10S32 29 44 29V31H3Z" fill="currentColor" fill-opacity=".24" stroke="none"/><path d="M3 29C12 29 12 10 22 10S32 29 44 29"/></g><g transform="translate(71 0)" class="mini-image"><path d="M3 10H44" stroke-dasharray="2 3" opacity=".75"/><path d="m22 6 4 4-4 4-4-4Z" fill="currentColor" stroke="none"/><path d="M3 29C12 29 12 10 22 10S32 29 44 29"/></g></svg><span>10 · Hardy to uniform</span><small>Compare angular energy with the inner peak.</small></a>
+<a href="../uniform-to-hardy/index.html"><svg class="lesson-thumbnail" viewBox="0 0 120 38" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><path class="mini-axis" d="M2 31H45M73 31H116M51 20h15l-4-4m4 4-4 4"/><g transform="translate(0 0)" class="mini-input"><path d="M3 10H44" stroke-dasharray="2 3" opacity=".75"/><path d="m22 6 4 4-4 4-4-4Z" fill="currentColor" stroke="none"/><path d="M3 29C12 29 12 10 22 10S32 29 44 29"/></g><g transform="translate(71 0)" class="mini-image"><path d="M3 29C12 29 12 10 22 10S32 29 44 29V31H3Z" fill="currentColor" fill-opacity=".24" stroke="none"/><path d="M3 29C12 29 12 10 22 10S32 29 44 29"/></g></svg><span>11 · Uniform to Hardy</span><small>Measure how an arc contributes to the mean.</small></a>
+<a href="../transfer-tails/index.html"><svg class="lesson-thumbnail" viewBox="0 0 120 38" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><path class="mini-axis" d="M2 32H116M51.07 4V32" stroke-dasharray="2 3"/><polyline class="mini-image" points="3.00,4.00 7.63,5.80 12.25,7.51 16.88,9.11 21.50,10.64 26.12,12.08 30.75,13.45 35.38,14.76 40.00,16.00 44.62,17.18 49.25,18.31 53.87,19.39 58.50,20.42 63.12,21.41 67.75,22.35 72.38,23.26 77.00,24.13 81.63,24.96 86.25,25.77 90.87,26.54 95.50,27.28 100.12,28.00 104.75,28.69 109.38,29.36 114.00,30.00"/><path class="mini-response" d="M3 30 114 4"/><path class="mini-balance" d="M51.07 14.74l4 4-4 4-4-4Z"/></svg><span>12 · Two gaps and operator tails</span><small>Find where the two decay ratios meet.</small></a>
+<details class="hardy-prerequisites"><summary>Lessons 1–8 · Laurent expansion to factorisation</summary><div><a href="../index.html">1 · Laurent expansion</a><a href="../real-line/index.html">2 · Real-line stability</a><a href="../ellipse-growth/index.html">3 · Geometric growth</a><a href="../contour-coefficients/index.html">4 · Boundary coefficients</a><a href="../kernel-structure/index.html">5 · Kernel frequencies</a><a href="../hinf-coefficients/index.html">6 · Bounded analytic coefficients</a><a href="../hardy-coefficients/index.html">7 · Hardy coefficients and tails</a><a href="index.html" aria-current="page">8 · Factorisation and embeddings</a></div></details></nav>
+<noscript><p>Enable JavaScript to move the probes and render the formulas. The explanations below remain readable.</p></noscript>
+<section class="factorisation-lab" id="lesson-lab" aria-label="Interactive factorisation on three nested ellipses">
+<p class="experiment-note math-static">Illustrative two-branch model: \(\tau_\pm(\omega)=(\omega\pm1)/2\), with weights \(1/2\). Move the input ring or use the controls to follow all four measurements together.</p>
+<div id="hardy-moving-landscape">
+  <h2>Hardy humps and supremum lighthouses</h2>
+  <div class="hm-flow"><span class="math">\(f\xrightarrow{\mathcal J_2}g\)</span><span class="math">\(\xrightarrow{\widetilde{\mathcal L}}h\)</span><span class="math">\(\xrightarrow{\mathcal J_\infty}h|_{E_r}\)</span></div>
+  <div class="viz-controls">
+    <label class="form-label" for="hm-angle">Input point angle · <output id="hm-angle-out" class="tabular-nums">135°</output>
+      <input class="form-range" id="hm-angle" type="range" min="0" max="360" step="1" value="135">
+    </label>
+    <label class="form-label" for="hm-degree">Degree n · <output id="hm-degree-out" class="tabular-nums">2</output>
+      <input class="form-range" id="hm-degree" type="range" min="0" max="6" step="1" value="2">
+    </label>
+    <label class="form-label" for="hm-amplitude">Input amplitude A · <output id="hm-amplitude-out" class="tabular-nums">1</output>
+      <input class="form-range" id="hm-amplitude" type="range" min="0" max="2" step="0.05" value="1">
+    </label>
+    <div class="hm-motion"><button class="btn" type="button" id="hm-play" aria-pressed="false">Move once around</button><button class="btn" type="button" id="hm-arrange">Arrange as in sketch</button></div>
+  </div>
+  <label class="form-check"><input class="form-check-input" id="hm-vary" type="checkbox" checked><span class="form-check-label">Vary input amplitude with position</span></label>
+  <div class="text-small hm-note" id="hm-family-status"></div>
+  <div class="hm-legend text-small">
+    <span><i style="--c:var(--viz-series-2)"></i><span class="math">\(E_s,\ s=r_\tau(\rho)\)</span></span>
+    <span><i style="--c:var(--viz-series-1)"></i><span class="math">\(E_r\)</span> · both Hardy averages</span>
+    <span><i style="--c:var(--viz-series-3)"></i><span class="math">\(E_\rho\)</span></span>
+  </div>
+  <div class="hm-meter-labels" aria-label="Colours and shapes of the four moving measurements">
+    <div style="--c:var(--viz-series-1)"><svg class="hm-symbol" viewBox="0 0 48 28" aria-hidden="true"><path d="M2 24H46M4 24C18 24 13 3 24 3S30 24 44 24"/></svg><span class="math">\(f\)</span><span>Input Hardy hump</span></div>
+    <div style="--c:var(--viz-series-5)"><svg class="hm-symbol" viewBox="0 0 48 28" aria-hidden="true"><path d="M2 24H46M4 24C18 24 13 3 24 3S30 24 44 24"/></svg><span class="math">\(h|_{E_r}\)</span><span>Output Hardy hump</span></div>
+    <div style="--c:var(--viz-series-2)"><svg class="hm-symbol" viewBox="0 0 48 28" aria-hidden="true"><path d="M2 4H46M17 26L22 4H26L31 26ZM24 4L5 13M24 4L43 13"/><circle cx="24" cy="4" r="3"/></svg><span class="math">\(g\)</span><span>Inner lighthouse</span></div>
+    <div style="--c:var(--viz-series-3)"><svg class="hm-symbol" viewBox="0 0 48 28" aria-hidden="true"><path d="M2 4H46M17 26L22 4H26L31 26ZM24 4L5 13M24 4L43 13"/><circle cx="24" cy="4" r="3"/></svg><span class="math">\(h\)</span><span>Outer lighthouse</span></div>
+  </div>
+  <div id="hm-scene"></div>
+  <div class="hm-map-labels" aria-label="Operator and inverse-branch arrow labels">
+    <p>Dashed arrows · operators on whole functions</p>
+    <div class="hm-map-row">
+      <span style="--c:var(--viz-series-1)"><i class="hm-arrow-key"></i><span class="math">\(f\xrightarrow{\mathcal J_2}g\)</span></span>
+      <span style="--c:var(--viz-series-3)"><i class="hm-arrow-key"></i><span class="math">\(g\xrightarrow{\widetilde{\mathcal L}}h\)</span></span>
+      <span style="--c:var(--viz-series-5)"><i class="hm-arrow-key"></i><span class="math">\(h\xrightarrow{\mathcal J_\infty}h|_{E_r}\)</span></span>
+    </div>
+    <p>Solid arrows · inverse-branch point maps from the outer light</p>
+    <div class="hm-map-row hm-branch-labels">
+      <span><i class="hm-branch-key hm-circle-key"></i><span class="math">\(\omega\mapsto\tau_-(\omega)\)</span></span>
+      <span><i class="hm-branch-key hm-diamond-key"></i><span class="math">\(\omega\mapsto\tau_+(\omega)\)</span></span>
+    </div>
+  </div>
+  <div class="hm-flow"><span class="math">\(\omega\mapsto\tau_\pm(\omega)=\frac{\omega\pm1}{2}\)</span><span class="math">\(\tau_\pm(\omega)\in E_s\)</span></div>
+  <div class="text-small">Schematic spacing; not to scale. One common transformation preserves which ellipse contains each point.</div>
+  <div class="text-small">Hump height: local energy · inward lighthouse length: local modulus · dashed guide: full mean or maximum.</div>
+  <div class="text-small text-muted hm-note">Drag the input ring or move the angle slider. The enlarged meters use a compressed scale.</div>
+  <p class="text-small hm-note">Each lighthouse shines at its boundary evaluation point. Its inward stem is a magnitude gauge, not a profile of the function through the ellipse.</p>
+  <table class="table table-sm hm-readings">
+    <thead><tr><th>Measurement</th><th class="text-end">At moving point</th><th class="text-end">Whole boundary</th></tr></thead>
+    <tbody>
+      <tr><td><span class="hm-key math" style="--c:var(--viz-series-1)">\(f\)</span> Input Hardy energy</td><td id="hm-local-a" class="text-end tabular-nums"></td><td id="hm-full-a" class="text-end tabular-nums"></td></tr>
+      <tr><td><span class="hm-key math" style="--c:var(--viz-series-5)">\(h|_{E_r}\)</span> Output Hardy energy</td><td id="hm-local-b" class="text-end tabular-nums"></td><td id="hm-full-b" class="text-end tabular-nums"></td></tr>
+      <tr><td><span class="hm-key math" style="--c:var(--viz-series-2)">\(g\)</span> Inner modulus</td><td id="hm-local-c" class="text-end tabular-nums"></td><td id="hm-full-c" class="text-end tabular-nums"></td></tr>
+      <tr><td><span class="hm-key math" style="--c:var(--viz-series-3)">\(h\)</span> Outer modulus</td><td id="hm-local-d" class="text-end tabular-nums"></td><td id="hm-full-d" class="text-end tabular-nums"></td></tr>
+    </tbody>
+  </table>
+  <div id="hm-status" class="text-small hm-note"></div>
+  <div id="hm-announcement" class="sr-only" aria-live="polite"></div>
+  <details>
+    <summary>What the humps, lighthouses and motion measure</summary>
+    <div class="math hm-note">\(E_f=\frac1{2\pi}\int_0^{2\pi}|f(\Gamma_r(t))|^2\,dt\)</div>
+    <div class="math hm-note">\(E_h=\frac1{2\pi}\int_0^{2\pi}|h(\Gamma_r(t))|^2\,dt\)</div>
+    <div class="math hm-note">\(\|f\|_{H^2(E_r)}=\sqrt{E_f},\quad\|h\|_{H^2(E_r)}=\sqrt{E_h}\)</div>
+    <div class="math hm-note">\(M_s=\max_t|g(\Gamma_s(t))|,\quad g=f|_{E_s}\)</div>
+    <div class="math hm-note">\(M_\rho=\max_t|h(\Gamma_\rho(t))|\)</div>
+    <div class="text-small hm-note">The humps are schematic bell-shaped meters, not Gaussian boundary profiles. Solid heights show local energy; dashed caps show whole-boundary mean energy. The Hardy measure is dt/(2π), not arclength. Lighthouses show local modulus with a dashed maximum guide; their positions need not maximize the function.</div>
+    <div class="math hm-note">\(\Gamma_R(t)=\tfrac12(Re^{it}+R^{-1}e^{-it})\)</div>
+    <div class="math hm-note">\(\xi_f=\Gamma_r(\theta),\quad\xi_h=\Gamma_r(\theta-\pi/2)\)</div>
+    <div class="math hm-note">\(\eta=\Gamma_s(\theta-7\pi/36),\quad\omega=\Gamma_\rho(\theta-\pi/4)\)</div>
+    <div class="text-small hm-note">At θ = 135°, the input hump sits upper-left, the output hump upper-right, and both lighthouses near the top, as in the sketch. Fixed angular offsets keep them moving together. They are linked probes, not the movement of one point through the operator. A value at a single input point does not determine the whole response.</div>
+    <div class="text-small hm-note">The solid arrows start at the outer lighthouse's light ω and end at the two actual branch images inside E_s. These points generally differ from the inner lighthouse's probe η. The dashed core arrow maps the whole function g to h.</div>
+    <div class="math hm-note">\(f_\alpha(w)=A_{\rm eff}(\alpha)P_n(w)\)</div>
+    <div class="math hm-note">\(A_{\rm eff}(\alpha)=A[1+0.35\cos(2\alpha)]\)</div>
+    <div class="text-small hm-note">With the position option enabled, α is the selected input angle and is held fixed throughout each boundary integral or maximum. This illustrative family changes the entire input function. Disabling it restores A Pₙ and fixed full norms.</div>
+    <div class="math hm-note">\(h(w)=\tfrac12 f\!\left(\tfrac{w-1}{2}\right)+\tfrac12 f\!\left(\tfrac{w+1}{2}\right)\)</div>
+    <div class="text-small hm-note">Illustrative affine branches. Radii: r = 1.85, ρ = 2, s ≈ 1.70327. Numerical readouts use 4,096 angles; maxima are sampled. For these polynomials the boundary maximum equals the supremum over the ellipse.</div>
+    <div class="text-small hm-note">Each meter uses a fixed, compressed scale for the chosen degree: height = H(1 − exp(−value/reference)), with its A = 1 boundary peak as reference. Energies scale by A_eff² and moduli by A_eff. Moving a probe alone leaves the full norms fixed. For the drawing, confocal radius coordinates are expanded monotonically, followed by one common vertical compression. The same transformation places every branch image and the red interval. Numerical evaluations use the actual Γ_R.</div>
+  </details>
+
+</div>
+</section>
+<section class="factorisation-explanation math-static" aria-labelledby="mechanism-heading">
+<h2 id="mechanism-heading">What each operator does</h2>
+<div class="factorisation-steps">
+<article class="card" id="restrict-input" tabindex="-1"><p class="eyebrow">01 · RESTRICT THE INPUT</p><h3>Keep the function, narrow its domain</h3>
+<div class="math-block">\[g=\mathcal J_2f=f|_{E_s}.\]</div>
+<p>The strict gap between \(E_s\) and \(E_r\) lets Hardy control on the larger ellipse bound every value on the smaller one.</p>
+<details><summary>Intuitive/geometric explanation</summary><p>Imagine looking at the same analytic function through a smaller window. No point is transported and no new function values are invented. The input hump records angular mean-square size on \(E_r\); the inner lighthouse measures the modulus of its restriction on \(E_s\).</p></details>
+</article>
+<article class="card" id="form-response" tabindex="-1"><p class="eyebrow">02 · FORM THE RESPONSE</p><h3>Look inward to compute an outer value</h3>
+<div class="math-block">\[h(\omega)=\sum_b\phi_b(\omega)g(\tau_b(\omega)).\]</div>
+<p>Choose an outer point \(\omega\). Its inverse-branch images lie inside \(E_s\), where \(g\) is available. Add the weighted complex values there to obtain \(h(\omega)\).</p>
+<details><summary>Intuitive/geometric explanation</summary><p>The solid arrows answer “where do we evaluate?” They point inward. The dashed middle arrow answers “which function do we construct?” It produces the response on the outer ellipse. Add the complex contributions before taking a magnitude.</p><div class="math-block">\[h(\omega)=\tfrac12g(\tau_-(\omega))+\tfrac12g(\tau_+(\omega)).\]</div><p>The separate inner lighthouse is a moving probe on the boundary of \(E_s\); it is generally different from both branch-image points.</p></details>
+</article>
+<article class="card" id="restrict-output" tabindex="-1"><p class="eyebrow">03 · RESTRICT THE OUTPUT</p><h3>Return to the original measuring space</h3>
+<div class="math-block">\[\mathcal Lf=\mathcal J_\infty h=h|_{E_r}.\]</div>
+<p>The new response is now considered on the middle ellipse. Its second Hardy hump uses the same angular measure as the input hump.</p>
+<details><summary>Intuitive/geometric explanation</summary><p>The two Hardy humps stand on the same ellipse but measure different functions: \(f\) and \(\mathcal Lf\). Restriction does not carry an outer point's value inward. The output value is evaluated anew at the middle-ellipse probe.</p></details>
+</article>
+</div>
+<details class="card factorisation-notes"><summary>General mechanism, example and numerical meaning</summary>
+<p>For the general mechanism, assume finitely many branches \(\tau_b\) and weights \(\phi_b\), holomorphic near \(\overline{E_\rho}\), with \(\tau_b(\overline{E_\rho})\subset E_s\). Here \(A(E_\rho)=\operatorname{Hol}(E_\rho)\cap C(\overline{E_\rho})\). These conditions make the middle operation a bounded map into \(A(E_\rho)\).</p>
+<p>The diagram uses the affine example above and the unnormalised Legendre polynomial input \(AP_n\). It illustrates the fixed-space factorisation and the two Hardy embeddings studied after the coefficient bounds. Both embeddings are restrictions; they are not inverses of one another.</p>
+<p>The two humps use \(d t/(2\pi)\), not arclength. Their values are energies; take square roots to obtain Hardy norms. Supremum measurements take a maximum, with no integration. The displayed averages and maxima use 4,096 angular samples, evaluated in floating-point arithmetic without a certified error enclosure.</p>
+<p>Enlarged gaps and compressed meter heights make the construction readable. The common drawing transformation preserves ellipse membership; numerical values use the actual Bernstein ellipses. The red segment represents \([-1,1]\).</p>
+<p>With position-dependent amplitude disabled, moving the probes leaves whole-boundary measurements fixed. Enabling it changes the entire input function with the selected angle; that angle is held fixed inside each full-boundary calculation.</p>
+</details>
+</section>
+<footer><a href="../hardy-coefficients/index.html">← 7 · Hardy coefficients and tails</a><a href="../weighted-synthesis/index.html">9 · Weighted synthesis and tails →</a></footer>
+</main>
+</body>
+</html>

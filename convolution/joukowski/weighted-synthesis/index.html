@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weighted synthesis and exact tails · Convolution Atlas</title>
+<meta name="description" content="Combine Legendre coefficient decay and ellipse growth, then separate the retained modes from the exact weighted geometric tail.">
+<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../hardy-embeddings/style.css?v=7c1918bd1ec1">
+<link rel="stylesheet" href="tail-target.css?v=8a6b1fe2295c">
+<link rel="stylesheet" href="../hardy-embeddings/chapter.css?v=37295e81b75b">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'none'},startup:{typeset:false},options:{enableMenu:false}};</script>
+<script defer src="../../vendor/tex-svg.js?v=d4295dc33744"></script>
+<script defer src="../lesson-navigation.js?v=bb9ff39db220"></script>
+<script defer src="../hardy-embeddings/math.js?v=1237b8bf1726"></script>
+<script defer src="../hardy-embeddings/plots.js?v=da161f155f1c"></script>
+<script defer src="../hardy-embeddings/lesson.js?v=5523d9bbfcf2"></script>
+<script defer src="tail-target.js?v=e7313d3b5cf9"></script>
+<link rel="stylesheet" href="../home-palette.css?v=ca2188dd1bc9">
+</head>
+<body class="hardy-page">
+<a class="skip" href="#hardy-app">Skip to the interactive laboratory</a>
+<header class="site-header"><a href="../index.html">← Joukowski–Legendre</a><nav aria-label="Atlas navigation"><a href="../../index.html">Convolution Atlas</a><a href="../factorisation/index.html">Factorisation overview</a></nav></header>
+<main class="hardy-main">
+<header class="hardy-intro math-static">
+<p class="eyebrow">09 · WEIGHTED SYNTHESIS AND EXACT TAILS</p>
+<h1>Embedding bookkeeping, synthesis, and exact tail sums</h1>
+<p>A Legendre mode grows on an ellipse, while its coefficient decays with the larger analytic radius. Multiply the two estimates, then decide which modes to keep.</p>
+<p>For \(1&lt;r&lt;R\), the remaining geometric factor is \(q=r/R&lt;1\). The real-line truncation \(\mathcal P_N\) keeps exactly \(N\) terms, with degrees \(0,\ldots,N-1\).</p>
+</header>
+<nav class="thesis-switcher hardy-chapter-nav" data-lesson-navigation data-lesson="weighted-synthesis" aria-label="Switch thesis lesson">
+<div class="hardy-chapter-heading"><h2>Two Hardy embeddings and Legendre projection tails</h2><span>Lessons 9–12</span></div>
+<a href="index.html" aria-current="page"><span>9 · Weighted synthesis and tails</span><small>Choose how much tail to allow.</small></a>
+<a href="../hardy-to-uniform/index.html"><span>10 · Hardy to uniform</span><small>Compare angular energy with the inner peak.</small></a>
+<a href="../uniform-to-hardy/index.html"><span>11 · Uniform to Hardy</span><small>Measure how an arc contributes to the mean.</small></a>
+<a href="../transfer-tails/index.html"><span>12 · Two gaps and operator tails</span><small>Find where the two decay ratios meet.</small></a>
+<details class="hardy-prerequisites"><summary>Lessons 1–8 · Laurent expansion to factorisation</summary><div><a href="../index.html">1 · Laurent expansion</a><a href="../real-line/index.html">2 · Real-line stability</a><a href="../ellipse-growth/index.html">3 · Geometric growth</a><a href="../contour-coefficients/index.html">4 · Boundary coefficients</a><a href="../kernel-structure/index.html">5 · Kernel frequencies</a><a href="../hinf-coefficients/index.html">6 · Bounded analytic coefficients</a><a href="../hardy-coefficients/index.html">7 · Hardy coefficients and tails</a><a href="../factorisation/index.html">8 · Factorisation and embeddings</a></div></details></nav>
+<p class="hardy-experiment-link" hidden><a href="#tail-target">Find the mode count for a tolerance ↓</a></p>
+<noscript><p>Enable JavaScript to explore the controls and render the formulas. The explanations below remain available.</p></noscript>
+<section id="hardy-app" class="hardy-lab" data-kind="synthesis" aria-label="Interactive weighted Legendre synthesis">
+<div class="hardy-stages" role="group" aria-label="Choose a synthesis step">
+<button type="button" data-stage="0" aria-pressed="true">1 · Compare decay and growth</button>
+<button type="button" data-stage="1" aria-pressed="false">2 · Add the retained modes</button>
+<button type="button" data-stage="2" aria-pressed="false">3 · Sum the infinite tail</button>
+</div>
+<div id="hardy-controls"></div>
+<div id="hardy-stage-copy"></div>
+<div id="hardy-legend"></div>
+<svg id="hardy-scene" viewBox="0 0 800 480" role="img" aria-label="Legendre synthesis on nested Bernstein ellipses"></svg>
+<div id="hardy-readings"></div>
+<svg id="hardy-profile" viewBox="0 0 800 300" role="img" aria-label="Weighted modes separated into retained terms and discarded tail"></svg>
+<div id="hardy-results"></div>
+<p id="hardy-live" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+</section>
+<section id="tail-target" class="math-static" aria-labelledby="tail-target-title" hidden>
+  <h2 id="tail-target-title">How many modes meet your tolerance?</h2>
+  <p>Choose the largest scalar tail \(\varepsilon\) you will allow. Compare three inner ellipses while the outer radius stays at \(R=2\).</p>
+  <div class="tail-target-grid">
+    <div>
+      <label for="tail-tolerance">Scalar tail tolerance \(\varepsilon\)</label>
+      <select id="tail-tolerance">
+        <option value="1">1</option>
+        <option value=".1" selected>0.1</option>
+        <option value=".01">0.01</option>
+        <option value=".001">0.001</option>
+        <option value=".0001">0.0001</option>
+      </select>
+      <p class="tail-target-caption">Select an inner radius to use it in the ellipse diagram.</p>
+      <div class="tail-comparisons" role="group" aria-label="Compare mode counts and select an inner radius">
+        <button type="button" data-target-radius="1.2" aria-pressed="false"><span>\(r=1.20\)</span><span class="tail-bar" aria-hidden="true"><i></i></span><span data-count></span></button>
+        <button type="button" data-target-radius="1.5" aria-pressed="true"><span>\(r=1.50\)</span><span class="tail-bar" aria-hidden="true"><i></i></span><span data-count></span></button>
+        <button type="button" data-target-radius="1.8" aria-pressed="false"><span>\(r=1.80\)</span><span class="tail-bar" aria-hidden="true"><i></i></span><span data-count></span></button>
+      </div>
+    </div>
+    <div class="tail-decision">
+      <div class="tail-radius" id="tail-current-radius"></div>
+      <strong id="tail-minimum" role="status" aria-live="polite" aria-atomic="true"></strong>
+      <p id="tail-bracket"></p>
+      <button type="button" id="tail-apply"></button>
+      <p id="tail-example" class="tail-target-caption"></p>
+    </div>
+  </div>
+  <details>
+    <summary>Why is this the first possible mode count?</summary>
+    <p>Keeping one more mode removes the positive term \((2N+1)q^N\) from \(\mathsf T_N(q)\). The first count with \(\mathsf T_N(q)\leq\varepsilon\) therefore meets the target, while the preceding count exceeds it. For the displayed polynomial family the corresponding function bound is \(A\,\mathsf T_N(q)\).</p>
+  </details>
+</section>
+<section class="hardy-explanation math-static" aria-label="Understanding weighted synthesis">
+<p class="try-this"><strong>What to try.</strong> Hold the radii fixed and increase \(N\). Then move the inner ellipse closer to the outer one. Watch how many terms are needed to make the scalar tail small.</p>
+<p class="dependency"><strong>Earlier ingredients.</strong> <a href="../ellipse-growth/index.html">Geometric growth</a> bounds each Legendre mode. <a href="../hinf-coefficients/index.html">Bounded analytic coefficients</a> and <a href="../hardy-coefficients/index.html">Hardy coefficients</a> supply the decay that outweighs that growth.</p>
+<details>
+<summary>Intuitive/geometric explanation</summary>
+<p>The larger ellipse supplies a coefficient factor \(R^{-n}\), and reconstruction on the smaller ellipse costs at most \(r^n\). Their product is \(q^n\). The coefficient estimate also contributes \(2n+1\), producing the scalar majorant \(b_n=(2n+1)q^n\).</p>
+<p>The weighted coefficient norm is \(\|c\|_{\ell^1_r}=\sum_{n\ge0}|c_n|r^n\). The factor \(2n+1\) belongs to the coefficient estimate, rather than to the definition of this norm. Summing the weighted magnitudes bounds the reconstructed function on the whole target ellipse.</p>
+<p>The finite example uses \(c_n=A(2n+1)2^{-n}e^{-in\alpha}\) for \(0\le n\le47\). Changing the phase control changes this polynomial. Here \(A\) controls the coefficient envelope, while the outer Hardy reading is a diagnostic measurement.</p>
+<p>The moving hump records a local squared modulus, while the lighthouse records a local modulus. A full Hardy norm requires the normalized angular average and a square root. The schematic hump shape does not represent the entire boundary profile.</p>
+</details>
+<details>
+<summary>Why the estimate follows</summary>
+<p>The bound \(\|P_n\|_{A(E_r)}\le r^n\) makes the Weierstrass majorant test applicable whenever \(c\in\ell^1_r\). Thus synthesis \(\mathcal S_rc=\sum c_nP_n\) has norm at most one into \(A(E_r)\), \(H^\infty(E_r)\), and \(H^2(E_r)\).</p>
+<div class="math-block">\[\begin{aligned}\mathsf S_N(q)&=\sum_{n=0}^{N-1}(2n+1)q^n,\\\mathsf T_N(q)&=\sum_{n=N}^{\infty}(2n+1)q^n.\end{aligned}\]</div>
+<div class="math-block">\[\mathsf T_N(q)=q^N\!\left(\frac{2N+1}{1-q}+\frac{2q}{(1-q)^2}\right).\]</div>
+<p>Applying \(2q\,d/dq+1\) to the geometric series gives these exact scalar sums. In particular, \(\mathsf S_N+\mathsf T_N=\mathsf S_\infty=(1+q)/(1-q)^2\). A finite displayed set of bars does not remove the remaining infinite tail.</p>
+<p>These scalar equalities produce upper bounds for function and operator norms. They do not assert that every coefficient estimate is attained simultaneously. The illustrative polynomial and the infinite scalar majorant therefore have separate readings.</p>
+</details>
+<details>
+<summary>Connection to the thesis</summary>
+<p>This lesson follows “Embedding bookkeeping, synthesis, and exact tail sums” in the Distilled section “Two Hardy embeddings and Legendre projection tails.” It packages the preceding coefficient and mode estimates for the next two restrictions.</p>
+<p>The real-line coefficients are \(a_n(f)=(n+\tfrac12)\int_{-1}^{1}f(x)P_n(x)\,dx\). Hence \(\mathcal P_Nf=\sum_{n=0}^{N-1}a_n(f)P_n\), with \(\mathcal P_0=0\). This projector differs from the later Hardy orthogonal projector \(\mathcal P_N^X\), even though both retain the same polynomial space.</p>
+<p>The full sum supplies embedding constants, and the scalar tail supplies a projection-error comparator. This scalar \(\mathsf T_N(q)\) is distinct from the finite connection matrix denoted \(\mathsf T_N(r)\) later in the thesis.</p>
+</details>
+</section>
+<footer><a href="../factorisation/index.html">← 8 · Factorisation and embeddings</a><a href="../hardy-to-uniform/index.html">10 · Hardy to uniform →</a></footer>
+</main>
+</body>
+</html>

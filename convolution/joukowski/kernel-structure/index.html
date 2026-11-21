@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Circle structure of the second-kind kernel · Joukowski–Legendre</title>
+<meta name="description" content="Explore the one-sided opposite-parity Laurent tail of the second-kind Legendre kernel and its geometric decay.">
+<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../math-window.css?v=2bca698ac08e"><link rel="stylesheet" href="../coefficient-lessons.css?v=cff5ff89777e"><link rel="stylesheet" href="style.css?v=5f1d63edb77e">
+<script defer src="../../mathjax-config.js?v=fb5c0f9a8785"></script><script defer src="../../vendor/tex-svg.js?v=d4295dc33744"></script>
+<script defer src="../../vendor/d3.min.js?v=f2094bbf6141"></script><script defer src="../math-window.js?v=31277e048601"></script><script defer src="../coefficient-math.js?v=ede7bfda9876"></script>
+<script defer src="../lesson-navigation.js?v=bb9ff39db220"></script><script defer src="origin.js?v=0a9d66869996"></script><script defer src="filters.js?v=01bef8225d8b"></script><script defer src="disc.js?v=742123d354c9"></script><script defer src="pullback.js?v=302196da414e"></script><script defer src="pair-hump.js?v=5dc51514a2a9"></script><script defer src="pair-expansion.js?v=4f6b63766e83"></script><script defer src="jacobian.js?v=08e785f40e62"></script><script defer src="spatial.js?v=975620acaad9"></script><script defer src="../coefficient-lessons.js?v=ad2d0604d318"></script><script defer src="lesson.js?v=60fdbb76d36e"></script>
+<link rel="stylesheet" href="../home-palette.css?v=ca2188dd1bc9">
+</head>
+<body class="coefficient-page">
+<a class="skip" href="#lesson-lab">Skip to the interactive lesson</a>
+<header class="site-header"><a href="../index.html">← Joukowski–Legendre</a><nav aria-label="Atlas navigation"><a href="../../index.html">Convolution Atlas</a><a href="../ellipse-growth/index.html">Geometric growth</a></nav></header>
+<main class="coefficient-main">
+<header class="lesson-intro math-static"><p class="eyebrow">THESIS WALKTHROUGH · SUBSECTION <bdi data-thesis-ref="legEDMD:subsec-Qn-circle-structure">3.2.5</bdi> · LEMMA <bdi data-thesis-ref="legEDMD:lem-1-8">3.24</bdi></p><h1>Circle structure of the second-kind kernel</h1>
+<p>Why does the kernel that extracts the degree-three Legendre coefficient start with \(z^{-4}\), miss \(z^{-5}\), and return at \(z^{-6}\)? Follow one frequency from its birth in a geometric series to its place in the contour integral.</p>
+<a class="kw-start" href="#lesson-lab">Explore the circle construction ↓</a>
+</header>
+<nav class="thesis-switcher" data-lesson-navigation data-lesson="kernel-structure" aria-label="Switch thesis lesson"><a href="../index.html"><span>1 · Laurent expansion</span><small>How the finite packet is formed</small></a><a href="../real-line/index.html"><span>2 · Real-line stability</span><small>The neutral radius-one case</small></a><a href="../ellipse-growth/index.html"><span>3 · Geometric growth</span><small>Radial weights on an ellipse</small></a><a href="../contour-coefficients/index.html"><span>4 · Boundary coefficients</span><small>Recover a coefficient from a circuit</small></a><a href="index.html" aria-current="page"><span>5 · Kernel frequencies</span><small>Viewing this lesson</small></a><a href="../hinf-coefficients/index.html"><span>6 · Bounded analytic coefficients</span><small>From boundary size to decay</small></a><a href="../hardy-coefficients/index.html"><span>7 · Hardy coefficients and tails</span><small>From angular energy to truncation</small></a><a href="../factorisation/index.html"><span>8 · Factorisation and embeddings</span><small>Follow the function through three operations</small></a><a href="../weighted-synthesis/index.html"><span>9 · Weighted synthesis and tails</span><small>Split the coefficient budget</small></a><a href="../hardy-to-uniform/index.html"><span>10 · Hardy to uniform</span><small>From angular energy to a pointwise ceiling</small></a><a href="../uniform-to-hardy/index.html"><span>11 · Uniform to Hardy</span><small>From a ceiling to angular energy</small></a><a href="../transfer-tails/index.html"><span>12 · Two gaps and operator tails</span><small>Balance the input and output restrictions</small></a></nav>
+<noscript><p>The proof remains readable below. Enable JavaScript to render the formulas and explore the linked diagrams.</p></noscript>
+<div id="lesson-lab" class="coefficient-lab">
+  <h2 id="kw-heading">Follow the kernel from circle to contour</h2>
+  <div class="kw-path" role="group" aria-label="Kernel construction steps">
+    <button type="button" aria-controls="kernel-origin" aria-pressed="true">1 · Exterior circle</button>
+    <button type="button" aria-controls="kernel-filters" aria-pressed="false">2 · Frequency filters</button>
+    <button type="button" aria-controls="kernel-chain" aria-pressed="false">3 · Rotating arrows</button>
+    <button type="button" aria-controls="kernel-disc" aria-pressed="false">4 · Tail disc</button>
+    <button type="button" aria-controls="kernel-pullback" aria-pressed="false">5 · Pull-back &amp; tangents</button>
+    <button type="button" aria-controls="kernel-jacobian" aria-pressed="false">6 · Contour weights</button>
+  </div>
+  <div class="viz-controls">
+    <label class="form-label">Legendre degree <span data-value="n" class="tabular-nums"></span><input class="form-range" data-input="n" type="range" min="0" max="8" step="1" value="3"></label>
+    <label class="form-label">Circle radius <span data-value="rho" class="tabular-nums"></span><input class="form-range" data-input="rho" type="range" min="1.15" max="2.5" step="0.01" value="1.5"></label>
+    <label class="form-label">Circle angle <span data-value="theta" class="tabular-nums"></span><input class="form-range" data-input="theta" type="range" min="0" max="360" step="1" value="28"></label>
+    <label class="form-label">Retained terms <span data-value="L" class="tabular-nums"></span><input class="form-range" data-input="L" type="range" min="1" max="12" step="1" value="6"></label>
+    <label class="form-label">Integration angle <span data-value="t" class="tabular-nums"></span><input class="form-range" data-input="t" type="range" min="0" max="180" step="1" value="54"></label>
+  </div>
+  <section id="kernel-origin" class="kw-panel"></section>
+  <section id="kernel-filters" class="kw-panel" hidden></section>
+  <section id="kernel-chain" class="kw-panel" hidden>
+  <div class="lesson-section-heading"><h2>How does each surviving term rotate?</h2><button type="button" data-explain="kernel-arrows">Intuitive/geometric explanation</button></div>
+  <div class="sk-formula math-static" data-static-math>\(Q_n(\Gamma_\varrho(\theta))=\sum_{q=0}^{\infty}\sigma_{n,k_q}\varrho^{-k_q}e^{-ik_q\theta}\)<br>\(k_q=n+1+2q.\)</div>
+  <p class="math-static">The \(P_n\) packet is finite, with frequencies from \(-n\) to \(+n\) in steps of two. The \(Q_n\) tail starts one step farther out and continues clockwise through frequencies \(-(n+1),-(n+3),\ldots\).</p>
+  <div class="viz-row sk-select-row">
+    <label class="form-label" for="sk-selected-k">Inspect a surviving term</label>
+    <select id="sk-selected-k" class="form-select" aria-label="Inspect a surviving frequency"></select>
+    <button type="button" id="sk-inspect-integral">Inspect its defining integral</button>
+  </div>
+  <div class="sk-figures">
+    <section>
+      <h3>Add the retained arrows head to tail</h3>
+      <div class="sk-vector-controls">
+        <label for="sk-vector-zoom">Vector zoom <output id="sk-vector-zoom-value" for="sk-vector-zoom">1×</output><input id="sk-vector-zoom" type="range" min="0" max="44" step="0.1" value="0" aria-describedby="sk-vector-view-note"></label>
+        <button type="button" id="sk-vector-fit">Fit all arrows</button>
+        <button type="button" id="sk-vector-selected">Enlarge selected arrow</button>
+      </div>
+      <svg class="sk-chart" data-plot="vectors" role="img" aria-label="Coloured term vectors and their finite sum in the complex plane"></svg>
+      <p id="sk-vector-view-note" class="text-small" aria-live="polite"></p>
+      <div class="text-small sk-legend">Colours match the spectrum. Dashed arrow: finite sum. Zoom centres on the selected arrow.</div>
+      <div class="text-small">Increasing θ through one full turn rotates every term clockwise; the k-th term makes k turns. Both axes have the same scale, so arrow lengths represent complex moduli.</div>
+    </section>
+    <section class="sk-detail">
+        <h3>Magnify the small arrows</h3>
+        <div class="kw-controls" role="group" aria-label="Magnified arrow sequence">
+          <button type="button" id="sk-lens-earlier">← Earlier</button>
+          <button type="button" id="sk-lens-later">Later →</button>
+          <button type="button" id="sk-lens-tail">Fit final three</button>
+        </div>
+        <p id="sk-lens-description"></p>
+        <svg class="sk-chart" data-plot="local-chain" role="img" aria-label="Magnified sequence of consecutive arrows using local real and imaginary offsets"></svg>
+        <p id="sk-lens-values" class="kw-readout"></p>
+    </section>
+    <section class="sk-wide-spectrum">
+      <h3>Lengths of the Laurent terms</h3>
+      <div class="kw-controls" role="group" aria-label="Term length scale">
+        <button type="button" data-sk-scale="log" aria-pressed="true">Log scale</button>
+        <button type="button" data-sk-scale="linear" aria-pressed="false">Linear scale</button>
+      </div>
+      <svg class="sk-chart" data-plot="spectrum" role="img" aria-label="Term lengths by positive index k; the Laurent exponent is minus k"></svg>
+      <div class="text-small sk-legend">● Surviving term &nbsp; □ Exact zero &nbsp; ○ Ring: selected term</div>
+      <div class="text-small sk-structure" aria-live="polite"></div>
+    </section>
+  </div>
+  <div class="sk-formula sk-selected" aria-live="polite"><div class="sk-selected-term"></div><div class="sk-selected-length"></div></div>
+  <div class="sk-formula math-static" data-static-math>\(Q_{n,L}:=\sum_{q=0}^{L-1}\sigma_{n,k_q}\varrho^{-k_q}e^{-ik_q\theta}\)<br>\(|Q_n-Q_{n,L}|\le B_L:=\dfrac{2\varrho^{-(n+1+2L)}}{1-\varrho^{-2}}.\)</div>
+  <div class="sk-result tabular-nums" aria-live="polite"></div>
+  <div class="text-small">The plotted endpoint is a truncation. The analytic bound covers every omitted term; displayed arithmetic is rounded. It bounds series truncation, not floating-point error.</div>
+</section>
+  <section id="kernel-disc" class="kw-panel" hidden></section>
+  <section id="kernel-pullback" class="kw-panel" hidden>
+    <h3>What changes when we pull the kernel back?</h3>
+    <p class="math-static">Start with \(Q_n(\omega)\), defined off the red interval \([-1,1]\). Choose a point \(z\) outside the unit circle and use \(J(z)=\tfrac12(z+z^{-1})\) as its address in the \(\omega\)-plane. Reading \(Q_n\) at that address defines the pull-back \(z\mapsto Q_n(J(z))\). Fixing \(|z|=\varrho\) leaves just one input, the angle \(\theta\).</p>
+    <div class="kw-controls" aria-label="Compare ellipse tangents"><button type="button" data-pb-angle="0">Right tip · 0°</button><button type="button" data-pb-angle="45">Diagonal · 45°</button><button type="button" data-pb-angle="90">Top · 90°</button></div>
+    <div class="kw-controls" role="group" aria-label="Geometry view">
+      <button type="button" data-geom-mode="space" aria-pressed="true">3D correspondence</button>
+      <button type="button" data-geom-mode="flat" aria-pressed="false">Compare flat planes</button>
+      <a href="#pb-matrix">Apply the local Jacobian ↓</a>
+    </div>
+    <div id="kp-space"></div>
+    <div id="kp-flat" hidden>
+    <div class="kw-grid">
+      <article class="kw-card"><h4>Choose a point on the circle</h4><svg id="pb-circle" class="pb-plane" role="img" aria-label="Circle with marked input and counterclockwise tangent"></svg><p class="math-static">The cyan band lies between the unit circle and the active contour \(|z|=\varrho\). The dotted inner rim has radius \(\varrho^{-1}\). Its hollow point \(1/z\) shares the marked point’s image.</p><output id="pb-z"></output></article>
+      <article class="kw-card"><h4>Follow its image on the ellipse</h4><svg id="pb-ellipse" class="pb-plane" role="img" aria-label="Ellipse with the corresponding point, tangent and real interval"></svg><p class="math-static">The two radii in violet and green are the semiaxes \(a_\varrho=(\varrho+\varrho^{-1})/2\) and \(b_\varrho=(\varrho-\varrho^{-1})/2\). The red segment joins the foci.</p><output id="pb-omega"></output><output id="pb-axes"></output></article>
+    </div>
+    <p class="math-static">Both diagrams use the same coordinate scale. Both arrows show the tangent multiplied by \(0.45\) for display. Move from the right tip to the top and compare the distance travelled per radian.</p>
+    </div>
+    <details class="kw-card math-static pb-branches"><summary>Compare the Laurent series on the two sheets</summary>
+      <p>The outer rim of \(\varrho^{-1}&lt;|z|&lt;\varrho\) traces the coefficient contour once. Its reciprocal partner \(s=1/z\) gives the same kernel value at the same image point. Substituting \(z=1/s\) explains the change of powers across the two sheets.</p>
+      <div class="lesson-formula">\[\begin{aligned}
+      Q_n(J(z))&=\sum_{q\ge0}\sigma_{n,k_q}z^{-k_q}, &&|z|>1,\\
+      Q_n(J(s))&=\sum_{q\ge0}\sigma_{n,k_q}s^{k_q}, &&0&lt;|s|&lt;1.
+      \end{aligned}\]</div><p>The two expansions meet the excluded interval at the unit circle. On the chosen outer rim each term has radial factor \(\varrho^{-k_q}\).</p>
+    </details>
+    <section class="kw-card pm-card" id="pb-matrix">
+      <h4>Apply the Jacobian to a vector</h4>
+      <p class="math-static">Choose a vector at the marked point. Multiplication by the complex number \(J'(z)=u+iv\) has an exact real \(2\times2\) matrix. Its first column is the image of the real unit vector and its second is the image of the imaginary unit vector.</p>
+      <div class="pm-layout"><div>
+        <div class="kw-controls" role="group" aria-label="Choose an input vector"><button type="button" data-pm-input="tangent" aria-pressed="true">Circle tangent</button><button type="button" data-pm-input="real" aria-pressed="false">Real unit vector</button><button type="button" data-pm-input="imag" aria-pressed="false">Imaginary unit vector</button></div>
+        <label class="pm-angle">Move the point <output id="pm-deg"></output><input id="pm-theta" type="range" min="0" max="360" step="1" value="28"></label>
+        <button type="button" id="pm-example" class="math-static">Try \(\varrho=2,\ \theta=45^\circ\)</button>
+        <div class="math-static lesson-formula">\[D J(z)=\begin{pmatrix}u&-v\\v&u\end{pmatrix}=|J'(z)|R_{\arg J'(z)}.\]</div>
+        <div class="pm-product" aria-label="Numerical matrix times input vector equals image vector">
+          <div><small>Jacobian</small><div class="pm-array pm-square" id="pm-J"><span></span><span></span><span></span><span></span></div></div>
+          <b>×</b><div><small>Input</small><div class="pm-array" id="pm-in"><span></span><span></span></div></div>
+          <b>=</b><div><small>Image</small><div class="pm-array" id="pm-out"><span></span><span></span></div></div>
+        </div>
+        <p class="math-static">Here \(u=(1-\varrho^{-2}\cos 2\theta)/2\) and \(v=\varrho^{-2}\sin(2\theta)/2\). The doubled angle comes from \(z^{-2}\). Turning the 3D camera changes only your viewpoint.</p>
+      </div><div class="pm-drawing">
+        <svg id="pm-vectors" role="img" aria-label="Input and image vector drawn from a common origin on equal axes"></svg>
+        <div class="space-legend"><span style="color:#66d8ec">↗ Input</span><span style="color:#d7a9f9">↗ Image</span></div>
+        <output id="pm-rotation"></output>
+      </div></div>
+      <p class="math-static" id="pm-tangent-eqn">For the circle tangent the product reads \(D J(z)(-\varrho\sin\theta,\,\varrho\cos\theta)^{\mathsf T}=(-a_\varrho\sin\theta,\,b_\varrho\cos\theta)^{\mathsf T}\). The diagonal matrix \(\operatorname{diag}(a_\varrho,b_\varrho)\) draws the ellipse from the unit circle. The local Jacobian \(D J(z)\) transports a small displacement at the actual preimage \(z\). At the right tip the speed is \(b_\varrho\), and at the top it is \(a_\varrho\).</p>
+      <h4>Follow this point into Contour weights</h4>
+      <div class="kw-grid pm-links"><div><p class="math-static">Keep the complex factor \(J'(z)\). Its two terms give the two contributions to each shifted Laurent coefficient.</p><button type="button" data-pb-contour="shift">Contour · follow the shift →</button></div>
+      <div><p class="math-static">Take the squared tangent length \(w(\theta)=\varrho^2|J'(z)|^2\). It weights every frequency pair at this angle, before the full-turn average selects three diagonals.</p><button type="button" data-pb-contour="pairs" data-pb-average="point">Hardy · follow a pair →</button></div></div>
+    </section>
+    <div class="kw-grid">
+      <article class="kw-card"><h4>Evaluate a function</h4><div class="math-static lesson-formula">\[Q_n(\omega)=Q_n(J(z))=Q_n(\Gamma_\varrho(\theta)).\]</div><p>These three readings agree at the linked points. Changing coordinates alone leaves the complex value unchanged.</p><output id="pb-q"></output></article>
+      <article class="kw-card"><h4>Transport a contour differential</h4><div class="math-static lesson-formula">\[Q_n(\omega)\,d\omega=\underbrace{Q_n(J(z))J'(z)}_{\widetilde Q_n(z)}\,dz.\]</div><p class="math-static">The complex Jacobian \(J'(z)=\tfrac12(1-z^{-2})\) scales a small displacement by \(|J'(z)|\) and turns it through \(\arg J'(z)\). Its direction matters in a contour integral.</p><output id="pb-j"></output><output id="pb-tilde"></output></article>
+    </div>
+    <h3>From oriented tangent to angular energy</h3>
+    <p class="math-static">Along the circle, \(dz=iz\,d\theta\), so the contour density satisfies \(\widetilde Q_n(z)\,iz=Q_n(\Gamma_\varrho(\theta))\,\Gamma_\varrho'(\theta)\). For the contour integral we keep the full vector \(d\omega=\Gamma'_\varrho(\theta)\,d\theta\). Cauchy–Schwarz then asks for the squared magnitude of \(Q_n(\Gamma_\varrho)\Gamma'_\varrho\), averaged in \(d\theta/(2\pi)\). This is where the squared speed enters.</p>
+    <div class="math-static lesson-formula">\[\begin{aligned}\Gamma'_\varrho(\theta)&=\tfrac i2(\varrho e^{i\theta}-\varrho^{-1}e^{-i\theta}),\\[3pt]
+      |\Gamma'_\varrho(\theta)|^2&=\tfrac14(\varrho^2+\varrho^{-2}-e^{2i\theta}-e^{-2i\theta})\\
+      &=a-\tfrac12\cos(2\theta),\quad a=\tfrac14(\varrho^2+\varrho^{-2}).\end{aligned}\]</div>
+    <article class="kw-card"><h4>What survives a full turn?</h4>
+      <div class="kw-controls" role="group" aria-label="Choose the angular profile"><button type="button" data-pb-profile="speed" aria-pressed="true">Squared speed</button><button type="button" data-pb-profile="flat" aria-pressed="false">Kernel energy</button><button type="button" data-pb-profile="weighted" aria-pressed="false">Speed-weighted energy</button></div>
+      <svg class="pb-wave" role="img" aria-label="Angular profile with a movable point and dashed line at its full-circle mean"></svg>
+      <output id="pb-wave-read"></output>
+      <p class="math-static">The dot follows \(\theta\). The dashed line is the full-turn mean. The energy views use the \(L\) retained terms \(Q_{n,L}=\sum_k c_k e^{-ik\theta}\), with \(c_k=\sigma_{n,k}\varrho^{-k}\).</p>
+      <p class="math-static"><strong>Parseval’s role.</strong> In the unweighted mean, \(\langle e^{i(\ell-k)\theta}\rangle=0\) unless \(k=\ell\). Hence \(\langle |Q_{n,L}|^2\rangle=\sum_k c_k^2\). The squared speed adds frequencies \(0,\pm2\). After multiplication a pair can have zero total frequency when \(\ell-k=0\) or \(\pm2\). Each ordered neighbour contributes \(-c_kc_\ell/4\).</p>
+      <button type="button" data-pb-contour="pairs" data-pb-average="mean" id="pb-pairs">Inspect the surviving pairs in Contour weights →</button>
+    </article>
+  </section>
+  <section id="kernel-jacobian" class="kw-panel" hidden></section>
+  <div class="kw-pager" aria-label="Walk through the construction">
+    <button type="button" data-kw-prev>← Previous step</button>
+    <button type="button" data-kw-next>Next step →</button>
+  </div>
+</div>
+<section class="lesson-proof math-static" id="kernel-proof"><div class="lesson-section-heading"><h2>Why only this ladder remains</h2><button type="button" data-explain="kernel-zeros">Intuitive/geometric explanation</button></div>
+<div id="kernel-calculations" class="kernel-calculations">
+  <h3>Worked calculations</h3>
+  <div role="group" aria-label="Open a step-by-step calculation">
+    <button type="button" data-explain="kernel-reflection" aria-haspopup="dialog">1 · Reflect the integral</button>
+    <button type="button" data-explain="kernel-product" aria-haspopup="dialog">2 · Integrate one cosine mode</button>
+    <button type="button" data-explain="kernel-sigma34" aria-haspopup="dialog">3 · Compute \(\sigma_{3,4}\)</button>
+    <button type="button" data-explain="kernel-chebyshev" aria-haspopup="dialog">4 · Derive \(U_0\) through \(U_3\)</button>
+  </div>
+</div>
+<p>Expand the Cauchy kernel after the Joukowski substitution. The surviving coefficients are ordinary real integrals, and their exact zeros follow from degree and parity.</p><div class="lesson-formula">\[\sigma_{n,k}=\int_0^\pi P_n(\cos t)\sin(kt)\,dt=\int_{-1}^{1}P_n(x)U_{k-1}(x)\,dx\quad(k\ge1).\]</div><p>Here \(U_{k-1}\) is the Chebyshev polynomial of the second kind. This formula follows from \(\sin(kt)=\sin t\,U_{k-1}(\cos t)\).</p><div class="lesson-proof-grid"><article class="card"><h3>1 · Remove lower degrees</h3><p>For \(1\le k\le n\), \(U_{k-1}\) has degree less than \(n\). Legendre orthogonality therefore gives \(\sigma_{n,k}=0\). Also \(\sigma_{n,0}=0\) directly.</p><div class="lesson-formula">\[k\le n\quad\Longrightarrow\quad\sigma_{n,k}=0.\]</div></article><article class="card"><h3>2 · Remove the matching parity</h3><p>Reflecting \(t\) to \(\pi-t\) gives \(\sigma_{n,k}=(-1)^{n+k+1}\sigma_{n,k}\). When \(n\) and \(k\) have the same parity, this forces a zero.</p><div class="lesson-formula">\[k=n+1,n+3,n+5,\ldots\]</div><p>The remaining indices have the opposite parity to \(n\).</p></article><article class="card"><h3>3 · Bound the surviving weights</h3><p>The non-negative cosine packet for \(P_n(\cos t)\) makes each surviving contribution non-negative. The real-line bound \(|P_n(x)|\le1\) and \(\int_0^\pi|\sin(kt)|dt=2\) give</p><div class="lesson-formula">\[0\le\sigma_{n,k}\le2.\]</div><p>The first possible coefficient \(\sigma_{n,n+1}\) is strictly positive.</p></article></div></section>
+<section class="lesson-proof math-static"><div class="lesson-section-heading"><h2>Decay comes from the radius</h2><button type="button" data-explain="kernel-tail">Intuitive/geometric explanation</button></div><p>On \(z=\varrho e^{i\theta}\), the unit factor \(e^{-ik\theta}\) controls direction, while \(\varrho^{-k}\) shrinks the length. The powers along the ladder have ratio \(\varrho^{-2}\). The coefficients themselves need not have a constant ratio.</p><div class="lesson-formula">\[|Q_n(\Gamma_\varrho(\theta))|\le2\sum_{q=0}^{\infty}\varrho^{-(n+1+2q)}=\frac{2\varrho^{-n}}{\varrho-\varrho^{-1}}.\]</div><p>Increasing \(n\) moves the first surviving power farther down the tail. This is where the factor \(\varrho^{-n}\) in the coefficient estimate comes from. For \(f\in A(E_\varrho)\), insert the envelope into the contour integral for \(a_n(f)\) and multiply by the boundary length.</p><div class="lesson-formula">\[|a_n(f)|\le\frac{(2n+1)|\partial E_\varrho|}{\pi(\varrho-\varrho^{-1})}\max_{\partial E_\varrho}|f|\,\varrho^{-n}.\]</div><p><a href="../hinf-coefficients/index.html">Explore the coefficient estimate in Lesson 6 →</a></p><div class="card"><h3>The pulled-back contour also needs its Jacobian</h3><div class="lesson-formula">\[\widetilde Q_n(z)=Q_n(\operatorname{Jouk}(z))\,\frac12(1-z^{-2}).\]</div><p>The displayed arrows sum \(Q_n(\operatorname{Jouk}(z))\). The actual circle-contour kernel includes \(\operatorname{Jouk}'(z)\), so its coefficients are shifted differences and are not the same non-negative \(\sigma_{n,k}\).</p></div></section>
+<details class="card lesson-source math-static"><summary>Source, convergence and numerical meaning</summary><p>This is Subsection <bdi data-thesis-ref="legEDMD:subsec-Qn-circle-structure">3.2.5</bdi>, Lemma <bdi data-thesis-ref="legEDMD:lem-1-8">3.24</bdi>, of the integrated thesis. Its cited source is Bandtlow's EDMD–Legendre Lemma 1.8. The series converges absolutely and uniformly on every fixed circle \(|z|=\varrho>1\).</p><p>The coefficients use the classical \(P_n(1)=1\) convention. The code evaluates the finite positive cosine-packet expression for \(\sigma_{n,k}\); structural degree and parity zeros are imposed exactly. All nonzero readouts use floating-point arithmetic.</p><p>\(B_L\) bounds the omitted series in exact arithmetic, uniformly in \(\theta\). It does not include floating-point rounding error. The plotted endpoint is \(Q_{n,L}\), not the infinite sum.</p></details>
+<footer class="coefficient-footer"><a href="../contour-coefficients/index.html">← Boundary coefficients</a><a href="../hinf-coefficients/index.html">H∞ coefficient bound →</a></footer>
+</main>
+<template id="explain-kernel-arrows"><h3>The arrow lives in the value plane</h3><p>The point \(z=\varrho e^{i\theta}\) moves on an input circle and maps to the ellipse. The arrows shown here represent complex contributions to the output \(Q_n\).</p><div class="lesson-formula">\[v_k=\underbrace{\sigma_{n,k}\varrho^{-k}}_{\text{length}}\,\underbrace{e^{-ik\theta}}_{\text{unit direction}}.\]</div><p>The arrow length is neither the circle radius nor an ellipse semiaxis. With \(\varrho\) fixed, changing \(\theta\) rotates an arrow without changing its length. Its negative frequency makes it rotate clockwise.</p><p>The spectrum's horizontal index is \(k\), but the Laurent exponent is \(-k\). The matching colours connect each spectrum height with its translated arrow. The dashed resultant is the sum of retained terms.</p></template>
+<template id="explain-kernel-zeros"><h3>Two separate filters select the ladder</h3><p>Degree orthogonality first removes all \(k\le n\). Reflection symmetry then removes indices with the same parity as \(n\). For example, when \(n=3\), the first possible indices are \(4,6,8,\ldots\), representing powers \(z^{-4},z^{-6},z^{-8},\ldots\).</p><p>The square markers are exact structural zeros. They are not tiny values dropped by a plotting threshold. Increase \(n\) to see the start move right and the surviving parity alternate.</p></template>
+
+<template id="explain-kernel-reflection">
+  <h3>Reflect the integral about its midpoint</h3>
+  <h4>1 · Reverse the variable and the limits</h4>
+  <p>Start with \(\sigma_{n,k}=\int_0^\pi P_n(\cos t)\sin(kt)\,dt\). Put \(u=\pi-t\). As \(t\) goes from zero to \(\pi\), \(u\) goes from \(\pi\) to zero. The minus sign in \(dt=-du\) reverses the limits again.</p>
+  <div class="lesson-formula">\[\sigma_{n,k}=\int_0^\pi P_n(\cos(\pi-u))\sin(k(\pi-u))\,du.\]</div>
+  <h4>2 · Keep track of the two signs</h4>
+  <p>Reflection changes \(\cos u\) to \(-\cos u\). For integer \(k\), \(\sin(k\pi)=0\) and \(\cos(k\pi)=(-1)^k\).</p>
+  <div class="lesson-formula">\[\begin{aligned}
+  P_n(-\cos u)&=\underbrace{(-1)^n}_{\text{Legendre sign}} P_n(\cos u),\\
+  \sin(k\pi-ku)&=-\cos(k\pi)\sin(ku)\\
+  &=\underbrace{(-1)^{k+1}}_{\text{sine sign}}\sin(ku).
+  \end{aligned}\]</div>
+  <p>Pull both signs outside the integral. The integral that remains is the original coefficient.</p>
+  <div class="lesson-formula">\[\sigma_{n,k}=(-1)^n(-1)^{k+1}\int_0^\pi P_n(\cos u)\sin(ku)\,du.\]</div>
+  <div class="lesson-formula">\[\boxed{\sigma_{n,k}=(-1)^{n+k+1}\sigma_{n,k}}.\]</div>
+  <h4>3 · Compare two reflected pairs</h4>
+  <p>For \(n=3,\ k=5\), the exponent is \(3+5+1=9\). The two heights at \(u\) and \(\pi-u\) are opposites.</p>
+  <div class="lesson-formula">\[\sigma_{3,5}=-\sigma_{3,5}\quad\Longrightarrow\quad 2\sigma_{3,5}=0\quad\Longrightarrow\quad\boxed{\sigma_{3,5}=0}.\]</div>
+  <p>For \(n=3,\ k=4\), the exponent is \(8\). The heights agree and the identity reads \(\sigma_{3,4}=\sigma_{3,4}\). Its value requires a calculation. Window 3 gives \(32/35\).</p>
+  <p>Equal parity forces cancellation. Opposite parity allows survival. After the degree filter has removed \(k\le n\), the possible indices are \(k=n+1,n+3,n+5,\ldots\).</p>
+</template>
+
+<template id="explain-kernel-product">
+  <h3>Integrate one cosine mode against a sine</h3>
+  <p>Take integers \(k,m\) with \(k>|m|\) and opposite parity. These assumptions make both \(k+m\) and \(k-m\) positive odd integers.</p>
+  <h4>1 · Add the sine addition formulas</h4>
+  <div class="lesson-formula">\[\begin{aligned}
+  \sin(A+B)&=\sin A\cos B+\cos A\sin B,\\
+  \sin(A-B)&=\sin A\cos B-\cos A\sin B.
+  \end{aligned}\]</div>
+  <p>The last terms cancel. Divide the sum by two and take \(A=kt,\ B=mt\).</p>
+  <div class="lesson-formula">\[\sin(kt)\cos(mt)=\tfrac12\big[\sin((k+m)t)+\sin((k-m)t)\big].\]</div>
+  <h4>2 · Split the integral</h4>
+  <p>Write \(S_\ell=\int_0^\pi\sin(\ell t)\,dt\). Linearity gives</p>
+  <div class="lesson-formula">\[I_{k,m}=\int_0^\pi\cos(mt)\sin(kt)\,dt=\tfrac12(S_{k+m}+S_{k-m}).\]</div>
+  <h4>3 · Evaluate the two endpoint contributions</h4>
+  <div class="lesson-formula">\[S_\ell=\left[-\frac{\cos(\ell t)}{\ell}\right]_0^\pi
+  =\frac{1-(-1)^\ell}{\ell}.\]</div>
+  <p>At an odd frequency the endpoint cosines are \(1\) and \(-1\). Hence \(S_{k+m}=2/(k+m)\) and \(S_{k-m}=2/(k-m)\).</p>
+  <h4>4 · Combine the fractions</h4>
+  <div class="lesson-formula">\[\begin{aligned}
+  I_{k,m}&=\tfrac12\left(\frac{2}{k+m}+\frac{2}{k-m}\right)\\
+  &=\frac{(k-m)+(k+m)}{(k+m)(k-m)}\\
+  &=\boxed{\frac{2k}{k^2-m^2}}>0 .
+  \end{aligned}\]</div>
+  <p>The numerator is positive because \(k>0\). The denominator is positive because \(k>|m|\).</p>
+</template>
+
+<template id="explain-kernel-sigma34">
+  <h3>Compute the first surviving coefficient for degree three</h3>
+  <h4>1 · Find the two cosine modes</h4>
+  <p>Insert \(x=\cos t\) into \(P_3(x)=(5x^3-3x)/2\). The triple-angle identity gives \(\cos^3t=(\cos 3t+3\cos t)/4\). Collecting the two frequencies gives</p>
+  <div class="lesson-formula">\[P_3(\cos t)=\underbrace{\tfrac58\cos(3t)}_{m=3}+\underbrace{\tfrac38\cos t}_{m=1}.\]</div>
+  <h4>2 · Integrate each mode with its own weight</h4>
+  <p>Multiply by \(\sin(kt)\) and integrate. For even \(k\ge4\), both frequencies satisfy the hypotheses of Window 2.</p>
+  <div class="lesson-formula">\[\begin{aligned}
+  \sigma_{3,k}&=\tfrac58 I_{k,3}+\tfrac38 I_{k,1},\\
+  I_{k,3}&=\frac{2k}{k^2-9},\qquad I_{k,1}=\frac{2k}{k^2-1}.
+  \end{aligned}\]</div>
+  <h4>3 · Set the sine frequency to four</h4>
+  <div class="lesson-formula">\[\begin{aligned}
+  \sigma_{3,4}&=\frac58\frac{8}{16-9}+\frac38\frac{8}{16-1}\\
+  &=\underbrace{\frac58\cdot\frac87}_{5/7}
+    +\underbrace{\frac38\cdot\frac8{15}}_{1/5}\\
+  &=\frac{25}{35}+\frac{7}{35}=\boxed{\frac{32}{35}}.
+  \end{aligned}\]</div>
+  <p>In the frequency-filter plot, the bars for \(m=3\) and \(m=1\) have heights \(5/7\) and \(1/5\). Their sum is the signed area of \(P_3(\cos t)\sin(4t)\).</p>
+</template>
+
+<template id="explain-kernel-chebyshev">
+  <h3>Turn a sine frequency into a polynomial</h3>
+  <h4>1 · Change from the angle to the real coordinate</h4>
+  <p>Take \(-1&lt;x&lt;1\) and \(t=\arccos x\). Since \(0&lt;t&lt;\pi\), the positive square root gives \(\sin t=\sqrt{1-x^2}\).</p>
+  <div class="lesson-formula">\[U_{k-1}(x)=\frac{\sin(k\arccos x)}{\sqrt{1-x^2}}=\frac{\sin(kt)}{\sin t}.\]</div>
+  <h4>2 · Frequencies one and two</h4>
+  <div class="lesson-formula">\[\begin{aligned}
+  U_0(x)&=\frac{\sin t}{\sin t}=\boxed{1},\\
+  U_1(x)&=\frac{2\sin t\cos t}{\sin t}=\boxed{2x}.
+  \end{aligned}\]</div>
+  <h4>3 · Frequency three</h4>
+  <p>Expand \(\sin(2t+t)\) and factor out the denominator \(\sin t\).</p>
+  <div class="lesson-formula">\[\begin{aligned}
+  \sin(3t)&=\sin(2t)\cos t+\cos(2t)\sin t\\
+  &=2\sin t\cos^2t+(2\cos^2t-1)\sin t\\
+  &=\sin t(4\cos^2t-1),\\
+  U_2(x)&=\boxed{4x^2-1}.
+  \end{aligned}\]</div>
+  <h4>4 · Frequency four</h4>
+  <div class="lesson-formula">\[\begin{aligned}
+  \sin(4t)&=2\sin(2t)\cos(2t)\\
+  &=4\sin t\cos t(2\cos^2t-1),\\
+  U_3(x)&=\boxed{8x^3-4x}.
+  \end{aligned}\]</div>
+  <h4>5 · Read the degree from the recurrence</h4>
+  <p>Add the sine formulas for \((k+1)t\) and \((k-1)t\), then divide by \(\sin t\).</p>
+  <div class="lesson-formula">\[\begin{aligned}
+  \sin((k+1)t)+\sin((k-1)t)&=2\cos t\sin(kt),\\
+  U_k(x)&=2xU_{k-1}(x)-U_{k-2}(x)\quad(k\ge2).
+  \end{aligned}\]</div>
+  <p>For example, \(2x(2x)-1=4x^2-1\), then \(2x(4x^2-1)-2x=8x^3-4x\). At each step the first term raises the degree by one and the second has lower degree. Thus \(\deg U_{k-1}=k-1\). The polynomials extend to both endpoints by continuity.</p>
+  <h4>6 · Apply the degree filter</h4>
+  <p>In the coefficient integral use \(\sin(kt)=U_{k-1}(x)\sin t\) and \(dx=-\sin t\,dt\). Reversing the limits gives</p>
+  <div class="lesson-formula">\[\sigma_{n,k}=\int_{-1}^1P_n(x)U_{k-1}(x)\,dx.\]</div>
+  <p>When \(1\le k\le n\), the degree \(k-1\) is below \(n\). Orthogonality of \(P_n\) makes this integral zero. This removes the powers \(z^{-1},\ldots,z^{-n}\) from the exterior Laurent expansion.</p>
+</template>
+
+<template id="explain-kernel-tail"><h3>A geometric envelope for the unseen arrows</h3><p>After retaining \(L\) terms, the first omitted index is \(n+1+2L\). Replace each remaining coefficient by its upper bound two and add the resulting geometric series:</p><div class="lesson-formula">\[\sum_{q=L}^{\infty}2\varrho^{-(n+1+2q)}=\frac{2\varrho^{-(n+1+2L)}}{1-\varrho^{-2}}.\]</div><p>This bounds every possible direction of the omitted arrows, so it holds for every angle. Increasing \(L\) reduces the analytic bound by the factor \(\varrho^{-2}\). It may be much larger than the actual error because it discards coefficient sizes and directional cancellation.</p><p>The bound controls truncation. A separate rounding analysis would be needed for a numerical certificate.</p></template>
+</body>
+</html>
