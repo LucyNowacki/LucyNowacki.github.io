@@ -1,0 +1,120 @@
+.laurent-correspondence {
+  --lc-border: #674977;
+  --lc-soft: #d1c2df;
+  --lc-surface: #21152d;
+  min-width: 0;
+  color: #fff8ff;
+  container-type: inline-size;
+}
+.laurent-correspondence h3 { margin: 0 0 .25rem; font-size: clamp(1.12rem, 2vw, 1.45rem); }
+.laurent-correspondence .lc-intro, .laurent-correspondence .lc-note { color: var(--lc-soft); max-width: none; }
+.laurent-correspondence .lc-intro { margin: 0 0 .95rem; }
+.laurent-correspondence .lc-expansion {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .4rem;
+  margin: 0 0 .8rem; line-height: 1.25;
+}
+.laurent-correspondence button[data-pick] {
+  background: var(--lc-surface); color: var(--ink); border: 1px solid var(--lc-border);
+  border-radius: .45rem; font: inherit; cursor: pointer;
+}
+.laurent-correspondence button[data-pick]:hover,
+.laurent-correspondence button[data-pick][aria-pressed="true"] {
+  border-color: var(--ink); color: var(--ink); background: #302038;
+}
+.laurent-correspondence button[data-pick][aria-pressed="true"] { box-shadow: inset 0 -3px var(--ink); }
+.laurent-correspondence :focus-visible { outline: 2px solid #fff8ff; outline-offset: 2px; }
+.laurent-correspondence .lc-left { margin-inline-end: .2rem; font-size: 1.14em; }
+.laurent-correspondence .lc-plus { color: var(--lc-soft); }
+.laurent-correspondence .lc-expansion button {
+  display: inline-flex; align-items: center; gap: .35em; padding: .48rem .55rem;
+  min-height: 2.6rem; font-size: 1.05rem;
+}
+.laurent-correspondence .lc-index { border-inline-end: 1px solid var(--lc-border); padding-inline-end: .35em; font-size: .82em; }
+.laurent-correspondence .lc-plots { display: grid; grid-template-columns: 1fr 1.13fr; gap: .75rem; align-items: stretch; }
+.laurent-correspondence .lc-card {
+  min-width: 0; display: flex; flex-direction: column; align-items: stretch; margin: 0;
+  padding: .75rem; background: #1b1226; border: 1px solid var(--lc-border); border-radius: .6rem;
+}
+.laurent-correspondence .lc-card figcaption {
+  display: flex; align-items: baseline; justify-content: space-between; gap: .3rem .5rem; flex-wrap: wrap;
+  margin: 0 0 .5rem; color: #fff8ff; font-size: .98rem; font-weight: 650;
+}
+.laurent-correspondence .lc-card figcaption span { color: var(--lc-soft); font-size: .88em; font-weight: 400; }
+.laurent-correspondence .lc-columns { text-align: center; font-size: .8rem; color: var(--lc-soft); }
+.laurent-correspondence .lc-matrix-scroll { overflow-x: auto; scrollbar-width: thin; }
+.laurent-correspondence .lc-matrix { display: grid; align-items: stretch; grid-template-columns: 1.85rem repeat(var(--size),minmax(1.65rem,1fr)); gap: .2rem; padding: .2rem; }
+.laurent-correspondence .lc-matrix > * { display: flex; align-items: center; justify-content: center; }
+.laurent-correspondence .lc-matrix button { padding: .18rem; min-height: 2.45rem; flex-wrap: wrap; gap: .22rem; }
+.laurent-correspondence .lc-cell-weight { font-size: 1em; }
+.laurent-correspondence .lc-cell-index { font-size: .76em; }
+.laurent-correspondence .lc-cell-weight + .lc-cell-index { margin-inline-start: .15rem; padding-inline-start: .3rem; border-inline-start: 1px solid var(--lc-border); }
+.laurent-correspondence .lc-axis { color: #eadced; font-size: .8rem; font-variant-numeric: tabular-nums; }
+.laurent-correspondence .lc-other { color: #af9dbb; background: #251a30; border-radius: .25rem; font-size: .79rem; }
+.laurent-correspondence .lc-dense { gap: 1px; }
+.laurent-correspondence .lc-dense button { min-height: 1.76rem; font-size: .76rem; }
+.laurent-correspondence .lc-chain { display: block; width: 100%; max-height: 18rem; margin: auto; aspect-ratio: 340/222; overflow: visible; }
+.laurent-correspondence .lc-chain text { fill: var(--lc-soft); font: 12px system-ui,sans-serif; }
+.laurent-correspondence .lc-chain [role="button"] { cursor: pointer; }
+.laurent-correspondence .lc-note { margin: auto 0 0; padding-top: .45rem; font-size: .85rem; line-height: 1.4; }
+.laurent-correspondence .lc-gold-line { display:inline-block; width:1.35em; border-top:2px solid #ffd77c; margin: 0 .3em .22em 0; }
+.laurent-correspondence .lc-readout {
+  display: flex; align-items: center; justify-content: space-between; gap: .7rem; flex-wrap: wrap;
+  margin-top: .75rem; padding: .65rem .85rem; border-inline-start: 3px solid var(--lc-active);
+  border-radius: .2rem; background: var(--lc-surface);
+}
+.laurent-correspondence .lc-selection { display: block; color: var(--lc-active); font-size: .98rem; }
+.laurent-correspondence .lc-detail-math { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; align-items: center; margin-top: .3rem; }
+.laurent-correspondence .lc-detail-math > span { max-width: 100%; overflow-x: auto; padding-block: .15rem; }
+.laurent-correspondence .lc-values { margin: .25rem 0 0; color: var(--lc-soft); font-size: .87rem; font-variant-numeric: tabular-nums; }
+.laurent-correspondence .lc-direction { display: grid; justify-items: center; min-width: 5.3rem; font-size: .74rem; color: var(--lc-soft); }
+.laurent-correspondence .lc-direction svg { width: 5.3rem; height: 4.1rem; }
+.laurent-correspondence [hidden] { display: none; }
+.laurent-correspondence mjx-container { pointer-events: none; }
+.film-correspondence { grid-column: 1/-1; margin: 1.3rem 0 0; padding-block-start: 1.15rem; border-top: 1px solid #674977; }
+.film-correspondence .lc-film-guidance { margin: -.35rem 0 .8rem; padding: 0; }
+.ll-correspondence-slot { margin: 1.15rem 0; }
+@container (max-width: 550px) {
+  .laurent-correspondence .lc-plots { grid-template-columns: minmax(0,1fr); }
+  .laurent-correspondence .lc-chain { max-height: 15.5rem; }
+  .laurent-correspondence .lc-expansion { gap: .2rem; }
+  .laurent-correspondence .lc-expansion button { padding: .3rem .38rem; }
+}
+
+.laurent-correspondence .lc-tip-view {
+  margin-top: 1rem; padding: clamp(.8rem, 2vw, 1.25rem);
+  border: 1px solid var(--lc-border); border-radius: .65rem; background: #21152d;
+  scroll-margin-top: 1rem;
+}
+.lc-tip-view h4 { margin: 0 0 .65rem; color: #fff8ff; font-size: 1.2rem; }
+.lc-view-tabs, .lc-series-controls, .lc-tip-key {
+  display: flex; align-items: center; flex-wrap: wrap; gap: .5rem .85rem;
+}
+.lc-tip-view button {
+  color: #f8e8fa; background: #2b1c37; padding: .45rem .72rem; border: 1px solid #8e709f;
+  border-radius: .4rem; font: inherit; cursor: pointer;
+}
+.lc-tip-view button[aria-pressed="true"] { color: #fff5fc; background: #502849; border-color: #ffbdea; box-shadow: inset 0 -2px #ffbdea; }
+.lc-tip-view p { color: #dccfe4; font-size: .92rem; line-height: 1.5; }
+.lc-series-intro p:first-child { overflow-x: auto; color: #fff8ff; padding: .35rem 0; margin-bottom: 0; }
+.lc-series-intro p + p { margin-top: .3rem; }
+.lc-series-controls { margin-block: .75rem; }
+.lc-series-controls label { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; color: #fff8ff; }
+.lc-series-controls input { width: min(13rem, 100%); accent-color: #ffbdea; cursor: pointer; margin: 0; }
+.lc-series-controls output, .lc-mag, .lc-converge { font-variant-numeric: tabular-nums; }
+.lc-series-controls output { min-width: 3.6em; text-align: right; color: #ffd0ed; }
+.lc-tip-plots { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .65rem; }
+.lc-tip-plots figure { margin: 0; min-width: 0; padding: .65rem; border: 1px solid #60476f; border-radius: .45rem; background: #1a1124; }
+.lc-tip-plots figcaption { display: flex; justify-content: space-between; font: 600 .92rem/1.4 system-ui,sans-serif; color: #f9eefa; }
+.lc-tip-plots .lc-mag { color: #ffd0ed; }
+.lc-tip-plots svg { display: block; width: 100%; max-height: 14rem; overflow: hidden; }
+.lc-tip-key { margin: .5rem 0 0; gap: .28rem; }
+.lc-ring-key { color: #fff8ff; font-size: 1.15rem; }
+.lc-limit-key, .lc-scope { margin-left: .7rem; }
+.lc-limit-key b { color: #ffd77c; font-size: 1.2rem; }
+.lc-converge { margin: .3rem 0 0; }
+@container (max-width: 540px) {
+  .lc-tip-plots { grid-template-columns: minmax(0,1fr); }
+  .lc-series-controls label { width: 100%; }
+  .lc-series-controls input { flex: 1; min-width: 6rem; }
+}
+.lc-tip-view .lc-film-zoom { margin-top: .7rem; font-size: .88rem; }

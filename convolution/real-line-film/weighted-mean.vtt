@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00:00.280 --> 00:00:02.036
+Give each phase point a mass.
+
+00:00:02.036 --> 00:00:04.762
+Their balance point gives the height of the graph.
+
+00:00:05.092 --> 00:00:07.018
+Degree two has three phases.
+
+00:00:07.018 --> 00:00:10.830
+Their angles are twice t, zero, and minus twice t.
+
+00:00:11.160 --> 00:00:12.640
+The weights add to one.
+
+00:00:12.640 --> 00:00:17.007
+Three eighths, one quarter, and three eighths are all positive.
+
+00:00:17.337 --> 00:00:19.024
+Set t to sixty degrees.
+
+00:00:19.024 --> 00:00:21.415
+The three phase points form a triangle.
+
+00:00:21.415 --> 00:00:23.634
+Their weighted mean is its balance point.
+
+00:00:23.964 --> 00:00:26.206
+The two mirror points have equal mass.
+
+00:00:26.206 --> 00:00:30.814
+Their imaginary parts cancel, so the balance point sits on the real axis.
+
+00:00:31.144 --> 00:00:32.590
+Read the balance point.
+
+00:00:32.590 --> 00:00:36.692
+At x equal to one half, P two takes the value minus one eighth.
+

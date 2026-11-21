@@ -1,0 +1,62 @@
+WEBVTT
+
+00:00:00.230 --> 00:00:07.265
+Fix the circle radius. Omega is the point on the boundary of the ellipse where we evaluate the polynomial.
+
+00:00:07.545 --> 00:00:15.078
+In the generating function, s is a separate variable. Its exponent tells us which Legendre polynomial to read.
+
+00:00:15.358 --> 00:00:25.286
+Look beside s squared. Its coefficient is P two of omega. Move the point along the ellipse and that value changes, while the power of s stays two.
+
+00:00:26.230 --> 00:00:30.338
+The auxiliary variable s keeps track of the Legendre degree.
+
+00:00:30.618 --> 00:00:39.313
+Choose s to the power p from the first factor, and s to the power q from the second. Their product is s to the power p plus q.
+
+00:00:39.593 --> 00:00:46.502
+For example, s squared times s gives s cubed, so this pair contributes to degree three.
+
+00:00:46.782 --> 00:00:52.593
+Its power of z is p minus q. Here, two minus one equals one.
+
+00:00:53.230 --> 00:00:56.892
+Which products contribute to a single Legendre degree?
+
+00:00:57.172 --> 00:01:02.118
+Keep only the pairs whose two powers of the series variable add to that degree.
+
+00:01:02.700 --> 00:01:04.884
+To find P three at that midpoint,
+
+00:01:05.024 --> 00:01:08.356
+take the coefficient of s cubed in the generating function.
+
+00:01:08.666 --> 00:01:11.651
+Choose degree p from the first binomial factor
+
+00:01:11.791 --> 00:01:13.902
+and degree q from the second.
+
+00:01:14.212 --> 00:01:16.973
+We need p plus q to equal three.
+
+00:01:17.730 --> 00:01:25.060
+In this product array, p plus q selects the Legendre degree, and p minus q selects the power of z.
+
+00:01:25.340 --> 00:01:32.214
+At p equals three and q equals zero, five sixteenths times z cubed gives the blue arrow.
+
+00:01:32.494 --> 00:01:38.880
+At p equals two and q equals one, three sixteenths times z gives the mint arrow.
+
+00:01:39.160 --> 00:01:45.994
+At p equals one and q equals two, three sixteenths times z inverse gives the violet arrow.
+
+00:01:46.274 --> 00:01:54.776
+At p equals zero and q equals three, five sixteenths times z to the power minus three gives the orchid arrow.
+
+00:01:55.056 --> 00:02:01.376
+The gold arrow runs from the origin to the final tip and shows their sum, P three at J of z.
+

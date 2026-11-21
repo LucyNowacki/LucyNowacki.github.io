@@ -1,0 +1,47 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.172
+Now recover a coefficient.
+
+00:00:02.172 --> 00:00:06.630
+A Legendre coefficient combines values from the whole real interval.
+
+00:00:06.630 --> 00:00:12.518
+For degree two, multiply x squared by P two of x and integrate from minus one to one.
+
+00:00:12.818 --> 00:00:14.495
+Include the normalization.
+
+00:00:14.495 --> 00:00:18.910
+The classical Legendre polynomial equals one at the right endpoint.
+
+00:00:18.910 --> 00:00:22.899
+Its coefficient formula carries a factor of n plus one half.
+
+00:00:22.899 --> 00:00:25.459
+For degree two, that factor is five halves.
+
+00:00:25.759 --> 00:00:27.350
+Keep the sign of the weight.
+
+00:00:27.350 --> 00:00:31.126
+P two is one half of the quantity three x squared minus one.
+
+00:00:31.126 --> 00:00:34.901
+Its zeros are plus and minus one over the square root of three.
+
+00:00:34.901 --> 00:00:39.979
+The product is negative between them except at zero, and positive toward both ends.
+
+00:00:40.279 --> 00:00:41.764
+Add the signed areas.
+
+00:00:41.764 --> 00:00:45.518
+Integrating x squared times P two gives four fifteenths.
+
+00:00:45.518 --> 00:00:49.421
+Multiply by five halves and the coefficient is two thirds.
+
+00:00:49.421 --> 00:00:52.493
+This is the number we will now recover from the ellipse.
+

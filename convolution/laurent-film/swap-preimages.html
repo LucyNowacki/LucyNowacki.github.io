@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Swap the preimages · Narrated Laurent lesson</title>
+  <link rel="stylesheet" href="film.css?v=12695968db4b">
+  
+  <script defer src="player.js?v=9e60855b7308"></script>
+</head>
+<body class="film-page">
+  <main class="film-layout">
+    <header class="film-heading">
+      <a href="../joukowski/index.html#ll-step-3">← Laurent expansion lesson</a>
+      <h1>Swap the preimages</h1>
+    </header>
+    <section class="film-screen" aria-label="Narrated animation">
+      <div class="film-stage">
+        <video id="film" width="1920" height="1080" controls playsinline preload="none"
+               poster="swap-preimages-poster.jpg?v=132abf61418c" aria-label="Swap the preimages with English narration">
+          <source src="swap-preimages.webm?v=649e65366c10" type='video/webm; codecs="vp9, opus"'>
+          <source src="swap-preimages.mp4?v=cbc1892bdc2e" type="video/mp4">
+          <track kind="captions" srclang="en" label="English" src="swap-preimages.vtt?v=48e02e4fb60b">
+        </video>
+        <button class="film-cover" id="film-cover" aria-label="Play Swap the preimages with narration" hidden>
+          <img src="swap-preimages-poster.jpg?v=132abf61418c" width="1280" height="720" alt="">
+          <span class="film-cover-action"><span aria-hidden="true">▶</span> Play with narration</span>
+        </button>
+      </div>
+      <div class="film-tools">
+        <button id="film-toggle" type="button" aria-controls="film" hidden>Play film</button>
+        
+        <span class="film-duration">0:19</span>
+        <a href="swap-preimages.mp4?v=cbc1892bdc2e" download>Download MP4</a>
+      </div>
+      <p class="film-status" role="status" id="film-status"></p>
+    </section>
+    <nav class="film-chapters" aria-label="Laurent films">
+      <h2>Watch by step</h2>
+      <a href="index.html"><span>Full lesson</span><small>6:41</small></a>
+<a href="circle-to-ellipse.html"><span>1. Circle to ellipse</span><small>1:16</small></a>
+<a href="extract-one-degree.html"><span>2. Extract one degree</span><small>2:02</small></a>
+<a href="finite-packet.html"><span>3. Read the finite packet</span><small>2:00</small></a>
+<a href="swap-preimages.html" aria-current="page"><span>4. Swap the preimages</span><small>0:19</small></a>
+    </nav>
+    <details class="film-script" id="opening-script">
+      <summary>Read the introduction script</summary>
+      <h3>How the two binomial factors give the Laurent weights</h3><p>Here is our destination. Choose the Legendre degree n. The index j runs from zero to n and selects one term. Fix the radius rho. J sends the complex circle point z to omega on the ellipse boundary. Each term has coefficient alpha sub n comma j and exponent n minus twice j. Where does that coefficient come from? The variable s counts degree in the Legendre generating function. At omega equals J of z, it splits into two inverse square roots. Expand each factor using the binomial series. The first coefficients are one, one half, three eighths, and five sixteenths. Why these numbers? The binomial rule gives the product of the first ell odd numbers, divided by two to the power ell times ell factorial. Multiply top and bottom by the missing even factors. This gives the central binomial coefficient divided by four to the power ell. For ell equal to two, this gives three eighths. For s to the power n, choose degree n minus j from the first factor and j from the second. Multiply their coefficients. The powers of z subtract to give n minus twice j. At degree three, choose j equal to one. Three eighths times one half gives three sixteenths. The term is three sixteenths times z. Once n is fixed, write this coefficient as the weight w sub j. It is the same number. This gives the weighted sum of rotating powers.</p><h3>From a circle point to a Fourier mode</h3><p>Take a complex point z on a circle of radius rho, at angle theta. The Joukowski map sends z to omega on the ellipse. The pullback expresses P sub n at omega as a function of the original circle angle. In the cubic term, five sixteenths is the Laurent coefficient, and three is the exponent. At fixed radius, z cubed is rho cubed times the Fourier mode, e to the power three i theta. So the Fourier coefficient is five sixteenths times rho cubed, and the mode makes three turns per circuit.</p><h3>Omega and s in one generating function</h3><p>Fix the circle radius. Omega is the point on the boundary of the ellipse where we evaluate the polynomial. In the generating function, s is a separate variable. Its exponent tells us which Legendre polynomial to read. Look beside s squared. Its coefficient is P two of omega. Move the point along the ellipse and that value changes, while the power of s stays two.</p><h3>What the variable s counts</h3><p>The auxiliary variable s keeps track of the Legendre degree. Choose s to the power p from the first factor, and s to the power q from the second. Their product is s to the power p plus q. For example, s squared times s gives s cubed, so this pair contributes to degree three. Its power of z is p minus q. Here, two minus one equals one.</p>
+      <a href="opening-script.txt?v=9b303d012a73" download>Download the spoken text</a>
+    </details>
+    
+  </main>
+</body>
+</html>

@@ -1,0 +1,239 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.492
+The Hardy norm measures a full turn.
+
+00:00:02.492 --> 00:00:05.990
+At one ellipse point, add the four complex arrows first.
+
+00:00:05.990 --> 00:00:09.808
+The squared length of their resultant is the energy at that angle.
+
+00:00:09.808 --> 00:00:12.900
+Move around the ellipse and watch that energy change.
+
+00:00:12.900 --> 00:00:15.545
+The colour follows the height of the energy curve.
+
+00:00:15.545 --> 00:00:18.318
+Average those squared values over the full turn.
+
+00:00:18.318 --> 00:00:20.878
+The square root of that mean is the Hardy norm.
+
+00:00:21.178 --> 00:00:23.260
+Give equal angles equal weight.
+
+00:00:23.260 --> 00:00:28.785
+Divide the circle into equal angle steps, and mark the corresponding cells on the ellipse.
+
+00:00:28.785 --> 00:00:30.427
+Their arc lengths can differ.
+
+00:00:30.427 --> 00:00:32.112
+Read the energy in each cell.
+
+00:00:32.112 --> 00:00:37.828
+Its sample height times the angle step gives the area of a rectangle on the angular plot.
+
+00:00:37.828 --> 00:00:41.860
+As the steps get finer, the rectangle sum approaches the integral.
+
+00:00:41.860 --> 00:00:44.953
+Dividing by two pi gives the mean squared size.
+
+00:00:45.253 --> 00:00:47.122
+Watch a cross term rotate.
+
+00:00:47.122 --> 00:00:51.154
+Multiply the sum of the four modes by its complex conjugate.
+
+00:00:51.154 --> 00:00:54.822
+The grid shows each mode paired with each conjugate mode.
+
+00:00:54.822 --> 00:00:59.899
+A diagonal pair has frequency difference zero, so its contribution stays fixed.
+
+00:00:59.899 --> 00:01:03.696
+An off-diagonal pair has a nonzero integer difference.
+
+00:01:03.696 --> 00:01:10.394
+Its phase completes full turns as theta runs from zero to two pi, and its angular average is zero.
+
+00:01:10.694 --> 00:01:12.457
+Only squared lengths survive.
+
+00:01:12.457 --> 00:01:16.808
+After averaging the full grid, only four diagonal entries remain.
+
+00:01:16.808 --> 00:01:18.898
+Each is the square of one arrow length.
+
+00:01:18.898 --> 00:01:20.839
+This is Parseval's identity.
+
+00:01:20.839 --> 00:01:27.131
+Add the squares of five halves, three eighths, three over thirty-two, and five over one hundred twenty-eight.
+
+00:01:27.131 --> 00:01:31.398
+The exact mean squared size is about six point four zero one.
+
+00:01:31.398 --> 00:01:35.366
+Taking the square root gives a Hardy norm of about two point five three.
+
+00:01:35.666 --> 00:01:38.047
+Square the reciprocal radial factors.
+
+00:01:38.047 --> 00:01:42.995
+For the cubic pair, eight and one eighth become sixty-four and one over sixty-four.
+
+00:01:42.995 --> 00:01:46.643
+Multiply each by the square of its weight to get its energy.
+
+00:01:46.643 --> 00:01:49.159
+The doubled exponents belong to the radius.
+
+00:01:49.159 --> 00:01:52.295
+The original boundary waves still have three crests each.
+
+00:01:52.595 --> 00:01:54.486
+Drop one factor of each weight.
+
+00:01:54.486 --> 00:02:00.800
+Each colour starts with its exact Fourier energy, the squared weight times the doubled radial power.
+
+00:02:00.800 --> 00:02:02.719
+Keep its radial factor fixed.
+
+00:02:02.719 --> 00:02:05.214
+Replace the squared weight by the weight itself.
+
+00:02:05.214 --> 00:02:09.502
+Every weight lies between zero and one, so each bar can only grow.
+
+00:02:09.502 --> 00:02:17.993
+For example, the positive cubic term keeps its radial energy factor sixty-four while five sixteenths squared becomes five sixteenths.
+
+00:02:18.293 --> 00:02:19.863
+Pair the doubled powers.
+
+00:02:19.863 --> 00:02:22.209
+Read these bars on one energy scale.
+
+00:02:22.209 --> 00:02:26.027
+The exact squared norm is about six point four zero one.
+
+00:02:26.027 --> 00:02:31.061
+After dropping one weight from each term, the sum is about twenty point eight zero two.
+
+00:02:31.061 --> 00:02:35.839
+Pair the reciprocal radial factors with twice the logarithmic radius.
+
+00:02:35.839 --> 00:02:38.057
+Pairing keeps that intermediate total.
+
+00:02:38.057 --> 00:02:45.779
+Replacing all frequency magnitudes by the extreme gives the squared ceiling, about thirty-two point zero zero eight.
+
+00:02:45.779 --> 00:02:47.357
+Now take square roots.
+
+00:02:47.357 --> 00:02:53.096
+The Hardy norm is about two point five three, and its upper bound is about five point six five eight.
+
+00:02:53.396 --> 00:02:54.966
+Check the constant mode.
+
+00:02:54.966 --> 00:02:58.486
+At degree zero there is just one phase and it stays fixed.
+
+00:02:58.486 --> 00:03:02.858
+The output is always one, so the energy profile is flat at height one.
+
+00:03:02.858 --> 00:03:05.780
+Every equal-angle cell has the same energy.
+
+00:03:05.780 --> 00:03:08.916
+Its mean, its square root and both bounds are all one.
+
+00:03:08.916 --> 00:03:13.160
+As the radius tends to one, the ellipse collapses to the real interval.
+
+00:03:13.160 --> 00:03:16.510
+This is the limiting picture of the angular construction.
+
+00:03:16.810 --> 00:03:19.404
+Orthonormal scaling changes the size.
+
+00:03:19.404 --> 00:03:23.436
+For the real-line orthonormal mode, start with two n plus one.
+
+00:03:23.436 --> 00:03:25.824
+Divide by two and take the square root.
+
+00:03:25.824 --> 00:03:29.984
+Multiply the polynomial and both norm bounds by that factor.
+
+00:03:29.984 --> 00:03:31.626
+Squared energies take its square.
+
+00:03:31.926 --> 00:03:33.774
+Compare the two cubic graphs.
+
+00:03:33.774 --> 00:03:38.765
+At each angle, evaluate both polynomials at the same point on the same ellipse.
+
+00:03:38.765 --> 00:03:41.751
+The graphs show the real parts of those two values.
+
+00:03:41.751 --> 00:03:46.060
+For degree three, the scaling factor is the square root of seven halves.
+
+00:03:46.060 --> 00:03:51.243
+The heights are multiplied by that factor, and their zero crossings stay at the same angles.
+
+00:03:51.243 --> 00:03:55.958
+The full complex value and both of its norm bounds scale by the same factor.
+
+00:03:56.258 --> 00:03:57.850
+Return to the real line.
+
+00:03:57.850 --> 00:04:04.825
+Here x runs from minus one to one along the horizontal axis of an ordinary polynomial graph.
+
+00:04:04.825 --> 00:04:09.539
+In the previous plot, the horizontal coordinate was the angle around the ellipse.
+
+00:04:09.539 --> 00:04:11.629
+P zero is the constant one.
+
+00:04:11.629 --> 00:04:14.658
+Its graph stays at the same height across the interval.
+
+00:04:14.658 --> 00:04:16.151
+P one equals x.
+
+00:04:16.151 --> 00:04:19.201
+It rises along the diagonal through the origin.
+
+00:04:19.201 --> 00:04:20.971
+P two is the quadratic.
+
+00:04:20.971 --> 00:04:25.450
+Its graph dips to minus one half at the centre and reaches one at both ends.
+
+00:04:25.450 --> 00:04:27.028
+P three is the cubic.
+
+00:04:27.028 --> 00:04:32.105
+It crosses the horizontal axis three times and has two interior turning points.
+
+00:04:32.105 --> 00:04:35.027
+Compare P three with its orthonormal version.
+
+00:04:35.027 --> 00:04:39.016
+Multiply the height at each x by the square root of seven halves.
+
+00:04:39.016 --> 00:04:45.800
+The zeros and turning points keep their horizontal positions, while the extreme heights are scaled by that same factor.
+

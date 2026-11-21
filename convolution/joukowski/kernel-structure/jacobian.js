@@ -69,7 +69,7 @@
         The next is \(\tfrac12(\tfrac{128}{315}-\tfrac{32}{35})=-\tfrac{16}{63}\).</p>
     </section>
     <section class="kw-card hp-lab" id="hardy-pair-lab" data-jac-panel="pairs" hidden>
-      <div class="hp-title"><h3>Build the Hardy integral on the ellipse</h3><button type="button" data-hp-example>Try the seven-mode example</button></div>
+      <div class="hp-title"><h3>Build the Hardy integral on the ellipse</h3><button type="button" id="kf-film-neighbour">Film example · pair (4, 6)</button><button type="button" data-hp-example>Try the seven-mode example</button></div>
       <p class="math-static">Each square multiplies one mode of \(Q_{n,L}\) by one conjugate mode and the squared boundary speed \(W=|\Gamma'_\varrho|^2\). Select a square to follow its contribution around the ellipse and into the sum below.</p>
       <div class="hp-equation math-static" aria-label="Hardy integral of the retained kernel">
         <span>\(\displaystyle I_L=\frac{1}{2\pi}\int_0^{2\pi}|Q_{n,L}(\theta)|^2 W(\theta)\,d\theta\)</span><span>\(=\)</span>
@@ -449,7 +449,14 @@
     selectPair(row,col);
     pairs.rows[row+1].cells[col+1].firstElementChild.focus({preventScroll:true});
   });
+  function filmPair(){
+    mode='pairs';difference=2;averaging='mean';
+    send({n:3,rho:1.5,L:3,theta:30,q:0});
+  }
+  host.querySelector('#kf-film-neighbour').addEventListener('click',filmPair);
+  window.addEventListener('DOMContentLoaded',()=>{if(location.hash==='#kf-film-neighbour')filmPair();},{once:true});
   window.addEventListener('hashchange',()=>{
+    if(location.hash==='#kf-film-neighbour')filmPair();
     if (location.hash==='#hardy-pair-lab') {mode='pairs';render();}
   });
   host.querySelectorAll('[data-jac-angle]').forEach(el=>el.addEventListener('input',()=>send({theta:Number(el.value)})));

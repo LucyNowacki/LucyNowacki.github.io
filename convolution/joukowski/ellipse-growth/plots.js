@@ -7,11 +7,11 @@
  */
 (() => {
   'use strict';
-  const PALETTE = ['#5bd9ee', '#ffa66e', '#d4a6ff', '#b6e77c', '#ff8fba',
+  const PALETTE = ['#6BE5FA', '#7EF4C2', '#BA94FF', '#EB47BC', '#ff8fba',
     '#8db6ff', '#f3d46e', '#72e1bc', '#eea1f0', '#ffb7a1', '#c5d68c',
     '#9edee8', '#bfb6ff'];
   const C = { text: '#ece4f5', muted: '#c2afd2', grid: '#574164',
-    sum: '#fff7df', length: '#bce883', ceiling: '#d6abff', gold: '#ffd66c' };
+    sum: '#EDC16D', length: '#bce883', ceiling: '#d6abff', gold: '#ffd66c' };
   const NS = 'http://www.w3.org/2000/svg';
   let serial = 0;
   const ids = new WeakMap();
@@ -67,7 +67,7 @@
   function arrow(x, y, xx, yy, colour, width = 2.5, attrs = '') {
     const dx = xx - x, dy = yy - y, length = Math.hypot(dx, dy);
     if (length < .02) return dot(xx, yy, width, colour, attrs);
-    const ux = dx / length, uy = dy / length, head = Math.min(9, Math.max(3, length * .36));
+    const ux = dx / length, uy = dy / length, head = Math.min(10, length * .36);
     const hx = xx - head * ux, hy = yy - head * uy;
     return `<g ${attrs}>${line(x,y,xx,yy,`stroke="${colour}" stroke-width="${width}" stroke-linecap="round"`)}<path d="M${xx},${yy} L${hx - head*.43*uy},${hy + head*.43*ux} L${hx + head*.43*uy},${hy - head*.43*ux} Z" fill="${colour}"/></g>`;
   }
@@ -97,7 +97,7 @@
     const zoom = Math.max(1,Math.min(5,Number(state.zoom)||1));
     const selected = Math.max(0,Math.min(packet.terms.length-1,Math.trunc(state.j)||0));
     const F = frame(svg,'vectors',packet,state,'Legendre terms as coloured arrows added head to tail',
-      `${packet.terms.length} arrows sum to the polynomial value. Term ${selected} is highlighted. The white resultant has length ${fmt(packet.magnitude)}, the green circle has radius S ${fmt(packet.S)}, and the purple ceiling has radius B ${fmt(packet.B)}. Zoom ${zoom} uses equal real and imaginary scales. Parts outside the frame are clipped.` ,420);
+      `${packet.terms.length} arrows sum to the polynomial value. Term ${selected} is highlighted. The gold resultant has length ${fmt(packet.magnitude)}, the green circle has radius S ${fmt(packet.S)}, and the purple ceiling has radius B ${fmt(packet.B)}. Zoom ${zoom} uses equal real and imaginary scales. Parts outside the frame are clipped.` ,420);
     // Fitting to the sum of lengths keeps the actual packet legible even when
     // the coarser bound B is much larger. Zoom changes the view, never values.
     const radius = Math.max(packet.S,Number.MIN_VALUE)*1.15;
@@ -105,6 +105,7 @@
     let body = P.defs + P.axes + `<g clip-path="url(#${P.clip})">`;
     body += `<circle data-role="coarse-circle" cx="${P.cx}" cy="${P.cy}" r="${packet.B*P.scale}" fill="none" stroke="${C.ceiling}" stroke-width="1.5" stroke-dasharray="2 6" opacity=".8"/>`;
     body += `<circle data-role="length-circle" cx="${P.cx}" cy="${P.cy}" r="${packet.S*P.scale}" fill="none" stroke="${C.length}" stroke-width="1.6" stroke-dasharray="6 5" opacity=".85"/>`;
+    body += arrow(P.cx,P.cy,P.X(packet.sum.re),P.Y(packet.sum.im),C.sum,1.8,'data-role="resultant" opacity=".9"');
     const starts = []; let re=0,im=0;
     for(const term of packet.terms){
       starts.push({re,im}); const next={re:re+term.re,im:im+term.im};
@@ -112,7 +113,6 @@
         `data-role="term-vector" data-j="${term.j}" data-real="${term.re}" data-imaginary="${term.im}" data-length="${term.length}"`);
       re=next.re;im=next.im;
     }
-    body += arrow(P.cx,P.cy,P.X(packet.sum.re),P.Y(packet.sum.im),C.sum,1.8,'data-role="resultant" opacity=".9"');
     body += dot(P.cx,P.cy,3,C.sum,'data-role="sum-start"');
     body += dot(P.X(packet.sum.re),P.Y(packet.sum.im),5.5,C.sum,'data-role="sum-endpoint" stroke="#261731" stroke-width="2"');
     const term=packet.terms[selected], start=starts[selected];
@@ -128,6 +128,25 @@
     F.draw(body);
     Object.assign(svg.dataset,{scaleX:String(P.scale),scaleY:String(P.scale),zoom:String(zoom),sumReal:String(packet.sum.re),sumImaginary:String(packet.sum.im),magnitude:String(packet.magnitude),lengthSum:String(packet.S),ceiling:String(packet.B),ceilingClipped:String(boundOutside)});
     return {width:F.width,height:F.height,scale:P.scale,ceilingClipped:boundOutside};
+  }
+
+  // Centre the selected displacement independently of its position in the chain.
+  // Use the same pixels per unit in x and y, including for almost vanishing terms.
+  function detail(svg, packet, state, chainScale) {
+    const v = packet.terms[state.j], colour = termColor(v.j);
+    const width = Math.max(160, svg.clientWidth), height = 124;
+    const size = Math.min(width - 42, height - 28);
+    const scale = size / v.length;
+    const dx = v.re * scale / 2, dy = v.im * scale / 2;
+    const cx = width / 2, cy = height / 2;
+    const x0 = cx - dx, y0 = cy + dy, x1 = cx + dx, y1 = cy - dy;
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    svg.setAttribute('aria-label', `Arrow j = ${v.j}. Hollow tail to pointed tip at ${fmt(v.phase * 180 / Math.PI)} degrees, length ${fmt(v.length)}.`);
+    svg.innerHTML = line(10, y0, width - 10, y0, `stroke="${C.grid}" stroke-dasharray="3 5"`)
+      + line(x0, 6, x0, height - 6, `stroke="${C.grid}" stroke-dasharray="3 5"`)
+      + arrow(x0, y0, x1, y1, colour, 4)
+      + dot(x0, y0, 4.5, '#24152e', `stroke="${colour}" stroke-width="2"`);
+    return scale / chainScale;
   }
 
   function hardy(svg, packet, state) {
@@ -164,5 +183,5 @@
     return {width:F.width,height:F.height,samples:samples+1,angularMean:packet.h2Squared};
   }
 
-  window.EllipseGrowthPlots=Object.freeze({termColor,map,vectors,hardy});
+  window.EllipseGrowthPlots=Object.freeze({termColor,map,vectors,detail,hardy});
 })();

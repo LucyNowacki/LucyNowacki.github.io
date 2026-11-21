@@ -1,0 +1,68 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:01.916
+Enclose the missing arrows.
+
+00:00:01.916 --> 00:00:05.499
+Place a disc at the endpoint of the three retained arrows.
+
+00:00:05.499 --> 00:00:07.674
+The next surviving frequency is ten.
+
+00:00:07.674 --> 00:00:15.716
+Replacing each omitted sigma by its upper bound of two leaves a geometric series, beginning at twice rho to the minus ten.
+
+00:00:15.716 --> 00:00:18.809
+Successive terms shrink by rho to the minus two.
+
+00:00:18.809 --> 00:00:20.558
+The sum is the disc radius.
+
+00:00:20.558 --> 00:00:24.313
+Whatever the angle, the full kernel lies inside or on that disc.
+
+00:00:24.613 --> 00:00:26.439
+Magnify the remainder disc.
+
+00:00:26.439 --> 00:00:29.894
+Move the origin of the close-up to the finite endpoint.
+
+00:00:29.894 --> 00:00:31.643
+The axes now show offsets.
+
+00:00:31.643 --> 00:00:35.738
+Compare the disc with an independent evaluation of the full kernel.
+
+00:00:35.738 --> 00:00:39.492
+The coloured displacement is the estimated error at this angle.
+
+00:00:39.492 --> 00:00:41.390
+The radius bounds every angle.
+
+00:00:41.390 --> 00:00:43.395
+Keep six terms instead of three.
+
+00:00:43.395 --> 00:00:49.603
+The next exponent advances by six, and the radius shrinks by a factor of two thirds to the sixth power.
+
+00:00:49.903 --> 00:00:51.538
+Align the arrows at zero.
+
+00:00:51.538 --> 00:00:53.052
+Set theta to zero.
+
+00:00:53.052 --> 00:00:59.664
+Every surviving coefficient is positive and all phases equal one, so all the arrows point to the right.
+
+00:00:59.664 --> 00:01:03.952
+Their summed lengths give the true maximum when the whole series is included.
+
+00:01:03.952 --> 00:01:08.026
+With three retained arrows, the sum of their lengths gives a lower bound.
+
+00:01:08.026 --> 00:01:10.926
+Adding the remainder radius gives an upper bound.
+
+00:01:10.926 --> 00:01:14.041
+Turn theta again and watch the arrows lose alignment.
+

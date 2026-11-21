@@ -21,13 +21,21 @@
         <button type="button" data-kf-case="4">k = 4 · Survival</button>
       </div>
     </div>
-    <div class="kw-grid">
+    <div class="kw-grid kf-area-grid" id="kf-signed-areas">
       <section class="kw-card">
         <h4>Signed area on the half-circle</h4>
         <p>Blue area counts positively and orange area counts negatively. Click the curve’s horizontal range to move the probe.</p>
         <svg class="kw-plot" data-kf-curve width="100%" role="img" aria-label="Signed integrand and its two reflected samples"></svg>
         <p class="kw-readout" data-kf-probes></p>
-        <p data-kf-reflection></p>
+        <p data-kf-reflection></p><p data-kf-t-area class="kw-readout"></p>
+      </section>
+      <section class="kw-card">
+        <h4>The same area on the real interval</h4>
+        <p class="math-static">As \(t\) grows from \(0\) to \(T\), \(x=\cos t\) moves left from \(1\). For \(k\ge1\), the factor \(\sin t\) in \(\sin(kt)=\sin t\,U_{k-1}(x)\) supplies the change in width. Click the interval to move both cursors.</p>
+        <svg class="kw-plot" data-kf-real-curve width="100%" role="img" aria-label="Signed Legendre and Chebyshev product with accumulated area from cos T to one"></svg>
+        <div data-kf-cheb-eq class="lesson-formula math-static">\(\displaystyle \int_0^T P_n(\cos t)\sin(kt)\,dt=\int_{\cos T}^{1}P_n(x)U_{k-1}(x)\,dx.\)</div>
+        <p data-kf-x-area class="kw-readout"></p>
+        <div class="kw-controls"><button type="button" data-kf-sweep>Trace both areas</button><button type="button" data-kf-end>Complete the half-circle</button></div>
       </section>
       <section class="kw-card">
         <h4>Build the coefficient from cosine modes</h4>
@@ -64,7 +72,8 @@
   let k = Number(slider.value);
   let previous = '';
   let pointLayer;
-  let chart;
+  let chart, realChart, realLayer, sweepId=0;
+  const realCurve = $('[data-kf-real-curve]');
 
   function svg(parent, tag, attrs, content) {
     const node = document.createElementNS(ns, tag);
@@ -112,11 +121,6 @@
       return {x: x(t), f: integralSamples(state.n, k, t)};
     });
     const path = transform => samples.map(p => p.x.toFixed(2) + ',' + y(transform(p.f)).toFixed(2)).join(' L');
-    for (const sign of [1, -1]) {
-      const ridge = path(v => sign * Math.max(0, sign * v));
-      svg(curve, 'path', {d: 'M' + left + ',89 L' + ridge + ' L' + right + ',89 Z',
-        fill: sign > 0 ? pos : neg, 'fill-opacity': .45});
-    }
     for (const level of [-1, 0, 1]) {
       line(curve, left, y(level), right, y(level), grid, {'stroke-width': level === 0 ? 1.8 : 1});
       label(curve, left - 5, y(level) + 4, String(level), 'end');
@@ -144,6 +148,85 @@
       '   ○ F(' + fmt(180 - state.t) + '°) ≈ ' + fmt(second);
   }
 
+  function chebyshev(x) {
+    if(k===0)return 0;
+    let before=0,current=1;
+    for(let j=1;j<k;j++) [before,current]=[current,2*x*current-before];
+    return current;
+  }
+  function realDensity(x){return math.legendre(state.n,x)*chebyshev(x);}
+  function drawReal() {
+    const width=dimensions(realCurve,194),left=36,right=width-14,peak=Math.max(1,k);
+    const x=w=>left+(right-left)*(1+w)/2, y=v=>89-68*v/peak;
+    realChart={left,right,x,y};
+    line(realCurve,left,y(0),right,y(0),grid);
+    for(const v of [-peak,0,peak])label(realCurve,left-4,y(v)+4,String(v),'end');
+    for(const v of [-1,0,1])label(realCurve,x(v),183,String(v),'middle');
+    const pts=Array.from({length:501},(_,j)=>{
+      const w=-Math.cos(Math.PI*j/500);return x(w)+','+y(realDensity(w));
+    });
+    svg(realCurve,'polyline',{points:pts.join(' '),fill:'none',stroke:muted,'stroke-width':2});
+    realLayer=svg(realCurve,'g',{});
+  }
+  function showAreas(){
+    const T=state.t*degrees,lower=Math.cos(T);
+    const x=realChart.x,y=realChart.y;
+    const N=Math.max(120,12*(state.n+k));
+    const nodes=Array.from({length:N+1},(_,j)=>Math.cos(T*(1-j/N)));
+    realLayer.replaceChildren();
+    function fillHalf(layer,nodes,value,xx,yy,sign){
+      const path=nodes.map(a=>xx(a)+','+yy(sign*Math.max(0,sign*value(a)))).join(' L');
+      svg(layer,'path',{d:'M'+xx(nodes[0])+','+yy(0)+' L'+path+' L'+xx(nodes.at(-1))+','+yy(0)+' Z',
+        fill:sign===1?pos:neg,'fill-opacity':.65});
+    }
+    const angles=Array.from({length:N+1},(_,j)=>T*j/N);
+    const angleFill=svg(pointLayer,'g',{});pointLayer.prepend(angleFill);
+    for(const sign of [1,-1]){
+      fillHalf(realLayer,nodes,realDensity,x,y,sign);
+      fillHalf(angleFill,angles,a=>integralSamples(state.n,k,a),chart.x,chart.y,sign);
+    }
+    line(realLayer,x(lower),16,x(lower),162,ink,{'stroke-dasharray':'3 3'});
+    svg(realLayer,'circle',{cx:x(lower),cy:y(realDensity(lower)),r:4,fill:ink});
+    const q=math.gaussLegendre(64);
+    function integrate(lo,hi,fn){
+      const mid=(lo+hi)/2,r=(hi-lo)/2;
+      return r*q.nodes.reduce((v,a,i)=>v+q.weights[i]*fn(mid+r*a),0);
+    }
+    const tArea=integrate(0,T,a=>integralSamples(state.n,k,a));
+    const xArea=integrate(lower,1,realDensity);
+    $('[data-kf-cheb-eq]').hidden=k===0;
+    $('[data-kf-t-area]').textContent='Accumulated from 0° to '+state.t+'° ≈ '+fmt(tArea);
+    $('[data-kf-x-area]').textContent=k===0?'k = 0 gives a zero sine wave; the Chebyshev formula starts at k = 1.':
+      'Accumulated from x = '+fmt(lower)+' to 1 ≈ '+fmt(xArea)+' · full coefficient '+fmt(math.sigma(state.n,k));
+  }
+  function endSweep(){
+    cancelAnimationFrame(sweepId);sweepId=0;$('[data-kf-sweep]').textContent='Trace both areas';
+    $('[data-kf-sweep]').setAttribute('aria-pressed','false');
+  }
+  $('[data-kf-end]').addEventListener('click',()=>{endSweep();root.dispatchEvent(new CustomEvent('kernel:set',{detail:{t:180}}));});
+  $('[data-kf-sweep]').addEventListener('click',()=>{
+    if(sweepId){endSweep();return;}
+    const initial=state.t%180,start=performance.now();let previous=-1;
+    $('[data-kf-sweep]').textContent='Pause sweep';$('[data-kf-sweep]').setAttribute('aria-pressed','true');
+    function frame(now){
+      if(host.hidden || document.hidden){endSweep();return;}
+      const t=Math.min(180,initial+Math.floor((now-start)/55));
+      if(t!==previous){root.dispatchEvent(new CustomEvent('kernel:set',{detail:{t}}));previous=t;}
+      if(t===180)endSweep();else sweepId=requestAnimationFrame(frame);
+    }
+    sweepId=requestAnimationFrame(frame);
+  });
+  realCurve.addEventListener('click',event=>{
+    const matrix=realCurve.getScreenCTM();if(!realChart || !matrix)return;
+    endSweep();const local=new DOMPoint(event.clientX,event.clientY).matrixTransform(matrix.inverse());
+    const {left, right} = realChart;
+    const edgeTolerance = 1 / Math.hypot(matrix.a, matrix.b);
+    const x = local.x <= left + edgeTolerance ? -1
+      : local.x >= right - edgeTolerance ? 1
+      : 2 * (local.x - left) / (right - left) - 1;
+    root.dispatchEvent(new CustomEvent('kernel:set',{detail:{t:Math.round(Math.acos(x)/degrees)}}));
+  });
+  root.querySelector('[data-input="t"]').addEventListener('input',endSweep);
   function cosineChannels(n, k) {
     // A cosine at m and at −m is identical. Combine its two positive weights once.
     const groups = [];
@@ -224,12 +307,12 @@
     if (host.closest('[hidden]') || host.getClientRects().length === 0) return;
     const revision = [state.n, k, Math.round(curve.getBoundingClientRect().width), Math.round(bars.getBoundingClientRect().width)].join('/');
     if (revision !== previous) {
-      drawIntegrand();
+      drawIntegrand();drawReal();
       drawChannels();
       explain();
       previous = revision;
     }
-    showProbes();
+    showProbes();showAreas();
   }
 
   slider.addEventListener('input', () => { k = Number(slider.value); update(); });
@@ -252,6 +335,7 @@
     update();
   });
   curve.addEventListener('click', event => {
+    endSweep();
     const matrix = curve.getScreenCTM();
     if (!chart || !matrix) return;
     const local = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());

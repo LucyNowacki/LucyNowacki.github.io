@@ -1,0 +1,164 @@
+WEBVTT
+
+00:00:00.280 --> 00:00:01.699
+Why cosine?
+
+00:00:01.699 --> 00:00:04.973
+A circle point gives a real Legendre input.
+
+00:00:05.303 --> 00:00:07.908
+Mark z on the unit circle at angle t.
+
+00:00:07.908 --> 00:00:11.620
+Its reciprocal is its mirror image across the real axis.
+
+00:00:11.950 --> 00:00:13.317
+Join the two points.
+
+00:00:13.317 --> 00:00:18.266
+Their midpoint keeps their common horizontal coordinate, x equals cosine t.
+
+00:00:18.596 --> 00:00:20.383
+The midpoint sweeps the interval.
+
+00:00:20.383 --> 00:00:24.036
+Turn from zero to pi, sweeping x from one to minus one.
+
+00:00:24.366 --> 00:00:25.925
+Stop at ninety degrees.
+
+00:00:25.925 --> 00:00:27.335
+The input is zero.
+
+00:00:27.335 --> 00:00:31.815
+The quadratic Legendre polynomial takes the value minus one half there.
+
+00:00:32.145 --> 00:00:33.420
+Read the graph.
+
+00:00:33.420 --> 00:00:37.115
+The input is zero and the height is minus one half.
+
+00:00:38.280 --> 00:00:40.036
+Give each phase point a mass.
+
+00:00:40.036 --> 00:00:42.762
+Their balance point gives the height of the graph.
+
+00:00:43.092 --> 00:00:45.018
+Degree two has three phases.
+
+00:00:45.018 --> 00:00:48.830
+Their angles are twice t, zero, and minus twice t.
+
+00:00:49.160 --> 00:00:50.640
+The weights add to one.
+
+00:00:50.640 --> 00:00:55.007
+Three eighths, one quarter, and three eighths are all positive.
+
+00:00:55.337 --> 00:00:57.024
+Set t to sixty degrees.
+
+00:00:57.024 --> 00:00:59.415
+The three phase points form a triangle.
+
+00:00:59.415 --> 00:01:01.634
+Their weighted mean is its balance point.
+
+00:01:01.964 --> 00:01:04.206
+The two mirror points have equal mass.
+
+00:01:04.206 --> 00:01:08.814
+Their imaginary parts cancel, so the balance point sits on the real axis.
+
+00:01:09.144 --> 00:01:10.590
+Read the balance point.
+
+00:01:10.590 --> 00:01:14.692
+At x equal to one half, P two takes the value minus one eighth.
+
+00:01:15.780 --> 00:01:17.439
+Why exactly one?
+
+00:01:17.439 --> 00:01:21.284
+Can a Legendre mode exceed one in absolute value?
+
+00:01:21.614 --> 00:01:23.759
+Every phase has modulus one.
+
+00:01:23.759 --> 00:01:26.734
+Each carries a positive weight, in every degree.
+
+00:01:27.064 --> 00:01:29.377
+Normalization gives the total weight.
+
+00:01:29.377 --> 00:01:32.096
+At angle zero, all phases equal one.
+
+00:01:32.096 --> 00:01:34.767
+The weights sum to P sub n of one, which is one.
+
+00:01:35.097 --> 00:01:36.592
+The disk is convex.
+
+00:01:36.592 --> 00:01:41.584
+It contains every weighted mean of these points, so the absolute value is at most one.
+
+00:01:41.914 --> 00:01:44.101
+The bound covers the whole interval.
+
+00:01:44.101 --> 00:01:48.399
+Every x from minus one to one is cosine t for some angle.
+
+00:01:48.729 --> 00:01:51.419
+Now line up the phases at angle zero.
+
+00:01:51.419 --> 00:01:53.895
+The mean reaches one at the right endpoint.
+
+00:01:53.895 --> 00:01:56.754
+The supremum is exactly one, in every degree.
+
+00:01:57.780 --> 00:01:59.205
+Start with a sine wave.
+
+00:01:59.205 --> 00:02:03.670
+Multiply it by the Legendre value, and take k to be a positive integer.
+
+00:02:04.000 --> 00:02:05.915
+Sigma is a signed integral.
+
+00:02:05.915 --> 00:02:10.826
+Integrate P sub n of cosine t times sine of k t, from zero to pi.
+
+00:02:11.156 --> 00:02:14.230
+The Legendre factor has magnitude at most one.
+
+00:02:14.230 --> 00:02:18.219
+The product stays between the upper and lower absolute sine envelopes.
+
+00:02:18.549 --> 00:02:21.346
+Positive and negative areas can cancel.
+
+00:02:21.346 --> 00:02:26.082
+The magnitude of the signed integral is at most the integral of the absolute product.
+
+00:02:26.412 --> 00:02:28.291
+Look at k equal to three.
+
+00:02:28.291 --> 00:02:33.517
+The upper envelope has three lobes, each of width pi over three and area two thirds.
+
+00:02:33.847 --> 00:02:34.984
+Count the lobes.
+
+00:02:34.984 --> 00:02:40.206
+For every positive integer k, the k lobes have area two over k each, totaling two.
+
+00:02:40.536 --> 00:02:42.841
+Every coefficient has magnitude at most two.
+
+00:02:42.841 --> 00:02:46.702
+This holds for every Legendre degree and every positive integer frequency.
+

@@ -1,0 +1,221 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.150
+How long can the sum become?
+
+00:00:02.150 --> 00:00:05.904
+Follow the same angle theta through all four boundary waves.
+
+00:00:05.904 --> 00:00:11.749
+At the moving marker, take each mode with its full complex direction and its own radial length.
+
+00:00:11.749 --> 00:00:14.287
+Now place those four arrows head to tail.
+
+00:00:14.287 --> 00:00:18.105
+Their gold resultant runs from the origin to the last tip.
+
+00:00:18.105 --> 00:00:22.223
+At thirty degrees the path turns corners, so the direct route is shorter.
+
+00:00:22.523 --> 00:00:23.880
+Add the four lengths.
+
+00:00:23.880 --> 00:00:26.162
+These are lengths of individual arrows.
+
+00:00:26.162 --> 00:00:29.169
+Add them along one straight ruler to get capital S.
+
+00:00:29.169 --> 00:00:30.683
+Turn the shared angle.
+
+00:00:30.683 --> 00:00:36.037
+The four phases move, the chain changes shape, and its tip moves inside the circle.
+
+00:00:36.037 --> 00:00:37.786
+Its path length stays fixed.
+
+00:00:37.786 --> 00:00:42.223
+The triangle inequality gives a disk of radius S for every angle.
+
+00:00:42.523 --> 00:00:44.648
+Alignment attains the supremum.
+
+00:00:44.648 --> 00:00:48.872
+At angle zero, all arrows point right and their sum reaches S.
+
+00:00:48.872 --> 00:00:56.317
+The polynomial is analytic, so the maximum modulus principle gives the same supremum over the ellipse interior.
+
+00:00:56.617 --> 00:00:58.465
+Pair the opposite frequencies.
+
+00:00:58.465 --> 00:01:01.600
+The terms at m and minus m have equal weights.
+
+00:01:01.600 --> 00:01:04.565
+Write lowercase s for the logarithm of rho.
+
+00:01:04.565 --> 00:01:07.594
+The radial factors now have opposite exponents.
+
+00:01:07.894 --> 00:01:09.571
+Trace the boundary waves.
+
+00:01:09.571 --> 00:01:11.960
+Theta marks position around the ellipse.
+
+00:01:11.960 --> 00:01:16.823
+Draw the real part of each angular mode at a common height to compare its shape.
+
+00:01:16.823 --> 00:01:20.364
+The modes plus one and minus one each have one crest.
+
+00:01:20.364 --> 00:01:23.350
+Plus three and minus three each have three crests.
+
+00:01:23.350 --> 00:01:27.083
+Advance the same display phase, phi, for every wave.
+
+00:01:27.083 --> 00:01:30.283
+Opposite signs send the crests in opposite directions.
+
+00:01:30.583 --> 00:01:33.198
+Degree five adds two more frequencies.
+
+00:01:33.198 --> 00:01:37.848
+Degree five keeps the frequencies plus and minus one and three, with new weights.
+
+00:01:37.848 --> 00:01:40.962
+Its extra powers are plus five and minus five.
+
+00:01:40.962 --> 00:01:43.351
+Each new wave has five crests per circuit.
+
+00:01:43.351 --> 00:01:48.044
+The exponent tells us both the radial power and the signed angular frequency.
+
+00:01:48.044 --> 00:01:51.009
+The number of crests counts cycles along the boundary.
+
+00:01:51.309 --> 00:01:52.922
+Pairing preserves the total.
+
+00:01:52.922 --> 00:01:56.057
+Watch the two cubic waves while we compare their lengths.
+
+00:01:56.057 --> 00:01:59.747
+At radius two, their radial factors are eight and one eighth.
+
+00:01:59.747 --> 00:02:01.795
+Both carry weight five sixteenths.
+
+00:02:01.795 --> 00:02:07.597
+The long arrow and the short arrow contribute five halves and five over one hundred twenty-eight.
+
+00:02:07.597 --> 00:02:09.900
+Slide those lengths together on the ruler.
+
+00:02:09.900 --> 00:02:12.929
+Now divide the same bar into two equal shares.
+
+00:02:12.929 --> 00:02:17.110
+Its total is still three hundred twenty-five over one hundred twenty-eight.
+
+00:02:17.110 --> 00:02:19.541
+The waves keep their actual amplitudes.
+
+00:02:19.541 --> 00:02:22.100
+Only the way we record the pair has changed.
+
+00:02:22.100 --> 00:02:28.863
+For any opposite pair, the average of the two radial factors is the hyperbolic cosine of m times s.
+
+00:02:29.163 --> 00:02:31.544
+The largest frequency gives a ceiling.
+
+00:02:31.544 --> 00:02:37.069
+Overlay the one-crest and three-crest profiles to see which frequencies the cubic contains.
+
+00:02:37.069 --> 00:02:39.970
+The estimate compares their paired radial factors.
+
+00:02:39.970 --> 00:02:44.129
+At radius two, the factor for magnitude one is five quarters.
+
+00:02:44.129 --> 00:02:47.350
+For magnitude three it is sixty-five sixteenths.
+
+00:02:47.350 --> 00:02:48.906
+Follow the four rows.
+
+00:02:48.906 --> 00:02:52.490
+The outer rows already have frequency magnitude three.
+
+00:02:52.490 --> 00:02:57.076
+Raise each inner row from its own factor to the larger one, keeping its weight.
+
+00:02:57.076 --> 00:03:02.174
+Hyperbolic cosine is even and increases with the magnitude of its argument.
+
+00:03:02.174 --> 00:03:08.339
+The weights sum to one, so this gives the ceiling B, the average of rho to the n and rho to the minus n.
+
+00:03:08.639 --> 00:03:10.124
+There are two different gaps.
+
+00:03:10.124 --> 00:03:14.796
+At thirty degrees, the gold resultant has length about two point six three three.
+
+00:03:14.796 --> 00:03:18.678
+Compare it with the path length, about three point zero zero eight.
+
+00:03:18.678 --> 00:03:19.978
+Turn to zero.
+
+00:03:19.978 --> 00:03:22.836
+The arrows align and that first gap closes.
+
+00:03:22.836 --> 00:03:24.521
+The second gap stays put.
+
+00:03:24.521 --> 00:03:34.654
+Replacing the inner frequencies by the extreme raises the length sum from about three point zero zero eight to a ceiling of about four point zero six three.
+
+00:03:34.654 --> 00:03:36.360
+One loss depends on angle.
+
+00:03:36.360 --> 00:03:38.984
+The other depends only on degree and radius.
+
+00:03:39.284 --> 00:03:41.387
+Which degrees reach the ceiling?
+
+00:03:41.387 --> 00:03:42.966
+Keep the radius at two.
+
+00:03:42.966 --> 00:03:45.994
+For degree zero, the only frequency is zero.
+
+00:03:45.994 --> 00:03:49.364
+The exact maximum and the ceiling both equal one.
+
+00:03:49.364 --> 00:03:55.124
+For degree one, both frequencies are already extreme, so both values are five quarters.
+
+00:03:55.124 --> 00:03:58.878
+Degree two introduces a middle term at frequency zero.
+
+00:03:58.878 --> 00:04:02.141
+The exact maximum is fifty-nine over thirty-two.
+
+00:04:02.141 --> 00:04:04.978
+The ceiling is seventeen eighths, which is larger.
+
+00:04:04.978 --> 00:04:07.004
+The same gap appeared at degree three.
+
+00:04:07.004 --> 00:04:14.854
+For every degree at least two and radius greater than one, a positive weight at an inner frequency makes the inequality strict.
+

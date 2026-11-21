@@ -59,7 +59,17 @@
     $('eg-output').textContent=`${symbol}${state.n}(Γ) = ${complex(d.sum)} · magnitude ${fmt(d.magnitude)}`;
     $('eg-output').dataset.magnitude=d.magnitude;
     $('eg-zoom-note').textContent=state.zoom>1?'Magnified view: some arrows or bound circles may lie outside the frame. Readouts retain the complete sum.':'View fitted to the sum of lengths S. The coarser circle B can extend outside the frame.';
-    P.map($('eg-map-plot'),d,state);P.vectors($('eg-vectors-plot'),d,state);P.hardy($('eg-hardy-plot'),d,state);
+    P.map($('eg-map-plot'),d,state);
+    const chainPlot=$('eg-vectors-plot');
+    const chain=P.vectors(chainPlot,d,state);
+    const transform=chainPlot.getScreenCTM();
+    const displayedScale=chain.scale * (transform ? Math.hypot(transform.a,transform.b) : 1);
+    const magnification=P.detail($('eg-detail'),d,state,displayedScale);
+    $('eg-detail-title').textContent=`Arrow j = ${v.j} · frequency ${v.m}`;
+    $('eg-detail-title').style.color=P.termColor(v.j);
+    $('eg-detail-scale').textContent=`${fmt(magnification)}× the diagram scale`;
+    $('eg-detail-value').textContent=`Hollow tail → pointed tip · length ${fmt(v.length)} · angle ${fmt(v.phase*180/Math.PI)}°`;
+    P.hardy($('eg-hardy-plot'),d,state);
     $('eg-selected-values').replaceChildren(labelledValue('Weight w =',fmt(v.w)),labelledValue('Radial factor =',fmt(v.radial)),labelledValue('Arrow length =',fmt(v.length)),labelledValue('Direction angle =',fmt(v.phase*180/Math.PI)+'°'),labelledValue('Contribution =',complex(v)));
     if(!playing){
       $('eg-legend').replaceChildren(...d.terms.map(v=>{const b=document.createElement('button');b.type='button';b.dataset.j=v.j;b.setAttribute('aria-pressed',String(v.j===state.j));b.setAttribute('aria-label',`Inspect term j ${v.j}, frequency ${v.m}`);b.innerHTML=`<span class="eg-swatch" style="--term:${P.termColor(v.j)}"></span>j = ${v.j} · m = ${v.m}`;return b;}));
@@ -91,6 +101,11 @@
     $(id).addEventListener('input',e=>{const x=e.target.valueAsNumber;if(Number.isFinite(x)&&x>=min&&x<=max)setParameter(key,convert(x));});
     $(id).addEventListener('change',e=>{let x=e.target.valueAsNumber;if(!Number.isFinite(x))x=key==='r'?state.r:state.t*180/Math.PI;x=Math.min(max,Math.max(min,x));setParameter(key,convert(x));e.target.value=x;});
   }
+  $('eg-film-example').addEventListener('click',()=>{
+    pause();
+    Object.assign(state,{n:3,r:2,t:Math.PI/6,j:3,zoom:1,orthonormal:false});
+    render();
+  });
   $('eg-normal').addEventListener('change',e=>{pause();state.orthonormal=e.target.checked;render();});
   $('eg-unit').addEventListener('click',()=>setParameter('r',1));$('eg-align').addEventListener('click',()=>setParameter('t',0));
   $('eg-legend').addEventListener('click',e=>{const b=e.target.closest('[data-j]');if(b)setParameter('j',+b.dataset.j);});

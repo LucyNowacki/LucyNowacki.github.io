@@ -139,5 +139,11 @@
   });
   document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
   new ResizeObserver(() => { cancelAnimationFrame(resizeFrame); resizeFrame = requestAnimationFrame(render); }).observe($('rl-content') || document.querySelector('.rl-content'));
-  render();
+  function followStepLink() {
+    const target = /^#rl-step-([0-3])$/.exec(location.hash);
+    if (target) chooseStep(Number(target[1]));
+    else render();
+  }
+  window.addEventListener('hashchange', followStepLink);
+  followStepLink();
 })();

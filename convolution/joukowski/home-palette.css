@@ -88,3 +88,11 @@ main > header .eyebrow { color: #f3defb; }
 body :is(button, a, input, select, summary, [tabindex]):focus-visible {
   outline: 3px solid var(--focus); outline-offset: 2px;
 }
+
+.hero-identity .identity-reading {
+  margin-top: .85rem;
+  font: 400 .95rem/1.55 system-ui, sans-serif;
+  text-align: left;
+}
+.identity-reading summary { cursor: pointer; color: var(--ink); }
+.identity-reading p { margin: .6rem 0 0; }

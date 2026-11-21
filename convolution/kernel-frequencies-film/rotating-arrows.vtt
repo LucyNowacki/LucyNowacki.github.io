@@ -1,0 +1,104 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.492
+Each power becomes a clockwise wave.
+
+00:00:02.492 --> 00:00:05.264
+Put z equal to rho times the unit phase.
+
+00:00:05.264 --> 00:00:10.597
+Its minus k power has length rho to the minus k and angle minus k theta.
+
+00:00:10.597 --> 00:00:14.287
+Multiply by sigma to get the length of the kernel arrow.
+
+00:00:14.287 --> 00:00:17.316
+Follow four, six, and eight as theta advances.
+
+00:00:17.316 --> 00:00:23.908
+In one positive circuit of the input, the three output arrows make four, six, and eight clockwise turns.
+
+00:00:24.208 --> 00:00:25.714
+Link a crest to its arrow.
+
+00:00:25.714 --> 00:00:28.103
+Unroll the ellipse by its angle theta.
+
+00:00:28.103 --> 00:00:32.241
+The real part of a term is its length times cosine k theta.
+
+00:00:32.241 --> 00:00:36.614
+Its imaginary part is minus that length times sine k theta.
+
+00:00:36.614 --> 00:00:40.752
+The point on the ellipse selects one sample of each signed profile.
+
+00:00:40.752 --> 00:00:46.490
+The two samples are the horizontal and vertical coordinates of the same rotating arrow.
+
+00:00:46.490 --> 00:00:51.119
+At thirty degrees the first arrow points at minus one hundred and twenty degrees.
+
+00:00:51.419 --> 00:00:53.139
+Add the arrows head to tail.
+
+00:00:53.139 --> 00:00:54.951
+Start with the fourth frequency.
+
+00:00:54.951 --> 00:00:59.004
+Carry the sixth arrow to its tip, then carry the eighth to the next tip.
+
+00:00:59.004 --> 00:01:01.713
+Translation keeps each length and direction.
+
+00:01:01.713 --> 00:01:04.806
+The close-up makes the final displacement readable.
+
+00:01:04.806 --> 00:01:07.770
+The endpoint is the sum of three retained terms.
+
+00:01:07.770 --> 00:01:11.440
+The full kernel still contains every later surviving frequency.
+
+00:01:11.740 --> 00:01:13.886
+Watch the sum trace its own curve.
+
+00:01:13.886 --> 00:01:15.869
+Keep the radius at three halves.
+
+00:01:15.869 --> 00:01:19.261
+The numbers c four, c six and c eight are now fixed.
+
+00:01:19.261 --> 00:01:22.353
+Each number is the length of its own rotating arrow.
+
+00:01:22.353 --> 00:01:25.062
+At the right tip of the ellipse, theta is zero.
+
+00:01:25.062 --> 00:01:27.749
+The three arrows point right, so their lengths add.
+
+00:01:27.749 --> 00:01:29.754
+Follow the gold point to the top.
+
+00:01:29.754 --> 00:01:34.276
+The fourth and eighth frequencies face right again, but the sixth faces left.
+
+00:01:34.276 --> 00:01:35.876
+Its length now subtracts.
+
+00:01:35.876 --> 00:01:40.782
+The changing endpoint is the value of the three-wave kernel at that boundary point.
+
+00:01:40.782 --> 00:01:44.194
+It traces the mint curve in the complex output plane.
+
+00:01:44.194 --> 00:01:45.943
+The coefficients stayed fixed.
+
+00:01:45.943 --> 00:01:49.590
+What changed was the phase of each term, and therefore their sum.
+
+00:01:49.590 --> 00:01:53.068
+This moving sum supplies one factor of the boundary integral.
+

@@ -1,0 +1,41 @@
+WEBVTT
+
+00:00:00.280 --> 00:00:01.699
+Why cosine?
+
+00:00:01.699 --> 00:00:04.973
+A circle point gives a real Legendre input.
+
+00:00:05.303 --> 00:00:07.908
+Mark z on the unit circle at angle t.
+
+00:00:07.908 --> 00:00:11.620
+Its reciprocal is its mirror image across the real axis.
+
+00:00:11.950 --> 00:00:13.317
+Join the two points.
+
+00:00:13.317 --> 00:00:18.266
+Their midpoint keeps their common horizontal coordinate, x equals cosine t.
+
+00:00:18.596 --> 00:00:20.383
+The midpoint sweeps the interval.
+
+00:00:20.383 --> 00:00:24.036
+Turn from zero to pi, sweeping x from one to minus one.
+
+00:00:24.366 --> 00:00:25.925
+Stop at ninety degrees.
+
+00:00:25.925 --> 00:00:27.335
+The input is zero.
+
+00:00:27.335 --> 00:00:31.815
+The quadratic Legendre polynomial takes the value minus one half there.
+
+00:00:32.145 --> 00:00:33.420
+Read the graph.
+
+00:00:33.420 --> 00:00:37.115
+The input is zero and the height is minus one half.
+

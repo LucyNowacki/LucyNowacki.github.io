@@ -1,0 +1,224 @@
+WEBVTT
+
+00:00:00.230 --> 00:00:07.919
+Here is our destination. Choose the Legendre degree n. The index j runs from zero to n and selects one term.
+
+00:00:08.199 --> 00:00:20.437
+Fix the radius rho. J sends the complex circle point z to omega on the ellipse boundary. Each term has coefficient alpha sub n comma j and exponent n minus twice j.
+
+00:00:20.717 --> 00:00:31.386
+Where does that coefficient come from? The variable s counts degree in the Legendre generating function. At omega equals J of z, it splits into two inverse square roots.
+
+00:00:31.666 --> 00:00:40.766
+Expand each factor using the binomial series. The first coefficients are one, one half, three eighths, and five sixteenths.
+
+00:00:41.046 --> 00:01:02.072
+Why these numbers? The binomial rule gives the product of the first ell odd numbers, divided by two to the power ell times ell factorial. Multiply top and bottom by the missing even factors. This gives the central binomial coefficient divided by four to the power ell. For ell equal to two, this gives three eighths.
+
+00:01:03.046 --> 00:01:15.135
+For s to the power n, choose degree n minus j from the first factor and j from the second. Multiply their coefficients. The powers of z subtract to give n minus twice j.
+
+00:01:15.415 --> 00:01:25.095
+At degree three, choose j equal to one. Three eighths times one half gives three sixteenths. The term is three sixteenths times z.
+
+00:01:25.375 --> 00:01:34.471
+Once n is fixed, write this coefficient as the weight w sub j. It is the same number. This gives the weighted sum of rotating powers.
+
+00:01:35.230 --> 00:01:40.327
+Take a complex point z on a circle of radius rho, at angle theta.
+
+00:01:40.607 --> 00:01:44.601
+The Joukowski map sends z to omega on the ellipse.
+
+00:01:44.881 --> 00:01:50.589
+The pullback expresses P sub n at omega as a function of the original circle angle.
+
+00:01:50.869 --> 00:01:56.964
+In the cubic term, five sixteenths is the Laurent coefficient, and three is the exponent.
+
+00:01:57.244 --> 00:02:04.633
+At fixed radius, z cubed is rho cubed times the Fourier mode, e to the power three i theta.
+
+00:02:04.913 --> 00:02:12.100
+So the Fourier coefficient is five sixteenths times rho cubed, and the mode makes three turns per circuit.
+
+00:02:12.730 --> 00:02:19.765
+Fix the circle radius. Omega is the point on the boundary of the ellipse where we evaluate the polynomial.
+
+00:02:20.045 --> 00:02:27.578
+In the generating function, s is a separate variable. Its exponent tells us which Legendre polynomial to read.
+
+00:02:27.858 --> 00:02:37.786
+Look beside s squared. Its coefficient is P two of omega. Move the point along the ellipse and that value changes, while the power of s stays two.
+
+00:02:38.730 --> 00:02:42.838
+The auxiliary variable s keeps track of the Legendre degree.
+
+00:02:43.118 --> 00:02:51.813
+Choose s to the power p from the first factor, and s to the power q from the second. Their product is s to the power p plus q.
+
+00:02:52.093 --> 00:02:59.002
+For example, s squared times s gives s cubed, so this pair contributes to degree three.
+
+00:02:59.282 --> 00:03:05.093
+Its power of z is p minus q. Here, two minus one equals one.
+
+00:03:05.730 --> 00:03:08.284
+One Legendre value has two descriptions.
+
+00:03:08.564 --> 00:03:12.372
+We can evaluate the polynomial at a point on the ellipse.
+
+00:03:12.652 --> 00:03:16.089
+Or we can add a finite set of rotating arrows.
+
+00:03:16.369 --> 00:03:18.302
+Their sum gives that same value.
+
+00:03:19.230 --> 00:03:21.819
+How can points on a circle trace an ellipse?
+
+00:03:22.099 --> 00:03:25.211
+Follow the midpoint between a point and its reciprocal.
+
+00:03:26.380 --> 00:03:29.375
+Start with a point z on the outer circle.
+
+00:03:29.685 --> 00:03:33.714
+Its distance from the origin is rho, which we’ll set to one and a half.
+
+00:03:34.700 --> 00:03:37.680
+Now mark one over z on the inner circle.
+
+00:03:37.990 --> 00:03:40.433
+Join the two points and take their midpoint.
+
+00:03:40.743 --> 00:03:43.309
+That’s the Joukowski map, J of z.
+
+00:03:44.200 --> 00:03:46.157
+Turn z counterclockwise.
+
+00:03:46.467 --> 00:03:49.645
+Its reciprocal turns clockwise through the same angle.
+
+00:03:49.955 --> 00:03:51.154
+Watch their midpoint.
+
+00:03:51.464 --> 00:03:56.050
+As z makes one full turn, the midpoint traces a Bernstein ellipse.
+
+00:03:57.230 --> 00:04:00.892
+Which products contribute to a single Legendre degree?
+
+00:04:01.172 --> 00:04:06.118
+Keep only the pairs whose two powers of the series variable add to that degree.
+
+00:04:06.700 --> 00:04:08.884
+To find P three at that midpoint,
+
+00:04:09.024 --> 00:04:12.356
+take the coefficient of s cubed in the generating function.
+
+00:04:12.666 --> 00:04:15.651
+Choose degree p from the first binomial factor
+
+00:04:15.791 --> 00:04:17.902
+and degree q from the second.
+
+00:04:18.212 --> 00:04:20.973
+We need p plus q to equal three.
+
+00:04:21.730 --> 00:04:25.098
+How does each surviving pair become a rotating arrow?
+
+00:04:25.378 --> 00:04:27.433
+The weight and radius set its length.
+
+00:04:27.713 --> 00:04:30.712
+The difference of the indices sets how it turns.
+
+00:04:31.700 --> 00:04:33.931
+Each choice gives a power of z.
+
+00:04:34.241 --> 00:04:36.786
+Read p minus q from left to right.
+
+00:04:37.096 --> 00:04:40.275
+Three, one, minus one, minus three.
+
+00:04:40.585 --> 00:04:43.777
+Their weights are five sixteenths, three sixteenths,
+
+00:04:43.917 --> 00:04:46.808
+three sixteenths, and five sixteenths.
+
+00:04:47.700 --> 00:04:51.113
+Turn z again and watch the four arrows.
+
+00:04:51.423 --> 00:04:53.961
+For exponent k and weight w,
+
+00:04:54.101 --> 00:04:57.162
+the length is w times rho to the power k.
+
+00:04:57.472 --> 00:05:00.174
+The angle is k times the angle of z,
+
+00:05:00.314 --> 00:05:02.994
+so a negative exponent reverses the turn.
+
+00:05:04.200 --> 00:05:09.053
+For example, z cubed has the radius cubed and three times the angle.
+
+00:05:09.363 --> 00:05:12.321
+Now place the four weighted arrows head to tail.
+
+00:05:12.631 --> 00:05:17.289
+The tip lands at the value of the third Legendre polynomial at our midpoint.
+
+00:05:18.230 --> 00:05:25.560
+In this product array, p plus q selects the Legendre degree, and p minus q selects the power of z.
+
+00:05:25.840 --> 00:05:32.714
+At p equals three and q equals zero, five sixteenths times z cubed gives the blue arrow.
+
+00:05:32.994 --> 00:05:39.380
+At p equals two and q equals one, three sixteenths times z gives the mint arrow.
+
+00:05:39.660 --> 00:05:46.494
+At p equals one and q equals two, three sixteenths times z inverse gives the violet arrow.
+
+00:05:46.774 --> 00:05:55.276
+At p equals zero and q equals three, five sixteenths times z to the power minus three gives the orchid arrow.
+
+00:05:55.556 --> 00:06:01.876
+The gold arrow runs from the origin to the final tip and shows their sum, P three at J of z.
+
+00:06:02.650 --> 00:06:06.150
+What if we add one arrow for every Legendre degree?
+
+00:06:06.400 --> 00:06:11.200
+The fourth is our whole four-arrow sum, multiplied by s cubed.
+
+00:06:11.500 --> 00:06:16.000
+Follow the tip in the zoom window as we add the first forty.
+
+00:06:16.350 --> 00:06:21.150
+The gold diamond marks the limit. The smaller arrows keep closing the gap.
+
+00:06:21.730 --> 00:06:25.201
+Why does swapping the two preimages preserve the answer?
+
+00:06:25.481 --> 00:06:28.413
+The powers reverse, and the paired weights match.
+
+00:06:29.200 --> 00:06:32.242
+Finally, swap z and its reciprocal.
+
+00:06:32.552 --> 00:06:35.106
+The four terms trade places in pairs.
+
+00:06:35.416 --> 00:06:39.886
+The midpoint stays put, and the arrows still add up to the same value.
+

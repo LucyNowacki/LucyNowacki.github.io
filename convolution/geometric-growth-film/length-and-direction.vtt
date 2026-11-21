@@ -1,0 +1,86 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:01.937
+Now follow the output.
+
+00:00:01.937 --> 00:00:04.027
+The point on the ellipse is our input.
+
+00:00:04.027 --> 00:00:08.998
+Add the weighted powers of z in a second plane to find the polynomial value.
+
+00:00:09.298 --> 00:00:11.017
+Each power has a frequency.
+
+00:00:11.017 --> 00:00:13.833
+Term j has frequency n minus twice j.
+
+00:00:13.833 --> 00:00:18.313
+At degree three the frequencies are three, one, minus one and minus three.
+
+00:00:18.613 --> 00:00:20.418
+Radius sets the arrow length.
+
+00:00:20.418 --> 00:00:23.297
+The length is the weight times rho to the power m.
+
+00:00:23.297 --> 00:00:29.932
+Positive powers grow as rho increases, negative powers shrink, and the zero frequency keeps its weight.
+
+00:00:30.232 --> 00:00:31.866
+Angle sets the direction.
+
+00:00:31.866 --> 00:00:34.127
+An arrow turns through m times theta.
+
+00:00:34.127 --> 00:00:38.585
+Positive frequencies turn anticlockwise, negative ones clockwise.
+
+00:00:38.585 --> 00:00:40.377
+A zero frequency stays still.
+
+00:00:40.677 --> 00:00:42.290
+Start with the cubic arrow.
+
+00:00:42.290 --> 00:00:46.001
+Five sixteenths times two cubed gives a length of five halves.
+
+00:00:46.001 --> 00:00:48.903
+Three times thirty degrees points the arrow straight up.
+
+00:00:49.203 --> 00:00:51.285
+Place the middle arrows head to tail.
+
+00:00:51.285 --> 00:00:55.871
+With weight three sixteenths, their lengths are three eighths and three over thirty-two.
+
+00:00:55.871 --> 00:01:00.266
+One points thirty degrees above horizontal, the other thirty degrees below.
+
+00:01:00.566 --> 00:01:02.264
+Magnify the last arrow.
+
+00:01:02.264 --> 00:01:05.272
+Follow the camera into the cluster at the end of the chain.
+
+00:01:05.272 --> 00:01:07.234
+The pink arrow points straight down.
+
+00:01:07.234 --> 00:01:13.142
+The reciprocal cube contributes one eighth, making the true length five over one hundred twenty-eight.
+
+00:01:13.142 --> 00:01:16.939
+At thirty-two times magnification, its tail and tip separate.
+
+00:01:16.939 --> 00:01:18.475
+Pull back to the whole chain.
+
+00:01:18.775 --> 00:01:21.007
+Join the origin to the final tip.
+
+00:01:21.007 --> 00:01:24.782
+The gold arrow gives P three of omega in the output plane.
+
+00:01:24.782 --> 00:01:27.299
+Its input, omega, stays on the ellipse.
+

@@ -1,0 +1,53 @@
+WEBVTT
+
+00:00:00.230 --> 00:00:05.327
+Take a complex point z on a circle of radius rho, at angle theta.
+
+00:00:05.607 --> 00:00:09.601
+The Joukowski map sends z to omega on the ellipse.
+
+00:00:09.881 --> 00:00:15.589
+The pullback expresses P sub n at omega as a function of the original circle angle.
+
+00:00:15.869 --> 00:00:21.964
+In the cubic term, five sixteenths is the Laurent coefficient, and three is the exponent.
+
+00:00:22.244 --> 00:00:29.633
+At fixed radius, z cubed is rho cubed times the Fourier mode, e to the power three i theta.
+
+00:00:29.913 --> 00:00:37.100
+So the Fourier coefficient is five sixteenths times rho cubed, and the mode makes three turns per circuit.
+
+00:00:37.730 --> 00:00:40.319
+How can points on a circle trace an ellipse?
+
+00:00:40.599 --> 00:00:43.711
+Follow the midpoint between a point and its reciprocal.
+
+00:00:44.880 --> 00:00:47.875
+Start with a point z on the outer circle.
+
+00:00:48.185 --> 00:00:52.214
+Its distance from the origin is rho, which we’ll set to one and a half.
+
+00:00:53.200 --> 00:00:56.180
+Now mark one over z on the inner circle.
+
+00:00:56.490 --> 00:00:58.933
+Join the two points and take their midpoint.
+
+00:00:59.243 --> 00:01:01.809
+That’s the Joukowski map, J of z.
+
+00:01:02.700 --> 00:01:04.657
+Turn z counterclockwise.
+
+00:01:04.967 --> 00:01:08.145
+Its reciprocal turns clockwise through the same angle.
+
+00:01:08.455 --> 00:01:09.654
+Watch their midpoint.
+
+00:01:09.964 --> 00:01:14.550
+As z makes one full turn, the midpoint traces a Bernstein ellipse.
+

@@ -44,10 +44,12 @@
       <section class="ll-step card" id="ll-step-0" aria-labelledby="ll-heading-0">
         <h3 id="ll-heading-0">1. Two circle points, one ellipse point</h3>
         <p>Move the angle: the segment joining the outer point to its reciprocal has a midpoint on the ellipse. That midpoint is the input at which the Legendre polynomial is evaluated.</p>
+        <a class="narrated-film-link" href="../laurent-film/circle-to-ellipse.html"><span aria-hidden="true">▶</span> Watch this step with narration</a>
         <div class="ll-two">
           <figure class="ll-figure"><svg id="ll-circle-plot" role="img" aria-labelledby="ll-circle-title"></svg><figcaption>${tex(T`z=\varrho e^{it},\qquad z^{-1}=\varrho^{-1}e^{-it}`)}</figcaption></figure>
           <figure class="ll-figure"><svg id="ll-ellipse-plot" role="img" aria-labelledby="ll-ellipse-title"></svg><figcaption>${tex(T`\omega=\mathit{Jouk}(z)=\mathit{Jouk}(z^{-1})=\tfrac12(z+z^{-1})`)}</figcaption></figure>
         </div>
+        <p>For the cubic term ${tex(T`\tfrac{5}{16}z^3`)}, the Laurent coefficient is ${tex(T`5/16`)}. On a circle of fixed radius the same term is ${tex(T`\underbrace{\tfrac{5}{16}\varrho^3}_{\text{Fourier coefficient}}\,\underbrace{e^{3it}}_{\text{Fourier mode}}`)}. Its arrow makes three turns as the circle point makes one.</p>
         <div class="legend"><span class="positive-key">Outer point</span><span class="negative-key">Reciprocal point</span><span class="selected-key">Their midpoint / ellipse input</span></div>
         <p class="numeric" id="ll-map-value"></p>
         <p class="hint" id="ll-map-note"></p>
@@ -59,17 +61,27 @@
 
       <section class="ll-step card" id="ll-step-1" aria-labelledby="ll-heading-1" hidden>
         <h3 id="ll-heading-1">2. A diagonal selects the generating degree</h3>
-        <p>Multiplication adds the powers of ${tex(T`s`)} and subtracts the powers of ${tex(T`z`)}. Follow the highlighted diagonal to collect exactly one Legendre degree.</p>
+        <p>Fix a point ${tex(T`\omega=\mathit{Jouk}(z)`)} on the ellipse boundary. In the generating function, ${tex(T`s`)} is an independent variable. Its exponent picks the Legendre degree. The coefficient beside ${tex(T`s^2`)} is ${tex(T`P_2(\omega)`)}. Moving the boundary point changes that value while the exponent stays two.</p>
+        <div class="math-block ll-formula">${display(T`\begin{aligned}G(\omega,s)&=(1-2\omega s+s^2)^{-1/2}\\&=1+\omega s+\underbrace{\tfrac{3\omega^2-1}{2}}_{P_2(\omega)}s^2+\cdots.\end{aligned}`)}</div>
+        <p>Take ${tex(T`s^2z^2`)} from the first factor and ${tex(T`sz^{-1}`)} from the second, with their respective coefficients. Their product has ${tex(T`s^3 z`)}. It supplies frequency one to degree three. The highlighted diagonal collects all pairs for the chosen degree.</p>
+        <a class="narrated-film-link" href="../laurent-film/extract-one-degree.html"><span aria-hidden="true">▶</span> Watch this step with narration</a>
+        <div class="ll-correspondence-slot" id="ll-match-1"></div>
+        <details class="ll-proof"><summary>Why does the exponent give Pascal’s middle entries?</summary>
+          <p>Each factor has the form ${tex(T`F(u)=(1-u)^{-1/2}`)}. Its square is the geometric series. If ${tex(T`F(u)=1+au+bu^2+\cdots`)}, squaring and comparing the coefficients of ${tex(T`u`)} and ${tex(T`u^2`)} forces ${tex(T`2a=1`)} and ${tex(T`2b+a^2=1`)}. This gives the first two nonconstant coefficients ${tex(T`a=1/2,\ b=3/8`)} of the binomial series.</p>
+          <div class="math-block">${display(T`2(1-u)F'(u)=F(u)\quad\Longrightarrow\quad\alpha_0=1,\quad\alpha_{\ell+1}=\frac{2\ell+1}{2\ell+2}\alpha_\ell.`)}</div>
+          <p>The middle entry of row ${tex(T`2\ell`)} in Pascal’s triangle, divided by the row sum, is ${tex(T`4^{-\ell}\binom{2\ell}{\ell}`)}. These numbers start at one and obey the same recurrence, so they give precisely the required coefficients. The ellipse enters through the two substitutions ${tex(T`u=sz`)} and ${tex(T`u=s/z`)}.</p>
+        </details>
+        <details class="ll-proof"><summary>Inspect the two generating factors and their frequency lines</summary>
         <div class="math-block ll-formula">${display(T`1-2\mathit{Jouk}(z)s+s^2=(1-sz)(1-sz^{-1})`)}</div>
         <div class="ll-two">
-          <figure class="ll-figure"><svg id="ll-lattice-plot" role="img" aria-labelledby="ll-lattice-title"></svg><figcaption>Solid diagonal: fixed degree. Dashed line: selected frequency.</figcaption></figure>
+          <figure class="ll-figure"><svg id="ll-lattice-plot" role="group" aria-labelledby="ll-lattice-title"></svg><figcaption>The solid diagonal fixes the degree. Select a coloured point to follow its frequency on the dashed line.</figcaption></figure>
           <div>
             <div class="math-block ll-formula">${display(T`\begin{aligned}(1-sz)^{-1/2}&=\sum_{p\ge0}\alpha_p s^p z^p,\\(1-sz^{-1})^{-1/2}&=\sum_{q\ge0}\alpha_q s^q z^{-q}.\end{aligned}`)}</div>
             <div class="math-block ll-formula" id="ll-selected-factor"></div>
             <p class="hint">We label the diagonal by ${tex(T`q=j`)} and ${tex(T`p=n-j`)}, so its frequency is ${tex(T`m=p-q=n-2j`)}. The thesis arrives at this ordering by reindexing its first coefficient sum.</p>
           </div>
         </div>
-        <div class="math-block ll-formula" id="ll-extraction"></div>
+        <div class="math-block ll-formula" id="ll-extraction"></div></details>
         <details class="ll-proof"><summary>Convergence and the square-root branches in this derivation</summary>
           <p>Fix ${tex(T`z\ne0`)} and choose ${tex(T`|s|<\min\{|z|,|z|^{-1}\}`)}. Both binomial series then converge absolutely. Every square-root branch is analytic near ${tex(T`s=0`)} and equals ${tex(T`1`)} there.</p>
           <div class="math-block">${display(T`\begin{aligned}\sum_{n\ge0}P_n(\mathit{Jouk}(z))s^n&=(1-sz)^{-1/2}(1-sz^{-1})^{-1/2}\\&=\sum_{p,q\ge0}\alpha_p\alpha_q s^{p+q}z^{p-q}.\end{aligned}`)}</div>
@@ -79,11 +91,11 @@
 
       <section class="ll-step card" id="ll-step-2" aria-labelledby="ll-heading-2" hidden>
         <h3 id="ll-heading-2">3. One polynomial becomes a finite packet</h3>
-        <p>The bar heights are the positive, symmetric structural weights. The radius and angle then turn each weight into a complex contribution.</p>
-        <div class="ll-two">
-          <figure class="ll-figure"><svg id="ll-weights-plot" role="img" aria-labelledby="ll-weights-title"></svg><figcaption id="ll-support-note"></figcaption></figure>
-          <figure class="ll-figure"><svg id="ll-vectors-plot" role="img" aria-labelledby="ll-vectors-title"></svg><figcaption>Complex output plane: add the contributions head to tail. Gold selects one term; purple marks their total.</figcaption></figure>
-        </div>
+        <p>The same entry determines both the coefficient and the power of the selected term. Change the radius to vary its length, or rotate the angle to turn its arrow.</p>
+        <a class="narrated-film-link" href="../laurent-film/finite-packet.html"><span aria-hidden="true">▶</span> Watch this step with narration</a>
+        <div class="ll-correspondence-slot" id="ll-match-2"></div>
+        <details class="ll-proof"><summary>Inspect the weights and check the sum</summary>
+        <figure class="ll-figure"><svg id="ll-weights-plot" role="img" aria-labelledby="ll-weights-title"></svg><figcaption id="ll-support-note"></figcaption></figure>
         <div class="ll-support" id="ll-support-controls" aria-label="Select a Laurent frequency"></div>
         <div class="math-block ll-formula">${display(T`\alpha_\ell=\binom{2\ell}{\ell}4^{-\ell},\qquad \alpha_{n,j}=\alpha_j\alpha_{n-j}=\alpha_{n,n-j}>0`)}</div>
         <div class="math-block ll-formula" id="ll-full-packet"></div>
@@ -93,7 +105,7 @@
           <div><span>Finite Laurent sum</span><strong class="numeric" id="ll-packet-value"></strong></div>
           <div><span>Independent Legendre recurrence</span><strong class="numeric" id="ll-recurrence-value"></strong></div>
         </div>
-        <p class="check-note" id="ll-recurrence-note"></p>
+        <p class="check-note" id="ll-recurrence-note"></p></details>
         <details class="ll-proof"><summary>What the support tells us</summary>
           <div class="math-block">${display(T`P_n(\Gamma_\varrho(t))=\sum_{j=0}^n\alpha_{n,j}\varrho^{\,n-2j}e^{i(n-2j)t}`)}</div>
           <p>There are exactly ${tex(T`n+1`)} frequencies, all with the parity of ${tex(T`n`)}. An even degree has a single zero-frequency term. The sum is finite, so there is no boundary-convergence issue. Positivity refers to the weights, not the complex values of the terms. This basis-side parity alone asserts no parity blocks for a transfer matrix.</p>
@@ -103,6 +115,7 @@
       <section class="ll-step card" id="ll-step-3" aria-labelledby="ll-heading-3" hidden>
         <h3 id="ll-heading-3">4. Swap the preimage and reverse the packet</h3>
         <p>The same index can have a different radial contribution at the other preimage. The partner index supplies exactly the missing contribution, leaving the complete sum unchanged.</p>
+        <a class="narrated-film-link" href="../laurent-film/swap-preimages.html"><span aria-hidden="true">▶</span> Watch this step with narration</a>
         <div class="ll-toolbar"><button type="button" id="ll-swap" aria-pressed="false">Use reciprocal preimage</button><span class="ll-status" id="ll-active-preimage" aria-live="polite"></span></div>
         <figure class="ll-figure"><svg id="ll-reciprocal-plot" role="img" aria-labelledby="ll-reciprocal-title"></svg><figcaption>Two magnitudes at each bookkeeping index; a gold outline marks the inspected term.</figcaption></figure>
         <div class="legend"><span class="positive-key">At the outer preimage</span><span class="negative-key">At its reciprocal</span></div>
@@ -121,6 +134,14 @@
       </section>
       <div class="ll-toolbar ll-footer-nav"><button type="button" id="ll-previous">Previous step</button><span id="ll-progress" aria-live="polite">Step 1 of 4</span><button type="button" id="ll-next">Next step</button></div>
     `;
+
+    const matchHost = document.createElement('section');
+    matchHost.setAttribute('aria-label', 'Linked matrix, Laurent expansion and arrow sum');
+    const correspondence = window.createLaurentCorrespondence(matchHost, {
+      M, typeset, onSelect: j => onChange({ j })
+    });
+    const sharedChain = matchHost.querySelector('.lc-chain');
+    sharedChain.id = 'll-vectors-plot';
 
     function putMath(id, value) {
       const el = $(id);
@@ -200,9 +221,10 @@
       body += line(X(p0), Y(q0), X(p0 + span), Y(q0 + span), 'stroke="var(--pair)" stroke-width="2" stroke-dasharray="5 4"');
       body += line(X(0), Y(S.n), X(S.n), Y(0), 'stroke="var(--degree)" stroke-width="3"');
       for (let a = 0; a <= count; a++) for (let b = 0; b <= count; b++) {
-        body += dot(X(a), Y(b), a + b === S.n ? 4.5 : 2, a + b === S.n ? 'var(--degree)' : 'var(--line)');
+        if (a + b !== S.n) { body += dot(X(a), Y(b), 2, 'var(--line)'); continue; }
+        body += `<g role="button" tabindex="0" data-lattice-j="${b}" aria-pressed="${b === S.j}" aria-label="Select pair ${a}, ${b}">${dot(X(a), Y(b), 10, 'transparent')}${dot(X(a), Y(b), 5, correspondence.termColour(b))}</g>`;
       }
-      body += dot(X(p), Y(q), 8, 'none', 'stroke="var(--gold)" stroke-width="2.5"');
+      body += dot(X(p), Y(q), 8, 'none', 'stroke="var(--gold)" stroke-width="2.5" pointer-events="none"');
       body += text(X(count) + 13, Y(0) + 4, 'p') + text(X(0) - 4, Y(count) - 13, 'q');
       body += text(width / 2, 17, `p + q = ${S.n} · p − q = ${signed(m)}`, 'text-anchor="middle" class="plot-label"');
       setSVG('ll-lattice-plot', width, height, `Degree ${S.n} selects the diagonal p plus q equals ${S.n}. Selected pair p ${p}, q ${q} has frequency ${m}.`, body);
@@ -226,34 +248,6 @@
       }
       setSVG('ll-weights-plot', width, height, `${S.n + 1} positive weights, symmetric about frequency zero, supported on ${terms.map(v => v.k).join(', ')}.`, body);
       $('ll-support-note').textContent = `${S.n + 1} terms · ${S.n % 2 ? 'odd' : 'even'} frequencies · ${S.n % 2 ? 'no zero-frequency term' : 'zero frequency appears once'}. Bar heights stay fixed as the radius and angle change.`;
-    }
-
-    function vectorSum(S, terms) {
-      const width = widthOf('ll-vectors-plot'), height = 270;
-      // The triangle inequality bounds every intermediate head-to-tail sum.
-      // This scale depends on n and radius, never on the moving angle.
-      const radialSum = terms.reduce((total, v) => total + v.weight * v.radial, 0);
-      const P = plane(width, height, radialSum * 1.15, radialSum / 2);
-      let body = P.base + text(width / 2, 16, 'Complex output: finite sum', 'text-anchor="middle" class="plot-label"');
-      let accumulated = { re: 0, im: 0 };
-      for (const v of terms) {
-        const next = M.add(accumulated, v.value), color = v.j === S.j ? 'var(--gold)' : colour(v.k);
-        const x = P.X(accumulated.re), y = P.Y(accumulated.im), xx = P.X(next.re), yy = P.Y(next.im);
-        const length = Math.hypot(xx - x, yy - y), stroke = v.j === S.j ? 3 : 1.8;
-        if (length < 1) body += dot(xx, yy, v.j === S.j ? 3 : 1.5, color);
-        else {
-          const dx = (xx - x) / length, dy = (yy - y) / length, size = Math.min(7, length * .45);
-          body += line(x, y, xx, yy, `stroke="${color}" stroke-width="${stroke}"`);
-          body += `<path d="M${xx},${yy} L${xx - size * dx + size * .45 * dy},${yy - size * dy - size * .45 * dx} L${xx - size * dx - size * .45 * dy},${yy - size * dy + size * .45 * dx} Z" fill="${color}"/>`;
-        }
-        accumulated = next;
-      }
-      const total = M.packet(S.n, S.r, S.t);
-      body += dot(P.X(0), P.Y(0), 3, 'var(--muted)');
-      body += dot(P.X(total.re), P.Y(total.im), 6, 'var(--degree)', 'stroke="var(--panel)" stroke-width="1.5"');
-      body += text(width / 2, height - 7, S.n === 0 ? 'One constant term, one endpoint' : 'Axes fixed while the angle moves', 'text-anchor="middle"');
-      setSVG('ll-vectors-plot', width, height, `Head-to-tail sum of ${S.n + 1} complex contributions. Selected term j ${S.j} is gold; total ${complex(total)} is purple. Both axes have equal scale.`, body);
-      $('ll-vectors-plot').dataset.bound = String(radialSum * 1.15);
     }
 
     function reciprocal(S, terms) {
@@ -337,11 +331,11 @@
       host.querySelectorAll('[data-ll-j]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.llJ) === S.j)));
       const nextKey = `${activeStep}:${S.n}:${S.j}`;
       if (nextKey !== mathKey) { structuralMath(S, terms); mathKey = nextKey; }
+      if (activeStep === 1 || activeStep === 2) correspondence.render(S);
       if (activeStep === 0) mapping(S);
       else if (activeStep === 1) lattice(S);
       else if (activeStep === 2) {
         packetBars(S, terms);
-        vectorSum(S, terms);
         const packet = M.packet(S.n, S.r, S.t), recurrence = M.legendre(S.n, M.joukowski(S.r, S.t));
         const selected = terms[S.j];
         $('ll-term-value').textContent = `Selected term: ${complex(selected.value)} · radial multiplier: ${fmt(selected.radial)} · phase angle: ${fmt(selected.k * S.t * 180 / Math.PI, 5)}°.`;
@@ -355,6 +349,7 @@
     function setStep(step) {
       activeStep = Math.max(0, Math.min(3, step));
       host.dataset.step = String(activeStep + 1);
+      if (activeStep === 1 || activeStep === 2) $(`ll-match-${activeStep}`).append(matchHost);
       for (let i = 0; i < 4; i++) {
         $(`ll-step-${i}`).hidden = i !== activeStep;
         $(`ll-step-button-${i}`).setAttribute('aria-pressed', String(i === activeStep));
@@ -375,6 +370,16 @@
       else if (button.id === 'll-swap') { swapped = !swapped; if (lastState) render(lastState, false); }
     });
     listen($('ll-term-select'), 'change', event => onChange({ j: Number(event.target.value) }));
+    function selectLatticePoint(event) {
+      const entry = event.target.closest('[data-lattice-j]');
+      if (!entry || (event.type === 'keydown' && !['Enter', ' '].includes(event.key))) return;
+      event.preventDefault();
+      const j = Number(entry.dataset.latticeJ);
+      onChange({ j });
+      if (event.type === 'keydown') $('ll-lattice-plot').querySelector(`[data-lattice-j="${j}"]`)?.focus();
+    }
+    listen($('ll-lattice-plot'), 'click', selectLatticePoint);
+    listen($('ll-lattice-plot'), 'keydown', selectLatticePoint);
     const resize = () => {
       if (resizeFrame || destroyed || !lastState || !host.getBoundingClientRect().width) return;
       resizeFrame = requestAnimationFrame(() => { resizeFrame = 0; if (!destroyed && lastState) render(lastState, false); });
@@ -382,7 +387,8 @@
     const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null;
     if (observer) observer.observe(host); else listen(window, 'resize', resize);
     typeset([host.querySelector('.ll-toolbar')]);
-    setStep(0);
+    const linkedStep = /^#ll-step-([0-3])$/.exec(location.hash);
+    setStep(linkedStep ? Number(linkedStep[1]) : 0);
     return {
       render,
       setStep,

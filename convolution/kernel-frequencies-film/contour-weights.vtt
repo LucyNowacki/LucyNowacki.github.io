@@ -1,0 +1,152 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.428
+Subtract a copy shifted by two.
+
+00:00:02.428 --> 00:00:06.438
+The derivative is one half times one minus z to the minus two.
+
+00:00:06.438 --> 00:00:08.677
+Its first half keeps every exponent.
+
+00:00:08.677 --> 00:00:14.052
+Its second half shifts every frequency index upward by two and changes the sign.
+
+00:00:14.052 --> 00:00:19.044
+In the row for six, half of sigma three six meets minus half of sigma three four.
+
+00:00:19.044 --> 00:00:22.222
+Their difference gives minus sixteen over sixty three.
+
+00:00:22.222 --> 00:00:26.125
+These are Laurent coefficients, before evaluating at a radius.
+
+00:00:26.125 --> 00:00:28.259
+Each row has at most these two inputs.
+
+00:00:28.559 --> 00:00:31.004
+Multiply two waves before averaging.
+
+00:00:31.004 --> 00:00:37.552
+Choose row k equal to four from the kernel, and column ell equal to six from its complex conjugate.
+
+00:00:37.552 --> 00:00:39.877
+Here ell labels the column frequency.
+
+00:00:39.877 --> 00:00:41.818
+The row arrow has length c four.
+
+00:00:41.818 --> 00:00:47.086
+The conjugate column arrow has length c six and turns in the opposite sense.
+
+00:00:47.086 --> 00:00:52.014
+When we multiply complex numbers, their lengths multiply and their angles add.
+
+00:00:52.014 --> 00:00:56.835
+Minus four theta plus six theta leaves a new arrow at angle two theta.
+
+00:00:56.835 --> 00:01:04.791
+At radius three halves, the two lengths are about zero point one eight zero six and zero point zero three five seven.
+
+00:01:04.791 --> 00:01:09.015
+Their product is about six point four four three thousandths.
+
+00:01:09.015 --> 00:01:11.425
+That product is fixed as the point moves.
+
+00:01:11.425 --> 00:01:16.779
+The squared tangent speed, W, scales the arrow once more at each boundary point.
+
+00:01:17.079 --> 00:01:19.375
+Read both heights from the same product.
+
+00:01:19.375 --> 00:01:21.636
+The real part gives the cyan height.
+
+00:01:21.636 --> 00:01:27.182
+Multiply c four times c six, times W, times cosine of two theta.
+
+00:01:27.182 --> 00:01:31.405
+The pink height uses the same amplitude and sine of two theta.
+
+00:01:31.405 --> 00:01:33.858
+Watch the matched dots on the two ellipses.
+
+00:01:33.858 --> 00:01:39.084
+Each samples a different component of the same complex number at the same boundary point.
+
+00:01:39.084 --> 00:01:40.513
+Stop at thirty degrees.
+
+00:01:40.513 --> 00:01:44.011
+W is sixty one over one hundred and forty four.
+
+00:01:44.011 --> 00:01:51.519
+The weighted arrow is about two point seven two nine thousandths long and makes an angle of sixty degrees.
+
+00:01:51.519 --> 00:01:56.788
+Its horizontal projection is about one point three six five thousandths.
+
+00:01:56.788 --> 00:02:01.694
+Its vertical projection is about two point three six four thousandths.
+
+00:02:01.694 --> 00:02:04.403
+Both heights already include both coefficients.
+
+00:02:04.403 --> 00:02:07.517
+The transposed cell is the complex conjugate.
+
+00:02:07.517 --> 00:02:12.295
+The two imaginary parts cancel point by point, and the two real parts add.
+
+00:02:12.295 --> 00:02:16.839
+Summing all nine cells gives the nonnegative three-wave energy density.
+
+00:02:17.139 --> 00:02:19.584
+Three diagonals survive a full turn.
+
+00:02:19.584 --> 00:02:22.421
+The squared speed has three angular frequencies.
+
+00:02:22.421 --> 00:02:27.369
+Its constant is ninety seven over one hundred and forty four at our radius.
+
+00:02:27.369 --> 00:02:32.745
+Its two side frequencies, plus two and minus two, both carry minus one quarter.
+
+00:02:32.745 --> 00:02:36.819
+By Parseval, averaging the product keeps only its constant part.
+
+00:02:36.819 --> 00:02:39.463
+Equal indices give the main diagonal.
+
+00:02:39.463 --> 00:02:45.756
+A difference of two in either direction selects the adjacent diagonals in this even-frequency grid.
+
+00:02:45.756 --> 00:02:48.081
+Every other entry averages to zero.
+
+00:02:48.381 --> 00:02:50.144
+Read one negative neighbour.
+
+00:02:50.144 --> 00:02:52.319
+Choose row four and column six.
+
+00:02:52.319 --> 00:02:53.961
+Their difference is plus two.
+
+00:02:53.961 --> 00:03:01.641
+The minus two wave of the speed cancels that angular frequency, leaving minus one quarter times c four times c six.
+
+00:03:01.641 --> 00:03:05.203
+Its transposed neighbour contributes the same real mean.
+
+00:03:05.203 --> 00:03:07.378
+Together they subtract half the product.
+
+00:03:07.378 --> 00:03:10.663
+Add the diagonal weights and both neighbouring directions.
+
+00:03:10.663 --> 00:03:17.532
+For three retained waves the weighted mean squared magnitude is about zero point zero one nine four nine.
+

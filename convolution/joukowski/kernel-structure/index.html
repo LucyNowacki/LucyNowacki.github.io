@@ -4,11 +4,11 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Circle structure of the second-kind kernel · Joukowski–Legendre</title>
 <meta name="description" content="Explore the one-sided opposite-parity Laurent tail of the second-kind Legendre kernel and its geometric decay.">
-<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../math-window.css?v=2bca698ac08e"><link rel="stylesheet" href="../coefficient-lessons.css?v=cff5ff89777e"><link rel="stylesheet" href="style.css?v=5f1d63edb77e">
+<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../math-window.css?v=2bca698ac08e"><link rel="stylesheet" href="../coefficient-lessons.css?v=cff5ff89777e"><link rel="stylesheet" href="style.css?v=3f59c6f607df">
 <script defer src="../../mathjax-config.js?v=fb5c0f9a8785"></script><script defer src="../../vendor/tex-svg.js?v=d4295dc33744"></script>
 <script defer src="../../vendor/d3.min.js?v=f2094bbf6141"></script><script defer src="../math-window.js?v=31277e048601"></script><script defer src="../coefficient-math.js?v=ede7bfda9876"></script>
-<script defer src="../lesson-navigation.js?v=bb9ff39db220"></script><script defer src="origin.js?v=0a9d66869996"></script><script defer src="filters.js?v=01bef8225d8b"></script><script defer src="disc.js?v=742123d354c9"></script><script defer src="pullback.js?v=302196da414e"></script><script defer src="pair-hump.js?v=5dc51514a2a9"></script><script defer src="pair-expansion.js?v=4f6b63766e83"></script><script defer src="jacobian.js?v=08e785f40e62"></script><script defer src="spatial.js?v=975620acaad9"></script><script defer src="../coefficient-lessons.js?v=ad2d0604d318"></script><script defer src="lesson.js?v=60fdbb76d36e"></script>
-<link rel="stylesheet" href="../home-palette.css?v=ca2188dd1bc9">
+<script defer src="../lesson-navigation.js?v=bb9ff39db220"></script><script defer src="kernel-circuit.js?v=2befa9b85c25"></script><script defer src="origin.js?v=0a9d66869996"></script><script defer src="filters.js?v=78c81e68cf8a"></script><script defer src="disc.js?v=742123d354c9"></script><script defer src="pullback.js?v=302196da414e"></script><script defer src="pair-hump.js?v=5dc51514a2a9"></script><script defer src="pair-expansion.js?v=89c7a1804da5"></script><script defer src="jacobian.js?v=a483faf73425"></script><script defer src="spatial.js?v=975620acaad9"></script><script defer src="../coefficient-lessons.js?v=ad2d0604d318"></script><script defer src="lesson.js?v=fcbe83f0a5c3"></script>
+<link rel="stylesheet" href="../home-palette.css?v=7aed544b8fa9">
 </head>
 <body class="coefficient-page">
 <a class="skip" href="#lesson-lab">Skip to the interactive lesson</a>
@@ -16,7 +16,7 @@
 <main class="coefficient-main">
 <header class="lesson-intro math-static"><p class="eyebrow">THESIS WALKTHROUGH · SUBSECTION <bdi data-thesis-ref="legEDMD:subsec-Qn-circle-structure">3.2.5</bdi> · LEMMA <bdi data-thesis-ref="legEDMD:lem-1-8">3.24</bdi></p><h1>Circle structure of the second-kind kernel</h1>
 <p>Why does the kernel that extracts the degree-three Legendre coefficient start with \(z^{-4}\), miss \(z^{-5}\), and return at \(z^{-6}\)? Follow one frequency from its birth in a geometric series to its place in the contour integral.</p>
-<a class="kw-start" href="#lesson-lab">Explore the circle construction ↓</a>
+<div class="kf-links"><a class="kf-watch" href="../../kernel-frequencies-film/index.html">▶ Watch the narrated lesson</a><a class="kw-start" href="#lesson-lab">Explore the six steps</a><a class="kw-start" href="#kernel-circuit">Try the closing circuit</a></div>
 </header>
 <nav class="thesis-switcher" data-lesson-navigation data-lesson="kernel-structure" aria-label="Switch thesis lesson"><a href="../index.html"><span>1 · Laurent expansion</span><small>How the finite packet is formed</small></a><a href="../real-line/index.html"><span>2 · Real-line stability</span><small>The neutral radius-one case</small></a><a href="../ellipse-growth/index.html"><span>3 · Geometric growth</span><small>Radial weights on an ellipse</small></a><a href="../contour-coefficients/index.html"><span>4 · Boundary coefficients</span><small>Recover a coefficient from a circuit</small></a><a href="index.html" aria-current="page"><span>5 · Kernel frequencies</span><small>Viewing this lesson</small></a><a href="../hinf-coefficients/index.html"><span>6 · Bounded analytic coefficients</span><small>From boundary size to decay</small></a><a href="../hardy-coefficients/index.html"><span>7 · Hardy coefficients and tails</span><small>From angular energy to truncation</small></a><a href="../factorisation/index.html"><span>8 · Factorisation and embeddings</span><small>Follow the function through three operations</small></a><a href="../weighted-synthesis/index.html"><span>9 · Weighted synthesis and tails</span><small>Split the coefficient budget</small></a><a href="../hardy-to-uniform/index.html"><span>10 · Hardy to uniform</span><small>From angular energy to a pointwise ceiling</small></a><a href="../uniform-to-hardy/index.html"><span>11 · Uniform to Hardy</span><small>From a ceiling to angular energy</small></a><a href="../transfer-tails/index.html"><span>12 · Two gaps and operator tails</span><small>Balance the input and output restrictions</small></a></nav>
 <noscript><p>The proof remains readable below. Enable JavaScript to render the formulas and explore the linked diagrams.</p></noscript>
@@ -30,6 +30,7 @@
     <button type="button" aria-controls="kernel-pullback" aria-pressed="false">5 · Pull-back &amp; tangents</button>
     <button type="button" aria-controls="kernel-jacobian" aria-pressed="false">6 · Contour weights</button>
   </div>
+  <div class="kf-chapter-link"><a id="kf-step-film" href="../../kernel-frequencies-film/exterior-circle.html">▶ Watch Exterior circle</a></div>
   <div class="viz-controls">
     <label class="form-label">Legendre degree <span data-value="n" class="tabular-nums"></span><input class="form-range" data-input="n" type="range" min="0" max="8" step="1" value="3"></label>
     <label class="form-label">Circle radius <span data-value="rho" class="tabular-nums"></span><input class="form-range" data-input="rho" type="range" min="1.15" max="2.5" step="0.01" value="1.5"></label>
@@ -151,7 +152,12 @@
       <svg class="pb-wave" role="img" aria-label="Angular profile with a movable point and dashed line at its full-circle mean"></svg>
       <output id="pb-wave-read"></output>
       <p class="math-static">The dot follows \(\theta\). The dashed line is the full-turn mean. The energy views use the \(L\) retained terms \(Q_{n,L}=\sum_k c_k e^{-ik\theta}\), with \(c_k=\sigma_{n,k}\varrho^{-k}\).</p>
-      <p class="math-static"><strong>Parseval’s role.</strong> In the unweighted mean, \(\langle e^{i(\ell-k)\theta}\rangle=0\) unless \(k=\ell\). Hence \(\langle |Q_{n,L}|^2\rangle=\sum_k c_k^2\). The squared speed adds frequencies \(0,\pm2\). After multiplication a pair can have zero total frequency when \(\ell-k=0\) or \(\pm2\). Each ordered neighbour contributes \(-c_kc_\ell/4\).</p>
+      <p><strong>Parseval’s role.</strong> Over one full turn each rotating wave cancels. The constant wave has mean one.</p>
+      <div class="math-static lesson-formula">\[\frac{1}{2\pi}\int_0^{2\pi}e^{i(\ell-k)\theta}\,d\theta
+        =\begin{cases}1,&amp; k=\ell,\\[2pt]0,&amp; k\ne\ell.\end{cases}\]</div>
+      <p>In the unweighted squared modulus, only equal-frequency pairs contribute to the integral.</p>
+      <div class="math-static lesson-formula">\[\frac{1}{2\pi}\int_0^{2\pi}|Q_{n,L}(\theta)|^2\,d\theta=\sum_k c_k^2.\]</div>
+      <p class="math-static">The squared speed adds frequencies \(0,\pm2\). After multiplication a pair has a constant term when \(\ell-k=0\) or \(\pm2\). Each ordered neighbour contributes \(-c_kc_\ell/4\).</p>
       <button type="button" data-pb-contour="pairs" data-pb-average="mean" id="pb-pairs">Inspect the surviving pairs in Contour weights →</button>
     </article>
   </section>
@@ -165,15 +171,60 @@
 <div id="kernel-calculations" class="kernel-calculations">
   <h3>Worked calculations</h3>
   <div role="group" aria-label="Open a step-by-step calculation">
-    <button type="button" data-explain="kernel-reflection" aria-haspopup="dialog">1 · Reflect the integral</button>
-    <button type="button" data-explain="kernel-product" aria-haspopup="dialog">2 · Integrate one cosine mode</button>
-    <button type="button" data-explain="kernel-sigma34" aria-haspopup="dialog">3 · Compute \(\sigma_{3,4}\)</button>
-    <button type="button" data-explain="kernel-chebyshev" aria-haspopup="dialog">4 · Derive \(U_0\) through \(U_3\)</button>
+    <button type="button" id="kf-work-reflection" data-explain="kernel-reflection" aria-haspopup="dialog">1 · Reflect the integral</button>
+    <button type="button" id="kf-work-product" data-explain="kernel-product" aria-haspopup="dialog">2 · Integrate one cosine mode</button>
+    <button type="button" id="kf-work-sigma34" data-explain="kernel-sigma34" aria-haspopup="dialog">3 · Compute \(\sigma_{3,4}\)</button>
+    <button type="button" id="kf-work-chebyshev" data-explain="kernel-chebyshev" aria-haspopup="dialog">4 · Derive \(U_0\) through \(U_3\)</button>
   </div>
+<nav class="kf-worked" aria-label="Watch worked calculations"><span>Watch the calculations</span><a href="../../kernel-frequencies-film/frequency-filters.html#t=34.148">Reflection</a> <a href="../../kernel-frequencies-film/frequency-filters.html#t=56.942">Cosine integral</a> <a href="../../kernel-frequencies-film/frequency-filters.html#t=146.751">First surviving coefficient</a> <a href="../../kernel-frequencies-film/frequency-filters.html#t=0.26">Chebyshev recurrence</a></nav>
 </div>
 <p>Expand the Cauchy kernel after the Joukowski substitution. The surviving coefficients are ordinary real integrals, and their exact zeros follow from degree and parity.</p><div class="lesson-formula">\[\sigma_{n,k}=\int_0^\pi P_n(\cos t)\sin(kt)\,dt=\int_{-1}^{1}P_n(x)U_{k-1}(x)\,dx\quad(k\ge1).\]</div><p>Here \(U_{k-1}\) is the Chebyshev polynomial of the second kind. This formula follows from \(\sin(kt)=\sin t\,U_{k-1}(\cos t)\).</p><div class="lesson-proof-grid"><article class="card"><h3>1 · Remove lower degrees</h3><p>For \(1\le k\le n\), \(U_{k-1}\) has degree less than \(n\). Legendre orthogonality therefore gives \(\sigma_{n,k}=0\). Also \(\sigma_{n,0}=0\) directly.</p><div class="lesson-formula">\[k\le n\quad\Longrightarrow\quad\sigma_{n,k}=0.\]</div></article><article class="card"><h3>2 · Remove the matching parity</h3><p>Reflecting \(t\) to \(\pi-t\) gives \(\sigma_{n,k}=(-1)^{n+k+1}\sigma_{n,k}\). When \(n\) and \(k\) have the same parity, this forces a zero.</p><div class="lesson-formula">\[k=n+1,n+3,n+5,\ldots\]</div><p>The remaining indices have the opposite parity to \(n\).</p></article><article class="card"><h3>3 · Bound the surviving weights</h3><p>The non-negative cosine packet for \(P_n(\cos t)\) makes each surviving contribution non-negative. The real-line bound \(|P_n(x)|\le1\) and \(\int_0^\pi|\sin(kt)|dt=2\) give</p><div class="lesson-formula">\[0\le\sigma_{n,k}\le2.\]</div><p>The first possible coefficient \(\sigma_{n,n+1}\) is strictly positive.</p></article></div></section>
 <section class="lesson-proof math-static"><div class="lesson-section-heading"><h2>Decay comes from the radius</h2><button type="button" data-explain="kernel-tail">Intuitive/geometric explanation</button></div><p>On \(z=\varrho e^{i\theta}\), the unit factor \(e^{-ik\theta}\) controls direction, while \(\varrho^{-k}\) shrinks the length. The powers along the ladder have ratio \(\varrho^{-2}\). The coefficients themselves need not have a constant ratio.</p><div class="lesson-formula">\[|Q_n(\Gamma_\varrho(\theta))|\le2\sum_{q=0}^{\infty}\varrho^{-(n+1+2q)}=\frac{2\varrho^{-n}}{\varrho-\varrho^{-1}}.\]</div><p>Increasing \(n\) moves the first surviving power farther down the tail. This is where the factor \(\varrho^{-n}\) in the coefficient estimate comes from. For \(f\in A(E_\varrho)\), insert the envelope into the contour integral for \(a_n(f)\) and multiply by the boundary length.</p><div class="lesson-formula">\[|a_n(f)|\le\frac{(2n+1)|\partial E_\varrho|}{\pi(\varrho-\varrho^{-1})}\max_{\partial E_\varrho}|f|\,\varrho^{-n}.\]</div><p><a href="../hinf-coefficients/index.html">Explore the coefficient estimate in Lesson 6 →</a></p><div class="card"><h3>The pulled-back contour also needs its Jacobian</h3><div class="lesson-formula">\[\widetilde Q_n(z)=Q_n(\operatorname{Jouk}(z))\,\frac12(1-z^{-2}).\]</div><p>The displayed arrows sum \(Q_n(\operatorname{Jouk}(z))\). The actual circle-contour kernel includes \(\operatorname{Jouk}'(z)\), so its coefficients are shifted differences and are not the same non-negative \(\sigma_{n,k}\).</p></div></section>
 <details class="card lesson-source math-static"><summary>Source, convergence and numerical meaning</summary><p>This is Subsection <bdi data-thesis-ref="legEDMD:subsec-Qn-circle-structure">3.2.5</bdi>, Lemma <bdi data-thesis-ref="legEDMD:lem-1-8">3.24</bdi>, of the integrated thesis. Its cited source is Bandtlow's EDMD–Legendre Lemma 1.8. The series converges absolutely and uniformly on every fixed circle \(|z|=\varrho>1\).</p><p>The coefficients use the classical \(P_n(1)=1\) convention. The code evaluates the finite positive cosine-packet expression for \(\sigma_{n,k}\); structural degree and parity zeros are imposed exactly. All nonzero readouts use floating-point arithmetic.</p><p>\(B_L\) bounds the omitted series in exact arithmetic, uniformly in \(\theta\). It does not include floating-point rounding error. The plotted endpoint is \(Q_{n,L}\), not the infinite sum.</p></details>
+<section class="kf-circuit math-static" id="kernel-circuit" aria-labelledby="kf-title">
+  <header><h2 id="kf-title">One circuit, two integrals</h2>
+    <p>Use \(f=P_3\) and follow \(\omega=\Gamma_\rho(\theta)\). Select a matrix entry to see its wave on the ellipse and the value it has added so far.</p>
+    <a class="kf-watch" href="../../kernel-frequencies-film/putting-it-together.html">▶ Watch the closing circuit</a>
+  </header>
+  <div class="kf-modes" role="group" aria-label="Integral to follow"><button type="button" data-kf-kind="contour" aria-pressed="true">Recover the coefficient</button><button type="button" data-kf-kind="hardy" aria-pressed="false">Measure the Hardy energy</button></div>
+  <div id="kf-contour-proof">
+    <div class="kf-eqn">\(\displaystyle a_3(P_3)=\frac7{2\pi i}\oint_{\partial E_\rho} P_3(\omega)Q_3(\omega)\,d\omega
+      =\frac1{2\pi}\int_0^{2\pi}\!7P_3(J(z))Q_3(J(z))\,zJ'(z)\,d\theta.\)</div>
+    <p>The column supplies a kernel wave \(z^{-k}\), the row an input power \(z^m\). The tangent contributes \(zJ'(z)=(z-z^{-1})/2\). Only a product with exponent zero survives a full turn.</p>
+  </div>
+  <div id="kf-hardy-proof" hidden>
+    <div class="kf-eqn">\(\displaystyle H_L=\frac1{2\pi}\int_0^{2\pi}|Q_{3,L}(\Gamma_\rho)|^2|\Gamma_\rho'|^2\,d\theta
+      =d\sum_k c_k^2-\frac12\sum_k c_kc_{k+2},\quad d=\frac{\rho^2+\rho^{-2}}4.\)</div>
+    <p>Here \(c_k=\sigma_{3,k}\rho^{-k}\). Pair a kernel wave with a conjugate wave, then multiply by the squared speed. Its frequencies \(0,+2,-2\) select the three matrix diagonals. The sum of all entries is the mean squared magnitude of the tangent-weighted kernel.</p>
+  </div>
+  <div class="kf-sliders">
+    <label>Boundary angle θ <output id="kf-angle-label"></output><input id="kf-angle" type="range" min="0" max="360" step="1" value="30"></label>
+    <label>Circle radius ρ <output id="kf-radius-label"></output><input id="kf-radius" type="range" min="1.25" max="2.25" step=".01" value="1.5"></label>
+    <label>Retained waves L <output id="kf-terms-label"></output><input id="kf-terms" type="range" min="1" max="5" step="1" value="3"></label>
+  </div>
+  <div class="kf-actions"><button type="button" id="kf-play" aria-pressed="false">Play circuit</button><button type="button" id="kf-full">Finish turn · 360°</button><button type="button" id="kf-reset">Film example · 30°</button></div>
+  <div class="kf-workbench">
+    <figure><figcaption>Ellipse and rotating tangent</figcaption>
+      <svg id="kf-ellipse" viewBox="0 0 380 255" role="img" aria-label="Oblique view of the ellipse with signed wave heights, boundary point and tangent"></svg>
+      <label>Signed height <select id="kf-surface"><option value="wave">Selected kernel wave</option><option value="entry">Selected matrix entry · real part</option><option value="total">Whole retained integrand · real part</option></select></label>
+      <div class="kf-eqn" id="kf-wave-math">\(h_k(\alpha;\phi)=\Re\!\left(e^{i\phi}c_ke^{-ik\alpha}\right)\)</div>
+      <div id="kf-wave-ctrl"><button type="button" id="kf-wave" aria-pressed="false">Animate wave phase</button><output id="kf-phase"></output></div>
+      <p id="kf-geometry-note"></p>
+    </figure>
+    <div class="kf-grid-card"><h3 id="kf-matrix-title">Frequency products</h3><label>Entries <select id="kf-cell-view"><option value="mean">Full-turn mean</option><option value="point">At the moving point · real part</option></select></label>
+      <div id="kf-matrix"></div><p id="kf-entries-note"></p></div>
+    <figure><figcaption id="kf-trace-title">Running integral in the complex plane</figcaption>
+      <svg id="kf-trace" viewBox="0 0 380 255" role="img" aria-labelledby="kf-trace-title"></svg>
+      <label>Trace <select id="kf-trace-view"><option value="sum">Whole integral</option><option value="entry">Magnify selected entry</option></select></label>
+      <details id="kf-im-detail" open><summary>Magnify the imaginary excursion</summary>
+        <svg id="kf-im-plot" viewBox="0 0 380 128" role="img" aria-label="Imaginary part of the partial integral versus angle on a magnified signed scale"></svg>
+      </details><p id="kf-trace-note"></p>
+    </figure>
+  </div>
+  <div class="kf-selected"><h3 id="kf-selected-title">Selected product</h3><div id="kf-equation" class="kf-eqn"></div></div>
+  <div id="kf-readings"></div>
+  <p id="kf-end-note"></p>
+</section>
 <footer class="coefficient-footer"><a href="../contour-coefficients/index.html">← Boundary coefficients</a><a href="../hinf-coefficients/index.html">H∞ coefficient bound →</a></footer>
 </main>
 <template id="explain-kernel-arrows"><h3>The arrow lives in the value plane</h3><p>The point \(z=\varrho e^{i\theta}\) moves on an input circle and maps to the ellipse. The arrows shown here represent complex contributions to the output \(Q_n\).</p><div class="lesson-formula">\[v_k=\underbrace{\sigma_{n,k}\varrho^{-k}}_{\text{length}}\,\underbrace{e^{-ik\theta}}_{\text{unit direction}}.\]</div><p>The arrow length is neither the circle radius nor an ellipse semiaxis. With \(\varrho\) fixed, changing \(\theta\) rotates an arrow without changing its length. Its negative frequency makes it rotate clockwise.</p><p>The spectrum's horizontal index is \(k\), but the Laurent exponent is \(-k\). The matching colours connect each spectrum height with its translated arrow. The dashed resultant is the sum of retained terms.</p></template>
@@ -212,7 +263,7 @@
   <p>The last terms cancel. Divide the sum by two and take \(A=kt,\ B=mt\).</p>
   <div class="lesson-formula">\[\sin(kt)\cos(mt)=\tfrac12\big[\sin((k+m)t)+\sin((k-m)t)\big].\]</div>
   <h4>2 · Split the integral</h4>
-  <p>Write \(S_\ell=\int_0^\pi\sin(\ell t)\,dt\). Linearity gives</p>
+  <p>Here \(\ell\) is the frequency of either new sine wave. With \(k=4\) and \(m=3\), the two choices are \(\ell=7\) and \(\ell=1\). Write their signed areas as \(S_\ell=\int_0^\pi\sin(\ell t)\,dt\). Linearity gives</p>
   <div class="lesson-formula">\[I_{k,m}=\int_0^\pi\cos(mt)\sin(kt)\,dt=\tfrac12(S_{k+m}+S_{k-m}).\]</div>
   <h4>3 · Evaluate the two endpoint contributions</h4>
   <div class="lesson-formula">\[S_\ell=\left[-\frac{\cos(\ell t)}{\ell}\right]_0^\pi

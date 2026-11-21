@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.280 --> 00:00:01.939
+Why exactly one?
+
+00:00:01.939 --> 00:00:05.784
+Can a Legendre mode exceed one in absolute value?
+
+00:00:06.114 --> 00:00:08.259
+Every phase has modulus one.
+
+00:00:08.259 --> 00:00:11.234
+Each carries a positive weight, in every degree.
+
+00:00:11.564 --> 00:00:13.877
+Normalization gives the total weight.
+
+00:00:13.877 --> 00:00:16.596
+At angle zero, all phases equal one.
+
+00:00:16.596 --> 00:00:19.267
+The weights sum to P sub n of one, which is one.
+
+00:00:19.597 --> 00:00:21.092
+The disk is convex.
+
+00:00:21.092 --> 00:00:26.084
+It contains every weighted mean of these points, so the absolute value is at most one.
+
+00:00:26.414 --> 00:00:28.601
+The bound covers the whole interval.
+
+00:00:28.601 --> 00:00:32.899
+Every x from minus one to one is cosine t for some angle.
+
+00:00:33.229 --> 00:00:35.919
+Now line up the phases at angle zero.
+
+00:00:35.919 --> 00:00:38.395
+The mean reaches one at the right endpoint.
+
+00:00:38.395 --> 00:00:41.254
+The supremum is exactly one, in every degree.
+

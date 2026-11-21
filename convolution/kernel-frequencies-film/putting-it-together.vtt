@@ -1,0 +1,110 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.300
+Begin again with Cauchy’s formula.
+
+00:00:02.300 --> 00:00:05.243
+Return to the ellipse enclosing the real interval.
+
+00:00:05.243 --> 00:00:10.874
+For each x, the moving denominator omega minus x supplies a Cauchy kernel.
+
+00:00:10.874 --> 00:00:17.380
+Weight it by P three of x and integrate across the interval to form Q three, with its factor of one half.
+
+00:00:17.380 --> 00:00:24.015
+For the coefficient, multiply Q three on the boundary by the input P three and the oriented tangent.
+
+00:00:24.015 --> 00:00:28.708
+Include seven divided by two pi i and start the running integral at zero.
+
+00:00:29.008 --> 00:00:31.453
+Follow one angle through the construction.
+
+00:00:31.453 --> 00:00:33.330
+Watch the circle point move.
+
+00:00:33.330 --> 00:00:40.710
+Its image chooses the ellipse sample, its phase turns the kernel arrows, and its tangent supplies the oriented step.
+
+00:00:40.710 --> 00:00:43.888
+In parallel, the squared speed weights the pair matrix.
+
+00:00:43.888 --> 00:00:47.600
+One accumulator adds complex increments for the coefficient.
+
+00:00:47.600 --> 00:00:52.506
+The other adds a real, nonnegative rate for the three-mode Hardy energy.
+
+00:00:52.506 --> 00:00:55.151
+The same geometry drives both measurements.
+
+00:00:55.451 --> 00:00:57.576
+Integrate one short arc at a time.
+
+00:00:57.576 --> 00:00:59.367
+Keep the three kernel arrows.
+
+00:00:59.367 --> 00:01:03.783
+At each ellipse point, first add them to get a single complex number, S.
+
+00:01:03.783 --> 00:01:11.441
+For the coefficient, multiply S by the input polynomial and the oriented tangent, with the normalization shown.
+
+00:01:11.441 --> 00:01:15.814
+This is the rate of change of the running complex integral per radian.
+
+00:01:15.814 --> 00:01:22.064
+For the Hardy energy, take the squared magnitude of S times the tangent, and divide by two pi.
+
+00:01:22.064 --> 00:01:24.815
+This second rate is real and nonnegative.
+
+00:01:24.815 --> 00:01:28.014
+Follow just the arc from thirty to forty five degrees.
+
+00:01:28.014 --> 00:01:33.710
+As the arrows turn, the complex rate changes direction and the energy rate changes height.
+
+00:01:33.710 --> 00:01:43.373
+Over this arc the coefficient accumulator gains about zero point zero three nine six six minus zero point zero zero one four eight i.
+
+00:01:43.373 --> 00:01:48.364
+The energy gains about seven hundred and seventy-one and a half millionths.
+
+00:01:48.364 --> 00:01:51.222
+Joining consecutive arcs adds their increments.
+
+00:01:51.222 --> 00:01:59.819
+After one full turn these three waves give a coefficient of one, and a weighted energy of about zero point zero one nine four nine.
+
+00:01:59.819 --> 00:02:01.632
+The full kernel has further waves.
+
+00:02:01.632 --> 00:02:10.208
+In this cubic example they change the coefficient along a partial arc, but their contributions integrate to zero over a complete turn.
+
+00:02:10.508 --> 00:02:12.078
+Complete the two integrals.
+
+00:02:12.078 --> 00:02:14.766
+At the end of the turn, the coefficient is one.
+
+00:02:14.766 --> 00:02:16.493
+See which frequencies made it.
+
+00:02:16.493 --> 00:02:23.191
+The input supplies plus three, the kernel supplies minus four, and the tangent factor supplies plus one.
+
+00:02:23.191 --> 00:02:24.513
+Their sum is zero.
+
+00:02:24.513 --> 00:02:31.766
+The surviving product is seven halves times five sixteenths times thirty two over thirty five, exactly one.
+
+00:02:31.766 --> 00:02:37.419
+Higher kernel modes change the partial trace, and their full-turn contributions vanish here.
+
+00:02:37.419 --> 00:02:44.565
+The three-mode Hardy energy finishes near zero point zero one nine four nine, from its three matrix diagonals.
+

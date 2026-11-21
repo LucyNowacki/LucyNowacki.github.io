@@ -1,0 +1,824 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.406
+One contour contains a spectrum.
+
+00:00:02.406 --> 00:00:06.438
+How can a trip around an ellipse pick out one polynomial coefficient?
+
+00:00:06.438 --> 00:00:09.786
+Take the third Legendre polynomial as the input.
+
+00:00:09.786 --> 00:00:12.218
+Its own degree three coefficient is one.
+
+00:00:12.218 --> 00:00:16.121
+Cauchy’s formula first recovers a value inside the ellipse.
+
+00:00:16.121 --> 00:00:22.009
+Weight those interior values by the third Legendre polynomial and collect their Cauchy kernels.
+
+00:00:22.009 --> 00:00:23.523
+The result is Q three.
+
+00:00:23.523 --> 00:00:29.005
+We will open that kernel, follow its waves around the ellipse, then put the integral back together.
+
+00:00:29.305 --> 00:00:30.790
+Separate the two angles.
+
+00:00:30.790 --> 00:00:34.288
+Turn theta on the exterior circle of radius three halves.
+
+00:00:34.288 --> 00:00:36.912
+Its point z maps to omega on the ellipse.
+
+00:00:36.912 --> 00:00:40.346
+Now hold theta still and turn t on the unit circle.
+
+00:00:40.346 --> 00:00:46.233
+The two unit points at angles t and minus t both map to x equal to cosine t.
+
+00:00:46.233 --> 00:00:50.542
+As t moves from zero to pi, x moves from one to minus one.
+
+00:00:50.542 --> 00:00:55.086
+The vector from x to omega supplies the denominator in the Cauchy kernel.
+
+00:00:55.386 --> 00:00:57.468
+Expand on the exterior circle.
+
+00:00:57.468 --> 00:00:59.537
+Divide each unit point by z.
+
+00:00:59.537 --> 00:01:03.099
+Both ratios have length two thirds, so their powers shrink.
+
+00:01:03.099 --> 00:01:07.024
+Subtract the two geometric series and divide by two i.
+
+00:01:07.024 --> 00:01:12.207
+At level k, the difference produces sine of k t times z to the minus k.
+
+00:01:12.207 --> 00:01:16.878
+The sum equals sine t over twice omega minus twice cosine t.
+
+00:01:16.878 --> 00:01:22.446
+The same geometric bound works at every t, which lets us integrate each wave separately.
+
+00:01:22.746 --> 00:01:25.618
+Read one coefficient as two signed areas.
+
+00:01:25.618 --> 00:01:30.481
+Multiply the sine wave at frequency k by P three of cosine t.
+
+00:01:30.481 --> 00:01:34.065
+Its signed area from zero to pi is sigma three k.
+
+00:01:34.065 --> 00:01:37.094
+Change coordinates to x equal to cosine t.
+
+00:01:37.094 --> 00:01:44.645
+The factor sine t in the differential cancels the sine t in the identity for the second kind Chebyshev polynomial.
+
+00:01:44.645 --> 00:01:52.602
+After reversing the limits, the same area is the integral of P three times U sub k minus one, from minus one to one.
+
+00:01:52.602 --> 00:01:54.564
+Keep frequency four in mind.
+
+00:01:54.564 --> 00:01:56.398
+We will compute its area exactly.
+
+00:01:57.260 --> 00:01:59.620
+Degree removes the first frequencies.
+
+00:01:59.620 --> 00:02:04.462
+Divide sine of k t by sine t and put x equal to cosine t.
+
+00:02:04.462 --> 00:02:09.901
+At k equal to one we get one, and the double angle gives two x at k equal to two.
+
+00:02:09.901 --> 00:02:12.780
+The sine addition formulas give the recurrence.
+
+00:02:12.780 --> 00:02:17.815
+Multiply the previous polynomial by two x and subtract the one before it.
+
+00:02:17.815 --> 00:02:22.763
+This produces four x squared minus one, then eight x cubed minus four x.
+
+00:02:22.763 --> 00:02:24.533
+The degree is k minus one.
+
+00:02:24.533 --> 00:02:30.848
+For k up to three, that degree is below three, so orthogonality to P three makes the area zero.
+
+00:02:31.148 --> 00:02:32.569
+Reflect the integrand.
+
+00:02:32.569 --> 00:02:34.382
+Pair t with pi minus t.
+
+00:02:34.382 --> 00:02:37.944
+The Legendre sign is minus one raised to the power n.
+
+00:02:37.944 --> 00:02:41.036
+For the sine sign, the exponent is k plus one.
+
+00:02:41.036 --> 00:02:45.622
+For n equal to three and k equal to five, the product changes sign.
+
+00:02:45.622 --> 00:02:47.350
+The reflected areas cancel.
+
+00:02:47.350 --> 00:02:49.333
+At k equal to four they agree.
+
+00:02:49.333 --> 00:02:53.642
+Equal parity forces zero, while opposite parity passes this filter.
+
+00:02:53.942 --> 00:02:55.790
+Integrate one cosine mode.
+
+00:02:55.790 --> 00:03:01.571
+Here k labels the test sine and m labels one cosine in the Legendre polynomial.
+
+00:03:01.571 --> 00:03:04.642
+Take k equal to four and m equal to three.
+
+00:03:04.642 --> 00:03:08.994
+The product splits into two sine waves, each with a factor of one half.
+
+00:03:08.994 --> 00:03:11.788
+Call the frequency of either new sine wave ell.
+
+00:03:11.788 --> 00:03:15.072
+For the cyan wave, ell is four plus three, or seven.
+
+00:03:15.072 --> 00:03:18.122
+For the pink wave, ell is four minus three, or one.
+
+00:03:18.122 --> 00:03:20.277
+Read all three graphs at the same t.
+
+00:03:20.277 --> 00:03:25.012
+At pi over six, the two heights are minus one quarter and plus one quarter.
+
+00:03:25.012 --> 00:03:28.511
+Their sum is zero, exactly the height of the white product.
+
+00:03:28.811 --> 00:03:31.192
+Seven half-waves leave one signed lobe.
+
+00:03:31.192 --> 00:03:35.351
+First look at sine of seven t before multiplying by one half.
+
+00:03:35.351 --> 00:03:40.236
+Between zero and pi there are four positive lobes and three negative ones.
+
+00:03:40.236 --> 00:03:44.203
+A negative lobe cancels a positive lobe of the same size.
+
+00:03:44.203 --> 00:03:46.741
+The one left over has area two sevenths.
+
+00:03:46.741 --> 00:03:51.071
+The wave at frequency one has a single positive lobe of area two.
+
+00:03:51.071 --> 00:03:52.948
+Why two divided by ell?
+
+00:03:52.948 --> 00:03:57.363
+The antiderivative is minus cosine of ell t divided by ell.
+
+00:03:57.363 --> 00:04:03.571
+For positive odd ell, cosine changes from one to minus one, giving two divided by ell.
+
+00:04:03.571 --> 00:04:04.935
+Restore the two halves.
+
+00:04:04.935 --> 00:04:09.521
+The cyan wave contributes one seventh and the pink wave contributes one.
+
+00:04:09.521 --> 00:04:11.291
+Together they give eight sevenths.
+
+00:04:11.291 --> 00:04:18.843
+For any k greater than the absolute value of m and of opposite parity, both new frequencies are positive and odd.
+
+00:04:18.843 --> 00:04:23.451
+The same addition gives two k divided by k squared minus m squared.
+
+00:04:23.751 --> 00:04:26.089
+Compute the first surviving coefficient.
+
+00:04:26.089 --> 00:04:32.830
+The cosine packet of P three has weight five eighths at frequency three and three eighths at frequency one.
+
+00:04:32.830 --> 00:04:34.493
+Take k equal to four.
+
+00:04:34.493 --> 00:04:39.378
+The frequency three integral gives eight sevenths, and its weight leaves five sevenths.
+
+00:04:39.378 --> 00:04:44.199
+The frequency one integral gives eight fifteenths, and its weight leaves one fifth.
+
+00:04:44.199 --> 00:04:45.947
+Add the two contributions.
+
+00:04:45.947 --> 00:04:49.766
+The coefficient sigma three four is thirty two over thirty five.
+
+00:04:50.066 --> 00:04:51.679
+Read the surviving ladder.
+
+00:04:51.679 --> 00:04:53.428
+Put the two filters together.
+
+00:04:53.428 --> 00:05:00.318
+After the three low degrees disappear, reflection removes five, seven, and every later odd frequency.
+
+00:05:00.318 --> 00:05:03.474
+Four, six, eight, and their even successors remain.
+
+00:05:03.474 --> 00:05:08.807
+Positive cosine packet weights multiply positive integrals at those frequencies.
+
+00:05:08.807 --> 00:05:13.884
+For the upper bound, the magnitude of P three on the real interval is at most one.
+
+00:05:13.884 --> 00:05:19.515
+Integrating the absolute sine wave gives two, whatever its positive integer frequency.
+
+00:05:19.515 --> 00:05:22.054
+Each surviving weight is therefore at most two.
+
+00:05:22.760 --> 00:05:24.992
+Each power becomes a clockwise wave.
+
+00:05:24.992 --> 00:05:27.764
+Put z equal to rho times the unit phase.
+
+00:05:27.764 --> 00:05:33.097
+Its minus k power has length rho to the minus k and angle minus k theta.
+
+00:05:33.097 --> 00:05:36.787
+Multiply by sigma to get the length of the kernel arrow.
+
+00:05:36.787 --> 00:05:39.816
+Follow four, six, and eight as theta advances.
+
+00:05:39.816 --> 00:05:46.408
+In one positive circuit of the input, the three output arrows make four, six, and eight clockwise turns.
+
+00:05:46.708 --> 00:05:48.214
+Link a crest to its arrow.
+
+00:05:48.214 --> 00:05:50.603
+Unroll the ellipse by its angle theta.
+
+00:05:50.603 --> 00:05:54.741
+The real part of a term is its length times cosine k theta.
+
+00:05:54.741 --> 00:05:59.114
+Its imaginary part is minus that length times sine k theta.
+
+00:05:59.114 --> 00:06:03.252
+The point on the ellipse selects one sample of each signed profile.
+
+00:06:03.252 --> 00:06:08.990
+The two samples are the horizontal and vertical coordinates of the same rotating arrow.
+
+00:06:08.990 --> 00:06:13.619
+At thirty degrees the first arrow points at minus one hundred and twenty degrees.
+
+00:06:13.919 --> 00:06:15.639
+Add the arrows head to tail.
+
+00:06:15.639 --> 00:06:17.451
+Start with the fourth frequency.
+
+00:06:17.451 --> 00:06:21.504
+Carry the sixth arrow to its tip, then carry the eighth to the next tip.
+
+00:06:21.504 --> 00:06:24.213
+Translation keeps each length and direction.
+
+00:06:24.213 --> 00:06:27.306
+The close-up makes the final displacement readable.
+
+00:06:27.306 --> 00:06:30.270
+The endpoint is the sum of three retained terms.
+
+00:06:30.270 --> 00:06:33.940
+The full kernel still contains every later surviving frequency.
+
+00:06:34.240 --> 00:06:36.386
+Watch the sum trace its own curve.
+
+00:06:36.386 --> 00:06:38.369
+Keep the radius at three halves.
+
+00:06:38.369 --> 00:06:41.761
+The numbers c four, c six and c eight are now fixed.
+
+00:06:41.761 --> 00:06:44.853
+Each number is the length of its own rotating arrow.
+
+00:06:44.853 --> 00:06:47.562
+At the right tip of the ellipse, theta is zero.
+
+00:06:47.562 --> 00:06:50.249
+The three arrows point right, so their lengths add.
+
+00:06:50.249 --> 00:06:52.254
+Follow the gold point to the top.
+
+00:06:52.254 --> 00:06:56.776
+The fourth and eighth frequencies face right again, but the sixth faces left.
+
+00:06:56.776 --> 00:06:58.376
+Its length now subtracts.
+
+00:06:58.376 --> 00:07:03.282
+The changing endpoint is the value of the three-wave kernel at that boundary point.
+
+00:07:03.282 --> 00:07:06.694
+It traces the mint curve in the complex output plane.
+
+00:07:06.694 --> 00:07:08.443
+The coefficients stayed fixed.
+
+00:07:08.443 --> 00:07:12.090
+What changed was the phase of each term, and therefore their sum.
+
+00:07:12.090 --> 00:07:15.568
+This moving sum supplies one factor of the boundary integral.
+
+00:07:16.260 --> 00:07:17.916
+Enclose the missing arrows.
+
+00:07:17.916 --> 00:07:21.499
+Place a disc at the endpoint of the three retained arrows.
+
+00:07:21.499 --> 00:07:23.674
+The next surviving frequency is ten.
+
+00:07:23.674 --> 00:07:31.716
+Replacing each omitted sigma by its upper bound of two leaves a geometric series, beginning at twice rho to the minus ten.
+
+00:07:31.716 --> 00:07:34.809
+Successive terms shrink by rho to the minus two.
+
+00:07:34.809 --> 00:07:36.558
+The sum is the disc radius.
+
+00:07:36.558 --> 00:07:40.313
+Whatever the angle, the full kernel lies inside or on that disc.
+
+00:07:40.613 --> 00:07:42.439
+Magnify the remainder disc.
+
+00:07:42.439 --> 00:07:45.894
+Move the origin of the close-up to the finite endpoint.
+
+00:07:45.894 --> 00:07:47.643
+The axes now show offsets.
+
+00:07:47.643 --> 00:07:51.738
+Compare the disc with an independent evaluation of the full kernel.
+
+00:07:51.738 --> 00:07:55.492
+The coloured displacement is the estimated error at this angle.
+
+00:07:55.492 --> 00:07:57.390
+The radius bounds every angle.
+
+00:07:57.390 --> 00:07:59.395
+Keep six terms instead of three.
+
+00:07:59.395 --> 00:08:05.603
+The next exponent advances by six, and the radius shrinks by a factor of two thirds to the sixth power.
+
+00:08:05.903 --> 00:08:07.538
+Align the arrows at zero.
+
+00:08:07.538 --> 00:08:09.052
+Set theta to zero.
+
+00:08:09.052 --> 00:08:15.664
+Every surviving coefficient is positive and all phases equal one, so all the arrows point to the right.
+
+00:08:15.664 --> 00:08:19.952
+Their summed lengths give the true maximum when the whole series is included.
+
+00:08:19.952 --> 00:08:24.026
+With three retained arrows, the sum of their lengths gives a lower bound.
+
+00:08:24.026 --> 00:08:26.926
+Adding the remainder radius gives an upper bound.
+
+00:08:26.926 --> 00:08:30.041
+Turn theta again and watch the arrows lose alignment.
+
+00:08:30.760 --> 00:08:32.757
+One angle locates two points.
+
+00:08:32.757 --> 00:08:35.018
+Choose z on the exterior circle.
+
+00:08:35.018 --> 00:08:38.174
+Its Joukowski image omega lies on the ellipse.
+
+00:08:38.174 --> 00:08:41.950
+Q three of omega is the original function at that point.
+
+00:08:41.950 --> 00:08:47.517
+Q three composed with J is the same value read using the circle coordinate z.
+
+00:08:47.517 --> 00:08:53.106
+Fixing the radius leaves only theta, so the same value reads Q three of gamma of theta.
+
+00:08:53.106 --> 00:08:57.501
+We now have the right address for both the kernel value and its moving tangent.
+
+00:08:57.801 --> 00:09:00.694
+The derivative rotates and stretches the tangent.
+
+00:09:00.694 --> 00:09:03.850
+On the circle the oriented velocity is i z.
+
+00:09:03.850 --> 00:09:10.079
+The derivative of J multiplies that complex vector, giving the ellipse tangent gamma prime.
+
+00:09:10.079 --> 00:09:12.574
+Write the derivative as u plus i v.
+
+00:09:12.574 --> 00:09:15.475
+The first column of its real matrix is u, v.
+
+00:09:15.475 --> 00:09:17.522
+The second is minus v, u.
+
+00:09:17.522 --> 00:09:22.749
+Multiply that matrix by the real and imaginary parts of the circle tangent.
+
+00:09:22.749 --> 00:09:26.375
+The output arrow has the direction and speed of the ellipse point.
+
+00:09:26.675 --> 00:09:28.502
+Trace the two velocity tips.
+
+00:09:28.502 --> 00:09:31.018
+First leave each arrow on its moving point.
+
+00:09:31.018 --> 00:09:34.495
+The cyan arrow tells us how z moves around the circle.
+
+00:09:34.495 --> 00:09:38.505
+The violet arrow tells us how its image moves along the ellipse.
+
+00:09:38.505 --> 00:09:42.600
+Now slide both arrows to zero without turning or stretching them.
+
+00:09:42.600 --> 00:09:45.714
+We can trace their tips in a separate velocity plane.
+
+00:09:45.714 --> 00:09:47.740
+The cyan tip is i times z.
+
+00:09:47.740 --> 00:09:53.244
+It starts at the top and draws a circle of radius three halves, once counterclockwise.
+
+00:09:53.244 --> 00:09:55.974
+The violet tip is the derivative of gamma.
+
+00:09:55.974 --> 00:10:04.186
+It starts at height five twelfths and traces an ellipse with the same two semiaxes as the boundary, a quarter turn ahead in the parameter.
+
+00:10:04.186 --> 00:10:09.093
+At theta zero the boundary point is on the right and the velocity points up.
+
+00:10:09.093 --> 00:10:13.209
+At ninety degrees the point is at the top and the velocity points left.
+
+00:10:13.209 --> 00:10:16.857
+An arrow on the boundary shows the direction of the next step.
+
+00:10:16.857 --> 00:10:22.062
+Multiplying the velocity by a small angle in radians gives the local displacement.
+
+00:10:22.362 --> 00:10:24.487
+Trace the two Jacobian columns.
+
+00:10:24.487 --> 00:10:28.369
+Gold shows what the derivative does to a unit step to the right.
+
+00:10:28.369 --> 00:10:31.035
+Mint shows what it does to a unit step upward.
+
+00:10:31.035 --> 00:10:33.872
+They are the two columns of the real Jacobian.
+
+00:10:33.872 --> 00:10:38.031
+The mint arrow is always the gold arrow turned through ninety degrees.
+
+00:10:38.031 --> 00:10:40.185
+Follow their tips as theta grows.
+
+00:10:40.185 --> 00:10:43.257
+The gold tip circles one half on the real axis.
+
+00:10:43.257 --> 00:10:46.840
+The mint tip circles one half on the imaginary axis.
+
+00:10:46.840 --> 00:10:48.781
+Both radii are two ninths here.
+
+00:10:48.781 --> 00:10:55.159
+The factor e to the minus two i theta makes each tip go clockwise twice in one boundary circuit.
+
+00:10:55.159 --> 00:11:05.847
+To recover the violet tangent, multiply the gold column by the horizontal component of i z, the mint column by its vertical component, and add the two vectors.
+
+00:11:06.147 --> 00:11:08.186
+Keep the differential with the kernel.
+
+00:11:08.186 --> 00:11:11.919
+A contour integral transports a value and an oriented step.
+
+00:11:11.919 --> 00:11:15.502
+The step d omega equals J prime times d z.
+
+00:11:15.502 --> 00:11:20.664
+Bundle J prime with Q three composed with J, and call the result Q tilde.
+
+00:11:20.664 --> 00:11:23.053
+Now multiply Q tilde by d z.
+
+00:11:23.053 --> 00:11:26.487
+This gives exactly the original kernel times d omega.
+
+00:11:26.487 --> 00:11:31.693
+In the angular coordinate the circle contributes the remaining i z times d theta.
+
+00:11:32.760 --> 00:11:34.928
+Subtract a copy shifted by two.
+
+00:11:34.928 --> 00:11:38.938
+The derivative is one half times one minus z to the minus two.
+
+00:11:38.938 --> 00:11:41.177
+Its first half keeps every exponent.
+
+00:11:41.177 --> 00:11:46.552
+Its second half shifts every frequency index upward by two and changes the sign.
+
+00:11:46.552 --> 00:11:51.544
+In the row for six, half of sigma three six meets minus half of sigma three four.
+
+00:11:51.544 --> 00:11:54.722
+Their difference gives minus sixteen over sixty three.
+
+00:11:54.722 --> 00:11:58.625
+These are Laurent coefficients, before evaluating at a radius.
+
+00:11:58.625 --> 00:12:00.759
+Each row has at most these two inputs.
+
+00:12:01.059 --> 00:12:03.504
+Multiply two waves before averaging.
+
+00:12:03.504 --> 00:12:10.052
+Choose row k equal to four from the kernel, and column ell equal to six from its complex conjugate.
+
+00:12:10.052 --> 00:12:12.377
+Here ell labels the column frequency.
+
+00:12:12.377 --> 00:12:14.318
+The row arrow has length c four.
+
+00:12:14.318 --> 00:12:19.586
+The conjugate column arrow has length c six and turns in the opposite sense.
+
+00:12:19.586 --> 00:12:24.514
+When we multiply complex numbers, their lengths multiply and their angles add.
+
+00:12:24.514 --> 00:12:29.335
+Minus four theta plus six theta leaves a new arrow at angle two theta.
+
+00:12:29.335 --> 00:12:37.291
+At radius three halves, the two lengths are about zero point one eight zero six and zero point zero three five seven.
+
+00:12:37.291 --> 00:12:41.515
+Their product is about six point four four three thousandths.
+
+00:12:41.515 --> 00:12:43.925
+That product is fixed as the point moves.
+
+00:12:43.925 --> 00:12:49.279
+The squared tangent speed, W, scales the arrow once more at each boundary point.
+
+00:12:49.579 --> 00:12:51.875
+Read both heights from the same product.
+
+00:12:51.875 --> 00:12:54.136
+The real part gives the cyan height.
+
+00:12:54.136 --> 00:12:59.682
+Multiply c four times c six, times W, times cosine of two theta.
+
+00:12:59.682 --> 00:13:03.905
+The pink height uses the same amplitude and sine of two theta.
+
+00:13:03.905 --> 00:13:06.358
+Watch the matched dots on the two ellipses.
+
+00:13:06.358 --> 00:13:11.584
+Each samples a different component of the same complex number at the same boundary point.
+
+00:13:11.584 --> 00:13:13.013
+Stop at thirty degrees.
+
+00:13:13.013 --> 00:13:16.511
+W is sixty one over one hundred and forty four.
+
+00:13:16.511 --> 00:13:24.019
+The weighted arrow is about two point seven two nine thousandths long and makes an angle of sixty degrees.
+
+00:13:24.019 --> 00:13:29.288
+Its horizontal projection is about one point three six five thousandths.
+
+00:13:29.288 --> 00:13:34.194
+Its vertical projection is about two point three six four thousandths.
+
+00:13:34.194 --> 00:13:36.903
+Both heights already include both coefficients.
+
+00:13:36.903 --> 00:13:40.017
+The transposed cell is the complex conjugate.
+
+00:13:40.017 --> 00:13:44.795
+The two imaginary parts cancel point by point, and the two real parts add.
+
+00:13:44.795 --> 00:13:49.339
+Summing all nine cells gives the nonnegative three-wave energy density.
+
+00:13:49.639 --> 00:13:52.084
+Three diagonals survive a full turn.
+
+00:13:52.084 --> 00:13:54.921
+The squared speed has three angular frequencies.
+
+00:13:54.921 --> 00:13:59.869
+Its constant is ninety seven over one hundred and forty four at our radius.
+
+00:13:59.869 --> 00:14:05.245
+Its two side frequencies, plus two and minus two, both carry minus one quarter.
+
+00:14:05.245 --> 00:14:09.319
+By Parseval, averaging the product keeps only its constant part.
+
+00:14:09.319 --> 00:14:11.963
+Equal indices give the main diagonal.
+
+00:14:11.963 --> 00:14:18.256
+A difference of two in either direction selects the adjacent diagonals in this even-frequency grid.
+
+00:14:18.256 --> 00:14:20.581
+Every other entry averages to zero.
+
+00:14:20.881 --> 00:14:22.644
+Read one negative neighbour.
+
+00:14:22.644 --> 00:14:24.819
+Choose row four and column six.
+
+00:14:24.819 --> 00:14:26.461
+Their difference is plus two.
+
+00:14:26.461 --> 00:14:34.141
+The minus two wave of the speed cancels that angular frequency, leaving minus one quarter times c four times c six.
+
+00:14:34.141 --> 00:14:37.703
+Its transposed neighbour contributes the same real mean.
+
+00:14:37.703 --> 00:14:39.878
+Together they subtract half the product.
+
+00:14:39.878 --> 00:14:43.163
+Add the diagonal weights and both neighbouring directions.
+
+00:14:43.163 --> 00:14:50.032
+For three retained waves the weighted mean squared magnitude is about zero point zero one nine four nine.
+
+00:14:50.760 --> 00:14:52.800
+Begin again with Cauchy’s formula.
+
+00:14:52.800 --> 00:14:55.743
+Return to the ellipse enclosing the real interval.
+
+00:14:55.743 --> 00:15:01.374
+For each x, the moving denominator omega minus x supplies a Cauchy kernel.
+
+00:15:01.374 --> 00:15:07.880
+Weight it by P three of x and integrate across the interval to form Q three, with its factor of one half.
+
+00:15:07.880 --> 00:15:14.515
+For the coefficient, multiply Q three on the boundary by the input P three and the oriented tangent.
+
+00:15:14.515 --> 00:15:19.208
+Include seven divided by two pi i and start the running integral at zero.
+
+00:15:19.508 --> 00:15:21.953
+Follow one angle through the construction.
+
+00:15:21.953 --> 00:15:23.830
+Watch the circle point move.
+
+00:15:23.830 --> 00:15:31.210
+Its image chooses the ellipse sample, its phase turns the kernel arrows, and its tangent supplies the oriented step.
+
+00:15:31.210 --> 00:15:34.388
+In parallel, the squared speed weights the pair matrix.
+
+00:15:34.388 --> 00:15:38.100
+One accumulator adds complex increments for the coefficient.
+
+00:15:38.100 --> 00:15:43.006
+The other adds a real, nonnegative rate for the three-mode Hardy energy.
+
+00:15:43.006 --> 00:15:45.651
+The same geometry drives both measurements.
+
+00:15:45.951 --> 00:15:48.076
+Integrate one short arc at a time.
+
+00:15:48.076 --> 00:15:49.867
+Keep the three kernel arrows.
+
+00:15:49.867 --> 00:15:54.283
+At each ellipse point, first add them to get a single complex number, S.
+
+00:15:54.283 --> 00:16:01.941
+For the coefficient, multiply S by the input polynomial and the oriented tangent, with the normalization shown.
+
+00:16:01.941 --> 00:16:06.314
+This is the rate of change of the running complex integral per radian.
+
+00:16:06.314 --> 00:16:12.564
+For the Hardy energy, take the squared magnitude of S times the tangent, and divide by two pi.
+
+00:16:12.564 --> 00:16:15.315
+This second rate is real and nonnegative.
+
+00:16:15.315 --> 00:16:18.514
+Follow just the arc from thirty to forty five degrees.
+
+00:16:18.514 --> 00:16:24.210
+As the arrows turn, the complex rate changes direction and the energy rate changes height.
+
+00:16:24.210 --> 00:16:33.873
+Over this arc the coefficient accumulator gains about zero point zero three nine six six minus zero point zero zero one four eight i.
+
+00:16:33.873 --> 00:16:38.864
+The energy gains about seven hundred and seventy-one and a half millionths.
+
+00:16:38.864 --> 00:16:41.722
+Joining consecutive arcs adds their increments.
+
+00:16:41.722 --> 00:16:50.319
+After one full turn these three waves give a coefficient of one, and a weighted energy of about zero point zero one nine four nine.
+
+00:16:50.319 --> 00:16:52.132
+The full kernel has further waves.
+
+00:16:52.132 --> 00:17:00.708
+In this cubic example they change the coefficient along a partial arc, but their contributions integrate to zero over a complete turn.
+
+00:17:01.008 --> 00:17:02.578
+Complete the two integrals.
+
+00:17:02.578 --> 00:17:05.266
+At the end of the turn, the coefficient is one.
+
+00:17:05.266 --> 00:17:06.993
+See which frequencies made it.
+
+00:17:06.993 --> 00:17:13.691
+The input supplies plus three, the kernel supplies minus four, and the tangent factor supplies plus one.
+
+00:17:13.691 --> 00:17:15.013
+Their sum is zero.
+
+00:17:15.013 --> 00:17:22.266
+The surviving product is seven halves times five sixteenths times thirty two over thirty five, exactly one.
+
+00:17:22.266 --> 00:17:27.919
+Higher kernel modes change the partial trace, and their full-turn contributions vanish here.
+
+00:17:27.919 --> 00:17:35.065
+The three-mode Hardy energy finishes near zero point zero one nine four nine, from its three matrix diagonals.
+

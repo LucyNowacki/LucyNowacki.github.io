@@ -5,3 +5,16 @@
 @media(prefers-reduced-motion:reduce){.eg-page *{scroll-behavior:auto!important}}
 /* Give inline fractions room without a spurious vertical scrollbar. */
 .eg-caption{padding:5px 0 9px;overflow-y:hidden}.eg-formula,.eg-theorem,.eg-identity{overflow-y:hidden}
+
+.eg-page .eg-film-link{display:inline-flex;align-items:center;gap:.6em;margin:.45rem 0 .2rem;padding:.55rem .8rem;border:1px solid #ba8fd0;border-radius:.45rem;color:#ffe8fa;text-decoration:none;font-weight:600;font-size:.92rem;background:#2b1937}
+.eg-page .eg-film-link span{font-size:.85em;color:#ee96d7}
+.eg-page .eg-film-primary{background:#faabe1;border-color:#faabe1;color:#201125}
+.eg-page .eg-film-primary span{color:inherit}
+.eg-page .eg-film-link:hover,.eg-page .eg-film-link:focus-visible{outline:2px solid #77dfef;outline-offset:2px}
+
+.eg-arrow-detail{margin:1rem 0 .5rem;padding:.75rem .9rem;border:1px solid var(--line);border-radius:.45rem;background:#20152b}
+.eg-arrow-detail figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;align-items:baseline;gap:.15rem .7rem}
+.eg-arrow-detail figcaption span,.eg-arrow-detail .hint{color:var(--muted);font-size:.82rem}
+.eg-arrow-detail svg{display:block;width:100%;height:124px}
+.eg-arrow-detail .hint{margin:.25rem 0 0}
+.eg-controls #eg-film-example{grid-column:1/-1;margin:0 0 .7rem;justify-self:start}

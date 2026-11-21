@@ -1,0 +1,44 @@
+WEBVTT
+
+00:00:00.280 --> 00:00:01.705
+Start with a sine wave.
+
+00:00:01.705 --> 00:00:06.170
+Multiply it by the Legendre value, and take k to be a positive integer.
+
+00:00:06.500 --> 00:00:08.415
+Sigma is a signed integral.
+
+00:00:08.415 --> 00:00:13.326
+Integrate P sub n of cosine t times sine of k t, from zero to pi.
+
+00:00:13.656 --> 00:00:16.730
+The Legendre factor has magnitude at most one.
+
+00:00:16.730 --> 00:00:20.719
+The product stays between the upper and lower absolute sine envelopes.
+
+00:00:21.049 --> 00:00:23.846
+Positive and negative areas can cancel.
+
+00:00:23.846 --> 00:00:28.582
+The magnitude of the signed integral is at most the integral of the absolute product.
+
+00:00:28.912 --> 00:00:30.791
+Look at k equal to three.
+
+00:00:30.791 --> 00:00:36.017
+The upper envelope has three lobes, each of width pi over three and area two thirds.
+
+00:00:36.347 --> 00:00:37.484
+Count the lobes.
+
+00:00:37.484 --> 00:00:42.706
+For every positive integer k, the k lobes have area two over k each, totaling two.
+
+00:00:43.036 --> 00:00:45.341
+Every coefficient has magnitude at most two.
+
+00:00:45.341 --> 00:00:49.202
+This holds for every Legendre degree and every positive integer frequency.
+

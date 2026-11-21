@@ -1,0 +1,368 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.214
+Can a loop recover one value?
+
+00:00:02.214 --> 00:00:04.134
+Take the function omega squared.
+
+00:00:04.134 --> 00:00:08.464
+Our target is its value at x equal to one half, namely one quarter.
+
+00:00:08.464 --> 00:00:12.496
+Cauchy's formula recovers this number from a counterclockwise circuit.
+
+00:00:12.796 --> 00:00:14.451
+Place a pole at the target.
+
+00:00:14.451 --> 00:00:17.160
+Divide the function by omega minus x.
+
+00:00:17.160 --> 00:00:21.810
+The denominator vanishes at one half, while the numerator there is one quarter.
+
+00:00:21.810 --> 00:00:23.602
+This gives a genuine simple pole.
+
+00:00:23.902 --> 00:00:25.494
+Start with a small circle.
+
+00:00:25.494 --> 00:00:26.859
+Its centre is x.
+
+00:00:26.859 --> 00:00:30.527
+Take its radius epsilon to be one quarter for the drawing.
+
+00:00:30.527 --> 00:00:36.778
+Any sufficiently small positive radius works if the circle and its interior lie inside the ellipse.
+
+00:00:37.078 --> 00:00:39.566
+The tangent cancels the denominator.
+
+00:00:39.566 --> 00:00:44.194
+On the circle, omega minus x is epsilon times e to the i t.
+
+00:00:44.194 --> 00:00:48.695
+The differential contributes i times that same factor times d t.
+
+00:00:48.695 --> 00:00:54.903
+After dividing by two pi i, only the function value times d t over two pi remains.
+
+00:00:55.203 --> 00:00:56.752
+Keep the constant part.
+
+00:00:56.752 --> 00:00:58.757
+Expand the square along the circle.
+
+00:00:58.757 --> 00:01:02.810
+One term is constant, one turns once, and another turns twice.
+
+00:01:02.810 --> 00:01:06.500
+Both rotating terms average to zero over a full turn.
+
+00:01:06.500 --> 00:01:09.081
+What survives is x squared, or one quarter.
+
+00:01:10.260 --> 00:01:12.022
+What does the residue measure?
+
+00:01:12.022 --> 00:01:15.883
+Look at omega squared divided by omega minus x.
+
+00:01:15.883 --> 00:01:18.293
+Only the denominator vanishes at x.
+
+00:01:18.293 --> 00:01:23.946
+For this simple pole, multiply by omega minus x and let omega approach x.
+
+00:01:23.946 --> 00:01:26.313
+The remaining numerator tends to x squared.
+
+00:01:26.313 --> 00:01:29.363
+At x equal to one half, that gives one quarter.
+
+00:01:29.363 --> 00:01:32.947
+This is the coefficient of one over omega minus x.
+
+00:01:33.247 --> 00:01:35.244
+Blend two points at the same angle.
+
+00:01:35.244 --> 00:01:36.630
+Fix the angle t.
+
+00:01:36.630 --> 00:01:40.768
+Mark the point on the small circle and the matching point on the ellipse.
+
+00:01:40.768 --> 00:01:44.544
+The first term takes one minus lambda times the circle point.
+
+00:01:44.544 --> 00:01:47.295
+The second takes lambda times the ellipse point.
+
+00:01:47.295 --> 00:01:50.388
+At lambda zero, the sum gives the circle point.
+
+00:01:50.388 --> 00:01:52.499
+At one half, it is their midpoint.
+
+00:01:52.499 --> 00:01:54.803
+At one, it reaches the ellipse point.
+
+00:01:54.803 --> 00:01:56.210
+Now let t turn.
+
+00:01:56.210 --> 00:01:59.090
+The blended point traces the loop called C lambda.
+
+00:01:59.390 --> 00:02:01.472
+Keep the pole inside every loop.
+
+00:02:01.472 --> 00:02:03.712
+Each intermediate loop is an ellipse.
+
+00:02:03.712 --> 00:02:05.524
+Look at its two real tips.
+
+00:02:05.524 --> 00:02:09.556
+The left one stays to the left of x, and the right one stays to the right.
+
+00:02:09.556 --> 00:02:14.974
+As t increases through one turn, every loop goes counterclockwise once around the pole.
+
+00:02:14.974 --> 00:02:22.142
+Cauchy's formula therefore gives the same normalized integral, one quarter, for every lambda from zero to one.
+
+00:02:22.442 --> 00:02:24.673
+The tangent supplies the differential.
+
+00:02:24.673 --> 00:02:27.574
+Follow the point upward at the right tip of the ellipse.
+
+00:02:27.574 --> 00:02:29.728
+At the top the tangent points left.
+
+00:02:29.728 --> 00:02:31.882
+Advance the angle by a small amount.
+
+00:02:31.882 --> 00:02:35.978
+The short chord follows the tangent more closely as the step shrinks.
+
+00:02:35.978 --> 00:02:41.097
+The differential is the tangent, C prime of t, times the angle step, d t.
+
+00:02:41.097 --> 00:02:44.062
+Both its direction and its speed enter the integral.
+
+00:02:44.362 --> 00:02:46.551
+Multiply the two complex arrows.
+
+00:02:46.551 --> 00:02:51.692
+The first arrow represents the quotient, omega squared over omega minus x.
+
+00:02:51.692 --> 00:02:54.529
+The second is the tangent at the moving point.
+
+00:02:54.529 --> 00:02:59.200
+Complex multiplication adds their angles and multiplies their lengths.
+
+00:02:59.200 --> 00:03:06.261
+Dividing by two pi i turns the product clockwise by a quarter turn and scales it by one over two pi.
+
+00:03:06.261 --> 00:03:09.140
+Multiply this rate by the small angle step.
+
+00:03:09.140 --> 00:03:11.722
+Put the resulting arrow at the tip of the running sum.
+
+00:03:12.022 --> 00:03:14.595
+On the small circle, the factors cancel.
+
+00:03:14.595 --> 00:03:18.541
+The radius arrow from x is epsilon times e to the i t.
+
+00:03:18.541 --> 00:03:21.164
+The tangent is i times that same arrow.
+
+00:03:21.164 --> 00:03:23.873
+Divide the tangent by the radius arrow.
+
+00:03:23.873 --> 00:03:26.965
+Their lengths cancel, and the quarter turn leaves i.
+
+00:03:26.965 --> 00:03:29.760
+That i cancels the i in the normalization.
+
+00:03:29.760 --> 00:03:34.133
+What remains is the circle value squared, times d t over two pi.
+
+00:03:34.433 --> 00:03:37.219
+Keep the constant and turn the other two waves.
+
+00:03:37.219 --> 00:03:38.563
+Expand the square.
+
+00:03:38.563 --> 00:03:42.722
+The constant arrow has length x squared, one quarter, and points right.
+
+00:03:42.722 --> 00:03:47.628
+The next term has length two x epsilon, also one quarter, and turns once.
+
+00:03:47.628 --> 00:03:52.065
+The last has length epsilon squared, one sixteenth, and turns twice.
+
+00:03:52.065 --> 00:03:56.608
+Each rotating arrow meets an equal opposite arrow during its own cycle.
+
+00:03:56.608 --> 00:03:58.591
+Both full-turn averages vanish.
+
+00:03:58.591 --> 00:04:00.297
+Only the constant survives.
+
+00:04:00.297 --> 00:04:03.049
+Its average over the full circle is one quarter.
+
+00:04:03.349 --> 00:04:05.453
+Build the partial integral from zero.
+
+00:04:05.453 --> 00:04:10.167
+A sub C of T adds the little arrows from angle zero to angle T.
+
+00:04:10.167 --> 00:04:14.135
+Before the first step, the interval is empty, so the sum is zero.
+
+00:04:14.135 --> 00:04:17.803
+Halfway around the small circle the real part is one eighth.
+
+00:04:17.803 --> 00:04:20.747
+The imaginary part is one over four pi.
+
+00:04:20.747 --> 00:04:22.410
+The integral is still moving.
+
+00:04:22.410 --> 00:04:23.497
+Finish the turn.
+
+00:04:23.497 --> 00:04:28.063
+The imaginary contributions cancel and the real part reaches one quarter.
+
+00:04:28.363 --> 00:04:31.405
+The two signed heights give one complex integral.
+
+00:04:31.405 --> 00:04:32.791
+Return to the ellipse.
+
+00:04:32.791 --> 00:04:38.764
+Read the real part of the rate as height on the first boundary and the imaginary part on the second.
+
+00:04:38.764 --> 00:04:43.840
+Each small angle interval contributes its signed height times its angular width.
+
+00:04:43.840 --> 00:04:48.747
+Watch those two contributions move the running sum horizontally and vertically.
+
+00:04:48.747 --> 00:04:52.757
+The ellipse and the small circle take different routes in the value plane.
+
+00:04:52.757 --> 00:04:55.402
+Both finish at one quarter on the real axis.
+
+00:04:56.260 --> 00:04:58.172
+Now recover a coefficient.
+
+00:04:58.172 --> 00:05:02.630
+A Legendre coefficient combines values from the whole real interval.
+
+00:05:02.630 --> 00:05:08.518
+For degree two, multiply x squared by P two of x and integrate from minus one to one.
+
+00:05:08.818 --> 00:05:10.495
+Include the normalization.
+
+00:05:10.495 --> 00:05:14.910
+The classical Legendre polynomial equals one at the right endpoint.
+
+00:05:14.910 --> 00:05:18.899
+Its coefficient formula carries a factor of n plus one half.
+
+00:05:18.899 --> 00:05:21.459
+For degree two, that factor is five halves.
+
+00:05:21.759 --> 00:05:23.350
+Keep the sign of the weight.
+
+00:05:23.350 --> 00:05:27.126
+P two is one half of the quantity three x squared minus one.
+
+00:05:27.126 --> 00:05:30.901
+Its zeros are plus and minus one over the square root of three.
+
+00:05:30.901 --> 00:05:35.979
+The product is negative between them except at zero, and positive toward both ends.
+
+00:05:36.279 --> 00:05:37.764
+Add the signed areas.
+
+00:05:37.764 --> 00:05:41.518
+Integrating x squared times P two gives four fifteenths.
+
+00:05:41.518 --> 00:05:45.421
+Multiply by five halves and the coefficient is two thirds.
+
+00:05:45.421 --> 00:05:48.493
+This is the number we will now recover from the ellipse.
+
+00:05:49.260 --> 00:05:51.705
+Give every interval point its own kernel.
+
+00:05:51.705 --> 00:05:56.462
+Replace each f of x in the real integral by its Cauchy formula.
+
+00:05:56.462 --> 00:06:01.454
+As x moves along the interval, the factor one over omega minus x follows it.
+
+00:06:01.754 --> 00:06:03.772
+Exchange the two integrations.
+
+00:06:03.772 --> 00:06:08.230
+The ellipse boundary stays a positive distance from the entire interval.
+
+00:06:08.230 --> 00:06:15.867
+The parametrised integrand is continuous on a compact rectangle, so Fubini's theorem lets us integrate over x first.
+
+00:06:16.167 --> 00:06:18.399
+The kernels combine into one function.
+
+00:06:18.399 --> 00:06:23.497
+The bracket now integrates P two of x divided by omega minus x.
+
+00:06:23.497 --> 00:06:29.492
+By definition, half of that bracket is Q two of omega, so the whole bracket is twice Q two.
+
+00:06:29.792 --> 00:06:32.109
+Follow the coefficient around the ellipse.
+
+00:06:32.109 --> 00:06:35.948
+The factor of two from the bracket turns five halves into five.
+
+00:06:35.948 --> 00:06:42.732
+Multiply omega squared by Q two, by the oriented differential, and by five over two pi i.
+
+00:06:42.732 --> 00:06:46.080
+The accumulated value can be complex partway round.
+
+00:06:46.080 --> 00:06:47.958
+At the end it reaches two thirds.
+
+00:06:48.258 --> 00:06:50.020
+Keep the kernel off the slit.
+
+00:06:50.020 --> 00:06:54.521
+Q two is holomorphic off the real segment from minus one to one.
+
+00:06:54.521 --> 00:06:57.955
+The coefficient contour surrounds that entire segment.
+
+00:06:57.955 --> 00:07:02.861
+Deforming it across the slit would leave the region where this kernel is holomorphic.
+

@@ -4,3 +4,8 @@
 @media(max-width:760px){.rl-layout{grid-template-columns:1fr}.rl-controls{position:static;max-height:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 18px}.rl-controls>h2,.rl-controls>p{grid-column:1/-1;margin:0}.rl-controls .control{margin:0}.rl-controls .wide{font-size:13px}.rl-theorem{font-size:16px}.rl-live>div{padding:9px}.rl-live strong{font-size:17px}.rl-live span{font-size:11px}.rl-page .site-header{padding:12px;gap:12px;flex-wrap:wrap}.rl-page .site-header nav{gap:15px}.rl-page .math-block{font-size:15px}.rl-scope{font-size:12px}.rl-integral-readout{grid-template-columns:1fr}.rl-bottom-nav{gap:8px}.rl-bottom-nav button{font-size:13px}}
 @media(max-width:560px){.rl-visuals{grid-template-columns:1fr}.rl-graph-card{grid-column:auto}.rl-page main{padding:16px 10px}.rl-page .card{padding:14px}.rl-live{grid-template-columns:1fr 1fr}.rl-live>div:last-child{grid-column:1/-1}.rl-live>div:last-child strong{margin-left:14px}.rl-live>div:last-child span,.rl-live>div:last-child strong{display:inline}.rl-explanation h2{font-size:19px}.rl-steps button{font-size:13px}.rl-controls{gap:14px}.rl-page .rl-theorem{font-size:15px;padding:12px}.rl-page footer{font-size:12px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+.rl-watch, .rl-watch-step { display: inline-flex; align-items: center; gap: .5rem; color: #ffe6f7; background: #3d1d40; border: 1px solid #ee7acb; border-radius: .45rem; text-decoration: none; }
+.rl-watch { padding: .58rem .9rem; margin-top: .75rem; font-weight: 650; }
+.rl-watch-step { padding: .35rem .65rem; font-size: .9rem; margin-bottom: .45rem; }
+.rl-watch:hover, .rl-watch-step:hover { color: white; border-color: #75e7f9; background: #552957; }

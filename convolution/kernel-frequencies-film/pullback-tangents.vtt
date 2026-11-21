@@ -1,0 +1,143 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.257
+One angle locates two points.
+
+00:00:02.257 --> 00:00:04.518
+Choose z on the exterior circle.
+
+00:00:04.518 --> 00:00:07.674
+Its Joukowski image omega lies on the ellipse.
+
+00:00:07.674 --> 00:00:11.450
+Q three of omega is the original function at that point.
+
+00:00:11.450 --> 00:00:17.017
+Q three composed with J is the same value read using the circle coordinate z.
+
+00:00:17.017 --> 00:00:22.606
+Fixing the radius leaves only theta, so the same value reads Q three of gamma of theta.
+
+00:00:22.606 --> 00:00:27.001
+We now have the right address for both the kernel value and its moving tangent.
+
+00:00:27.301 --> 00:00:30.194
+The derivative rotates and stretches the tangent.
+
+00:00:30.194 --> 00:00:33.350
+On the circle the oriented velocity is i z.
+
+00:00:33.350 --> 00:00:39.579
+The derivative of J multiplies that complex vector, giving the ellipse tangent gamma prime.
+
+00:00:39.579 --> 00:00:42.074
+Write the derivative as u plus i v.
+
+00:00:42.074 --> 00:00:44.975
+The first column of its real matrix is u, v.
+
+00:00:44.975 --> 00:00:47.022
+The second is minus v, u.
+
+00:00:47.022 --> 00:00:52.249
+Multiply that matrix by the real and imaginary parts of the circle tangent.
+
+00:00:52.249 --> 00:00:55.875
+The output arrow has the direction and speed of the ellipse point.
+
+00:00:56.175 --> 00:00:58.002
+Trace the two velocity tips.
+
+00:00:58.002 --> 00:01:00.518
+First leave each arrow on its moving point.
+
+00:01:00.518 --> 00:01:03.995
+The cyan arrow tells us how z moves around the circle.
+
+00:01:03.995 --> 00:01:08.005
+The violet arrow tells us how its image moves along the ellipse.
+
+00:01:08.005 --> 00:01:12.100
+Now slide both arrows to zero without turning or stretching them.
+
+00:01:12.100 --> 00:01:15.214
+We can trace their tips in a separate velocity plane.
+
+00:01:15.214 --> 00:01:17.240
+The cyan tip is i times z.
+
+00:01:17.240 --> 00:01:22.744
+It starts at the top and draws a circle of radius three halves, once counterclockwise.
+
+00:01:22.744 --> 00:01:25.474
+The violet tip is the derivative of gamma.
+
+00:01:25.474 --> 00:01:33.686
+It starts at height five twelfths and traces an ellipse with the same two semiaxes as the boundary, a quarter turn ahead in the parameter.
+
+00:01:33.686 --> 00:01:38.593
+At theta zero the boundary point is on the right and the velocity points up.
+
+00:01:38.593 --> 00:01:42.709
+At ninety degrees the point is at the top and the velocity points left.
+
+00:01:42.709 --> 00:01:46.357
+An arrow on the boundary shows the direction of the next step.
+
+00:01:46.357 --> 00:01:51.562
+Multiplying the velocity by a small angle in radians gives the local displacement.
+
+00:01:51.862 --> 00:01:53.987
+Trace the two Jacobian columns.
+
+00:01:53.987 --> 00:01:57.869
+Gold shows what the derivative does to a unit step to the right.
+
+00:01:57.869 --> 00:02:00.535
+Mint shows what it does to a unit step upward.
+
+00:02:00.535 --> 00:02:03.372
+They are the two columns of the real Jacobian.
+
+00:02:03.372 --> 00:02:07.531
+The mint arrow is always the gold arrow turned through ninety degrees.
+
+00:02:07.531 --> 00:02:09.685
+Follow their tips as theta grows.
+
+00:02:09.685 --> 00:02:12.757
+The gold tip circles one half on the real axis.
+
+00:02:12.757 --> 00:02:16.340
+The mint tip circles one half on the imaginary axis.
+
+00:02:16.340 --> 00:02:18.281
+Both radii are two ninths here.
+
+00:02:18.281 --> 00:02:24.659
+The factor e to the minus two i theta makes each tip go clockwise twice in one boundary circuit.
+
+00:02:24.659 --> 00:02:35.347
+To recover the violet tangent, multiply the gold column by the horizontal component of i z, the mint column by its vertical component, and add the two vectors.
+
+00:02:35.647 --> 00:02:37.686
+Keep the differential with the kernel.
+
+00:02:37.686 --> 00:02:41.419
+A contour integral transports a value and an oriented step.
+
+00:02:41.419 --> 00:02:45.002
+The step d omega equals J prime times d z.
+
+00:02:45.002 --> 00:02:50.164
+Bundle J prime with Q three composed with J, and call the result Q tilde.
+
+00:02:50.164 --> 00:02:52.553
+Now multiply Q tilde by d z.
+
+00:02:52.553 --> 00:02:55.987
+This gives exactly the original kernel times d omega.
+
+00:02:55.987 --> 00:03:01.193
+In the angular coordinate the circle contributes the remaining i z times d theta.
+

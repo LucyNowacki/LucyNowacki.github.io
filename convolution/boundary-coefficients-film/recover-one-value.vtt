@@ -1,0 +1,65 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.214
+Can a loop recover one value?
+
+00:00:02.214 --> 00:00:04.134
+Take the function omega squared.
+
+00:00:04.134 --> 00:00:08.464
+Our target is its value at x equal to one half, namely one quarter.
+
+00:00:08.464 --> 00:00:12.496
+Cauchy's formula recovers this number from a counterclockwise circuit.
+
+00:00:12.796 --> 00:00:14.451
+Place a pole at the target.
+
+00:00:14.451 --> 00:00:17.160
+Divide the function by omega minus x.
+
+00:00:17.160 --> 00:00:21.810
+The denominator vanishes at one half, while the numerator there is one quarter.
+
+00:00:21.810 --> 00:00:23.602
+This gives a genuine simple pole.
+
+00:00:23.902 --> 00:00:25.494
+Start with a small circle.
+
+00:00:25.494 --> 00:00:26.859
+Its centre is x.
+
+00:00:26.859 --> 00:00:30.527
+Take its radius epsilon to be one quarter for the drawing.
+
+00:00:30.527 --> 00:00:36.778
+Any sufficiently small positive radius works if the circle and its interior lie inside the ellipse.
+
+00:00:37.078 --> 00:00:39.566
+The tangent cancels the denominator.
+
+00:00:39.566 --> 00:00:44.194
+On the circle, omega minus x is epsilon times e to the i t.
+
+00:00:44.194 --> 00:00:48.695
+The differential contributes i times that same factor times d t.
+
+00:00:48.695 --> 00:00:54.903
+After dividing by two pi i, only the function value times d t over two pi remains.
+
+00:00:55.203 --> 00:00:56.752
+Keep the constant part.
+
+00:00:56.752 --> 00:00:58.757
+Expand the square along the circle.
+
+00:00:58.757 --> 00:01:02.810
+One term is constant, one turns once, and another turns twice.
+
+00:01:02.810 --> 00:01:06.500
+Both rotating terms average to zero over a full turn.
+
+00:01:06.500 --> 00:01:09.081
+What survives is x squared, or one quarter.
+

@@ -4,21 +4,75 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Boundary coefficients · Joukowski–Legendre</title>
 <meta name="description" content="Recover Legendre coefficients from a Bernstein ellipse using Cauchy’s formula, the second-kind kernel, and a linked contour visualization.">
-<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../math-window.css?v=2bca698ac08e"><link rel="stylesheet" href="../coefficient-lessons.css?v=cff5ff89777e"><link rel="stylesheet" href="style.css?v=a1a049eb2fa5">
+<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../math-window.css?v=2bca698ac08e"><link rel="stylesheet" href="../coefficient-lessons.css?v=cff5ff89777e"><link rel="stylesheet" href="style.css?v=eb5fd34382d0">
 <script defer src="../../mathjax-config.js?v=fb5c0f9a8785"></script><script defer src="../../vendor/tex-svg.js?v=d4295dc33744"></script>
 <script defer src="../../vendor/d3.min.js?v=f2094bbf6141"></script><script defer src="../math-window.js?v=31277e048601"></script><script defer src="../coefficient-math.js?v=ede7bfda9876"></script>
-<script defer src="../lesson-navigation.js?v=bb9ff39db220"></script><script defer src="../coefficient-lessons.js?v=ad2d0604d318"></script><script defer src="lesson.js?v=d40a31cc6ac1"></script>
-<link rel="stylesheet" href="../home-palette.css?v=ca2188dd1bc9">
+<script defer src="../lesson-navigation.js?v=bb9ff39db220"></script><script defer src="../coefficient-lessons.js?v=ad2d0604d318"></script><script defer src="boundary-ribbon.js?v=9149d8f4dbe1"></script><script defer src="cauchy-steps.js?v=80b73843b28a"></script><script defer src="proof-lab.js?v=98ebdb8ced25"></script><script defer src="lesson.js?v=d05902fe045e"></script>
+<link rel="stylesheet" href="proof-lab.css?v=3929cd08f929"><link rel="stylesheet" href="../home-palette.css?v=7aed544b8fa9">
 </head>
 <body class="coefficient-page">
 <a class="skip" href="#lesson-lab">Skip to the interactive lesson</a>
 <header class="site-header"><a href="../index.html">← Joukowski–Legendre</a><nav aria-label="Atlas navigation"><a href="../../index.html">Convolution Atlas</a><a href="../ellipse-growth/index.html">Geometric growth</a></nav></header>
 <main class="coefficient-main">
-<header class="lesson-intro math-static"><p class="eyebrow">THESIS WALKTHROUGH · SUBSECTION <bdi data-thesis-ref="legEDMD:subsec-coefficient-contour-Qn">3.2.4</bdi> · LEMMA <bdi data-thesis-ref="legEDMD:lem-1-7">3.22</bdi></p><h1>Recover a coefficient from the boundary</h1><p>The preceding lesson controlled how Legendre modes grow on an ellipse. We now move the coefficient integral from the real interval to the ellipse boundary, where the holomorphic extension of the function becomes useful.</p><div class="lesson-formula">\[a_n(f)=\frac{2n+1}{2\pi i}\oint_{\partial E_\varrho}f(\varpi)Q_n(\varpi)\,d\varpi.\]</div><p>Assume \(\varrho>1\) and \(f\in A(E_\varrho)\): the function is holomorphic inside the ellipse and continuous on its closure. The contour is positively oriented.</p></header>
+<header class="lesson-intro math-static"><p class="eyebrow">THESIS WALKTHROUGH · SUBSECTION <bdi data-thesis-ref="legEDMD:subsec-coefficient-contour-Qn">3.2.4</bdi> · LEMMA <bdi data-thesis-ref="legEDMD:lem-1-7">3.22</bdi></p><h1>Recover a coefficient from the boundary</h1><p>The preceding lesson controlled how Legendre modes grow on an ellipse. We now move the coefficient integral from the real interval to the ellipse boundary, where the holomorphic extension of the function becomes useful.</p><div class="lesson-formula">\[a_n(f)=\frac{2n+1}{2\pi i}\oint_{\partial E_\varrho}f(\varpi)Q_n(\varpi)\,d\varpi.\]</div><p>Assume \(\varrho>1\) and \(f\in A(E_\varrho)\): the function is holomorphic inside the ellipse and continuous on its closure. The contour is positively oriented.</p><a class="bc-film" href="../../boundary-coefficients-film/index.html"><span aria-hidden="true">▶</span> Watch the narrated lesson</a> <a class="bc-film" href="#bc-cauchy-steps">Explore why the answer is ¼</a></header>
 <nav class="thesis-switcher" data-lesson-navigation data-lesson="contour-coefficients" aria-label="Switch thesis lesson"><a href="../index.html"><span>1 · Laurent expansion</span><small>How the finite packet is formed</small></a><a href="../real-line/index.html"><span>2 · Real-line stability</span><small>The neutral radius-one case</small></a><a href="../ellipse-growth/index.html"><span>3 · Geometric growth</span><small>Radial weights on an ellipse</small></a><a href="index.html" aria-current="page"><span>4 · Boundary coefficients</span><small>Viewing this lesson</small></a><a href="../kernel-structure/index.html"><span>5 · Kernel frequencies</span><small>The surviving parity ladder</small></a><a href="../hinf-coefficients/index.html"><span>6 · Bounded analytic coefficients</span><small>From boundary size to decay</small></a><a href="../hardy-coefficients/index.html"><span>7 · Hardy coefficients and tails</span><small>From angular energy to truncation</small></a><a href="../factorisation/index.html"><span>8 · Factorisation and embeddings</span><small>Follow the function through three operations</small></a><a href="../weighted-synthesis/index.html"><span>9 · Weighted synthesis and tails</span><small>Split the coefficient budget</small></a><a href="../hardy-to-uniform/index.html"><span>10 · Hardy to uniform</span><small>From angular energy to a pointwise ceiling</small></a><a href="../uniform-to-hardy/index.html"><span>11 · Uniform to Hardy</span><small>From a ceiling to angular energy</small></a><a href="../transfer-tails/index.html"><span>12 · Two gaps and operator tails</span><small>Balance the input and output restrictions</small></a></nav>
 <noscript><p>The proof remains readable below. Enable JavaScript to render the formulas and explore the linked diagrams.</p></noscript>
+<section id="bc-cauchy-steps" class="bc-walk math-static" aria-labelledby="cs-heading">
+  <header><h2 id="cs-heading">How does a moving tangent give one quarter?</h2>
+    <p>Fix \(f(\varpi)=\varpi^2\) and \(x=\tfrac12\). Follow one point on the contour and the value it adds to the integral.</p></header>
+  <div class="cs-steps" role="group" aria-label="Choose a formula to explore">
+    <button type="button" id="cs-step-pole" data-step="pole" aria-pressed="true">1 · Find the residue</button>
+    <button type="button" id="cs-step-loop" data-step="loop" aria-pressed="false">2 · Move the loop</button>
+    <button type="button" id="cs-step-tangent" data-step="tangent" aria-pressed="false">3 · Multiply by the tangent</button>
+    <button type="button" id="cs-step-sum" data-step="sum" aria-pressed="false">4 · Add a full turn</button>
+  </div>
+  <div class="cs-explain" data-pane="pole">
+    <h3>Which part survives at the pole?</h3>
+    <div class="cs-equation">\(\displaystyle F(\varpi)=\frac{\varpi^2}{\varpi-x}=(\varpi-x)+2x+\frac{x^2}{\varpi-x}.\)</div>
+    <p>Multiplying by the distance vector \(\varpi-x\) removes the denominator. Bring the gold point closer to the pink ring from any angle. Its squared value approaches the coefficient of the reciprocal term, called the <strong>residue</strong>.</p>
+    <div class="cs-equation">\(\displaystyle \operatorname{Res}_{\varpi=x}F=\lim_{\varpi\to x}(\varpi-x)F(\varpi)=x^2=\tfrac14.\)</div>
+  </div>
+  <div class="cs-explain" data-pane="loop" hidden>
+    <h3>Join the two boundary points at the same angle</h3>
+    <div class="cs-equation">\(\displaystyle S(t)=x+\varepsilon e^{it},\qquad \Gamma_2(t)=\tfrac54\cos t+i\tfrac34\sin t.\)</div>
+    <div class="cs-equation">\(\displaystyle C_\lambda(t)=(1-\lambda)S(t)+\lambda\Gamma_2(t),\qquad 0\leq\lambda\leq1.\)</div>
+    <p>At a fixed angle, the gold point divides the dotted segment in the fraction \(\lambda\). At zero it is on the small circle, at one it is on the ellipse. Each intermediate loop goes counterclockwise around the pole once. Changing the loop changes the partial trace, while every full trace ends at the same diamond.</p>
+    <div class="cs-equation">\(\displaystyle \frac{1}{2\pi i}\oint_{C_\lambda}F(\varpi)\,d\varpi=\tfrac14.\)</div>
+  </div>
+  <div class="cs-explain" data-pane="tangent" hidden>
+    <h3>Turn the contour tangent into the integral’s next direction</h3>
+    <div class="cs-equation">\(\displaystyle d\varpi=C_\lambda'(t)\,dt,\qquad A_C'(t)=\frac{F(C_\lambda(t))}{2\pi i}\,C_\lambda'(t).\)</div>
+    <p>The cyan arrow points along the input contour. Multiplication by the complex number \(F(C_\lambda)/(2\pi i)\) rotates and scales it into the pink arrow on the accumulated trace. Each arrow shows a tangent times the same short angle \(h\). The curved pieces show the actual motion over \(h\). Reduce \(h\) to compare.</p>
+  </div>
+  <div class="cs-explain" data-pane="sum" hidden>
+    <h3>Watch the three contributions to the integral</h3>
+    <div class="cs-equation">\(\displaystyle \varpi=x+\varepsilon e^{it},\qquad \frac{d\varpi}{\varpi-x}=\frac{i\varepsilon e^{it}\,dt}{\varepsilon e^{it}}=i\,dt.\)</div>
+    <div class="cs-equation">\(\displaystyle A_C(T)=\frac1{2\pi}\int_0^T\!\left(\underbrace{\tfrac14}_{\rm constant}+\tfrac14e^{it}+\tfrac1{16}e^{2it}\right)dt.\)</div>
+    <p>The constant carries the endpoint steadily to the right. The other two integrals travel around circles once and twice, respectively. At a full turn they both return to zero. The gold tip adds the three coloured displacements head to tail.</p>
+    <div class="cs-equation">\(\displaystyle A_C(0)=0,\qquad A_C(2\pi)=\tfrac14+0+0=\tfrac14.\)</div>
+  </div>
+  <div class="cs-controls">
+    <label>Angle <output id="cs-angle-val">48°</output><input type="range" id="cs-angle" min="0" max="360" step="1" value="48"></label>
+    <label id="cs-radius-line">Distance to pole <output id="cs-radius-val"></output><input type="range" id="cs-radius" min="-3" max="0" step=".025" value="0"></label>
+    <label id="cs-blend-line" hidden>Contour blend λ <output id="cs-blend-val"></output><input type="range" id="cs-blend" min="0" max="1" step=".01" value=".50"></label>
+    <label id="cs-h-line" hidden>Local step h <output id="cs-h-val"></output><input type="range" id="cs-h" min="1" max="30" step="1" value="15"></label>
+  </div>
+  <div class="cs-buttons"><button id="cs-play" type="button" aria-pressed="false">Play a turn</button><button type="button" data-angle="0">Start · 0°</button><button type="button" data-angle="180">Half · 180°</button><button type="button" data-angle="360">Full · 360°</button><button type="button" hidden id="cs-zoom" aria-pressed="true">Show whole curves</button></div>
+  <div class="cs-buttons cs-modes" id="cs-modes" role="group" aria-label="Trace one integrated term" hidden>
+    <button type="button" data-mode="all" aria-pressed="true">Sum of all three</button>
+    <button type="button" data-mode="0" aria-pressed="false">Constant</button>
+    <button type="button" data-mode="1" aria-pressed="false">First harmonic</button>
+    <button type="button" data-mode="2" aria-pressed="false">Second harmonic</button>
+  </div>
+  <div class="cs-charts">
+    <figure><figcaption id="cs-input-title">Approach the pole in the input plane</figcaption><svg id="cs-input" viewBox="0 0 410 260" role="img" aria-labelledby="cs-input-title"></svg><p id="cs-input-note"></p></figure>
+    <figure><figcaption id="cs-output-title">The residue limit in the value plane</figcaption><svg id="cs-output" viewBox="0 0 410 260" role="img" aria-labelledby="cs-output-title"></svg><p id="cs-output-note"></p></figure>
+  </div>
+  <div id="cs-results" aria-label="Values at the selected angle"></div>
+  <a class="bc-film" href="../../boundary-coefficients-film/deform-the-contour.html"><span aria-hidden="true">▶</span> Watch this derivation</a>
+</section>
 <div id="lesson-lab" class="coefficient-lab">
-  <div class="lesson-section-heading"><h2>One coefficient, recovered around an ellipse</h2><button type="button" data-explain="contour-journey">Intuitive/geometric explanation</button></div>
+  <div class="lesson-section-heading"><h2>Follow the point around the contour</h2><button type="button" data-explain="contour-journey">Intuitive/geometric explanation</button></div>
   <div class="viz-controls">
     <label class="form-label">Recover<select class="form-select" id="cj-mode"><option value="coefficient">Legendre coefficient</option><option value="value">One real-line value</option></select></label>
     <label class="form-label">Function<select class="form-select" id="cj-example"><option value="square" selected>f(ω) = ω²</option><option value="exp">f(ω) = exp(ω)</option></select></label>
@@ -27,28 +81,64 @@
     <label class="form-label">Circle radius ϱ = <output id="cj-rv"></output><input class="form-range" type="range" id="cj-r" min="1.15" max="2.5" step="0.01" value="1.6"></label>
     <label class="form-label">Circuit completed θ = <output id="cj-tv"></output><input class="form-range" type="range" id="cj-t" min="0" max="360" step="1" value="90"></label>
   </div>
+  <div class="bc-control-row">
+    <button class="btn" id="cj-demo" type="button">Try the film’s Cauchy example</button>
+    <button class="btn" id="cj-play" type="button" aria-pressed="false">Play circuit</button>
+    <button class="btn" id="cj-finish" type="button">Complete circuit · 360°</button>
+  </div>
+  <section class="bc-deform" id="bc-deformation">
+    <h3>From the ellipse to a circle around x</h3>
+    <div id="cj-shape-controls" hidden>
+      <div class="bc-deform-controls">
+        <label>Shrink fraction u <output id="cj-uv"></output><input type="range" id="cj-u" min="0" max="1" step=".01" value="0"></label>
+        <label>Final circle radius ε <output id="cj-ev"></output><input type="range" id="cj-e" min="-3" max="0" step=".025" value="0"></label>
+        <button type="button" class="btn" id="cj-morph" aria-pressed="false">Deform while orbiting</button>
+        <button type="button" class="btn" id="cj-small">Shrink to circle</button>
+      </div>
+      <p class="hint">This control shrinks the contour from the ellipse to the circle. The film uses λ = 1 − u to blend from the circle back to the ellipse. The circle stays inside the original ellipse. Its centre is the evaluation point x. Every intermediate loop winds once around x. At 0% the path is the original ellipse. At 100% it is the circle of radius ε.</p>
+    </div>
+    <p id="cj-slit-note">The coefficient contour encloses the full interval. Choose <b>One real-line value</b> to deform the contour around a single point.</p>
+    <a class="bc-film" href="../../boundary-coefficients-film/deform-the-contour.html"><span aria-hidden="true">▶</span> Watch the contour deform</a>
+  </section>
   <div id="cj-formula" class="cj-math"></div>
   <div class="cj-planes">
-    <section><h3>Circle · z-plane</h3><svg id="cj-circle" class="cj-plot" role="img" aria-label="Source circle and current point"></svg></section>
-    <section><h3>Ellipse · input plane</h3><svg id="cj-ellipse" class="cj-plot" role="img" aria-label="Ellipse boundary and counterclockwise tangent direction"></svg></section>
+    <section><h3>Circle · angle parameter</h3><svg id="cj-circle" class="cj-plot" role="img" aria-label="Source circle and current point"></svg></section>
+    <section><h3>Contour · input plane</h3><button type="button" class="btn bc-fit" id="cj-fit" aria-pressed="false" hidden>Fit moving contour</button><svg id="cj-ellipse" class="cj-plot" role="img" aria-label="Ellipse boundary and counterclockwise tangent direction"></svg><p class="hint" id="cj-origin" hidden></p></section>
     <section><h3>Integral · value plane</h3><svg id="cj-sum" class="cj-plot" role="img" aria-label="Partial contour integral ending at the recovered value"></svg></section>
   </div>
-  <div class="viz-row text-small"><span>━━ Complete path</span><span>● Current point</span><span>◇ Real-line answer</span><button class="btn" id="cj-finish" type="button">Complete circuit · 360°</button></div>
+  <div class="viz-row text-small"><span>━━ Complete path</span><span>● Current point</span><span>◇ Real-line answer</span></div>
   <div class="viz-grid" aria-live="polite">
     <div class="card viz-stat"><div class="text-small">Partial integral · numerical</div><div class="viz-stat-value tabular-nums" id="cj-partial"></div></div>
     <div class="card viz-stat"><div class="text-small">Full circuit · numerical</div><div class="viz-stat-value tabular-nums" id="cj-full"></div></div>
     <div class="card viz-stat"><div class="text-small" id="cj-target-label"></div><div class="viz-stat-value tabular-nums" id="cj-target"></div></div>
   </div>
-  <p class="hint">The circle angle parametrises the ellipse; it is generally not the polar angle of the ellipse point. Each diagram has equal real and imaginary scales, with its own numerical scale.</p>
+  <section class="bc-ribbon" id="bc-height">
+    <div class="bc-title-row"><h3>Waves and signed height on the contour</h3><label>View <select id="cj-ridge"><option value="density">Oriented integrand</option><option value="function">Boundary waves of f</option></select></label></div>
+    <div class="bc-ridge-layout">
+      <figure><svg id="cj-ribbon" viewBox="0 0 520 310" role="img" aria-label="Oblique view of the contour with signed heights, moving point and tangent"></svg>
+        <figcaption><span class="bc-key bc-key-path">Contour</span> <span class="bc-key bc-key-tangent">Tangent</span> <span class="bc-key bc-key-height">Signed height</span></figcaption></figure>
+      <div class="bc-ridge-side">
+        <div class="bc-panel-controls"><label>Height <select id="cj-component"><option value="re">Real part</option><option value="im">Imaginary part</option></select></label><label id="cj-mode-field" hidden>Angular mode <select id="cj-wave-mode"><option value="all">Sum of modes</option><option value="0">Constant</option><option value="1">+1</option><option value="-1">−1</option><option value="2">+2</option><option value="-2">−2</option></select></label></div>
+        <div id="cj-wave-phase" hidden><label>Viewing phase φ <output id="cj-phiv">0°</output><input id="cj-phi" type="range" min="0" max="360" step="1" value="0"></label><button class="btn" id="cj-wave-play" type="button" aria-pressed="false">Move wave crests</button></div>
+        <div class="bc-rate-formulas math-static">
+          <div id="cj-value-rate">\(r_x=\dfrac{f(H)H'}{2\pi i(H-x)}\)</div>
+          <div id="cj-coeff-rate">\(r_n=\dfrac{2n+1}{2\pi i}f(\Gamma_\varrho)Q_n(\Gamma_\varrho)\Gamma_\varrho'\)</div>
+          <div id="cj-mode-rate" hidden>\(f(H(\theta))=\sum_{m=-2}^{2} b_m e^{im\theta}\)</div>
+        </div>
+        <p id="cj-ridge-caption"></p><div class="bc-mode-list" id="cj-wave-values" hidden></div><p class="bc-numeric" id="cj-height-value"></p>
+        <label>Camera angle <output id="cj-yawv">−28°</output><input id="cj-yaw" type="range" min="-180" max="180" step="1" value="-28"></label>
+      </div>
+    </div>
+  </section><p class="hint">The circle angle parametrises the ellipse; it is generally not the polar angle of the ellipse point. The planar diagrams use equal real and imaginary scales. The value-plane dot records the accumulated complex integral.</p>
   <div id="cj-definition" class="cj-math"></div>
   <div class="text-small" id="cj-detail"></div>
-  <div class="text-small">Contour: complex tangent · arrow shows direction only · 1,024-panel quadrature, 160 kernel terms · floating-point illustration. Only the complete contour identity recovers the target; the numerical endpoint approximates it.</div>
+  <div class="text-small">The pink arrow shows 0.22 times the complex tangent in input-plane units. Values use 1,024 midpoint panels. The coefficient view uses 160 kernel terms. Only the complete contour identity recovers the target; the numerical endpoint approximates it.</div>
 </div>
-<section class="lesson-proof math-static" id="contour-proof"><div class="lesson-section-heading"><h2>Why the boundary gives the same coefficient</h2><button type="button" data-explain="contour-proof">Intuitive/geometric explanation</button></div><p>First recover each value on the real interval by Cauchy's formula. Then combine those values using the Legendre weights. Interchanging the two integrations reveals a single boundary kernel.</p><div class="lesson-proof-grid"><article class="card"><h3>1 · Recover one real-line value</h3><div class="lesson-formula">\[f(x)=\frac1{2\pi i}\oint_{\partial E_\varrho}\frac{f(\varpi)}{\varpi-x}\,d\varpi.\]</div><p>Every \(x\in[-1,1]\) lies strictly inside the ellipse. The “One real-line value” setting shows this simpler contour identity.</p></article><article class="card"><h3>2 · Apply the Legendre weight</h3><div class="lesson-formula">\[a_n(f)=\left(n+\frac12\right)\int_{-1}^{1}f(x)P_n(x)\,dx.\]</div><p>Insert the Cauchy representation of \(f(x)\). The contour stays a positive distance from the interval, so the parametrised integrand is continuous on a compact rectangle and Fubini applies.</p></article><article class="card"><h3>3 · Collect the Cauchy kernels</h3><div class="lesson-formula">\[Q_n(\omega)=\frac12\int_{-1}^{1}\frac{P_n(x)}{\omega-x}\,dx,\qquad\omega\notin[-1,1].\]</div><p>The real integration produces \(2Q_n(\varpi)\), leaving the stated contour formula. This is Cauchy's formula followed by Fubini, rather than a substitution from the interval to the ellipse.</p></article></div><div class="card"><h3>The differential carries direction</h3><div class="lesson-formula">\[\varpi=\Gamma_\varrho(\theta),\qquad d\varpi=\Gamma'_\varrho(\theta)\,d\theta.\]</div><p>The complex tangent multiplies the integrand and turns its direction as the boundary is traversed. Its modulus appears only when taking an arclength estimate. In the interactive, the tangent arrow is rescaled to show direction, not speed.</p></div></section>
-<details class="card lesson-source math-static"><summary>Source, normalisation and numerical meaning</summary><p>The definition is Definition <bdi data-thesis-ref="legEDMD:def-Qn-second-kind">3.21</bdi>; the coefficient identity is Lemma <bdi data-thesis-ref="legEDMD:lem-1-7">3.22</bdi> in Subsection <bdi data-thesis-ref="legEDMD:subsec-coefficient-contour-Qn">3.2.4</bdi> of the integrated thesis. The cited preprint calls the identity Bandtlow's EDMD–Legendre Lemma 1.7.</p><p>The convention is the classical Legendre polynomial \(P_n(1)=1\). For the initial example, \(\omega^2=\tfrac13P_0(\omega)+\tfrac23P_2(\omega)\), so the exact reference is \(a_2=2/3\). Changing the contour radius does not change that coefficient.</p><p>The contour curve uses 1,024 midpoint quadrature panels and 160 terms of the kernel series. The real coefficient for \(e^\omega\) is independently evaluated by real-line quadrature. These are floating-point illustrations, with no interval certificate.</p><p>Next, the <a href="../kernel-structure/index.html">circle structure of \(Q_n\)</a> explains why the boundary kernel decays geometrically.</p></details>
+<section class="lesson-proof math-static" id="contour-proof"><div class="lesson-section-heading"><h2>Why the boundary gives the same coefficient</h2><button type="button" data-explain="contour-proof">Intuitive/geometric explanation</button></div><p>First recover each value on the real interval by Cauchy's formula. Then combine those values using the Legendre weights. Interchanging the two integrations reveals a single boundary kernel.</p><div class="lesson-proof-grid"><article class="card" id="bc-value"><h3>1 · Recover one real-line value</h3><div class="lesson-formula">\[f(x)=\frac1{2\pi i}\oint_{\partial E_\varrho}\frac{f(\varpi)}{\varpi-x}\,d\varpi.\]</div><p>Every \(x\in[-1,1]\) lies strictly inside the ellipse. Take x = ½ in the film example. The small circle and the ellipse both recover ¼.</p><a class="bc-film" href="../../boundary-coefficients-film/recover-one-value.html"><span aria-hidden="true">▶</span> Watch one real-line value</a></article><article class="card" id="bc-weight"><h3>2 · Apply the Legendre weight</h3><div class="lesson-formula">\[a_n(f)=\left(n+\frac12\right)\int_{-1}^{1}f(x)P_n(x)\,dx.\]</div><p>Insert the Cauchy representation of \(f(x)\). The contour stays a positive distance from the interval, so the parametrised integrand is continuous on a compact rectangle and Fubini applies.</p><a class="bc-film" href="../../boundary-coefficients-film/legendre-weight.html"><span aria-hidden="true">▶</span> Watch the Legendre weight</a></article><article class="card" id="bc-kernels"><h3>3 · Collect the Cauchy kernels</h3><div class="lesson-formula">\[\begin{gathered}Q_n(\omega)=\frac12\int_{-1}^{1}\frac{P_n(x)}{\omega-x}\,dx,\\ \omega\notin[-1,1].\end{gathered}\]</div><p>The real integration produces \(2Q_n(\varpi)\), leaving the stated contour formula. This is Cauchy's formula followed by Fubini, rather than a substitution from the interval to the ellipse.</p><a class="bc-film" href="../../boundary-coefficients-film/collect-the-kernels.html"><span aria-hidden="true">▶</span> Watch the kernels combine</a></article></div><div id="bc-proof-lab"></div><div class="card"><h3>The differential carries direction</h3><div class="lesson-formula">\[\varpi=\Gamma_\varrho(\theta),\qquad d\varpi=\Gamma'_\varrho(\theta)\,d\theta.\]</div><p>The complex tangent multiplies the integrand and turns its direction as the boundary is traversed. Its modulus appears only when taking an arclength estimate. On the ellipse with semiaxes a and b, the tangent is −a sin θ + i b cos θ. It points up at the right tip and left at the top. The same arrow scale throughout a circuit lets you compare the speeds there.</p></div></section>
+<details class="card lesson-source math-static"><summary>Source, normalisation and numerical meaning</summary><p>The definition is Definition <bdi data-thesis-ref="legEDMD:def-Qn-second-kind">3.21</bdi>; the coefficient identity is Lemma <bdi data-thesis-ref="legEDMD:lem-1-7">3.22</bdi> in Subsection <bdi data-thesis-ref="legEDMD:subsec-coefficient-contour-Qn">3.2.4</bdi> of the integrated thesis. The cited preprint calls the identity Bandtlow's EDMD–Legendre Lemma 1.7.</p><p>The convention is the classical Legendre polynomial \(P_n(1)=1\). For the initial example, \(\omega^2=\tfrac13P_0(\omega)+\tfrac23P_2(\omega)\), so the exact reference is \(a_2=2/3\). Changing the contour radius does not change that coefficient.</p><p>For the stated boundary regularity, apply Cauchy and Fubini on an inner ellipse \(E_s\), with \(1&lt;s&lt;\varrho\), then let \(s\uparrow\varrho\). Continuity up to the boundary and separation from the interval give the limit.</p><p>The contour curve uses 1,024 midpoint quadrature panels and 160 terms of the kernel series. The real coefficient for \(e^\omega\) is independently evaluated by real-line quadrature. These are floating-point illustrations, with no interval certificate.</p><p>Next, the <a href="../kernel-structure/index.html">circle structure of \(Q_n\)</a> explains why the boundary kernel decays geometrically.</p></details>
 <footer class="coefficient-footer"><a href="../ellipse-growth/index.html">← Geometric growth</a><a href="../kernel-structure/index.html">Kernel structure →</a></footer>
 </main>
 <template id="explain-contour-journey"><h3>Three planes, three different objects</h3><p>The first diagram shows the circle point \(z=\varrho e^{i\theta}\). The Joukowski map sends it to the ellipse point in the second diagram:</p><div class="lesson-formula">\[\Gamma_\varrho(\theta)=\frac{\varrho+\varrho^{-1}}2\cos\theta+i\frac{\varrho-\varrho^{-1}}2\sin\theta.\]</div><p>The first two diagrams locate the input. The third records the complex integral accumulated so far. Its moving point is a value, not another point on the original ellipse. A partial circuit need not give the coefficient; the whole positively oriented circuit gives the identity.</p><p>Try the default \(f(\omega)=\omega^2\), \(n=2\), then complete the circuit. The numerical endpoint approaches the exact reference \(2/3\). Change the radius: the path changes while its full-circuit target stays fixed.</p></template>
-<template id="explain-contour-proof"><h3>A weighted collection of Cauchy formulas</h3><p>Cauchy's formula recovers each \(f(x)\) from the boundary. A Legendre coefficient asks for a weighted average of those real-line values. Because the contour and interval stay apart, the two integrations can be exchanged.</p><div class="lesson-formula">\[\underbrace{\frac12\int_{-1}^{1}\frac{P_n(x)}{\varpi-x}\,dx}_{Q_n(\varpi)}\]</div><p>The bracket collects the Cauchy kernels into one function depending on the mode \(n\). The contour then needs only \(f(\varpi)\), that mode's kernel, and the oriented differential \(d\varpi\).</p><p>The ellipse is traversed counterclockwise. Replacing its complex tangent by its length would change the integral; length belongs to later inequalities.</p></template>
+<template id="explain-contour-proof"><h3>A weighted collection of Cauchy formulas</h3><p>Cauchy's formula recovers each \(f(x)\) from the boundary. A Legendre coefficient combines those real-line values with the signed weight \( (n+\tfrac12)P_n(x)\). Because the contour and interval stay apart, the two integrations can be exchanged.</p><div class="lesson-formula">\[\underbrace{\frac12\int_{-1}^{1}\frac{P_n(x)}{\varpi-x}\,dx}_{Q_n(\varpi)}\]</div><p>The bracket collects the Cauchy kernels into one function depending on the mode \(n\). The contour then needs only \(f(\varpi)\), that mode's kernel, and the oriented differential \(d\varpi\).</p><p>The ellipse is traversed counterclockwise. Replacing its complex tangent by its length would change the integral; length belongs to later inequalities.</p></template>
 </body>
 </html>

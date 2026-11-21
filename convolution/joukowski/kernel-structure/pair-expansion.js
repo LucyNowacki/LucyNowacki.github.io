@@ -108,7 +108,7 @@
     const rows = find('row'), cols = find('col'), average = find('mean');
     rows.replaceChildren(math('Q_{'+n+','+terms.length+'}='));
     cols.replaceChildren(math('\\overline{Q_{'+n+','+terms.length+'}}='));
-    average.replaceChildren(math('\\big\\langle W |Q_{'+n+','+terms.length+'}|^2\\big\\rangle='));
+    average.replaceChildren(math('\\displaystyle\\frac{1}{2\\pi}\\int_0^{2\\pi} W(\\theta)\\,|Q_{'+n+','+terms.length+'}(\\theta)|^2\\,d\\theta='));
     terms.forEach(({k},i) => {
       if (i) { sign(rows,'+'); sign(cols,'+'); sign(average,'+'); }
       rows.append(button('row',i,'c_{'+k+'}'+phase(-k),'Select row k = '+k));
@@ -153,7 +153,7 @@
     channels.append(math('\\big]'));
     let reason;
     if (d===0) reason='The constant weight a survives. This diagonal cell supplies the highlighted square in the average.';
-    else if (Math.abs(d)===2) reason='The constant term in brackets gives −¼ of the coefficient product. Its conjugate cell supplies another −¼, yielding the highlighted −½ term in the average.';
+    else if (Math.abs(d)===2) reason='The constant term contributes −¼ of the coefficient product. Its conjugate cell supplies another −¼, yielding the highlighted −½ term in the average.';
     else reason='The three frequencies '+pieces.map(([f])=>f).join(', ')+' all oscillate. This cell averages to zero, so it has no term in the averaged sum.';
     find('reason').textContent=reason;
   }

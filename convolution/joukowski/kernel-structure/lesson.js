@@ -223,6 +223,10 @@
   }
   function showStep(index, move=false) {
     step = index;
+    const chapter = ['exterior-circle','frequency-filters','rotating-arrows','tail-disc','pullback-tangents','contour-weights'][step];
+    const filmLink = root.querySelector('#kf-step-film');
+    filmLink.href = '../../kernel-frequencies-film/' + chapter + '.html';
+    filmLink.textContent = '▶ Watch ' + steps[step].textContent.split(' · ')[1];
     steps.forEach((button,i) => {
       button.setAttribute('aria-pressed', String(i === step));
       panels[i].hidden = i !== step;
@@ -281,6 +285,12 @@
   });
   root.querySelector('#sk-vector-selected').addEventListener('click',()=>{focusSelected=true;fitSelected=true;vectors(termsFor(state));});
   window.MathJax?.startup?.promise?.then(()=>typeset([root.querySelector('.sk-selected')]));
+  function openWorkedCalculation() {
+    const target=document.getElementById(location.hash.slice(1));
+    if(target?.matches('#kernel-calculations button[id^="kf-work-"]'))target.click();
+  }
+  window.addEventListener('DOMContentLoaded',openWorkedCalculation,{once:true});
+  window.addEventListener('hashchange',openWorkedCalculation);
   showStep(step);
   let resize,lastWidth=root.clientWidth;
   new ResizeObserver(()=>{const width=root.clientWidth;if(Math.abs(width-lastWidth)<1)return;lastWidth=width;cancelAnimationFrame(resize);resize=requestAnimationFrame(draw);}).observe(root);

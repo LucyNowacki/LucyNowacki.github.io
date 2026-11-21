@@ -1,0 +1,56 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.705
+Give every interval point its own kernel.
+
+00:00:02.705 --> 00:00:07.462
+Replace each f of x in the real integral by its Cauchy formula.
+
+00:00:07.462 --> 00:00:12.454
+As x moves along the interval, the factor one over omega minus x follows it.
+
+00:00:12.754 --> 00:00:14.772
+Exchange the two integrations.
+
+00:00:14.772 --> 00:00:19.230
+The ellipse boundary stays a positive distance from the entire interval.
+
+00:00:19.230 --> 00:00:26.867
+The parametrised integrand is continuous on a compact rectangle, so Fubini's theorem lets us integrate over x first.
+
+00:00:27.167 --> 00:00:29.399
+The kernels combine into one function.
+
+00:00:29.399 --> 00:00:34.497
+The bracket now integrates P two of x divided by omega minus x.
+
+00:00:34.497 --> 00:00:40.492
+By definition, half of that bracket is Q two of omega, so the whole bracket is twice Q two.
+
+00:00:40.792 --> 00:00:43.109
+Follow the coefficient around the ellipse.
+
+00:00:43.109 --> 00:00:46.948
+The factor of two from the bracket turns five halves into five.
+
+00:00:46.948 --> 00:00:53.732
+Multiply omega squared by Q two, by the oriented differential, and by five over two pi i.
+
+00:00:53.732 --> 00:00:57.080
+The accumulated value can be complex partway round.
+
+00:00:57.080 --> 00:00:58.958
+At the end it reaches two thirds.
+
+00:00:59.258 --> 00:01:01.020
+Keep the kernel off the slit.
+
+00:01:01.020 --> 00:01:05.521
+Q two is holomorphic off the real segment from minus one to one.
+
+00:01:05.521 --> 00:01:08.955
+The coefficient contour surrounds that entire segment.
+
+00:01:08.955 --> 00:01:13.861
+Deforming it across the slit would leave the region where this kernel is holomorphic.
+

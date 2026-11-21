@@ -1,0 +1,92 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.406
+One contour contains a spectrum.
+
+00:00:02.406 --> 00:00:06.438
+How can a trip around an ellipse pick out one polynomial coefficient?
+
+00:00:06.438 --> 00:00:09.786
+Take the third Legendre polynomial as the input.
+
+00:00:09.786 --> 00:00:12.218
+Its own degree three coefficient is one.
+
+00:00:12.218 --> 00:00:16.121
+Cauchy’s formula first recovers a value inside the ellipse.
+
+00:00:16.121 --> 00:00:22.009
+Weight those interior values by the third Legendre polynomial and collect their Cauchy kernels.
+
+00:00:22.009 --> 00:00:23.523
+The result is Q three.
+
+00:00:23.523 --> 00:00:29.005
+We will open that kernel, follow its waves around the ellipse, then put the integral back together.
+
+00:00:29.305 --> 00:00:30.790
+Separate the two angles.
+
+00:00:30.790 --> 00:00:34.288
+Turn theta on the exterior circle of radius three halves.
+
+00:00:34.288 --> 00:00:36.912
+Its point z maps to omega on the ellipse.
+
+00:00:36.912 --> 00:00:40.346
+Now hold theta still and turn t on the unit circle.
+
+00:00:40.346 --> 00:00:46.233
+The two unit points at angles t and minus t both map to x equal to cosine t.
+
+00:00:46.233 --> 00:00:50.542
+As t moves from zero to pi, x moves from one to minus one.
+
+00:00:50.542 --> 00:00:55.086
+The vector from x to omega supplies the denominator in the Cauchy kernel.
+
+00:00:55.386 --> 00:00:57.468
+Expand on the exterior circle.
+
+00:00:57.468 --> 00:00:59.537
+Divide each unit point by z.
+
+00:00:59.537 --> 00:01:03.099
+Both ratios have length two thirds, so their powers shrink.
+
+00:01:03.099 --> 00:01:07.024
+Subtract the two geometric series and divide by two i.
+
+00:01:07.024 --> 00:01:12.207
+At level k, the difference produces sine of k t times z to the minus k.
+
+00:01:12.207 --> 00:01:16.878
+The sum equals sine t over twice omega minus twice cosine t.
+
+00:01:16.878 --> 00:01:22.446
+The same geometric bound works at every t, which lets us integrate each wave separately.
+
+00:01:22.746 --> 00:01:25.618
+Read one coefficient as two signed areas.
+
+00:01:25.618 --> 00:01:30.481
+Multiply the sine wave at frequency k by P three of cosine t.
+
+00:01:30.481 --> 00:01:34.065
+Its signed area from zero to pi is sigma three k.
+
+00:01:34.065 --> 00:01:37.094
+Change coordinates to x equal to cosine t.
+
+00:01:37.094 --> 00:01:44.645
+The factor sine t in the differential cancels the sine t in the identity for the second kind Chebyshev polynomial.
+
+00:01:44.645 --> 00:01:52.602
+After reversing the limits, the same area is the integral of P three times U sub k minus one, from minus one to one.
+
+00:01:52.602 --> 00:01:54.564
+Keep frequency four in mind.
+
+00:01:54.564 --> 00:01:56.398
+We will compute its area exactly.
+
