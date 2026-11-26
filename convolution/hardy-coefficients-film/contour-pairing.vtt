@@ -1,0 +1,62 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.525
+Recover the same real coefficient.
+
+00:00:02.525 --> 00:00:09.481
+On the red interval, x squared is one third of the constant mode plus two thirds of the second Legendre polynomial.
+
+00:00:09.481 --> 00:00:12.425
+Our target coefficient is therefore two thirds.
+
+00:00:12.425 --> 00:00:20.490
+Lesson four, Bandtlow’s Lemma one point seven, recovers that same number by circling the violet ellipse once counterclockwise.
+
+00:00:20.490 --> 00:00:26.842
+The second kind kernel carries information about the degree two polynomial into the contour integral.
+
+00:00:26.842 --> 00:00:29.214
+The moving tangent supplies direction.
+
+00:00:29.214 --> 00:00:32.265
+Follow the arrow attached to the gold boundary point.
+
+00:00:32.265 --> 00:00:37.108
+It is the derivative of omega with respect to angle, drawn with one fixed scale.
+
+00:00:37.108 --> 00:00:41.333
+Multiply the function and kernel values by that complex tangent.
+
+00:00:41.333 --> 00:00:47.414
+The curve on the right adds these directed contributions in order, including the contour prefactor.
+
+00:00:47.414 --> 00:00:50.870
+The moving tip can leave the real axis during the circuit.
+
+00:00:50.870 --> 00:00:55.088
+It returns to the real value two thirds when the circuit closes.
+
+00:00:55.088 --> 00:00:57.546
+Cauchy–Schwarz separates two energies.
+
+00:00:57.546 --> 00:01:01.216
+Read the first squared magnitude under the angular integral.
+
+00:01:01.216 --> 00:01:02.859
+It measures the function alone.
+
+00:01:02.859 --> 00:01:08.300
+The other integral measures the squared magnitude of the kernel multiplied by the tangent.
+
+00:01:08.300 --> 00:01:13.613
+Their square roots bound the coefficient after multiplication by two n plus one.
+
+00:01:13.613 --> 00:01:16.963
+For this example the actual coefficient is two thirds.
+
+00:01:16.963 --> 00:01:20.355
+The energy estimate is about zero point nine three one.
+
+00:01:20.355 --> 00:01:26.408
+Replacing the kernel energy by a formula valid at every degree will give a looser bound.
+

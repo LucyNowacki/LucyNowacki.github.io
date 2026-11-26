@@ -1,0 +1,83 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.355
+Extend the estimate by density.
+
+00:00:02.355 --> 00:00:08.883
+We first wrote the contour formula for functions continuous up to the outer boundary and holomorphic inside.
+
+00:00:08.883 --> 00:00:13.428
+Approximate a Hardy input in the outer Hardy norm by such functions.
+
+00:00:13.428 --> 00:00:17.738
+The coefficient bound makes their coefficient values a Cauchy sequence.
+
+00:00:17.738 --> 00:00:22.240
+Its limit defines the coefficient continuously for every Hardy input.
+
+00:00:22.240 --> 00:00:28.826
+For its holomorphic representative, this is the same coefficient that we recover from the red interval.
+
+00:00:28.826 --> 00:00:30.793
+Two ellipses supply two powers.
+
+00:00:30.793 --> 00:00:35.466
+Keep the violet outer analytic ellipse fixed at R equal to one and a half.
+
+00:00:35.466 --> 00:00:39.349
+Choose the gold target ellipse with r equal to one point two.
+
+00:00:39.349 --> 00:00:44.150
+The coefficient estimate supplies R to the minus n from the outer Hardy norm.
+
+00:00:44.150 --> 00:00:52.662
+Lesson three, Bandtlow’s Lemma one point six, bounds the magnitude of the basis polynomial by r to the n throughout the inner ellipse.
+
+00:00:52.662 --> 00:00:54.327
+Multiply the two powers.
+
+00:00:54.327 --> 00:00:58.502
+Each term now carries the ratio zero point eight to the n.
+
+00:00:58.502 --> 00:01:00.512
+Sum every discarded degree.
+
+00:01:00.512 --> 00:01:05.099
+Keep the real-line Legendre modes of degrees zero through N minus one.
+
+00:01:05.099 --> 00:01:07.212
+The first omitted bar is degree N.
+
+00:01:07.212 --> 00:01:12.887
+Sum the upper envelopes from that bar onward, including the infinitely many bars beyond the chart.
+
+00:01:12.887 --> 00:01:18.285
+Moving the cutoff to the right drives the bound to zero throughout the fixed closed inner ellipse.
+
+00:01:18.285 --> 00:01:23.619
+With omega squared as input, the actual error vanishes as soon as three modes are kept.
+
+00:01:23.619 --> 00:01:28.755
+The positive bound still applies to all inputs of the same outer Hardy norm.
+
+00:01:28.755 --> 00:01:30.807
+Follow the two measurements together.
+
+00:01:30.807 --> 00:01:37.250
+On the outer ellipse, the rotating point measures the function energy and the tangent-weighted kernel energy.
+
+00:01:37.250 --> 00:01:40.344
+The three diagonals evaluate that kernel energy.
+
+00:01:40.344 --> 00:01:44.612
+The resulting coefficient bound shrinks with degree on the outer circle.
+
+00:01:44.612 --> 00:01:47.684
+On the smaller target ellipse the basis can grow.
+
+00:01:47.684 --> 00:01:51.034
+Their ratio controls the uniform reconstruction error.
+
+00:01:51.034 --> 00:01:59.540
+If the two radii coincide, the ratio becomes one and this geometric tail argument no longer supplies convergence.
+

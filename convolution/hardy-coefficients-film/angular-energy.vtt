@@ -1,0 +1,56 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.141
+What does the boundary measure?
+
+00:00:02.141 --> 00:00:09.374
+In Lesson six, we bounded a Legendre coefficient using the largest magnitude of the function on the outer ellipse.
+
+00:00:09.374 --> 00:00:13.684
+Now replace that measurement with the root mean square over a full turn.
+
+00:00:13.684 --> 00:00:17.589
+Follow the same function, omega squared, through both measurements.
+
+00:00:17.589 --> 00:00:22.383
+They lead to different constants and the same geometric decay with degree.
+
+00:00:22.383 --> 00:00:24.435
+One angle locates two points.
+
+00:00:24.435 --> 00:00:27.380
+Choose the outer circle of radius one and a half.
+
+00:00:27.380 --> 00:00:29.663
+The cyan point is z on that circle.
+
+00:00:29.663 --> 00:00:35.466
+The Joukowski map sends it to the gold point omega on the boundary of the violet ellipse.
+
+00:00:35.466 --> 00:00:38.347
+Move the two points by increasing the same angle.
+
+00:00:38.347 --> 00:00:42.252
+Equal steps on the circle cover different lengths along the ellipse.
+
+00:00:42.252 --> 00:00:46.555
+Each angular step still gets equal weight in the Hardy integral.
+
+00:00:46.555 --> 00:00:48.586
+Each height contributes to the mean.
+
+00:00:48.586 --> 00:00:53.749
+Raise a cyan stem over the ellipse point by the squared magnitude of omega squared.
+
+00:00:53.749 --> 00:00:58.401
+As the point travels, the stem traces a ridge, tallest at the real tips.
+
+00:00:58.401 --> 00:01:03.607
+The matching graph unwraps one circuit and shades the accumulated angular energy.
+
+00:01:03.607 --> 00:01:08.877
+Divide the full area by two pi to get the mean, about zero point five seven nine.
+
+00:01:08.877 --> 00:01:15.783
+Its square root, about zero point seven six one, is the Hardy norm of this function on the outer ellipse.
+

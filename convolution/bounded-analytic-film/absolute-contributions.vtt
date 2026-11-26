@@ -1,113 +1,146 @@
 WEBVTT
 
-00:00:00.260 --> 00:00:02.428
+00:00:00.260 --> 00:00:02.519
 Straighten the contour contributions.
 
-00:00:02.428 --> 00:00:05.179
+00:00:02.519 --> 00:00:05.286
 Follow four successive arcs of the inner ellipse.
 
-00:00:05.179 --> 00:00:10.085
-For each arc, integrate the complex density, including the oriented tangent.
+00:00:05.286 --> 00:00:10.065
+For each arc integrate the complex density, including its oriented tangent.
 
-00:00:10.085 --> 00:00:13.946
-In the output plane each coloured arrow is one such increment.
+00:00:10.065 --> 00:00:15.506
+The four coloured output arrows are the resulting increments, delta one through delta four.
 
-00:00:13.946 --> 00:00:15.353
+00:00:15.506 --> 00:00:16.929
 Join them head to tail.
 
-00:00:15.353 --> 00:00:18.809
-The displacement from start to finish gives the coefficient.
+00:00:16.929 --> 00:00:24.567
+The gold displacement measures the distance from the first tail to the last tip, about zero point zero four nine four two.
 
-00:00:18.809 --> 00:00:22.605
-Now turn the arrows until they all face right, keeping their lengths.
+00:00:24.567 --> 00:00:27.512
+Now straighten the four arrows, preserving their lengths.
 
-00:00:22.605 --> 00:00:27.170
-The straightened path can be longer because the original arrows partly cancel.
+00:00:27.512 --> 00:00:34.105
+The violet total is about zero point three one five because the directed arrows had partly cancelled.
 
-00:00:27.170 --> 00:00:32.439
-Splitting into finer arcs gives the integral of the absolute density as an upper bound.
+00:00:34.105 --> 00:00:40.783
+The mint bar measures the length of the entire curved output path, including the bends within each of the four arcs.
 
-00:00:32.739 --> 00:00:34.928
+00:00:40.783 --> 00:00:48.307
+On each arc the chord is at most the path length, so adding the four chords gives at most the integral of the absolute density.
+
+00:00:48.307 --> 00:00:50.587
 Replace the local heights by ceilings.
 
-00:00:34.928 --> 00:00:39.408
-At each boundary point the absolute density contains three factors.
+00:00:50.587 --> 00:00:56.988
+At each angle, taking the modulus changes the contour density into a product of three real heights.
 
-00:00:39.408 --> 00:00:42.074
-The first is the modulus of the function.
+00:00:56.988 --> 00:01:01.874
+Violet is the magnitude of the function at the moving point on the inner ellipse.
 
-00:00:42.074 --> 00:00:45.934
-Its height on the inner rim stays below the outer supremum, M rho.
+00:01:01.874 --> 00:01:06.355
+Its horizontal ceiling is the supremum over the outer ellipse, M rho.
 
-00:00:45.934 --> 00:00:48.537
-The second is the modulus of the kernel.
+00:01:06.355 --> 00:01:10.708
+Pink is the magnitude of the degree two kernel on that same inner contour.
 
-00:00:48.537 --> 00:00:52.291
-Bound every height by the largest kernel height on this inner rim.
+00:01:10.708 --> 00:01:13.546
+Its ceiling is the maximum around that contour.
 
-00:00:52.291 --> 00:00:54.765
-The third is the speed of the moving point.
+00:01:13.546 --> 00:01:17.493
+Mint is the speed, the distance along the ellipse per unit angle.
 
-00:00:54.765 --> 00:00:58.113
-Integrating that speed over one turn gives the perimeter.
+00:01:17.493 --> 00:01:21.974
+Multiply speed by a small angle step to obtain a small arc length.
 
-00:00:58.113 --> 00:01:01.036
-Those three pieces give the estimate on the screen.
+00:01:21.974 --> 00:01:26.796
+Summing those lengths around one turn gives the mint area, the perimeter L sub s.
 
-00:01:01.336 --> 00:01:03.418
+00:01:26.796 --> 00:01:33.069
+Take the first two ceilings outside the integral and keep the perimeter, giving the bound below for any degree n.
+
+00:01:33.069 --> 00:01:36.376
+This is the supremum estimate of Lemma one point nine.
+
+00:01:36.376 --> 00:01:43.645
+Lesson seven uses Lemma one point ten, where Cauchy Schwarz instead separates two angular mean squares.
+
+00:01:43.645 --> 00:01:45.818
 Every second frequency survives.
 
-00:01:03.418 --> 00:01:05.636
-Look inside the kernel at degree three.
+00:01:45.818 --> 00:01:49.979
+Switch from the degree two contour example to the kernel of degree three.
 
-00:01:05.636 --> 00:01:08.558
-The first three frequencies are four, six and eight.
+00:01:49.979 --> 00:01:56.017
+Lesson five leaves frequencies four, six, eight, and then every second positive index.
 
-00:01:08.558 --> 00:01:13.059
-At one moving point each coloured ridge gives the real part of its wave.
+00:01:56.017 --> 00:02:02.311
+The numbers c four, c six and c eight are the lengths of the first three complex arrows on this contour.
 
-00:01:13.059 --> 00:01:16.003
-The matching arrow carries the whole complex value.
+00:02:02.311 --> 00:02:04.167
+Each length has two ingredients.
 
-00:01:16.003 --> 00:01:18.818
-Its length is sigma times s to the minus k.
+00:02:04.167 --> 00:02:11.805
+Sigma is the coefficient found by integrating the third Legendre polynomial of cosine t against sine of k t.
 
-00:01:18.818 --> 00:01:22.935
-A full turn rotates the fourth frequency four times clockwise.
+00:02:11.805 --> 00:02:15.796
+At frequency four this integral is thirty-two over thirty-five.
 
-00:01:22.935 --> 00:01:25.771
-All three arrows have fixed lengths at this radius.
+00:02:15.796 --> 00:02:24.394
+Multiply it by the circle radius one point five four to the power minus four to get about zero point one six two five five.
 
-00:01:25.771 --> 00:01:28.565
-Their sum changes as their directions change.
+00:02:24.394 --> 00:02:28.576
+The identical rule gives the pink and violet lengths for six and eight.
 
-00:01:28.565 --> 00:01:32.661
-To bound it at every angle, add their lengths and include the rest of the ladder.
+00:02:28.576 --> 00:02:33.547
+The remaining exponential has modulus one and rotates each arrow clockwise.
 
-00:01:32.961 --> 00:01:34.958
+00:02:33.547 --> 00:02:41.441
+Above each dial the wave shows the real projection of that arrow on the ellipse, enlarged separately so all three waves are visible.
+
+00:02:41.441 --> 00:02:44.620
+A full turn gives four, six and eight oscillations.
+
+00:02:44.620 --> 00:02:49.692
+Adding their lengths and all the later lengths bounds the complete kernel at any angle.
+
+00:02:49.692 --> 00:02:51.780
 Sum the geometric majorant.
 
-00:01:34.958 --> 00:01:38.584
-For general degree n, the first frequency is n plus one.
+00:02:51.780 --> 00:02:55.514
+For degree n, the first surviving frequency is n plus one.
 
-00:01:38.584 --> 00:01:42.232
-Replace each nonnegative sigma by its upper bound of two.
+00:02:55.514 --> 00:02:58.693
+The index q counts steps of two, starting at zero.
 
-00:01:42.232 --> 00:01:47.906
-Successive upper bounds have ratio one over s squared, since the exponents differ by two.
+00:02:58.693 --> 00:03:04.049
+Take absolute values of the waves and bound each sigma by two using Lesson five.
 
-00:01:47.906 --> 00:01:54.369
-The first upper bound divided by one minus that ratio sums the entire geometric series.
+00:03:04.049 --> 00:03:07.911
+The first three upper bounds are the blue, pink and violet blocks.
 
-00:01:54.369 --> 00:02:01.067
-Simplify the fraction to get two times s to the minus n divided by s minus its reciprocal.
+00:03:07.911 --> 00:03:14.013
+Dividing any block by its predecessor cancels the initial power and leaves one over s squared.
 
-00:02:01.067 --> 00:02:04.224
-Insert this kernel ceiling into the contour estimate.
+00:03:14.013 --> 00:03:18.728
+This number is less than one because the inner circle radius s exceeds one.
 
-00:02:04.224 --> 00:02:07.509
-The two cancels the two in the contour normalization.
+00:03:18.728 --> 00:03:24.211
+The entire strip has length equal to the first block divided by one minus the ratio.
 
-00:02:07.509 --> 00:02:12.714
-What remains is the perimeter constant, the function norm, and the geometric decay.
+00:03:24.211 --> 00:03:32.276
+Multiply the numerator and denominator by s to obtain two times s to the minus n over s minus its reciprocal.
+
+00:03:32.276 --> 00:03:36.415
+Put that kernel bound into the pink slot of the coefficient estimate.
+
+00:03:36.415 --> 00:03:40.363
+Its factor of two cancels the two in the contour normalization.
+
+00:03:40.363 --> 00:03:44.844
+Group the perimeter and the remaining denominator into C infinity of s.
+
+00:03:44.844 --> 00:03:50.363
+The factor s to the minus n stays visible because it controls decay with degree.
 

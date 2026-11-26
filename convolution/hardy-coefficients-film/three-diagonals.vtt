@@ -1,0 +1,77 @@
+WEBVTT
+
+00:00:00.260 --> 00:00:02.184
+Build the kernel from three waves.
+
+00:00:02.184 --> 00:00:06.921
+Lesson five, Bandtlow’s Lemma one point eight, gives the one-sided ladder.
+
+00:00:06.921 --> 00:00:12.617
+For degree two, the first three frequencies are minus three, minus five, and minus seven.
+
+00:00:12.617 --> 00:00:17.695
+Each coloured arrow turns clockwise and adds one term to the kernel approximation.
+
+00:00:17.695 --> 00:00:24.608
+Its length is the real coefficient sigma multiplied by the outer radius to the negative frequency index.
+
+00:00:24.608 --> 00:00:27.333
+The gold tip follows the finite sum.
+
+00:00:27.333 --> 00:00:29.172
+Select a pair of frequencies.
+
+00:00:29.172 --> 00:00:34.506
+Multiply the three-term sum by its complex conjugate and the squared boundary speed.
+
+00:00:34.506 --> 00:00:41.824
+Row three and column five select a product with amplitude c three times c five and phase twice the angle.
+
+00:00:41.824 --> 00:00:47.179
+The speed squared has a constant wave and two waves with frequencies plus and minus two.
+
+00:00:47.179 --> 00:00:49.654
+The minus two wave cancels this pair’s phase.
+
+00:00:49.654 --> 00:00:54.150
+Its constant contribution survives averaging over the full circuit.
+
+00:00:54.150 --> 00:00:56.564
+Three diagonals survive a full turn.
+
+00:00:56.564 --> 00:01:01.557
+The main diagonal contributes a positive multiple of each squared amplitude.
+
+00:01:01.557 --> 00:01:06.187
+Each adjacent cell contributes minus one quarter of a neighbouring product.
+
+00:01:06.187 --> 00:01:08.663
+The reflected cell makes a second copy.
+
+00:01:08.663 --> 00:01:16.642
+For three terms, subtract about zero point zero one zero zero five from zero point zero six nine nine four.
+
+00:01:16.642 --> 00:01:22.381
+The resulting zero point zero five nine eight nine is the energy of the three-term packet.
+
+00:01:22.381 --> 00:01:26.343
+Adding further kernel terms changes this finite energy.
+
+00:01:26.343 --> 00:01:28.737
+Turn the exact identity into a bound.
+
+00:01:28.737 --> 00:01:36.311
+For the full ladder, every surviving coefficient is nonnegative, so discarding the subtracted correction gives an upper bound.
+
+00:01:36.311 --> 00:01:37.933
+Each sigma is at most two.
+
+00:01:37.933 --> 00:01:45.678
+Squaring the radial factors makes the remaining geometric sum decrease by a factor of R to the minus four at every step.
+
+00:01:45.678 --> 00:01:48.686
+Its sum gives the explicit constant C two of R.
+
+00:01:48.686 --> 00:01:53.139
+Bandtlow’s Lemma one point ten follows by taking the square root.
+

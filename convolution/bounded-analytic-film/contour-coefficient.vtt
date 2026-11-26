@@ -1,104 +1,131 @@
 WEBVTT
 
-00:00:00.260 --> 00:00:02.364
+00:00:00.260 --> 00:00:02.454
 Recover one real value first.
 
-00:00:02.364 --> 00:00:05.840
+00:00:02.454 --> 00:00:05.947
 Fix x on the red interval inside the moving contour.
 
-00:00:05.840 --> 00:00:08.037
+00:00:05.947 --> 00:00:08.159
 The Cauchy kernel has its pole at x.
 
-00:00:08.037 --> 00:00:14.074
+00:00:08.159 --> 00:00:14.211
 Turn once counterclockwise around that pole, weighting the kernel by the boundary values of the function.
 
-00:00:14.074 --> 00:00:17.102
+00:00:14.211 --> 00:00:17.255
 Cauchy's formula recovers the value at x.
 
-00:00:17.102 --> 00:00:24.014
+00:00:17.255 --> 00:00:24.182
 Now let x run along the interval, weight these recoveries by the second Legendre polynomial, and integrate.
 
-00:00:24.014 --> 00:00:27.853
+00:00:24.182 --> 00:00:28.037
 Collecting their kernels gives the second-kind kernel Q two.
 
-00:00:27.853 --> 00:00:33.293
+00:00:28.037 --> 00:00:34.047
 With the coefficient normalization, a factor of five remains outside the contour integral.
 
-00:00:33.593 --> 00:00:35.526
+00:00:34.047 --> 00:00:36.071
 Let the tangent turn the product.
 
-00:00:35.526 --> 00:00:37.787
+00:00:36.071 --> 00:00:38.348
 One angle chooses the boundary point.
 
-00:00:37.787 --> 00:00:42.842
-As the point turns, the tangent gives the complex direction and speed per radian.
+00:00:38.348 --> 00:00:42.935
+As the point turns, the pink tangent gives its direction and speed per radian.
 
-00:00:42.842 --> 00:00:45.380
+00:00:42.935 --> 00:00:45.489
 At the right tip the tangent points straight up.
 
-00:00:45.380 --> 00:00:47.044
+00:00:45.489 --> 00:00:47.168
 At the top it points left.
 
-00:00:47.044 --> 00:00:54.851
-The next small change in the coefficient integral comes from multiplying the function value, the kernel value and this tangent.
+00:00:47.168 --> 00:00:54.806
+Now multiply the function value, the second-kind kernel and this tangent to obtain the violet vector in the output plane.
 
-00:00:54.851 --> 00:00:58.562
-Multiply also by five divided by two pi i.
+00:00:54.806 --> 00:00:58.732
+Dividing by i turns that vector clockwise by a quarter turn.
 
-00:00:58.562 --> 00:01:02.231
-The gold arrow in the output plane shows this complex rate.
+00:00:58.732 --> 00:01:07.324
+Multiplying its length by five over two pi gives the gold arrow, the rate of change of the accumulated integral per radian.
 
-00:01:02.231 --> 00:01:06.221
-A small angle in radians turns the rate into a small increment.
+00:01:07.324 --> 00:01:08.842
+Halve the angular step.
 
-00:01:06.521 --> 00:01:08.859
+00:01:08.842 --> 00:01:13.088
+Fix the starting angle at thirty degrees and hold its gold rate fixed.
+
+00:01:13.088 --> 00:01:17.313
+Sweep the cyan arc through four tenths of a radian on the inner ellipse.
+
+00:01:17.313 --> 00:01:22.668
+Multiplying the starting rate by the angle step gives the gold straight-line prediction.
+
+00:01:22.668 --> 00:01:28.962
+The true increment integrates the changing rate all along the arc, giving the mint arrow in the output plane.
+
+00:01:28.962 --> 00:01:31.182
+Now halve the angle step to two tenths.
+
+00:01:31.182 --> 00:01:39.012
+The predicted arrow halves, and the gap between its tip and the integrated tip falls from about sixteen thousandths to four thousandths.
+
+00:01:39.012 --> 00:01:40.911
+Halve the step again to one tenth.
+
+00:01:40.911 --> 00:01:43.003
+The gap is now below one thousandth.
+
+00:01:43.003 --> 00:01:48.586
+These small directed increments add head to tail to form the full contour integral.
+
+00:01:48.586 --> 00:01:51.015
 Two contours add different increments.
 
-00:01:08.859 --> 00:01:13.722
+00:01:51.015 --> 00:01:55.894
 Keep the same function and use two inner radii, one point five four and two.
 
-00:01:13.722 --> 00:01:16.068
+00:01:55.894 --> 00:01:58.256
 Start both running integrals at zero.
 
-00:01:16.068 --> 00:01:18.905
+00:01:58.256 --> 00:02:01.109
 Turn both boundary points through the same angle.
 
-00:01:18.905 --> 00:01:24.558
+00:02:01.109 --> 00:02:06.777
 Their radii differ, so they sample different function values, kernel values and tangents.
 
-00:01:24.558 --> 00:01:28.845
+00:02:06.777 --> 00:02:11.080
 The tips in the output plane trace the accumulated complex integrals.
 
-00:01:28.845 --> 00:01:30.359
+00:02:11.080 --> 00:02:12.610
 Stop at a quarter turn.
 
-00:01:30.359 --> 00:01:32.257
+00:02:12.610 --> 00:02:14.523
 The two tips are visibly apart.
 
-00:01:32.257 --> 00:01:36.055
+00:02:14.523 --> 00:02:18.891
 A partly traversed contour still remembers which ellipse we chose.
 
-00:01:36.355 --> 00:01:38.714
+00:02:18.891 --> 00:02:21.341
 Both circuits give the same coefficient.
 
-00:01:38.714 --> 00:01:41.402
+00:02:21.341 --> 00:02:24.045
 Complete the remaining three quarters of each circuit.
 
-00:01:41.402 --> 00:01:45.625
+00:02:24.045 --> 00:02:28.284
 Watch the cyan and pink traces come together on the real axis.
 
-00:01:45.625 --> 00:01:52.131
+00:02:28.284 --> 00:02:34.805
 Both reach the real integral from our first chapter, approximately zero point zero four nine four two.
 
-00:01:52.131 --> 00:01:53.389
+00:02:34.805 --> 00:02:36.079
 Why do they meet?
 
-00:01:53.389 --> 00:01:58.828
+00:02:36.079 --> 00:02:41.534
 The product of the function and the kernel is holomorphic in the region between the two contours.
 
-00:01:58.828 --> 00:02:03.030
+00:02:41.534 --> 00:02:45.751
 Deforming one contour into the other preserves its complete integral.
 
-00:02:03.030 --> 00:02:06.977
+00:02:45.751 --> 00:02:50.268
 Now we can choose any inner contour to estimate that same coefficient.
 

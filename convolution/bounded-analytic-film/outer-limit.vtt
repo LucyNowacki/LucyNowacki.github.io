@@ -1,116 +1,131 @@
 WEBVTT
 
-00:00:00.260 --> 00:00:01.980
+00:00:00.260 --> 00:00:02.070
 Move the inner contour outward.
 
-00:00:01.980 --> 00:00:06.715
+00:00:02.070 --> 00:00:06.821
 Fix rho at two point one five and keep the function and its outer norm fixed.
 
-00:00:06.715 --> 00:00:10.128
+00:00:06.821 --> 00:00:10.250
 The amber ellipse starts at the inner radius from the lesson.
 
-00:00:10.128 --> 00:00:14.820
+00:00:10.250 --> 00:00:14.958
 Its value is one point five four zero five before display rounding.
 
-00:00:14.820 --> 00:00:16.932
+00:00:14.958 --> 00:00:17.085
 Expand it toward the violet rim.
 
-00:00:16.932 --> 00:00:22.563
+00:00:17.085 --> 00:00:22.732
 Along the way, the perimeter and the gap s minus its reciprocal both change continuously.
 
-00:00:22.563 --> 00:00:28.131
+00:00:22.732 --> 00:00:28.315
 Their quotient therefore tends to the outer perimeter constant, since rho is greater than one.
 
-00:00:28.131 --> 00:00:31.159
+00:00:28.315 --> 00:00:31.359
 The coefficient stays on the left of every inequality.
 
-00:00:31.159 --> 00:00:39.799
+00:00:31.359 --> 00:00:40.569
 Taking the limit on the right gives the theorem without ever needing values of a general bounded holomorphic function on the outer boundary.
 
-00:00:40.099 --> 00:00:42.843
+00:00:40.569 --> 00:00:43.403
 Read degree ten on the logarithmic scale.
 
-00:00:42.843 --> 00:00:46.554
+00:00:43.403 --> 00:00:47.131
 The cyan curve holds the coefficients of our fixed function.
 
-00:00:46.554 --> 00:00:49.092
+00:00:47.131 --> 00:00:49.685
 The amber curve gives the inner envelope.
 
-00:00:49.092 --> 00:00:51.374
+00:00:49.685 --> 00:00:51.982
 The violet curve gives its outer limit.
 
-00:00:51.374 --> 00:00:53.059
+00:00:51.982 --> 00:00:53.683
 Read all three at degree ten.
 
-00:00:53.059 --> 00:00:57.752
+00:00:53.683 --> 00:00:58.391
 The real coefficient is about three point eight times ten to the minus seven.
 
-00:00:57.752 --> 00:01:01.058
+00:00:58.391 --> 00:01:01.712
 The inner estimate is about zero point four two three.
 
-00:01:01.058 --> 00:01:08.332
+00:01:01.712 --> 00:01:09.001
 As the amber contour approaches the violet one, the amber marker descends to about zero point zero one zero eight.
 
-00:01:08.332 --> 00:01:10.102
+00:01:09.001 --> 00:01:10.787
 The cyan marker stays put.
 
-00:01:10.102 --> 00:01:15.713
+00:01:10.787 --> 00:01:16.968
 Each step of four powers of ten on this vertical axis represents a factor of ten thousand.
 
-00:01:16.013 --> 00:01:18.052
+00:01:16.968 --> 00:01:19.098
 Estimate the perimeter in two ways.
 
-00:01:18.052 --> 00:01:22.361
-In the geometric formula the perimeter is the integral of the speed.
+00:01:19.098 --> 00:01:22.982
+On the outer ellipse the mint curve is the speed of the boundary point.
 
-00:01:22.361 --> 00:01:26.862
-Numerical quadrature samples this speed at equally spaced angles.
+00:01:22.982 --> 00:01:26.033
+Integrating the mint height in angle gives the perimeter.
 
-00:01:26.862 --> 00:01:31.960
-The displayed perimeter constant is about one point two nine one for the outer ellipse.
+00:01:26.033 --> 00:01:31.666
+Sample it at equally spaced angles and multiply the sum of the heights by the angular step.
 
-00:01:31.960 --> 00:01:34.285
-There is also an elementary upper bound.
+00:01:31.666 --> 00:01:35.229
+This quadrature gives a perimeter of about six point eight three.
 
-00:01:34.285 --> 00:01:37.356
-The speed never exceeds the major semiaxis.
+00:01:35.229 --> 00:01:40.627
+For an analytic upper bound, consider the real and imaginary components of the tangent.
 
-00:01:37.356 --> 00:01:44.225
-Replacing every speed by this horizontal ceiling bounds the perimeter by two pi times that semiaxis.
+00:01:40.627 --> 00:01:45.855
+The squared speed is a squared times sine squared plus b squared times cosine squared.
 
-00:01:44.225 --> 00:01:51.925
-The elementary envelope is about zero point zero one three at degree ten, a little higher than the perimeter based estimate.
+00:01:45.855 --> 00:01:52.789
+Since b is at most a, the squared speed is at most a squared, so the gold horizontal line bounds every speed.
 
-00:01:51.925 --> 00:01:54.442
-The elementary inequality is analytic.
+00:01:52.789 --> 00:01:59.296
+The rectangle under that ceiling has width two pi and height a, hence the perimeter is at most two pi a.
 
-00:01:54.442 --> 00:01:59.349
-The quadrature gives a numerical evaluation of the exact perimeter formula.
+00:01:59.296 --> 00:02:06.508
+Divide this perimeter bound by pi times rho minus its reciprocal, the denominator inherited from the kernel.
 
-00:01:59.649 --> 00:02:01.880
+00:02:06.508 --> 00:02:12.396
+Substituting the horizontal semiaxis for a gives the displayed upper bound for C infinity.
+
+00:02:12.396 --> 00:02:20.141
+At degree ten, the mint perimeter calculation gives about zero point zero one zero eight for the coefficient envelope.
+
+00:02:20.141 --> 00:02:26.514
+The gold elementary estimate gives about zero point zero one three for the same envelope.
+
+00:02:26.514 --> 00:02:28.836
 Follow one coefficient through the proof.
 
-00:02:01.880 --> 00:02:06.232
-Start inside, where the contour integral recovers the fixed coefficient.
+00:02:28.836 --> 00:02:33.978
+On this graph, cyan follows the actual Legendre coefficients of our fixed function.
 
-00:02:06.232 --> 00:02:09.879
-Take absolute values and pay for the lost cancellation.
+00:02:33.978 --> 00:02:40.763
+At degree ten the contour integral gives the cyan point, independent of the chosen inner circle radius.
 
-00:02:09.879 --> 00:02:13.228
-The kernel frequencies supply the geometric factor.
+00:02:40.763 --> 00:02:46.801
+Taking absolute values and bounding the kernel gives the amber envelope on the same degree axis.
 
-00:02:13.228 --> 00:02:15.681
-Let the inner rim approach the outer ellipse.
+00:02:46.801 --> 00:02:54.695
+Its factor s to the minus n comes from the first surviving negative power and the geometric sum on the pulled back circle.
 
-00:02:15.681 --> 00:02:18.027
-Now move the selected degree to the right.
+00:02:54.695 --> 00:02:58.216
+Let s increase to rho, the fixed outer circle radius.
 
-00:02:18.027 --> 00:02:23.189
-The degree multiplier grows linearly, while the reciprocal power falls geometrically.
+00:02:58.216 --> 00:03:02.974
+The limiting envelope is violet, and the cyan coefficients still stay below it.
 
-00:02:23.189 --> 00:02:28.351
-For a fixed outer radius greater than one, the geometric factor eventually wins.
+00:03:02.974 --> 00:03:08.820
+To see why the violet curve eventually falls, compare the bounds at two consecutive degrees.
 
-00:02:28.351 --> 00:02:35.071
-This is how the size of a holomorphic function on an ellipse controls the decay of its Legendre coefficients.
+00:03:08.820 --> 00:03:14.687
+Their ratio is two n plus three divided by two n plus one, times one over rho.
+
+00:03:14.687 --> 00:03:21.258
+The first factor tends to one, leaving one over rho, about zero point four six five for this ellipse.
+
+00:03:21.258 --> 00:03:29.167
+This limiting contraction explains the geometric slope of the upper envelope and the guarantee of coefficient decay.
 

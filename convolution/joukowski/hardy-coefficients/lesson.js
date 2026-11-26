@@ -4,7 +4,7 @@
   const byId = id => document.getElementById(id);
   const input = {view: byId('het-view'), R: byId('het-R'), n: byId('het-n'), L: byId('het-L'), r: byId('het-r'), N: byId('het-N')};
   const svg = d3.select(byId('het-chart'));
-  const defaults = {view: 'energy', R: 1.7, n: 3, L: 12, r: 1.25, N: 6};
+  const defaults = {view: 'energy', R: 1.5, n: 2, L: 3, r: 1.2, N: 2};
   let state = {...defaults};
   const colours = {diagonal: 'var(--viz-series-1)', correction: 'var(--viz-series-2)', energy: 'var(--viz-series-3)', tail: 'var(--viz-series-1)'};
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -57,9 +57,14 @@
       }
     }
   }
+  const laboratory = window.createHardyBoundaryLab(root, changes => {
+    Object.assign(state, changes);
+    sanitize(); sync(); draw(true); persist();
+  });
   let previousView=null;
   function draw(animate=false) {
     if(!window.d3) return;
+    laboratory.sync(state);
     const W=Math.max(280,root.getBoundingClientRect().width), H=280;
     const changedView=previousView!==state.view;
     if(changedView) svg.selectAll('g,rect,line,path,text').remove();
@@ -110,6 +115,8 @@
   }
   try{restore(JSON.parse(localStorage.getItem('convolution-hardy-coefficients-v1')||'null'));}catch(_){}
   sync();draw();
+  laboratory.visitChapter(location.hash);
+  window.addEventListener('hashchange',()=>laboratory.visitChapter(location.hash));
   new ResizeObserver(()=>draw()).observe(root);
   if(window.MathJax?.startup?.promise) window.MathJax.startup.promise.then(typeset).catch(()=>{});else typeset();
 })();

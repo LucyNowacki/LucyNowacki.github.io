@@ -60,7 +60,7 @@
 </section>
 <section class="lesson-proof math-static" id="hi-prerequisites" aria-labelledby="hi-lemma-heading">
   <h2 id="hi-lemma-heading">Where the earlier lessons enter the proof</h2>
-  <p>The lemma numbers below follow Bandtlow’s preprint. Its Lemma 1.9 is Lemma 3.25 in the thesis.</p>
+  <p>The lemma numbers below follow Bandtlow’s preprint. Its Lemma 1.9 is Lemma 3.25 in the thesis. Here the supremum of \(|f|\) on the outer ellipse \(E_\rho\) bounds its height everywhere on the inner contour \(\partial E_s\). Integrating the boundary speed \(|\Gamma_s^\prime(\theta)|\) gives that contour’s perimeter. <a href="../hardy-coefficients/index.html">Lesson 7 follows Lemma 1.10</a>, where Cauchy–Schwarz pairs the angular mean square of \(f(\Gamma_\rho)\) with that of \(Q_n(\Gamma_\rho)\,\Gamma_\rho^\prime\). Both means use the angle on \(|z|=\rho\).</p>
   <ol class="hi-lemma-map">
     <li><a href="../index.html">Lesson 1 · Lemma 1.1</a> supplies the positive Laurent weights used to determine the signs of the surviving kernel coefficients.</li>
     <li><a href="../real-line/index.html">Lesson 2 · Lemma 1.2</a> bounds the Legendre modes by one on the interval. This gives the upper bound of two on the kernel coefficients and later controls the polynomial tail on the interval.</li>
@@ -82,7 +82,7 @@
     <p>Multiply the estimates. The degree-\(n\) term carries \(r^n\rho^{-n}=(r/\rho)^n\). For each fixed \(1&lt;r&lt;\rho\), the entire omitted tail tends to zero <strong>as \(N\) increases</strong>.</p>
     <div class="math-block">\[\sup_{E_r}|f-S_N|\leq K_\rho\sum_{n=N}^\infty(2n+1)(r/\rho)^n \xrightarrow[N\to\infty]{}0,\qquad S_N=\sum_{n=0}^{N-1}a_n(f)P_n.\]</div>
     <h4>How many terms guarantee the same accuracy?</h4>
-    <p>The film fixes the violet outer ellipse \(E_{2.15}\), where \(f(\omega)=1/(2.5-\omega)\) is bounded and analytic. The cyan curve bounds the error everywhere in \(E_{1.29}\), and the pink curve bounds it everywhere in \(E_{1.935}\). Both target boundaries lie strictly inside \(E_{2.15}\), so continuity extends each estimate to its target boundary. Here the gold rim selects one target at a time. Fix both domains and increase \(N\) to compare the bound with the tolerance \(0.01\). <a href="../../bounded-analytic-film/pullback-convergence.html#t=333.943">Hear which ellipse each curve describes.</a></p>
+    <p>The film fixes the violet outer ellipse \(E_{2.15}\), where \(f(\omega)=1/(2.5-\omega)\) is bounded and analytic. The cyan curve bounds the error everywhere in \(E_{1.29}\), and the pink curve bounds it everywhere in \(E_{1.935}\). Both target boundaries lie strictly inside \(E_{2.15}\), so continuity extends each estimate to its target boundary. Here the gold rim selects one target at a time. Fix both domains and increase \(N\) to compare the bound with the tolerance \(0.01\). <a href="../../bounded-analytic-film/pullback-convergence.html#t=419.525">Hear which ellipse each curve describes.</a></p>
     <div class="hi-radius-plots">
       <figure><figcaption>Analytic domain and error domain</figcaption>
         <div class="hi-domain-key">
@@ -114,7 +114,7 @@
       <p>At the film’s outer radius \(2.15\), this gives \(K_*\approx 1.30162\). The count is the first \(N\) for which this upper bound falls below \(0.01\). The actual error may be smaller. For this rational function every finite partial sum has positive uniform error. The infinite series equals \(f\) on each smaller ellipse.</p>
     </details>
   </div>
-  <a class="hi-chapter" href="../../bounded-analytic-film/pullback-convergence.html#t=193.5">Watch how the two radii enter the proof</a>
+  <a class="hi-chapter" href="../../bounded-analytic-film/pullback-convergence.html#t=267.035">Watch how the two radii enter the proof</a>
 </section>
 <details class="coefficient-source card math-static"><summary>Source, normalization and numerical meaning</summary>
   <p>This lesson follows <strong>Subsection <bdi data-thesis-ref="legEDMD:subsec-Hinf-coefficient-bound">3.2.6</bdi> — \(H^\infty\) coefficient bounds from the second-kind kernel</strong> and <strong>Lemma <bdi data-thesis-ref="legEDMD:lem-1-9">3.25</bdi></strong>, in thesis Section <bdi data-thesis-ref="legEDMD:sec-legendre-coefficient-bounds">3.2</bdi>. Bandtlow’s original result is EDMD–Legendre Lemma 1.9.</p>

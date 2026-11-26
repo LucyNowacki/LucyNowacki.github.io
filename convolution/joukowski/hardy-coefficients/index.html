@@ -4,11 +4,11 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hardy coefficient bounds and projection tails · Joukowski–Legendre</title>
 <meta name="description" content="Explore angular Hardy energy, the negative nearest-neighbour correction in the second-kind kernel, and the geometric Legendre projection-tail envelope.">
-<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../math-window.css?v=2bca698ac08e"><link rel="stylesheet" href="../coefficient-lessons.css?v=cff5ff89777e"><link rel="stylesheet" href="style.css?v=f1754db7d86f">
+<link rel="stylesheet" href="../joukowski.css?v=18fb31094624"><link rel="stylesheet" href="../math-window.css?v=2bca698ac08e"><link rel="stylesheet" href="../coefficient-lessons.css?v=cff5ff89777e"><link rel="stylesheet" href="style.css?v=3a8dc347dc25">
 <script defer src="../../mathjax-config.js?v=fb5c0f9a8785"></script><script defer src="../../vendor/tex-svg.js?v=d4295dc33744"></script>
 <script defer src="../../vendor/d3.min.js?v=f2094bbf6141"></script><script defer src="../coefficient-math.js?v=ede7bfda9876"></script>
-<script defer src="../math-window.js?v=31277e048601"></script><script defer src="../lesson-navigation.js?v=bb9ff39db220"></script><script defer src="../coefficient-lessons.js?v=ad2d0604d318"></script><script defer src="lesson.js?v=bdec6a6d4e15"></script>
-<link rel="stylesheet" href="../home-palette.css?v=ca2188dd1bc9">
+<script defer src="../math-window.js?v=31277e048601"></script><script defer src="../lesson-navigation.js?v=bb9ff39db220"></script><script defer src="../coefficient-lessons.js?v=ad2d0604d318"></script><script defer src="boundary-lab.js?v=c1abdf09214c"></script><script defer src="lesson.js?v=77a275a09aaa"></script>
+<link rel="stylesheet" href="../home-palette.css?v=7aed544b8fa9">
 </head>
 <body class="coefficient-page">
 <a class="skip" href="#lesson-lab">Skip to the interactive lesson</a>
@@ -17,14 +17,15 @@
 <header class="coefficient-intro">
   <p class="eyebrow">THESIS WALKTHROUGH · SUBSECTION <bdi data-thesis-ref="legEDMD:subsec-H2-coefficient-bound">3.2.7</bdi> · LEMMA <bdi data-thesis-ref="legEDMD:lem-1-10">3.28</bdi></p>
   <h1>Hardy energy controls the discarded modes</h1>
-  <p>Average boundary energy replaces the supremum norm. Fourier orthogonality turns the weighted kernel energy into a diagonal sum minus a neighbour correction. The resulting coefficient decay then competes with mode growth on a smaller ellipse.</p>
+  <p>Lesson 6 controls the coefficient by the largest modulus on an ellipse. Here the Hardy norm measures the root mean square over one turn of its preimage circle. Fourier orthogonality turns the weighted kernel energy into a diagonal sum minus a neighbour correction. The resulting coefficient decay then competes with mode growth on a smaller ellipse.</p>
   <div class="math-static coefficient-theorem">\[|a_n(f)|\le(2n+1)C_2(\varrho)\,\|f\|_{H^2(E_\varrho)}\,\varrho^{-n}.\]</div>
+<a class="het-film" href="../../hardy-coefficients-film/index.html">▶ Watch the narrated lesson</a>
 </header>
 <nav class="thesis-switcher" data-lesson-navigation data-lesson="hardy-coefficients" aria-label="Switch thesis lesson"><a href="../index.html"><span>1 · Laurent expansion</span><small>How the finite packet is formed</small></a><a href="../real-line/index.html"><span>2 · Real-line stability</span><small>The neutral radius-one case</small></a><a href="../ellipse-growth/index.html"><span>3 · Geometric growth</span><small>Radial weights on an ellipse</small></a><a href="../contour-coefficients/index.html"><span>4 · Boundary coefficients</span><small>Recover a coefficient from a circuit</small></a><a href="../kernel-structure/index.html"><span>5 · Kernel frequencies</span><small>The surviving parity ladder</small></a><a href="../hinf-coefficients/index.html"><span>6 · Bounded analytic coefficients</span><small>From boundary size to decay</small></a><a href="index.html" aria-current="page"><span>7 · Hardy coefficients and tails</span><small>Viewing this lesson</small></a><a href="../factorisation/index.html"><span>8 · Factorisation and embeddings</span><small>Follow the function through three operations</small></a><a href="../weighted-synthesis/index.html"><span>9 · Weighted synthesis and tails</span><small>Split the coefficient budget</small></a><a href="../hardy-to-uniform/index.html"><span>10 · Hardy to uniform</span><small>From angular energy to a pointwise ceiling</small></a><a href="../uniform-to-hardy/index.html"><span>11 · Uniform to Hardy</span><small>From a ceiling to angular energy</small></a><a href="../transfer-tails/index.html"><span>12 · Two gaps and operator tails</span><small>Balance the input and output restrictions</small></a></nav>
 <noscript><p>The proof below remains readable without the controls. Enable JavaScript to explore the figures and render the formulas.</p></noscript>
 <section class="coefficient-lab" id="lesson-lab" aria-label="Hardy energy and projection tail experiment">
 <div class="lesson-heading"><h2>From the kernel energy to an infinite tail bound</h2><button type="button" data-explain="energy">Intuitive/geometric explanation</button></div>
-<p class="coefficient-hint math-static">Use <strong>Kernel energy</strong> to inspect the cancellation between neighbouring Fourier coefficients. Switch to <strong>Projection tail</strong> to combine outer decay with inner mode growth. Here \(R\) is the outer ellipse radius; the second view also introduces \(1&lt;r&lt;R\).</p>
+<p class="coefficient-hint math-static">Use <strong>Kernel energy</strong> to inspect the cancellation between neighbouring Fourier coefficients. Switch to <strong>Projection tail</strong> to combine outer decay with inner mode growth. The outer ellipse parameter is \(R=\varrho\) in the controls. The outer circle has radius \(R\) and maps to \(\partial E_R\). For the tail, the target circle has radius \(1&lt;r&lt;R\) and maps to \(\partial E_r\).</p>
 <div id="hardy-energy-tail">
   
   <div class="viz-controls">
@@ -34,25 +35,70 @@
         <option value="tail">Projection tail</option>
       </select>
     </label>
-    <label class="form-label">Outer radius R = <output id="het-R-value" class="tabular-nums">1.70</output>
-      <input class="form-range" id="het-R" type="range" min="1.15" max="2.5" step="0.01" value="1.7">
+    <label class="form-label">Outer radius R = <output id="het-R-value" class="tabular-nums">1.50</output>
+      <input class="form-range" id="het-R" type="range" min="1.15" max="2.5" step="0.01" value="1.5">
     </label>
   </div>
   <div class="viz-controls het-controls" id="het-energy-controls">
-    <label class="form-label">Legendre degree n = <output id="het-n-value" class="tabular-nums">3</output>
-      <input class="form-range" id="het-n" type="range" min="0" max="8" step="1" value="3">
+    <label class="form-label">Legendre degree n = <output id="het-n-value" class="tabular-nums">2</output>
+      <input class="form-range" id="het-n" type="range" min="0" max="8" step="1" value="2">
     </label>
-    <label class="form-label">Retained kernel terms L = <output id="het-L-value" class="tabular-nums">12</output>
-      <input class="form-range" id="het-L" type="range" min="1" max="160" step="1" value="12">
+    <label class="form-label">Retained kernel terms L = <output id="het-L-value" class="tabular-nums">3</output>
+      <input class="form-range" id="het-L" type="range" min="1" max="160" step="1" value="3">
     </label>
   </div>
   <div class="viz-controls het-controls" id="het-tail-controls" hidden>
-    <label class="form-label">Inner radius r = <output id="het-r-value" class="tabular-nums">1.25</output>
-      <input class="form-range" id="het-r" type="range" min="1.01" max="1.69" step="0.01" value="1.25">
+    <label class="form-label">Inner radius r = <output id="het-r-value" class="tabular-nums">1.20</output>
+      <input class="form-range" id="het-r" type="range" min="1.01" max="1.49" step="0.01" value="1.20">
     </label>
-    <label class="form-label">Keep degrees 0 through N − 1; N = <output id="het-N-value" class="tabular-nums">6</output>
-      <input class="form-range" id="het-N" type="range" min="1" max="25" step="1" value="6">
+    <label class="form-label">Keep degrees 0 through N − 1; N = <output id="het-N-value" class="tabular-nums">2</output>
+      <input class="form-range" id="het-N" type="range" min="1" max="25" step="1" value="2">
     </label>
+  </div>
+  <div class="het-explorer">
+    <div class="het-topline"><div id="het-energy-tabs" class="het-switch" role="group" aria-label="Kernel energy diagrams"><button type="button" data-het-stage="contour" aria-pressed="true">Follow the boundary</button><button type="button" data-het-stage="bound" aria-pressed="false">Bound a coefficient</button><button type="button" data-het-stage="pairs" aria-pressed="false">Pair the modes</button></div><button type="button" id="het-worked">Try the film’s quadratic example</button></div>
+    <div class="het-sweep"><label for="het-theta">Boundary angle <output id="het-theta-value" for="het-theta">45°</output></label><input id="het-theta" type="range" min="0" max="360" step="1" value="45"><button type="button" id="het-play" aria-pressed="false">Play one turn</button></div>
+    <section id="het-contour" class="het-scene" aria-labelledby="het-contour-title">
+      <h3 id="het-contour-title" data-chapter="angular-energy">One angle on the circle and the ellipse</h3>
+      <a class="het-chapter" href="../../hardy-coefficients-film/angular-energy.html">▶ Watch 1 · Angular energy</a>
+      <p class="math-static">Move \(z=Re^{i\theta}\) around the preimage circle. The dotted line joins it to \(\omega=J(z)\) on the outer boundary \(\partial E_R\). The arrows give the directions of travel. The real interval has endpoints at the two foci.</p>
+      <div class="het-panel-grid">
+        <figure><figcaption>Circle to outer ellipse</figcaption><svg id="het-map" viewBox="0 0 440 226" role="img" aria-label="Preimage circle and outer ellipse with mapped points and positive tangents"></svg><p id="het-map-values" class="het-readout"></p></figure>
+        <figure><figcaption>Energy along the same outer boundary</figcaption>
+          <div class="het-switch" role="group" aria-label="Energy on outer boundary"><button type="button" data-het-layer="input" aria-pressed="true">Input energy</button><button type="button" data-het-layer="kernel" aria-pressed="false">Kernel energy</button></div>
+          <svg id="het-hump" viewBox="0 0 440 218" role="img" aria-label="Local outward ridge of angular energy on the outer ellipse"></svg>
+          <p class="het-readout" id="het-hump-values"></p>
+        </figure>
+      </div>
+      <figure class="het-strip"><figcaption>Unroll one turn into equal steps in angle</figcaption><svg id="het-profile" viewBox="0 0 600 136" role="img" aria-label="Angular density with the visited part filled in and the full-turn mean marked"></svg><p id="het-arc-values" class="het-readout"></p></figure>
+      <p class="math-static">The hump shows the density on a short arc of the outer ellipse. The two layers use separate height scales. The graph unrolls the selected density through a full turn. Its shaded area divided by \(2\pi\) is the contribution collected so far. The input uses \(d\theta/(2\pi)\). The kernel includes the extra factor \(W=|\Gamma'_R|^2\). The horizontal dashed line marks the full-turn mean.</p>
+    </section>
+    <section id="het-pairs" class="het-scene" aria-labelledby="het-pair-title" hidden>
+      <h3 id="het-pair-title" data-chapter="three-diagonals">Which mode pairs survive a turn?</h3>
+      <a class="het-chapter" href="../../hardy-coefficients-film/three-diagonals.html">▶ Watch 3 · Three diagonals</a>
+      <p class="math-static">Lesson 5 (Lemma 1.8) supplies the one-sided Fourier series of the kernel. Each square pairs one term of \(Q_{n,L}\) with one term of its complex conjugate. The tangent weight \(W(\theta)=|\Gamma'_R(\theta)|^2\) has frequencies \(0,\,2,\,-2\). Select a square to follow its two coefficients into the integral.</p>
+      <div class="het-panel-grid">
+        <figure><figcaption>Angular mean for each ordered pair</figcaption><div id="het-matrix-slot"></div><p id="het-matrix-key" class="het-readout"></p></figure>
+        <figure><figcaption id="het-pair-caption">Selected mode pair</figcaption><p id="het-pair-coeff" class="het-readout"></p><svg id="het-pair-wave" viewBox="0 0 440 194" role="img" aria-label="Real part of the selected weighted mode pair through a turn"></svg><p id="het-pair-values" class="het-readout"></p></figure>
+      </div>
+      <p class="math-static">At angle \(\theta\), the ordered pair contributes \(c_i c_j W(\theta)e^{i(k_j-k_i)\theta}\), with \(k_j=n+1+2j\). Exchanging row and column gives its conjugate. Their imaginary parts cancel pointwise. After angular averaging, both ordered neighbours contribute \(-c_i c_{i+1}/4\) each, giving the subtraction in \(D_L-C_L\).</p>
+    </section>
+    <section id="het-bound" class="het-scene" aria-labelledby="het-bound-title" hidden>
+      <h3 id="het-bound-title" data-chapter="contour-pairing">Two measurements of the same function</h3>
+      <a class="het-chapter" href="../../hardy-coefficients-film/contour-pairing.html">▶ Watch 2 · Contour pairing</a>
+      <p class="math-static">Lesson 4 (Lemma 1.7) supplies the contour formula. Use the entire function \(f(\omega)=\omega^2\). Lesson 6 (Bandtlow’s Lemma 1.9) measures its largest modulus on \(\partial E_R\). Lesson 7 (Lemma 1.10) measures its angular mean square on the same ellipse, then takes the square root. Move the point to compare its local value with both full-turn measurements.</p>
+      <div class="het-panel-grid"><figure><figcaption>One function on the outer ellipse</figcaption><svg id="het-bound-plot" viewBox="0 0 440 210" role="img" aria-label="Quadratic’s angular modulus with its boundary peak and root mean square"></svg><p id="het-bound-size" class="het-readout"></p></figure>
+      <div class="het-note"><h4>From two energies to one coefficient</h4><div class="het-formula">\(\displaystyle |a_n(f)|\le(2n+1)\|f\|_{H^2(E_R)}\sqrt{q_{n,R}}\)</div><p class="math-static">Cauchy–Schwarz pairs the input with the tangent-weighted kernel. Bounding \(\sqrt{q_{n,R}}\) by \(C_2(R)R^{-n}\) gives the Hardy ceiling.</p><div class="het-formula">\(\displaystyle b_L(\theta)=\frac{2n+1}{i}\, f(\Gamma_R(\theta))Q_{n,L}(\theta)\,\Gamma_R^{\prime}(\theta)\)</div><p id="het-bound-local" class="het-readout"></p><p id="het-bound-result" class="het-readout"></p></div></div>
+      <p class="math-static">Here \(\omega^2=P_0(\omega)/3+2P_2(\omega)/3\). Its coefficients follow exactly from this identity. Varying \(R\) changes both ceilings while preserving the coefficients.</p>
+    </section>
+    <section id="het-target" class="het-scene" aria-labelledby="het-target-title" hidden>
+      <h3 id="het-target-title" data-chapter="projection-tail">Carry the series to a smaller ellipse</h3>
+      <a class="het-chapter" href="../../hardy-coefficients-film/projection-tail.html">▶ Watch 4 · Projection tail</a>
+      <p class="math-static">On the violet outer ellipse \(E_R\), Bandtlow’s Lemma 1.10 supplies the Hardy coefficient decay \(R^{-n}\). On the gold inner ellipse \(E_r\), Lemma 1.6 from Lesson 3 bounds mode growth by \(r^n\). The dotted line pairs points at equal preimage angles. Restriction evaluates the same analytic function throughout the smaller domain.</p>
+      <div class="het-panel-grid"><figure><figcaption>Outer Hardy domain and inner error domain</figcaption><svg id="het-nested" viewBox="0 0 440 230" role="img" aria-label="Confocal source and target ellipses, both sampled at the selected angle"></svg><p id="het-target-radii" class="het-readout"></p></figure>
+      <div class="het-note"><h4>Actual error for the quadratic</h4><p class="math-static">\(\displaystyle f=\tfrac13 P_0+\tfrac23 P_2\). Keeping the first \(N\) modes retains degrees \(0,\ldots,N-1\).</p><div class="het-switch" role="group" aria-label="Quadratic truncation"><button type="button" data-het-count="2">Keep 2 terms</button><button type="button" data-het-count="3">Keep 3 terms</button></div><p id="het-target-error" class="het-readout"></p><p id="het-target-envelope" class="het-readout"></p></div></div>
+      <p class="math-static">Below, the bars give a guarantee for any input with unit outer Hardy norm. For this quadratic, multiply that guarantee by its own \(\|f\|_{H^2(E_R)}\). Increasing \(N\) at fixed \(r&lt;R\) sends the entire upper bound to zero.</p>
+    </section>
   </div>
   <div id="het-energy-formulas" class="het-formula">
     <div>\(c_\ell=\sigma_{n,n+1+2\ell}R^{-(n+1+2\ell)}\ge0\)</div>

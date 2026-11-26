@@ -1,734 +1,848 @@
 WEBVTT
 
-00:00:00.260 --> 00:00:02.534
+00:00:00.260 --> 00:00:02.625
 One coefficient has many contours.
 
-00:00:02.534 --> 00:00:04.411
+00:00:02.625 --> 00:00:04.518
 Pick one Legendre degree, n.
 
-00:00:04.411 --> 00:00:10.021
+00:00:04.518 --> 00:00:10.144
 The coefficient measures how much of that polynomial occurs in the function on the red interval.
 
-00:00:10.021 --> 00:00:13.860
+00:00:10.144 --> 00:00:13.999
 The surrounding ellipse gives us another way to measure the same number.
 
-00:00:13.860 --> 00:00:17.252
+00:00:13.999 --> 00:00:17.406
 Watch the contour move out while the coefficient stays put.
 
-00:00:17.252 --> 00:00:19.726
+00:00:17.406 --> 00:00:19.895
 The estimate above it has three ingredients.
 
-00:00:19.726 --> 00:00:28.685
+00:00:19.895 --> 00:00:28.870
 The largest allowed function value sets a scale, the perimeter measures how far we integrate, and the kernel supplies a power that shrinks with degree.
 
-00:00:28.685 --> 00:00:33.037
+00:00:28.870 --> 00:00:33.237
 Lesson four, Bandtlow’s Lemma one point seven, gives us the contour.
 
-00:00:33.037 --> 00:00:37.623
+00:00:33.237 --> 00:00:37.839
 Lesson five, Lemma one point eight, gives us the decaying kernel waves.
 
-00:00:37.623 --> 00:00:41.569
+00:00:37.839 --> 00:00:42.355
 Together they prove the coefficient estimate in Lemma one point nine.
 
-00:00:41.869 --> 00:00:43.589
+00:00:42.355 --> 00:00:44.166
 Start on the real interval.
 
-00:00:43.589 --> 00:00:47.428
+00:00:44.166 --> 00:00:48.021
 Take the function one divided by two and a half minus x.
 
-00:00:47.428 --> 00:00:48.921
+00:00:48.021 --> 00:00:49.529
 Choose degree two.
 
-00:00:48.921 --> 00:00:53.379
+00:00:49.529 --> 00:00:54.002
 Its Legendre polynomial is one half of three x squared minus one.
 
-00:00:53.379 --> 00:00:58.178
+00:00:54.002 --> 00:00:58.817
 Multiply these two functions and sweep the signed area from minus one to one.
 
-00:00:58.178 --> 00:01:02.082
+00:00:58.817 --> 00:01:02.737
 The central region subtracts area and the two ends add it back.
 
-00:01:02.082 --> 00:01:08.908
+00:01:02.737 --> 00:01:09.578
 Multiplying the result by five halves gives a coefficient of about zero point zero four nine four two.
 
-00:01:08.908 --> 00:01:11.703
+00:01:09.578 --> 00:01:12.943
 Its definition uses only real inputs.
 
-00:01:12.003 --> 00:01:14.128
+00:01:12.943 --> 00:01:15.159
 A circle draws each inner ellipse.
 
-00:01:14.128 --> 00:01:16.986
-Choose an outer radius rho greater than one.
+00:01:15.159 --> 00:01:18.594
+Choose the outer circle of radius rho in the z plane.
 
-00:01:16.986 --> 00:01:21.188
-The function is bounded and holomorphic in the open outer ellipse.
+00:01:18.594 --> 00:01:27.981
+Its image under the Joukowski map is the boundary of the outer ellipse, where our example is bounded, and the theorem assumes boundedness inside.
 
-00:01:21.188 --> 00:01:24.323
-Choose a smaller radius s, still greater than one.
+00:01:27.981 --> 00:01:32.611
+Choose the smaller circle of radius s, with s between one and rho.
 
-00:01:24.323 --> 00:01:28.525
-The point z moves counterclockwise on the circle of radius s.
+00:01:32.611 --> 00:01:36.175
+The cyan spoke has length s and turns with the point z.
 
-00:01:28.525 --> 00:01:32.023
-The Joukowski map sends it to omega on the inner ellipse.
+00:01:36.175 --> 00:01:41.850
+Its image, the gold point omega, runs along the boundary of the inner ellipse, E sub s.
 
-00:01:32.023 --> 00:01:34.966
+00:01:41.850 --> 00:01:44.808
 At angle zero, omega is at the right tip.
 
-00:01:34.966 --> 00:01:37.590
+00:01:44.808 --> 00:01:47.447
 At a quarter turn, omega is at the top.
 
-00:01:37.590 --> 00:01:44.672
-The entire closed inner ellipse lies inside the open outer one, so its contour is available to Cauchy's formula.
+00:01:47.447 --> 00:01:54.935
+The subscript s records which circle produced the ellipse, while its horizontal and vertical semiaxes have different lengths.
 
-00:01:44.972 --> 00:01:47.588
+00:01:54.935 --> 00:01:59.431
+The entire closed inner ellipse lies inside the open outer one.
+
+00:01:59.431 --> 00:02:02.137
 The nearest point gives the largest value.
 
-00:01:47.588 --> 00:01:50.766
+00:02:02.137 --> 00:02:05.331
 For our example, the cross at two and a half is the pole.
 
-00:01:50.766 --> 00:01:55.864
+00:02:05.331 --> 00:02:10.445
 The size of the function is one over the distance from the moving point to that cross.
 
-00:01:55.864 --> 00:01:58.445
-Trace the outer ellipse and watch the distance.
+00:02:10.445 --> 00:02:14.435
+Trace the outer ellipse until the moving point reaches its right tip.
 
-00:01:58.445 --> 00:02:04.140
-It is smallest at the right tip, giving the largest boundary value for this particular function.
+00:02:14.435 --> 00:02:18.638
+The mint segment goes from the centre to this tip along the real axis.
 
-00:02:04.140 --> 00:02:09.729
-Interior points approach that tip, so the same number is the supremum in the open ellipse.
+00:02:18.638 --> 00:02:22.052
+Its length, a sub rho, is the horizontal semiaxis.
 
-00:02:09.729 --> 00:02:14.784
+00:02:22.052 --> 00:02:29.178
+To find it, apply Joukowski at angle zero, where z equals rho and its reciprocal equals one over rho.
+
+00:02:29.178 --> 00:02:34.171
+The gold distance from the tip to the pole is therefore two and a half minus a sub rho.
+
+00:02:34.171 --> 00:02:39.590
+Interior points approach that tip, so its reciprocal is the supremum in the open ellipse.
+
+00:02:39.590 --> 00:02:45.081
 At outer radius two point one five, this gives about zero point eight three nine.
 
-00:02:14.784 --> 00:02:18.624
-In the general theorem we only use the finite supremum inside.
-
-00:02:19.760 --> 00:02:21.864
+00:02:45.893 --> 00:02:48.088
 Recover one real value first.
 
-00:02:21.864 --> 00:02:25.340
+00:02:48.088 --> 00:02:51.580
 Fix x on the red interval inside the moving contour.
 
-00:02:25.340 --> 00:02:27.537
+00:02:51.580 --> 00:02:53.792
 The Cauchy kernel has its pole at x.
 
-00:02:27.537 --> 00:02:33.574
+00:02:53.792 --> 00:02:59.845
 Turn once counterclockwise around that pole, weighting the kernel by the boundary values of the function.
 
-00:02:33.574 --> 00:02:36.602
+00:02:59.845 --> 00:03:02.888
 Cauchy's formula recovers the value at x.
 
-00:02:36.602 --> 00:02:43.514
+00:03:02.888 --> 00:03:09.816
 Now let x run along the interval, weight these recoveries by the second Legendre polynomial, and integrate.
 
-00:02:43.514 --> 00:02:47.353
+00:03:09.816 --> 00:03:13.671
 Collecting their kernels gives the second-kind kernel Q two.
 
-00:02:47.353 --> 00:02:52.793
+00:03:13.671 --> 00:03:19.681
 With the coefficient normalization, a factor of five remains outside the contour integral.
 
-00:02:53.093 --> 00:02:55.026
+00:03:19.681 --> 00:03:21.705
 Let the tangent turn the product.
 
-00:02:55.026 --> 00:02:57.287
+00:03:21.705 --> 00:03:23.981
 One angle chooses the boundary point.
 
-00:02:57.287 --> 00:03:02.342
-As the point turns, the tangent gives the complex direction and speed per radian.
+00:03:23.981 --> 00:03:28.569
+As the point turns, the pink tangent gives its direction and speed per radian.
 
-00:03:02.342 --> 00:03:04.880
+00:03:28.569 --> 00:03:31.123
 At the right tip the tangent points straight up.
 
-00:03:04.880 --> 00:03:06.544
+00:03:31.123 --> 00:03:32.801
 At the top it points left.
 
-00:03:06.544 --> 00:03:14.351
-The next small change in the coefficient integral comes from multiplying the function value, the kernel value and this tangent.
+00:03:32.801 --> 00:03:40.440
+Now multiply the function value, the second-kind kernel and this tangent to obtain the violet vector in the output plane.
 
-00:03:14.351 --> 00:03:18.062
-Multiply also by five divided by two pi i.
+00:03:40.440 --> 00:03:44.366
+Dividing by i turns that vector clockwise by a quarter turn.
 
-00:03:18.062 --> 00:03:21.731
-The gold arrow in the output plane shows this complex rate.
+00:03:44.366 --> 00:03:52.957
+Multiplying its length by five over two pi gives the gold arrow, the rate of change of the accumulated integral per radian.
 
-00:03:21.731 --> 00:03:25.721
-A small angle in radians turns the rate into a small increment.
+00:03:52.957 --> 00:03:54.476
+Halve the angular step.
 
-00:03:26.021 --> 00:03:28.359
+00:03:54.476 --> 00:03:58.722
+Fix the starting angle at thirty degrees and hold its gold rate fixed.
+
+00:03:58.722 --> 00:04:02.946
+Sweep the cyan arc through four tenths of a radian on the inner ellipse.
+
+00:04:02.946 --> 00:04:08.302
+Multiplying the starting rate by the angle step gives the gold straight-line prediction.
+
+00:04:08.302 --> 00:04:14.596
+The true increment integrates the changing rate all along the arc, giving the mint arrow in the output plane.
+
+00:04:14.596 --> 00:04:16.815
+Now halve the angle step to two tenths.
+
+00:04:16.815 --> 00:04:24.645
+The predicted arrow halves, and the gap between its tip and the integrated tip falls from about sixteen thousandths to four thousandths.
+
+00:04:24.645 --> 00:04:26.545
+Halve the step again to one tenth.
+
+00:04:26.545 --> 00:04:28.636
+The gap is now below one thousandth.
+
+00:04:28.636 --> 00:04:34.219
+These small directed increments add head to tail to form the full contour integral.
+
+00:04:34.219 --> 00:04:36.648
 Two contours add different increments.
 
-00:03:28.359 --> 00:03:33.222
+00:04:36.648 --> 00:04:41.527
 Keep the same function and use two inner radii, one point five four and two.
 
-00:03:33.222 --> 00:03:35.568
+00:04:41.527 --> 00:04:43.889
 Start both running integrals at zero.
 
-00:03:35.568 --> 00:03:38.405
+00:04:43.889 --> 00:04:46.742
 Turn both boundary points through the same angle.
 
-00:03:38.405 --> 00:03:44.058
+00:04:46.742 --> 00:04:52.410
 Their radii differ, so they sample different function values, kernel values and tangents.
 
-00:03:44.058 --> 00:03:48.345
+00:04:52.410 --> 00:04:56.713
 The tips in the output plane trace the accumulated complex integrals.
 
-00:03:48.345 --> 00:03:49.859
+00:04:56.713 --> 00:04:58.243
 Stop at a quarter turn.
 
-00:03:49.859 --> 00:03:51.757
+00:04:58.243 --> 00:05:00.157
 The two tips are visibly apart.
 
-00:03:51.757 --> 00:03:55.555
+00:05:00.157 --> 00:05:04.524
 A partly traversed contour still remembers which ellipse we chose.
 
-00:03:55.855 --> 00:03:58.214
+00:05:04.524 --> 00:05:06.975
 Both circuits give the same coefficient.
 
-00:03:58.214 --> 00:04:00.902
+00:05:06.975 --> 00:05:09.678
 Complete the remaining three quarters of each circuit.
 
-00:04:00.902 --> 00:04:05.125
+00:05:09.678 --> 00:05:13.917
 Watch the cyan and pink traces come together on the real axis.
 
-00:04:05.125 --> 00:04:11.631
+00:05:13.917 --> 00:05:20.439
 Both reach the real integral from our first chapter, approximately zero point zero four nine four two.
 
-00:04:11.631 --> 00:04:12.889
+00:05:20.439 --> 00:05:21.713
 Why do they meet?
 
-00:04:12.889 --> 00:04:18.328
+00:05:21.713 --> 00:05:27.168
 The product of the function and the kernel is holomorphic in the region between the two contours.
 
-00:04:18.328 --> 00:04:22.530
+00:05:27.168 --> 00:05:31.385
 Deforming one contour into the other preserves its complete integral.
 
-00:04:22.530 --> 00:04:26.477
+00:05:31.385 --> 00:05:35.901
 Now we can choose any inner contour to estimate that same coefficient.
 
-00:04:27.260 --> 00:04:29.428
+00:05:36.727 --> 00:05:38.985
 Straighten the contour contributions.
 
-00:04:29.428 --> 00:04:32.179
+00:05:38.985 --> 00:05:41.752
 Follow four successive arcs of the inner ellipse.
 
-00:04:32.179 --> 00:04:37.085
-For each arc, integrate the complex density, including the oriented tangent.
+00:05:41.752 --> 00:05:46.532
+For each arc integrate the complex density, including its oriented tangent.
 
-00:04:37.085 --> 00:04:40.946
-In the output plane each coloured arrow is one such increment.
+00:05:46.532 --> 00:05:51.972
+The four coloured output arrows are the resulting increments, delta one through delta four.
 
-00:04:40.946 --> 00:04:42.353
+00:05:51.972 --> 00:05:53.396
 Join them head to tail.
 
-00:04:42.353 --> 00:04:45.809
-The displacement from start to finish gives the coefficient.
+00:05:53.396 --> 00:06:01.034
+The gold displacement measures the distance from the first tail to the last tip, about zero point zero four nine four two.
 
-00:04:45.809 --> 00:04:49.605
-Now turn the arrows until they all face right, keeping their lengths.
+00:06:01.034 --> 00:06:03.979
+Now straighten the four arrows, preserving their lengths.
 
-00:04:49.605 --> 00:04:54.170
-The straightened path can be longer because the original arrows partly cancel.
+00:06:03.979 --> 00:06:10.571
+The violet total is about zero point three one five because the directed arrows had partly cancelled.
 
-00:04:54.170 --> 00:04:59.439
-Splitting into finer arcs gives the integral of the absolute density as an upper bound.
+00:06:10.571 --> 00:06:17.249
+The mint bar measures the length of the entire curved output path, including the bends within each of the four arcs.
 
-00:04:59.739 --> 00:05:01.928
+00:06:17.249 --> 00:06:24.774
+On each arc the chord is at most the path length, so adding the four chords gives at most the integral of the absolute density.
+
+00:06:24.774 --> 00:06:27.054
 Replace the local heights by ceilings.
 
-00:05:01.928 --> 00:05:06.408
-At each boundary point the absolute density contains three factors.
+00:06:27.054 --> 00:06:33.455
+At each angle, taking the modulus changes the contour density into a product of three real heights.
 
-00:05:06.408 --> 00:05:09.074
-The first is the modulus of the function.
+00:06:33.455 --> 00:06:38.341
+Violet is the magnitude of the function at the moving point on the inner ellipse.
 
-00:05:09.074 --> 00:05:12.934
-Its height on the inner rim stays below the outer supremum, M rho.
+00:06:38.341 --> 00:06:42.822
+Its horizontal ceiling is the supremum over the outer ellipse, M rho.
 
-00:05:12.934 --> 00:05:15.537
-The second is the modulus of the kernel.
+00:06:42.822 --> 00:06:47.174
+Pink is the magnitude of the degree two kernel on that same inner contour.
 
-00:05:15.537 --> 00:05:19.291
-Bound every height by the largest kernel height on this inner rim.
+00:06:47.174 --> 00:06:50.012
+Its ceiling is the maximum around that contour.
 
-00:05:19.291 --> 00:05:21.765
-The third is the speed of the moving point.
+00:06:50.012 --> 00:06:53.960
+Mint is the speed, the distance along the ellipse per unit angle.
 
-00:05:21.765 --> 00:05:25.113
-Integrating that speed over one turn gives the perimeter.
+00:06:53.960 --> 00:06:58.440
+Multiply speed by a small angle step to obtain a small arc length.
 
-00:05:25.113 --> 00:05:28.036
-Those three pieces give the estimate on the screen.
+00:06:58.440 --> 00:07:03.262
+Summing those lengths around one turn gives the mint area, the perimeter L sub s.
 
-00:05:28.336 --> 00:05:30.418
+00:07:03.262 --> 00:07:09.535
+Take the first two ceilings outside the integral and keep the perimeter, giving the bound below for any degree n.
+
+00:07:09.535 --> 00:07:12.843
+This is the supremum estimate of Lemma one point nine.
+
+00:07:12.843 --> 00:07:20.111
+Lesson seven uses Lemma one point ten, where Cauchy Schwarz instead separates two angular mean squares.
+
+00:07:20.111 --> 00:07:22.285
 Every second frequency survives.
 
-00:05:30.418 --> 00:05:32.636
-Look inside the kernel at degree three.
+00:07:22.285 --> 00:07:26.445
+Switch from the degree two contour example to the kernel of degree three.
 
-00:05:32.636 --> 00:05:35.558
-The first three frequencies are four, six and eight.
+00:07:26.445 --> 00:07:32.483
+Lesson five leaves frequencies four, six, eight, and then every second positive index.
 
-00:05:35.558 --> 00:05:40.059
-At one moving point each coloured ridge gives the real part of its wave.
+00:07:32.483 --> 00:07:38.777
+The numbers c four, c six and c eight are the lengths of the first three complex arrows on this contour.
 
-00:05:40.059 --> 00:05:43.003
-The matching arrow carries the whole complex value.
+00:07:38.777 --> 00:07:40.634
+Each length has two ingredients.
 
-00:05:43.003 --> 00:05:45.818
-Its length is sigma times s to the minus k.
+00:07:40.634 --> 00:07:48.272
+Sigma is the coefficient found by integrating the third Legendre polynomial of cosine t against sine of k t.
 
-00:05:45.818 --> 00:05:49.935
-A full turn rotates the fourth frequency four times clockwise.
+00:07:48.272 --> 00:07:52.262
+At frequency four this integral is thirty-two over thirty-five.
 
-00:05:49.935 --> 00:05:52.771
-All three arrows have fixed lengths at this radius.
+00:07:52.262 --> 00:08:00.860
+Multiply it by the circle radius one point five four to the power minus four to get about zero point one six two five five.
 
-00:05:52.771 --> 00:05:55.565
-Their sum changes as their directions change.
+00:08:00.860 --> 00:08:05.042
+The identical rule gives the pink and violet lengths for six and eight.
 
-00:05:55.565 --> 00:05:59.661
-To bound it at every angle, add their lengths and include the rest of the ladder.
+00:08:05.042 --> 00:08:10.014
+The remaining exponential has modulus one and rotates each arrow clockwise.
 
-00:05:59.961 --> 00:06:01.958
+00:08:10.014 --> 00:08:17.908
+Above each dial the wave shows the real projection of that arrow on the ellipse, enlarged separately so all three waves are visible.
+
+00:08:17.908 --> 00:08:21.087
+A full turn gives four, six and eight oscillations.
+
+00:08:21.087 --> 00:08:26.158
+Adding their lengths and all the later lengths bounds the complete kernel at any angle.
+
+00:08:26.158 --> 00:08:28.246
 Sum the geometric majorant.
 
-00:06:01.958 --> 00:06:05.584
-For general degree n, the first frequency is n plus one.
+00:08:28.246 --> 00:08:31.980
+For degree n, the first surviving frequency is n plus one.
 
-00:06:05.584 --> 00:06:09.232
-Replace each nonnegative sigma by its upper bound of two.
+00:08:31.980 --> 00:08:35.160
+The index q counts steps of two, starting at zero.
 
-00:06:09.232 --> 00:06:14.906
-Successive upper bounds have ratio one over s squared, since the exponents differ by two.
+00:08:35.160 --> 00:08:40.515
+Take absolute values of the waves and bound each sigma by two using Lesson five.
 
-00:06:14.906 --> 00:06:21.369
-The first upper bound divided by one minus that ratio sums the entire geometric series.
+00:08:40.515 --> 00:08:44.377
+The first three upper bounds are the blue, pink and violet blocks.
 
-00:06:21.369 --> 00:06:28.067
-Simplify the fraction to get two times s to the minus n divided by s minus its reciprocal.
+00:08:44.377 --> 00:08:50.479
+Dividing any block by its predecessor cancels the initial power and leaves one over s squared.
 
-00:06:28.067 --> 00:06:31.224
-Insert this kernel ceiling into the contour estimate.
+00:08:50.479 --> 00:08:55.195
+This number is less than one because the inner circle radius s exceeds one.
 
-00:06:31.224 --> 00:06:34.509
-The two cancels the two in the contour normalization.
+00:08:55.195 --> 00:09:00.678
+The entire strip has length equal to the first block divided by one minus the ratio.
 
-00:06:34.509 --> 00:06:39.714
-What remains is the perimeter constant, the function norm, and the geometric decay.
+00:09:00.678 --> 00:09:08.743
+Multiply the numerator and denominator by s to obtain two times s to the minus n over s minus its reciprocal.
 
-00:06:40.760 --> 00:06:42.480
+00:09:08.743 --> 00:09:12.882
+Put that kernel bound into the pink slot of the coefficient estimate.
+
+00:09:12.882 --> 00:09:16.830
+Its factor of two cancels the two in the contour normalization.
+
+00:09:16.830 --> 00:09:21.310
+Group the perimeter and the remaining denominator into C infinity of s.
+
+00:09:21.310 --> 00:09:26.830
+The factor s to the minus n stays visible because it controls decay with degree.
+
+00:09:27.660 --> 00:09:29.470
 Move the inner contour outward.
 
-00:06:42.480 --> 00:06:47.215
+00:09:29.470 --> 00:09:34.221
 Fix rho at two point one five and keep the function and its outer norm fixed.
 
-00:06:47.215 --> 00:06:50.628
+00:09:34.221 --> 00:09:37.650
 The amber ellipse starts at the inner radius from the lesson.
 
-00:06:50.628 --> 00:06:55.320
+00:09:37.650 --> 00:09:42.358
 Its value is one point five four zero five before display rounding.
 
-00:06:55.320 --> 00:06:57.432
+00:09:42.358 --> 00:09:44.485
 Expand it toward the violet rim.
 
-00:06:57.432 --> 00:07:03.063
+00:09:44.485 --> 00:09:50.132
 Along the way, the perimeter and the gap s minus its reciprocal both change continuously.
 
-00:07:03.063 --> 00:07:08.631
+00:09:50.132 --> 00:09:55.715
 Their quotient therefore tends to the outer perimeter constant, since rho is greater than one.
 
-00:07:08.631 --> 00:07:11.659
+00:09:55.715 --> 00:09:58.759
 The coefficient stays on the left of every inequality.
 
-00:07:11.659 --> 00:07:20.299
+00:09:58.759 --> 00:10:07.969
 Taking the limit on the right gives the theorem without ever needing values of a general bounded holomorphic function on the outer boundary.
 
-00:07:20.599 --> 00:07:23.343
+00:10:07.969 --> 00:10:10.803
 Read degree ten on the logarithmic scale.
 
-00:07:23.343 --> 00:07:27.054
+00:10:10.803 --> 00:10:14.531
 The cyan curve holds the coefficients of our fixed function.
 
-00:07:27.054 --> 00:07:29.592
+00:10:14.531 --> 00:10:17.085
 The amber curve gives the inner envelope.
 
-00:07:29.592 --> 00:07:31.874
+00:10:17.085 --> 00:10:19.382
 The violet curve gives its outer limit.
 
-00:07:31.874 --> 00:07:33.559
+00:10:19.382 --> 00:10:21.083
 Read all three at degree ten.
 
-00:07:33.559 --> 00:07:38.252
+00:10:21.083 --> 00:10:25.791
 The real coefficient is about three point eight times ten to the minus seven.
 
-00:07:38.252 --> 00:07:41.558
+00:10:25.791 --> 00:10:29.112
 The inner estimate is about zero point four two three.
 
-00:07:41.558 --> 00:07:48.832
+00:10:29.112 --> 00:10:36.401
 As the amber contour approaches the violet one, the amber marker descends to about zero point zero one zero eight.
 
-00:07:48.832 --> 00:07:50.602
+00:10:36.401 --> 00:10:38.187
 The cyan marker stays put.
 
-00:07:50.602 --> 00:07:56.213
+00:10:38.187 --> 00:10:44.368
 Each step of four powers of ten on this vertical axis represents a factor of ten thousand.
 
-00:07:56.513 --> 00:07:58.552
+00:10:44.368 --> 00:10:46.498
 Estimate the perimeter in two ways.
 
-00:07:58.552 --> 00:08:02.861
-In the geometric formula the perimeter is the integral of the speed.
+00:10:46.498 --> 00:10:50.382
+On the outer ellipse the mint curve is the speed of the boundary point.
 
-00:08:02.861 --> 00:08:07.362
-Numerical quadrature samples this speed at equally spaced angles.
+00:10:50.382 --> 00:10:53.433
+Integrating the mint height in angle gives the perimeter.
 
-00:08:07.362 --> 00:08:12.460
-The displayed perimeter constant is about one point two nine one for the outer ellipse.
+00:10:53.433 --> 00:10:59.066
+Sample it at equally spaced angles and multiply the sum of the heights by the angular step.
 
-00:08:12.460 --> 00:08:14.785
-There is also an elementary upper bound.
+00:10:59.066 --> 00:11:02.629
+This quadrature gives a perimeter of about six point eight three.
 
-00:08:14.785 --> 00:08:17.856
-The speed never exceeds the major semiaxis.
+00:11:02.629 --> 00:11:08.027
+For an analytic upper bound, consider the real and imaginary components of the tangent.
 
-00:08:17.856 --> 00:08:24.725
-Replacing every speed by this horizontal ceiling bounds the perimeter by two pi times that semiaxis.
+00:11:08.027 --> 00:11:13.255
+The squared speed is a squared times sine squared plus b squared times cosine squared.
 
-00:08:24.725 --> 00:08:32.425
-The elementary envelope is about zero point zero one three at degree ten, a little higher than the perimeter based estimate.
+00:11:13.255 --> 00:11:20.189
+Since b is at most a, the squared speed is at most a squared, so the gold horizontal line bounds every speed.
 
-00:08:32.425 --> 00:08:34.942
-The elementary inequality is analytic.
+00:11:20.189 --> 00:11:26.696
+The rectangle under that ceiling has width two pi and height a, hence the perimeter is at most two pi a.
 
-00:08:34.942 --> 00:08:39.849
-The quadrature gives a numerical evaluation of the exact perimeter formula.
+00:11:26.696 --> 00:11:33.908
+Divide this perimeter bound by pi times rho minus its reciprocal, the denominator inherited from the kernel.
 
-00:08:40.149 --> 00:08:42.380
+00:11:33.908 --> 00:11:39.796
+Substituting the horizontal semiaxis for a gives the displayed upper bound for C infinity.
+
+00:11:39.796 --> 00:11:47.541
+At degree ten, the mint perimeter calculation gives about zero point zero one zero eight for the coefficient envelope.
+
+00:11:47.541 --> 00:11:53.914
+The gold elementary estimate gives about zero point zero one three for the same envelope.
+
+00:11:53.914 --> 00:11:56.236
 Follow one coefficient through the proof.
 
-00:08:42.380 --> 00:08:46.732
-Start inside, where the contour integral recovers the fixed coefficient.
+00:11:56.236 --> 00:12:01.378
+On this graph, cyan follows the actual Legendre coefficients of our fixed function.
 
-00:08:46.732 --> 00:08:50.379
-Take absolute values and pay for the lost cancellation.
+00:12:01.378 --> 00:12:08.163
+At degree ten the contour integral gives the cyan point, independent of the chosen inner circle radius.
 
-00:08:50.379 --> 00:08:53.728
-The kernel frequencies supply the geometric factor.
+00:12:08.163 --> 00:12:14.201
+Taking absolute values and bounding the kernel gives the amber envelope on the same degree axis.
 
-00:08:53.728 --> 00:08:56.181
-Let the inner rim approach the outer ellipse.
+00:12:14.201 --> 00:12:22.095
+Its factor s to the minus n comes from the first surviving negative power and the geometric sum on the pulled back circle.
 
-00:08:56.181 --> 00:08:58.527
-Now move the selected degree to the right.
+00:12:22.095 --> 00:12:25.616
+Let s increase to rho, the fixed outer circle radius.
 
-00:08:58.527 --> 00:09:03.689
-The degree multiplier grows linearly, while the reciprocal power falls geometrically.
+00:12:25.616 --> 00:12:30.374
+The limiting envelope is violet, and the cyan coefficients still stay below it.
 
-00:09:03.689 --> 00:09:08.851
-For a fixed outer radius greater than one, the geometric factor eventually wins.
+00:12:30.374 --> 00:12:36.220
+To see why the violet curve eventually falls, compare the bounds at two consecutive degrees.
 
-00:09:08.851 --> 00:09:15.571
-This is how the size of a holomorphic function on an ellipse controls the decay of its Legendre coefficients.
+00:12:36.220 --> 00:12:42.087
+Their ratio is two n plus three divided by two n plus one, times one over rho.
 
-00:09:16.260 --> 00:09:18.470
+00:12:42.087 --> 00:12:48.658
+The first factor tends to one, leaving one over rho, about zero point four six five for this ellipse.
+
+00:12:48.658 --> 00:12:56.567
+This limiting contraction explains the geometric slope of the upper envelope and the guarantee of coefficient decay.
+
+00:12:57.393 --> 00:12:59.694
 Trace the proof back to its two inputs.
 
-00:09:18.470 --> 00:09:22.310
+00:12:59.694 --> 00:13:03.549
 Read the numbers here as the lemma numbers in Bandtlow’s preprint.
 
-00:09:22.310 --> 00:09:27.536
+00:13:03.549 --> 00:13:08.791
 Lesson four, Lemma one point seven, moves the real coefficient onto an ellipse.
 
-00:09:27.536 --> 00:09:33.487
+00:13:08.791 --> 00:13:14.757
 Lesson five, Lemma one point eight, tells us which kernel waves survive on its preimage circle.
 
-00:09:33.487 --> 00:09:36.879
+00:13:14.757 --> 00:13:18.164
 These are the two direct inputs to Lemma one point nine.
 
-00:09:36.879 --> 00:09:38.627
+00:13:18.164 --> 00:13:19.928
 Look one step further back.
 
-00:09:38.627 --> 00:09:47.352
+00:13:19.928 --> 00:13:28.668
 In the proof of the kernel lemma, the positive Laurent weights from Lesson one, Lemma one point one, give the surviving coefficients their sign.
 
-00:09:47.352 --> 00:09:53.303
+00:13:28.668 --> 00:13:34.635
 Real line stability from Lesson two, Lemma one point two, bounds each coefficient by two.
 
-00:09:53.303 --> 00:09:54.903
+00:13:34.635 --> 00:13:36.250
 Keep Lesson three in sight.
 
-00:09:54.903 --> 00:09:59.639
+00:13:36.250 --> 00:13:41.556
 We will use its ellipse growth bound when we put the polynomial series back together.
 
-00:09:59.939 --> 00:10:01.701
+00:13:41.556 --> 00:13:43.409
 Read the ellipse from its circle.
 
-00:10:01.701 --> 00:10:05.498
-Start with the cyan point z on a circle of radius s.
+00:13:43.409 --> 00:13:51.196
+Start with the cyan point z on the smaller circle of radius s, strictly between one and the fixed outer radius rho.
 
-00:10:05.498 --> 00:10:06.884
+00:13:51.196 --> 00:13:52.599
 Its angle is theta.
 
-00:10:06.884 --> 00:10:10.979
-The Joukowski map takes it to the gold point omega on the ellipse.
+00:13:52.599 --> 00:13:59.810
+The Joukowski map takes it to the gold point omega on the boundary of the inner integration ellipse, E sub s.
 
-00:10:10.979 --> 00:10:13.091
+00:13:59.810 --> 00:14:01.937
 Move both points with the same angle.
 
-00:10:13.091 --> 00:10:17.399
+00:14:01.937 --> 00:14:06.261
 The function lives on the ellipse, so we read its value at the gold point.
 
-00:10:17.399 --> 00:10:23.500
+00:14:06.261 --> 00:14:12.377
 Writing that very same value as f of J of z makes it a function of the circle point.
 
-00:10:23.500 --> 00:10:25.590
-That composition is the pull-back.
+00:14:12.377 --> 00:14:14.255
+That composition is the pullback.
 
-00:10:25.590 --> 00:10:28.320
+00:14:14.255 --> 00:14:17.001
 For the contour integral, carry the tangent too.
 
-00:10:28.320 --> 00:10:32.778
+00:14:17.001 --> 00:14:21.475
 The step on the ellipse is J prime of z times the step on the circle.
 
-00:10:32.778 --> 00:10:37.855
-This is why the phase, the changing speed, and the arclength all have a place in the proof.
+00:14:21.475 --> 00:14:26.887
+Composing the kernel with this same map lets us read its waves in the circle angle.
 
-00:10:38.155 --> 00:10:40.088
+00:14:26.887 --> 00:14:28.911
 See radius act on one wave.
 
-00:10:40.088 --> 00:10:44.248
-On the circle, a negative Laurent power becomes a rotating arrow.
+00:14:28.911 --> 00:14:35.695
+The pullback of the second kind kernel has only negative powers of z, by the expansion in Lesson five.
 
-00:10:44.248 --> 00:10:46.871
-Its direction is minus k times theta.
+00:14:35.695 --> 00:14:41.392
+To see what a single power does, substitute s times the exponential of i theta for z.
 
-00:10:46.871 --> 00:10:51.180
-Its length, before multiplying by sigma, is one over s to the k.
+00:14:41.392 --> 00:14:49.158
+Raising it to the power minus k gives a length of one over s to the k, and an angle of minus k times theta.
 
-00:10:51.180 --> 00:10:52.758
-Turn the boundary point.
+00:14:49.158 --> 00:14:51.954
+Turn the point around the circle at fixed radius.
 
-00:10:52.758 --> 00:10:55.509
-The arrows rotate while their lengths stay fixed.
+00:14:51.954 --> 00:14:54.664
+The directions change and the lengths stay fixed.
 
-00:10:55.509 --> 00:10:58.623
-Now hold the angle fixed and expand the circle.
+00:14:54.664 --> 00:14:59.507
+Now freeze theta and increase the circle radius from one point two four to two.
 
-00:10:58.623 --> 00:11:02.377
-Every arrow shortens, and the higher frequencies shrink faster.
+00:14:59.507 --> 00:15:03.753
+All three arrows keep their directions, but higher powers shorten faster.
 
-00:11:02.377 --> 00:11:06.046
+00:15:03.753 --> 00:15:07.437
 At radius two, the fourth power has length one sixteenth.
 
-00:11:06.046 --> 00:11:08.264
+00:15:07.437 --> 00:15:09.671
 The sixth has length one sixty-fourth.
 
-00:11:08.264 --> 00:11:11.293
+00:15:09.671 --> 00:15:12.714
 The eighth has length one two-hundred-and-fifty-sixth.
 
-00:11:11.293 --> 00:11:14.855
-The smallest surviving frequency moves up with the degree.
+00:15:12.714 --> 00:15:17.210
+These are the lengths before multiplying by each kernel coefficient.
 
-00:11:14.855 --> 00:11:19.292
-This is the geometric origin of the shrinking coefficient envelope.
+00:15:17.210 --> 00:15:20.478
+Follow the first kernel wave as degree increases.
 
-00:11:19.592 --> 00:11:21.845
+00:15:20.478 --> 00:15:25.662
+Each coloured row now represents a different Legendre degree on the same inner contour.
+
+00:15:25.662 --> 00:15:32.767
+In any one row the kernel frequencies advance by two, so the length bounds decrease by a factor of one over s squared.
+
+00:15:32.767 --> 00:15:34.773
+Look down the first column instead.
+
+00:15:34.773 --> 00:15:41.238
+For degrees two, three, and four, the first allowed powers are minus three, minus four, and minus five.
+
+00:15:41.238 --> 00:15:48.321
+Raising the degree by one therefore moves the whole geometric majorant down by a factor of one over s.
+
+00:15:48.321 --> 00:15:53.826
+The pullback exposes the negative powers, and the kernel lemma tells us which powers can occur.
+
+00:15:53.826 --> 00:15:59.459
+Summing a row and using the contour estimate gives a bound containing s to the minus n.
+
+00:15:59.459 --> 00:16:07.581
+Let the inner contour radius approach the fixed outer radius rho to obtain the coefficient bound with rho to the minus n.
+
+00:16:07.581 --> 00:16:09.925
 Take the root to read the decay rate.
 
-00:11:21.845 --> 00:11:30.911
+00:16:09.925 --> 00:16:19.006
 For a fixed outer ellipse, Lemma one point nine bounds the coefficient by a constant, times two n plus one, times rho to the minus n.
 
-00:11:30.911 --> 00:11:33.599
+00:16:19.006 --> 00:16:21.710
 Take the n-th root for positive n.
 
-00:11:33.599 --> 00:11:35.774
+00:16:21.710 --> 00:16:23.901
 The root of the prefactor tends to one.
 
-00:11:35.774 --> 00:11:38.760
-The remaining factor is exactly one over rho.
+00:16:23.901 --> 00:16:28.574
+The remaining factor is exactly one over rho, the mint horizontal line.
 
-00:11:38.760 --> 00:11:42.173
-Watch the upper envelope of the roots approach that level.
+00:16:28.574 --> 00:16:32.308
+Follow the violet upper envelope of the roots toward that line.
 
-00:11:42.173 --> 00:11:47.186
+00:16:32.308 --> 00:16:37.336
 The upper limit of the actual coefficient roots is therefore at most one over rho.
 
-00:11:47.186 --> 00:11:49.745
-A particular function can decay faster.
+00:16:37.336 --> 00:16:43.460
+For our fixed function, the cyan dots give actual coefficient roots at the displayed integer degrees.
 
-00:11:49.745 --> 00:11:52.177
-The radius gives a guaranteed upper rate.
+00:16:43.460 --> 00:16:46.675
+The ellipse supplies a ceiling on their limiting rate.
 
-00:11:52.477 --> 00:11:54.495
+00:16:46.675 --> 00:16:48.784
 Rebuild the function on the interval.
 
-00:11:54.495 --> 00:11:57.673
+00:16:48.784 --> 00:16:51.978
 A small coefficient is one part of a small term.
 
-00:11:57.673 --> 00:12:01.107
+00:16:51.978 --> 00:16:55.428
 We also need the size of the polynomial it multiplies.
 
-00:12:01.107 --> 00:12:07.635
+00:16:55.428 --> 00:17:01.970
 On the red interval, Lesson two, Lemma one point two, bounds every Legendre polynomial by one.
 
-00:12:07.635 --> 00:12:12.135
+00:17:01.970 --> 00:17:06.486
 The omitted terms are thus bounded by the sum of the coefficient bounds.
 
-00:12:12.135 --> 00:12:14.354
+00:17:06.486 --> 00:17:08.720
 Increase the number of retained terms.
 
-00:12:14.354 --> 00:12:20.689
+00:17:08.720 --> 00:17:15.071
 Watch the partial polynomial approach the fixed function, and watch its error on a separate logarithmic scale.
 
-00:12:20.689 --> 00:12:23.910
+00:17:15.071 --> 00:17:18.307
 The geometric tail tends to zero uniformly.
 
-00:12:23.910 --> 00:12:29.200
+00:17:18.307 --> 00:17:24.168
 Completeness of the Legendre basis identifies the limit with our function on the interval.
 
-00:12:29.500 --> 00:12:31.519
+00:17:24.168 --> 00:17:26.277
 Which ellipse supplies each power?
 
-00:12:31.519 --> 00:12:36.403
+00:17:26.277 --> 00:17:31.177
 Choose the violet outer ellipse on which the function is bounded and holomorphic.
 
-00:12:36.403 --> 00:12:41.224
+00:17:31.177 --> 00:17:36.014
 Its parameter rho is the radius of the circle before the Joukowski map.
 
-00:12:41.224 --> 00:12:46.685
-Choose a smaller gold ellipse where we want to approximate the function, with circle radius r.
+00:17:36.014 --> 00:17:42.564
+Choose a smaller gold target ellipse where we evaluate the reconstructed function, with circle radius r.
 
-00:12:46.685 --> 00:12:49.180
-Both ellipses have the same two foci.
+00:17:42.564 --> 00:17:45.594
+The marks on the red interval are their common foci.
 
-00:12:49.180 --> 00:12:51.206
+00:17:45.594 --> 00:17:47.636
 Follow the gold factor first.
 
-00:12:51.206 --> 00:13:00.486
-Lesson three, Bandtlow’s Lemma one point six, part a, bounds the size of the degree n Legendre mode on the gold ellipse by r to the n.
+00:17:47.636 --> 00:17:57.919
+Lesson three, Bandtlow’s Lemma one point six, part a, bounds the size of each degree n basis polynomial throughout the gold target ellipse by r to the n.
 
-00:13:00.486 --> 00:13:02.533
+00:17:57.919 --> 00:17:59.982
 Now follow the violet factor.
 
-00:13:02.533 --> 00:13:10.170
-Lesson six, Lemma one point nine, bounds the coefficient using the outer ellipse and contributes rho to the minus n.
+00:17:59.982 --> 00:18:06.766
+Lesson six, Lemma one point nine, contributes rho to the minus n from the outer coefficient estimate.
 
-00:13:10.170 --> 00:13:17.657
-The pull-back of the kernel to the outer circle is the source of that decay, as the inner integration contour tends outward.
+00:18:06.766 --> 00:18:10.821
+Its prefactor includes the fixed outer norm and perimeter constant.
 
-00:13:17.657 --> 00:13:22.456
-Multiplying the two estimates gives r divided by rho to the power n.
+00:18:10.821 --> 00:18:19.077
+Multiply the gold mode growth by the violet coefficient decay to obtain the mint ratio, r over rho to the power n.
 
-00:13:22.456 --> 00:13:28.088
-Because the gold ellipse lies strictly inside the violet one, this ratio is less than one.
+00:18:19.077 --> 00:18:25.457
+For fixed nested ellipses this ratio is below one and the resulting upper bounds have a summable tail.
 
-00:13:28.388 --> 00:13:30.897
+00:18:25.457 --> 00:18:30.236
+The uniform reconstruction estimate is a consequence of these two lemmas together.
+
+00:18:30.236 --> 00:18:34.134
+Lemma one point nine itself bounds a single coefficient.
+
+00:18:34.134 --> 00:18:36.734
 Move the gold ellipse, then hold it fixed.
 
-00:13:30.897 --> 00:13:35.313
+00:18:36.734 --> 00:18:41.165
 Keep the outer radius at two point one five and keep the same function.
 
-00:13:35.313 --> 00:13:38.214
+00:18:41.165 --> 00:18:44.081
 Begin with a gold radius of one point two nine.
 
-00:13:38.214 --> 00:13:39.877
+00:18:44.081 --> 00:18:45.760
 The ratio is six tenths.
 
-00:13:39.877 --> 00:13:42.628
+00:18:45.760 --> 00:18:48.527
 Move the gold rim closer to the violet rim.
 
-00:13:42.628 --> 00:13:47.065
+00:18:48.527 --> 00:18:52.979
 At a radius of one point nine three five, the ratio is nine tenths.
 
-00:13:47.065 --> 00:13:50.542
+00:18:52.979 --> 00:18:56.471
 The coefficients stay the same because the function is fixed.
 
-00:13:50.542 --> 00:13:53.826
+00:18:56.471 --> 00:18:59.771
 Each basis mode now has a larger allowed size.
 
-00:13:53.826 --> 00:13:58.818
+00:18:59.771 --> 00:19:04.777
 To guarantee the same accuracy on the larger ellipse, our bound needs more terms.
 
-00:13:58.818 --> 00:14:05.111
+00:19:04.777 --> 00:19:11.641
 At the outer rim the ratio reaches one and this geometric estimate gives no decay guarantee.
 
-00:14:05.411 --> 00:14:08.816
+00:19:11.641 --> 00:19:15.136
 Keep the gold target and enlarge the violet ellipse.
 
-00:14:08.816 --> 00:14:11.610
+00:19:15.136 --> 00:19:17.946
 Hold the target radius at one point two nine.
 
-00:14:11.610 --> 00:14:14.404
+00:19:17.946 --> 00:19:20.756
 Start the outer radius at one point seven two.
 
-00:14:14.404 --> 00:14:17.838
+00:19:20.756 --> 00:19:24.205
 The target occupies three quarters of that circle radius.
 
-00:14:17.838 --> 00:14:21.998
+00:19:24.205 --> 00:19:28.380
 Now expand only the violet ellipse, up to two point one five.
 
-00:14:21.998 --> 00:14:27.437
+00:19:28.380 --> 00:19:33.835
 The ratio falls to six tenths, so the geometric factor decays faster with degree.
 
-00:14:27.437 --> 00:14:31.148
+00:19:33.835 --> 00:19:37.562
 The coefficients themselves are still those of the same function.
 
-00:14:31.148 --> 00:14:39.553
+00:19:37.562 --> 00:19:45.982
 Its supremum and the perimeter constant can change on a larger domain, so the full numerical bound also depends on its prefactor.
 
-00:14:39.553 --> 00:14:45.568
+00:19:45.982 --> 00:19:52.013
 We can use a larger violet ellipse only while the function remains bounded and analytic throughout it.
 
-00:14:45.568 --> 00:14:49.643
+00:19:52.013 --> 00:19:56.658
 In this example the pole at two and a half limits how far we can go.
 
-00:14:49.943 --> 00:14:52.751
+00:19:56.658 --> 00:19:59.557
 Fix the violet outer ellipse for both curves.
 
-00:14:52.751 --> 00:14:55.865
+00:19:59.557 --> 00:20:02.686
 The violet outer ellipse is E two point one five.
 
-00:14:55.865 --> 00:15:04.355
+00:20:02.686 --> 00:20:11.192
 It stays fixed for both curves and supplies the coefficient bound because the function is bounded and analytic throughout this outer ellipse.
 
-00:15:04.355 --> 00:15:13.592
+00:20:11.192 --> 00:20:20.444
 The cyan curve gives an upper bound on the error throughout the smaller inner ellipse, E one point two nine, where r divided by rho is six tenths.
 
-00:15:13.592 --> 00:15:21.506
+00:20:20.444 --> 00:20:28.373
 The pink curve gives the bound throughout the larger inner ellipse, E one point nine three five, where the ratio is nine tenths.
 
-00:15:21.506 --> 00:15:31.105
+00:20:28.373 --> 00:20:37.987
 Each bound holds throughout its target interior and, by continuity, on its boundary, since both closed targets lie inside the violet outer ellipse.
 
-00:15:31.105 --> 00:15:36.054
+00:20:37.987 --> 00:20:42.952
 Keep all three ellipse sizes fixed and increase only N, the number of terms kept.
 
-00:15:36.054 --> 00:15:39.978
+00:20:42.952 --> 00:20:46.892
 The dashed line marks the absolute tolerance of one hundredth.
 
-00:15:39.978 --> 00:15:44.948
+00:20:46.892 --> 00:20:51.876
 Both curves use the same elementary perimeter estimate on the outer ellipse.
 
-00:15:44.948 --> 00:15:52.329
+00:20:51.876 --> 00:20:59.272
 On E one point two nine, nineteen terms first guarantee this accuracy everywhere on that target using our bound.
 
-00:15:52.329 --> 00:15:58.345
+00:20:59.272 --> 00:21:05.302
 On E one point nine three five, the corresponding count is one hundred and twenty one terms.
 
-00:15:58.345 --> 00:16:03.144
+00:21:05.302 --> 00:21:10.117
 These are sufficient counts from the estimate, and the actual error can be smaller.
 
-00:16:03.144 --> 00:16:11.271
+00:21:10.117 --> 00:21:18.260
 On each fixed inner target, the upper bound for the whole tail tends to zero as N grows, because its ratio is strictly below one.
 
-00:16:11.271 --> 00:16:18.076
+00:21:18.260 --> 00:21:25.080
 The identity theorem identifies each limit with the function that the series recovers on the real interval.
 
-00:16:18.076 --> 00:16:24.710
+00:21:25.080 --> 00:21:31.729
 For this rational function the finite partial sums have positive uniform error on each inner target.
 
-00:16:24.710 --> 00:16:34.033
+00:21:31.729 --> 00:21:41.622
 At the violet outer radius itself, r would equal rho and the ratio would be one, so this estimate gives no uniform convergence guarantee there.
 
